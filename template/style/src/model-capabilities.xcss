@@ -1,0 +1,15 @@
+.model-capabilities {
+    margin-top: 6px;
+    font-size: .8rem;
+
+    > div {
+        opacity: .8;
+        margin-bottom: 2px;
+
+        > i {
+            display: inline-block;
+            width: 18px;
+            font-size: 1rem;
+        }
+    }
+}

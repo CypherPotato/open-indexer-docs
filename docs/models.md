@@ -4,6 +4,8 @@ O Open Indexer provê modelos de diferentes provedores para tornar o desenvolvim
 
 Veja a lista abaixo dos modelos disponíveis e suas precificações. Todos os preços consideram o total de entrada e saída de tokens, com ou sem cache.
 
+Todos os preços estão em dólares dos Estados Unidos.
+
 ## <img src="/assets/icon/deepseek.svg" class="inline-icon"> DeepSeek
 
 <table>
@@ -25,10 +27,20 @@ Veja a lista abaixo dos modelos disponíveis e suas precificações. Todos os pr
                 @deepseekai/r1-distill-llama-70b
             </td>
             <td>
-                <span>$ 3,08</span>
+                <span>$ 2,76</span>
             </td>
             <td>
                 Modelo com raciocínio e pensamento profundo, melhor para tarefas mais exigentes.
+                <div class="model-capabilities">
+                    <div>
+                        <i class="ri-lightbulb-line"></i>
+                        Pensamento
+                    </div>
+                    <div>
+                        <i class="ri-instance-line"></i>
+                        Chamadas de função
+                    </div>
+                </div>
             </td>
         </tr>        
     </tbody>
@@ -52,13 +64,74 @@ Veja a lista abaixo dos modelos disponíveis e suas precificações. Todos os pr
     <tbody>
         <tr>
             <td>
+                @google/gemini-2.5-pro
+            </td>
+            <td>
+                <span>$ 12,25</span>
+            </td>
+            <td>
+                Um dos modelos mais poderosos da atualidade.
+                <div class="model-capabilities">
+                    <div>
+                        <i class="ri-lightbulb-line"></i>
+                        Pensamento
+                    </div>
+                    <div>
+                        <i class="ri-multi-image-fill"></i>
+                        Entrada: aceita imagens, vídeos e áudios
+                    </div>
+                    <div>
+                        <i class="ri-instance-line"></i>
+                        Chamadas de função
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @google/gemini-2.5-flash-think
+            </td>
+            <td>
+                <span>$ 4,65</span>
+            </td>
+            <td>
+                Modelo da geração mais recente com raciocínio e
+                pensamento integrado.
+                <div class="model-capabilities">
+                    <div>
+                        <i class="ri-lightbulb-line"></i>
+                        Pensamento
+                    </div>
+                    <div>
+                        <i class="ri-multi-image-fill"></i>
+                        Entrada: aceita imagens, vídeos e áudios
+                    </div>
+                    <div>
+                        <i class="ri-instance-line"></i>
+                        Chamadas de função
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
                 @google/gemini-2.5-flash
             </td>
             <td>
-                <span>$ 6,39</span>
+                <span>$ 1,31</span>
             </td>
             <td>
-                Modelo da geração mais recente com raciocínio e pensamento integrado.
+                Modelo da geração mais recente, sem pensamento profundo.
+                <div class="model-capabilities">
+                    <div>
+                        <i class="ri-multi-image-fill"></i>
+                        Entrada: aceita imagens, vídeos e áudios
+                    </div>
+                    <div>
+                        <i class="ri-instance-line"></i>
+                        Chamadas de função
+                    </div>
+                </div>
             </td>
         </tr>
         <tr>
@@ -70,6 +143,12 @@ Veja a lista abaixo dos modelos disponíveis e suas precificações. Todos os pr
             </td>
             <td>
                 Modelo rápido, estudo de código aberto da Google para realizar a maioria das tarefas.
+                <div class="model-capabilities">
+                    <div>
+                        <i class="ri-instance-line"></i>
+                        Chamadas de função
+                    </div>
+                </div>
             </td>
         </tr>
         <tr>
@@ -81,6 +160,16 @@ Veja a lista abaixo dos modelos disponíveis e suas precificações. Todos os pr
             </td>
             <td>
                 Modelo de uso geral, com reconhecimento de imagens, esperto e rápido.
+                <div class="model-capabilities">
+                    <div>
+                        <i class="ri-multi-image-fill"></i>
+                        Entrada: aceita imagens, vídeos e áudios
+                    </div>
+                    <div>
+                        <i class="ri-instance-line"></i>
+                        Chamadas de função
+                    </div>
+                </div>
             </td>
         </tr>
         <tr>
@@ -93,52 +182,20 @@ Veja a lista abaixo dos modelos disponíveis e suas precificações. Todos os pr
             <td>
                 Modelo de uso geral da geração anterior, com reconhecimento de imagens e
                 boa performance para maioria das tarefas.
+                <div class="model-capabilities">
+                    <div>
+                        <i class="ri-multi-image-fill"></i>
+                        Entrada: aceita imagens, vídeos e áudios
+                    </div>
+                    <div>
+                        <i class="ri-instance-line"></i>
+                        Chamadas de função
+                    </div>
+                </div>
             </td>
         </tr>
     </tbody>
 </table>
-
-## <img src="/assets/icon/openai.svg" class="inline-icon"> OpenAI
-
-<table>
-    <thead>
-        <colgroup>
-            <col style="width: 30%" />
-            <col style="width: 20%" />
-            <col style="width: 50%" />
-        </colgroup>
-        <tr>
-            <th>Nome do modelo</th>
-            <th>Preço/1m tokens</th>
-            <th>Descrição</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-                @openai/o4-mini
-            </td>
-            <td>
-                <span>$ 9,63</span>
-            </td>
-            <td>
-                Modelo da geração mais recente da OpenAI com mecanismo de pensamento profundo e resolução de problemas complexos.
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @openai/gpt-4.1-nano
-            </td>
-            <td>
-                <span>$ 0,88</span>
-            </td>
-            <td>
-                Modelo otimizado para conversação e resolução de problemas.
-            </td>
-        </tr>
-    </tbody>
-</table>
-
 
 ## <img src="/assets/icon/meta.svg" class="inline-icon"> Meta AI
 
@@ -161,10 +218,16 @@ Veja a lista abaixo dos modelos disponíveis e suas precificações. Todos os pr
                 @metaai/llama-3.3-70b
             </td>
             <td>
-                <span>$ 2,45</span>
+                <span>$ 2,40</span>
             </td>
             <td>
                 Modelo de geração anterior com bastantes parâmetros e velocidade surpreendentemente rápida.
+                <div class="model-capabilities">
+                    <div>
+                        <i class="ri-instance-line"></i>
+                        Chamadas de função
+                    </div>
+                </div>
             </td>
         </tr>
         <tr>
@@ -176,6 +239,16 @@ Veja a lista abaixo dos modelos disponíveis e suas precificações. Todos os pr
             </td>
             <td>
                 Modelo rápido, com 17 bilhões de parâmetros ativados e 128 especialistas.
+                <div class="model-capabilities">
+                    <div>
+                        <i class="ri-multi-image-fill"></i>
+                        Entrada: aceita imagens
+                    </div>
+                    <div>
+                        <i class="ri-instance-line"></i>
+                        Chamadas de função
+                    </div>
+                </div>
             </td>
         </tr>
         <tr>
@@ -187,6 +260,16 @@ Veja a lista abaixo dos modelos disponíveis e suas precificações. Todos os pr
             </td>
             <td>
                 Menor versão da família Llama 4 com 17 bilhões de parâmetros ativados e 16 especialistas.
+                <div class="model-capabilities">
+                    <div>
+                        <i class="ri-multi-image-fill"></i>
+                        Entrada: aceita imagens
+                    </div>
+                    <div>
+                        <i class="ri-instance-line"></i>
+                        Chamadas de função
+                    </div>
+                </div>
             </td>
         </tr>
         <tr>
@@ -198,6 +281,12 @@ Veja a lista abaixo dos modelos disponíveis e suas precificações. Todos os pr
             </td>
             <td>
                 Modelo barato para conversação rápida e simples.
+                <div class="model-capabilities">
+                    <div>
+                        <i class="ri-instance-line"></i>
+                        Chamadas de função
+                    </div>
+                </div>
             </td>
         </tr>
     </tbody>
@@ -224,10 +313,24 @@ Veja a lista abaixo dos modelos disponíveis e suas precificações. Todos os pr
                 @groq/compound-beta
             </td>
             <td>
-                <span>$ 3,94</span>
+                <span>$ 3,25</span>
             </td>
             <td>
                 Agende de conversação que pesquisa na internet para contextualização e informação em tempo real.
+                <div class="model-capabilities">
+                    <div>
+                        <i class="ri-global-line"></i>
+                        Live data
+                    </div>
+                    <div>
+                        <i class="ri-multi-image-fill"></i>
+                        Entrada: aceita imagens
+                    </div>
+                    <div>
+                        <i class="ri-instance-line"></i>
+                        Chamadas de função
+                    </div>
+                </div>
             </td>
         </tr>
         <tr>
@@ -235,10 +338,24 @@ Veja a lista abaixo dos modelos disponíveis e suas precificações. Todos os pr
                 @groq/compound-beta-mini
             </td>
             <td>
-                <span>$ 2,80</span>
+                <span>$ 2,60</span>
             </td>
             <td>
                 Versão menor da família Compound, que possui menos especialistas.
+                <div class="model-capabilities">
+                    <div>
+                        <i class="ri-global-line"></i>
+                        Live data
+                    </div>
+                    <div>
+                        <i class="ri-multi-image-fill"></i>
+                        Entrada: aceita imagens
+                    </div>
+                    <div>
+                        <i class="ri-instance-line"></i>
+                        Chamadas de função
+                    </div>
+                </div>
             </td>
         </tr>
     </tbody>
@@ -269,6 +386,16 @@ Veja a lista abaixo dos modelos disponíveis e suas precificações. Todos os pr
             </td>
             <td>
                 Modelo de conversação com pensamento e raciocínio para resolução de tarefas complexas.
+                <div class="model-capabilities">
+                    <div>
+                        <i class="ri-lightbulb-line"></i>
+                        Pensamento
+                    </div>
+                    <div>
+                        <i class="ri-instance-line"></i>
+                        Chamadas de função
+                    </div>
+                </div>
             </td>
         </tr>
     </tbody>
