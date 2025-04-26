@@ -396,6 +396,80 @@ data: [END]
     &quot;data&quot;: null
 }
 </code></pre>
+<h2 id="endpoint-openai">Endpoint OpenAI</h2>
+<p>A Open Indexer provê um endpoint compatível com a interface OpenAI através de um AI-gateway, o que facilita a integração do modelo criado pela Open Indexer com aplicações existentes. Vale ressaltar que somente algumas propriedades são suportadas.</p>
+<p>Em um gateway de IA, você já configura os parâmetros do modelo, como System Prompt, temperatura e nome do modelo. Ao usar esse endpoint, alguns valores do gateway podem ser sobrescritos pela requisição.</p>
+<h4 id="requisição-5">Requisição</h4>
+<div class="request-item post">
+    <span>POST</span>
+    <span>
+        /api/v1/ai-gateways/<span>{ai-gateway-id}</span>/open-ai/v1/chat/completions
+    </span>
+</div>
+<pre><code class="lang-json">{
+    // O campo &quot;model&quot; é obrigatório, mas não faz nada nessa requisição. Ele só existe para ser compatível com a API Open AI. Você pode deixar ele vazio ou escrever qualquer coisa no lugar, pois o modelo considerado é o definido no AI Gateway.
+    &quot;model&quot;: &quot;foobar&quot;,
+    
+    // As mensagens devem seguir o formato da Open AI. Somente &quot;system&quot; e &quot;user&quot; são suportados como &quot;roles&quot; da conversa.
+    &quot;messages&quot;: [
+        {
+            &quot;role&quot;: &quot;system&quot;,
+            &quot;content&quot;: &quot;You are a helpful assistant.&quot;
+        },
+        {
+            &quot;role&quot;: &quot;user&quot;,
+            &quot;content&quot;: &quot;Hello!&quot;
+        }
+    ],
+    
+    // Ambas propriedades são equivalentes e opcionais e vão substituir o campo maxCompletionTokens se forem enviadas na requisição.
+    &quot;max_completion_tokens&quot;: 1024,
+    &quot;max_tokens&quot;: 1024,
+    
+    // Opcional. Substitui o parâmetro do gateway.
+    &quot;stop&quot;: &quot;\n&quot;,
+    
+    // Opcional. Por padrão a resposta não é por streaming.
+    &quot;stream&quot;: true
+}
+</code></pre>
+<h4 id="resposta-para-não-streaming">Resposta para não-streaming</h4>
+<pre><code class="lang-json">{
+    &quot;id&quot;: &quot;019672f3-699c-7d45-8484-7a23f4cdc079&quot;,
+    &quot;object&quot;: &quot;chat.completion&quot;,
+    &quot;created&quot;: 1745685277,
+    &quot;model&quot;: &quot;gemini-2.0-flash-lite&quot;,
+    &quot;choices&quot;: [
+        {
+            &quot;index&quot;: 0,
+            &quot;message&quot;: {
+                &quot;role&quot;: &quot;assistant&quot;,
+                &quot;content&quot;: &quot;Hi there! How can I help you today?\n&quot;,
+                &quot;refusal&quot;: null,
+                &quot;annotations&quot;: []
+            },
+            &quot;logprobs&quot;: null,
+            &quot;finish_reason&quot;: &quot;stop&quot;
+        }
+    ],
+    &quot;usage&quot;: {
+        &quot;prompt_tokens&quot;: 0,
+        &quot;completion_tokens&quot;: 0,
+        &quot;total_tokens&quot;: 0
+    },
+    &quot;service_tier&quot;: &quot;default&quot;
+}
+</code></pre>
+<h3 id="resposta-para-streaming">Resposta para streaming</h3>
+<pre><code class="lang-json">data: {&quot;id&quot;:&quot;019672f4-9a58-7932-82f0-022e457a2e63&quot;,&quot;object&quot;:&quot;chat.completion.chunk&quot;,&quot;created&quot;:1745685355,&quot;model&quot;:&quot;gemini-2.0-flash-lite&quot;,&quot;system_fingerprint&quot;:&quot;fp_2i0nmn&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;finish_reason&quot;:null,&quot;delta&quot;:{&quot;role&quot;:&quot;assistant&quot;,&quot;content&quot;:&quot;Hi&quot;}}]}
+
+data: {&quot;id&quot;:&quot;019672f4-9ab9-73a2-bdb8-23c4481453a8&quot;,&quot;object&quot;:&quot;chat.completion.chunk&quot;,&quot;created&quot;:1745685355,&quot;model&quot;:&quot;gemini-2.0-flash-lite&quot;,&quot;system_fingerprint&quot;:&quot;fp_ar1qol&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;finish_reason&quot;:null,&quot;delta&quot;:{&quot;content&quot;:&quot; there! How can I help you today?\n&quot;}}]}
+
+...
+
+data: {&quot;id&quot;:&quot;019672f4-9ac0-7ddf-a76a-e7f8043dd082&quot;,&quot;object&quot;:&quot;chat.completion.chunk&quot;,&quot;created&quot;:1745685355,&quot;model&quot;:&quot;gemini-2.0-flash-lite&quot;,&quot;system_fingerprint&quot;:&quot;fp_3e84ge&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;finish_reason&quot;:&quot;stop&quot;,&quot;delta&quot;:{}}]}
+```'
+</code></pre>
 
 </article>
 
