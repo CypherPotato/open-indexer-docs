@@ -1,0 +1,50 @@
+{
+    "metadata": [
+        {
+            "src": [
+                {
+                    "files": [
+                        "**/*.dll"
+                    ],
+                    "src": "ref/"
+                }
+            ],
+            "dest": "api",
+            "namespaceLayout": "nested",
+            "memberLayout": "separatePages"
+        }
+    ],
+    "build": {
+        "content": [
+            {
+                "files": [
+                    "**/*.{md,yml}"
+                ],
+                "exclude": [
+                    "_site/**"
+                ]
+            }
+        ],
+        "resource": [
+            {
+                "files": [
+                    "assets/**"
+                ]
+            }
+        ],
+        "output": "_site",
+        "template": [
+            "default",
+            "template/modern",
+            "template/style"
+        ],
+        "globalMetadata": {
+            "_appFaviconPath": "assets/img/favicon.ico",
+            "_appLogoPath": "assets/img/Icon.png",
+            "_appName": "OpenIndexer",
+            "_appTitle": "OpenIndexer",
+            "_enableSearch": true,
+            "pdf": false
+        }
+    }
+}

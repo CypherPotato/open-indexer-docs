@@ -1,0 +1,30 @@
+* {
+    scrollbar-width: thin;
+}
+
+@supports (scrollbar-width: auto) {
+    * {
+        scrollbar-color: var(--scrollbar-color-thumb) var(--scrollbar-color-track);
+        scrollbar-width: var(--scrollbar-width);
+
+        & ::-webkit-scrollbar-thumb {
+            border: 2px solid var(--scrollbar-color-track);
+        }
+    }
+}
+
+@supports selector(::-webkit-scrollbar) {
+    *::-webkit-scrollbar-thumb {
+        background: var(--scrollbar-color-thumb);
+        border: 2px solid var(--scrollbar-color-track);
+    }
+
+    *::-webkit-scrollbar-track {
+        background: var(--scrollbar-color-track);
+    }
+
+    *::-webkit-scrollbar {
+        max-width: var(--scrollbar-width-legacy);
+        max-height: var(--scrollbar-width-legacy);
+    }
+}

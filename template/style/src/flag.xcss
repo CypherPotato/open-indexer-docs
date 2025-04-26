@@ -1,0 +1,30 @@
+.actionbar {
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+
+    .breadcrumb {
+        margin-bottom: 0 !important;
+    }
+
+    #language-wrapper {
+        display: none;
+
+        > a {
+            font-size: 14px;
+        }
+        
+        > .language-dropdown {
+            img {
+                display: inline-block;
+                height: 22px;
+                width: auto;
+                margin-right: 6px;
+            }
+
+            a {
+                font-size: 14px;
+            }
+        }
+    }
+}

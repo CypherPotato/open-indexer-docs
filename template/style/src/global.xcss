@@ -1,0 +1,75 @@
+:root {
+    --bs-font-sans-serif: "Geist", system-ui, -apple-system, Arial, sans-serif;
+    --bs-font-monospace: "Geist Mono", "Geist Mono Fallback", Consolas, SFMono-Regular, Roboto Mono, Menlo, Monaco, Liberation Mono, DejaVu Sans Mono, "Courier New", ui-monospace, monospace;
+    --bs-body-font-size: 14px;
+    --bs-link-color: --primary;
+    --bs-transition: .3s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+html[data-bs-theme="dark"] {
+    --primary: rgb(248, 165, 193);
+    --primary-opaque: rgba(248, 165, 200, 0.15);
+    --bs-link-color-rgb: 248, 165, 193;
+    --bs-code-color: #cd91ff;
+    --bs-danger-bg-subtle: #362829;
+    --bs-warning-bg-subtle: #332701;
+    --bs-info-bg-subtle: #183338;
+    --bs-body-bg: #010102;
+    --bs-body-bg-alt: #0c0e0f;
+    --scrollbar-color-track: #0c0e0f;
+    --scrollbar-color-thumb: #15191b;
+    --bs-border-color: #1a1e20;
+    --article-color: #bfcdcf;
+
+    --code-bg: #0c0e11;
+    --code-block-border: #20262e;
+
+    --alt-text: #ebe6bb;
+    --post: #3cd8a4;
+    --patch: #3c6dd8;
+    --get: #9f5fe7;
+    --put: #cee75f;
+    --delete: #e75f5f;
+}
+
+html[data-bs-theme="light"] {
+    --primary: rgb(119, 0, 73);
+    --primary-opaque: rgba(172, 7, 117, 0.15);
+    --bs-body-color: #000000;
+    --bs-link-color-rgb: 119, 0, 73;
+    --bs-code-color: #5342f0;
+    --bs-danger-bg-subtle: #ffe8ea;
+    --bs-warning-bg-subtle: #fff9e5;
+    --bs-info-bg-subtle: #eafbff;
+    --bs-body-bg: #fbfbfb;
+    --bs-body-bg-alt: #f0f0f0;
+    --scrollbar-color-track: #d9d9d9;
+    --scrollbar-color-thumb: #bbb;
+    --article-color: #343f41;
+
+    --code-bg: white;
+    --code-block-border: #e6e6e6;
+
+    --alt-text: #a17c00;
+    --post: #027951;
+    --patch: #021879;
+    --get: #5405af;
+    --put: #af6505;
+    --delete: #c51414;
+}
+
+.bg-body {
+    --bs-bg-opacity: .7;
+}
+
+.alert {
+    border: none;
+
+    p {
+        margin-block: 0;
+
+        + p {
+            margin-top: .3em;
+        }
+    }
+}

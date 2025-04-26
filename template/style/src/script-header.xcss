@@ -1,0 +1,27 @@
+.script-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+
+    border: 1px solid --code-block-border;
+    border-bottom: none;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+
+    > span {
+        font-size: .85rem;
+        opacity: .8;
+
+        & :last-of-type {
+            display: inline-block;
+            font-weight: 600;
+            opacity: .9;
+        }
+    }
+
+    + pre .hljs {
+        border-top-left-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+    }
+}

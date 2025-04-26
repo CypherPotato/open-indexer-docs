@@ -1,0 +1,14 @@
+div.search-results {
+    max-width: 1000px;
+    margin-inline: auto;
+
+    .sr-item {
+        a {
+            text-decoration: none;
+        }
+        
+        .item-href {
+            display: none;
+        }
+    }
+}

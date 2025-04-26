@@ -1,0 +1,19 @@
+items:
+- name: Introduction
+- name: Getting Started
+  href: getting-started.md
+- name: Authentication
+  href: authentication.md
+- name: Models
+  href: models.md
+- name: Using the API
+- name: Collections
+  href: entities/collections.md
+- name: Documents
+  href: entities/documents.md
+- name: Searches
+  href: entities/search.md
+- name: AI Gateways
+  href: entities/ai-gateway.md
+- name: Chat Clients
+  href: entities/chat-clients.md

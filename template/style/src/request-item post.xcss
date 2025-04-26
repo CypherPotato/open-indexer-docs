@@ -1,0 +1,65 @@
+.request-item {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 5px;
+    padding: 8px;
+    border: 1px solid --code-block-border;
+    border-radius: 8px;
+    background-color: --code-bg;
+
+    > span:first-of-type {
+        display: inline-block;
+        overflow: hidden;
+        text-align: center;
+        width: 60px;
+        border: 1px solid --code-block-border;
+        border-radius: 4px;
+        font-weight: 600;
+        font-size: .85em;
+        padding: 2px 0;
+        user-select: none;
+        text-shadow: 0 0 30px currentColor;
+    }
+
+    > span:last-of-type {
+        font-family: --bs-font-monospace;
+        font-size: 13px;
+
+        > span {
+            color: --alt-text;
+        }
+    }
+
+    & .post > span:first-of-type {
+        color: --post;
+    }
+
+    & .get > span:first-of-type {
+        color: --get;
+    }
+
+    & .delete > span:first-of-type {
+        color: --delete;
+    }
+
+    & .put > span:first-of-type {
+        color: --put;
+    }
+
+    & .patch > span:first-of-type {
+        color: --patch;
+    }
+    
+    & :has(+ pre) {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        margin-bottom: 0;
+        border-bottom: none;
+    }
+
+    + pre > code {
+        border-top-right-radius: 0 !important;
+        border-top-left-radius: 0 !important;
+    }
+}

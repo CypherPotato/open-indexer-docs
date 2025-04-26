@@ -1,0 +1,544 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>AI Gateway | OpenIndexer </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="AI Gateway | OpenIndexer ">
+
+
+        <link rel="icon" href="../../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
+
+        <meta name="docfx:rel" content="../../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/sisk-http/docs/blob/master/docs/en/entities/ai-gateway.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+        
+        <!-- GoatCounter -->
+        <script data-goatcounter="https://siskframework.goatcounter.com/count" async="" src="//gc.zgo.at/count.js"></script>
+        <!-- End GoatCounter -->
+        
+        <script>            
+            function switchLanguage(lang) {
+                const docPart = window.location.pathname.match(/\/docs\/((en)\/)?(.*)/)[3];
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../../index.html">
+                        <img id="logo" class="svg" src="../../../assets/img/Icon.png" alt="OpenIndexer">
+                        OpenIndexer
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/en/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="ai-gateway">AI Gateway</h1>
+
+<p>The AI gateways are a service provided by OpenIndexer to create an inference tunnel between an LLM model and a knowledge base. It is possible to:</p>
+<ul>
+<li>Create a model with customized instructions</li>
+<li>Use a model provided by you through an OpenAI compatible endpoint, or use a model made available by OpenIndexer</li>
+<li>Customize inference parameters, such as temperature, top_p, prefill</li>
+<li>Use a knowledge collection as the foundation for AI responses</li>
+</ul>
+<p>Among other features. With the AI Gateway, you create a model that is ready for use, parameterized, and based on the instructions you define.</p>
+<h2 id="models">Models</h2>
+<p>You can bring an AI model compatible with the OpenAI interface to the AI gateway. If you bring your own AI model, we will only charge for the document search attached to the AI.</p>
+<p>You can also use one of the models below that are already ready to start with OpenIndexer.</p>
+<p>When using a model, you will notice that some are more intelligent than others for specific tasks. Some models are better with certain data acquisition strategies than others. Perform tests to find the best model.</p>
+<p>You can view the available models on the <a href="/docs/en/models">models page</a>.</p>
+<h2 id="choosing-a-search-strategy">Choosing a search strategy</h2>
+<p>If you are using a knowledge collection with an AI model, you can choose a strategy that the AI will use to search for information. Each strategy is more refined than the other. Some create better results than others, but it is essential to perform practical tests with several strategies to understand which one fits best in the model, conversation, and user tone.</p>
+<p>It may be necessary to make adjustments to the system prompt to better inform the AI how to consider the documents attached to the conversation. The documents are attached as a user message, limited to the parameters you define in the acquisition strategy.</p>
+<p>Strategies without rewriting cost:</p>
+<ul>
+<li><code>Plain</code>: the default strategy. It is the least optimized and has no rewriting cost: the last user message is used as a search term to search the attached collection of the gateway.</li>
+<li><code>Concatenate</code>: concatenates the last N user messages in lines, and then the result of the concatenation is used as a search term.</li>
+<li><code>ToolCall</code>: forces the AI gateway to call an internal function requesting context. Provides good results and does not generate rewriting cost. However, it may not be as compatible with certain models: some may be less tolerant of the instructions of this function and not obtain information when necessary.</li>
+</ul>
+<p>Strategies with rewriting cost (inference tokens are charged):</p>
+<ul>
+<li><code>UserRewrite</code>: rewrites the last N user messages using a smaller model, creating a contextualized question about what the user wants to say.</li>
+<li><code>FullRewrite</code>: rewrites the last N*2 chat messages using a smaller model. Similar to <code>UserRewrite</code>, but also considers assistant messages in formulating the new question. Generally creates the best questions, with a slightly higher cost. It is the most stable and consistent strategy. Works with any model.</li>
+</ul>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Note about the <code>ToolCall</code> function: it is necessary that the model used in the gateway supports <a href="https://platform.openai.com/docs/en/guides/function-calling">function calls</a>. Additionally, the way the model will call the function is unpredictable: it may refuse to call the function. In this case, Open Indexer forces the function call and handles the result afterwards, without the need to insert additional messages in the system prompt.</p>
+</div>
+<h2 id="creating-an-ai-gateway">Creating an AI gateway</h2>
+<p>If you are using a model provided by you, have the following in hand:</p>
+<ul>
+<li>The base address compatible with the OpenAI API</li>
+<li>The API key of the endpoint (if applicable)</li>
+<li>The name of the inference model.</li>
+</ul>
+<p>It is not necessary to have a collection to link to your AI gateway. You can create an AI gateway and link a knowledge base to it later.</p>
+<h4 id="request">Request</h4>
+<div class="request-item post">
+    <span>POST</span>
+    <span>
+        /api/v1/ai-gateways
+    </span>
+</div>
+<pre><code class="lang-json">{
+    // Name of the gateway to identify it later.
+    &quot;name&quot;: &quot;my-gateway-model&quot;,
+    
+    &quot;parameters&quot;: {
+
+        // Endpoint compatible with OpenAI chat/completions, or use @integrated
+        // to use a model provided by Open Indexer.
+        &quot;baseAddress&quot;: &quot;@integrated&quot;,
+
+        // ID of the collection that will be used as the knowledge base by the AI.
+        // Can be null.
+        &quot;knowledgeCollectionId&quot;: &quot;01965b62-17c4-7258-9aa8-af5139799527&quot;,
+
+        // Optional. Specifies how many documents should be attached to the AI context.
+        &quot;knowledgeBaseMaximumResults&quot;: 16,
+
+        // Optional. Specifies the minimum similarity score that the document search should attach to the AI context.
+        &quot;knowledgeBaseMinimumScore&quot;: 0.55,
+
+        // Optional. Specifies whether document references should be attached to the AI context.
+        &quot;knowledgeUseReferences&quot;: false,
+
+        // Optional. Specifies the document acquisition strategy. Read &quot;Choosing a search strategy&quot; to learn more.
+        &quot;queryStrategy&quot;: &quot;Concatenate&quot;,
+
+        // Parameters of the acquisition strategy.
+        &quot;queryStrategyParameters&quot;: {
+
+            // Optional. Specifies the number of messages that should be considered for the UserRewrite and FullRewrite strategies. Note: for FullRewrite, the value is always multiplied by 2 to consider assistant messages.
+            &quot;rewriteContextSize&quot;: 3,
+
+            // Optional. Specifies the number of user messages that should be concatenated in the search term.
+            &quot;concatenateContextSize&quot;: 3
+        }
+
+        // Optional. Specifies the API key &quot;Authorization: Bearer ...&quot; used in inference. Leave null if using an embedded Open Indexer model.
+        &quot;apiKey&quot;: null,
+
+        // Required. Specifies the name of the model that will be used in inference.
+        &quot;modelName&quot;: &quot;@groq/compound-beta&quot;,
+
+        // Optional. Specifies the model temperature.
+        &quot;temperature&quot;: 1.25,
+        
+        // Optional. Specifies the model's nucleos sampling.
+        &quot;topP&quot;: null,
+
+        // Optional. Specifies the presence penalty of model tokens.
+        &quot;presencePenalty&quot;: null,
+
+        // Optional. Specifies a &quot;stop&quot; term for the model.
+        &quot;stop&quot;: null,
+
+        // Optional. Specifies the maximum number of response tokens of the model.
+        &quot;maxCompletionTokens&quot;: 4096,
+
+        // Optional. Specifies the system-prompt used in the model.
+        &quot;systemInstruction&quot;: &quot;You are a friendly assistant.&quot;,
+
+        // Optional. Transforms the user's question into the indicated format, where &quot;{prompt}&quot; is the user's original prompt.
+        &quot;userPromptTemplate&quot;: null,
+        
+        // Optional. Specifies a prefill (initialization) of the assistant's message.
+        &quot;assistantPrefill&quot;: null,
+
+        // Optional. Specifies whether the assistantPrefill and stop should be included in the message generated by the assistant.
+        &quot;includePrefillingInMessages&quot;: false,
+
+        // Optional. Specifies special flags for the model. Leave as &quot;0&quot; to not use any flag. The allowed flags are:
+        //      NoSystemInstruct: instead of using system prompt, inserts system instructions in a user message
+        &quot;flags&quot;: &quot;0&quot;,
+
+        // Optional. Passes an array of functions to the AI.
+        &quot;tools&quot;: null
+    }
+}
+</code></pre>
+<h4 id="response">Response</h4>
+<pre><code class="lang-json">{
+    &quot;message&quot;: null,
+    &quot;data&quot;: {
+        &quot;aiGatewayId&quot;: &quot;01965b64-a8eb-716c-892d-880159a9f12d&quot;
+    }
+}
+</code></pre>
+<h2 id="editing-an-ai-gateway">Editing an AI gateway</h2>
+<p>The request body is basically the same as the create AI gateway endpoint. Instead of using POST, use PATCH.</p>
+<h4 id="request-1">Request</h4>
+<div class="request-item patch">
+    <span>PATCH</span>
+    <span>
+        /api/v1/ai-gateways/<span>{ai-gateway-id}</span>
+    </span>
+</div>
+<h4 id="response-1">Response</h4>
+<pre><code class="lang-json">{
+    &quot;message&quot;: &quot;Gateway edited.&quot;,
+    &quot;data&quot;: null
+}
+</code></pre>
+<h2 id="using-an-ai-gateway">Using an AI gateway</h2>
+<p>The endpoint for conversing with an AI gateway is simple: it only expects the conversation. You can receive the response at once or by streaming.</p>
+<h4 id="request-2">Request</h4>
+<div class="request-item patch">
+    <span>POST</span>
+    <span>
+        /api/v1/ai-gateways/<span>{ai-gateway-id}</span>/inference
+    </span>
+</div>
+<pre><code class="lang-json">{
+    &quot;messages&quot;: [
+        {
+            &quot;role&quot;: &quot;user&quot;,
+            &quot;content&quot;: &quot;How can I turn on my Civic 2015?&quot;
+        }
+    ],
+    &quot;stream&quot;: true
+}
+</code></pre>
+<h4 id="response-for-streamtrue">Response for stream=true</h4>
+<p>The streaming response is based on server-sent events. The first line is always a response with debugging information.</p>
+<pre><code class="lang-text">data: {&quot;content&quot;:&quot;&quot;,&quot;isFirstChunkMetadata&quot;:true,&quot;embeddedDocuments&quot;:[],&quot;debugInfo&quot;:[{&quot;name&quot;:&quot;EmbeddingTimeMs&quot;,&quot;value&quot;:7.5045},{&quot;name&quot;:&quot;InferenceTimeMs&quot;,&quot;value&quot;:0},{&quot;name&quot;:&quot;ElapsedTotalMs&quot;,&quot;value&quot;:8.3489},{&quot;name&quot;:&quot;KnowledgeQueryText&quot;,&quot;value&quot;:null}]}
+
+data: {&quot;content&quot;:&quot;[...]&quot;,&quot;isFirstChunkMetadata&quot;:false,&quot;embeddedDocuments&quot;:[],&quot;debugInfo&quot;:[]}
+
+data: {&quot;content&quot;:&quot;[...]&quot;,&quot;isFirstChunkMetadata&quot;:false,&quot;embeddedDocuments&quot;:[],&quot;debugInfo&quot;:[]}
+
+data: {&quot;content&quot;:&quot;[...]&quot;,&quot;isFirstChunkMetadata&quot;:false,&quot;embeddedDocuments&quot;:[],&quot;debugInfo&quot;:[]}
+
+data: {&quot;content&quot;:&quot;[...]&quot;,&quot;isFirstChunkMetadata&quot;:false,&quot;embeddedDocuments&quot;:[],&quot;debugInfo&quot;:[]}
+... 
+
+data: [END]
+</code></pre>
+<h4 id="response-for-streamfalse">Response for stream=false</h4>
+<pre><code class="lang-json">{
+    &quot;message&quot;: null,
+    &quot;data&quot;: {
+        &quot;generatedMessage&quot;: &quot;[...]&quot;,
+        &quot;embeddedDocuments&quot;: [],
+        &quot;debugInfo&quot;: [
+            {
+                &quot;name&quot;: &quot;EmbeddingTimeMs&quot;,
+                &quot;value&quot;: 4140.8628
+            },
+            {
+                &quot;name&quot;: &quot;InferenceTimeMs&quot;,
+                &quot;value&quot;: 4140.803
+            },
+            {
+                &quot;name&quot;: &quot;ElapsedTotalMs&quot;,
+                &quot;value&quot;: 4141.4771
+            },
+            {
+                &quot;name&quot;: &quot;KnowledgeQueryText&quot;,
+                &quot;value&quot;: null
+            }
+        ]
+    }
+}
+</code></pre>
+<h2 id="viewing-an-ai-gateway">Viewing an AI gateway</h2>
+<p>The request below brings details of an AI gateway.</p>
+<h4 id="request-3">Request</h4>
+<div class="request-item get">
+    <span>GET</span>
+    <span>
+        /api/v1/ai-gateways/<span>{ai-gateway-id}</span>
+    </span>
+</div>
+<h4 id="response-2">Response</h4>
+<pre><code class="lang-json">{
+    &quot;message&quot;: null,
+    &quot;data&quot;: {
+        &quot;name&quot;: &quot;my-gateway-client&quot;,
+        &quot;parameters&quot;: {
+            &quot;baseAddress&quot;: &quot;@integrated&quot;,
+            &quot;knowledgeCollectionId&quot;: &quot;01965b54-7fbd-70cd-982b-604de002ac0a&quot;,
+            &quot;knowledgeBaseMaximumResults&quot;: 16,
+            &quot;knowledgeBaseMinimumScore&quot;: 0.55,
+            &quot;knowledgeUseReferences&quot;: false,
+            &quot;queryStrategy&quot;: &quot;ToolCall&quot;,
+            &quot;queryStrategyParameters&quot;: {
+                &quot;rewriteContextSize&quot;: 3,
+                &quot;concatenateContextSize&quot;: 3
+            },
+            &quot;apiKey&quot;: null,
+            &quot;modelName&quot;: &quot;@google/gemini-2.0-flash-lite&quot;,
+            &quot;temperature&quot;: 1.25,
+            &quot;topP&quot;: null,
+            &quot;presencePenalty&quot;: null,
+            &quot;stop&quot;: null,
+            &quot;maxCompletionTokens&quot;: 4096,
+            &quot;systemInstruction&quot;: &quot;[...]&quot;,
+            &quot;userPromptTemplate&quot;: null,
+            &quot;assistantPrefill&quot;: null,
+            &quot;includePrefillingInMessages&quot;: false,
+            &quot;flags&quot;: &quot;0&quot;,
+            &quot;tools&quot;: null
+        }
+    }
+}
+</code></pre>
+<h2 id="deleting-an-ai-gateway">Deleting an AI gateway</h2>
+<p>Permanently removes an AI gateway.</p>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>When removing an AI gateway, all associated chat clients are also removed. Collections are not removed.</p>
+</div>
+<h4 id="request-4">Request</h4>
+<div class="request-item delete">
+    <span>DELETE</span>
+    <span>
+        /api/v1/ai-gateways/<span>{ai-gateway-id}</span>
+    </span>
+</div>
+<h4 id="response-3">Response</h4>
+<pre><code class="lang-json">{
+    &quot;message&quot;: &quot;AI gateway deleted.&quot;,
+    &quot;data&quot;: null
+}
+</code></pre>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/sisk-http/docs/blob/master/docs/en/entities/ai-gateway.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>

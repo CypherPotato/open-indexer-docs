@@ -1,0 +1,11 @@
+ref/*
+api/*
+
+[Bb]in/
+[Oo]bj/
+Properties/
+
+*.sln
+
+.vs/
+.vscode/

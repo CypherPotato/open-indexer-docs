@@ -1,0 +1,512 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Documents | OpenIndexer </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="Documents | OpenIndexer ">
+
+
+        <link rel="icon" href="../../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
+
+        <meta name="docfx:rel" content="../../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/sisk-http/docs/blob/master/docs/en/entities/documents.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+        
+        <!-- GoatCounter -->
+        <script data-goatcounter="https://siskframework.goatcounter.com/count" async="" src="//gc.zgo.at/count.js"></script>
+        <!-- End GoatCounter -->
+        
+        <script>            
+            function switchLanguage(lang) {
+                const docPart = window.location.pathname.match(/\/docs\/((en)\/)?(.*)/)[3];
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../../index.html">
+                        <img id="logo" class="svg" src="../../../assets/img/Icon.png" alt="OpenIndexer">
+                        OpenIndexer
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/en/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="documents">Documents</h1>
+
+<p>A document represents a piece of knowledge. It is a limited, self-sufficient, and meaningful piece of information on its own. A document is the component that is indexed by the internal model to be retrieved later through a semantic search term.</p>
+<p>Consider a car manual: it is not a document, but rather several documents. Each of these documents talks, in isolation, about a specific topic related to that car, in such a way that the document does not depend on external context or information to make sense.</p>
+<p>Each document in this manual will discuss a topic: one will discuss how to turn on the car, another how to turn it off, another how the paint is made, and another how to change the oil periodically. It is not a good idea to reserve a document to discuss several things at the same time, as this will reduce the objectivity and scope of the inference and reduce the quality of acquisition.</p>
+<p>Examples of document creation:</p>
+<h3 id="-do-not">❌ Do not</h3>
+<ul>
+<li>Do not create very short documents (with 10 or fewer words).</li>
+<li>Do not create very large documents (with 700 or more words).</li>
+<li>Do not discuss more than one thing in a document.</li>
+<li>Do not mix different languages in documents.</li>
+<li>Do not be implicit in documents.</li>
+<li>Do not write documents using technical language, such as codes or structures like JSON.</li>
+</ul>
+<h3 id="-do">✅ Do</h3>
+<ul>
+<li>Be explicit about the purpose of your document.</li>
+<li>Focus documents on individual topics, summarizing what should be done or explained.</li>
+<li>Always repeat terms that are keywords for the document search. Example: prefer to use &quot;The color of the Honda Civic 2015 is yellow&quot; instead of &quot;the color of the car is yellow&quot;.</li>
+<li>Restrict the document content to discuss only one topic or subject.</li>
+<li>Use simple and easy-to-understand human language.</li>
+</ul>
+<h2 id="using-the-api">Using the API</h2>
+<p>As all documents are entities that belong to a <a href="/entities/collections">collection</a>, always have the collection where the document is/will be located at hand.</p>
+<h2 id="sending-documents-in-bulk">Sending documents in bulk</h2>
+<p>To send a large list of documents to a collection, structure them following the <a href="https://jsonlines.org/">JSONL</a> format. The indexing file structure is:</p>
+<pre><code class="lang-json">{&quot;docid&quot;:&quot;Cars/HondaCivic2015.rmd:1&quot;,&quot;text&quot;:&quot;The Honda Civic 2015 is available in [...]&quot;,&quot;__ref&quot;:null,&quot;__tags&quot;:[&quot;Cars&quot;,&quot;Honda-Civic-2015&quot;]}
+{&quot;docid&quot;:&quot;Cars/HondaCivic2015.rmd:2&quot;,&quot;text&quot;:&quot;The engine of the Honda Civic 2015 is [...]&quot;,&quot;__ref&quot;:null,&quot;__tags&quot;:[&quot;Cars&quot;,&quot;Honda-Civic-2015&quot;]}
+{&quot;docid&quot;:&quot;Cars/HondaCivic2015.rmd:3&quot;,&quot;text&quot;:&quot;The color of the Honda Civic 2015 is Yellow [...]&quot;,&quot;__ref&quot;:null,&quot;__tags&quot;:[&quot;Cars&quot;,&quot;Honda-Civic-2015&quot;]}
+...
+</code></pre>
+<p>The structure consists of the following properties:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>docid</code></td>
+<td><code>string</code></td>
+<td>Specifies the name of the document. Useful for debugging and identification.</td>
+</tr>
+<tr>
+<td><code>text</code></td>
+<td><code>string</code></td>
+<td>The &quot;raw&quot; content of the document that will be indexed.</td>
+</tr>
+<tr>
+<td><code>__ref</code></td>
+<td><code>string</code></td>
+<td>Optional. Specifies a reference ID for the document.</td>
+</tr>
+<tr>
+<td><code>__tags</code></td>
+<td><code>string[]</code></td>
+<td>Optional. Specifies an array of tags for the document. Useful for document management.</td>
+</tr>
+</tbody>
+</table>
+<p>A document reference is an ID that can be specified in several documents that need to be linked in a search when one of them is matched in a similarity search. For example, if a search finds a document that has a reference ID, all other documents in the same collection that share the same reference ID as the matched document will also be included in the search response.</p>
+<p>The use of references can be useful when a document depends on another or more documents to make sense. There is no format requirement for the reference ID: any format is accepted.</p>
+<p>You can send up to <strong>1,000</strong> lines of documents per request. If you need to send more documents, separate the sending into more requests. If you send a document with more than 1,000 lines, the following lines will be ignored.</p>
+<p>Note that very long documents, which exceed the allowed number of tokens in the internal embedding model, will have their content <strong>truncated</strong> and the indexing quality may be severely affected. To avoid this problem, send documents that contain between 20 and 700 words.</p>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>Warning: this endpoint generates cost. The cost is calculated based on the tokens of the content of each document. The content of each document is tokenized according to the model used in the indexing of the documents.</p>
+</div>
+<h4 id="request">Request</h4>
+<p>The sending must be done using <strong>multipart form data</strong>.</p>
+<div class="request-item get">
+    <span>POST</span>
+    <span>
+        /api/v1/collections/<span>{collection-id}</span>/documents
+    </span>
+</div>
+<pre><code class="lang-text">documents=[documents.jsonl]
+</code></pre>
+<h4 id="response">Response</h4>
+<pre><code class="lang-json">{
+    &quot;message&quot;: null,
+    &quot;data&quot;: [
+        {
+            &quot;name&quot;: &quot;Institutional/Company.rmd:1&quot;,
+            &quot;documentId&quot;: &quot;01965f93-a36b-7fc2-9e6a-c733f4955927&quot;
+        },
+        {
+            &quot;name&quot;: &quot;Institutional/Company.rmd:2&quot;,
+            &quot;documentId&quot;: &quot;01965f93-a390-79d3-9b3d-338d407f6b64&quot;
+        },
+        {
+            &quot;name&quot;: &quot;Institutional/Company.rmd:3&quot;,
+            &quot;documentId&quot;: &quot;01965f93-a391-79ef-adcf-737d98303a78&quot;
+        },
+        {
+            &quot;name&quot;: &quot;Products/Scheduling.rmd:1&quot;,
+            &quot;documentId&quot;: &quot;01965f93-a391-712e-9292-c4d8e010bf42&quot;
+        },
+        ...
+    ]
+}
+</code></pre>
+<h2 id="create-or-modify-document">Create or modify document</h2>
+<p>This endpoint creates or modifies a document from its name. When a document is modified, its indexing vectors are reset, i.e., the document will be re-indexed by the indexing engine.</p>
+<p>This indexing is not cost-free. The cost is relative to the number of tokens in the sent content.</p>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>Warning: this endpoint generates cost. The cost is calculated based on the tokens of the file content. The file content is tokenized according to the model used in the indexing of the documents.</p>
+</div>
+<h4 id="request-1">Request</h4>
+<div class="request-item put">
+    <span>PUT</span>
+    <span>
+        /api/v1/collections/<span>{collection-id}</span>/documents
+    </span>
+</div>
+<pre><code class="lang-json">{
+    // the name of the document to be modified
+    &quot;name&quot;: &quot;document-name&quot;,
+
+    // the content of the document to be created or overwritten if the name already exists
+    &quot;contents&quot;: &quot;Content of my document&quot;,
+
+    // parameters explained earlier
+    &quot;reference&quot;: null,
+    &quot;tags&quot;: [&quot;products&quot;, &quot;my-product&quot;]
+}
+</code></pre>
+<h4 id="response-1">Response</h4>
+<pre><code class="lang-json">{
+    &quot;message&quot;: null,
+    &quot;data&quot;: {
+        &quot;documentId&quot;: &quot;0196663c-3a15-72c7-98e6-b496f8e8bb8c&quot;,
+
+        // the operation status indicates whether the document was modified &quot;Modified&quot; or created &quot;Created&quot;.
+        &quot;state&quot;: &quot;Modified&quot;
+    }
+}
+</code></pre>
+<h2 id="list-documents">List documents</h2>
+<p>This endpoint lists all available documents in a collection.</p>
+<h4 id="request-2">Request</h4>
+<div class="request-item get">
+    <span>GET</span>
+    <span>
+        /api/v1/collections/<span>{collection-id}</span>/documents
+    </span>
+</div>
+<h4 id="response-2">Response</h4>
+<pre><code class="lang-json">{
+    &quot;message&quot;: null,
+    &quot;data&quot;: {
+        &quot;pageInfo&quot;: {
+            &quot;currentPage&quot;: 1,
+            &quot;hasMoreItems&quot;: true
+        },
+        &quot;items&quot;: [
+            {
+                &quot;id&quot;: &quot;01965b54-b31c-7184-9f5c-60b2648106d9&quot;,
+                &quot;name&quot;: &quot;Institutional/Company.rmd:1&quot;,
+                &quot;reference&quot;: null,
+                &quot;tags&quot;: []
+            },
+            {
+                &quot;id&quot;: &quot;01965b54-b32b-7433-b90b-73d71d21ae38&quot;,
+                &quot;name&quot;: &quot;Institutional/Company.rmd:2&quot;,
+                &quot;reference&quot;: null,
+                &quot;tags&quot;: []
+            },
+            {
+                &quot;id&quot;: &quot;01965b54-b32b-79bb-ac5e-729dfec701a8&quot;,
+                &quot;name&quot;: &quot;Products/Scheduling.rmd:1&quot;,
+                &quot;reference&quot;: null,
+                &quot;tags&quot;: []
+            },
+            ...
+        ]
+    }
+}
+</code></pre>
+<h2 id="view-document">View document</h2>
+<p>View details about a specific document.</p>
+<h4 id="request-3">Request</h4>
+<div class="request-item get">
+    <span>GET</span>
+    <span>
+        /api/v1/collections/<span>{collection-id}</span>/documents/<span>{document-id}</span>
+    </span>
+</div>
+<h4 id="response-3">Response</h4>
+<pre><code class="lang-json">{
+    &quot;message&quot;: null,
+    &quot;data&quot;: {
+        &quot;id&quot;: &quot;01965f93-a36b-7fc2-9e6a-c733f4955927&quot;,
+        &quot;name&quot;: &quot;Institutional/Company.rmd:1&quot;,
+        
+        // represents the indexing status of the document.
+        // valid values: Queued, Indexed, Cancelled
+        &quot;state&quot;: &quot;Indexed&quot;,
+
+        // content of the indexed document
+        &quot;contents&quot;: &quot;...&quot;,
+
+        // id of the document reference
+        &quot;reference&quot;: &quot;institutional-company&quot;,
+        
+        // brings all documents that share the same reference
+        &quot;references&quot;: [
+            {
+                &quot;id&quot;: &quot;01965b54-b32b-7433-b90b-73d71d21ae38&quot;,
+                &quot;name&quot;: &quot;Institutional/Company.rmd:2&quot;
+            },
+            {
+                &quot;id&quot;: &quot;01965b54-b31c-7184-9f5c-60b2648106d9&quot;,
+                &quot;name&quot;: &quot;Institutional/Company.rmd:3&quot;
+            }
+        ]
+    }
+}
+</code></pre>
+<h2 id="delete-document">Delete document</h2>
+<p>Permanently deletes a document through its ID.</p>
+<h4 id="request-4">Request</h4>
+<div class="request-item delete">
+    <span>DELETE</span>
+    <span>
+        /api/v1/collections/<span>{collection-id}</span>/documents/<span>{document-id}</span>
+    </span>
+</div>
+<h4 id="response-4">Response</h4>
+<pre><code class="lang-json">{
+    &quot;message&quot;: &quot;Document removed.&quot;,
+    &quot;data&quot;: null
+}
+</code></pre>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/sisk-http/docs/blob/master/docs/en/entities/documents.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>

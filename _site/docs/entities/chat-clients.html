@@ -1,0 +1,463 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Chat Clients | OpenIndexer </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="Chat Clients | OpenIndexer ">
+
+
+        <link rel="icon" href="../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
+
+        <meta name="docfx:rel" content="../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/sisk-http/docs/blob/master/docs/entities/chat-clients.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+        
+        <!-- GoatCounter -->
+        <script data-goatcounter="https://siskframework.goatcounter.com/count" async="" src="//gc.zgo.at/count.js"></script>
+        <!-- End GoatCounter -->
+        
+        <script>            
+            function switchLanguage(lang) {
+                const docPart = window.location.pathname.match(/\/docs\/((en)\/)?(.*)/)[3];
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../index.html">
+                        <img id="logo" class="svg" src="../../assets/img/Icon.png" alt="OpenIndexer">
+                        OpenIndexer
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/en/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="chat-clients">Chat Clients</h1>
+
+<p>Um cliente de chat provê uma interface de usuário através de um <a href="/docs/entities/ai-gateway">AI Gateway</a> que permite o usuário conversar com sua assistente. Um chat client é integrado à inferência do AI gateway e dá suporte para pensamento profundo, pesquisa e conversa por texto. Recursos multi-modais, como envio de imagens e áudio estão em desenvolvimento.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>A Open Indexer nunca armazena o conteúdo de um chat entre um cliente e o usuário. Você pode usar JavaScript para essa tarefa, mas sob sua responsabilidade de uso e armazenamento.</p>
+</div>
+<p>Você pode personalizar a interface do seu chat client com CSS e JavaScript personalizado, além de poder escolher a linguagem dos recursos do chat.</p>
+<h2 id="criando-um-chat-client">Criando um chat client</h2>
+<p>Cria um novo chat client.</p>
+<div class="request-item get">
+    <span>POST</span>
+    <span>
+        /api/v1/web-chat-client/
+    </span>
+</div>
+<pre><code class="lang-json">{
+    // Especifica o nome público do seu chat client
+    &quot;name&quot;: &quot;Minha assistente&quot;,
+    
+    // Especifica o ID do gateway de IA que será usado pelo chat
+    &quot;aiGatewayId&quot;: &quot;01965b64-a8eb-716c-892d-880159a9f12d&quot;,
+
+    &quot;clientParameters&quot;: {
+        
+        // Opcional. Especifica o código da linguagem que será usada no chat para maioria dos elementos, como mensagens de erro, botões, etc.
+        //      Valores: pt-BR, en
+        &quot;languageCode&quot;: &quot;pt-BR&quot; | &quot;en&quot;,
+
+        // Opcional. Especifica um código JavaScript para executar no chat.
+        &quot;customScripts&quot;: null,
+
+        // Opcional. Especifica um código CSS para aplicar estilos customizados no chat.
+        &quot;customStyles&quot;: null,
+
+        // Opcional. Especifica a cor de realce dos elementos do chat client.
+        &quot;primaryColor&quot;: &quot;#eabe44&quot;,
+
+        // Opcional. Especifica o título da página de chat.
+        &quot;pageTitle&quot;: &quot;Assistente&quot;,
+
+        // Opcional. Especifica o título ao entrar no chat pela primeira vez.
+        &quot;helloLabel&quot;: &quot;É ótimo ver você aqui.&quot;,
+
+        // Opcional. Especifica o sub-título ao entrar no chat pela primeira vez.
+        &quot;helloSubLabel&quot;: &quot;Sou a sua assistente.&quot;,
+
+        // Opcional. Especifica o placeholder do campo de enviar mensagem.
+        &quot;textAreaPlaceholder&quot;: &quot;Falar com a assistente&quot;,
+
+        // Opcional. Especifica uma imagem/logo para exibir no chat pela primeira vez.
+        &quot;logoImageUrl&quot;: null,
+
+        // Opcional. Ativa recursos de depuração.
+        &quot;debug&quot;: true,
+        
+        // Opcional. Especifica quais origens devem ser permitidas para embutir o cliente de chat em um iframe. Se esse campo estiver vazio, qualquer origem será aceita.
+        &quot;allowedFrameOrigins&quot;: [&quot;https://my-domain.com.br&quot;]
+    },
+    
+    &quot;limitingParameters&quot;: {
+        
+        // Opcional. Especifica quantas mensagens o usuário pode enviar por hora no chat. Essa opção é rastreada pelo userTag da sessão.
+        &quot;messagesPerHour&quot;: 30,
+        
+        // Opcional. Especifica o máximo de tokens que uma mensagem do usuário pode conter.
+        &quot;userInputMaxTokens&quot;: 1024
+    }
+}
+</code></pre>
+<h4 id="resposta">Resposta</h4>
+<pre><code class="lang-json">{
+    &quot;message&quot;: null,
+    &quot;data&quot;: {
+        &quot;id&quot;: &quot;01965b65-e95e-7795-848c-ff0919ef1436&quot;
+    }
+}
+</code></pre>
+<h2 id="editando-um-chat-client">Editando um chat client</h2>
+<p>O corpo dessa requisição é exatamente igual ao de criar um chat client.</p>
+<div class="request-item get">
+    <span>PUT</span>
+    <span>
+        /api/v1/web-chat-client/<span>{chat-client-id}</span>
+    </span>
+</div>
+<h4 id="resposta-1">Resposta</h4>
+<pre><code class="lang-json">{
+    &quot;message&quot;: &quot;Web client updated successfully.&quot;,
+    &quot;data&quot;: null
+}
+</code></pre>
+<h2 id="listando-os-chat-clients">Listando os chat clients</h2>
+<p>Obtém uma lista dos chat clients criados.</p>
+<div class="request-item get">
+    <span>GET</span>
+    <span>
+        /api/v1/web-chat-client/
+    </span>
+</div>
+<h4 id="resposta-2">Resposta</h4>
+<pre><code class="lang-json">{
+    &quot;message&quot;: null,
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: &quot;01965b59-daf6-7809-94c8-2a65b7264dba&quot;,
+            &quot;name&quot;: &quot;Meu chat client&quot;
+        },
+        ...
+    ]
+}
+</code></pre>
+<h2 id="vendo-um-chat-client-específico">Vendo um chat client específico</h2>
+<p>Obtém detalhes de um chat client existente.</p>
+<div class="request-item get">
+    <span>GET</span>
+    <span>
+        /api/v1/web-chat-client/<span>{chat-client-id}</span>
+    </span>
+</div>
+<h4 id="resposta-3">Resposta</h4>
+<pre><code class="lang-json">{
+    &quot;message&quot;: null,
+    &quot;data&quot;: {
+        &quot;name&quot;: &quot;Meu chat client&quot;,
+        &quot;aiGateway&quot;: {
+            &quot;id&quot;: &quot;01965b59-49ff-7753-8327-b3b6a6a871f2&quot;,
+            &quot;name&quot;: &quot;gateway-t1&quot;,
+            &quot;knowledgeCollection&quot;: {
+                &quot;id&quot;: &quot;01965b54-7fbd-70cd-982b-604de002ac0a&quot;,
+                &quot;name&quot;: &quot;Informações sobre carros&quot;
+            }
+        },
+        &quot;limitingParameters&quot;: {
+            &quot;messagesPerHour&quot;: 30,
+            &quot;userInputMaxTokens&quot;: 1024,
+            &quot;maxMessages&quot;: 500
+        },
+        &quot;clientParameters&quot;: {
+            &quot;languageCode&quot;: &quot;pt-BR&quot;,
+            &quot;customScripts&quot;: null,
+            &quot;customStyles&quot;: null,
+            &quot;primaryColor&quot;: &quot;#f011d2&quot;,
+            &quot;pageTitle&quot;: &quot;Lyra&quot;,
+            &quot;helloLabel&quot;: &quot;É ótimo ver você aqui.&quot;,
+            &quot;helloSubLabel&quot;: &quot;Sou sua assistente.&quot;,
+            &quot;textAreaPlaceholder&quot;: &quot;Falar com a assistente&quot;,
+            &quot;logoImageUrl&quot;: null,
+            &quot;debug&quot;: true,
+            &quot;allowedFrameOrigins&quot;: []
+        }
+    }
+}
+</code></pre>
+<h2 id="criar-uma-sessão-de-chat">Criar uma sessão de chat</h2>
+<p>Uma sessão de chat é onde você cria uma conversa entre seu chat client e o usuário. Você pode chamar esse endpoint informando contexto adicional para conversa, como o nome do usuário, onde ele está, etc.</p>
+<p>Uma sessão de chat expira após algum tempo por segurança do token de acesso gerado. Quando você chama esse endpoint informando uma <code>tag</code> você pode chamar o mesmo endpoint várias vezes e obter a sessão de chat que está ativa para a tag informada, ou criar um chat novo se não existir uma sessão em andamento.</p>
+<p>Uma sessão é automaticamente renovada por mais 30 minutos ao receber uma mensagem do usuário.</p>
+<div class="request-item get">
+    <span>GET</span>
+    <span>
+        /api/v1/web-chat-client/<span>{chat-client-id}</span>/sessions
+    </span>
+</div>
+<pre><code class="lang-json">{
+    // Opcional. Contexto adicional para a IA sobre o chat.
+    &quot;extraContext&quot;: &quot;# Contexto adicional\r\n\r\nVocê está falando com Eduardo.&quot;,
+
+    // Tempo em segundos para o chat expirar. O mínimo é 10 minutos. O máximo é 30 dias.
+    &quot;expires&quot;: 3600,
+
+    // Opcional (recomendado). Um id externo para identificar a sessão posteriormente e reaproveitá-la sempre que chamar o mesmo endpoint. Pode ser o ID do usuário do seu banco de dados ou uma string que facilite a identificação desse chat posteriormente.
+    &quot;tag&quot;: &quot;my-user-tag&quot;
+}
+</code></pre>
+<h4 id="resposta-4">Resposta</h4>
+<pre><code class="lang-json">{
+    &quot;message&quot;: null,
+    &quot;data&quot;: {
+        // ID da sessão de chat criada.
+        &quot;sessionId&quot;: &quot;01966f0b-172d-7bbc-9393-4273b86667d2&quot;,
+
+        // Chave pública de acesso do chat.
+        &quot;accessKey&quot;: &quot;wky_gr5uepjsgrhuqcj3aaat1iagrsmozwr9gghusnnu6zjhrsyures5xoe&quot;,
+
+        // A URL pública para conversar com o chat.
+        &quot;talkUrl&quot;: &quot;https://preview-s01.proj.pw/www/web-chat-clients/wky_gr5uepjsgrhuqcj3aaat1iagrsmozwr9gghusnnu6zjhrsyures5xoe&quot;
+    }
+}
+</code></pre>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/sisk-http/docs/blob/master/docs/entities/chat-clients.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,13 @@
+.content > article .alert {
+    background-color: --bs-body-bg;
+    border: none;
+    border-left: 4px solid --bs-alert-border-color;
+    border-radius: 0;
+    color: --article-color;
+    padding: .25em 0 .25em 1em;
+    margin-block: 1em;
+
+    h5 {
+        color: --bs-alert-color;
+    }
+}

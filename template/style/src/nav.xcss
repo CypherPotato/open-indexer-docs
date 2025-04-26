@@ -1,0 +1,128 @@
+nav {
+    scrollbar-width: thin;
+    font-size: --bs-body-font-size;
+
+    & .toc {
+
+        .filter {
+            display: none;
+        }
+
+        > div {
+            padding-bottom: 50px; // comfortable scroll
+        }
+
+        li {
+            position: relative;
+            padding-left: 15px;
+            margin: 0;
+            transition: --bs-transition;
+
+            > .expand-stub::before {
+                margin-top: 0.7em;
+            }
+
+            & :not(:has(span.text-body-tertiary)):not(.expander):hover {
+                background-color: --bs-body-bg-alt;
+
+                a {
+                    opacity: 1;
+                    text-decoration: none;
+                }
+            }
+
+            > a {
+                display: block;
+                padding: 3px 8px;
+                margin-bottom: 2px;
+                transition: none;
+                text-decoration: none;
+                opacity: .65;
+                width: 95%;
+                border-radius: 4px;
+                transition: --bs-transition;
+            }
+
+            & :not(.expander).active {
+                font-weight: 500;
+
+                & ::before {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 3px;
+                    height: 100%;
+                    background-color: --bs-body-color;
+                }
+
+                > a {
+                    position: relative;
+                    color: --bs-body-color;
+                    opacity: 1;
+                }
+            }
+
+            & .expander {
+
+                & .active {
+                    font-weight: 500;
+
+                    > a {
+                        color: --bs-body-color;
+                        opacity: 1;
+                    }
+                }
+
+                & :hover {
+                    > a {
+                        opacity: 1;
+                    }
+                }
+            }
+
+            // header separator
+            > span.text-body-tertiary {
+                margin-left: 8px;
+                opacity: .7;
+                font-size: .7rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                margin-block: 1.3rem 0.2rem !important;
+            }
+        }
+    }
+
+    & #affix {
+        padding-right: 15px;
+
+        > h5 {
+            font-weight: 500;
+            letter-spacing: unset;
+            text-transform: none;
+            width: 100%;
+        }
+
+        a {
+            color: var(--bs-nav-link-color);
+            text-decoration: none !important;
+            opacity: .75;
+            font-size: .8rem;
+            transition: --bs-transition;
+
+            & ::before {
+                content: "\2022"; // bullet
+                display: inline-block;
+                margin-right: 5px;
+            }
+
+            & :hover {
+                opacity: 1;
+            }
+        }
+
+        ul li {
+            margin: .4em 0;
+        }
+    }
+}

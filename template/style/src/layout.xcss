@@ -1,0 +1,27 @@
+.container-xxl {
+    justify-content: center;
+    max-width: unset !important;
+    
+    & :is(main) {
+        padding: 0;
+    }
+
+    // nav wrapper
+    > .toc-offcanvas,
+    > .affix {
+        max-width: 300px !important;
+        top: calc(60px) !important;
+        max-height: calc(100svh - 60px) !important;
+    }
+    
+    > .content {
+        padding-block: 50px;
+        max-width: unset !important;
+        
+        > * {
+            margin: 0 auto;
+            max-width: 920px;
+            width: 100%;
+        }
+    }
+}

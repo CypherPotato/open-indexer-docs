@@ -1,0 +1,11 @@
+img.icon {
+    width: 34px;
+    height: auto;
+}
+
+img.inline-icon {
+    display: inline-block !important;
+    width: 32px !important;
+    margin: 0 !important;
+    height: auto;
+}
