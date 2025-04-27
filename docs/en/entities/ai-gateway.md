@@ -19,7 +19,7 @@ You can view the available models on the [models page](/docs/en/models).
 
 ## Choosing a search strategy
 
-If you are using a knowledge collection with an AI model, you can choose a strategy that the AI will use to search for information. Each strategy is more refined than the other. Some create better results than others, but it is essential to perform practical tests with several strategies to understand which one fits best in the model, conversation, and user tone.
+If you are using a knowledge collection with an AI model, you can choose a strategy that the AI will use to perform an information search. Each strategy is more refined than the other. Some create better results than others, but it is essential to perform practical tests with several strategies to understand which one fits best in the model, conversation, and user tone.
 
 It may be necessary to make adjustments to the system prompt to better inform the AI how to consider the documents attached to the conversation. The documents are attached as a user message, limited to the parameters you define in the acquisition strategy.
 
@@ -27,7 +27,7 @@ Strategies without rewriting cost:
 
 - `Plain`: the default strategy. It is the least optimized and has no rewriting cost: the last user message is used as a search term to search the attached collection of the gateway.
 - `Concatenate`: concatenates the last N user messages in lines, and then the result of the concatenation is used as a search term.
-- `ToolCall`: forces the AI of the gateway to call an internal function requesting context. Provides good results and does not generate rewriting cost. However, it may not be as compatible with certain models: some may be less tolerant of the instructions of this function and not obtain information when necessary.
+- `ToolCall`: forces the AI gateway to call an internal function requesting context. Provides good results and does not generate rewriting cost. However, it may not be as compatible with certain models: some may be less tolerant of this function's instructions and not obtain information when necessary.
 
 Strategies with rewriting cost (inference tokens are charged):
 
@@ -106,13 +106,13 @@ It is not necessary to have a collection to link to your AI gateway. You can cre
         // Optional. Specifies the model's nucleos sampling.
         "topP": null,
 
-        // Optional. Specifies the token presence penalty of the model.
+        // Optional. Specifies the model's presence penalty.
         "presencePenalty": null,
 
         // Optional. Specifies a "stop" term for the model.
         "stop": null,
 
-        // Optional. Specifies the maximum response tokens of the model.
+        // Optional. Specifies the maximum number of response tokens of the model.
         "maxCompletionTokens": 4096,
 
         // Optional. Specifies the system-prompt used in the model.
@@ -214,8 +214,9 @@ data: {"content":"[...]","isFirstChunkMetadata":false,"embeddedDocuments":[],"de
 data: {"content":"[...]","isFirstChunkMetadata":false,"embeddedDocuments":[],"debugInfo":[]}
 ... 
 
-data: {"content":"[...]","isFirstChunkMetadata":false,"embeddedDocuments":[],"debugInfo":[]}
+data: {"content":"[END]"}
 ```
+
 
 #### Response for stream=false
 
@@ -330,7 +331,7 @@ Permanently removes an AI gateway.
 
 Open Indexer provides an endpoint compatible with the OpenAI interface through an AI gateway, which facilitates the integration of the model created by Open Indexer with existing applications. It is worth noting that only some properties are supported.
 
-In an AI gateway, you already configure the model parameters, such as System Prompt, temperature, and model name. When using this endpoint, some values of the gateway can be overwritten by the request.
+In an AI gateway, you already configure the model parameters, such as System Prompt, temperature, and model name. When using this endpoint, some gateway values can be overwritten by the request.
 
 #### Request
 
@@ -402,9 +403,9 @@ In an AI gateway, you already configure the model parameters, such as System Pro
 ```
 
 
-### Response for streaming
+#### Response for streaming
 
-```json
+```text
 data: {"id":"019672f4-9a58-7932-82f0-022e457a2e63","object":"chat.completion.chunk","created":1745685355,"model":"gemini-2.0-flash-lite","system_fingerprint":"fp_2i0nmn","choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant","content":"Hi"}}]}
 
 data: {"id":"019672f4-9ab9-73a2-bdb8-23c4481453a8","object":"chat.completion.chunk","created":1745685355,"model":"gemini-2.0-flash-lite","system_fingerprint":"fp_ar1qol","choices":[{"index":0,"finish_reason":null,"delta":{"content":" there! How can I help you today?\n"}}]}

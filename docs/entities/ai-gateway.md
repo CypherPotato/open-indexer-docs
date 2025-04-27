@@ -398,7 +398,7 @@ Em um gateway de IA, você já configura os parâmetros do modelo, como System P
 ```
 
 
-### Resposta para streaming
+#### Resposta para streaming
 
 ```json
 data: {"id":"019672f4-9a58-7932-82f0-022e457a2e63","object":"chat.completion.chunk","created":1745685355,"model":"gemini-2.0-flash-lite","system_fingerprint":"fp_2i0nmn","choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant","content":"Hi"}}]}

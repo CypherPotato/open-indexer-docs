@@ -141,7 +141,7 @@ All prices are in United States dollars.
                 <span>$ 0.70</span>
             </td>
             <td>
-                Fast model, open-source study by Google to perform most tasks.
+                Fast model, Google's open-source study to perform most tasks.
                 <div class="model-capabilities">
                     <div>
                         <i class="ri-instance-line"></i>
@@ -158,7 +158,7 @@ All prices are in United States dollars.
                 <span>$ 0.67</span>
             </td>
             <td>
-                General-purpose model, with image recognition, smart, and fast.
+                General-purpose model, with image recognition, smart and fast.
                 <div class="model-capabilities">
                     <div>
                         <i class="ri-multi-image-fill"></i>
@@ -236,7 +236,7 @@ All prices are in United States dollars.
                 <span>$ 1.40</span>
             </td>
             <td>
-                Fast model, with 17 billion parameters activated and 128 specialists.
+                Fast model, with 17 billion parameters enabled and 128 experts.
                 <div class="model-capabilities">
                     <div>
                         <i class="ri-multi-image-fill"></i>
@@ -257,7 +257,7 @@ All prices are in United States dollars.
                 <span>$ 0.79</span>
             </td>
             <td>
-                Smaller version of the Llama 4 family with 17 billion parameters activated and 16 specialists.
+                Smaller version of the Llama 4 family, with 17 billion parameters enabled and 16 experts.
                 <div class="model-capabilities">
                     <div>
                         <i class="ri-multi-image-fill"></i>
@@ -314,7 +314,7 @@ All prices are in United States dollars.
                 <span>$ 3.25</span>
             </td>
             <td>
-                Conversation scheduler that searches the internet for contextualization and real-time information.
+                Conversation agent that searches the internet for contextualization and real-time information.
                 <div class="model-capabilities">
                     <div>
                         <i class="ri-global-line"></i>
@@ -339,7 +339,7 @@ All prices are in United States dollars.
                 <span>$ 2.60</span>
             </td>
             <td>
-                Smaller version of the Compound family, with fewer specialists.
+                Smaller version of the Compound family, with fewer experts.
                 <div class="model-capabilities">
                     <div>
                         <i class="ri-global-line"></i>
@@ -354,6 +354,47 @@ All prices are in United States dollars.
                         Function calls
                     </div>
                 </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+## <img src="/assets/icon/microsoft.svg" class="inline-icon"> Microsoft
+
+<table>
+    <thead>
+        <colgroup>
+            <col style="width: 30%" />
+            <col style="width: 20%" />
+            <col style="width: 50%" />
+        </colgroup>
+        <tr>
+            <th>Model Name</th>
+            <th>Price/1m tokens</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @microsoft/phi-4
+            </td>
+            <td>
+                <span>$ 0.70</span>
+            </td>
+            <td>
+                Smart and agile chat model, optimized for most tasks.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @microsoft/phi-3.5-mini
+            </td>
+            <td>
+                <span>$ 0.21</span>
+            </td>
+            <td>
+                Model from the previous generation, but still capable of many things.
             </td>
         </tr>
     </tbody>

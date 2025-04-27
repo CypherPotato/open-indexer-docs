@@ -316,7 +316,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 <span>$ 3,25</span>
             </td>
             <td>
-                Agende de conversação que pesquisa na internet para contextualização e informação em tempo real.
+                Agente de conversação que pesquisa na internet para contextualização e informação em tempo real.
                 <div class="model-capabilities">
                     <div>
                         <i class="ri-global-line"></i>
@@ -356,6 +356,48 @@ Todos os preços estão em dólares dos Estados Unidos.
                         Chamadas de função
                     </div>
                 </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+## <img src="/assets/icon/microsoft.svg" class="inline-icon"> Microsoft
+
+<table>
+    <thead>
+        <colgroup>
+            <col style="width: 30%" />
+            <col style="width: 20%" />
+            <col style="width: 50%" />
+        </colgroup>
+        <tr>
+            <th>Nome do modelo</th>
+            <th>Preço/1m tokens</th>
+            <th>Descrição</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @microsoft/phi-4
+            </td>
+            <td>
+                <span>$ 0,70</span>
+            </td>
+            <td>
+                Modelo de chat esperto e ágil, otimizado para maioria das tarefas.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @microsoft/phi-3.5-mini
+            </td>
+            <td>
+                <span>$ 0,21</span>
+            </td>
+            <td>
+                Modelo de geração anterior, mas ainda capaz de muita coisa.
             </td>
         </tr>
     </tbody>
