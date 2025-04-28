@@ -27,16 +27,19 @@ Estratégias sem custo de reescrita:
 
 - `Plain`: a estratégia padrão. É a menos otimizada e não possui custo de reescrita: a última mensagem do usuário é usada como termo de busca para pesquisar na coleção anexada do gateway.
 - `Concatenate`: Concatena em linhas as últimas N mensagens do usuário, e então o resultado da concatenação é usada como termo de busca.
-- `ToolCall`: força a IA do gateway chamar uma função interna solicitando por contexto. Fornece bons resultados e não gera custo de reescrita. No entanto, pode não ser tão compatível com certos modelos: alguns podem ser menos tolerantes às instruções dessa função e não obterem informações quando necessário.
 
 Estratégias com custo de reescrita (os tokens de inferência são cobrados):
 
 - `UserRewrite`: reescreve as últimas N mensagens do usuário usando um modelo menor, criando uma pergunta contextualizada no que o usuário quer dizer.
 - `FullRewrite`: reescreve as últimas N*2 mensagens do chat usando um modelo menor. Similar ao `UserRewrite`, mas considera também as mensagens da assistente na formulação da nova pergunta. Geralmente cria as melhores perguntas, com um custo um pouco maior. É a estratégia mais estável e consistente. Funciona com qualquer modelo.
 
-> [!NOTE]
->
-> Nota sobre a função `ToolCall`: é necessário que o modelo usado no gateway suporte [chamadas de função](https://platform.openai.com/docs/guides/function-calling). Além disso, a forma que o modelo irá chamar a função é imprevisível: pode ser que o modelo se recuse a chamar a função. Neste caso, o Open Indexer força a chamada da função e lida com o resultado depois, sem a necessidade de inserir mensagens no system prompt adicionais.
+Estratégias com reescrita normalmente geram os melhores resultados à um baixo custo de latência e custo. O modelo de reescrita usado sempre o com menor custo, escolhido normalmente por um pool interno que decide o modelo que está com menor latência no momento.
+
+## Usando funções (tools) de IA
+
+No momento, não é possível especificar chamadas de função através da nossa API, seja pelo AI-Gateway ou pela API OpenAI compatível. Esse recurso está no nosso radar para implementação futura.
+
+Se isso é crítico para seu modelo de IA funcionar, você pode usar a API de [busca de documentos](/docs/search) no seu modelo.
 
 ## Criando um gateway de IA
 
@@ -82,8 +85,8 @@ Não é necessário ter uma coleção para vincular no seu gateway de IA. Você 
         "knowledgeUseReferences": false,
 
         // Opcional. Especifica a estratégia de obtenção de documentos. Leia "Escolhendo uma estratégia de busca" para saber mais.
-        "queryStrategy": "Concatenate",
-
+        "queryStrategy": "UserRewrite",
+        
         // Parâmetros da estratégia de obtenção.
         "queryStrategyParameters": {
 

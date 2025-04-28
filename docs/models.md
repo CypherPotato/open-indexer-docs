@@ -159,7 +159,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 <span>$ 0,67</span>
             </td>
             <td>
-                Modelo de uso geral, com reconhecimento de imagens, esperto e rápido.
+                Modelo de uso geral, com reconhecimento de imagens, esperto e rápido. Ótimo para um chat econômico.
                 <div class="model-capabilities">
                     <div>
                         <i class="ri-multi-image-fill"></i>
@@ -180,8 +180,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 <span>$ 0,33</span>
             </td>
             <td>
-                Modelo de uso geral da geração anterior, com reconhecimento de imagens e
-                boa performance para maioria das tarefas.
+                Modelo de uso geral da geração anterior, otimizado para tarefas menos exigentes e simples.
                 <div class="model-capabilities">
                     <div>
                         <i class="ri-multi-image-fill"></i>
@@ -280,7 +279,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 <span>$ 0,23</span>
             </td>
             <td>
-                Modelo barato para conversação rápida e simples.
+                Modelo barato e rápido para tarefas menos exigentes.
                 <div class="model-capabilities">
                     <div>
                         <i class="ri-instance-line"></i>
@@ -356,48 +355,6 @@ Todos os preços estão em dólares dos Estados Unidos.
                         Chamadas de função
                     </div>
                 </div>
-            </td>
-        </tr>
-    </tbody>
-</table>
-
-
-## <img src="/assets/icon/microsoft.svg" class="inline-icon"> Microsoft
-
-<table>
-    <thead>
-        <colgroup>
-            <col style="width: 30%" />
-            <col style="width: 20%" />
-            <col style="width: 50%" />
-        </colgroup>
-        <tr>
-            <th>Nome do modelo</th>
-            <th>Preço/1m tokens</th>
-            <th>Descrição</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-                @microsoft/phi-4
-            </td>
-            <td>
-                <span>$ 0,70</span>
-            </td>
-            <td>
-                Modelo de chat esperto e ágil, otimizado para maioria das tarefas.
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @microsoft/phi-3.5-mini
-            </td>
-            <td>
-                <span>$ 0,21</span>
-            </td>
-            <td>
-                Modelo de geração anterior, mas ainda capaz de muita coisa.
             </td>
         </tr>
     </tbody>
