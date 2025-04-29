@@ -195,6 +195,86 @@ All prices are in United States dollars.
     </tbody>
 </table>
 
+
+## <img src="/assets/icon/openai.svg" class="inline-icon"> OpenAI
+
+<table>
+    <thead>
+        <colgroup>
+            <col style="width: 30%" />
+            <col style="width: 20%" />
+            <col style="width: 50%" />
+        </colgroup>
+        <tr>
+            <th>Model name</th>
+            <th>Price/1m tokens</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @openai/o1-mini
+            </td>
+            <td>
+                <span>$ 6,50</span>
+            </td>
+            <td>
+                A small, affordable reasoning model
+                <div class="model-capabilities">
+                    <div>
+                        <i class="ri-lightbulb-line"></i>
+                        Thinking
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @openai/gpt-4o-mini
+            </td>
+            <td>
+                <span>$ 1,31</span>
+            </td>
+            <td>
+                Fast, affordable small model for focused tasks.
+                <div class="model-capabilities">
+                    <div>
+                        <i class="ri-multi-image-fill"></i>
+                        Input: accepts images
+                    </div>
+                    <div>
+                        <i class="ri-instance-line"></i>
+                        Function calls
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @openai/gpt-4.1-nano
+            </td>
+            <td>
+                <span>$ 0,88</span>
+            </td>
+            <td>
+                Fastest, most cost-effective GPT-4.1 model.
+                <div class="model-capabilities">
+                    <div>
+                        <i class="ri-multi-image-fill"></i>
+                        Input: accepts images
+                    </div>
+                    <div>
+                        <i class="ri-instance-line"></i>
+                        Function calls
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
 ## <img src="/assets/icon/meta.svg" class="inline-icon"> Meta AI
 
 <table>
