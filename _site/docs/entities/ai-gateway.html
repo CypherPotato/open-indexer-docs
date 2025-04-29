@@ -147,17 +147,16 @@
 <ul>
 <li><code>Plain</code>: a estratégia padrão. É a menos otimizada e não possui custo de reescrita: a última mensagem do usuário é usada como termo de busca para pesquisar na coleção anexada do gateway.</li>
 <li><code>Concatenate</code>: Concatena em linhas as últimas N mensagens do usuário, e então o resultado da concatenação é usada como termo de busca.</li>
-<li><code>ToolCall</code>: força a IA do gateway chamar uma função interna solicitando por contexto. Fornece bons resultados e não gera custo de reescrita. No entanto, pode não ser tão compatível com certos modelos: alguns podem ser menos tolerantes às instruções dessa função e não obterem informações quando necessário.</li>
 </ul>
 <p>Estratégias com custo de reescrita (os tokens de inferência são cobrados):</p>
 <ul>
 <li><code>UserRewrite</code>: reescreve as últimas N mensagens do usuário usando um modelo menor, criando uma pergunta contextualizada no que o usuário quer dizer.</li>
 <li><code>FullRewrite</code>: reescreve as últimas N*2 mensagens do chat usando um modelo menor. Similar ao <code>UserRewrite</code>, mas considera também as mensagens da assistente na formulação da nova pergunta. Geralmente cria as melhores perguntas, com um custo um pouco maior. É a estratégia mais estável e consistente. Funciona com qualquer modelo.</li>
 </ul>
-<div class="NOTE">
-<h5>Note</h5>
-<p>Nota sobre a função <code>ToolCall</code>: é necessário que o modelo usado no gateway suporte <a href="https://platform.openai.com/docs/guides/function-calling">chamadas de função</a>. Além disso, a forma que o modelo irá chamar a função é imprevisível: pode ser que o modelo se recuse a chamar a função. Neste caso, o Open Indexer força a chamada da função e lida com o resultado depois, sem a necessidade de inserir mensagens no system prompt adicionais.</p>
-</div>
+<p>Estratégias com reescrita normalmente geram os melhores resultados à um baixo custo de latência e custo. O modelo de reescrita usado sempre o com menor custo, escolhido normalmente por um pool interno que decide o modelo que está com menor latência no momento.</p>
+<h2 id="usando-funções-tools-de-ia">Usando funções (tools) de IA</h2>
+<p>No momento, não é possível especificar chamadas de função através da nossa API, seja pelo AI-Gateway ou pela API OpenAI compatível. Esse recurso está no nosso radar para implementação futura.</p>
+<p>Se isso é crítico para seu modelo de IA funcionar, você pode usar a API de <a href="/docs/search">busca de documentos</a> no seu modelo.</p>
 <h2 id="criando-um-gateway-de-ia">Criando um gateway de IA</h2>
 <p>Se for usar um modelo providenciado por você, tenha em mãos:</p>
 <ul>
@@ -197,8 +196,8 @@
         &quot;knowledgeUseReferences&quot;: false,
 
         // Opcional. Especifica a estratégia de obtenção de documentos. Leia &quot;Escolhendo uma estratégia de busca&quot; para saber mais.
-        &quot;queryStrategy&quot;: &quot;Concatenate&quot;,
-
+        &quot;queryStrategy&quot;: &quot;UserRewrite&quot;,
+        
         // Parâmetros da estratégia de obtenção.
         &quot;queryStrategyParameters&quot;: {
 

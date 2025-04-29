@@ -16,7 +16,7 @@ All prices are in United States dollars.
             <col style="width: 50%" />
         </colgroup>
         <tr>
-            <th>Model name</th>
+            <th>Model Name</th>
             <th>Price/1m tokens</th>
             <th>Description</th>
         </tr>
@@ -56,7 +56,7 @@ All prices are in United States dollars.
             <col style="width: 50%" />
         </colgroup>
         <tr>
-            <th>Model name</th>
+            <th>Model Name</th>
             <th>Price/1m tokens</th>
             <th>Description</th>
         </tr>
@@ -158,7 +158,7 @@ All prices are in United States dollars.
                 <span>$ 0.67</span>
             </td>
             <td>
-                General-purpose model, with image recognition, smart, and fast. Ideal for an economical chat.
+                General-purpose model, with image recognition, smart, and fast. Ideal for an economic chat.
                 <div class="model-capabilities">
                     <div>
                         <i class="ri-multi-image-fill"></i>
@@ -195,7 +195,6 @@ All prices are in United States dollars.
     </tbody>
 </table>
 
-
 ## <img src="/assets/icon/openai.svg" class="inline-icon"> OpenAI
 
 <table>
@@ -206,7 +205,7 @@ All prices are in United States dollars.
             <col style="width: 50%" />
         </colgroup>
         <tr>
-            <th>Model name</th>
+            <th>Model Name</th>
             <th>Price/1m tokens</th>
             <th>Description</th>
         </tr>
@@ -217,10 +216,10 @@ All prices are in United States dollars.
                 @openai/o1-mini
             </td>
             <td>
-                <span>$ 6,50</span>
+                <span>$ 6.50</span>
             </td>
             <td>
-                A small, affordable reasoning model
+                A small and smart model with reasoning.
                 <div class="model-capabilities">
                     <div>
                         <i class="ri-lightbulb-line"></i>
@@ -234,10 +233,10 @@ All prices are in United States dollars.
                 @openai/gpt-4o-mini
             </td>
             <td>
-                <span>$ 1,31</span>
+                <span>$ 1.31</span>
             </td>
             <td>
-                Fast, affordable small model for focused tasks.
+                Fast and cheap for focused tasks.
                 <div class="model-capabilities">
                     <div>
                         <i class="ri-multi-image-fill"></i>
@@ -255,10 +254,10 @@ All prices are in United States dollars.
                 @openai/gpt-4.1-nano
             </td>
             <td>
-                <span>$ 0,88</span>
+                <span>$ 0.88</span>
             </td>
             <td>
-                Fastest, most cost-effective GPT-4.1 model.
+                The fastest and cheapest model of GPT 4.1.
                 <div class="model-capabilities">
                     <div>
                         <i class="ri-multi-image-fill"></i>
@@ -274,7 +273,6 @@ All prices are in United States dollars.
     </tbody>
 </table>
 
-
 ## <img src="/assets/icon/meta.svg" class="inline-icon"> Meta AI
 
 <table>
@@ -285,7 +283,7 @@ All prices are in United States dollars.
             <col style="width: 50%" />
         </colgroup>
         <tr>
-            <th>Model name</th>
+            <th>Model Name</th>
             <th>Price/1m tokens</th>
             <th>Description</th>
         </tr>
@@ -299,7 +297,7 @@ All prices are in United States dollars.
                 <span>$ 2.40</span>
             </td>
             <td>
-                Previous generation model with many parameters and surprisingly fast speed.
+                Model from the previous generation with many parameters and surprisingly fast speed.
                 <div class="model-capabilities">
                     <div>
                         <i class="ri-instance-line"></i>
@@ -316,7 +314,7 @@ All prices are in United States dollars.
                 <span>$ 1.40</span>
             </td>
             <td>
-                Fast model, with 17 billion parameters enabled and 128 experts.
+                Fast model, with 17 billion parameters activated and 128 experts.
                 <div class="model-capabilities">
                     <div>
                         <i class="ri-multi-image-fill"></i>
@@ -337,7 +335,7 @@ All prices are in United States dollars.
                 <span>$ 0.79</span>
             </td>
             <td>
-                Smaller version of the Llama 4 family with 17 billion parameters enabled and 16 experts.
+                Smaller version of the Llama 4 family with 17 billion parameters activated and 16 experts.
                 <div class="model-capabilities">
                     <div>
                         <i class="ri-multi-image-fill"></i>
@@ -380,7 +378,7 @@ All prices are in United States dollars.
             <col style="width: 50%" />
         </colgroup>
         <tr>
-            <th>Model name</th>
+            <th>Model Name</th>
             <th>Price/1m tokens</th>
             <th>Description</th>
         </tr>
@@ -449,7 +447,7 @@ All prices are in United States dollars.
             <col style="width: 50%" />
         </colgroup>
         <tr>
-            <th>Model name</th>
+            <th>Model Name</th>
             <th>Price/1m tokens</th>
             <th>Description</th>
         </tr>
