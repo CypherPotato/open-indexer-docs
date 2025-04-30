@@ -64,4 +64,4 @@ key=cky_gr5uepj18yhd1qbshep7&term=What is the color of the Honda CIVIC?
 }
 ```
 
-For the search result, the higher the score, the more similar the document is to the search term. The OpenIndexer uses embedding models that allow task orientation. For the search, the term is vectorized with a `DOCUMENT_QUERY` orientation. For document indexing, the orientation is `DOCUMENT_RETRIEVAL`, which provides a more optimized search and not to verify the similarity between documents.
+For the search result, the higher the score, the more similar the document is to the search term. The Open Indexer uses embedding models that allow task orientation. For the search, the term is vectorized with a `DOCUMENT_QUERY` orientation. For document indexing, the orientation is `DOCUMENT_RETRIEVAL`, which provides a more optimized search and not to verify the similarity between documents.

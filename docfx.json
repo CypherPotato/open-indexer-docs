@@ -41,8 +41,8 @@
         "globalMetadata": {
             "_appFaviconPath": "assets/img/favicon.ico",
             "_appLogoPath": "assets/img/Icon.png",
-            "_appName": "OpenIndexer",
-            "_appTitle": "OpenIndexer",
+            "_appName": "Open Indexer",
+            "_appTitle": "Open Indexer",
             "_enableSearch": true,
             "pdf": false
         }

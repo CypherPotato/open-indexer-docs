@@ -61,7 +61,18 @@ Cria um novo chat client.
         "debug": true,
         
         // Opcional. Especifica quais origens devem ser permitidas para embutir o cliente de chat em um iframe. Se esse campo estiver vazio, qualquer origem será aceita.
-        "allowedFrameOrigins": ["https://my-domain.com.br"]
+        "allowedFrameOrigins": ["https://my-domain.com.br"],
+        
+        // Opcional. Especifica botões de sugestão de conversa ao iniciar uma nova sessão de chat. Você pode adicionar quantos botões quiser, mas o aconselhável é até 3 botões.
+        "suggestionButtons": [
+            {
+                // Título que será exibido no botão.
+                "label": "Como comprar um carro?",
+                // Prompt que será enviado para o modelo.
+                "prompt": "Onde e como posso comprar um carro na sua loja?"
+            },
+            ...
+        ]
     },
     
     "limitingParameters": {
@@ -69,8 +80,11 @@ Cria um novo chat client.
         // Opcional. Especifica quantas mensagens o usuário pode enviar por hora no chat. Essa opção é rastreada pelo userTag da sessão.
         "messagesPerHour": 30,
         
-        // Opcional. Especifica o máximo de tokens que uma mensagem do usuário pode conter.
-        "userInputMaxTokens": 1024
+        // Opcional. Especifica o máximo de tokens que uma mensagem do usuário pode conter. Esse campo só é válido quando usado em modelos integrados ao Open Indexer.
+        "userInputMaxTokens": 1024,
+        
+        // Opcional. Especifica o limite de mensagens (para o usuário e IA) que uma sessão pode ter.
+        "maxMessages": 300
     }
 }
 ```
@@ -186,10 +200,16 @@ Uma sessão de chat é onde você cria uma conversa entre seu chat client e o us
 
 Uma sessão de chat expira após algum tempo por segurança do token de acesso gerado. Quando você chama esse endpoint informando uma `tag` você pode chamar o mesmo endpoint várias vezes e obter a sessão de chat que está ativa para a tag informada, ou criar um chat novo se não existir uma sessão em andamento.
 
-Uma sessão é automaticamente renovada por mais 30 minutos ao receber uma mensagem do usuário.
+Uma sessão de chat também restaura todas as mensagens da conversa da mesma sessão após desconexão. O usuário pode limpar a conversa ao clicar no botão de limpar conversa no canto superior direito do cliente de chat. Essa sessão usa os limites definidos pelo cliente de chat, como máximo de mensagens e tokens na conversa.
 
-<div class="request-item get">
-    <span>GET</span>
+Uma sessão é automaticamente renovada por mais 3 dias ao receber uma mensagem do usuário.
+
+> [!IMPORTANT]
+>
+> Só é possível determinar a quantidade de tokens usados em uma mensagem ao usar um [modelo provido pela Open Indexer](/docs/models). Se você usar um modelo externo, a propriedade `limitingParameters.userInputMaxTokens` será ignorada.
+
+<div class="request-item post">
+    <span>POST</span>
     <span>
         /api/v1/web-chat-client/<span>{chat-client-id}</span>/sessions
     </span>
@@ -199,7 +219,7 @@ Uma sessão é automaticamente renovada por mais 30 minutos ao receber uma mensa
 {
     // Opcional. Contexto adicional para a IA sobre o chat.
     "extraContext": "# Contexto adicional\r\n\r\nVocê está falando com Eduardo.",
-
+    
     // Tempo em segundos para o chat expirar. O mínimo é 10 minutos. O máximo é 30 dias.
     "expires": 3600,
 

@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Authentication | OpenIndexer </title>
+        <title>Authentication | Open Indexer </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="Authentication | OpenIndexer ">
+        <meta name="title" content="Authentication | Open Indexer ">
 
 
         <link rel="icon" href="../../assets/img/favicon.ico">
@@ -65,8 +65,8 @@
             <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
                 <div class="container-xxl flex-nowrap">
                     <a class="navbar-brand" href="../../index.html">
-                        <img id="logo" class="svg" src="../../assets/img/Icon.png" alt="OpenIndexer">
-                        OpenIndexer
+                        <img id="logo" class="svg" src="../../assets/img/Icon.png" alt="Open Indexer">
+                        Open Indexer
                     </a>
                     <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="bi bi-three-dots"></i>
@@ -128,12 +128,16 @@
                 <article data-uid="">
 <h1 id="authentication">Authentication</h1>
 
-<p>When you have your account, use your unique authentication key to authenticate in our API through the <code>Authorization</code> header:</p>
-<pre><code class="lang-bash">curl https://openindexer.proj.pw/api/v1/information/models.txt \
+<p>When you have your account in hand, use your unique authentication key to authenticate on our API through the <code>Authorization</code> header:</p>
+<pre><code class="lang-bash">curl https://open-indexer.proj.pw/api/v1/information/models.txt \
     -H 'Authorization: Bearer oky_gr5uepj...'
 </code></pre>
+<p>You can also send your authorization token through the query parameter <code>?api-key</code>, example:</p>
+<pre><code class="lang-bash">curl https://open-indexer.proj.pw/api/v1/information/models.txt?api-key=oky_gr5uepj...
+</code></pre>
+<p>There is no need to send the authentication scheme <code>Bearer</code> in both headers, but it is possible for compatibility reasons.</p>
 <h2 id="obtaining-the-api-key-from-the-login-key">Obtaining the API Key from the Login Key</h2>
-<p>Your Login Key is the key you use to access your user panel and control the various functions of OpenIndexer. From this key, it is possible to recover your API key:</p>
+<p>Your Login Key is the key you use to access your user panel and control the various functions of Open Indexer. From this key, it is possible to recover your API key:</p>
 <h4 id="request">Request</h4>
 <div class="request-item get">
     <span>GET</span>

@@ -1,4 +1,4 @@
 # Bem-vindo!
 
-Bem-vindo à documentação do OpenIndexer.
+Bem-vindo à documentação do Open Indexer.
 

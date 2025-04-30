@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Chat Clients | OpenIndexer </title>
+        <title>Chat Clients | Open Indexer </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="Chat Clients | OpenIndexer ">
+        <meta name="title" content="Chat Clients | Open Indexer ">
 
 
         <link rel="icon" href="../../assets/img/favicon.ico">
@@ -65,8 +65,8 @@
             <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
                 <div class="container-xxl flex-nowrap">
                     <a class="navbar-brand" href="../../index.html">
-                        <img id="logo" class="svg" src="../../assets/img/Icon.png" alt="OpenIndexer">
-                        OpenIndexer
+                        <img id="logo" class="svg" src="../../assets/img/Icon.png" alt="Open Indexer">
+                        Open Indexer
                     </a>
                     <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="bi bi-three-dots"></i>
@@ -183,7 +183,18 @@
         &quot;debug&quot;: true,
         
         // Opcional. Especifica quais origens devem ser permitidas para embutir o cliente de chat em um iframe. Se esse campo estiver vazio, qualquer origem será aceita.
-        &quot;allowedFrameOrigins&quot;: [&quot;https://my-domain.com.br&quot;]
+        &quot;allowedFrameOrigins&quot;: [&quot;https://my-domain.com.br&quot;],
+        
+        // Opcional. Especifica botões de sugestão de conversa ao iniciar uma nova sessão de chat. Você pode adicionar quantos botões quiser, mas o aconselhável é até 3 botões.
+        &quot;suggestionButtons&quot;: [
+            {
+                // Título que será exibido no botão.
+                &quot;label&quot;: &quot;Como comprar um carro?&quot;,
+                // Prompt que será enviado para o modelo.
+                &quot;prompt&quot;: &quot;Onde e como posso comprar um carro na sua loja?&quot;
+            },
+            ...
+        ]
     },
     
     &quot;limitingParameters&quot;: {
@@ -191,8 +202,11 @@
         // Opcional. Especifica quantas mensagens o usuário pode enviar por hora no chat. Essa opção é rastreada pelo userTag da sessão.
         &quot;messagesPerHour&quot;: 30,
         
-        // Opcional. Especifica o máximo de tokens que uma mensagem do usuário pode conter.
-        &quot;userInputMaxTokens&quot;: 1024
+        // Opcional. Especifica o máximo de tokens que uma mensagem do usuário pode conter. Esse campo só é válido quando usado em modelos integrados ao Open Indexer.
+        &quot;userInputMaxTokens&quot;: 1024,
+        
+        // Opcional. Especifica o limite de mensagens (para o usuário e IA) que uma sessão pode ter.
+        &quot;maxMessages&quot;: 300
     }
 }
 </code></pre>
@@ -283,9 +297,14 @@
 <h2 id="criar-uma-sessão-de-chat">Criar uma sessão de chat</h2>
 <p>Uma sessão de chat é onde você cria uma conversa entre seu chat client e o usuário. Você pode chamar esse endpoint informando contexto adicional para conversa, como o nome do usuário, onde ele está, etc.</p>
 <p>Uma sessão de chat expira após algum tempo por segurança do token de acesso gerado. Quando você chama esse endpoint informando uma <code>tag</code> você pode chamar o mesmo endpoint várias vezes e obter a sessão de chat que está ativa para a tag informada, ou criar um chat novo se não existir uma sessão em andamento.</p>
-<p>Uma sessão é automaticamente renovada por mais 30 minutos ao receber uma mensagem do usuário.</p>
-<div class="request-item get">
-    <span>GET</span>
+<p>Uma sessão de chat também restaura todas as mensagens da conversa da mesma sessão após desconexão. O usuário pode limpar a conversa ao clicar no botão de limpar conversa no canto superior direito do cliente de chat. Essa sessão usa os limites definidos pelo cliente de chat, como máximo de mensagens e tokens na conversa.</p>
+<p>Uma sessão é automaticamente renovada por mais 3 dias ao receber uma mensagem do usuário.</p>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>Só é possível determinar a quantidade de tokens usados em uma mensagem ao usar um <a href="/docs/models">modelo provido pela Open Indexer</a>. Se você usar um modelo externo, a propriedade <code>limitingParameters.userInputMaxTokens</code> será ignorada.</p>
+</div>
+<div class="request-item post">
+    <span>POST</span>
     <span>
         /api/v1/web-chat-client/<span>{chat-client-id}</span>/sessions
     </span>
@@ -293,7 +312,7 @@
 <pre><code class="lang-json">{
     // Opcional. Contexto adicional para a IA sobre o chat.
     &quot;extraContext&quot;: &quot;# Contexto adicional\r\n\r\nVocê está falando com Eduardo.&quot;,
-
+    
     // Tempo em segundos para o chat expirar. O mínimo é 10 minutos. O máximo é 30 dias.
     &quot;expires&quot;: 3600,
 

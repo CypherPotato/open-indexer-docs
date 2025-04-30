@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Autentica&#231;&#227;o | OpenIndexer </title>
+        <title>Autentica&#231;&#227;o | Open Indexer </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="Autentica&#231;&#227;o | OpenIndexer ">
+        <meta name="title" content="Autentica&#231;&#227;o | Open Indexer ">
 
 
         <link rel="icon" href="../assets/img/favicon.ico">
@@ -65,8 +65,8 @@
             <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
                 <div class="container-xxl flex-nowrap">
                     <a class="navbar-brand" href="../index.html">
-                        <img id="logo" class="svg" src="../assets/img/Icon.png" alt="OpenIndexer">
-                        OpenIndexer
+                        <img id="logo" class="svg" src="../assets/img/Icon.png" alt="Open Indexer">
+                        Open Indexer
                     </a>
                     <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="bi bi-three-dots"></i>
@@ -129,11 +129,15 @@
 <h1 id="autenticação">Autenticação</h1>
 
 <p>Quando tiver sua conta em mãos, use sua chave de autenticação única para se autenticar na nossa API através do cabeçalho <code>Authorization</code>:</p>
-<pre><code class="lang-bash">curl https://openindexer.proj.pw/api/v1/information/models.txt \
+<pre><code class="lang-bash">curl https://open-indexer.proj.pw/api/v1/information/models.txt \
     -H 'Authorization: Bearer oky_gr5uepj...'
 </code></pre>
+<p>Você também pode enviar o seu token de autorização pelo parâmetro da query <code>?api-key</code>, exemplo:</p>
+<pre><code class="lang-bash">curl https://open-indexer.proj.pw/api/v1/information/models.txt?api-key=oky_gr5uepj...
+</code></pre>
+<p>Não há necessidade de enviar o esquema de autenticação <code>Bearer</code> em ambos cabeçalhos, mas é possível por questões de compatibilidade.</p>
 <h2 id="obtendo-a-api-key-a-partir-da-login-key">Obtendo a API Key a partir da Login Key</h2>
-<p>Sua Login Key é a chave que você usa para acessar seu painel de usuário e controlar as diversas funções do OpenIndexer. A partir dessa chave é possível recuperar sua API key:</p>
+<p>Sua Login Key é a chave que você usa para acessar seu painel de usuário e controlar as diversas funções do Open Indexer. A partir dessa chave é possível recuperar sua API key:</p>
 <h4 id="requisição">Requisição</h4>
 <div class="request-item get">
     <span>GET</span>

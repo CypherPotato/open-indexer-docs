@@ -1,9 +1,9 @@
 # AI Gateway
 
-Os gateways de AI é um serviço que a OpenIndexer fornece para criar um túnel de inferência entre um modelo de LLM e uma base de conhecimento. Nele é possível:
+Os gateways de AI é um serviço que a Open Indexer fornece para criar um túnel de inferência entre um modelo de LLM e uma base de conhecimento. Nele é possível:
 
 - Criar um modelo com instruções personalizadas
-- Usar um modelo provido por você através de um endpoint OpenAI compatível, ou usar um modelo disponibilizado pela OpenIndexer
+- Usar um modelo provido por você através de um endpoint OpenAI compatível, ou usar um modelo disponibilizado pela Open Indexer
 - Personalizar parâmetros de inferência, como temperatura, top_p, prefill
 - Usar uma coleção de conhecimento como fundação de respostas para IA
 
@@ -11,7 +11,7 @@ Dentre outros recursos. Com o AI Gateway, você cria um modelo pronto para uso, 
 
 ## Modelos
 
-Você pode trazer um modelo de IA compatível com a interface OpenAI para o gateway de IA. Se você trazer seu modelo de IA, iremos cobrar apenas pela pesquisa de documentos anexada na IA. Você também pode usar um dos modelos abaixo que já estão prontos para começar com o OpenIndexer.
+Você pode trazer um modelo de IA compatível com a interface OpenAI para o gateway de IA. Se você trazer seu modelo de IA, iremos cobrar apenas pela pesquisa de documentos anexada na IA. Você também pode usar um dos modelos abaixo que já estão prontos para começar com o Open Indexer.
 
 Ao usar um modelo, você perceberá que alguns são mais inteligentes que outros para determinadas tarefas. Alguns modelos são melhores com certas estratégias de obtenção de dados do que outros. Realize testes para encontrar o melhor modelo.
 
