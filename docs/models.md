@@ -136,6 +136,27 @@ Todos os preços estão em dólares dos Estados Unidos.
         </tr>
         <tr>
             <td>
+                @google/gemini-2.0-flash
+            </td>
+            <td>
+                <span>$ 0,88</span>
+            </td>
+            <td>
+                Oferece recursos da nova geração, com velocidade melhorada e geração multi-modal.
+                <div class="model-capabilities">
+                    <div>
+                        <i class="ri-multi-image-fill"></i>
+                        Entrada: aceita imagens, vídeos e áudios
+                    </div>
+                    <div>
+                        <i class="ri-instance-line"></i>
+                        Chamadas de função
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
                 @google/gemma2-9b
             </td>
             <td>
@@ -212,6 +233,48 @@ Todos os preços estão em dólares dos Estados Unidos.
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td>
+                @openai/gpt-4o
+            </td>
+            <td>
+                <span>$ 13,50</span>
+            </td>
+            <td>
+                Versátil, altamente inteligente e top de linha. Um dos modelos mais capazes atualmente.
+                <div class="model-capabilities">
+                    <div>
+                        <i class="ri-multi-image-fill"></i>
+                        Entrada: aceita imagens
+                    </div>
+                    <div>
+                        <i class="ri-instance-line"></i>
+                        Chamadas de função
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @openai/gpt-4.1
+            </td>
+            <td>
+                <span>$ 11,00</span>
+            </td>
+            <td>
+                Versátil, altamente inteligente e top de linha. Um dos modelos mais capazes atualmente.
+                <div class="model-capabilities">
+                    <div>
+                        <i class="ri-multi-image-fill"></i>
+                        Entrada: aceita imagens
+                    </div>
+                    <div>
+                        <i class="ri-instance-line"></i>
+                        Chamadas de função
+                    </div>
+                </div>
+            </td>
+        </tr>
         <tr>
             <td>
                 @openai/o1-mini
