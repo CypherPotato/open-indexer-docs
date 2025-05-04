@@ -542,6 +542,16 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "docs/en/entities/functions.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/en/entities/functions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "docs/en/entities/search.md",
       "output": {
         ".html": {
@@ -619,6 +629,16 @@
       "output": {
         ".html": {
           "relative_path": "docs/entities/documents.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/entities/functions.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/entities/functions.html"
         }
       },
       "version": ""
