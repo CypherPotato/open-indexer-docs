@@ -124,13 +124,17 @@
                 <article data-uid="">
 <h1 id="functions">Functions</h1>
 
-<p>Functions are a way to force your model to process information using JSON as an intermediate communication method. With functions, you can make any model respond in the JSON format you want.</p>
+<p>Functions are a way to force your model to process information using JSON as an intermediate communication medium. With functions, you can make any model respond in the JSON format you want.</p>
 <p>It can be useful for categorizing comments, applying moderation to reviews, or processing information with the help of AI.</p>
-<p>Currently, it is only possible to use functions with <a href="">models provided by Open Indexer</a>.</p>
+<p>Currently, it is only possible to use functions with models provided by Open Indexer.</p>
 <h2 id="calling-a-function">Calling a Function</h2>
 <p>To call an AI function, you will need to inform what the AI should respond with and provide a JSON schema that it should follow.</p>
-<p>Less intelligent models tend to fail JSON generation, producing an invalid or problematic document. To address this, adjust your model, instruction, and attempt parameter if necessary.</p>
-<p>You are charged for each attempt the AI makes to generate a response. Slightly more intelligent models tend to produce correct results on the first attempt. It is guaranteed that a valid JSON will be generated, but it is not guaranteed that the model will follow the names and types provided by your JSON schema.</p>
+<p>Less intelligent models tend to fail to generate JSON, resulting in an invalid or problematic document. To fix this, adjust your model, instruction, and attempt parameter if necessary.</p>
+<p>You are charged for each attempt the AI makes to generate a response. Slightly more intelligent models tend to generate correct results on the first attempt. It is guaranteed that a valid JSON will be generated, but it is not guaranteed that the model will follow the names and types provided by your JSON schema.</p>
+<p>Additionally, you can opt to activate <strong>internet search</strong> for function calls. This option can be useful for bringing relevant data in real-time to structure your response. When activating this option, you are charged for each internet search, with a fixed cost of <strong>$0.012</strong> American dollars per query.</p>
+<p>An internal model decides which searches should be performed based on the instructions and input data provided, which is also charged at a low cost. Alternatively, you can specify the <code>searchTerms</code> parameter manually to avoid calling the internal model to obtain the search terms.</p>
+<p>Specifying fewer search results is also possible and can help reduce the number of tokens processed by the AI model, and consequently, the cost of the operation.</p>
+<p>Retry attempts to generate the JSON content do not search the internet again and do not call the internal model to create the questions.</p>
 <h4 id="request">Request</h4>
 <div class="request-item post">
     <span>POST</span>
@@ -143,7 +147,7 @@
     &quot;modelName&quot;: &quot;@metaai/llama-3.1-8b&quot;,
     
     // Explain what your model should do with the input and how it should provide the response.
-    &quot;instructions&quot;: &quot;Classify the user's comment, indicating whether it is positive or negative, and if it contains any relevant information (number between 0 (not relevant) and 10 (very relevant))&quot;,
+    &quot;instructions&quot;: &quot;Classify the user's comment, indicating whether it is positive or negative, and if it contains any relevant information (a number between 0 (not relevant) and 10 (very relevant))&quot;,
     
     // The JSON object that the model should generate. You can provide generation examples in the instructions field. This object must be a valid JSON in the API.
     // This object must be an object, an array, or a string.
@@ -154,14 +158,27 @@
     
     // Optional. Defines a JSON input for the model. Can be any type of JSON value.
     &quot;inputData&quot;: {
-        &quot;userComment&quot;: &quot;Terrible market. There's a guard inside watching you so you don't steal, and the butchers ignore you and attend to pretty girls in front of you. But thank God there are other markets coming, and the end of this circus will arrive&quot;
+        &quot;userComment&quot;: &quot;Terrible market. There's a guard inside watching you so you don't steal and the butchers ignore you and serve pretty girls in front of you. But thank God there are other markets coming and the end of this circus will arrive&quot;
     },
     
-    // Optional. Defines the number of attempts the model should make before the API returns an error. Must be a number between 1 and 30.
+    // Optional. Defines how many attempts the model should make before the API returns an error. Must be a number between 1 and 30.
     &quot;maxAttempts&quot;: 10,
     
     // Optional. Defines the time limit in seconds to obtain a valid JSON before the API returns an error. Must be a number between 1 and 3600 (one hour).
-    &quot;timeout&quot;: 300
+    &quot;timeout&quot;: 300,
+    
+    // Optional. Allows the model to perform an internet search to improve the response construction.
+    &quot;webSearch&quot;: {
+
+        // Enables or disables internet search for the function.
+        &quot;enabled&quot;: true,
+
+        // Defines the search terms that will be performed to complement the model. Leave empty for an internal model to automatically generate the search terms.
+        &quot;searchTerms&quot;: [],
+
+        // Maximum number of results per search term that will be attached to the generation context.
+        &quot;maxResultsPerTerm&quot;: 5
+    }
 }
 </code></pre>
 <h4 id="response">Response</h4>
@@ -174,7 +191,7 @@
             &quot;informationScore&quot;: 8
         },
         
-        // In which attempt the AI managed to get a valid JSON
+        // Which attempt the AI was able to generate a valid JSON
         &quot;attempt&quot;: 1,
         
         // The time in milliseconds to obtain a valid JSON
@@ -210,6 +227,84 @@
         },
         &quot;attempt&quot;: 1,
         &quot;elapsedMilliseconds&quot;: 639
+    }
+}
+</code></pre>
+<h4 id="bring-latest-news-and-weather-for-a-specific-city">Bring latest news and weather for a specific city</h4>
+<div class="request-item post">
+    <span>POST</span>
+    <span>
+        /api/v1/functions/json
+    </span>
+</div>
+<pre><code class="lang-json">{
+    &quot;modelName&quot;: &quot;@google/gemini-1.5-flash-8b&quot;,
+    &quot;instructions&quot;: &quot;You are a model that searches for the last five news for the city the user informs. Create a short title for each news and details of what it covers. Also, bring weather data for the searched city.&quot;,
+    &quot;responseSchema&quot;: {
+        &quot;latestNews&quot;: [
+            {
+                &quot;title&quot;: &quot;...&quot;,
+                &quot;details&quot;: &quot;...&quot;,
+                &quot;link&quot;: &quot;https://...&quot;
+            }
+        ],
+        &quot;weather&quot;: {
+            &quot;currentTemperature&quot;: 0,
+            &quot;weatherType&quot;: &quot;sunny | cloudy | rain | thunderstorm&quot;,
+            &quot;willRain&quot;: true
+        }
+    },
+    &quot;inputData&quot;: {
+        &quot;city&quot;: &quot;São José do Rio Preto&quot;
+    },
+    &quot;webSearch&quot;: {
+        &quot;enabled&quot;: true
+    }
+}
+</code></pre>
+<pre><code class="lang-json">{
+    &quot;message&quot;: null,
+    &quot;data&quot;: {
+        &quot;result&quot;: {
+            &quot;latestNews&quot;: [
+                {
+                    &quot;title&quot;: &quot;Aid arrested for shooting at ex-girlfriend&quot;,
+                    &quot;details&quot;: &quot;An aid was arrested suspected of shooting with a shotgun at his ex-girlfriend and her ex-partner in the Ypê neighborhood, in Ilha Solteira (SP). The woman was rescued and taken to the Regional Hospital, where she underwent surgery.&quot;,
+                    &quot;link&quot;: &quot;https://g1.globo.com/sp/sao-jose-do-rio-preto-aracatuba/&quot;
+                },
+                {
+                    &quot;title&quot;: &quot;Rio Preto doctors form society with mentorships&quot;,
+                    &quot;details&quot;: &quot;Doctors from Rio Preto officially formed a society with mentorship companies.&quot;,
+                    &quot;link&quot;: &quot;https://www.gazetaderiopreto.com.br/&quot;
+                },
+                {
+                    &quot;title&quot;: &quot;Land regularization guarantees property in Rio Preto&quot;,
+                    &quot;details&quot;: &quot;A land regularization project guarantees security for Rio Preto residents.&quot;,
+                    &quot;link&quot;: &quot;https://regional24horas.com.br/rio-preto&quot;
+                },
+                {
+                    &quot;title&quot;: &quot;Petrobras reduces diesel price&quot;,
+                    &quot;details&quot;: &quot;Petrobras reduced the diesel price starting this Tuesday (6).&quot;,
+                    &quot;link&quot;: &quot;https://www.gazetaderiopreto.com.br/&quot;
+                },
+                {
+                    &quot;title&quot;: &quot;Third lane construction on Washington Luís begins&quot;,
+                    &quot;details&quot;: &quot;The construction of the third lane on Washington Luís begins this Monday.&quot;,
+                    &quot;link&quot;: &quot;https://www.gazetaderiopreto.com.br/&quot;
+                }
+            ],
+            &quot;weather&quot;: {
+                &quot;currentTemperature&quot;: 26,
+                &quot;weatherType&quot;: &quot;cloudy&quot;,
+                &quot;willRain&quot;: true
+            }
+        },
+        &quot;attempt&quot;: 1,
+        &quot;elapsedMilliseconds&quot;: 7480,
+        &quot;searchedTerms&quot;: [
+            &quot;weather in São José do Rio Preto&quot;,
+            &quot;news São José do Rio Preto and region&quot;
+        ]
     }
 }
 </code></pre>

@@ -17,3 +17,5 @@ items:
   href: entities/ai-gateway.md
 - name: Chat Clients
   href: entities/chat-clients.md
+- name: Functions
+  href: entities/functions.md

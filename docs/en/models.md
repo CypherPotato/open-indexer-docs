@@ -6,7 +6,7 @@ See the list below of available models and their pricing. All prices consider th
 
 All prices are in United States dollars.
 
-## <img src="/assets/icon/deepseek.svg" class="inline-icon"> DeepSeek
+## <img src="/assets/icon/deepseekai.svg" class="inline-icon"> deepseekai
 
 <table>
     <thead>
@@ -22,31 +22,31 @@ All prices are in United States dollars.
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>
-                @deepseekai/r1-distill-llama-70b
-            </td>
-            <td>
-                <span>$ 2.76</span>
-            </td>
-            <td>
-                Model with reasoning and deep thinking, better for more demanding tasks.
-                <div class="model-capabilities">
-                    <div>
-                        <i class="ri-lightbulb-line"></i>
-                        Thinking
-                    </div>
-                    <div>
-                        <i class="ri-instance-line"></i>
-                        Function calls
-                    </div>
-                </div>
-            </td>
-        </tr>        
+<tr>
+    <td>
+        @deepseekai/r1-distill-llama-70b
+    </td>
+    <td>
+        $ 2.76
+    </td>
+    <td>
+        Model with reasoning and deep thinking, better for more demanding tasks.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Reasoning
+</div>
+        </div>
+    </td>
+</tr>
     </tbody>
 </table>
 
-## <img src="/assets/icon/google.svg" class="inline-icon"> Google
+## <img src="/assets/icon/google.svg" class="inline-icon"> google
 
 <table>
     <thead>
@@ -62,140 +62,144 @@ All prices are in United States dollars.
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>
-                @google/gemini-2.5-pro
-            </td>
-            <td>
-                <span>$ 12.25</span>
-            </td>
-            <td>
-                One of the most powerful models currently available.
-                <div class="model-capabilities">
-                    <div>
-                        <i class="ri-lightbulb-line"></i>
-                        Thinking
-                    </div>
-                    <div>
-                        <i class="ri-multi-image-fill"></i>
-                        Input: accepts images, videos, and audio
-                    </div>
-                    <div>
-                        <i class="ri-instance-line"></i>
-                        Function calls
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @google/gemini-2.5-flash-think
-            </td>
-            <td>
-                <span>$ 4.65</span>
-            </td>
-            <td>
-                Model from the latest generation with integrated reasoning and thinking.
-                <div class="model-capabilities">
-                    <div>
-                        <i class="ri-lightbulb-line"></i>
-                        Thinking
-                    </div>
-                    <div>
-                        <i class="ri-multi-image-fill"></i>
-                        Input: accepts images, videos, and audio
-                    </div>
-                    <div>
-                        <i class="ri-instance-line"></i>
-                        Function calls
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @google/gemini-2.5-flash
-            </td>
-            <td>
-                <span>$ 1.31</span>
-            </td>
-            <td>
-                Model from the latest generation, without deep thinking.
-                <div class="model-capabilities">
-                    <div>
-                        <i class="ri-multi-image-fill"></i>
-                        Input: accepts images, videos, and audio
-                    </div>
-                    <div>
-                        <i class="ri-instance-line"></i>
-                        Function calls
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @google/gemma2-9b
-            </td>
-            <td>
-                <span>$ 0.70</span>
-            </td>
-            <td>
-                Fast model, Google's open-source study to perform most tasks.
-                <div class="model-capabilities">
-                    <div>
-                        <i class="ri-instance-line"></i>
-                        Function calls
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @google/gemini-2.0-flash-lite
-            </td>
-            <td>
-                <span>$ 0.67</span>
-            </td>
-            <td>
-                General-purpose model, with image recognition, smart, and fast. Ideal for an economic chat.
-                <div class="model-capabilities">
-                    <div>
-                        <i class="ri-multi-image-fill"></i>
-                        Input: accepts images, videos, and audio
-                    </div>
-                    <div>
-                        <i class="ri-instance-line"></i>
-                        Function calls
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @google/gemini-1.5-flash-8b
-            </td>
-            <td>
-                <span>$ 0.33</span>
-            </td>
-            <td>
-                General-purpose model from the previous generation, optimized for less demanding and simple tasks.
-                <div class="model-capabilities">
-                    <div>
-                        <i class="ri-multi-image-fill"></i>
-                        Input: accepts images, videos, and audio
-                    </div>
-                    <div>
-                        <i class="ri-instance-line"></i>
-                        Function calls
-                    </div>
-                </div>
-            </td>
-        </tr>
+<tr>
+    <td>
+        @google/gemini-2.5-pro
+    </td>
+    <td>
+        $ 12.25
+    </td>
+    <td>
+        One of the most powerful models currently available.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images, videos, audio
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Reasoning
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        @google/gemini-2.5-flash-th
+    </td>
+    <td>
+        $ 4.65
+    </td>
+    <td>
+        Model from the latest generation with integrated reasoning and thinking.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images, videos, audio
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Reasoning
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        @google/gemini-2.5-flash
+    </td>
+    <td>
+        $ 1.31
+    </td>
+    <td>
+        Same model as Gemini 2.5 Flash, but with the reasoning module disabled.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images, videos, audio
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        @google/gemini-2.0-flash
+    </td>
+    <td>
+        $ 0.88
+    </td>
+    <td>
+        Offers new generation features, with improved speed and multi-modal generation.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images, videos, audio
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        @google/gemini-2.0-flash-lite
+    </td>
+    <td>
+        $ 0.67
+    </td>
+    <td>
+        General-purpose model, with image recognition, smart and fast. Ideal for an economical chat.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images, videos, audio
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        @google/gemini-1.5-flash-8b
+    </td>
+    <td>
+        $ 0.33
+    </td>
+    <td>
+        General-purpose model from the previous generation, optimized for less demanding and simple tasks.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images, videos, audio
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+        </div>
+    </td>
+</tr>
     </tbody>
 </table>
 
-## <img src="/assets/icon/openai.svg" class="inline-icon"> OpenAI
+## <img src="/assets/icon/groq.svg" class="inline-icon"> groq
 
 <table>
     <thead>
@@ -211,69 +215,60 @@ All prices are in United States dollars.
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>
-                @openai/o1-mini
-            </td>
-            <td>
-                <span>$ 6.50</span>
-            </td>
-            <td>
-                A small and smart model with reasoning.
-                <div class="model-capabilities">
-                    <div>
-                        <i class="ri-lightbulb-line"></i>
-                        Thinking
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @openai/gpt-4o-mini
-            </td>
-            <td>
-                <span>$ 1.31</span>
-            </td>
-            <td>
-                Fast and cheap for focused tasks.
-                <div class="model-capabilities">
-                    <div>
-                        <i class="ri-multi-image-fill"></i>
-                        Input: accepts images
-                    </div>
-                    <div>
-                        <i class="ri-instance-line"></i>
-                        Function calls
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @openai/gpt-4.1-nano
-            </td>
-            <td>
-                <span>$ 0.88</span>
-            </td>
-            <td>
-                The fastest and cheapest model of GPT 4.1.
-                <div class="model-capabilities">
-                    <div>
-                        <i class="ri-multi-image-fill"></i>
-                        Input: accepts images
-                    </div>
-                    <div>
-                        <i class="ri-instance-line"></i>
-                        Function calls
-                    </div>
-                </div>
-            </td>
-        </tr>
+<tr>
+    <td>
+        @groq/compound-beta
+    </td>
+    <td>
+        $ 3.25
+    </td>
+    <td>
+        Conversation agent that searches the internet for contextualization and real-time information.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-global-line"></i>
+    Internet search
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        @groq/compound-beta-mini
+    </td>
+    <td>
+        $ 2.60
+    </td>
+    <td>
+        Smaller version of the Compound family, with fewer experts.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-global-line"></i>
+    Internet search
+</div>
+        </div>
+    </td>
+</tr>
     </tbody>
 </table>
 
-## <img src="/assets/icon/meta.svg" class="inline-icon"> Meta AI
+## <img src="/assets/icon/metaai.svg" class="inline-icon"> metaai
 
 <table>
     <thead>
@@ -289,86 +284,86 @@ All prices are in United States dollars.
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>
-                @metaai/llama-3.3-70b
-            </td>
-            <td>
-                <span>$ 2.40</span>
-            </td>
-            <td>
-                Model from the previous generation with many parameters and surprisingly fast speed.
-                <div class="model-capabilities">
-                    <div>
-                        <i class="ri-instance-line"></i>
-                        Function calls
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @metaai/llama-4-maverick-17b
-            </td>
-            <td>
-                <span>$ 1.40</span>
-            </td>
-            <td>
-                Fast model, with 17 billion parameters activated and 128 experts.
-                <div class="model-capabilities">
-                    <div>
-                        <i class="ri-multi-image-fill"></i>
-                        Input: accepts images
-                    </div>
-                    <div>
-                        <i class="ri-instance-line"></i>
-                        Function calls
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @metaai/llama-4-scout-17b
-            </td>
-            <td>
-                <span>$ 0.79</span>
-            </td>
-            <td>
-                Smaller version of the Llama 4 family with 17 billion parameters activated and 16 experts.
-                <div class="model-capabilities">
-                    <div>
-                        <i class="ri-multi-image-fill"></i>
-                        Input: accepts images
-                    </div>
-                    <div>
-                        <i class="ri-instance-line"></i>
-                        Function calls
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @metaai/llama-3.1-8b
-            </td>
-            <td>
-                <span>$ 0.23</span>
-            </td>
-            <td>
-                Cheap and fast model for less demanding tasks.
-                <div class="model-capabilities">
-                    <div>
-                        <i class="ri-instance-line"></i>
-                        Function calls
-                    </div>
-                </div>
-            </td>
-        </tr>
+<tr>
+    <td>
+        @metaai/llama-3.3-70b
+    </td>
+    <td>
+        $ 2.40
+    </td>
+    <td>
+        Previous generation model with many parameters and surprisingly fast speed.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        @metaai/llama-4-maverick-17b-128e
+    </td>
+    <td>
+        $ 1.40
+    </td>
+    <td>
+        Fast model, with 17 billion parameters enabled and 128 experts.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        @metaai/llama-4-scout-17b-16e
+    </td>
+    <td>
+        $ 0.79
+    </td>
+    <td>
+        Smaller version of the Llama 4 family, with 17 billion parameters enabled and 16 experts.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        @metaai/llama-3.1-8b
+    </td>
+    <td>
+        $ 0.23
+    </td>
+    <td>
+        Cheap and fast model for less demanding tasks.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+        </div>
+    </td>
+</tr>
     </tbody>
 </table>
 
-## <img src="/assets/icon/groq.svg" class="inline-icon"> Groq
+## <img src="/assets/icon/openai.svg" class="inline-icon"> openai
 
 <table>
     <thead>
@@ -384,60 +379,132 @@ All prices are in United States dollars.
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>
-                @groq/compound-beta
-            </td>
-            <td>
-                <span>$ 3.25</span>
-            </td>
-            <td>
-                Conversation agent that searches the internet for contextualization and real-time information.
-                <div class="model-capabilities">
-                    <div>
-                        <i class="ri-global-line"></i>
-                        Live data
-                    </div>
-                    <div>
-                        <i class="ri-multi-image-fill"></i>
-                        Input: accepts images
-                    </div>
-                    <div>
-                        <i class="ri-instance-line"></i>
-                        Function calls
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @groq/compound-beta-mini
-            </td>
-            <td>
-                <span>$ 2.60</span>
-            </td>
-            <td>
-                Smaller version of the Compound family, with fewer experts.
-                <div class="model-capabilities">
-                    <div>
-                        <i class="ri-global-line"></i>
-                        Live data
-                    </div>
-                    <div>
-                        <i class="ri-multi-image-fill"></i>
-                        Input: accepts images
-                    </div>
-                    <div>
-                        <i class="ri-instance-line"></i>
-                        Function calls
-                    </div>
-                </div>
-            </td>
-        </tr>
+<tr>
+    <td>
+        @openai/gpt-4o
+    </td>
+    <td>
+        $ 13.50
+    </td>
+    <td>
+        Dedicated to tasks that require reasoning for solving mathematical and logical problems.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        @openai/gpt-4.1
+    </td>
+    <td>
+        $ 11.00
+    </td>
+    <td>
+        Versatile, highly intelligent, and top-of-the-line. One of the most capable models currently available.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        @openai/o1-mini
+    </td>
+    <td>
+        $ 6.50
+    </td>
+    <td>
+        A small and smart model with reasoning.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Reasoning
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        @openai/gpt-4.1-mini
+    </td>
+    <td>
+        $ 3.00
+    </td>
+    <td>
+        Fast and cheap for focused tasks.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        @openai/gpt-4o-mini
+    </td>
+    <td>
+        $ 1.31
+    </td>
+    <td>
+        Smaller version of the 4o, optimized for everyday tasks.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        @openai/gpt-4.1-nano
+    </td>
+    <td>
+        $ 0.88
+    </td>
+    <td>
+        The fastest and cheapest model of the GPT 4.1.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+        </div>
+    </td>
+</tr>
     </tbody>
 </table>
 
-## <img src="/assets/icon/qwen.svg" class="inline-icon"> Qwen
+## <img src="/assets/icon/qwen.svg" class="inline-icon"> qwen
 
 <table>
     <thead>
@@ -453,26 +520,26 @@ All prices are in United States dollars.
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>
-                @qwen/qwq-32b
-            </td>
-            <td>
-                <span>$ 1.23</span>
-            </td>
-            <td>
-                Conversation model with thinking and reasoning for solving complex tasks.
-                <div class="model-capabilities">
-                    <div>
-                        <i class="ri-lightbulb-line"></i>
-                        Thinking
-                    </div>
-                    <div>
-                        <i class="ri-instance-line"></i>
-                        Function calls
-                    </div>
-                </div>
-            </td>
-        </tr>
+<tr>
+    <td>
+        @qwen/qwq-32b
+    </td>
+    <td>
+        $ 1.23
+    </td>
+    <td>
+        Conversation model with thinking and reasoning for solving complex tasks.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Reasoning
+</div>
+        </div>
+    </td>
+</tr>
     </tbody>
 </table>

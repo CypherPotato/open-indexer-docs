@@ -131,6 +131,10 @@
 <p>Para chamar uma função de IA, você precisará informar o que a IA deverá responder e fornecer um esquema JSON que ela deverá seguir.</p>
 <p>Modelos menos inteligentes tendem a falhar a geração de JSON, gerando um documento inválido ou problemático. Para isso, ajuste seu modelo, a instrução e o parâmetro de tentativas se for necessário.</p>
 <p>Você é cobrado por cada tentativa que a IA tentar gerar. Modelos um pouco mais inteligentes tendem a gerar resultados corretos na primeira tentativa. É garantido que um JSON válido será gerado, mas não é garantido que o modelo seguirá os nomes e tipos fornecidos pelo seu esquema JSON.</p>
+<p>Adicionalmente, você pode optar em ativar <strong>pesquisa na internet</strong> para chamada de função. Essa opção pode ser útil para trazer dados relevantes em tempo real ao estruturar sua resposta. Ao ativar essa opção, você é cobrado por cada pesquisa feita na internet, tendo o custo fixo de <strong>$ 0,012</strong> dólares americanos por consulta realizada.</p>
+<p>Um modelo interno decide quais pesquisas devem ser feitas a partir das instruções e entrada de dados fornecida, o que também é cobrado por um custo baixo, ou, você pode especificar no parâmetro <code>searchTerms</code> os termos de pesquisa manualmente, evitando a chamada do modelo interno para obter os termos de pesquisa.</p>
+<p>Especificar menos resultados de pesquisa também é possível e podem ajudar a reduzir a quantia de tokens processados pelo modelo de IA, e, consequentemente, o custo da operação.</p>
+<p>Retentativas de geração do conteúdo JSON não pesquisam na internet novamente e nem chamam o modelo interno para criar as perguntas.</p>
 <h4 id="requisição">Requisição</h4>
 <div class="request-item post">
     <span>POST</span>
@@ -161,7 +165,20 @@
     &quot;maxAttempts&quot;: 10,
     
     // Opcional. Define o tempo limite em segundos para obter um JSON válido antes da API retornar um erro. Deve ser um número entre 1 e 3600 (uma hora).
-    &quot;timeout&quot;: 300
+    &quot;timeout&quot;: 300,
+    
+    // Opcional. Permite que o modelo faça uma busca na internet para aperfeiçoar a construção da resposta.
+    &quot;webSearch&quot;: {
+
+        // Ativa ou desativa a pesquisa na internet da função.
+        &quot;enabled&quot;: true,
+
+        // Define os termos de pesquisa que serão realizados para complementar o modelo. Deixe vazio para um modelo interno gerar os termos de pesquisa automaticamente.
+        &quot;searchTerms&quot;: [],
+
+        // Máximo de resultados por termo de pesquisa que serão anexados no contexto de geração.
+        &quot;maxResultsPerTerm&quot;: 5
+    }
 }
 </code></pre>
 <h4 id="resposta">Resposta</h4>
@@ -210,6 +227,84 @@
         },
         &quot;attempt&quot;: 1,
         &quot;elapsedMilliseconds&quot;: 639
+    }
+}
+</code></pre>
+<h4 id="trazer-últimas-notícias-e-clima-de-uma-determinada-cidade">Trazer últimas notícias e clima de uma determinada cidade</h4>
+<div class="request-item post">
+    <span>POST</span>
+    <span>
+        /api/v1/functions/json
+    </span>
+</div>
+<pre><code class="lang-json">{
+    &quot;modelName&quot;: &quot;@google/gemini-1.5-flash-8b&quot;,
+    &quot;instructions&quot;: &quot;Você é um modelo que pesquisa as últimas cinco notícias para a cidade que o usuário informar. Crie um título curto para cada notícia e detalhes de o que ela aborda. Traga também dados de clima da cidade pesquisada.&quot;,
+    &quot;responseSchema&quot;: {
+        &quot;latestNews&quot;: [
+            {
+                &quot;title&quot;: &quot;...&quot;,
+                &quot;details&quot;: &quot;...&quot;,
+                &quot;link&quot;: &quot;https://...&quot;
+            }
+        ],
+        &quot;weather&quot;: {
+            &quot;currentTemperature&quot;: 0,
+            &quot;weatherType&quot;: &quot;sunny | cloudy | rain | thunderstorm&quot;,
+            &quot;willRain&quot;: true
+        }
+    },
+    &quot;inputData&quot;: {
+        &quot;city&quot;: &quot;São José do Rio Preto&quot;
+    },
+    &quot;webSearch&quot;: {
+        &quot;enabled&quot;: true
+    }
+}
+</code></pre>
+<pre><code class="lang-json">{
+    &quot;message&quot;: null,
+    &quot;data&quot;: {
+        &quot;result&quot;: {
+            &quot;latestNews&quot;: [
+                {
+                    &quot;title&quot;: &quot;Ajudante preso por disparo contra ex-namorada&quot;,
+                    &quot;details&quot;: &quot;Um ajudante foi preso suspeito de atirar com garrucha contra a ex-namorada e o ex-companheiro dela no bairro Ypê, em Ilha Solteira (SP). A mulher foi socorrida e levada para o Hospital Regional, onde passou por cirurgia.&quot;,
+                    &quot;link&quot;: &quot;https://g1.globo.com/sp/sao-jose-do-rio-preto-aracatuba/&quot;
+                },
+                {
+                    &quot;title&quot;: &quot;Médicos rio-pretenses formam sociedade com mentorias&quot;,
+                    &quot;details&quot;: &quot;Médicos de Rio Preto oficializaram uma sociedade com empresas de mentorias.&quot;,
+                    &quot;link&quot;: &quot;https://www.gazetaderiopreto.com.br/&quot;
+                },
+                {
+                    &quot;title&quot;: &quot;Regularização fundiária garante propriedade em Rio Preto&quot;,
+                    &quot;details&quot;: &quot;Projeto de regularização fundiária garante segurança para moradores de Rio Preto.&quot;,
+                    &quot;link&quot;: &quot;https://regional24horas.com.br/rio-preto&quot;
+                },
+                {
+                    &quot;title&quot;: &quot;Petrobras reduz preço do diesel&quot;,
+                    &quot;details&quot;: &quot;A Petrobras reduziu o preço do diesel a partir desta terça-feira (6).&quot;,
+                    &quot;link&quot;: &quot;https://www.gazetaderiopreto.com.br/&quot;
+                },
+                {
+                    &quot;title&quot;: &quot;Obras da terceira faixa da Washington Luís iniciam&quot;,
+                    &quot;details&quot;: &quot;As obras da terceira faixa da Washington Luís começam nesta segunda-feira.&quot;,
+                    &quot;link&quot;: &quot;https://www.gazetaderiopreto.com.br/&quot;
+                }
+            ],
+            &quot;weather&quot;: {
+                &quot;currentTemperature&quot;: 26,
+                &quot;weatherType&quot;: &quot;cloudy&quot;,
+                &quot;willRain&quot;: true
+            }
+        },
+        &quot;attempt&quot;: 1,
+        &quot;elapsedMilliseconds&quot;: 7480,
+        &quot;searchedTerms&quot;: [
+            &quot;clima em são josé do rio preto&quot;,
+            &quot;notícias são josé do rio preto e região&quot;
+        ]
     }
 }
 </code></pre>

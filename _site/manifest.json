@@ -82,10 +82,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "assets/icon/deepseek.svg",
+      "source_relative_path": "assets/icon/deepseekai.svg",
       "output": {
         "resource": {
-          "relative_path": "assets/icon/deepseek.svg"
+          "relative_path": "assets/icon/deepseekai.svg"
         }
       },
       "version": ""
@@ -112,10 +112,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "assets/icon/meta.svg",
+      "source_relative_path": "assets/icon/metaai.svg",
       "output": {
         "resource": {
-          "relative_path": "assets/icon/meta.svg"
+          "relative_path": "assets/icon/metaai.svg"
         }
       },
       "version": ""
