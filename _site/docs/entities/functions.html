@@ -130,11 +130,12 @@
 <h2 id="chamar-uma-função">Chamar uma função</h2>
 <p>Para chamar uma função de IA, você precisará informar o que a IA deverá responder e fornecer um esquema JSON que ela deverá seguir.</p>
 <p>Modelos menos inteligentes tendem a falhar a geração de JSON, gerando um documento inválido ou problemático. Para isso, ajuste seu modelo, a instrução e o parâmetro de tentativas se for necessário.</p>
-<p>Você é cobrado por cada tentativa que a IA tentar gerar. Modelos um pouco mais inteligentes tendem a gerar resultados corretos na primeira tentativa. É garantido que um JSON válido será gerado, mas não é garantido que o modelo seguirá os nomes e tipos fornecidos pelo seu esquema JSON.</p>
-<p>Adicionalmente, você pode optar em ativar <strong>pesquisa na internet</strong> para chamada de função. Essa opção pode ser útil para trazer dados relevantes em tempo real ao estruturar sua resposta. Ao ativar essa opção, você é cobrado por cada pesquisa feita na internet, tendo o custo fixo de <strong>$ 0,012</strong> dólares americanos por consulta realizada.</p>
-<p>Um modelo interno decide quais pesquisas devem ser feitas a partir das instruções e entrada de dados fornecida, o que também é cobrado por um custo baixo, ou, você pode especificar no parâmetro <code>searchTerms</code> os termos de pesquisa manualmente, evitando a chamada do modelo interno para obter os termos de pesquisa.</p>
-<p>Especificar menos resultados de pesquisa também é possível e podem ajudar a reduzir a quantia de tokens processados pelo modelo de IA, e, consequentemente, o custo da operação.</p>
-<p>Retentativas de geração do conteúdo JSON não pesquisam na internet novamente e nem chamam o modelo interno para criar as perguntas.</p>
+<p>Você é cobrado por cada tentativa que a IA tentar gerar. Modelos um pouco mais inteligentes tendem a gerar resultados corretos na primeira tentativa. É garantido que um JSON válido será gerado e que esse JSON seguirá o mesmo esquema fornecido na requisição.</p>
+<p>Adicionalmente, você pode optar em ativar <strong>pesquisa na internet</strong> para chamada de função. Essa opção pode ser útil para trazer dados relevantes em tempo real ao estruturar sua resposta. Ao usar essa função, um modelo com acesso na internet será usado para obter dados da internet para estruturar sua resposta. Esse modelo também tentará estruturar sua resposta a partir dos dados fornecidos, e se conseguir formular um JSON válido a etapa de chamar o modelo de estruturação é ignorada e a resposta é imediatamente retornada.</p>
+<p>Se for o caso do modelo de busca online não conseguir estruturar um JSON válido, o modelo escolhido na requisição ficará responsável por essa tarefa, e irá começar o encadeamento de tentativas de geração. Modelos mais inteligentes acertam a geração nas primeiras tentativas.</p>
+<p>Através da propriedade <code>fetch</code>, você pode fornecer uma lista de URLs para serem anexadas no contexto da geração. O Open Indexer faz uma requisição GET para acessar os conteúdos fornecidos e renderiza-os no conteúdo da requisição. Somente respostas 2xx ou 3xx são aceitas e o conteúdo da resposta deve ser textual. Respostas em HTML são renderizadas pelo JavaScript e CSS sem custo adicional.</p>
+<p>Retentativas de geração do conteúdo JSON não pesquisam na internet novamente nem chamam o conteúdo do fetch.</p>
+<p>Requisições que pesquisam na internet trazem bons resultados e dispensam crawlers, scrappers ou a necessidade de pagar por uma API específica, mas podem ser custosas e relativamente lentas para serem obtidas. Considere usar um cache do lado da sua aplicação para dados que não precisam ser constantementes atualizados, como dados meteorológicos, estatísticas diárias, etc. A Open Indexer não realiza nenhum cache pelo nosso lado.</p>
 <h4 id="requisição">Requisição</h4>
 <div class="request-item post">
     <span>POST</span>
@@ -152,7 +153,7 @@
     // O objeto JSON que o modelo deverá gerar. Você pode fornecer exemplos de geração no campo de instruções. Esse objeto deve ser um JSON válido na API.
     // Esse objeto deve ser um objeto, um array ou uma string.
     &quot;responseSchema&quot;: {
-        &quot;feedbackType&quot;: &quot;neutral | positive | negative&quot;,
+        &quot;feedbackType&quot;: &quot;{neutral|positive|negative}&quot;,
         &quot;informationScore&quot;: 5
     },
     
@@ -169,16 +170,16 @@
     
     // Opcional. Permite que o modelo faça uma busca na internet para aperfeiçoar a construção da resposta.
     &quot;webSearch&quot;: {
-
+        
         // Ativa ou desativa a pesquisa na internet da função.
-        &quot;enabled&quot;: true,
-
-        // Define os termos de pesquisa que serão realizados para complementar o modelo. Deixe vazio para um modelo interno gerar os termos de pesquisa automaticamente.
-        &quot;searchTerms&quot;: [],
-
-        // Máximo de resultados por termo de pesquisa que serão anexados no contexto de geração.
-        &quot;maxResultsPerTerm&quot;: 5
-    }
+        &quot;enabled&quot;: true
+    },
+    
+    // Opcional. Adiciona recursos externos para complementar a geração da resposta.
+    &quot;fetch&quot;: [
+        &quot;https://url1...&quot;,
+        &quot;https://url2...&quot;,
+    ]
 }
 </code></pre>
 <h4 id="resposta">Resposta</h4>
@@ -199,6 +200,15 @@
     }
 }
 </code></pre>
+<h2 id="considerações-sobre-o-esquema-json">Considerações sobre o esquema JSON</h2>
+<ul>
+<li>Especifique valores enumerados com <code>&quot;{valor1|valor2|valor3}&quot;</code>. Dessa forma, o modelo deverá escolher um dos valores apresentados na geração do JSON.</li>
+<li>Todos os valores são placeholders para a geração do modelo.</li>
+<li>Indique o que um campo é ou o que deve receber de valor com um hint em seu próprio placeholder ou indique diretamente nas instruções da função.</li>
+<li>Todos os valores podem ser nulos, à menos que você especifique diretamente para o modelo que não podem.</li>
+<li>A estrutura de saída do modelo é a mesma que informada em <code>responseSchema</code>.</li>
+<li>A estrutura de entrada é indiferente.</li>
+</ul>
 <h2 id="exemplos">Exemplos</h2>
 <p>Confira exemplos de funções de IA para várias tarefas cotidianas:</p>
 <h4 id="resumir-pedido-e-classificar-se-requer-atenção-ou-não">Resumir pedido e classificar se requer atenção ou não</h4>
@@ -238,8 +248,8 @@
     </span>
 </div>
 <pre><code class="lang-json">{
-    &quot;modelName&quot;: &quot;@google/gemini-1.5-flash-8b&quot;,
-    &quot;instructions&quot;: &quot;Você é um modelo que pesquisa as últimas cinco notícias para a cidade que o usuário informar. Crie um título curto para cada notícia e detalhes de o que ela aborda. Traga também dados de clima da cidade pesquisada.&quot;,
+    &quot;modelName&quot;: &quot;@google/gemini-2.0-flash-lite&quot;,
+    &quot;instructions&quot;: &quot;Pesquise as 5 últimas notícias e dados meteorológicos para a cidade informada.&quot;,
     &quot;responseSchema&quot;: {
         &quot;latestNews&quot;: [
             {
@@ -250,8 +260,8 @@
         ],
         &quot;weather&quot;: {
             &quot;currentTemperature&quot;: 0,
-            &quot;weatherType&quot;: &quot;sunny | cloudy | rain | thunderstorm&quot;,
-            &quot;willRain&quot;: true
+            &quot;currentWeather&quot;: &quot;{sunny|cloudy|rain|thunderstorm}&quot;,
+            &quot;forecast&quot;: &quot;{sunny|cloudy|rain|thunderstorm}&quot;
         }
     },
     &quot;inputData&quot;: {
@@ -268,43 +278,154 @@
         &quot;result&quot;: {
             &quot;latestNews&quot;: [
                 {
-                    &quot;title&quot;: &quot;Ajudante preso por disparo contra ex-namorada&quot;,
-                    &quot;details&quot;: &quot;Um ajudante foi preso suspeito de atirar com garrucha contra a ex-namorada e o ex-companheiro dela no bairro Ypê, em Ilha Solteira (SP). A mulher foi socorrida e levada para o Hospital Regional, onde passou por cirurgia.&quot;,
-                    &quot;link&quot;: &quot;https://g1.globo.com/sp/sao-jose-do-rio-preto-aracatuba/&quot;
+                    &quot;title&quot;: &quot;GCM prende trio por tráfico de drogas no Calçadão de Rio Preto&quot;,
+                    &quot;details&quot;: &quot;A Guarda Civil Municipal (GCM) de São José do Rio Preto prendeu, na noite desta terça-feira (6), três pessoas suspeitas de tráfico de drogas no Calçadão [4, 9].&quot;,
+                    &quot;link&quot;: &quot;https://dhoje.com.br/gcm-prende-trio-por-trafico-de-drogas-no-calcadao-de-rio-preto/&quot;
                 },
                 {
-                    &quot;title&quot;: &quot;Médicos rio-pretenses formam sociedade com mentorias&quot;,
-                    &quot;details&quot;: &quot;Médicos de Rio Preto oficializaram uma sociedade com empresas de mentorias.&quot;,
-                    &quot;link&quot;: &quot;https://www.gazetaderiopreto.com.br/&quot;
+                    &quot;title&quot;: &quot;Emprego Apoiado faz seleção para pessoas com deficiência&quot;,
+                    &quot;details&quot;: &quot;Distribuidora de bebidas de Rio Preto faz seleção nesta quinta-feira, 8/5, das 9h às 11h [4, 9].&quot;,
+                    &quot;link&quot;: &quot;https://dhoje.com.br/emprego-apoiado-faz-selecao-para-pessoas-com-deficiencia/&quot;
                 },
                 {
-                    &quot;title&quot;: &quot;Regularização fundiária garante propriedade em Rio Preto&quot;,
-                    &quot;details&quot;: &quot;Projeto de regularização fundiária garante segurança para moradores de Rio Preto.&quot;,
-                    &quot;link&quot;: &quot;https://regional24horas.com.br/rio-preto&quot;
+                    &quot;title&quot;: &quot;Fundo Social distribui Enxoval do Amor para gestantes em Rio Preto&quot;,
+                    &quot;details&quot;: &quot;Campanha do Fundo Social mobiliza voluntárias e população para apoiar mães em Rio Preto [4].&quot;,
+                    &quot;link&quot;: &quot;https://dhoje.com.br/fundo-social-distribui-enxoval-do-amor-para-gestantes-em-rio-preto/&quot;
                 },
                 {
-                    &quot;title&quot;: &quot;Petrobras reduz preço do diesel&quot;,
-                    &quot;details&quot;: &quot;A Petrobras reduziu o preço do diesel a partir desta terça-feira (6).&quot;,
-                    &quot;link&quot;: &quot;https://www.gazetaderiopreto.com.br/&quot;
+                    &quot;title&quot;: &quot;PM abre 2,2 mil vagas para policiais da reserva atuarem&quot;,
+                    &quot;details&quot;: &quot;A Polícia Militar de São Paulo publicou, nesta terça-feira, 6, edital para contratação de 2.200 policiais militares da reserva para exercerem [4].&quot;,
+                    &quot;link&quot;: &quot;https://dhoje.com.br/pm-abre-22-mil-vagas-para-policiais-da-reserva-atuarem/&quot;
                 },
                 {
-                    &quot;title&quot;: &quot;Obras da terceira faixa da Washington Luís iniciam&quot;,
-                    &quot;details&quot;: &quot;As obras da terceira faixa da Washington Luís começam nesta segunda-feira.&quot;,
-                    &quot;link&quot;: &quot;https://www.gazetaderiopreto.com.br/&quot;
+                    &quot;title&quot;: &quot;Rio Preto pode receber R$ 63,8 milhões do Governo do Estado de São Paulo para obras de melhoria&quot;,
+                    &quot;details&quot;: &quot;Prefeito busca R$ 63,8 milhões para viabilizar pacotaço de obras [4].&quot;,
+                    &quot;link&quot;: &quot;https://dhoje.com.br/infraestrutura-prefeito-busca-r-638-milhoes-para-viabilizar-pacotaco-de-obras/&quot;
                 }
             ],
             &quot;weather&quot;: {
-                &quot;currentTemperature&quot;: 26,
-                &quot;weatherType&quot;: &quot;cloudy&quot;,
-                &quot;willRain&quot;: true
+                &quot;currentTemperature&quot;: 18,
+                &quot;currentWeather&quot;: &quot;sunny&quot;,
+                &quot;forecast&quot;: &quot;sunny&quot;
             }
         },
         &quot;attempt&quot;: 1,
-        &quot;elapsedMilliseconds&quot;: 7480,
-        &quot;searchedTerms&quot;: [
-            &quot;clima em são josé do rio preto&quot;,
-            &quot;notícias são josé do rio preto e região&quot;
+        &quot;elapsedMilliseconds&quot;: 4187
+    }
+}
+</code></pre>
+<h4 id="trazer-estatísticas-da-covid-19-em-tempo-real">Trazer estatísticas da COVID-19 em tempo real</h4>
+<div class="request-item post">
+    <span>POST</span>
+    <span>
+        /api/v1/functions/json
+    </span>
+</div>
+<pre><code class="lang-json">{
+    &quot;modelName&quot;: &quot;@google/gemini-1.5-flash-8b&quot;,
+    &quot;instructions&quot;: &quot;Traga a contagem de casos e mortes por COVID-19.&quot;,
+    &quot;responseSchema&quot;: {
+        &quot;deathsWorld&quot;: 0,
+        &quot;deathsBrazil&quot;: 0,
+        &quot;casesWorld&quot;: 0,
+        &quot;casesBrazil&quot;: 0
+    },
+    &quot;inputData&quot;: null,
+    &quot;webSearch&quot;: {
+        &quot;enabled&quot;: true
+    }
+}
+</code></pre>
+<pre><code class="lang-json">{
+    &quot;message&quot;: null,
+    &quot;data&quot;: {
+        &quot;result&quot;: {
+            &quot;deathsWorld&quot;: 7010681,
+            &quot;deathsBrazil&quot;: 711380,
+            &quot;casesWorld&quot;: 704753890,
+            &quot;casesBrazil&quot;: 38743918
+        },
+        &quot;attempt&quot;: 1,
+        &quot;elapsedMilliseconds&quot;: 1620
+    }
+}
+</code></pre>
+<h4 id="trazer-artistas-em-alta-por-gênero-musical">Trazer artistas em alta por gênero musical</h4>
+<div class="request-item post">
+    <span>POST</span>
+    <span>
+        /api/v1/functions/json
+    </span>
+</div>
+<pre><code class="lang-json">{
+    &quot;modelName&quot;: &quot;@google/gemini-1.5-flash-8b&quot;,
+    &quot;instructions&quot;: &quot;Pesquise e formate uma lista de 10 artistas no TOP 10 do streaming musical por gênero.&quot;,
+    &quot;responseSchema&quot;: {
+        &quot;edm&quot;: [
+            &quot;artist name&quot;,
+            &quot;artist name&quot;,
+            &quot;...&quot;
+        ],
+        &quot;rap&quot;: [
+            &quot;artist name&quot;,
+            &quot;artist name&quot;,
+            &quot;...&quot;
+        ],
+        &quot;pop&quot;: [
+            &quot;artist name&quot;,
+            &quot;artist name&quot;,
+            &quot;...&quot;
         ]
+    },
+    &quot;inputData&quot;: null,
+    &quot;webSearch&quot;: {
+        &quot;enabled&quot;: true
+    }
+}
+</code></pre>
+<pre><code class="lang-json">{
+    &quot;message&quot;: null,
+    &quot;data&quot;: {
+        &quot;result&quot;: {
+            &quot;edm&quot;: [
+                &quot;David Guetta&quot;,
+                &quot;Calvin Harris&quot;,
+                &quot;The Chainsmokers&quot;,
+                &quot;Marshmello&quot;,
+                &quot;Avicii&quot;,
+                &quot;Kygo&quot;,
+                &quot;Tiesto&quot;,
+                &quot;DJ Snake&quot;,
+                &quot;Daft Punk&quot;,
+                &quot;Skrillex&quot;
+            ],
+            &quot;rap&quot;: [
+                &quot;Drake&quot;,
+                &quot;Eminem&quot;,
+                &quot;Kanye West&quot;,
+                &quot;Juice WRLD&quot;,
+                &quot;Travis Scott&quot;,
+                &quot;XXXTENTACION&quot;,
+                &quot;Kendrick Lamar&quot;,
+                &quot;Future&quot;,
+                &quot;J. Cole&quot;,
+                &quot;Nicki Minaj&quot;
+            ],
+            &quot;pop&quot;: [
+                &quot;Taylor Swift&quot;,
+                &quot;Drake&quot;,
+                &quot;Bad Bunny&quot;,
+                &quot;The Weeknd&quot;,
+                &quot;Ed Sheeran&quot;,
+                &quot;Ariana Grande&quot;,
+                &quot;Justin Bieber&quot;,
+                &quot;Billie Eilish&quot;,
+                &quot;Rihanna&quot;,
+                &quot;Bruno Mars&quot;
+            ]
+        },
+        &quot;attempt&quot;: 1,
+        &quot;elapsedMilliseconds&quot;: 8370
     }
 }
 </code></pre>

@@ -114,6 +114,56 @@ Todos os preços estão em dólares dos Estados Unidos.
 </tr>
 <tr>
     <td>
+        @google/gemini-2.5-flash-lv
+    </td>
+    <td>
+        $ 2,40
+    </td>
+    <td>
+        Versão do Gemini 2.5 Flash com pesquisa na internet.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens, vídeos, áudios
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-global-line"></i>
+    Pesquisa na internet
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        @google/gemini-2.0-flash-lv
+    </td>
+    <td>
+        $ 1,64
+    </td>
+    <td>
+        Versão do Gemini 2.0 com pesquisa na internet pelo Google.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens, vídeos, áudios
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-global-line"></i>
+    Pesquisa na internet
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
         @google/gemini-2.5-flash
     </td>
     <td>
@@ -159,7 +209,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         @google/gemini-2.0-flash-lite
     </td>
     <td>
-        $ 0,67
+        $ 0,66
     </td>
     <td>
         Modelo de uso geral, com reconhecimento de imagens, esperto e rápido. Ótimo para um chat econômico.

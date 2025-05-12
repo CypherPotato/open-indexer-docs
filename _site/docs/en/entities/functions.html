@@ -126,15 +126,16 @@
 
 <p>Functions are a way to force your model to process information using JSON as an intermediate communication medium. With functions, you can make any model respond in the JSON format you want.</p>
 <p>It can be useful for categorizing comments, applying moderation to reviews, or processing information with the help of AI.</p>
-<p>Currently, it is only possible to use functions with models provided by Open Indexer.</p>
+<p>Currently, it is only possible to use functions with <a href="">models provided by Open Indexer</a>.</p>
 <h2 id="calling-a-function">Calling a Function</h2>
-<p>To call an AI function, you will need to inform what the AI should respond with and provide a JSON schema that it should follow.</p>
-<p>Less intelligent models tend to fail to generate JSON, resulting in an invalid or problematic document. To fix this, adjust your model, instruction, and attempt parameter if necessary.</p>
-<p>You are charged for each attempt the AI makes to generate a response. Slightly more intelligent models tend to generate correct results on the first attempt. It is guaranteed that a valid JSON will be generated, but it is not guaranteed that the model will follow the names and types provided by your JSON schema.</p>
-<p>Additionally, you can opt to activate <strong>internet search</strong> for function calls. This option can be useful for bringing relevant data in real-time to structure your response. When activating this option, you are charged for each internet search, with a fixed cost of <strong>$0.012</strong> American dollars per query.</p>
-<p>An internal model decides which searches should be performed based on the instructions and input data provided, which is also charged at a low cost. Alternatively, you can specify the <code>searchTerms</code> parameter manually to avoid calling the internal model to obtain the search terms.</p>
-<p>Specifying fewer search results is also possible and can help reduce the number of tokens processed by the AI model, and consequently, the cost of the operation.</p>
-<p>Retry attempts to generate the JSON content do not search the internet again and do not call the internal model to create the questions.</p>
+<p>To call an AI function, you will need to specify what the AI should respond with and provide a JSON schema that it should follow.</p>
+<p>Less intelligent models tend to fail to generate JSON, generating an invalid or problematic document. To fix this, adjust your model, instruction, and attempt parameter if necessary.</p>
+<p>You are charged for each attempt the AI tries to generate. Slightly more intelligent models tend to generate correct results on the first attempt. It is guaranteed that a valid JSON will be generated and that this JSON will follow the same schema provided in the request.</p>
+<p>Additionally, you can opt to activate <strong>internet search</strong> for function calls. This option can be useful for bringing relevant data in real-time to structure your response. When using this function, a model with internet access will be used to obtain data from the internet to structure your response. This model will also try to structure your response from the provided data, and if it can formulate a valid JSON, the step of calling the structuring model is ignored and the response is immediately returned.</p>
+<p>If the online search model is unable to structure a valid JSON, the model chosen in the request will be responsible for this task and will start the chain of generation attempts. More intelligent models get the generation right on the first attempts.</p>
+<p>Through the <code>fetch</code> property, you can provide a list of URLs to be attached to the generation context. Open Indexer makes a GET request to access the provided content and renders it in the request content. Only 2xx or 3xx responses are accepted, and the response content must be text. HTML responses are rendered by JavaScript and CSS without additional cost.</p>
+<p>Retries of JSON content generation do not search the internet again or call the fetch content.</p>
+<p>Requests that search the internet bring good results and dispense with crawlers, scrapers, or the need to pay for a specific API, but can be expensive and relatively slow to obtain. Consider using a cache on the side of your application for data that does not need to be constantly updated, such as weather data, daily statistics, etc. Open Indexer does not perform any caching on our side.</p>
 <h4 id="request">Request</h4>
 <div class="request-item post">
     <span>POST</span>
@@ -143,13 +144,13 @@
     </span>
 </div>
 <pre><code class="lang-json">{
-    // Specify the name of the integrated model to be used for the action.
+    // Specify the name of the integrated model to be used to perform the action.
     &quot;modelName&quot;: &quot;@metaai/llama-3.1-8b&quot;,
     
-    // Explain what your model should do with the input and how it should provide the response.
-    &quot;instructions&quot;: &quot;Classify the user's comment, indicating whether it is positive or negative, and if it contains any relevant information (a number between 0 (not relevant) and 10 (very relevant))&quot;,
+    // Explain what your model should do with the input and how it should bring the response.
+    &quot;instructions&quot;: &quot;Classify the user's comment, indicating whether it is positive or negative, and if it has any relevant information (number between 0 (not relevant) and 10 (very relevant))&quot;,
     
-    // The JSON object that the model should generate. You can provide generation examples in the instructions field. This object must be a valid JSON in the API.
+    // The JSON object that the model should generate. You can provide generation examples in the instruction field. This object must be a valid JSON in the API.
     // This object must be an object, an array, or a string.
     &quot;responseSchema&quot;: {
         &quot;feedbackType&quot;: &quot;neutral | positive | negative&quot;,
@@ -158,10 +159,10 @@
     
     // Optional. Defines a JSON input for the model. Can be any type of JSON value.
     &quot;inputData&quot;: {
-        &quot;userComment&quot;: &quot;Terrible market. There's a guard inside watching you so you don't steal and the butchers ignore you and serve pretty girls in front of you. But thank God there are other markets coming and the end of this circus will arrive&quot;
+        &quot;userComment&quot;: &quot;Terrible market. There's a guard inside watching you so you don't steal and the butchers ignore you and serve the pretty girls in front of you. But thank God there are other markets coming and the end of this circus will come&quot;
     },
     
-    // Optional. Defines how many attempts the model should make before the API returns an error. Must be a number between 1 and 30.
+    // Optional. Defines how many attempts the model should try before the API returns an error. Must be a number between 1 and 30.
     &quot;maxAttempts&quot;: 10,
     
     // Optional. Defines the time limit in seconds to obtain a valid JSON before the API returns an error. Must be a number between 1 and 3600 (one hour).
@@ -169,16 +170,16 @@
     
     // Optional. Allows the model to perform an internet search to improve the response construction.
     &quot;webSearch&quot;: {
-
+        
         // Enables or disables internet search for the function.
-        &quot;enabled&quot;: true,
-
-        // Defines the search terms that will be performed to complement the model. Leave empty for an internal model to automatically generate the search terms.
-        &quot;searchTerms&quot;: [],
-
-        // Maximum number of results per search term that will be attached to the generation context.
-        &quot;maxResultsPerTerm&quot;: 5
-    }
+        &quot;enabled&quot;: true
+    },
+    
+    // Optional. Adds external resources to complement the response generation.
+    &quot;fetch&quot;: [
+        &quot;https://url1...&quot;,
+        &quot;https://url2...&quot;,
+    ]
 }
 </code></pre>
 <h4 id="response">Response</h4>
@@ -191,7 +192,7 @@
             &quot;informationScore&quot;: 8
         },
         
-        // Which attempt the AI was able to generate a valid JSON
+        // In which attempt the AI was able to generate a valid JSON
         &quot;attempt&quot;: 1,
         
         // The time in milliseconds to obtain a valid JSON
@@ -199,6 +200,15 @@
     }
 }
 </code></pre>
+<h2 id="considerations-about-the-json-schema">Considerations about the JSON Schema</h2>
+<ul>
+<li>Specify enumerated values with <code>&quot;{value1|value2|value3}&quot;</code>. In this way, the model should choose one of the values presented in the JSON generation.</li>
+<li>All values are placeholders for model generation.</li>
+<li>Indicate what a field is or what value it should receive with a hint in its own placeholder or indicate directly in the function instructions.</li>
+<li>All values can be null, unless you specify directly to the model that they cannot.</li>
+<li>The output structure of the model is the same as informed in <code>responseSchema</code>.</li>
+<li>The input structure is irrelevant.</li>
+</ul>
 <h2 id="examples">Examples</h2>
 <p>Check out examples of AI functions for various everyday tasks:</p>
 <h4 id="summarize-order-and-classify-if-it-requires-attention-or-not">Summarize order and classify if it requires attention or not</h4>
@@ -210,12 +220,12 @@
 </div>
 <pre><code class="lang-json">{
     &quot;modelName&quot;: &quot;@metaai/llama-4-scout-17b&quot;,
-    &quot;instructions&quot;: &quot;Summarize the user's comment, creating a short description with a maximum of 10 words indicating what they want to do. Also, indicate whether this comment requires attention or not.&quot;,
+    &quot;instructions&quot;: &quot;Summarize the user's comment, creating a short description, with a maximum of 10 words indicating what they want to do. Also, indicate if this comment requires attention or not.&quot;,
     &quot;responseSchema&quot;: {
         &quot;shortSummary&quot;: &quot;...&quot;,
         &quot;requiresAttention&quot;: false
     },
-    &quot;inputData&quot;: &quot;The customer Fernando de Castro has been trying to contact support since Friday and says he will cancel if he doesn't speak to someone today. He also said he is a friend of Rebeca from the commercial and is threatening to speak badly about the company on TikTok. Please, can someone attend to this guy??&quot;
+    &quot;inputData&quot;: &quot;The customer Fernando de Castro has been trying to contact support since Friday and says he will cancel if he doesn't speak to someone today. He also said he is a friend of Rebecca from the commercial and is threatening to speak badly about the company on TikTok. Please, can someone attend to this guy??&quot;
 }
 </code></pre>
 <pre><code class="lang-json">{
@@ -238,8 +248,8 @@
     </span>
 </div>
 <pre><code class="lang-json">{
-    &quot;modelName&quot;: &quot;@google/gemini-1.5-flash-8b&quot;,
-    &quot;instructions&quot;: &quot;You are a model that searches for the last five news for the city the user informs. Create a short title for each news and details of what it covers. Also, bring weather data for the searched city.&quot;,
+    &quot;modelName&quot;: &quot;@google/gemini-2.0-flash-lite&quot;,
+    &quot;instructions&quot;: &quot;Search for the 5 latest news and weather data for the informed city.&quot;,
     &quot;responseSchema&quot;: {
         &quot;latestNews&quot;: [
             {
@@ -250,8 +260,8 @@
         ],
         &quot;weather&quot;: {
             &quot;currentTemperature&quot;: 0,
-            &quot;weatherType&quot;: &quot;sunny | cloudy | rain | thunderstorm&quot;,
-            &quot;willRain&quot;: true
+            &quot;currentWeather&quot;: &quot;{sunny|cloudy|rain|thunderstorm}&quot;,
+            &quot;forecast&quot;: &quot;{sunny|cloudy|rain|thunderstorm}&quot;
         }
     },
     &quot;inputData&quot;: {
@@ -268,43 +278,154 @@
         &quot;result&quot;: {
             &quot;latestNews&quot;: [
                 {
-                    &quot;title&quot;: &quot;Aid arrested for shooting at ex-girlfriend&quot;,
-                    &quot;details&quot;: &quot;An aid was arrested suspected of shooting with a shotgun at his ex-girlfriend and her ex-partner in the Ypê neighborhood, in Ilha Solteira (SP). The woman was rescued and taken to the Regional Hospital, where she underwent surgery.&quot;,
-                    &quot;link&quot;: &quot;https://g1.globo.com/sp/sao-jose-do-rio-preto-aracatuba/&quot;
+                    &quot;title&quot;: &quot;GCM arrests trio for drug trafficking in Rio Preto's Calçadão&quot;,
+                    &quot;details&quot;: &quot;The Municipal Guard (GCM) of São José do Rio Preto arrested, on Tuesday night (6), three people suspected of drug trafficking in the Calçadão [4, 9].&quot;,
+                    &quot;link&quot;: &quot;https://dhoje.com.br/gcm-prende-trio-por-trafico-de-drogas-no-calcadao-de-rio-preto/&quot;
                 },
                 {
-                    &quot;title&quot;: &quot;Rio Preto doctors form society with mentorships&quot;,
-                    &quot;details&quot;: &quot;Doctors from Rio Preto officially formed a society with mentorship companies.&quot;,
-                    &quot;link&quot;: &quot;https://www.gazetaderiopreto.com.br/&quot;
+                    &quot;title&quot;: &quot;Employment Support makes selection for people with disabilities&quot;,
+                    &quot;details&quot;: &quot;A beverage distributor in Rio Preto makes a selection on Thursday, 8/5, from 9 am to 11 am [4, 9].&quot;,
+                    &quot;link&quot;: &quot;https://dhoje.com.br/emprego-apoiado-faz-selecao-para-pessoas-com-deficiencia/&quot;
                 },
                 {
-                    &quot;title&quot;: &quot;Land regularization guarantees property in Rio Preto&quot;,
-                    &quot;details&quot;: &quot;A land regularization project guarantees security for Rio Preto residents.&quot;,
-                    &quot;link&quot;: &quot;https://regional24horas.com.br/rio-preto&quot;
+                    &quot;title&quot;: &quot;Social Fund distributes Love Kit to pregnant women in Rio Preto&quot;,
+                    &quot;details&quot;: &quot;The Social Fund's campaign mobilizes volunteers and the population to support mothers in Rio Preto [4].&quot;,
+                    &quot;link&quot;: &quot;https://dhoje.com.br/fundo-social-distribui-enxoval-do-amor-para-gestantes-em-rio-preto/&quot;
                 },
                 {
-                    &quot;title&quot;: &quot;Petrobras reduces diesel price&quot;,
-                    &quot;details&quot;: &quot;Petrobras reduced the diesel price starting this Tuesday (6).&quot;,
-                    &quot;link&quot;: &quot;https://www.gazetaderiopreto.com.br/&quot;
+                    &quot;title&quot;: &quot;PM opens 2,200 vacancies for reserve police to work&quot;,
+                    &quot;details&quot;: &quot;The Military Police of São Paulo published, on Tuesday (6), an edital for the hiring of 2,200 military police from the reserve to work [4].&quot;,
+                    &quot;link&quot;: &quot;https://dhoje.com.br/pm-abre-22-mil-vagas-para-policiais-da-reserva-atuarem/&quot;
                 },
                 {
-                    &quot;title&quot;: &quot;Third lane construction on Washington Luís begins&quot;,
-                    &quot;details&quot;: &quot;The construction of the third lane on Washington Luís begins this Monday.&quot;,
-                    &quot;link&quot;: &quot;https://www.gazetaderiopreto.com.br/&quot;
+                    &quot;title&quot;: &quot;Rio Preto may receive R$ 63.8 million from the State Government of São Paulo for improvement works&quot;,
+                    &quot;details&quot;: &quot;The mayor is seeking R$ 63.8 million to make a package of works viable [4].&quot;,
+                    &quot;link&quot;: &quot;https://dhoje.com.br/infraestrutura-prefeito-busca-r-638-milhoes-para-viabilizar-pacotaco-de-obras/&quot;
                 }
             ],
             &quot;weather&quot;: {
-                &quot;currentTemperature&quot;: 26,
-                &quot;weatherType&quot;: &quot;cloudy&quot;,
-                &quot;willRain&quot;: true
+                &quot;currentTemperature&quot;: 18,
+                &quot;currentWeather&quot;: &quot;sunny&quot;,
+                &quot;forecast&quot;: &quot;sunny&quot;
             }
         },
         &quot;attempt&quot;: 1,
-        &quot;elapsedMilliseconds&quot;: 7480,
-        &quot;searchedTerms&quot;: [
-            &quot;weather in São José do Rio Preto&quot;,
-            &quot;news São José do Rio Preto and region&quot;
+        &quot;elapsedMilliseconds&quot;: 4187
+    }
+}
+</code></pre>
+<h4 id="bring-covid-19-statistics-in-real-time">Bring COVID-19 statistics in real-time</h4>
+<div class="request-item post">
+    <span>POST</span>
+    <span>
+        /api/v1/functions/json
+    </span>
+</div>
+<pre><code class="lang-json">{
+    &quot;modelName&quot;: &quot;@google/gemini-1.5-flash-8b&quot;,
+    &quot;instructions&quot;: &quot;Bring the count of cases and deaths by COVID-19.&quot;,
+    &quot;responseSchema&quot;: {
+        &quot;deathsWorld&quot;: 0,
+        &quot;deathsBrazil&quot;: 0,
+        &quot;casesWorld&quot;: 0,
+        &quot;casesBrazil&quot;: 0
+    },
+    &quot;inputData&quot;: null,
+    &quot;webSearch&quot;: {
+        &quot;enabled&quot;: true
+    }
+}
+</code></pre>
+<pre><code class="lang-json">{
+    &quot;message&quot;: null,
+    &quot;data&quot;: {
+        &quot;result&quot;: {
+            &quot;deathsWorld&quot;: 7010681,
+            &quot;deathsBrazil&quot;: 711380,
+            &quot;casesWorld&quot;: 704753890,
+            &quot;casesBrazil&quot;: 38743918
+        },
+        &quot;attempt&quot;: 1,
+        &quot;elapsedMilliseconds&quot;: 1620
+    }
+}
+</code></pre>
+<h4 id="bring-top-artists-by-music-genre">Bring top artists by music genre</h4>
+<div class="request-item post">
+    <span>POST</span>
+    <span>
+        /api/v1/functions/json
+    </span>
+</div>
+<pre><code class="lang-json">{
+    &quot;modelName&quot;: &quot;@google/gemini-1.5-flash-8b&quot;,
+    &quot;instructions&quot;: &quot;Search and format a list of 10 artists in the TOP 10 of music streaming by genre.&quot;,
+    &quot;responseSchema&quot;: {
+        &quot;edm&quot;: [
+            &quot;artist name&quot;,
+            &quot;artist name&quot;,
+            &quot;...&quot;
+        ],
+        &quot;rap&quot;: [
+            &quot;artist name&quot;,
+            &quot;artist name&quot;,
+            &quot;...&quot;
+        ],
+        &quot;pop&quot;: [
+            &quot;artist name&quot;,
+            &quot;artist name&quot;,
+            &quot;...&quot;
         ]
+    },
+    &quot;inputData&quot;: null,
+    &quot;webSearch&quot;: {
+        &quot;enabled&quot;: true
+    }
+}
+</code></pre>
+<pre><code class="lang-json">{
+    &quot;message&quot;: null,
+    &quot;data&quot;: {
+        &quot;result&quot;: {
+            &quot;edm&quot;: [
+                &quot;David Guetta&quot;,
+                &quot;Calvin Harris&quot;,
+                &quot;The Chainsmokers&quot;,
+                &quot;Marshmello&quot;,
+                &quot;Avicii&quot;,
+                &quot;Kygo&quot;,
+                &quot;Tiesto&quot;,
+                &quot;DJ Snake&quot;,
+                &quot;Daft Punk&quot;,
+                &quot;Skrillex&quot;
+            ],
+            &quot;rap&quot;: [
+                &quot;Drake&quot;,
+                &quot;Eminem&quot;,
+                &quot;Kanye West&quot;,
+                &quot;Juice WRLD&quot;,
+                &quot;Travis Scott&quot;,
+                &quot;XXXTENTACION&quot;,
+                &quot;Kendrick Lamar&quot;,
+                &quot;Future&quot;,
+                &quot;J. Cole&quot;,
+                &quot;Nicki Minaj&quot;
+            ],
+            &quot;pop&quot;: [
+                &quot;Taylor Swift&quot;,
+                &quot;Drake&quot;,
+                &quot;Bad Bunny&quot;,
+                &quot;The Weeknd&quot;,
+                &quot;Ed Sheeran&quot;,
+                &quot;Ariana Grande&quot;,
+                &quot;Justin Bieber&quot;,
+                &quot;Billie Eilish&quot;,
+                &quot;Rihanna&quot;,
+                &quot;Bruno Mars&quot;
+            ]
+        },
+        &quot;attempt&quot;: 1,
+        &quot;elapsedMilliseconds&quot;: 8370
     }
 }
 </code></pre>

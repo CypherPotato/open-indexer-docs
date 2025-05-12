@@ -1,10 +1,10 @@
 # Documents
 
-A document represents a piece of knowledge. It is a limited, self-sufficient, and meaningful piece of information on its own. A document is the component that is indexed by the internal model to be retrieved later through a semantic search term.
+A document represents a piece of knowledge. It is a limited, self-sufficient, and meaningful piece of text when isolated. A document is the component that is indexed by the internal model to be retrieved later through a semantic search term.
 
-Consider a car manual: it is not a document, but rather several documents. Each of these documents talks, in isolation, about a specific topic related to that car, in such a way that the document does not depend on external context or information to make sense.
+Consider a car manual: it is not a document, but rather several documents. Each of these documents talks about a specific topic related to the car, in a way that the document does not depend on external context or information to make sense.
 
-Each document in this manual will discuss a topic: one will discuss how to turn on the car, another how to turn it off, another how the paint is made, and another how to change the oil periodically. It is not a good idea to reserve a document to discuss several things at the same time, as this will reduce the objectivity and scope of the inference and reduce the quality of acquisition.
+Each document in this manual will talk about a topic: one will talk about how to turn on the car, another about how to turn it off, another about how the paint is made, and another about how to change the oil periodically. It is not a good idea to reserve a document to talk about several things at the same time, as this will reduce the objectivity and scope of the inference and reduce the quality of retrieval.
 
 Examples of document creation:
 
@@ -12,7 +12,7 @@ Examples of document creation:
 
 - Do not create very short documents (with 10 or fewer words).
 - Do not create very large documents (with 700 or more words).
-- Do not discuss more than one thing in a document.
+- Do not talk about more than one thing in a document.
 - Do not mix different languages in documents.
 - Do not be implicit in documents.
 - Do not write documents using technical language, such as codes or structures like JSON.
@@ -21,11 +21,11 @@ Examples of document creation:
 
 - Be explicit about the purpose of your document.
 - Focus documents on individual topics, summarizing what should be done or explained.
-- Always repeat terms that are keywords for the document search. Example: prefer to use "The color of the Honda Civic 2015 is yellow" instead of "the color of the car is yellow".
-- Restrict the document content to discuss only one topic or subject.
+- Always repeat terms that are keywords for the document search. Example: prefer to use "The color of the Honda Civic 2015 is yellow" instead of "the car color is yellow".
+- Restrict the document content to talk about only one topic or subject.
 - Use simple and easy-to-understand human language.
 
-## Using the API
+## API Usage
 
 As all documents are entities that belong to a [collection](/entities/collections), always have the collection where the document is/will be located at hand.
 
@@ -44,10 +44,10 @@ The structure consists of the following properties:
 
 | Property | Type | Description |
 | ----------- | ---- | --------- |
-| `docid` | `string` | Specifies the name of the document. Useful for debugging and identification. |
+| `docid` | `string` | Specifies the document name. Useful for debugging and identification. |
 | `text`  | `string` | The "raw" content of the document that will be indexed. |
-| `__ref` | `string` | Optional. Specifies a reference ID for the document. |
-| `__tags` | `string[]` | Optional. Specifies an array of tags for the document. Useful for document management. |
+| `__ref` | `string` | Optional. Specifies a reference ID of the document. |
+| `__tags` | `string[]` | Optional. Specifies an array of document tags. Useful for document management. |
 
 A document reference is an ID that can be specified in several documents that need to be linked in a search when one of them is matched in a similarity search. For example, if a search finds a document that has a reference ID, all other documents in the same collection that share the same reference ID as the matched document will also be included in the search response.
 
@@ -105,7 +105,7 @@ documents=[documents.jsonl]
 
 ## Create or modify document
 
-This endpoint creates or modifies a document from its name. When a document is modified, its indexing vectors are reset, i.e., the document will be re-indexed by the indexing engine.
+This endpoint creates or modifies a document from its name. When a document is modified, its indexing vectors are reset, i.e., the document will enter the queue again to be indexed by the indexing engine.
 
 This indexing is not cost-free. The cost is relative to the number of tokens in the sent content.
 
@@ -124,10 +124,10 @@ This indexing is not cost-free. The cost is relative to the number of tokens in 
 
 ```json
 {
-    // the name of the document to be modified
+    // the name of the document that will be modified
     "name": "document-name",
 
-    // the content of the document to be created or overwritten if the name already exists
+    // the content of the document that will be created or overwritten if the name already exists
     "contents": "Content of my document",
 
     // parameters explained earlier
@@ -229,20 +229,8 @@ View details about a specific document.
         // content of the indexed document
         "contents": "...",
 
-        // id of the document reference
-        "reference": "institutional-company",
-        
-        // brings all documents that share the same reference
-        "references": [
-            {
-                "id": "01965b54-b32b-7433-b90b-73d71d21ae38",
-                "name": "Institutional/Company.rmd:2"
-            },
-            {
-                "id": "01965b54-b31c-7184-9f5c-60b2648106d9",
-                "name": "Institutional/Company.rmd:3"
-            }
-        ]
+        // document reference ID
+        "reference": "institutional-company"
     }
 }
 ```

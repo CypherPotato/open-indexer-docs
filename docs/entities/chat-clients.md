@@ -50,13 +50,13 @@ Cria um novo chat client.
 
         // Opcional. Especifica o sub-título ao entrar no chat pela primeira vez.
         "helloSubLabel": "Sou a sua assistente.",
-
+        
         // Opcional. Especifica o placeholder do campo de enviar mensagem.
         "textAreaPlaceholder": "Falar com a assistente",
 
         // Opcional. Especifica uma imagem/logo para exibir no chat pela primeira vez.
         "logoImageUrl": null,
-
+        
         // Opcional. Ativa recursos de depuração.
         "debug": true,
         

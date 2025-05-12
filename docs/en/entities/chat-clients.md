@@ -4,7 +4,7 @@ A chat client provides a user interface through an [AI Gateway](/docs/en/entitie
 
 > [!NOTE]
 >
-> The Open Indexer never stores the content of a chat between a client and the user. You can use JavaScript for this task, but it is your responsibility to use and store it.
+> The Open Indexer never stores the content of a chat between a client and the user. You can use JavaScript for this task, but under your responsibility for usage and storage.
 
 You can customize the interface of your chat client with custom CSS and JavaScript, as well as choose the language of the chat features.
 
@@ -50,20 +50,20 @@ Create a new chat client.
 
         // Optional. Specifies the subtitle when entering the chat for the first time.
         "helloSubLabel": "I'm your assistant.",
-
+        
         // Optional. Specifies the placeholder of the message sending field.
         "textAreaPlaceholder": "Talk to the assistant",
 
         // Optional. Specifies an image/logo to display in the chat for the first time.
         "logoImageUrl": null,
-
+        
         // Optional. Enables debugging features.
         "debug": true,
         
         // Optional. Specifies which origins should be allowed to embed the chat client in an iframe. If this field is empty, any origin will be accepted.
         "allowedFrameOrigins": ["https://my-domain.com.br"],
         
-        // Optional. Specifies conversation suggestion buttons when starting a new chat session. You can add as many buttons as you want, but it is recommended to have up to 3 buttons.
+        // Optional. Specifies conversation suggestion buttons when starting a new chat session. You can add as many buttons as you want, but it's recommended to have up to 3 buttons.
         "suggestionButtons": [
             {
                 // Title to be displayed on the button.
@@ -80,10 +80,10 @@ Create a new chat client.
         // Optional. Specifies how many messages the user can send per hour in the chat. This option is tracked by the userTag of the session.
         "messagesPerHour": 30,
         
-        // Optional. Specifies the maximum number of tokens that a user message can contain. This field is only valid when used with models integrated into the Open Indexer.
+        // Optional. Specifies the maximum number of tokens that a user message can contain. This field is only valid when used with models integrated with the Open Indexer.
         "userInputMaxTokens": 1024,
         
-        // Optional. Specifies the limit of messages (for the user and AI) that a session can have.
+        // Optional. Specifies the maximum number of messages (for the user and AI) that a session can have.
         "maxMessages": 300
     }
 }
@@ -122,7 +122,7 @@ The body of this request is exactly the same as creating a chat client.
 
 ## Listing Chat Clients
 
-Get a list of created chat clients.
+Gets a list of created chat clients.
 
 <div class="request-item get">
     <span>GET</span>
@@ -148,7 +148,7 @@ Get a list of created chat clients.
 
 ## Viewing a Specific Chat Client
 
-Get details of an existing chat client.
+Gets details of an existing chat client.
 
 <div class="request-item get">
     <span>GET</span>
@@ -196,13 +196,13 @@ Get details of an existing chat client.
 
 ## Creating a Chat Session
 
-A chat session is where you create a conversation between your chat client and the user. You can call this endpoint providing additional context for the conversation, such as the user's name, location, etc.
+A chat session is where you create a conversation between your chat client and the user. You can call this endpoint providing additional context for the conversation, such as the user's name, where they are, etc.
 
-A chat session expires after a certain time for security reasons of the generated access token. When you call this endpoint providing a `tag`, you can call the same endpoint multiple times and get the active chat session for the informed tag, or create a new chat if there is no ongoing session.
+A chat session expires after some time for security reasons of the generated access token. When you call this endpoint providing a `tag`, you can call the same endpoint multiple times and get the active chat session for the informed tag, or create a new chat if there is no ongoing session.
 
 A chat session also restores all conversation messages from the same session after disconnection. The user can clear the conversation by clicking the clear conversation button in the top right corner of the chat client. This session uses the limits defined by the chat client, such as the maximum number of messages and tokens in the conversation.
 
-A session is automatically renewed for another 3 days when receiving a message from the user.
+A session is automatically renewed for another 3 days when receiving a user message.
 
 > [!IMPORTANT]
 >

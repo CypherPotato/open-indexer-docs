@@ -114,6 +114,56 @@ All prices are in United States dollars.
 </tr>
 <tr>
     <td>
+        @google/gemini-2.5-flash-lv
+    </td>
+    <td>
+        $ 2.40
+    </td>
+    <td>
+        Version of Gemini 2.5 Flash with internet search.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images, videos, audio
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-global-line"></i>
+    Internet search
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        @google/gemini-2.0-flash-lv
+    </td>
+    <td>
+        $ 1.64
+    </td>
+    <td>
+        Version of Gemini 2.0 with internet search by Google.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images, videos, audio
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-global-line"></i>
+    Internet search
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
         @google/gemini-2.5-flash
     </td>
     <td>
@@ -159,7 +209,7 @@ All prices are in United States dollars.
         @google/gemini-2.0-flash-lite
     </td>
     <td>
-        $ 0.67
+        $ 0.66
     </td>
     <td>
         General-purpose model, with image recognition, smart and fast. Ideal for an economical chat.
@@ -183,7 +233,7 @@ All prices are in United States dollars.
         $ 0.33
     </td>
     <td>
-        General-purpose model from the previous generation, optimized for less demanding and simple tasks.
+        Previous generation general-purpose model, optimized for less demanding and simple tasks.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -408,7 +458,7 @@ All prices are in United States dollars.
         $ 11.00
     </td>
     <td>
-        Versatile, highly intelligent, and top-of-the-line. One of the most capable models currently available.
+        Versatile, highly intelligent and top-of-the-line. One of the most capable models currently available.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -488,7 +538,7 @@ All prices are in United States dollars.
         $ 0.88
     </td>
     <td>
-        The fastest and cheapest model of the GPT 4.1.
+        The fastest and cheapest GPT 4.1 model.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>

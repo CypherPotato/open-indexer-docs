@@ -229,23 +229,10 @@ Vê detalhes sobre um documento específico.
         "contents": "...",
 
         // id da referência do documento
-        "reference": "institucional-empresa",
-        
-        // traz todos os documentos que compartilham a mesma referência
-        "references": [
-            {
-                "id": "01965b54-b32b-7433-b90b-73d71d21ae38",
-                "name": "Institucional/Empresa.rmd:2"
-            },
-            {
-                "id": "01965b54-b31c-7184-9f5c-60b2648106d9",
-                "name": "Institucional/Empresa.rmd:3"
-            }
-        ]
+        "reference": "institucional-empresa"
     }
 }
 ```
-
 
 ## Excluir documento
 
