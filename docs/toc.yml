@@ -6,8 +6,12 @@ items:
   href: getting-started.md
 - name: Autenticação
   href: authentication.md
+- name: Limites de taxa
+  href: limits.md
 - name: Modelos
   href: models.md
+- name: Sentinel
+  href: sentinel.md
 
 - name: Usando a API
 

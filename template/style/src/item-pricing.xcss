@@ -1,0 +1,22 @@
+.item-pricing {
+    display: block;
+
+    > small {
+        font-size: .7rem;
+        opacity: .85;
+    }
+
+    > div {
+        font-weight: 500;
+
+        > small {
+            font-weight: 400;
+            font-size: .6rem;
+            opacity: .85;
+        }
+    }
+
+    + .item-pricing {
+        margin-top: 3px;
+    }
+}

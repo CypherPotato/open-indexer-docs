@@ -142,6 +142,16 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "assets/icon/open-indexer.png",
+      "output": {
+        "resource": {
+          "relative_path": "assets/icon/open-indexer.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "assets/icon/openai.svg",
       "output": {
         "resource": {
@@ -572,10 +582,30 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "docs/en/limits.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/en/limits.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "docs/en/models.md",
       "output": {
         ".html": {
           "relative_path": "docs/en/models.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/en/sentinel.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/en/sentinel.html"
         }
       },
       "version": ""
@@ -665,10 +695,30 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "docs/limits.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/limits.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "docs/models.md",
       "output": {
         ".html": {
           "relative_path": "docs/models.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/sentinel.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/sentinel.html"
         }
       },
       "version": ""

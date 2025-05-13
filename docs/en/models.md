@@ -17,17 +17,27 @@ All prices are in United States dollars.
         </colgroup>
         <tr>
             <th>Model Name</th>
-            <th>Price/1m tokens</th>
+            <th>Prices</th>
             <th>Description</th>
         </tr>
     </thead>
     <tbody>
 <tr>
     <td>
-        @deepseekai/r1-distill-llama-70b
+        <code>
+            @deepseekai/r1-distill-llama-70b
+        </code>
     </td>
     <td>
-        $ 2.76
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 2.76 <small>/1M tokens</small>
+            </div>
+        </div>
+        
     </td>
     <td>
         Model with reasoning and deep thinking, better for more demanding tasks.
@@ -57,17 +67,27 @@ All prices are in United States dollars.
         </colgroup>
         <tr>
             <th>Model Name</th>
-            <th>Price/1m tokens</th>
+            <th>Prices</th>
             <th>Description</th>
         </tr>
     </thead>
     <tbody>
 <tr>
     <td>
-        @google/gemini-2.5-pro
+        <code>
+            @google/gemini-2.5-pro
+        </code>
     </td>
     <td>
-        $ 12.25
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 12.25 <small>/1M tokens</small>
+            </div>
+        </div>
+        
     </td>
     <td>
         One of the most powerful models currently available.
@@ -89,10 +109,20 @@ All prices are in United States dollars.
 </tr>
 <tr>
     <td>
-        @google/gemini-2.5-flash-th
+        <code>
+            @google/gemini-2.5-flash-th
+        </code>
     </td>
     <td>
-        $ 4.65
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 4.65 <small>/1M tokens</small>
+            </div>
+        </div>
+        
     </td>
     <td>
         Model from the latest generation with integrated reasoning and thinking.
@@ -114,10 +144,58 @@ All prices are in United States dollars.
 </tr>
 <tr>
     <td>
-        @google/gemini-2.5-flash-lv
+        <code>
+            @google/gemini-2.5-flash
+        </code>
     </td>
     <td>
-        $ 2.40
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 1.31 <small>/1M tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        Same model as Gemini 2.5 Flash, but with the reasoning module disabled.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images, videos, audio
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @google/gemini-2.5-flash-lv
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 1.31 <small>/1M tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Internet search:
+    </small>
+    <div>
+        $ 39.20 <small>/1,000 searches</small>
+    </div>
+</div>
     </td>
     <td>
         Version of Gemini 2.5 Flash with internet search.
@@ -139,10 +217,58 @@ All prices are in United States dollars.
 </tr>
 <tr>
     <td>
-        @google/gemini-2.0-flash-lv
+        <code>
+            @google/gemini-2.0-flash
+        </code>
     </td>
     <td>
-        $ 1.64
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 0.88 <small>/1M tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        Offers new generation features, with improved speed and multi-modal generation.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images, videos, audio
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @google/gemini-2.0-flash-lv
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 0.88 <small>/1M tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Internet search:
+    </small>
+    <div>
+        $ 39.20 <small>/1,000 searches</small>
+    </div>
+</div>
     </td>
     <td>
         Version of Gemini 2.0 with internet search by Google.
@@ -164,52 +290,20 @@ All prices are in United States dollars.
 </tr>
 <tr>
     <td>
-        @google/gemini-2.5-flash
+        <code>
+            @google/gemini-2.0-flash-lite
+        </code>
     </td>
     <td>
-        $ 1.31
-    </td>
-    <td>
-        Same model as Gemini 2.5 Flash, but with the reasoning module disabled.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Input: accepts images, videos, audio
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 0.66 <small>/1M tokens</small>
+            </div>
         </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        @google/gemini-2.0-flash
-    </td>
-    <td>
-        $ 0.88
-    </td>
-    <td>
-        Offers new generation features, with improved speed and multi-modal generation.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Input: accepts images, videos, audio
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        @google/gemini-2.0-flash-lite
-    </td>
-    <td>
-        $ 0.66
+        
     </td>
     <td>
         General-purpose model, with image recognition, smart and fast. Ideal for an economical chat.
@@ -227,13 +321,23 @@ All prices are in United States dollars.
 </tr>
 <tr>
     <td>
-        @google/gemini-1.5-flash-8b
+        <code>
+            @google/gemini-1.5-flash-8b
+        </code>
     </td>
     <td>
-        $ 0.33
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 0.33 <small>/1M tokens</small>
+            </div>
+        </div>
+        
     </td>
     <td>
-        Previous generation general-purpose model, optimized for less demanding and simple tasks.
+        General-purpose model from the previous generation, optimized for less demanding and simple tasks.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -260,17 +364,34 @@ All prices are in United States dollars.
         </colgroup>
         <tr>
             <th>Model Name</th>
-            <th>Price/1m tokens</th>
+            <th>Prices</th>
             <th>Description</th>
         </tr>
     </thead>
     <tbody>
 <tr>
     <td>
-        @groq/compound-beta
+        <code>
+            @groq/compound-beta
+        </code>
     </td>
     <td>
-        $ 3.25
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 3.25 <small>/1M tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Internet search:
+    </small>
+    <div>
+        $ 8.96 <small>/1,000 searches</small>
+    </div>
+</div>
     </td>
     <td>
         Conversation agent that searches the internet for contextualization and real-time information.
@@ -292,10 +413,27 @@ All prices are in United States dollars.
 </tr>
 <tr>
     <td>
-        @groq/compound-beta-mini
+        <code>
+            @groq/compound-beta-mini
+        </code>
     </td>
     <td>
-        $ 2.60
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 2.60 <small>/1M tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Internet search:
+    </small>
+    <div>
+        $ 8.96 <small>/1,000 searches</small>
+    </div>
+</div>
     </td>
     <td>
         Smaller version of the Compound family, with fewer experts.
@@ -329,17 +467,27 @@ All prices are in United States dollars.
         </colgroup>
         <tr>
             <th>Model Name</th>
-            <th>Price/1m tokens</th>
+            <th>Prices</th>
             <th>Description</th>
         </tr>
     </thead>
     <tbody>
 <tr>
     <td>
-        @metaai/llama-3.3-70b
+        <code>
+            @metaai/llama-3.3-70b
+        </code>
     </td>
     <td>
-        $ 2.40
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 2.40 <small>/1M tokens</small>
+            </div>
+        </div>
+        
     </td>
     <td>
         Previous generation model with many parameters and surprisingly fast speed.
@@ -353,13 +501,23 @@ All prices are in United States dollars.
 </tr>
 <tr>
     <td>
-        @metaai/llama-4-maverick-17b-128e
+        <code>
+            @metaai/llama-4-maverick-17b-128e
+        </code>
     </td>
     <td>
-        $ 1.40
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 1.40 <small>/1M tokens</small>
+            </div>
+        </div>
+        
     </td>
     <td>
-        Fast model, with 17 billion parameters enabled and 128 experts.
+        Fast model with 17 billion parameters enabled and 128 experts.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -374,13 +532,23 @@ All prices are in United States dollars.
 </tr>
 <tr>
     <td>
-        @metaai/llama-4-scout-17b-16e
+        <code>
+            @metaai/llama-4-scout-17b-16e
+        </code>
     </td>
     <td>
-        $ 0.79
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 0.79 <small>/1M tokens</small>
+            </div>
+        </div>
+        
     </td>
     <td>
-        Smaller version of the Llama 4 family, with 17 billion parameters enabled and 16 experts.
+        Smaller version of the Llama 4 family with 17 billion parameters enabled and 16 experts.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -395,10 +563,20 @@ All prices are in United States dollars.
 </tr>
 <tr>
     <td>
-        @metaai/llama-3.1-8b
+        <code>
+            @metaai/llama-3.1-8b
+        </code>
     </td>
     <td>
-        $ 0.23
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 0.23 <small>/1M tokens</small>
+            </div>
+        </div>
+        
     </td>
     <td>
         Cheap and fast model for less demanding tasks.
@@ -406,6 +584,159 @@ All prices are in United States dollars.
 <div>
     <i class="ri-instance-line"></i>
     Function calls
+</div>
+        </div>
+    </td>
+</tr>
+    </tbody>
+</table>
+
+## <img src="/assets/icon/open-indexer.svg" class="inline-icon"> open-indexer
+
+<table>
+    <thead>
+        <colgroup>
+            <col style="width: 30%" />
+            <col style="width: 20%" />
+            <col style="width: 50%" />
+        </colgroup>
+        <tr>
+            <th>Model Name</th>
+            <th>Prices</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+<tr>
+    <td>
+        <code>
+            @open-indexer/sentinel
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 12.25 <small>/1M tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Internet search:
+    </small>
+    <div>
+        $ 39.20 <small>/1,000 searches</small>
+    </div>
+</div>
+    </td>
+    <td>
+        Intelligent conversation agent created to help humans with the most complex and challenging tasks.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Reasoning
+</div>
+<div>
+    <i class="ri-global-line"></i>
+    Internet search
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @open-indexer/sentinel-mini
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 4.65 <small>/1M tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Internet search:
+    </small>
+    <div>
+        $ 39.20 <small>/1,000 searches</small>
+    </div>
+</div>
+    </td>
+    <td>
+        Optimized for fast conversation, with lower reasoning and more optimized for everyday tasks.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Reasoning
+</div>
+<div>
+    <i class="ri-global-line"></i>
+    Internet search
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @open-indexer/sentinel-core
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 1.31 <small>/1M tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Internet search:
+    </small>
+    <div>
+        $ 39.20 <small>/1,000 searches</small>
+    </div>
+</div>
+    </td>
+    <td>
+        Most optimized version of Sentinel for fast conversations, using a state-of-the-art model, without reasoning power.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-global-line"></i>
+    Internet search
 </div>
         </div>
     </td>
@@ -424,17 +755,27 @@ All prices are in United States dollars.
         </colgroup>
         <tr>
             <th>Model Name</th>
-            <th>Price/1m tokens</th>
+            <th>Prices</th>
             <th>Description</th>
         </tr>
     </thead>
     <tbody>
 <tr>
     <td>
-        @openai/gpt-4o
+        <code>
+            @openai/gpt-4o
+        </code>
     </td>
     <td>
-        $ 13.50
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 13.50 <small>/1M tokens</small>
+            </div>
+        </div>
+        
     </td>
     <td>
         Dedicated to tasks that require reasoning for solving mathematical and logical problems.
@@ -452,13 +793,23 @@ All prices are in United States dollars.
 </tr>
 <tr>
     <td>
-        @openai/gpt-4.1
+        <code>
+            @openai/gpt-4.1
+        </code>
     </td>
     <td>
-        $ 11.00
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 11.00 <small>/1M tokens</small>
+            </div>
+        </div>
+        
     </td>
     <td>
-        Versatile, highly intelligent and top-of-the-line. One of the most capable models currently available.
+        Versatile, highly intelligent, and top-of-the-line. One of the most capable models currently available.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -473,10 +824,20 @@ All prices are in United States dollars.
 </tr>
 <tr>
     <td>
-        @openai/o1-mini
+        <code>
+            @openai/o1-mini
+        </code>
     </td>
     <td>
-        $ 6.50
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 6.50 <small>/1M tokens</small>
+            </div>
+        </div>
+        
     </td>
     <td>
         A small and smart model with reasoning.
@@ -490,10 +851,20 @@ All prices are in United States dollars.
 </tr>
 <tr>
     <td>
-        @openai/gpt-4.1-mini
+        <code>
+            @openai/gpt-4.1-mini
+        </code>
     </td>
     <td>
-        $ 3.00
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 3.00 <small>/1M tokens</small>
+            </div>
+        </div>
+        
     </td>
     <td>
         Fast and cheap for focused tasks.
@@ -511,10 +882,20 @@ All prices are in United States dollars.
 </tr>
 <tr>
     <td>
-        @openai/gpt-4o-mini
+        <code>
+            @openai/gpt-4o-mini
+        </code>
     </td>
     <td>
-        $ 1.31
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 1.31 <small>/1M tokens</small>
+            </div>
+        </div>
+        
     </td>
     <td>
         Smaller version of the 4o, optimized for everyday tasks.
@@ -532,10 +913,20 @@ All prices are in United States dollars.
 </tr>
 <tr>
     <td>
-        @openai/gpt-4.1-nano
+        <code>
+            @openai/gpt-4.1-nano
+        </code>
     </td>
     <td>
-        $ 0.88
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 0.88 <small>/1M tokens</small>
+            </div>
+        </div>
+        
     </td>
     <td>
         The fastest and cheapest GPT 4.1 model.
@@ -565,17 +956,27 @@ All prices are in United States dollars.
         </colgroup>
         <tr>
             <th>Model Name</th>
-            <th>Price/1m tokens</th>
+            <th>Prices</th>
             <th>Description</th>
         </tr>
     </thead>
     <tbody>
 <tr>
     <td>
-        @qwen/qwq-32b
+        <code>
+            @qwen/qwq-32b
+        </code>
     </td>
     <td>
-        $ 1.23
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 1.23 <small>/1M tokens</small>
+            </div>
+        </div>
+        
     </td>
     <td>
         Conversation model with thinking and reasoning for solving complex tasks.

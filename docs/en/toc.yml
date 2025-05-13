@@ -4,8 +4,12 @@ items:
   href: getting-started.md
 - name: Authentication
   href: authentication.md
+- name: Rate Limits
+  href: limits.md
 - name: Models
   href: models.md
+- name: Sentinel
+  href: sentinel.md
 - name: Using the API
 - name: Collections
   href: entities/collections.md
