@@ -124,13 +124,12 @@
                 <article data-uid="">
 <h1 id="search">Search</h1>
 
-<p>The search API, through the query key obtained from the collections, performs a semantic search on it, performing an intelligent comparison for each indexed document in a collection.</p>
-<p>After creating a collection, you will obtain a <strong>query key</strong>, which will be used to perform the semantic search in your collection. The search routes do not need to be identified by an <code>Authorization</code> header.</p>
-<p>Use the endpoints of this API to embed semantic document search in your AI model or chatbot.</p>
+<p>The search API, through the query key obtained from the collections, performs a semantic search in it, performing an intelligent comparison for each indexed document in a collection.</p>
+<p>After creating a collection, you will get its ID. Use the ID of your collection to perform the search in the indexed documents of the same.</p>
+<p>Use the endpoints of this API to embed the semantic search of documents in your AI model or chatbot.</p>
 <h2 id="searching-documents">Searching documents</h2>
 <p>This endpoint expects a GET request with the following parameters:</p>
 <ul>
-<li><code>key</code>: <strong>required.</strong> Specifies the Query Key of the collection to be consulted.</li>
 <li><code>term</code>: <strong>required.</strong> Specifies the search term that will be searched in the documents.</li>
 <li><code>top</code>: Specifies the maximum number of documents that should be returned in the search.</li>
 <li><code>min</code>: Specifies the minimum score for obtaining the documents.</li>
@@ -143,10 +142,10 @@
 <div class="request-item post">
     <span>GET</span>
     <span>
-        /api/v1/search
+        /api/v1/collections/<span>{collection-id}</span>/query
     </span>
 </div>
-<pre><code class="lang-text">key=cky_gr5uepj18yhd1qbshep7&amp;term=What is the color of the Honda CIVIC?
+<pre><code class="lang-text">term=What is the color of the Honda CIVIC?
 </code></pre>
 <h4 id="response">Response</h4>
 <pre><code class="lang-json">{

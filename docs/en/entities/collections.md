@@ -2,12 +2,12 @@
 
 A collection is a knowledge library: it houses several knowledge documents.
 
-- Use collections to group documents by purpose, such as documenting a product, a company, a service, or workflow.
+- Use collections to group documents by purpose, such as documenting a product, a company, a service or flow.
 - Collections do not incur costs. There is no limit to the number of collections per account.
 
-## Create a Collection
+## Create a collection
 
-To create an empty collection, provide only its name:
+To create an empty collection, simply provide its name:
 
 #### Request
 
@@ -32,15 +32,12 @@ To create an empty collection, provide only its name:
     "message": null,
     "data": {
         // Unique ID of the created collection.
-        "collectionId": "01965b62-17c4-7258-9aa8-af5139799527",
-        
-        // A private key used to perform semantic queries on the collection.
-        "queryKey": "cky_gr5uepj18yhuop3zcsa4c7b8stdmpgg7kk4jaf4iug6x3hg7umyhk3o"
+        "collectionId": "01965b62-17c4-7258-9aa8-af5139799527"
     }
 }
 ```
 
-## List Collections
+## List collections
 
 Lists the collections available in your account.
 
@@ -79,7 +76,7 @@ Lists the collections available in your account.
 }
 ```
 
-## View a Collection
+## View a collection
 
 Obtains details of a collection, such as its indexing progress and information like creation date.
 
@@ -100,7 +97,6 @@ Obtains details of a collection, such as its indexing progress and information l
     "data": {
         "name": "My collection",
         "createdAt": "2025-04-22T02:29:46",
-        "queryKey": "cky_gr5uepj18yhd1qbshep7bki5e83hftbp6hbep97r8di9n4tta9ykswo",
         "state": {
             
             // Returns the number of documents waiting for indexing
@@ -108,12 +104,18 @@ Obtains details of a collection, such as its indexing progress and information l
             
             // Number of documents ready for query
             "indexedDocuments": 227
-        }
+        },
+        "tags": [
+            "tag1",
+            "tag2",
+            "tag3",
+            ...
+        ]
     }
 }
 ```
 
-## Delete a Collection
+## Delete a collection
 
 Deletes a collection and all documents within it. This action is irreversible.
 
@@ -136,9 +138,9 @@ Deletes a collection and all documents within it. This action is irreversible.
 ```
 
 
-## Clear a Collection
+## Clear a collection
 
-Unlike deleting a collection, this operation removes all documents from the collection, including indexed and queued ones.
+Unlike collection deletion, this operation removes all documents from the collection, including indexed and queued ones.
 
 #### Request
 

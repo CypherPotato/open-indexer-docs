@@ -32,10 +32,7 @@ Para criar uma coleção vazia, informe apenas o nome dela:
     "message": null,
     "data": {
         // ID único da coleção criada.
-        "collectionId": "01965b62-17c4-7258-9aa8-af5139799527",
-        
-        // Uma chave privada usada para realizar consulta semântica na coleção.
-        "queryKey": "cky_gr5uepj18yhuop3zcsa4c7b8stdmpgg7kk4jaf4iug6x3hg7umyhk3o"
+        "collectionId": "01965b62-17c4-7258-9aa8-af5139799527"
     }
 }
 ```
@@ -100,7 +97,6 @@ Obtém detalhes de uma coleção, como seu progresso de indexação e informaç�
     "data": {
         "name": "Minha coleção",
         "createdAt": "2025-04-22T02:29:46",
-        "queryKey": "cky_gr5uepj18yhd1qbshep7bki5e83hftbp6hbep97r8di9n4tta9ykswo",
         "state": {
             
             // traz a quantidade de documentos aguardando indexação
@@ -108,7 +104,13 @@ Obtém detalhes de uma coleção, como seu progresso de indexação e informaç�
             
             // quantidade de documentos pronto para consulta
             "indexedDocuments": 227
-        }
+        },
+        "tags": [
+            "tag1",
+            "tag2",
+            "tag3",
+            ...
+        ]
     }
 }
 ```

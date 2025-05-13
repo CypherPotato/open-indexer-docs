@@ -1,16 +1,15 @@
 # Search
 
-The search API, through the query key obtained from the collections, performs a semantic search on it, performing an intelligent comparison for each indexed document in a collection.
+The search API, through the query key obtained from the collections, performs a semantic search in it, performing an intelligent comparison for each indexed document in a collection.
 
-After creating a collection, you will obtain a **query key**, which will be used to perform the semantic search in your collection. The search routes do not need to be identified by an `Authorization` header.
+After creating a collection, you will get its ID. Use the ID of your collection to perform the search in the indexed documents of the same.
 
-Use the endpoints of this API to embed semantic document search in your AI model or chatbot.
+Use the endpoints of this API to embed the semantic search of documents in your AI model or chatbot.
 
 ## Searching documents
 
 This endpoint expects a GET request with the following parameters:
 
-- `key`: **required.** Specifies the Query Key of the collection to be consulted.
 - `term`: **required.** Specifies the search term that will be searched in the documents.
 - `top`: Specifies the maximum number of documents that should be returned in the search.
 - `min`: Specifies the minimum score for obtaining the documents.
@@ -24,12 +23,12 @@ This endpoint expects a GET request with the following parameters:
 <div class="request-item post">
     <span>GET</span>
     <span>
-        /api/v1/search
+        /api/v1/collections/<span>{collection-id}</span>/query
     </span>
 </div>
 
 ```text
-key=cky_gr5uepj18yhd1qbshep7&term=What is the color of the Honda CIVIC?
+term=What is the color of the Honda CIVIC?
 ```
 
 #### Response

@@ -2,7 +2,7 @@
 
 A API de pesquisa, através da query key obtida das coleções, realiza uma busca semântica na mesma, realizando uma comparação inteligente para cada documento indexado em uma coleção.
 
-Após criar uma coleção, você obterá uma **query key**, o que usará para realizar a busca semântica em sua coleção. As rotas de pesquisa não precisam serem identificadas por um cabeçalho `Authorization`.
+Após criar uma coleção, você obterá seu ID. Utilize o ID da sua coleção para realizar a busca nos documentos indexados da mesma.
 
 Use os endpoints dessa API para embutir a pesquisa semântica de documentos no seu modelo de IA ou chatbot.
 
@@ -10,7 +10,6 @@ Use os endpoints dessa API para embutir a pesquisa semântica de documentos no s
 
 Esse endpoint espera uma requisição GET com os parâmetros:
 
-- `key`: **obrigatório.** Especifica a Query Key da coleção que será consultada.
 - `term`: **obrigatório.** Especifica o termo de pesquisa que será pesquisado nos documentos.
 - `top`: Especifica o máximo de documentos que deverão ser retornados na busca.
 - `min`: Especifica o score mínimo para obtenção dos documentos.
@@ -24,12 +23,12 @@ Esse endpoint espera uma requisição GET com os parâmetros:
 <div class="request-item post">
     <span>GET</span>
     <span>
-        /api/v1/search
+        /api/v1/collections/<span>{collection-id}</span>/query
     </span>
 </div>
 
 ```text
-key=cky_gr5uepj18yhd1qbshep7&term=Qual a cor do honda CIVIC?
+term=Qual a cor do honda CIVIC?
 ```
 
 #### Resposta

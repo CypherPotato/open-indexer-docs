@@ -125,12 +125,11 @@
 <h1 id="pesquisa">Pesquisa</h1>
 
 <p>A API de pesquisa, através da query key obtida das coleções, realiza uma busca semântica na mesma, realizando uma comparação inteligente para cada documento indexado em uma coleção.</p>
-<p>Após criar uma coleção, você obterá uma <strong>query key</strong>, o que usará para realizar a busca semântica em sua coleção. As rotas de pesquisa não precisam serem identificadas por um cabeçalho <code>Authorization</code>.</p>
+<p>Após criar uma coleção, você obterá seu ID. Utilize o ID da sua coleção para realizar a busca nos documentos indexados da mesma.</p>
 <p>Use os endpoints dessa API para embutir a pesquisa semântica de documentos no seu modelo de IA ou chatbot.</p>
 <h2 id="pesquisando-documentos">Pesquisando documentos</h2>
 <p>Esse endpoint espera uma requisição GET com os parâmetros:</p>
 <ul>
-<li><code>key</code>: <strong>obrigatório.</strong> Especifica a Query Key da coleção que será consultada.</li>
 <li><code>term</code>: <strong>obrigatório.</strong> Especifica o termo de pesquisa que será pesquisado nos documentos.</li>
 <li><code>top</code>: Especifica o máximo de documentos que deverão ser retornados na busca.</li>
 <li><code>min</code>: Especifica o score mínimo para obtenção dos documentos.</li>
@@ -143,10 +142,10 @@
 <div class="request-item post">
     <span>GET</span>
     <span>
-        /api/v1/search
+        /api/v1/collections/<span>{collection-id}</span>/query
     </span>
 </div>
-<pre><code class="lang-text">key=cky_gr5uepj18yhd1qbshep7&amp;term=Qual a cor do honda CIVIC?
+<pre><code class="lang-text">term=Qual a cor do honda CIVIC?
 </code></pre>
 <h4 id="resposta">Resposta</h4>
 <pre><code class="lang-json">{
