@@ -60,6 +60,10 @@ Cria um novo chat client.
         // Opcional. Ativa recursos de depuração.
         "debug": true,
         
+        // Opcional. Especifica se o chat suporta processamento de mídia multi-modal, especificando quais botões ficarão visíveis para enviar o conteúdo multimídia ao modelo.
+        // Document é processado internamente como markdown pela Open Indexer.
+        "inputModes": ["Image", "Audio", "Document"],
+        
         // Opcional. Especifica quais origens devem ser permitidas para embutir o cliente de chat em um iframe. Se esse campo estiver vazio, qualquer origem será aceita.
         "allowedFrameOrigins": ["https://my-domain.com.br"],
         

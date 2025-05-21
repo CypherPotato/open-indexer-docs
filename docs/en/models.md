@@ -6,6 +6,52 @@ See the list below of available models and their pricing. All prices consider th
 
 All prices are in United States dollars.
 
+## <img src="/assets/icon/cognitivecomputations.svg" class="inline-icon"> cognitivecomputations
+
+<table>
+    <thead>
+        <colgroup>
+            <col style="width: 30%" />
+            <col style="width: 20%" />
+            <col style="width: 50%" />
+        </colgroup>
+        <tr>
+            <th>Model Name</th>
+            <th>Prices</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+<tr>
+    <td>
+        <code>
+            @cognitivecomputations/dolphin2.9
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 2.60 <small>/1M. tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        An experimental model based on Mistral that is completely uncensored. Use with responsibility.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+        </div>
+    </td>
+</tr>
+    </tbody>
+</table>
+
 ## <img src="/assets/icon/deepseekai.svg" class="inline-icon"> deepseekai
 
 <table>
@@ -34,7 +80,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 2.76 <small>/1M tokens</small>
+                $ 2.76 <small>/1M. tokens</small>
             </div>
         </div>
         
@@ -84,7 +130,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 12.25 <small>/1M tokens</small>
+                $ 12.25 <small>/1M. tokens</small>
             </div>
         </div>
         
@@ -119,13 +165,13 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 4.65 <small>/1M tokens</small>
+                $ 4.65 <small>/1M. tokens</small>
             </div>
         </div>
         
     </td>
     <td>
-        Model from the latest generation with integrated reasoning and thinking.
+        Model of the latest generation with integrated reasoning and thinking.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -154,13 +200,13 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 1.31 <small>/1M tokens</small>
+                $ 1.31 <small>/1M. tokens</small>
             </div>
         </div>
         
     </td>
     <td>
-        Same model as Gemini 2.5 Flash, but with the reasoning module disabled.
+        Same model as Gemini 2.5 Flash, but with the reasoning module turned off.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -185,7 +231,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 1.31 <small>/1M tokens</small>
+                $ 1.31 <small>/1M. tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -227,7 +273,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 0.88 <small>/1M tokens</small>
+                $ 0.88 <small>/1M. tokens</small>
             </div>
         </div>
         
@@ -258,7 +304,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 0.88 <small>/1M tokens</small>
+                $ 0.88 <small>/1M. tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -300,13 +346,13 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 0.66 <small>/1M tokens</small>
+                $ 0.66 <small>/1M. tokens</small>
             </div>
         </div>
         
     </td>
     <td>
-        General-purpose model, with image recognition, smart and fast. Ideal for an economical chat.
+        General-purpose model, with image recognition, smart and fast. Ideal for an economic chat.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -331,13 +377,13 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 0.33 <small>/1M tokens</small>
+                $ 0.33 <small>/1M. tokens</small>
             </div>
         </div>
         
     </td>
     <td>
-        General-purpose model from the previous generation, optimized for less demanding and simple tasks.
+        General-purpose model of the previous generation, optimized for less demanding and simple tasks.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -381,7 +427,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 3.25 <small>/1M tokens</small>
+                $ 3.25 <small>/1M. tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -423,7 +469,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 2.60 <small>/1M tokens</small>
+                $ 2.60 <small>/1M. tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -484,7 +530,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 2.40 <small>/1M tokens</small>
+                $ 2.40 <small>/1M. tokens</small>
             </div>
         </div>
         
@@ -511,13 +557,13 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 1.40 <small>/1M tokens</small>
+                $ 1.40 <small>/1M. tokens</small>
             </div>
         </div>
         
     </td>
     <td>
-        Fast model with 17 billion parameters enabled and 128 experts.
+        Fast model, with 17 billion parameters activated and 128 experts.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -542,13 +588,13 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 0.79 <small>/1M tokens</small>
+                $ 0.79 <small>/1M. tokens</small>
             </div>
         </div>
         
     </td>
     <td>
-        Smaller version of the Llama 4 family with 17 billion parameters enabled and 16 experts.
+        Smaller version of the Llama 4 family with 17 billion parameters activated and 16 experts.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -573,7 +619,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 0.23 <small>/1M tokens</small>
+                $ 0.23 <small>/1M. tokens</small>
             </div>
         </div>
         
@@ -619,7 +665,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 12.25 <small>/1M tokens</small>
+                $ 12.25 <small>/1M. tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -665,7 +711,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 4.65 <small>/1M tokens</small>
+                $ 4.65 <small>/1M. tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -678,7 +724,7 @@ All prices are in United States dollars.
 </div>
     </td>
     <td>
-        Optimized for fast conversation, with lower reasoning and more optimized for everyday tasks.
+        Optimized for fast conversation, with lower reasoning and more optimized for daily tasks.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -711,7 +757,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 1.31 <small>/1M tokens</small>
+                $ 1.31 <small>/1M. tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -772,7 +818,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 13.50 <small>/1M tokens</small>
+                $ 13.50 <small>/1M. tokens</small>
             </div>
         </div>
         
@@ -803,7 +849,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 11.00 <small>/1M tokens</small>
+                $ 11.00 <small>/1M. tokens</small>
             </div>
         </div>
         
@@ -834,7 +880,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 6.50 <small>/1M tokens</small>
+                $ 6.50 <small>/1M. tokens</small>
             </div>
         </div>
         
@@ -861,7 +907,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 3.00 <small>/1M tokens</small>
+                $ 3.00 <small>/1M. tokens</small>
             </div>
         </div>
         
@@ -892,13 +938,13 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 1.31 <small>/1M tokens</small>
+                $ 1.31 <small>/1M. tokens</small>
             </div>
         </div>
         
     </td>
     <td>
-        Smaller version of the 4o, optimized for everyday tasks.
+        Smaller version of the 4o, optimized for daily tasks.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -923,13 +969,13 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 0.88 <small>/1M tokens</small>
+                $ 0.88 <small>/1M. tokens</small>
             </div>
         </div>
         
     </td>
     <td>
-        The fastest and cheapest GPT 4.1 model.
+        The fastest and cheapest model of the GPT 4.1.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -973,7 +1019,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 1.23 <small>/1M tokens</small>
+                $ 1.23 <small>/1M. tokens</small>
             </div>
         </div>
         

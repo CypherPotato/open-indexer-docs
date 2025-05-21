@@ -4,7 +4,7 @@ A chat client provides a user interface through an [AI Gateway](/docs/en/entitie
 
 > [!NOTE]
 >
-> The Open Indexer never stores the content of a chat between a client and the user. You can use JavaScript for this task, but under your responsibility for usage and storage.
+> The Open Indexer never stores the content of a chat between a client and the user. You can use JavaScript for this task, but it is your responsibility to use and store it.
 
 You can customize the interface of your chat client with custom CSS and JavaScript, as well as choose the language of the chat features.
 
@@ -60,10 +60,14 @@ Create a new chat client.
         // Optional. Enables debugging features.
         "debug": true,
         
+        // Optional. Specifies whether the chat supports multi-modal media processing, specifying which buttons will be visible to send multimedia content to the model.
+        // Document is processed internally as markdown by the Open Indexer.
+        "inputModes": ["Image", "Audio", "Document"],
+        
         // Optional. Specifies which origins should be allowed to embed the chat client in an iframe. If this field is empty, any origin will be accepted.
         "allowedFrameOrigins": ["https://my-domain.com.br"],
         
-        // Optional. Specifies conversation suggestion buttons when starting a new chat session. You can add as many buttons as you want, but it's recommended to have up to 3 buttons.
+        // Optional. Specifies conversation suggestion buttons when starting a new chat session. You can add as many buttons as you want, but it is recommended to have up to 3 buttons.
         "suggestionButtons": [
             {
                 // Title to be displayed on the button.
@@ -122,7 +126,7 @@ The body of this request is exactly the same as creating a chat client.
 
 ## Listing Chat Clients
 
-Gets a list of created chat clients.
+Get a list of created chat clients.
 
 <div class="request-item get">
     <span>GET</span>
@@ -148,7 +152,7 @@ Gets a list of created chat clients.
 
 ## Viewing a Specific Chat Client
 
-Gets details of an existing chat client.
+Get details of an existing chat client.
 
 <div class="request-item get">
     <span>GET</span>
@@ -196,9 +200,9 @@ Gets details of an existing chat client.
 
 ## Creating a Chat Session
 
-A chat session is where you create a conversation between your chat client and the user. You can call this endpoint providing additional context for the conversation, such as the user's name, where they are, etc.
+A chat session is where you create a conversation between your chat client and the user. You can call this endpoint providing additional context for the conversation, such as the user's name, location, etc.
 
-A chat session expires after some time for security reasons of the generated access token. When you call this endpoint providing a `tag`, you can call the same endpoint multiple times and get the active chat session for the informed tag, or create a new chat if there is no ongoing session.
+A chat session expires after some time for security reasons of the generated access token. When you call this endpoint providing a `tag`, you can call the same endpoint multiple times and get the active chat session for the informed tag, or create a new chat session if there is no active session.
 
 A chat session also restores all conversation messages from the same session after disconnection. The user can clear the conversation by clicking the clear conversation button in the top right corner of the chat client. This session uses the limits defined by the chat client, such as the maximum number of messages and tokens in the conversation.
 

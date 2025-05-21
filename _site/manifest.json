@@ -142,10 +142,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "assets/icon/open-indexer.png",
+      "source_relative_path": "assets/icon/open-indexer.svg",
       "output": {
         "resource": {
-          "relative_path": "assets/icon/open-indexer.png"
+          "relative_path": "assets/icon/open-indexer.svg"
         }
       },
       "version": ""

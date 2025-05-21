@@ -6,6 +6,52 @@ Veja a lista abaixo dos modelos disponíveis e suas precificações. Todos os pr
 
 Todos os preços estão em dólares dos Estados Unidos.
 
+## <img src="/assets/icon/cognitivecomputations.svg" class="inline-icon"> cognitivecomputations
+
+<table>
+    <thead>
+        <colgroup>
+            <col style="width: 30%" />
+            <col style="width: 20%" />
+            <col style="width: 50%" />
+        </colgroup>
+        <tr>
+            <th>Nome do modelo</th>
+            <th>Preços</th>
+            <th>Descrição</th>
+        </tr>
+    </thead>
+    <tbody>
+<tr>
+    <td>
+        <code>
+            @cognitivecomputations/dolphin2.9
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada + saída:
+            </small>
+            <div>
+                $ 2.60 <small>/1M. tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        Um modelo experimental baseado no Mistral que é totalmente sem censura. Use com responsabilidade.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+        </div>
+    </td>
+</tr>
+    </tbody>
+</table>
+
 ## <img src="/assets/icon/deepseekai.svg" class="inline-icon"> deepseekai
 
 <table>
@@ -34,7 +80,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada + saída:
             </small>
             <div>
-                $ 2,76 <small>/1M. tokens</small>
+                $ 2.76 <small>/1M. tokens</small>
             </div>
         </div>
         
@@ -84,7 +130,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada + saída:
             </small>
             <div>
-                $ 12,25 <small>/1M. tokens</small>
+                $ 12.25 <small>/1M. tokens</small>
             </div>
         </div>
         
@@ -119,7 +165,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada + saída:
             </small>
             <div>
-                $ 4,65 <small>/1M. tokens</small>
+                $ 4.65 <small>/1M. tokens</small>
             </div>
         </div>
         
@@ -154,7 +200,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada + saída:
             </small>
             <div>
-                $ 1,31 <small>/1M. tokens</small>
+                $ 1.31 <small>/1M. tokens</small>
             </div>
         </div>
         
@@ -185,7 +231,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada + saída:
             </small>
             <div>
-                $ 1,31 <small>/1M. tokens</small>
+                $ 1.31 <small>/1M. tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -193,7 +239,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         Pesquisa na internet:
     </small>
     <div>
-        $ 39,20 <small>/1.000 pesquisas</small>
+        $ 39.20 <small>/1.000 pesquisas</small>
     </div>
 </div>
     </td>
@@ -227,7 +273,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada + saída:
             </small>
             <div>
-                $ 0,88 <small>/1M. tokens</small>
+                $ 0.88 <small>/1M. tokens</small>
             </div>
         </div>
         
@@ -258,7 +304,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada + saída:
             </small>
             <div>
-                $ 0,88 <small>/1M. tokens</small>
+                $ 0.88 <small>/1M. tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -266,7 +312,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         Pesquisa na internet:
     </small>
     <div>
-        $ 39,20 <small>/1.000 pesquisas</small>
+        $ 39.20 <small>/1.000 pesquisas</small>
     </div>
 </div>
     </td>
@@ -300,7 +346,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada + saída:
             </small>
             <div>
-                $ 0,66 <small>/1M. tokens</small>
+                $ 0.66 <small>/1M. tokens</small>
             </div>
         </div>
         
@@ -331,7 +377,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada + saída:
             </small>
             <div>
-                $ 0,33 <small>/1M. tokens</small>
+                $ 0.33 <small>/1M. tokens</small>
             </div>
         </div>
         
@@ -381,7 +427,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada + saída:
             </small>
             <div>
-                $ 3,25 <small>/1M. tokens</small>
+                $ 3.25 <small>/1M. tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -389,7 +435,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         Pesquisa na internet:
     </small>
     <div>
-        $ 8,96 <small>/1.000 pesquisas</small>
+        $ 8.96 <small>/1.000 pesquisas</small>
     </div>
 </div>
     </td>
@@ -423,7 +469,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada + saída:
             </small>
             <div>
-                $ 2,60 <small>/1M. tokens</small>
+                $ 2.60 <small>/1M. tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -431,7 +477,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         Pesquisa na internet:
     </small>
     <div>
-        $ 8,96 <small>/1.000 pesquisas</small>
+        $ 8.96 <small>/1.000 pesquisas</small>
     </div>
 </div>
     </td>
@@ -484,7 +530,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada + saída:
             </small>
             <div>
-                $ 2,40 <small>/1M. tokens</small>
+                $ 2.40 <small>/1M. tokens</small>
             </div>
         </div>
         
@@ -511,7 +557,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada + saída:
             </small>
             <div>
-                $ 1,40 <small>/1M. tokens</small>
+                $ 1.40 <small>/1M. tokens</small>
             </div>
         </div>
         
@@ -542,7 +588,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada + saída:
             </small>
             <div>
-                $ 0,79 <small>/1M. tokens</small>
+                $ 0.79 <small>/1M. tokens</small>
             </div>
         </div>
         
@@ -573,7 +619,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada + saída:
             </small>
             <div>
-                $ 0,23 <small>/1M. tokens</small>
+                $ 0.23 <small>/1M. tokens</small>
             </div>
         </div>
         
@@ -619,7 +665,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada + saída:
             </small>
             <div>
-                $ 12,25 <small>/1M. tokens</small>
+                $ 12.25 <small>/1M. tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -627,7 +673,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         Pesquisa na internet:
     </small>
     <div>
-        $ 39,20 <small>/1.000 pesquisas</small>
+        $ 39.20 <small>/1.000 pesquisas</small>
     </div>
 </div>
     </td>
@@ -665,7 +711,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada + saída:
             </small>
             <div>
-                $ 4,65 <small>/1M. tokens</small>
+                $ 4.65 <small>/1M. tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -673,7 +719,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         Pesquisa na internet:
     </small>
     <div>
-        $ 39,20 <small>/1.000 pesquisas</small>
+        $ 39.20 <small>/1.000 pesquisas</small>
     </div>
 </div>
     </td>
@@ -711,7 +757,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada + saída:
             </small>
             <div>
-                $ 1,31 <small>/1M. tokens</small>
+                $ 1.31 <small>/1M. tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -719,7 +765,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         Pesquisa na internet:
     </small>
     <div>
-        $ 39,20 <small>/1.000 pesquisas</small>
+        $ 39.20 <small>/1.000 pesquisas</small>
     </div>
 </div>
     </td>
@@ -772,7 +818,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada + saída:
             </small>
             <div>
-                $ 13,50 <small>/1M. tokens</small>
+                $ 13.50 <small>/1M. tokens</small>
             </div>
         </div>
         
@@ -803,7 +849,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada + saída:
             </small>
             <div>
-                $ 11,00 <small>/1M. tokens</small>
+                $ 11.00 <small>/1M. tokens</small>
             </div>
         </div>
         
@@ -834,7 +880,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada + saída:
             </small>
             <div>
-                $ 6,50 <small>/1M. tokens</small>
+                $ 6.50 <small>/1M. tokens</small>
             </div>
         </div>
         
@@ -861,7 +907,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada + saída:
             </small>
             <div>
-                $ 3,00 <small>/1M. tokens</small>
+                $ 3.00 <small>/1M. tokens</small>
             </div>
         </div>
         
@@ -892,7 +938,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada + saída:
             </small>
             <div>
-                $ 1,31 <small>/1M. tokens</small>
+                $ 1.31 <small>/1M. tokens</small>
             </div>
         </div>
         
@@ -923,7 +969,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada + saída:
             </small>
             <div>
-                $ 0,88 <small>/1M. tokens</small>
+                $ 0.88 <small>/1M. tokens</small>
             </div>
         </div>
         
@@ -973,7 +1019,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada + saída:
             </small>
             <div>
-                $ 1,23 <small>/1M. tokens</small>
+                $ 1.23 <small>/1M. tokens</small>
             </div>
         </div>
         

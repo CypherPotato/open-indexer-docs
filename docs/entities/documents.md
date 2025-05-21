@@ -107,7 +107,7 @@ documents=[documents.jsonl]
 
 Esse endpoint cria ou modifica um documento a partir do seu nome. Quando um documento é modificado, seus vetores de indexação são resetados, isto é, o documento entrará em fila novamente para ser indexado pelo motor de indexação.
 
-Essa indexação não é isenta de custo. O custo é relativo à quantidade de tokens do conteúdo enviado.
+Essa indexação não é isenta de custo. O custo é relativo à quantidade de tokens do conteúdo enviado. O custo somente é gerado quando o documento é de fato alterado. Chamar essa rota com o mesmo conteúdo do documento não gera modificação, portanto, não gera custo.
 
 > [!WARNING]
 >
@@ -143,7 +143,7 @@ Essa indexação não é isenta de custo. O custo é relativo à quantidade de t
     "message": null,
     "data": {
         "documentId": "0196663c-3a15-72c7-98e6-b496f8e8bb8c",
-
+        
         // o estado da operação indica se o documento foi modificado "Modified" ou criado "Created".
         "state": "Modified"
     }
@@ -153,7 +153,13 @@ Essa indexação não é isenta de custo. O custo é relativo à quantidade de t
 
 ## Listar documentos
 
-Esse endpoint lista todos os documentos disponíveis em uma coleção.
+Esse endpoint lista todos os documentos disponíveis em uma coleção. Você pode passar um parâmetro da query adicional `filter` para filtrar documentos por nome, tag ou conteúdo.
+
+Esse filtro suporta expressões que auxiliam a filtrar o que você está procurando:
+- `-t "tag"` - filtra documentos que possuem essa tag.
+- `-r "reference"` - filtra documentos que possuem esse ID de referência.
+- `-c "content"` - filtra documentos que possuem esse trecho em seu conteúdo.
+- `-n "name"` - filtra documentos que possuem esse trecho em seu nome.
 
 #### Requisição
 
@@ -176,22 +182,26 @@ Esse endpoint lista todos os documentos disponíveis em uma coleção.
         },
         "items": [
             {
-                "id": "01965b54-b31c-7184-9f5c-60b2648106d9",
-                "name": "Institucional/Empresa.rmd:1",
+                "id": "01968452-69f6-7f00-a497-d14c5b906b79",
+                "name": "Ajuda/Clientes.rmd:1",
                 "reference": null,
-                "tags": []
+                "tags": [
+                    "Ajuda",
+                    "Clientes"
+                ],
+                "contentsPreview": "Um cliente é um cadastro na sua platafor...",
+                "indexState": "Indexed"
             },
             {
-                "id": "01965b54-b32b-7433-b90b-73d71d21ae38",
-                "name": "Institucional/Empresa.rmd:2",
+                "id": "01968452-6a53-7ce3-adad-fad32d508856",
+                "name": "Ajuda/Clientes.rmd:2",
                 "reference": null,
-                "tags": []
-            },
-            {
-                "id": "01965b54-b32b-79bb-ac5e-729dfec701a8",
-                "name": "Produtos/Agendamentos.rmd:1",
-                "reference": null,
-                "tags": []
+                "tags": [
+                    "Ajuda",
+                    "Clientes"
+                ],
+                "contentsPreview": "No cadastro do cliente, é possível modif...",
+                "indexState": "Indexed"
             },
             ...
         ]
