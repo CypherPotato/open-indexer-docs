@@ -125,38 +125,199 @@
 <h1 id="limites-da-api">Limites da API</h1>
 
 <p>Limites de taxa (&quot;rate limiters&quot;) regulam o número de requisições que você pode enviar em uma janela de tempo. Esses limites ajudam a Open Indexer a prevenir abuso e fornecer uma API estável à todos.</p>
-<p>Os limites da API abaixo são os mesmos para todos os modelos embutidos da Open Indexer. Esses limites são categorizados por operações feitas pela API.</p>
+<p>Os limites da API abaixo são os mesmos para todos os modelos embutidos da Open Indexer. Esses limites são categorizados por operações feitas pela API. Cada conta possui um tier que define quais limites são aplicados à conta. Tiers mudam de acordo com o total investido na Open Indexer e o tempo que a conta existe.</p>
 <ul>
-<li><p><strong>Pesquisação de documentos</strong>: ocorre quando você pesquisa documentos em uma coleção através do endpoint <code>/v1/collections/&lt;collection-id&gt;/query</code>.</p>
-<ul>
-<li>Limitado à <strong>300</strong> requisições à cada <strong>1 minuto</strong>.</li>
+<li><strong>Tier zero (conta grátis):</strong> conta nova que nunca adicionou créditos.</li>
+<li><strong>Tier 1</strong>: conta criada há pelo menos 48 horas e que já adicionou qualquer valor em créditos.</li>
+<li><strong>Tier 2</strong>: conta criada há pelo menos 1 mês e que já adicionou pelo menos $ 100 em créditos.</li>
+<li><strong>Tier 3</strong>: conta criada há pelo menos 3 meses e que já adicionou pelo menos $ 1.000 em créditos.</li>
 </ul>
+<p>A medição é pela <strong>adição de créditos</strong> e não pelo seu consumo. Por exemplo, você não consumir $ 100 em créditos para avançar ao Tier 2.</p>
+<p>Legendas dos limites:</p>
+<ul>
+<li><strong>RPM</strong>: requisições por minuto.</li>
+<li><strong>RPD</strong>: requisições por dia (24 horas).</li>
+</ul>
+<div class="tabGroup" id="tabgroup_1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_1_free" role="tab" aria-controls="tabpanel_1_free" data-tab="free" tabindex="0" aria-selected="true">Grátis</a>
 </li>
-<li><p><strong>Inserção de documentos</strong>: ocorre sempre que um documento individual é inserido ou atualizado.</p>
-<ul>
-<li>Limitado à <strong>1.000</strong> requisições à cada <strong>6 horas</strong>.</li>
-</ul>
+<li role="presentation">
+<a href="#tabpanel_1_tier1" role="tab" aria-controls="tabpanel_1_tier1" data-tab="tier1" tabindex="-1">Tier 1</a>
 </li>
-<li><p><strong>Inferência</strong>: ocorre sempre que você utiliza a inferência dos modelos embutidos pela Open Indexer, seja pela API OpenAI, inferência direta ou web chat client. Não considera chamadas de função.</p>
-<ul>
-<li>Limitado à <strong>75</strong> requisições à cada <strong>1 minuto</strong>.</li>
-</ul>
+<li role="presentation">
+<a href="#tabpanel_1_tier2" role="tab" aria-controls="tabpanel_1_tier2" data-tab="tier2" tabindex="-1">Tier 2</a>
 </li>
-<li><p><strong>Chamada de função</strong>: ocorre sempre que você chama uma chamada de função.</p>
-<ul>
-<li>Limitado à <strong>30</strong> requisições à cada <strong>1 minuto</strong>; e</li>
-<li>Limitado à <strong>300</strong> requisições à cada <strong>1 hora</strong>.</li>
-</ul>
-</li>
-<li><p><strong>Chamadas de função conectadas</strong>: ocorre sempre que você chama uma função que realiza pesquisas na internet (não através do fetch).</p>
-<ul>
-<li>Limitado à <strong>5</strong> requisições à cada <strong>1 minuto</strong>; e</li>
-<li>Limitado à <strong>50</strong> requisições à cada <strong>1 hora</strong>.</li>
-</ul>
+<li role="presentation">
+<a href="#tabpanel_1_tier3" role="tab" aria-controls="tabpanel_1_tier3" data-tab="tier3" tabindex="-1">Tier 3</a>
 </li>
 </ul>
-<h2 id="aumentar-limites-de-uso">Aumentar limites de uso</h2>
-<p>No momento, esses limites são aplicados para todas as contas. Se você precisa de um limite maior, entre em contato conosco.</p>
+<section id="tabpanel_1_free" role="tabpanel" data-tab="free">
+
+<table>
+<thead>
+<tr>
+<th>Operação</th>
+<th>RPM</th>
+<th>RPD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pesquisa de documentos</td>
+<td>50</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Inserção de documentos</td>
+<td>-</td>
+<td>100</td>
+</tr>
+<tr>
+<td>Inferência</td>
+<td>5</td>
+<td>500</td>
+</tr>
+<tr>
+<td>Função</td>
+<td>5</td>
+<td>500</td>
+</tr>
+<tr>
+<td>Função (Live)</td>
+<td>3</td>
+<td>30</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="tabpanel_1_tier1" role="tabpanel" data-tab="tier1" aria-hidden="true" hidden="hidden">
+
+<table>
+<thead>
+<tr>
+<th>Operação</th>
+<th>RPM</th>
+<th>RPD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pesquisa de documentos</td>
+<td>150</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Inserção de documentos</td>
+<td>-</td>
+<td>3.000</td>
+</tr>
+<tr>
+<td>Inferência</td>
+<td>75</td>
+<td>1.000</td>
+</tr>
+<tr>
+<td>Função</td>
+<td>50</td>
+<td>1.000</td>
+</tr>
+<tr>
+<td>Função (Live)</td>
+<td>5</td>
+<td>200</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="tabpanel_1_tier2" role="tabpanel" data-tab="tier2" aria-hidden="true" hidden="hidden">
+
+<table>
+<thead>
+<tr>
+<th>Operação</th>
+<th>RPM</th>
+<th>RPD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pesquisa de documentos</td>
+<td>300</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Inserção de documentos</td>
+<td>-</td>
+<td>10.000</td>
+</tr>
+<tr>
+<td>Inferência</td>
+<td>150</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Função</td>
+<td>50</td>
+<td>10.000</td>
+</tr>
+<tr>
+<td>Função (Live)</td>
+<td>10</td>
+<td>400</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="tabpanel_1_tier3" role="tabpanel" data-tab="tier3" aria-hidden="true" hidden="hidden">
+
+<table>
+<thead>
+<tr>
+<th>Operação</th>
+<th>RPM</th>
+<th>RPD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pesquisa de documentos</td>
+<td>1.000</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Inserção de documentos</td>
+<td>-</td>
+<td>30.000</td>
+</tr>
+<tr>
+<td>Inferência</td>
+<td>1.000</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Função</td>
+<td>750</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Função (Live)</td>
+<td>200</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+</section>
+</div>
+
+<ul>
+<li><strong>Pesquisa de documentos</strong>: inclui pesquisa semântica de documentos em uma coleção pelo endpoint de pesquisa <code>../collections/{id}/query</code>.</li>
+<li><strong>Inserção de documentos</strong>: inclui criação e modificação de documentos em uma coleção.</li>
+<li><strong>Inferência</strong>: toda chamada de inferência, seja pela API Open-AI compatível, pela rota <code>/ai-gateways/{id}/inference</code> ou por cada mensagem enviada por uma sessão de cliente de chat.</li>
+<li><strong>Função</strong>: toda chamada de função <code>/functions</code>.</li>
+<li><strong>Função (Live)</strong>: toda chamada de função conectada à internet pelo parâmetro <code>webSearch</code>. Não inclui chamadas <code>fetch</code>.</li>
+</ul>
 
 </article>
 

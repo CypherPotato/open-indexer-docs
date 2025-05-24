@@ -18,7 +18,9 @@ Adicionalmente, você pode optar em ativar **pesquisa na internet** para chamada
 
 Se for o caso do modelo de busca online não conseguir estruturar um JSON válido, o modelo escolhido na requisição ficará responsável por essa tarefa, e irá começar o encadeamento de tentativas de geração. Modelos mais inteligentes acertam a geração nas primeiras tentativas.
 
-Através da propriedade `fetch`, você pode fornecer uma lista de URLs para serem anexadas no contexto da geração. O Open Indexer faz uma requisição GET para acessar os conteúdos fornecidos e renderiza-os no conteúdo da requisição. Somente respostas 2xx ou 3xx são aceitas e o conteúdo da resposta deve ser textual. Respostas em HTML são renderizadas pelo JavaScript e CSS sem custo adicional.
+Através da propriedade `fetch`, você pode fornecer uma lista de URLs para serem anexadas no contexto da geração. O Open Indexer faz uma requisição GET para acessar os conteúdos fornecidos e renderiza-os no conteúdo da requisição. Somente respostas 2xx ou 3xx são aceitas e o conteúdo da resposta deve ser textual. Respostas em HTML são sanitizadas para incluirem somente o texto da página, sem script e CSS.
+
+O tamanho máximo que pode ser lido de uma URL do fetch é 10 Mb. O máximo de itens para o fetch são 10 URLs.
 
 Retentativas de geração do conteúdo JSON não pesquisam na internet novamente nem chamam o conteúdo do fetch.
 
@@ -35,18 +37,24 @@ Requisições que pesquisam na internet trazem bons resultados e dispensam crawl
 
 ```json
 {
-    // Especifique o nome do modelo integrado que será usado para realizar a ação.
+    // Obrigatório. Especifique o nome do modelo integrado que será usado para realizar a ação.
     "modelName": "@metaai/llama-3.1-8b",
     
-    // Explique o que seu modelo deverá fazer com a entrada e como ele deve trazer a resposta.
+    // Obrigatório. Explique o que seu modelo deverá fazer com a entrada e como ele deve trazer a resposta.
     "instructions": "Classifique o comentário do usuário, indicando se é positivo ou negativo, e se possui alguma informação relevante (número entre 0 (pouco relevante) e 10 (muito relevante))",
     
-    // O objeto JSON que o modelo deverá gerar. Você pode fornecer exemplos de geração no campo de instruções. Esse objeto deve ser um JSON válido na API.
+    // Obrigatório. O objeto JSON que o modelo deverá gerar. Você pode fornecer exemplos de geração no campo de instruções. Esse objeto deve ser um JSON válido na API.
     // Esse objeto deve ser um objeto, um array ou uma string.
     "responseSchema": {
         "feedbackType": "{neutral|positive|negative}",
         "informationScore": 5
     },
+    
+    // Opcional. Especifica uma lista de caminhos JSON que a IA deve gerar conteúdo sempre e que esse campo não pode ser nulo. Para arrays, especifique com [*].
+    "requiredFields": [
+        "$.feedbackType",
+        "$.informationScore"
+    ],
     
     // Opcional. Define uma entrada JSON para o modelo. Pode ser qualquer tipo de valor JSON.
     "inputData": {
@@ -62,15 +70,31 @@ Requisições que pesquisam na internet trazem bons resultados e dispensam crawl
     // Opcional. Permite que o modelo faça uma busca na internet para aperfeiçoar a construção da resposta.
     "webSearch": {
         
-        // Ativa ou desativa a pesquisa na internet da função.
+        // Obrigatório. Ativa ou desativa a pesquisa na internet da função.
         "enabled": true
     },
     
     // Opcional. Adiciona recursos externos para complementar a geração da resposta.
-    "fetch": [
-        "https://url1...",
-        "https://url2...",
-    ]
+    "fetch": {
+
+        // Obrigatório. Fornece a lista de URLS que o Open Indexer irá acessar. O máximo são 10 URLs.
+        "urls": [
+            "https://url1...",
+            "https://url2...",
+        ],
+    
+        // Opcional. Define o comportamento do fetch para erros ao tentar acessar o site. Erros incluem respostas que não são 2xx ou 3xx, timeouts, erros de certificados, etc.
+        //      fail    -> retorna um erro na resposta da função (padrão)
+        //      warn    -> adiciona um aviso na resposta da função e não inclui o erro na geração da IA
+        //      ignore  -> ignora o erro e adiciona o erro na geração da IA
+        "fetchFailAction": "fail" | "warn" | "ignore",
+        
+        // Opcional. Define o timeout em segundos para o tempo maximo da resposta responder e ler os conteúdos. O máximo é 120 segundos (dois minutos).
+        "timeout": 10,
+        
+        // Opcional. Define o tamanho máximo do conteúdo em quantidade de caracteres que podem ser incluídos na geração da IA antes de serem truncados.
+        "pageMaxLength": 2048
+    }
 }
 ```
 
@@ -90,7 +114,10 @@ Requisições que pesquisam na internet trazem bons resultados e dispensam crawl
         "attempt": 1,
         
         // o tempo em milissegundos para obter um JSON válido
-        "elapsedMilliseconds": 527
+        "elapsedMilliseconds": 527,
+        
+        // avisos produzidos pela geração
+        "warnings": []
     }
 }
 ```

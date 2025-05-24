@@ -1,0 +1,39 @@
+.card[role="tabpanel"] {
+    padding: 0;
+    border: none;
+}
+
+ul.nav.nav-tabs {
+    border-bottom: none;
+    margin-bottom: .5em;
+    border: none;
+    margin-bottom: .5em;
+    background-color: var(--bs-body-bg-alt);
+    width: fit-content;
+    border-radius: 8px;
+    align-items: center;
+    gap: 5px;
+    padding: 5px;
+
+    > li > a {
+        padding: 6px 8px;
+        color: --article-color;
+        text-decoration: none;
+        border: none;
+        font-weight: 500;
+        line-height: 1em;
+        opacity: .7;
+        transition: --bs-transition;
+
+        & :hover {
+            opacity: 1;
+        }
+
+        & .active {
+            border: none;
+            box-shadow: 0 1px 3px 0 #00000012;
+            border-radius: 6px;
+            opacity: 1;
+        }
+    }
+}

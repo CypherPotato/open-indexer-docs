@@ -133,7 +133,8 @@
 <p>Você é cobrado por cada tentativa que a IA tentar gerar. Modelos um pouco mais inteligentes tendem a gerar resultados corretos na primeira tentativa. É garantido que um JSON válido será gerado e que esse JSON seguirá o mesmo esquema fornecido na requisição.</p>
 <p>Adicionalmente, você pode optar em ativar <strong>pesquisa na internet</strong> para chamada de função. Essa opção pode ser útil para trazer dados relevantes em tempo real ao estruturar sua resposta. Ao usar essa função, um modelo com acesso na internet será usado para obter dados da internet para estruturar sua resposta. Esse modelo também tentará estruturar sua resposta a partir dos dados fornecidos, e se conseguir formular um JSON válido a etapa de chamar o modelo de estruturação é ignorada e a resposta é imediatamente retornada.</p>
 <p>Se for o caso do modelo de busca online não conseguir estruturar um JSON válido, o modelo escolhido na requisição ficará responsável por essa tarefa, e irá começar o encadeamento de tentativas de geração. Modelos mais inteligentes acertam a geração nas primeiras tentativas.</p>
-<p>Através da propriedade <code>fetch</code>, você pode fornecer uma lista de URLs para serem anexadas no contexto da geração. O Open Indexer faz uma requisição GET para acessar os conteúdos fornecidos e renderiza-os no conteúdo da requisição. Somente respostas 2xx ou 3xx são aceitas e o conteúdo da resposta deve ser textual. Respostas em HTML são renderizadas pelo JavaScript e CSS sem custo adicional.</p>
+<p>Através da propriedade <code>fetch</code>, você pode fornecer uma lista de URLs para serem anexadas no contexto da geração. O Open Indexer faz uma requisição GET para acessar os conteúdos fornecidos e renderiza-os no conteúdo da requisição. Somente respostas 2xx ou 3xx são aceitas e o conteúdo da resposta deve ser textual. Respostas em HTML são sanitizadas para incluirem somente o texto da página, sem script e CSS.</p>
+<p>O tamanho máximo que pode ser lido de uma URL do fetch é 10 Mb. O máximo de itens para o fetch são 10 URLs.</p>
 <p>Retentativas de geração do conteúdo JSON não pesquisam na internet novamente nem chamam o conteúdo do fetch.</p>
 <p>Requisições que pesquisam na internet trazem bons resultados e dispensam crawlers, scrappers ou a necessidade de pagar por uma API específica, mas podem ser custosas e relativamente lentas para serem obtidas. Considere usar um cache do lado da sua aplicação para dados que não precisam ser constantementes atualizados, como dados meteorológicos, estatísticas diárias, etc. A Open Indexer não realiza nenhum cache pelo nosso lado.</p>
 <h4 id="requisição">Requisição</h4>
@@ -144,18 +145,24 @@
     </span>
 </div>
 <pre><code class="lang-json">{
-    // Especifique o nome do modelo integrado que será usado para realizar a ação.
+    // Obrigatório. Especifique o nome do modelo integrado que será usado para realizar a ação.
     &quot;modelName&quot;: &quot;@metaai/llama-3.1-8b&quot;,
     
-    // Explique o que seu modelo deverá fazer com a entrada e como ele deve trazer a resposta.
+    // Obrigatório. Explique o que seu modelo deverá fazer com a entrada e como ele deve trazer a resposta.
     &quot;instructions&quot;: &quot;Classifique o comentário do usuário, indicando se é positivo ou negativo, e se possui alguma informação relevante (número entre 0 (pouco relevante) e 10 (muito relevante))&quot;,
     
-    // O objeto JSON que o modelo deverá gerar. Você pode fornecer exemplos de geração no campo de instruções. Esse objeto deve ser um JSON válido na API.
+    // Obrigatório. O objeto JSON que o modelo deverá gerar. Você pode fornecer exemplos de geração no campo de instruções. Esse objeto deve ser um JSON válido na API.
     // Esse objeto deve ser um objeto, um array ou uma string.
     &quot;responseSchema&quot;: {
         &quot;feedbackType&quot;: &quot;{neutral|positive|negative}&quot;,
         &quot;informationScore&quot;: 5
     },
+    
+    // Opcional. Especifica uma lista de caminhos JSON que a IA deve gerar conteúdo sempre e que esse campo não pode ser nulo. Para arrays, especifique com [*].
+    &quot;requiredFields&quot;: [
+        &quot;$.feedbackType&quot;,
+        &quot;$.informationScore&quot;
+    ],
     
     // Opcional. Define uma entrada JSON para o modelo. Pode ser qualquer tipo de valor JSON.
     &quot;inputData&quot;: {
@@ -171,15 +178,31 @@
     // Opcional. Permite que o modelo faça uma busca na internet para aperfeiçoar a construção da resposta.
     &quot;webSearch&quot;: {
         
-        // Ativa ou desativa a pesquisa na internet da função.
+        // Obrigatório. Ativa ou desativa a pesquisa na internet da função.
         &quot;enabled&quot;: true
     },
     
     // Opcional. Adiciona recursos externos para complementar a geração da resposta.
-    &quot;fetch&quot;: [
-        &quot;https://url1...&quot;,
-        &quot;https://url2...&quot;,
-    ]
+    &quot;fetch&quot;: {
+
+        // Obrigatório. Fornece a lista de URLS que o Open Indexer irá acessar. O máximo são 10 URLs.
+        &quot;urls&quot;: [
+            &quot;https://url1...&quot;,
+            &quot;https://url2...&quot;,
+        ],
+    
+        // Opcional. Define o comportamento do fetch para erros ao tentar acessar o site. Erros incluem respostas que não são 2xx ou 3xx, timeouts, erros de certificados, etc.
+        //      fail    -&gt; retorna um erro na resposta da função (padrão)
+        //      warn    -&gt; adiciona um aviso na resposta da função e não inclui o erro na geração da IA
+        //      ignore  -&gt; ignora o erro e adiciona o erro na geração da IA
+        &quot;fetchFailAction&quot;: &quot;fail&quot; | &quot;warn&quot; | &quot;ignore&quot;,
+        
+        // Opcional. Define o timeout em segundos para o tempo maximo da resposta responder e ler os conteúdos. O máximo é 120 segundos (dois minutos).
+        &quot;timeout&quot;: 10,
+        
+        // Opcional. Define o tamanho máximo do conteúdo em quantidade de caracteres que podem ser incluídos na geração da IA antes de serem truncados.
+        &quot;pageMaxLength&quot;: 2048
+    }
 }
 </code></pre>
 <h4 id="resposta">Resposta</h4>
@@ -196,7 +219,10 @@
         &quot;attempt&quot;: 1,
         
         // o tempo em milissegundos para obter um JSON válido
-        &quot;elapsedMilliseconds&quot;: 527
+        &quot;elapsedMilliseconds&quot;: 527,
+        
+        // avisos produzidos pela geração
+        &quot;warnings&quot;: []
     }
 }
 </code></pre>
