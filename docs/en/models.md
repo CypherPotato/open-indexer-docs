@@ -206,7 +206,7 @@ All prices are in United States dollars.
         
     </td>
     <td>
-        Same model as Gemini 2.5 Flash, but with the reasoning module turned off.
+        Same model as Gemini 2.5 Flash, but with the reasoning module disabled.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -482,7 +482,7 @@ All prices are in United States dollars.
 </div>
     </td>
     <td>
-        Smaller version of the Compound family, which has fewer experts.
+        Smaller version of the Compound family, with fewer experts.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -536,7 +536,7 @@ All prices are in United States dollars.
         
     </td>
     <td>
-        Model of the previous generation with many parameters and surprisingly fast speed.
+        Previous generation model with many parameters and surprisingly fast speed.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
@@ -673,12 +673,12 @@ All prices are in United States dollars.
         Internet search:
     </small>
     <div>
-        $ 39.20 <small>/1,000 searches</small>
+        $ 5.60 <small>/1,000 searches</small>
     </div>
 </div>
     </td>
     <td>
-        Intelligent conversation agent created to help humans in the most complex and challenging tasks.
+        Intelligent conversation agent created to help humans with complex and challenging tasks.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -727,12 +727,12 @@ All prices are in United States dollars.
         Internet search:
     </small>
     <div>
-        $ 39.20 <small>/1,000 searches</small>
+        $ 5.60 <small>/1,000 searches</small>
     </div>
 </div>
     </td>
     <td>
-        Optimized for fast conversation, with lower reasoning and more optimized for daily tasks.
+        Optimized for fast conversation, with lower reasoning and more optimized for everyday tasks.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -781,12 +781,12 @@ All prices are in United States dollars.
         Internet search:
     </small>
     <div>
-        $ 39.20 <small>/1,000 searches</small>
+        $ 5.60 <small>/1,000 searches</small>
     </div>
 </div>
     </td>
     <td>
-        Most optimized version of Sentinel for fast conversations, using a latest-generation model, without reasoning power.
+        Most optimized version of Sentinel for fast conversations, using a state-of-the-art model, without reasoning power.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -823,13 +823,13 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 0.33 <small>/1M. tokens</small>
+                $ 0.66 <small>/1M. tokens</small>
             </div>
         </div>
         
     </td>
     <td>
-        Sentinel router, which automatically selects the best Sentinel model to perform a task according to its complexity.
+        Sentinel router, which automatically selects the best Sentinel model to perform a task based on its complexity.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -1015,7 +1015,7 @@ All prices are in United States dollars.
         
     </td>
     <td>
-        Smaller version of the 4o, optimized for daily tasks.
+        Smaller version of the 4o, optimized for everyday tasks.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>

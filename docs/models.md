@@ -673,7 +673,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         Pesquisa na internet:
     </small>
     <div>
-        $ 39.20 <small>/1.000 pesquisas</small>
+        $ 5.60 <small>/1.000 pesquisas</small>
     </div>
 </div>
     </td>
@@ -727,7 +727,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         Pesquisa na internet:
     </small>
     <div>
-        $ 39.20 <small>/1.000 pesquisas</small>
+        $ 5.60 <small>/1.000 pesquisas</small>
     </div>
 </div>
     </td>
@@ -781,7 +781,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         Pesquisa na internet:
     </small>
     <div>
-        $ 39.20 <small>/1.000 pesquisas</small>
+        $ 5.60 <small>/1.000 pesquisas</small>
     </div>
 </div>
     </td>
@@ -823,7 +823,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada + saída:
             </small>
             <div>
-                $ 0.33 <small>/1M. tokens</small>
+                $ 0.66 <small>/1M. tokens</small>
             </div>
         </div>
         

@@ -1,9 +1,9 @@
 # AI Gateway
 
-The AI gateways are a service that the Open Indexer provides to create an inference tunnel between an LLM model and a knowledge base. It is possible to:
+The AI gateways are a service provided by the Open Indexer to create an inference tunnel between an LLM model and a knowledge base. It is possible to:
 
 - Create a model with customized instructions
-- Use a model provided by you through an OpenAI compatible endpoint, or use a model made available by the Open Indexer
+- Use a model provided by you through an OpenAI compatible endpoint, or use a model provided by the Open Indexer
 - Customize inference parameters, such as temperature, top_p, prefill
 - Use a knowledge collection as the foundation for AI responses
 
@@ -11,9 +11,7 @@ Among other features. With the AI Gateway, you create a model that is ready for 
 
 ## Models
 
-You can bring an AI model compatible with the OpenAI interface to the AI gateway. If you bring your AI model, we will only charge for the document search attached to the AI.
-
-You can also use one of the models below that are already ready to start with the Open Indexer.
+You can bring an AI model compatible with the OpenAI interface to the AI gateway. If you bring your own AI model, we will only charge for the document search attached to the AI. You can also use one of the models below that are already ready to start with the Open Indexer.
 
 When using a model, you will notice that some are more intelligent than others for certain tasks. Some models are better with certain data acquisition strategies than others. Perform tests to find the best model.
 
@@ -23,19 +21,23 @@ You can view the available models on the [models page](/docs/en/models).
 
 If you are using a knowledge collection with an AI model, you can choose a strategy that the AI will use to perform an information search. Each strategy is more refined than the other. Some create better results than others, but it is essential to perform practical tests with several strategies to understand which one fits best in the model, conversation, and user tone.
 
-It may be necessary to make adjustments to the system prompt to better inform how the AI should consider the documents attached to the conversation. The documents are attached as a user message, limited to the parameters you define in the acquisition strategy.
+It may be necessary to make adjustments to the system prompt to better inform the AI how to consider the attached documents in the conversation. The documents are attached as a user message, limited to the parameters you define in the acquisition strategy.
+
+Strategies with rewriting usually generate the best results at a low latency and cost. The rewriting model used always has the lowest cost, usually chosen by an internal pool that decides which model has the lowest latency at the moment.
 
 Strategies without rewriting cost:
 
-- `Plain`: the default strategy. It is the least optimized and has no rewriting cost: the last user message is used as a search term to search the attached collection of the gateway.
-- `Concatenate`: Concatenates the last N user messages in lines, and then the result of the concatenation is used as a search term.
+- `Plain`: the default strategy. It is the least optimized and has no rewriting cost: the last user message is used as a search term to search the attached collection.
+- `Concatenate`: concatenates the last N user messages in lines, and then the result of the concatenation is used as a search term.
 
 Strategies with rewriting cost (inference tokens are charged):
 
-- `UserRewrite`: Rewrites the last N user messages using a smaller model, creating a contextualized question about what the user means.
-- `FullRewrite`: Rewrites the last N*2 chat messages using a smaller model. Similar to `UserRewrite`, but also considers the assistant's messages in formulating the new question. It usually creates the best questions, with a slightly higher cost. It is the most stable and consistent strategy. It works with any model.
+- `UserRewrite`: rewrites the last N user messages using a smaller model, creating a contextualized question about what the user means.
+- `FullRewrite`: rewrites the last N*2 chat messages using a smaller model. Similar to `UserRewrite`, but also considers the assistant's messages in formulating the new question. It usually creates the best questions, with a slightly higher cost. It is the most stable and consistent strategy. It works with any model.
 
-Rewriting strategies normally generate the best results at a low latency and cost. The rewriting model used always has the lowest cost, usually chosen by an internal pool that decides which model has the lowest latency at the moment.
+Function strategies:
+
+- `QueryFunction`: provides a search function in the integrated collection for the AI model. You should adjust the system instructions to define the ideal scenarios for the model to call this function when necessary. It may not work as well with smaller models.
 
 ## Using AI functions (tools)
 
@@ -69,12 +71,14 @@ It is not necessary to have a collection to link to your AI gateway. You can cre
     
     "parameters": {
 
-        // Endpoint compatible with OpenAI chat/completions, or use @integrated
+        // Required. Endpoint compatible with OpenAI chat/completions, or use @integrated
         // to use a model provided by the Open Indexer.
         "baseAddress": "@integrated",
 
-        // ID of the collection that will be used as the knowledge base by the AI.
-        // Can be null.
+        // Required. Specifies the name of the model that will be used in inference.
+        "modelName": "@groq/compound-beta",
+        
+        // Optional. ID of the collection that will be used as the knowledge base by the AI.
         "knowledgeCollectionId": "01965b62-17c4-7258-9aa8-af5139799527",
 
         // Optional. Specifies how many documents should be attached to the AI context.
@@ -89,7 +93,7 @@ It is not necessary to have a collection to link to your AI gateway. You can cre
         // Optional. Specifies the document acquisition strategy. Read "Choosing a search strategy" to learn more.
         "queryStrategy": "UserRewrite",
         
-        // Parameters of the acquisition strategy.
+        // Optional. Parameters of the acquisition strategy.
         "queryStrategyParameters": {
 
             // Optional. Specifies the number of messages that should be considered for the UserRewrite and FullRewrite strategies. Note: for FullRewrite, the value is always multiplied by 2 to consider assistant messages.
@@ -101,29 +105,26 @@ It is not necessary to have a collection to link to your AI gateway. You can cre
 
         // Optional. Specifies the API key "Authorization: Bearer ..." used in inference. Leave null if using an embedded Open Indexer model.
         "apiKey": null,
-
-        // Required. Specifies the name of the model that will be used in inference.
-        "modelName": "@groq/compound-beta",
-
+        
         // Optional. Specifies the model temperature.
         "temperature": 1.25,
         
         // Optional. Specifies the model's nucleos sampling.
         "topP": null,
 
-        // Optional. Specifies the model's presence penalty.
+        // Optional. Specifies the presence penalty of the model tokens.
         "presencePenalty": null,
 
         // Optional. Specifies a "stop" term for the model.
         "stop": null,
 
-        // Optional. Specifies the maximum number of response tokens for the model.
+        // Optional. Specifies the maximum response tokens of the model.
         "maxCompletionTokens": 4096,
-
+        
         // Optional. Specifies the system prompt used in the model.
         "systemInstruction": "You are a helpful assistant.",
 
-        // Optional. Transforms the user's question into the indicated format, where "{prompt}" is the user's original prompt.
+        // Optional. Transforms the user's question into the format indicated below, where "{prompt}" is the user's original prompt.
         "userPromptTemplate": null,
         
         // Optional. Specifies a prefill (initialization) of the assistant's message.
@@ -132,8 +133,8 @@ It is not necessary to have a collection to link to your AI gateway. You can cre
         // Optional. Specifies whether the assistantPrefill and stop should be included in the message generated by the assistant.
         "includePrefillingInMessages": false,
 
-        // Optional. Specifies special flags for the model. Leave as "0" to not use any flag. The allowed flags are:
-        //      NoSystemInstruct: instead of using system prompt, inserts system instructions into a user message
+        // Optional. Specifies special flags for the model. Leave as "0" to not use any flags. The allowed flags are:
+        //      NoSystemInstruct: instead of using the system prompt, insert the system instructions into a user message
         "flags": "0",
 
         // Optional. Passes an array of functions to the AI.
@@ -219,7 +220,7 @@ data: {"content":"[...]","isFirstChunkMetadata":false,"embeddedDocuments":[],"de
 data: {"content":"[...]","isFirstChunkMetadata":false,"embeddedDocuments":[],"debugInfo":[]}
 ... 
 
-data: [END]
+data: {"content":"[END]"}
 ```
 
 
@@ -334,7 +335,7 @@ Permanently removes an AI gateway.
 
 ## OpenAI Endpoint
 
-The Open Indexer provides an OpenAI compatible endpoint through an AI gateway, which facilitates the integration of the model created by the Open Indexer with existing applications. It is worth noting that only some properties are supported.
+The Open Indexer provides an endpoint compatible with the OpenAI interface through an AI gateway, which facilitates the integration of the model created by the Open Indexer with existing applications. It is worth noting that only some properties are supported.
 
 In an AI gateway, you already configure the model parameters, such as System Prompt, temperature, and model name. When using this endpoint, some gateway values can be overwritten by the request.
 
@@ -349,10 +350,10 @@ In an AI gateway, you already configure the model parameters, such as System Pro
 
 ```json
 {
-    // The "model" field is required, but it does nothing in this request. It only exists to be compatible with the Open AI API. You can leave it empty or write anything in its place, as the model considered is the one defined in the AI Gateway.
+    // The "model" field is required, but it does nothing in this request. It only exists to be compatible with the Open AI API. You can leave it empty or write anything in its place, as the considered model is the one defined in the AI Gateway.
     "model": "foobar",
     
-    // Messages must follow the Open AI format. Only "system" and "user" are supported as conversation "roles".
+    // The messages must follow the OpenAI format. Only "system" and "user" are supported as conversation "roles".
     "messages": [
         {
             "role": "system",
@@ -364,7 +365,7 @@ In an AI gateway, you already configure the model parameters, such as System Pro
         }
     ],
     
-    // Both properties are equivalent and optional, and will replace the maxCompletionTokens field if sent in the request.
+    // Both properties are equivalent and optional, and they will replace the maxCompletionTokens field if sent in the request.
     "max_completion_tokens": 1024,
     "max_tokens": 1024,
     

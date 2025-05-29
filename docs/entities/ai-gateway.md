@@ -23,6 +23,8 @@ Se você for usar uma coleção de conhecimento com um modelo de IA, você poder
 
 Talvez seja necessário realizar ajustes no prompt do sistema para informar melhor como a IA deverá considerar os documentos anexados na conversa. Os documentos são anexados como uma mensagem do usuário, limitados aos parâmetros que você define na estratégia de obtenção.
 
+Estratégias com reescrita normalmente geram os melhores resultados à um baixo custo de latência e custo. O modelo de reescrita usado sempre o com menor custo, escolhido normalmente por um pool interno que decide o modelo que está com menor latência no momento.
+
 Estratégias sem custo de reescrita:
 
 - `Plain`: a estratégia padrão. É a menos otimizada e não possui custo de reescrita: a última mensagem do usuário é usada como termo de busca para pesquisar na coleção anexada do gateway.
@@ -33,7 +35,9 @@ Estratégias com custo de reescrita (os tokens de inferência são cobrados):
 - `UserRewrite`: reescreve as últimas N mensagens do usuário usando um modelo menor, criando uma pergunta contextualizada no que o usuário quer dizer.
 - `FullRewrite`: reescreve as últimas N*2 mensagens do chat usando um modelo menor. Similar ao `UserRewrite`, mas considera também as mensagens da assistente na formulação da nova pergunta. Geralmente cria as melhores perguntas, com um custo um pouco maior. É a estratégia mais estável e consistente. Funciona com qualquer modelo.
 
-Estratégias com reescrita normalmente geram os melhores resultados à um baixo custo de latência e custo. O modelo de reescrita usado sempre o com menor custo, escolhido normalmente por um pool interno que decide o modelo que está com menor latência no momento.
+Estratégias de função:
+
+- `QueryFunction`: fornece uma função de pesquisa na coleção integrada para o modelo de IA. Você deverá ajustar nas instruções do sistema os cenários ideais para o modelo chamar essa função quando necessário. Pode não funcionar tão bem em modelos menores.
 
 ## Usando funções (tools) de IA
 
@@ -67,12 +71,14 @@ Não é necessário ter uma coleção para vincular no seu gateway de IA. Você 
     
     "parameters": {
 
-        // Endpoint compatível com chat/completions da OpenAI, ou use @integrated
+        // Obrigatório. Endpoint compatível com chat/completions da OpenAI, ou use @integrated
         // para usar um modelo provido pela Open Indexer.
         "baseAddress": "@integrated",
 
-        // ID da coleção que será usada como base de conhecimento pela IA.
-        // Pode ser nulo.
+        // Obrigatório. Especifica o nome do modelo que será usado na inferência.
+        "modelName": "@groq/compound-beta",
+        
+        // Opcional. ID da coleção que será usada como base de conhecimento pela IA.
         "knowledgeCollectionId": "01965b62-17c4-7258-9aa8-af5139799527",
 
         // Opcional. Especifica quantos documentos devem ser anexados no contexto da IA.
@@ -87,7 +93,7 @@ Não é necessário ter uma coleção para vincular no seu gateway de IA. Você 
         // Opcional. Especifica a estratégia de obtenção de documentos. Leia "Escolhendo uma estratégia de busca" para saber mais.
         "queryStrategy": "UserRewrite",
         
-        // Parâmetros da estratégia de obtenção.
+        // Opcional. Parâmetros da estratégia de obtenção.
         "queryStrategyParameters": {
 
             // Opcional. Especifica a quantidade de mensagens que devem ser consideradas para as estratégias UserRewrite e FullRewrite. Nota: para FullRewrite, o valor sempre é multiplicado por 2 para considerar mensagens da assistente.
@@ -99,10 +105,7 @@ Não é necessário ter uma coleção para vincular no seu gateway de IA. Você 
 
         // Opcional. Especifica a chave de api "Authorization: Bearer ..." usado na inferência. Deixe nulo se usar um modelo embutido da Open Indexer.
         "apiKey": null,
-
-        // Obrigatório. Especifica o nome do modelo que será usado na inferência.
-        "modelName": "@groq/compound-beta",
-
+        
         // Opcional. Especifica a temperatura do modelo.
         "temperature": 1.25,
         
@@ -117,7 +120,7 @@ Não é necessário ter uma coleção para vincular no seu gateway de IA. Você 
 
         // Opcional. Especifica o máximo de tokens de resposta do modelo.
         "maxCompletionTokens": 4096,
-
+        
         // Opcional. Especifica o system-prompt usado no modelo.
         "systemInstruction": "Você é uma assistente amigável.",
 

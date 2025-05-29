@@ -139,6 +139,7 @@
 <h2 id="escolhendo-uma-estratégia-de-busca">Escolhendo uma estratégia de busca</h2>
 <p>Se você for usar uma coleção de conhecimento com um modelo de IA, você poderá escolher uma estratégia que a IA usará para realizar uma busca por informação. Cada estratégia é mais refinada que a outra. Algumas criam resultados melhores que as demais, mas é importante realizar testes práticos com várias estratégias para entender qual se ajusta melhor no modelo, conversa e tom do usuário.</p>
 <p>Talvez seja necessário realizar ajustes no prompt do sistema para informar melhor como a IA deverá considerar os documentos anexados na conversa. Os documentos são anexados como uma mensagem do usuário, limitados aos parâmetros que você define na estratégia de obtenção.</p>
+<p>Estratégias com reescrita normalmente geram os melhores resultados à um baixo custo de latência e custo. O modelo de reescrita usado sempre o com menor custo, escolhido normalmente por um pool interno que decide o modelo que está com menor latência no momento.</p>
 <p>Estratégias sem custo de reescrita:</p>
 <ul>
 <li><code>Plain</code>: a estratégia padrão. É a menos otimizada e não possui custo de reescrita: a última mensagem do usuário é usada como termo de busca para pesquisar na coleção anexada do gateway.</li>
@@ -149,7 +150,10 @@
 <li><code>UserRewrite</code>: reescreve as últimas N mensagens do usuário usando um modelo menor, criando uma pergunta contextualizada no que o usuário quer dizer.</li>
 <li><code>FullRewrite</code>: reescreve as últimas N*2 mensagens do chat usando um modelo menor. Similar ao <code>UserRewrite</code>, mas considera também as mensagens da assistente na formulação da nova pergunta. Geralmente cria as melhores perguntas, com um custo um pouco maior. É a estratégia mais estável e consistente. Funciona com qualquer modelo.</li>
 </ul>
-<p>Estratégias com reescrita normalmente geram os melhores resultados à um baixo custo de latência e custo. O modelo de reescrita usado sempre o com menor custo, escolhido normalmente por um pool interno que decide o modelo que está com menor latência no momento.</p>
+<p>Estratégias de função:</p>
+<ul>
+<li><code>QueryFunction</code>: fornece uma função de pesquisa na coleção integrada para o modelo de IA. Você deverá ajustar nas instruções do sistema os cenários ideais para o modelo chamar essa função quando necessário. Pode não funcionar tão bem em modelos menores.</li>
+</ul>
 <h2 id="usando-funções-tools-de-ia">Usando funções (tools) de IA</h2>
 <p>No momento, não é possível especificar chamadas de função através da nossa API, seja pelo AI-Gateway ou pela API OpenAI compatível. Esse recurso está no nosso radar para implementação futura.</p>
 <p>Se isso é crítico para seu modelo de IA funcionar, você pode usar a API de <a href="/docs/search">busca de documentos</a> no seu modelo.</p>
@@ -174,12 +178,14 @@
     
     &quot;parameters&quot;: {
 
-        // Endpoint compatível com chat/completions da OpenAI, ou use @integrated
+        // Obrigatório. Endpoint compatível com chat/completions da OpenAI, ou use @integrated
         // para usar um modelo provido pela Open Indexer.
         &quot;baseAddress&quot;: &quot;@integrated&quot;,
 
-        // ID da coleção que será usada como base de conhecimento pela IA.
-        // Pode ser nulo.
+        // Obrigatório. Especifica o nome do modelo que será usado na inferência.
+        &quot;modelName&quot;: &quot;@groq/compound-beta&quot;,
+        
+        // Opcional. ID da coleção que será usada como base de conhecimento pela IA.
         &quot;knowledgeCollectionId&quot;: &quot;01965b62-17c4-7258-9aa8-af5139799527&quot;,
 
         // Opcional. Especifica quantos documentos devem ser anexados no contexto da IA.
@@ -194,7 +200,7 @@
         // Opcional. Especifica a estratégia de obtenção de documentos. Leia &quot;Escolhendo uma estratégia de busca&quot; para saber mais.
         &quot;queryStrategy&quot;: &quot;UserRewrite&quot;,
         
-        // Parâmetros da estratégia de obtenção.
+        // Opcional. Parâmetros da estratégia de obtenção.
         &quot;queryStrategyParameters&quot;: {
 
             // Opcional. Especifica a quantidade de mensagens que devem ser consideradas para as estratégias UserRewrite e FullRewrite. Nota: para FullRewrite, o valor sempre é multiplicado por 2 para considerar mensagens da assistente.
@@ -206,10 +212,7 @@
 
         // Opcional. Especifica a chave de api &quot;Authorization: Bearer ...&quot; usado na inferência. Deixe nulo se usar um modelo embutido da Open Indexer.
         &quot;apiKey&quot;: null,
-
-        // Obrigatório. Especifica o nome do modelo que será usado na inferência.
-        &quot;modelName&quot;: &quot;@groq/compound-beta&quot;,
-
+        
         // Opcional. Especifica a temperatura do modelo.
         &quot;temperature&quot;: 1.25,
         
@@ -224,7 +227,7 @@
 
         // Opcional. Especifica o máximo de tokens de resposta do modelo.
         &quot;maxCompletionTokens&quot;: 4096,
-
+        
         // Opcional. Especifica o system-prompt usado no modelo.
         &quot;systemInstruction&quot;: &quot;Você é uma assistente amigável.&quot;,
 
