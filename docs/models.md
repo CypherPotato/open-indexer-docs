@@ -40,11 +40,15 @@ Todos os preços estão em dólares dos Estados Unidos.
         
     </td>
     <td>
-        Um modelo experimental baseado no Mistral que é totalmente sem censura. Use com responsabilidade.
+        An experimental model based on Mistral that is completely uncensored. Use responsibly.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
 </div>
         </div>
     </td>
@@ -86,7 +90,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         
     </td>
     <td>
-        Modelo com raciocínio e pensamento profundo, melhor para tarefas mais exigentes.
+        Model with deep reasoning and thought, best for more demanding tasks.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
@@ -136,7 +140,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         
     </td>
     <td>
-        Um dos modelos mais poderosos da atualidade.
+        One of the most powerful models today.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -149,6 +153,10 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-lightbulb-line"></i>
     Raciocínio
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
 </div>
         </div>
     </td>
@@ -171,7 +179,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         
     </td>
     <td>
-        Modelo da geração mais recente com raciocínio e pensamento integrado.
+        Latest generation model with integrated reasoning and thought.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -206,7 +214,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         
     </td>
     <td>
-        Mesmo modelo do Gemini 2.5 Flash, mas com o módulo de raciocínio desligado.
+        Same model as Gemini 2.5 Flash, but with the reasoning module turned off.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -215,6 +223,10 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
 </div>
         </div>
     </td>
@@ -244,7 +256,7 @@ Todos os preços estão em dólares dos Estados Unidos.
 </div>
     </td>
     <td>
-        Versão do Gemini 2.5 Flash com pesquisa na internet.
+        Version of Gemini 2.5 Flash with internet search.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -279,7 +291,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         
     </td>
     <td>
-        Oferece recursos da nova geração, com velocidade melhorada e geração multi-modal.
+        Offers new generation features, with improved speed and multi-modal generation.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -288,6 +300,10 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
 </div>
         </div>
     </td>
@@ -317,7 +333,7 @@ Todos os preços estão em dólares dos Estados Unidos.
 </div>
     </td>
     <td>
-        Versão do Gemini 2.0 com pesquisa na internet pelo Google.
+        Version of Gemini 2.0 with internet search via Google.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -352,7 +368,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         
     </td>
     <td>
-        Modelo de uso geral, com reconhecimento de imagens, esperto e rápido. Ótimo para um chat econômico.
+        General-purpose model, with image recognition, smart and fast. Great for an economical chat.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -361,6 +377,10 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
 </div>
         </div>
     </td>
@@ -383,7 +403,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         
     </td>
     <td>
-        Modelo de uso geral da geração anterior, otimizado para tarefas menos exigentes e simples.
+        Previous generation general-purpose model, optimized for less demanding and simple tasks.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -392,6 +412,10 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
 </div>
         </div>
     </td>
@@ -440,7 +464,7 @@ Todos os preços estão em dólares dos Estados Unidos.
 </div>
     </td>
     <td>
-        Agente de conversação que pesquisa na internet para contextualização e informação em tempo real.
+        Conversational agent that searches the internet for contextualization and real-time information.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -482,7 +506,7 @@ Todos os preços estão em dólares dos Estados Unidos.
 </div>
     </td>
     <td>
-        Versão menor da família Compound, que possui menos especialistas.
+        Smaller version of the Compound family, which has fewer experts.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -536,11 +560,15 @@ Todos os preços estão em dólares dos Estados Unidos.
         
     </td>
     <td>
-        Modelo de geração anterior com bastantes parâmetros e velocidade surpreendentemente rápida.
+        Previous generation model with many parameters and surprisingly fast speed.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
 </div>
         </div>
     </td>
@@ -563,7 +591,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         
     </td>
     <td>
-        Modelo rápido, com 17 bilhões de parâmetros ativados e 128 especialistas.
+        Fast model, with 17 billion activated parameters and 128 experts.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -572,6 +600,10 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
 </div>
         </div>
     </td>
@@ -594,7 +626,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         
     </td>
     <td>
-        Menor versão da família Llama 4 com 17 bilhões de parâmetros ativados e 16 especialistas.
+        Smaller version of the Llama 4 family with 17 billion activated parameters and 16 experts.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -603,6 +635,10 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
 </div>
         </div>
     </td>
@@ -625,11 +661,15 @@ Todos os preços estão em dólares dos Estados Unidos.
         
     </td>
     <td>
-        Modelo barato e rápido para tarefas menos exigentes.
+        Cheap and fast model for less demanding tasks.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
 </div>
         </div>
     </td>
@@ -678,7 +718,7 @@ Todos os preços estão em dólares dos Estados Unidos.
 </div>
     </td>
     <td>
-        Um agente de conversação inteligente criado para ajudar humanos nas tarefas mais complexas e desafiadoras.
+        An intelligent conversational agent created to help humans with the most complex and challenging tasks.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -732,7 +772,7 @@ Todos os preços estão em dólares dos Estados Unidos.
 </div>
     </td>
     <td>
-        Otimizado para conversação rápida, com raciocínio menos elevado e mais otimizado para tarefas cotidianas.
+        Optimized for fast conversation, with less elevated reasoning and more optimized for everyday tasks.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -786,7 +826,7 @@ Todos os preços estão em dólares dos Estados Unidos.
 </div>
     </td>
     <td>
-        Versão mais otimizada do Sentinel para conversas rápidas, usando um modelo de última geração, sem poder de raciocínio.
+        Cost optimized version of Sentinel for fast conversations, using a latest-generation model, without reasoning power.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -829,7 +869,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         
     </td>
     <td>
-        Roteador do Sentinel, que seleciona automaticamente o melhor modelo do Sentinel para realizar uma tarefa de acordo com sua complexidade.
+        Sentinel's router, which automatically selects the best Sentinel model to perform a task according to its complexity.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -895,7 +935,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         
     </td>
     <td>
-        Dedicado para tarefas que exigem raciocínio para solução de problemas matemáticos e lógicos.
+        Dedicated to tasks requiring reasoning for mathematical and logical problem solving.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -904,6 +944,10 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
 </div>
         </div>
     </td>
@@ -926,7 +970,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         
     </td>
     <td>
-        Versátil, altamente inteligente e top de linha. Um dos modelos mais capazes atualmente.
+        Versatile, highly intelligent, and top-of-the-line. One of the most capable models currently available.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -935,6 +979,10 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
 </div>
         </div>
     </td>
@@ -957,11 +1005,15 @@ Todos os preços estão em dólares dos Estados Unidos.
         
     </td>
     <td>
-        Um pequeno e esperto modelo com raciocínio.
+        A small and smart model with reasoning.
         <div class="model-capabilities">
 <div>
     <i class="ri-lightbulb-line"></i>
     Raciocínio
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
 </div>
         </div>
     </td>
@@ -984,7 +1036,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         
     </td>
     <td>
-        Rápido e barato para tarefas focadas.
+        Fast and cheap for focused tasks.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -993,6 +1045,10 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
 </div>
         </div>
     </td>
@@ -1015,7 +1071,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         
     </td>
     <td>
-        Versão menor do 4o, otimizado para tarefas cotidianas.
+        Smaller version of 4o, optimized for everyday tasks.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -1024,6 +1080,10 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
 </div>
         </div>
     </td>
@@ -1046,7 +1106,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         
     </td>
     <td>
-        O mais rápido e barato modelo do GPT 4.1.
+        The fastest and cheapest GPT 4.1 model.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -1055,6 +1115,10 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
 </div>
         </div>
     </td>
@@ -1096,7 +1160,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         
     </td>
     <td>
-        Modelo de conversação com pensamento e raciocínio para resolução de tarefas complexas.
+        Conversational model with thinking and reasoning for solving complex tasks.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
