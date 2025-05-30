@@ -2,7 +2,7 @@
 
 Rate limits ("rate limiters") regulate the number of requests you can send in a time window. These limits help Open Indexer prevent abuse and provide a stable API to everyone.
 
-The API limits below are the same for all embedded Open Indexer models. These limits are categorized by operations performed by the API. Each account has a tier that defines which limits are applied to the account. Tiers change according to the total invested in Open Indexer and the time the account has existed.
+The API limits below are the same for all embedded AIVAX models. These limits are categorized by operations performed by the API. Each account has a tier that defines which limits are applied to the account. Tiers change according to the total invested in Open Indexer and the time the account has existed.
 
 - **Tier zero (free account):** new account that has never added credits.
 - **Tier 1**: account created at least 48 hours ago and has added any credit value.
@@ -60,6 +60,6 @@ Limit legends:
 
 - **Document search**: includes semantic search of documents in a collection by the search endpoint `../collections/{id}/query`.
 - **Document insertion**: includes creation and modification of documents in a collection.
-- **Inference**: every inference call, either by the Open-AI compatible API, by the route `/ai-gateways/{id}/inference` or by each message sent by a client chat session.
+- **Inference**: every inference call, either by the Open-AI compatible API, by the route `/ai-gateways/{id}/inference`, or by each message sent by a client chat session.
 - **Function**: every function call `/functions`.
 - **Function (Live)**: every function call connected to the internet by the `webSearch` parameter. Does not include `fetch` calls.

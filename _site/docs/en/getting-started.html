@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Welcome | Open Indexer </title>
+        <title>Welcome | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="Welcome | Open Indexer ">
+        <meta name="title" content="Welcome | AIVAX ">
 
 
         <link rel="icon" href="../../assets/img/favicon.ico">
@@ -61,8 +61,8 @@
             <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
                 <div class="container-xxl flex-nowrap">
                     <a class="navbar-brand" href="../../index.html">
-                        <img id="logo" class="svg" src="../../assets/img/Icon.png" alt="Open Indexer">
-                        Open Indexer
+                        <img id="logo" class="svg" src="../../assets/img/Icon.png" alt="AIVAX">
+                        AIVAX
                     </a>
                     <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="bi bi-three-dots"></i>
@@ -125,8 +125,8 @@
 <h1 id="welcome">Welcome</h1>
 
 <p>Welcome to Open Indexer. Our service makes it easier to develop intelligent AI models that use a knowledge base provided by you to converse with the user, answer questions, provide real-time information, and more.</p>
-<p>To get started, all endpoints must be made to the Open Indexer production URL:</p>
-<pre><code class="lang-text">https://open-indexer-api.proj.pw/
+<p>To get started, all endpoints must be made to the AIVAX production URL:</p>
+<pre><code class="lang-text">https://inference.aivax.net/
 </code></pre>
 <h2 id="concepts-and-definitions">Concepts and definitions</h2>
 <p>Understand the concepts used by the API below:</p>
@@ -138,7 +138,7 @@
 <li><strong>Document:</strong> represents a fact, a single piece of knowledge, and an item in a collection. A collection can have multiple documents.</li>
 </ul>
 </li>
-<li><strong>AI Gateway:</strong> represents an AI gateway that benefits from or does not use a knowledge collection, such as a plug-and-play knowledge middleware for a model.
+<li><strong>AI Gateway:</strong> represents an AI gateway that benefits from or does not use a knowledge collection, such as a <em>plug-and-play</em> knowledge middleware for a model.
 <ul>
 <li><strong>Embedded model:</strong> represents an AI model that Open Indexer provides to the user.</li>
 <li><strong>Chat client:</strong> represents a user interface that makes the AI gateway available through an interactive online chat.
@@ -155,7 +155,7 @@
 <p>All API errors return an HTTP response with a non-OK status (never 2xx or 3xx), and always follow the JSON format:</p>
 <pre><code class="lang-json">{
     &quot;error&quot;: &quot;An error explanation message&quot;,
-    &quot;data&quot;: {} // an object containing relevant error information. Most of the time it is null
+    &quot;details&quot;: {} // an object containing relevant error information. Most of the time it is null
 }
 </code></pre>
 

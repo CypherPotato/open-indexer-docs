@@ -1,4 +1,4 @@
 # Bem-vindo!
 
-Bem-vindo à documentação do Open Indexer.
+Bem-vindo à documentação da AIVAX.
 

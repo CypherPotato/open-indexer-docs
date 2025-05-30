@@ -103,7 +103,7 @@ Não é necessário ter uma coleção para vincular no seu gateway de IA. Você 
             "concatenateContextSize": 3
         },
 
-        // Opcional. Especifica a chave de api "Authorization: Bearer ..." usado na inferência. Deixe nulo se usar um modelo embutido da Open Indexer.
+        // Opcional. Especifica a chave de api "Authorization: Bearer ..." usado na inferência. Deixe nulo se usar um modelo embutido da AIVAX.
         "apiKey": null,
         
         // Opcional. Especifica a temperatura do modelo.

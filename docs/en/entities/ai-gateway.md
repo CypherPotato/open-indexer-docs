@@ -1,17 +1,17 @@
 # AI Gateway
 
-The AI gateways are a service provided by the Open Indexer to create an inference tunnel between an LLM model and a knowledge base. It is possible to:
+The AI gateways are a service that Open Indexer provides to create an inference tunnel between an LLM model and a knowledge base. It is possible to:
 
 - Create a model with customized instructions
-- Use a model provided by you through an OpenAI compatible endpoint, or use a model provided by the Open Indexer
+- Use a model provided by you through an OpenAI compatible endpoint, or use a model made available by Open Indexer
 - Customize inference parameters, such as temperature, top_p, prefill
 - Use a knowledge collection as the foundation for AI responses
 
-Among other features. With the AI Gateway, you create a model that is ready for use, parameterized, and based on the instructions you define.
+Among other features. With the AI Gateway, you create a model ready for use, parameterized and based on the instructions you define.
 
 ## Models
 
-You can bring an AI model compatible with the OpenAI interface to the AI gateway. If you bring your own AI model, we will only charge for the document search attached to the AI. You can also use one of the models below that are already ready to start with the Open Indexer.
+You can bring an AI model compatible with the OpenAI interface to the AI gateway. If you bring your AI model, we will only charge for the document search attached to the AI. You can also use one of the models below that are already ready to start with Open Indexer.
 
 When using a model, you will notice that some are more intelligent than others for certain tasks. Some models are better with certain data acquisition strategies than others. Perform tests to find the best model.
 
@@ -21,7 +21,7 @@ You can view the available models on the [models page](/docs/en/models).
 
 If you are using a knowledge collection with an AI model, you can choose a strategy that the AI will use to perform an information search. Each strategy is more refined than the other. Some create better results than others, but it is essential to perform practical tests with several strategies to understand which one fits best in the model, conversation, and user tone.
 
-It may be necessary to make adjustments to the system prompt to better inform the AI how to consider the attached documents in the conversation. The documents are attached as a user message, limited to the parameters you define in the acquisition strategy.
+It may be necessary to make adjustments to the system prompt to better inform how the AI should consider the documents attached to the conversation. The documents are attached as a user message, limited to the parameters you define in the acquisition strategy.
 
 Strategies with rewriting usually generate the best results at a low latency and cost. The rewriting model used always has the lowest cost, usually chosen by an internal pool that decides which model has the lowest latency at the moment.
 
@@ -72,7 +72,7 @@ It is not necessary to have a collection to link to your AI gateway. You can cre
     "parameters": {
 
         // Required. Endpoint compatible with OpenAI chat/completions, or use @integrated
-        // to use a model provided by the Open Indexer.
+        // to use a model provided by Open Indexer.
         "baseAddress": "@integrated",
 
         // Required. Specifies the name of the model that will be used in inference.
@@ -103,7 +103,7 @@ It is not necessary to have a collection to link to your AI gateway. You can cre
             "concatenateContextSize": 3
         }
 
-        // Optional. Specifies the API key "Authorization: Bearer ..." used in inference. Leave null if using an embedded Open Indexer model.
+        // Optional. Specifies the API key "Authorization: Bearer ..." used in inference. Leave null if using an embedded AIVAX model.
         "apiKey": null,
         
         // Optional. Specifies the model temperature.
@@ -118,7 +118,7 @@ It is not necessary to have a collection to link to your AI gateway. You can cre
         // Optional. Specifies a "stop" term for the model.
         "stop": null,
 
-        // Optional. Specifies the maximum response tokens of the model.
+        // Optional. Specifies the maximum number of response tokens of the model.
         "maxCompletionTokens": 4096,
         
         // Optional. Specifies the system prompt used in the model.
@@ -134,7 +134,7 @@ It is not necessary to have a collection to link to your AI gateway. You can cre
         "includePrefillingInMessages": false,
 
         // Optional. Specifies special flags for the model. Leave as "0" to not use any flags. The allowed flags are:
-        //      NoSystemInstruct: instead of using the system prompt, insert the system instructions into a user message
+        //      NoSystemInstruct: instead of using the system prompt, insert the system instructions in a user message
         "flags": "0",
 
         // Optional. Passes an array of functions to the AI.
@@ -203,7 +203,6 @@ The endpoint for conversing with an AI gateway is simple: it only expects the co
 }
 ```
 
-
 #### Response for stream=true
 
 The streaming response is based on server-sent events. The first line is always a response with debugging information.
@@ -220,9 +219,8 @@ data: {"content":"[...]","isFirstChunkMetadata":false,"embeddedDocuments":[],"de
 data: {"content":"[...]","isFirstChunkMetadata":false,"embeddedDocuments":[],"debugInfo":[]}
 ... 
 
-data: {"content":"[END]"}
+data: [END]
 ```
-
 
 #### Response for stream=false
 
@@ -335,7 +333,7 @@ Permanently removes an AI gateway.
 
 ## OpenAI Endpoint
 
-The Open Indexer provides an endpoint compatible with the OpenAI interface through an AI gateway, which facilitates the integration of the model created by the Open Indexer with existing applications. It is worth noting that only some properties are supported.
+Open Indexer provides an endpoint compatible with the OpenAI interface through an AI gateway, which facilitates the integration of the model created by Open Indexer with existing applications. It is worth noting that only some properties are supported.
 
 In an AI gateway, you already configure the model parameters, such as System Prompt, temperature, and model name. When using this endpoint, some gateway values can be overwritten by the request.
 
@@ -353,7 +351,7 @@ In an AI gateway, you already configure the model parameters, such as System Pro
     // The "model" field is required, but it does nothing in this request. It only exists to be compatible with the Open AI API. You can leave it empty or write anything in its place, as the considered model is the one defined in the AI Gateway.
     "model": "foobar",
     
-    // The messages must follow the OpenAI format. Only "system" and "user" are supported as conversation "roles".
+    // The messages must follow the Open AI format. Only "system" and "user" are supported as conversation "roles".
     "messages": [
         {
             "role": "system",
@@ -365,7 +363,7 @@ In an AI gateway, you already configure the model parameters, such as System Pro
         }
     ],
     
-    // Both properties are equivalent and optional, and they will replace the maxCompletionTokens field if sent in the request.
+    // Both properties are equivalent and optional and will replace the maxCompletionTokens field if sent in the request.
     "max_completion_tokens": 1024,
     "max_tokens": 1024,
     
@@ -376,7 +374,6 @@ In an AI gateway, you already configure the model parameters, such as System Pro
     "stream": true
 }
 ```
-
 
 #### Response for non-streaming
 

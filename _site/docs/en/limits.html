@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>API Limits | Open Indexer </title>
+        <title>API Limits | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="API Limits | Open Indexer ">
+        <meta name="title" content="API Limits | AIVAX ">
 
 
         <link rel="icon" href="../../assets/img/favicon.ico">
@@ -61,8 +61,8 @@
             <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
                 <div class="container-xxl flex-nowrap">
                     <a class="navbar-brand" href="../../index.html">
-                        <img id="logo" class="svg" src="../../assets/img/Icon.png" alt="Open Indexer">
-                        Open Indexer
+                        <img id="logo" class="svg" src="../../assets/img/Icon.png" alt="AIVAX">
+                        AIVAX
                     </a>
                     <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="bi bi-three-dots"></i>
@@ -125,7 +125,7 @@
 <h1 id="api-limits">API Limits</h1>
 
 <p>Rate limits (&quot;rate limiters&quot;) regulate the number of requests you can send in a time window. These limits help Open Indexer prevent abuse and provide a stable API to everyone.</p>
-<p>The API limits below are the same for all embedded Open Indexer models. These limits are categorized by operations performed by the API. Each account has a tier that defines which limits are applied to the account. Tiers change according to the total invested in Open Indexer and the time the account has existed.</p>
+<p>The API limits below are the same for all embedded AIVAX models. These limits are categorized by operations performed by the API. Each account has a tier that defines which limits are applied to the account. Tiers change according to the total invested in Open Indexer and the time the account has existed.</p>
 <ul>
 <li><strong>Tier zero (free account):</strong> new account that has never added credits.</li>
 <li><strong>Tier 1</strong>: account created at least 48 hours ago and has added any credit value.</li>
@@ -314,7 +314,7 @@
 <ul>
 <li><strong>Document search</strong>: includes semantic search of documents in a collection by the search endpoint <code>../collections/{id}/query</code>.</li>
 <li><strong>Document insertion</strong>: includes creation and modification of documents in a collection.</li>
-<li><strong>Inference</strong>: every inference call, either by the Open-AI compatible API, by the route <code>/ai-gateways/{id}/inference</code> or by each message sent by a client chat session.</li>
+<li><strong>Inference</strong>: every inference call, either by the Open-AI compatible API, by the route <code>/ai-gateways/{id}/inference</code>, or by each message sent by a client chat session.</li>
 <li><strong>Function</strong>: every function call <code>/functions</code>.</li>
 <li><strong>Function (Live)</strong>: every function call connected to the internet by the <code>webSearch</code> parameter. Does not include <code>fetch</code> calls.</li>
 </ul>

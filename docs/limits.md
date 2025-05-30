@@ -2,7 +2,7 @@
 
 Limites de taxa ("rate limiters") regulam o número de requisições que você pode enviar em uma janela de tempo. Esses limites ajudam a Open Indexer a prevenir abuso e fornecer uma API estável à todos.
 
-Os limites da API abaixo são os mesmos para todos os modelos embutidos da Open Indexer. Esses limites são categorizados por operações feitas pela API. Cada conta possui um tier que define quais limites são aplicados à conta. Tiers mudam de acordo com o total investido na Open Indexer e o tempo que a conta existe.
+Os limites da API abaixo são os mesmos para todos os modelos embutidos da AIVAX. Esses limites são categorizados por operações feitas pela API. Cada conta possui um tier que define quais limites são aplicados à conta. Tiers mudam de acordo com o total investido na Open Indexer e o tempo que a conta existe.
 
 - **Tier zero (conta grátis):** conta nova que nunca adicionou créditos.
 - **Tier 1**: conta criada há pelo menos 48 horas e que já adicionou qualquer valor em créditos.
