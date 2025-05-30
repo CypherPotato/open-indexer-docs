@@ -1,10 +1,234 @@
 # Models
 
-The Open Indexer provides models from different providers to make development even faster, eliminating the need to configure an account for each provider to access their latest models.
+AIVAX provides models from different providers to make development even faster, eliminating the need to configure an account for each provider to access their latest models.
 
-See the list below of available models and their pricing. All prices consider the total input and output of tokens, with or without cache.
+See the list below of available models and their prices. All prices consider the total input and output of tokens, with or without cache.
 
 All prices are in United States dollars.
+
+## <img src="/assets/icon/aivax.svg" class="inline-icon"> aivax
+
+<table>
+    <thead>
+        <colgroup>
+            <col style="width: 30%" />
+            <col style="width: 20%" />
+            <col style="width: 50%" />
+        </colgroup>
+        <tr>
+            <th>Model Name</th>
+            <th>Prices</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+<tr>
+    <td>
+        <code>
+            @aivax/sentinel
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 12.25 <small>/1M. tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Internet search:
+    </small>
+    <div>
+        $ 5.60 <small>/1.000 searches</small>
+    </div>
+</div>
+    </td>
+    <td>
+        An intelligent conversational agent created to help humans with the most complex and challenging tasks.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Reasoning
+</div>
+<div>
+    <i class="ri-global-line"></i>
+    Internet search
+</div>
+<div>
+    <i class="ri-link-m"></i>
+    Access links
+</div>
+<div>
+    <i class="ri-code-s-slash-line"></i>
+    Code execution
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @aivax/sentinel-mini
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 4.65 <small>/1M. tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Internet search:
+    </small>
+    <div>
+        $ 5.60 <small>/1.000 searches</small>
+    </div>
+</div>
+    </td>
+    <td>
+        Optimized for fast conversation, with less elevated reasoning and more optimized for everyday tasks.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Reasoning
+</div>
+<div>
+    <i class="ri-global-line"></i>
+    Internet search
+</div>
+<div>
+    <i class="ri-link-m"></i>
+    Access links
+</div>
+<div>
+    <i class="ri-code-s-slash-line"></i>
+    Code execution
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @aivax/sentinel-core
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 1.31 <small>/1M. tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Internet search:
+    </small>
+    <div>
+        $ 5.60 <small>/1.000 searches</small>
+    </div>
+</div>
+    </td>
+    <td>
+        Cost-optimized version of Sentinel for fast conversations, using a latest-generation model, without reasoning power.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-global-line"></i>
+    Internet search
+</div>
+<div>
+    <i class="ri-link-m"></i>
+    Access links
+</div>
+<div>
+    <i class="ri-code-s-slash-line"></i>
+    Code execution
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @aivax/sentinel-router
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 0.66 <small>/1M. tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        Sentinel's router, which automatically selects the best Sentinel model to perform a task according to its complexity.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Reasoning
+</div>
+<div>
+    <i class="ri-global-line"></i>
+    Internet search
+</div>
+<div>
+    <i class="ri-link-m"></i>
+    Access links
+</div>
+<div>
+    <i class="ri-code-s-slash-line"></i>
+    Code execution
+</div>
+        </div>
+    </td>
+</tr>
+    </tbody>
+</table>
 
 ## <img src="/assets/icon/cognitivecomputations.svg" class="inline-icon"> cognitivecomputations
 
@@ -40,11 +264,15 @@ All prices are in United States dollars.
         
     </td>
     <td>
-        An experimental model based on Mistral that is completely uncensored. Use with responsibility.
+        An experimental model based on Mistral that is completely uncensored. Use responsibly.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
     Function calls
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
 </div>
         </div>
     </td>
@@ -86,7 +314,7 @@ All prices are in United States dollars.
         
     </td>
     <td>
-        Model with reasoning and deep thinking, better for more demanding tasks.
+        Model with deep reasoning and thought, best for more demanding tasks.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
@@ -136,7 +364,7 @@ All prices are in United States dollars.
         
     </td>
     <td>
-        One of the most powerful models currently available.
+        One of the most powerful models today.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -149,6 +377,10 @@ All prices are in United States dollars.
 <div>
     <i class="ri-lightbulb-line"></i>
     Reasoning
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
 </div>
         </div>
     </td>
@@ -171,7 +403,7 @@ All prices are in United States dollars.
         
     </td>
     <td>
-        Model of the latest generation with integrated reasoning and thinking.
+        Latest generation model with integrated reasoning and thought.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -206,7 +438,7 @@ All prices are in United States dollars.
         
     </td>
     <td>
-        Same model as Gemini 2.5 Flash, but with the reasoning module disabled.
+        Same model as Gemini 2.5 Flash, but with the reasoning module turned off.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -215,6 +447,10 @@ All prices are in United States dollars.
 <div>
     <i class="ri-instance-line"></i>
     Function calls
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
 </div>
         </div>
     </td>
@@ -239,7 +475,7 @@ All prices are in United States dollars.
         Internet search:
     </small>
     <div>
-        $ 39.20 <small>/1,000 searches</small>
+        $ 39.20 <small>/1.000 searches</small>
     </div>
 </div>
     </td>
@@ -289,6 +525,10 @@ All prices are in United States dollars.
     <i class="ri-instance-line"></i>
     Function calls
 </div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
+</div>
         </div>
     </td>
 </tr>
@@ -312,12 +552,12 @@ All prices are in United States dollars.
         Internet search:
     </small>
     <div>
-        $ 39.20 <small>/1,000 searches</small>
+        $ 39.20 <small>/1.000 searches</small>
     </div>
 </div>
     </td>
     <td>
-        Version of Gemini 2.0 with internet search by Google.
+        Version of Gemini 2.0 with internet search via Google.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -352,7 +592,7 @@ All prices are in United States dollars.
         
     </td>
     <td>
-        General-purpose model, with image recognition, smart and fast. Great for an economic chat.
+        General-purpose model, with image recognition, smart and fast. Great for an economical chat.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -361,6 +601,10 @@ All prices are in United States dollars.
 <div>
     <i class="ri-instance-line"></i>
     Function calls
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
 </div>
         </div>
     </td>
@@ -383,7 +627,7 @@ All prices are in United States dollars.
         
     </td>
     <td>
-        General-purpose model of the previous generation, optimized for less demanding and simple tasks.
+        Previous generation general-purpose model, optimized for less demanding and simple tasks.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -392,6 +636,10 @@ All prices are in United States dollars.
 <div>
     <i class="ri-instance-line"></i>
     Function calls
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
 </div>
         </div>
     </td>
@@ -435,12 +683,12 @@ All prices are in United States dollars.
         Internet search:
     </small>
     <div>
-        $ 8.96 <small>/1,000 searches</small>
+        $ 8.96 <small>/1.000 searches</small>
     </div>
 </div>
     </td>
     <td>
-        Conversation agent that searches the internet for contextualization and real-time information.
+        Conversational agent that searches the internet for contextualization and real-time information.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -477,12 +725,12 @@ All prices are in United States dollars.
         Internet search:
     </small>
     <div>
-        $ 8.96 <small>/1,000 searches</small>
+        $ 8.96 <small>/1.000 searches</small>
     </div>
 </div>
     </td>
     <td>
-        Smaller version of the Compound family, with fewer experts.
+        Smaller version of the Compound family, which has fewer experts.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -542,6 +790,10 @@ All prices are in United States dollars.
     <i class="ri-instance-line"></i>
     Function calls
 </div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
+</div>
         </div>
     </td>
 </tr>
@@ -563,7 +815,7 @@ All prices are in United States dollars.
         
     </td>
     <td>
-        Fast model, with 17 billion parameters activated and 128 experts.
+        Fast model, with 17 billion activated parameters and 128 experts.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -572,6 +824,10 @@ All prices are in United States dollars.
 <div>
     <i class="ri-instance-line"></i>
     Function calls
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
 </div>
         </div>
     </td>
@@ -594,7 +850,7 @@ All prices are in United States dollars.
         
     </td>
     <td>
-        Smaller version of the Llama 4 family with 17 billion parameters activated and 16 experts.
+        Smaller version of the Llama 4 family with 17 billion activated parameters and 16 experts.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -603,6 +859,10 @@ All prices are in United States dollars.
 <div>
     <i class="ri-instance-line"></i>
     Function calls
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
 </div>
         </div>
     </td>
@@ -631,229 +891,9 @@ All prices are in United States dollars.
     <i class="ri-instance-line"></i>
     Function calls
 </div>
-        </div>
-    </td>
-</tr>
-    </tbody>
-</table>
-
-## <img src="/assets/icon/open-indexer.svg" class="inline-icon"> open-indexer
-
-<table>
-    <thead>
-        <colgroup>
-            <col style="width: 30%" />
-            <col style="width: 20%" />
-            <col style="width: 50%" />
-        </colgroup>
-        <tr>
-            <th>Model Name</th>
-            <th>Prices</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-<tr>
-    <td>
-        <code>
-            @open-indexer/sentinel
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Input + output:
-            </small>
-            <div>
-                $ 12.25 <small>/1M. tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-    <small>
-        Internet search:
-    </small>
-    <div>
-        $ 5.60 <small>/1,000 searches</small>
-    </div>
-</div>
-    </td>
-    <td>
-        Intelligent conversation agent created to help humans with complex and challenging tasks.
-        <div class="model-capabilities">
 <div>
-    <i class="ri-image-circle-line"></i>
-    Input: accepts images
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Reasoning
-</div>
-<div>
-    <i class="ri-global-line"></i>
-    Internet search
-</div>
-<div>
-    <i class="ri-link-m"></i>
-    Access links
-</div>
-<div>
-    <i class="ri-code-s-slash-line"></i>
-    Code execution
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @open-indexer/sentinel-mini
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Input + output:
-            </small>
-            <div>
-                $ 4.65 <small>/1M. tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-    <small>
-        Internet search:
-    </small>
-    <div>
-        $ 5.60 <small>/1,000 searches</small>
-    </div>
-</div>
-    </td>
-    <td>
-        Optimized for fast conversation, with lower reasoning and more optimized for everyday tasks.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Input: accepts images
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Reasoning
-</div>
-<div>
-    <i class="ri-global-line"></i>
-    Internet search
-</div>
-<div>
-    <i class="ri-link-m"></i>
-    Access links
-</div>
-<div>
-    <i class="ri-code-s-slash-line"></i>
-    Code execution
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @open-indexer/sentinel-core
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Input + output:
-            </small>
-            <div>
-                $ 1.31 <small>/1M. tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-    <small>
-        Internet search:
-    </small>
-    <div>
-        $ 5.60 <small>/1,000 searches</small>
-    </div>
-</div>
-    </td>
-    <td>
-        Most optimized version of Sentinel for fast conversations, using a state-of-the-art model, without reasoning power.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Input: accepts images
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
-<div>
-    <i class="ri-global-line"></i>
-    Internet search
-</div>
-<div>
-    <i class="ri-link-m"></i>
-    Access links
-</div>
-<div>
-    <i class="ri-code-s-slash-line"></i>
-    Code execution
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @open-indexer/sentinel-router
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Input + output:
-            </small>
-            <div>
-                $ 0.66 <small>/1M. tokens</small>
-            </div>
-        </div>
-        
-    </td>
-    <td>
-        Sentinel router, which automatically selects the best Sentinel model to perform a task based on its complexity.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Input: accepts images
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Reasoning
-</div>
-<div>
-    <i class="ri-global-line"></i>
-    Internet search
-</div>
-<div>
-    <i class="ri-link-m"></i>
-    Access links
-</div>
-<div>
-    <i class="ri-code-s-slash-line"></i>
-    Code execution
+    <i class="ri-braces-line"></i>
+    JSON functions
 </div>
         </div>
     </td>
@@ -895,7 +935,7 @@ All prices are in United States dollars.
         
     </td>
     <td>
-        Dedicated to tasks that require reasoning for solving mathematical and logical problems.
+        Dedicated to tasks requiring reasoning for mathematical and logical problem solving.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -904,6 +944,10 @@ All prices are in United States dollars.
 <div>
     <i class="ri-instance-line"></i>
     Function calls
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
 </div>
         </div>
     </td>
@@ -936,6 +980,10 @@ All prices are in United States dollars.
     <i class="ri-instance-line"></i>
     Function calls
 </div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
+</div>
         </div>
     </td>
 </tr>
@@ -962,6 +1010,10 @@ All prices are in United States dollars.
 <div>
     <i class="ri-lightbulb-line"></i>
     Reasoning
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
 </div>
         </div>
     </td>
@@ -994,6 +1046,10 @@ All prices are in United States dollars.
     <i class="ri-instance-line"></i>
     Function calls
 </div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
+</div>
         </div>
     </td>
 </tr>
@@ -1015,7 +1071,7 @@ All prices are in United States dollars.
         
     </td>
     <td>
-        Smaller version of the 4o, optimized for everyday tasks.
+        Smaller version of 4o, optimized for everyday tasks.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -1024,6 +1080,10 @@ All prices are in United States dollars.
 <div>
     <i class="ri-instance-line"></i>
     Function calls
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
 </div>
         </div>
     </td>
@@ -1055,6 +1115,10 @@ All prices are in United States dollars.
 <div>
     <i class="ri-instance-line"></i>
     Function calls
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
 </div>
         </div>
     </td>
@@ -1096,7 +1160,7 @@ All prices are in United States dollars.
         
     </td>
     <td>
-        Conversation model with thinking and reasoning for solving complex tasks.
+        Conversational model with thinking and reasoning for solving complex tasks.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>

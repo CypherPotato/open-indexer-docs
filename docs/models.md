@@ -1,10 +1,234 @@
 # Modelos
 
-O Open Indexer provê modelos de diferentes provedores para tornar o desenvolvimento ainda mais rápido, dispensando a necessidade de ter que configurar uma conta para cada provedor para ter acessos aos seus modelos mais recentes.
+A AIVAX provê modelos de diferentes provedores para tornar o desenvolvimento ainda mais rápido, dispensando a necessidade de ter que configurar uma conta para cada provedor para ter acessos aos seus modelos mais recentes.
 
 Veja a lista abaixo dos modelos disponíveis e suas precificações. Todos os preços consideram o total de entrada e saída de tokens, com ou sem cache.
 
 Todos os preços estão em dólares dos Estados Unidos.
+
+## <img src="/assets/icon/aivax.svg" class="inline-icon"> aivax
+
+<table>
+    <thead>
+        <colgroup>
+            <col style="width: 30%" />
+            <col style="width: 20%" />
+            <col style="width: 50%" />
+        </colgroup>
+        <tr>
+            <th>Nome do modelo</th>
+            <th>Preços</th>
+            <th>Descrição</th>
+        </tr>
+    </thead>
+    <tbody>
+<tr>
+    <td>
+        <code>
+            @aivax/sentinel
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada + saída:
+            </small>
+            <div>
+                $ 12.25 <small>/1M. tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Pesquisa na internet:
+    </small>
+    <div>
+        $ 5.60 <small>/1.000 pesquisas</small>
+    </div>
+</div>
+    </td>
+    <td>
+        An intelligent conversational agent created to help humans with the most complex and challenging tasks.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Raciocínio
+</div>
+<div>
+    <i class="ri-global-line"></i>
+    Pesquisa na internet
+</div>
+<div>
+    <i class="ri-link-m"></i>
+    Acessar links
+</div>
+<div>
+    <i class="ri-code-s-slash-line"></i>
+    Execução de código
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @aivax/sentinel-mini
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada + saída:
+            </small>
+            <div>
+                $ 4.65 <small>/1M. tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Pesquisa na internet:
+    </small>
+    <div>
+        $ 5.60 <small>/1.000 pesquisas</small>
+    </div>
+</div>
+    </td>
+    <td>
+        Optimized for fast conversation, with less elevated reasoning and more optimized for everyday tasks.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Raciocínio
+</div>
+<div>
+    <i class="ri-global-line"></i>
+    Pesquisa na internet
+</div>
+<div>
+    <i class="ri-link-m"></i>
+    Acessar links
+</div>
+<div>
+    <i class="ri-code-s-slash-line"></i>
+    Execução de código
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @aivax/sentinel-core
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada + saída:
+            </small>
+            <div>
+                $ 1.31 <small>/1M. tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Pesquisa na internet:
+    </small>
+    <div>
+        $ 5.60 <small>/1.000 pesquisas</small>
+    </div>
+</div>
+    </td>
+    <td>
+        Cost optimized version of Sentinel for fast conversations, using a latest-generation model, without reasoning power.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-global-line"></i>
+    Pesquisa na internet
+</div>
+<div>
+    <i class="ri-link-m"></i>
+    Acessar links
+</div>
+<div>
+    <i class="ri-code-s-slash-line"></i>
+    Execução de código
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @aivax/sentinel-router
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada + saída:
+            </small>
+            <div>
+                $ 0.66 <small>/1M. tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        Sentinel's router, which automatically selects the best Sentinel model to perform a task according to its complexity.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Raciocínio
+</div>
+<div>
+    <i class="ri-global-line"></i>
+    Pesquisa na internet
+</div>
+<div>
+    <i class="ri-link-m"></i>
+    Acessar links
+</div>
+<div>
+    <i class="ri-code-s-slash-line"></i>
+    Execução de código
+</div>
+        </div>
+    </td>
+</tr>
+    </tbody>
+</table>
 
 ## <img src="/assets/icon/cognitivecomputations.svg" class="inline-icon"> cognitivecomputations
 
@@ -670,230 +894,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-braces-line"></i>
     Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-    </tbody>
-</table>
-
-## <img src="/assets/icon/open-indexer.svg" class="inline-icon"> open-indexer
-
-<table>
-    <thead>
-        <colgroup>
-            <col style="width: 30%" />
-            <col style="width: 20%" />
-            <col style="width: 50%" />
-        </colgroup>
-        <tr>
-            <th>Nome do modelo</th>
-            <th>Preços</th>
-            <th>Descrição</th>
-        </tr>
-    </thead>
-    <tbody>
-<tr>
-    <td>
-        <code>
-            @open-indexer/sentinel
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada + saída:
-            </small>
-            <div>
-                $ 12.25 <small>/1M. tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-    <small>
-        Pesquisa na internet:
-    </small>
-    <div>
-        $ 5.60 <small>/1.000 pesquisas</small>
-    </div>
-</div>
-    </td>
-    <td>
-        An intelligent conversational agent created to help humans with the most complex and challenging tasks.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Raciocínio
-</div>
-<div>
-    <i class="ri-global-line"></i>
-    Pesquisa na internet
-</div>
-<div>
-    <i class="ri-link-m"></i>
-    Acessar links
-</div>
-<div>
-    <i class="ri-code-s-slash-line"></i>
-    Execução de código
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @open-indexer/sentinel-mini
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada + saída:
-            </small>
-            <div>
-                $ 4.65 <small>/1M. tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-    <small>
-        Pesquisa na internet:
-    </small>
-    <div>
-        $ 5.60 <small>/1.000 pesquisas</small>
-    </div>
-</div>
-    </td>
-    <td>
-        Optimized for fast conversation, with less elevated reasoning and more optimized for everyday tasks.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Raciocínio
-</div>
-<div>
-    <i class="ri-global-line"></i>
-    Pesquisa na internet
-</div>
-<div>
-    <i class="ri-link-m"></i>
-    Acessar links
-</div>
-<div>
-    <i class="ri-code-s-slash-line"></i>
-    Execução de código
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @open-indexer/sentinel-core
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada + saída:
-            </small>
-            <div>
-                $ 1.31 <small>/1M. tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-    <small>
-        Pesquisa na internet:
-    </small>
-    <div>
-        $ 5.60 <small>/1.000 pesquisas</small>
-    </div>
-</div>
-    </td>
-    <td>
-        Cost optimized version of Sentinel for fast conversations, using a latest-generation model, without reasoning power.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-global-line"></i>
-    Pesquisa na internet
-</div>
-<div>
-    <i class="ri-link-m"></i>
-    Acessar links
-</div>
-<div>
-    <i class="ri-code-s-slash-line"></i>
-    Execução de código
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @open-indexer/sentinel-router
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada + saída:
-            </small>
-            <div>
-                $ 0.66 <small>/1M. tokens</small>
-            </div>
-        </div>
-        
-    </td>
-    <td>
-        Sentinel's router, which automatically selects the best Sentinel model to perform a task according to its complexity.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Raciocínio
-</div>
-<div>
-    <i class="ri-global-line"></i>
-    Pesquisa na internet
-</div>
-<div>
-    <i class="ri-link-m"></i>
-    Acessar links
-</div>
-<div>
-    <i class="ri-code-s-slash-line"></i>
-    Execução de código
 </div>
         </div>
     </td>
