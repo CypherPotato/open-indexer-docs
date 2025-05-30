@@ -1,10 +1,15 @@
-article table {
+article {
 
-    thead {
-        opacity: .75;
-    }
+    table,
+    .table {
+        background-color: --bs-body-contrast !important;
 
-    > :not(caption) > * > * {
-        border-width: 1px 0 !important;
+        thead {
+            opacity: .75;
+        }
+
+        > :not(caption) > * > * {
+            border-width: 1px 0 !important;
+        }
     }
 }

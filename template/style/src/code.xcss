@@ -57,11 +57,11 @@ html[data-bs-theme="dark"] {
         background-color: --code-bg;
         border-radius: 8px;
         border: 1px solid --code-block-border;
-
+        
         .hljs-meta {
             color: #4ec9b0;
         }
-
+        
         .hljs-meta-value {
             color: #9ac18a;
         }
