@@ -14,13 +14,14 @@ html[data-bs-theme="dark"] {
     --bs-danger-bg-subtle: #362829;
     --bs-warning-bg-subtle: #332701;
     --bs-info-bg-subtle: #183338;
-    --bs-body-bg: #010102;
-    --bs-body-bg-alt: #0c0e0f;
+    --bs-body-contrast: black;
+    --bs-body-bg: #18181b;
+    --bs-body-bg-alt: #2d2d33;
     --scrollbar-color-track: #0c0e0f;
     --scrollbar-color-thumb: #15191b;
     --bs-border-color: #1a1e20;
     --article-color: #bfcdcf;
-
+    
     --code-bg: #0c0e11;
     --code-block-border: #20262e;
 
@@ -30,6 +31,10 @@ html[data-bs-theme="dark"] {
     --get: #9f5fe7;
     --put: #cee75f;
     --delete: #e75f5f;
+
+    nav .navbar-brand img {
+        filter: invert(1);
+    }
 }
 
 html[data-bs-theme="light"] {
@@ -41,7 +46,8 @@ html[data-bs-theme="light"] {
     --bs-danger-bg-subtle: #ffe8ea;
     --bs-warning-bg-subtle: #fff9e5;
     --bs-info-bg-subtle: #eafbff;
-    --bs-body-bg: #fbfbfb;
+    --bs-body-contrast: white;
+    --bs-body-bg: #fafafa;
     --bs-body-bg-alt: #f0f0f0;
     --scrollbar-color-track: #d9d9d9;
     --scrollbar-color-thumb: #bbb;

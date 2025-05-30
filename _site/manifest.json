@@ -192,6 +192,16 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "assets/img/aivax.png",
+      "output": {
+        "resource": {
+          "relative_path": "assets/img/aivax.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "assets/img/bg.jpg",
       "output": {
         "resource": {
