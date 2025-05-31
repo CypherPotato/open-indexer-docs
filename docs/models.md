@@ -34,7 +34,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada + saída:
             </small>
             <div>
-                $ 12.25 <small>/1M. tokens</small>
+                $ 4.65 <small>/1M. tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -92,7 +92,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada + saída:
             </small>
             <div>
-                $ 4.65 <small>/1M. tokens</small>
+                $ 1.31 <small>/1M. tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -105,7 +105,7 @@ Todos os preços estão em dólares dos Estados Unidos.
 </div>
     </td>
     <td>
-        Optimized for fast conversation, with less elevated reasoning and more optimized for everyday tasks.
+        Optimized for fast conversations and most optimized for everyday tasks.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -150,7 +150,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada + saída:
             </small>
             <div>
-                $ 1.31 <small>/1M. tokens</small>
+                $ 0.88 <small>/1M. tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -163,7 +163,7 @@ Todos os preços estão em dólares dos Estados Unidos.
 </div>
     </td>
     <td>
-        Cost optimized version of Sentinel for fast conversations, using a latest-generation model, without reasoning power.
+        Cost optimized version of Sentinel for fast conversations.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>

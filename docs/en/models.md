@@ -2,7 +2,7 @@
 
 AIVAX provides models from different providers to make development even faster, eliminating the need to configure an account for each provider to access their latest models.
 
-See the list below of available models and their prices. All prices consider the total input and output of tokens, with or without cache.
+See the list below of available models and their pricing. All prices consider the total input and output of tokens, with or without cache.
 
 All prices are in United States dollars.
 
@@ -34,7 +34,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 12.25 <small>/1M. tokens</small>
+                $ 4.65 <small>/1M. tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -92,7 +92,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 4.65 <small>/1M. tokens</small>
+                $ 1.31 <small>/1M. tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -105,7 +105,7 @@ All prices are in United States dollars.
 </div>
     </td>
     <td>
-        Optimized for fast conversation, with less elevated reasoning and more optimized for everyday tasks.
+        Optimized for fast conversations and most optimized for everyday tasks.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -150,7 +150,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 1.31 <small>/1M. tokens</small>
+                $ 0.88 <small>/1M. tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -163,7 +163,7 @@ All prices are in United States dollars.
 </div>
     </td>
     <td>
-        Cost-optimized version of Sentinel for fast conversations, using a latest-generation model, without reasoning power.
+        Cost-optimized version of Sentinel for fast conversations.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
