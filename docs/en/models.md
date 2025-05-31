@@ -73,6 +73,10 @@ All prices are in United States dollars.
     <i class="ri-code-s-slash-line"></i>
     Code execution
 </div>
+<div>
+    <i class="ri-chat-history-line"></i>
+    Persistent memory
+</div>
         </div>
     </td>
 </tr>
@@ -127,6 +131,10 @@ All prices are in United States dollars.
     <i class="ri-code-s-slash-line"></i>
     Code execution
 </div>
+<div>
+    <i class="ri-chat-history-line"></i>
+    Persistent memory
+</div>
         </div>
     </td>
 </tr>
@@ -176,6 +184,10 @@ All prices are in United States dollars.
 <div>
     <i class="ri-code-s-slash-line"></i>
     Code execution
+</div>
+<div>
+    <i class="ri-chat-history-line"></i>
+    Persistent memory
 </div>
         </div>
     </td>
@@ -417,6 +429,10 @@ All prices are in United States dollars.
     <i class="ri-lightbulb-line"></i>
     Reasoning
 </div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
+</div>
         </div>
     </td>
 </tr>
@@ -640,109 +656,6 @@ All prices are in United States dollars.
 <div>
     <i class="ri-braces-line"></i>
     JSON functions
-</div>
-        </div>
-    </td>
-</tr>
-    </tbody>
-</table>
-
-## <img src="/assets/icon/groq.svg" class="inline-icon"> groq
-
-<table>
-    <thead>
-        <colgroup>
-            <col style="width: 30%" />
-            <col style="width: 20%" />
-            <col style="width: 50%" />
-        </colgroup>
-        <tr>
-            <th>Model Name</th>
-            <th>Prices</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-<tr>
-    <td>
-        <code>
-            @groq/compound-beta
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Input + output:
-            </small>
-            <div>
-                $ 3.25 <small>/1M. tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-    <small>
-        Internet search:
-    </small>
-    <div>
-        $ 8.96 <small>/1.000 searches</small>
-    </div>
-</div>
-    </td>
-    <td>
-        Conversational agent that searches the internet for contextualization and real-time information.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Input: accepts images
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
-<div>
-    <i class="ri-global-line"></i>
-    Internet search
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @groq/compound-beta-mini
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Input + output:
-            </small>
-            <div>
-                $ 2.60 <small>/1M. tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-    <small>
-        Internet search:
-    </small>
-    <div>
-        $ 8.96 <small>/1.000 searches</small>
-    </div>
-</div>
-    </td>
-    <td>
-        Smaller version of the Compound family, which has fewer experts.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Input: accepts images
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
-<div>
-    <i class="ri-global-line"></i>
-    Internet search
 </div>
         </div>
     </td>

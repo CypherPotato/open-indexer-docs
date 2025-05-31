@@ -22,6 +22,7 @@ O diferencial dos modelos Sentinel são os recursos providos "out-of-the-box" po
 - **Pesquisa na internet**: os modelos Sentinel conseguem naturalmente pesquisar na internet para complementar sua resposta em diferentes cenários, como obter notícias locais, dados meteorológicos ou dados sobre um assunto ou nicho específico.
 - **Acessar links**: os modelos Sentinel conseguem acessar arquivos e páginas fornecidas pelo usuário. Ele consegue acessar páginas HTML, vários arquivos textuais, até mesmo documentos do Word e PDF.
 - **Execução de código**: os modelos Sentinel conseguem executar código para realizarem cálculos matemáticos, financeiros ou até mesmo ajudar o usuário com diversas tarefas.
+- **Memória persistente**: os modelos Sentinel conseguem identificar fatos relevantes ao usuário que devem ser persistidos durante várias conversas, até mesmo após a conversa atual ser limpada ou renovada.
 
 Além disso, todos os modelos Sentinel possuem uma cadeia de execução das funções. Por exemplo, você pode pedir para um modelo Sentinel acessar a temperatura de uma cidade, converter para JSON e chamar uma URL externa com a resposta.
 

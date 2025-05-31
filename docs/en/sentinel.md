@@ -1,4 +1,4 @@
-# Agents Sentinel
+# Sentinel Agents
 
 The Sentinel chat agents are models with optimized parameters for real-time chat conversation, with instructions that enhance the model's attention to specific tasks and allow for real-time internet research.
 
@@ -18,16 +18,17 @@ These models should be used for conversation with the end user and are not recom
 
 The differential of the Sentinel models are the resources provided "out-of-the-box" by them, including:
 
-- **Optimized for chat**: the Sentinel models have clear instructions that make the model adapt the tone of conversation to the same as the user, indicators of humor and objective.
+- **Optimized for chat**: the Sentinel models have clear instructions that make the model adapt the tone of the conversation to that of the user, indicators of humor and objective.
 - **Internet research**: the Sentinel models can naturally search the internet to complement their response in different scenarios, such as obtaining local news, weather data, or data on a specific topic or niche.
-- **Access links**: the Sentinel models can access files and pages provided by the user. It can access HTML pages, various text files, even Word and PDF documents.
+- **Accessing links**: the Sentinel models can access files and pages provided by the user. It can access HTML pages, various text files, even Word and PDF documents.
 - **Code execution**: the Sentinel models can execute code to perform mathematical, financial, or other tasks to help the user.
+- **Persistent memory**: the Sentinel models can identify relevant facts to the user that should be persisted during several conversations, even after the current conversation is cleared or renewed.
 
-In addition, all Sentinel models have a chain of execution of functions. For example, you can ask a Sentinel model to access the temperature of a city, convert it to JSON, and call an external URL with the response.
+Additionally, all Sentinel models have a chain of execution of functions. For example, you can ask a Sentinel model to access the temperature of a city, convert it to JSON, and call an external URL with the response.
 
 ## Sentinel Router
 
-You can also use the **sentinel-router** routing model, which works as a router between the three models. A router automatically chooses which model is best to solve the user's problem based on the complexity of their problem.
+You can also use the **sentinel-router** routing model, which works as a router model between the three models. A router automatically chooses which model is best to solve the user's problem based on the complexity of their problem.
 
 How does it work? A smaller model analyzes the context of the question and evaluates the degree of complexity that the user is facing, and that model responds with an indicator of which model is best to answer that question. The router decides which model is best per message and not per conversation.
 
