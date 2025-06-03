@@ -10,6 +10,8 @@ items:
   href: models.md
 - name: Sentinel
   href: sentinel.md
+# - name: Server-side Functions
+#   href: protocol-functions.md
 - name: Using the API
 - name: Collections
   href: entities/collections.md

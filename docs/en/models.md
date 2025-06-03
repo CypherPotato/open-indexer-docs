@@ -34,7 +34,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 4.65 <small>/1M. tokens</small>
+                $ 1.31 <small>/1M. tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -44,10 +44,17 @@ All prices are in United States dollars.
     <div>
         $ 5.60 <small>/1.000 searches</small>
     </div>
+</div><div class="item-pricing">
+    <small>
+        Sentinel reasoning:
+    </small>
+    <div>
+        $ 1.31 <small>/1m tokens</small>
+    </div>
 </div>
     </td>
     <td>
-        An intelligent conversational agent created to help humans with the most complex and challenging tasks.
+        Highly intelligent and optimized to perform challenging tasks and solve complex problems.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -92,7 +99,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 1.31 <small>/1M. tokens</small>
+                $ 0.88 <small>/1M. tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -102,10 +109,17 @@ All prices are in United States dollars.
     <div>
         $ 5.60 <small>/1.000 searches</small>
     </div>
+</div><div class="item-pricing">
+    <small>
+        Sentinel reasoning:
+    </small>
+    <div>
+        $ 1.31 <small>/1m tokens</small>
+    </div>
 </div>
     </td>
     <td>
-        Optimized for fast conversations and most optimized for everyday tasks.
+        Highly capable model, with reasoning power and complex problem-solving.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -150,7 +164,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 0.88 <small>/1M. tokens</small>
+                $ 0.66 <small>/1M. tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -160,10 +174,17 @@ All prices are in United States dollars.
     <div>
         $ 5.60 <small>/1.000 searches</small>
     </div>
+</div><div class="item-pricing">
+    <small>
+        Sentinel reasoning:
+    </small>
+    <div>
+        $ 1.31 <small>/1m tokens</small>
+    </div>
 </div>
     </td>
     <td>
-        Cost-optimized version of Sentinel for fast conversations.
+        Cost-optimized model optimized for conversation and enhanced understanding.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -172,6 +193,10 @@ All prices are in United States dollars.
 <div>
     <i class="ri-instance-line"></i>
     Function calls
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Reasoning
 </div>
 <div>
     <i class="ri-global-line"></i>
@@ -503,10 +528,6 @@ All prices are in United States dollars.
     Input: accepts images, videos, audio
 </div>
 <div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
-<div>
     <i class="ri-global-line"></i>
     Internet search
 </div>
@@ -578,10 +599,6 @@ All prices are in United States dollars.
 <div>
     <i class="ri-image-circle-line"></i>
     Input: accepts images, videos, audio
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
 </div>
 <div>
     <i class="ri-global-line"></i>
@@ -903,7 +920,7 @@ All prices are in United States dollars.
 <tr>
     <td>
         <code>
-            @openai/o1-mini
+            @openai/o4-mini
         </code>
     </td>
     <td>
@@ -918,8 +935,12 @@ All prices are in United States dollars.
         
     </td>
     <td>
-        A small and smart model with reasoning.
+        Optimized for fast, effective reasoning with exceptionally efficient performance in coding and visual tasks.
         <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images
+</div>
 <div>
     <i class="ri-lightbulb-line"></i>
     Reasoning

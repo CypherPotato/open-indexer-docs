@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Agentes Sentinel | AIVAX </title>
+        <title>Fun&#231;&#245;es de protocolo | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="Agentes Sentinel | AIVAX ">
+        <meta name="title" content="Fun&#231;&#245;es de protocolo | AIVAX ">
 
 
         <link rel="icon" href="../assets/img/favicon.ico">
@@ -23,7 +23,7 @@
         <meta name="docfx:rel" content="../">
 
 
-        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/sentinel.md/#L1">
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/protocol-functions.md/#L1">
         <meta name="loc:inThisArticle" content="In this article">
         <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
         <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -122,45 +122,37 @@
                 </div>
 
                 <article data-uid="">
-<h1 id="agentes-sentinel">Agentes Sentinel</h1>
+<h1 id="funções-de-protocolo">Funções de protocolo</h1>
 
-<p>Os agentes de chat Sentinel são modelos com parâmetros otimizados para conversação de chat em tempo real, com instruções que aprimoram a atenção do modelo para determinadas tarefas e permite o uso de pesquisação na internet em tempo real.</p>
-<p>Esses modelos são constantemente atualizados para utilizar as últimas tecnologias e recursos disponíveis por IA generativas, portanto, os modelos internos usados pelos modelos Sentinel podem ser constantemente atualizados.</p>
-<p>Atualmente, os modelos Sentinel estão disponíveis em três categorias:</p>
+<p>As funções de protocolo da AIVAX, ou <em>server-side functions</em>, é uma implementação customizada de chamadas de função criada pela AIVAX que permite que o modelo siga estritamente um contexto de função que não é baseada em documentos JSON.</p>
+<p>As funções de protocolo permitem a tomada de ações no lado do servidor da AIVAX, removendo a necessidade de implementação da função no lado do cliente e integrando com aplicações e serviços existentes.</p>
+<img src="/assets/diagrams/protocol-functions-1.drawio.svg">
+<p>Essas funções esperam um <strong>callback</strong> através de uma URL, e quando o modelo decide chamar a função, o callback é acessado com os parâmetros informados pela própria assistente. A assistente não sabe qual URL ela está chamando, pois a mesma permanece invisível tanto para a assistente quanto para o usuário.</p>
+<h2 id="definindo-funções-de-protocolo">Definindo funções de protocolo</h2>
+<p>Essas funções são definidas no <a href="/entities/ai-gateway.md">AI-gateway</a>, o que permite a criação de agentes inteligentes que realizam ações sem intervenção humana. Elas seguem uma sintaxe simples, esperam o nome da função, uma descrição do que ela faz e os parâmetros de invocação.</p>
+<h3 id="escolhendo-o-nome-da-função">Escolhendo o nome da função</h3>
+<p>O nome da função deve ser simples e determinístico ao que essa função faz. Evite nomes difíceis de advinhar ou que não remetam ao papel da função, pois a assistente pode se confundir e não chamar a função quando apropriado.</p>
+<p>Como um exemplo, vamos pensar em uma função de consultar um usuário em um banco de dados externo. Os nomes a seguir são bons exemplos para considerar para a chamada:</p>
 <ul>
-<li><strong>sentinel</strong>: altamente inteligente e otimizado para realizar tarefas desafiadoras e resolver problemas complexos.</li>
-<li><strong>sentinel-mini</strong>: modelo altamente capaz, com poder de raciocínio e solução de problemas complexos.</li>
-<li><strong>sentinel-core</strong>: modelo base otimizado para conversação e entendimento aprimorado.</li>
+<li><code>search-user</code></li>
+<li><code>query-user</code></li>
+<li><code>search_user</code></li>
 </ul>
-<p>Sempre que um modelo Sentinel for ter seu preço alterado, uma notificação é enviada para todos os usuários que utilizam o modelo e uma notificação é adicionada na página de notificações.</p>
-<p>Estes modelos devem ser utilizados para conversação com o usuário final e não são recomendados para demais tarefas como uso de funções, respostas estruturadas e etc.</p>
-<h2 id="principais-recursos">Principais recursos</h2>
-<p>O diferencial dos modelos Sentinel são os recursos providos &quot;out-of-the-box&quot; por ele, dentre eles:</p>
+<p>Nomes ruins incluem:</p>
 <ul>
-<li><strong>Otimizado para chat</strong>: os modelos Sentinel possuem instruções claras que faz o modelo adaptar o tom de conversa ao mesmo do usuário, indicativos de humor e objetivo.</li>
-<li><strong>Raciocínio</strong>: todos os modelos Sentinel possuem um mecanismo pensamento profundo personalizado, otimizado para raciocinar com base em suas funções fornecidas, inclusive <a href="/docs/protocol-functions">funções de protocolo</a>, para fornecer uma resposta detalhada ao usuário.</li>
-<li><strong>Pesquisa na internet</strong>: os modelos Sentinel conseguem naturalmente pesquisar na internet para complementar sua resposta em diferentes cenários, como obter notícias locais, dados meteorológicos ou dados sobre um assunto ou nicho específico.</li>
-<li><strong>Acessar links</strong>: os modelos Sentinel conseguem acessar arquivos e páginas fornecidas pelo usuário. Ele consegue acessar páginas HTML, vários arquivos textuais, até mesmo documentos do Word e PDF.</li>
-<li><strong>Execução de código</strong>: os modelos Sentinel conseguem executar código para realizarem cálculos matemáticos, financeiros ou até mesmo ajudar o usuário com diversas tarefas.</li>
-<li><strong>Memória persistente</strong>: os modelos Sentinel conseguem identificar fatos relevantes ao usuário que devem ser persistidos durante várias conversas, até mesmo após a conversa atual ser limpada ou renovada.</li>
+<li><code>search</code> (pouco abrangente)</li>
+<li><code>query-user-in-database-data</code> (nome muito grande)</li>
+<li><code>pesquisa-usuario</code> (nome não em inglês)</li>
+<li><code>search user</code> (nome com caracteres impróprios)</li>
 </ul>
-<p>Além disso, todos os modelos Sentinel possuem uma cadeia de execução das funções. Por exemplo, você pode pedir para um modelo Sentinel acessar a temperatura de uma cidade, converter para JSON e chamar uma URL externa com a resposta.</p>
-<div class="NOTE">
-<h5>Note</h5>
-<p>Importante: o contexto do Sentinel inclui uma descrição detalhada de seu comportamento e suas funções e ocupa aproximadamente <strong>~1.300</strong> tokens que serão anexados em todas as mensagens enviadas pelo usuário.</p>
-</div>
-<h2 id="sentinel-router">Sentinel Router</h2>
-<p>Você também pode usar o modelo de roteamento <strong>sentinel-router</strong> que funciona como um modelo de roteador entre os três modelos. Um roteador automaticamente escolhe qual o melhor modelo para resolver o problema do usuário de acordo com a complexidade de seu problema.</p>
-<p>Como funciona? Um modelo menor analisa o contexto da pergunta e avalia o grau de complexidade que o usuário está enfrentando, e esse modelo responde com o indicador de qual modelo é melhor para responder aquela pergunta. O roteador decide qual é o melhor modelo por mensagem e não por conversa.</p>
-<p>Um modelo de roteador pode ajudar à reduzir custos e manter a qualidade da conversação, usando recursos de pensamento profundo somente quando necessário.</p>
-<h2 id="sentinel-reasoning">Sentinel Reasoning</h2>
-<p>O mecanismo de pensamento profundo do Sentinel é um motor de raciocínio plug-and-play que fornece todo o contexto necessário para o modelo Sentinel responder a pergunta do usuário. Durante o processo de pensamento, Sentinel chama funções, realiza cálculos e executa código, visando fornecer uma resposta elaborada e precisa para o usuário, mesmo usado com modelos menores e menos inteligentes.</p>
-<p>A precificação do reasoning do Sentinel e os tokens do Sentinel são separadas: você perceberá que ao usar o modelo Sentinel, verá lançamentos do roteamento, raciocínio e inferência. Essa divisão é feita para fornecer transparência sobre o uso do Sentinel.</p>
+<p>Tendo o nome da função, podemos pensar na descrição da função.</p>
+<h3 id="escolhendo-a-descrição-da-função">Escolhendo a descrição da função.</h3>
+<p>A descrição da função deve explicar conceitualmente duas situações: o que ela faz e quando deve ser chamada pela assistente.</p>
 
 </article>
 
                 <div class="contribution d-print-none">
-                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/sentinel.md/#L1" class="edit-link">Edit this page</a>
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/protocol-functions.md/#L1" class="edit-link">Edit this page</a>
                 </div>
 
                 <div class="next-article d-print-none border-top" id="nextArticle"></div>

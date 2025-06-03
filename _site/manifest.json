@@ -12,6 +12,16 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "assets/diagrams/protocol-functions-1.drawio.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/diagrams/protocol-functions-1.drawio.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "assets/flag/brazil.png",
       "output": {
         "resource": {
@@ -622,6 +632,16 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "docs/en/protocol-functions.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/en/protocol-functions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "docs/en/sentinel.md",
       "output": {
         ".html": {
@@ -729,6 +749,16 @@
       "output": {
         ".html": {
           "relative_path": "docs/models.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/protocol-functions.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/protocol-functions.html"
         }
       },
       "version": ""
