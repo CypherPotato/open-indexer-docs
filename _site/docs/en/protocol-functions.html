@@ -124,14 +124,14 @@
                 <article data-uid="">
 <h1 id="protocol-functions">Protocol Functions</h1>
 
-<p>The protocol functions of AIVAX, or <em>server-side functions</em>, are a customized implementation of function calls created by AIVAX that allows the model to strictly follow a function context that is not based on JSON documents.</p>
+<p>The protocol functions of AIVAX, or <em>server-side functions</em>, are a customized implementation of function calls created by AIVAX that allows the model to strictly follow a function context that is not based on JSON documents. This feature is available for models with <a href="/docs/en/sentinel">Sentinel reasoning</a>.</p>
 <p>The protocol functions allow actions to be taken on the AIVAX server side, removing the need to implement the function on the client side and integrating with existing applications and services.</p>
 <img src="/assets/diagrams/protocol-functions-1.drawio.svg">
 <p>These functions expect a <strong>callback</strong> through a URL, and when the model decides to call the function, the callback is accessed with the parameters informed by the assistant itself. The assistant does not know which URL it is calling, as it remains invisible to both the assistant and the user.</p>
 <h2 id="defining-protocol-functions">Defining Protocol Functions</h2>
 <p>These functions are defined in the <a href="/entities/ai-gateway.md">AI-gateway</a>, which allows the creation of intelligent agents that perform actions without human intervention. They follow a simple syntax, expecting the function name, a description of what it does, and the invocation parameters.</p>
 <h3 id="choosing-the-function-name">Choosing the Function Name</h3>
-<p>The function name must be simple and deterministic to what the function does. Avoid names that are difficult to guess or that do not refer to the function's role, as the assistant may become confused and not call the function when appropriate.</p>
+<p>The function name must be simple and deterministic to what the function does. Avoid names that are difficult to guess or do not refer to the function's role, as the assistant may become confused and not call the function when appropriate.</p>
 <p>As an example, let's consider a function to query a user in an external database. The following names are good examples to consider for the call:</p>
 <ul>
 <li><code>search-user</code></li>
@@ -147,7 +147,9 @@
 </ul>
 <p>Having the function name, we can think about the function description.</p>
 <h3 id="choosing-the-function-description">Choosing the Function Description</h3>
-<p>The function description must conceptually explain two situations: what it does and when it should be called by the assistant.</p>
+<p>The function description must conceptually explain two situations: what it does and when it should be called by the assistant. This description must include the scenarios that the assistant should consider calling it and when it should not be called, providing a few examples of calls (one-shot) and/or making the function rules explicit.</p>
+<h3 id="creating-the-endpoint-that-the-function-will-call">Creating the Endpoint that the Function will Call</h3>
+<h3 id="creating-the-function-definition">Creating the Function Definition</h3>
 
 </article>
 

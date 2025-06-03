@@ -124,7 +124,7 @@
                 <article data-uid="">
 <h1 id="funções-de-protocolo">Funções de protocolo</h1>
 
-<p>As funções de protocolo da AIVAX, ou <em>server-side functions</em>, é uma implementação customizada de chamadas de função criada pela AIVAX que permite que o modelo siga estritamente um contexto de função que não é baseada em documentos JSON.</p>
+<p>As funções de protocolo da AIVAX, ou <em>server-side functions</em>, é uma implementação customizada de chamadas de função criada pela AIVAX que permite que o modelo siga estritamente um contexto de função que não é baseada em documentos JSON. Esse recurso é disponível para modelos com <a href="/docs/sentinel">raciocínio Sentinel</a>.</p>
 <p>As funções de protocolo permitem a tomada de ações no lado do servidor da AIVAX, removendo a necessidade de implementação da função no lado do cliente e integrando com aplicações e serviços existentes.</p>
 <img src="/assets/diagrams/protocol-functions-1.drawio.svg">
 <p>Essas funções esperam um <strong>callback</strong> através de uma URL, e quando o modelo decide chamar a função, o callback é acessado com os parâmetros informados pela própria assistente. A assistente não sabe qual URL ela está chamando, pois a mesma permanece invisível tanto para a assistente quanto para o usuário.</p>
@@ -147,7 +147,9 @@
 </ul>
 <p>Tendo o nome da função, podemos pensar na descrição da função.</p>
 <h3 id="escolhendo-a-descrição-da-função">Escolhendo a descrição da função.</h3>
-<p>A descrição da função deve explicar conceitualmente duas situações: o que ela faz e quando deve ser chamada pela assistente.</p>
+<p>A descrição da função deve explicar conceitualmente duas situações: o que ela faz e quando deve ser chamada pela assistente. Essa descrição deve incluir os cenários que a assistente deve considerar chamar ela e quando não deve ser chamada, fornecendo poucos exemplos de chamadas (one-shot) e/ou tornando explícitas as regras da função.</p>
+<h3 id="criando-o-endpoint-que-a-função-chamará">Criando o endpoint que a função chamará</h3>
+<h3 id="criando-a-definição-da-função">Criando a definição da função</h3>
 
 </article>
 

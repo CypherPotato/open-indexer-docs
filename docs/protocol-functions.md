@@ -1,6 +1,6 @@
 # Funções de protocolo
 
-As funções de protocolo da AIVAX, ou _server-side functions_, é uma implementação customizada de chamadas de função criada pela AIVAX que permite que o modelo siga estritamente um contexto de função que não é baseada em documentos JSON.
+As funções de protocolo da AIVAX, ou _server-side functions_, é uma implementação customizada de chamadas de função criada pela AIVAX que permite que o modelo siga estritamente um contexto de função que não é baseada em documentos JSON. Esse recurso é disponível para modelos com [raciocínio Sentinel](/docs/sentinel).
 
 As funções de protocolo permitem a tomada de ações no lado do servidor da AIVAX, removendo a necessidade de implementação da função no lado do cliente e integrando com aplicações e serviços existentes.
 
@@ -33,4 +33,10 @@ Tendo o nome da função, podemos pensar na descrição da função.
 
 ### Escolhendo a descrição da função.
 
-A descrição da função deve explicar conceitualmente duas situações: o que ela faz e quando deve ser chamada pela assistente. 
+A descrição da função deve explicar conceitualmente duas situações: o que ela faz e quando deve ser chamada pela assistente. Essa descrição deve incluir os cenários que a assistente deve considerar chamar ela e quando não deve ser chamada, fornecendo poucos exemplos de chamadas (one-shot) e/ou tornando explícitas as regras da função.
+
+### Criando o endpoint que a função chamará
+
+
+
+### Criando a definição da função

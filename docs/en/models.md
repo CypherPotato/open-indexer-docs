@@ -34,7 +34,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 1.31 <small>/1M. tokens</small>
+                $ 1.31 <small>/1M tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -42,14 +42,14 @@ All prices are in United States dollars.
         Internet search:
     </small>
     <div>
-        $ 5.60 <small>/1.000 searches</small>
+        $ 5.60 <small>/1,000 searches</small>
     </div>
 </div><div class="item-pricing">
     <small>
         Sentinel reasoning:
     </small>
     <div>
-        $ 1.31 <small>/1m tokens</small>
+        $ 1.31 <small>/1M tokens</small>
     </div>
 </div>
     </td>
@@ -99,7 +99,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 0.88 <small>/1M. tokens</small>
+                $ 0.88 <small>/1M tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -107,84 +107,19 @@ All prices are in United States dollars.
         Internet search:
     </small>
     <div>
-        $ 5.60 <small>/1.000 searches</small>
+        $ 5.60 <small>/1,000 searches</small>
     </div>
 </div><div class="item-pricing">
     <small>
         Sentinel reasoning:
     </small>
     <div>
-        $ 1.31 <small>/1m tokens</small>
+        $ 1.31 <small>/1M tokens</small>
     </div>
 </div>
     </td>
     <td>
         Highly capable model, with reasoning power and complex problem-solving.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Input: accepts images
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Reasoning
-</div>
-<div>
-    <i class="ri-global-line"></i>
-    Internet search
-</div>
-<div>
-    <i class="ri-link-m"></i>
-    Access links
-</div>
-<div>
-    <i class="ri-code-s-slash-line"></i>
-    Code execution
-</div>
-<div>
-    <i class="ri-chat-history-line"></i>
-    Persistent memory
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @aivax/sentinel-core
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Input + output:
-            </small>
-            <div>
-                $ 0.66 <small>/1M. tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-    <small>
-        Internet search:
-    </small>
-    <div>
-        $ 5.60 <small>/1.000 searches</small>
-    </div>
-</div><div class="item-pricing">
-    <small>
-        Sentinel reasoning:
-    </small>
-    <div>
-        $ 1.31 <small>/1m tokens</small>
-    </div>
-</div>
-    </td>
-    <td>
-        Cost-optimized model optimized for conversation and enhanced understanding.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -229,7 +164,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 0.66 <small>/1M. tokens</small>
+                $ 0.66 <small>/1M tokens</small>
             </div>
         </div>
         
@@ -295,7 +230,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 2.60 <small>/1M. tokens</small>
+                $ 2.60 <small>/1M tokens</small>
             </div>
         </div>
         
@@ -345,7 +280,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 2.76 <small>/1M. tokens</small>
+                $ 2.76 <small>/1M tokens</small>
             </div>
         </div>
         
@@ -395,7 +330,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 12.25 <small>/1M. tokens</small>
+                $ 12.25 <small>/1M tokens</small>
             </div>
         </div>
         
@@ -434,7 +369,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 4.65 <small>/1M. tokens</small>
+                $ 4.65 <small>/1M tokens</small>
             </div>
         </div>
         
@@ -473,7 +408,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 1.31 <small>/1M. tokens</small>
+                $ 1.31 <small>/1M tokens</small>
             </div>
         </div>
         
@@ -508,7 +443,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 1.31 <small>/1M. tokens</small>
+                $ 1.31 <small>/1M tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -516,7 +451,7 @@ All prices are in United States dollars.
         Internet search:
     </small>
     <div>
-        $ 39.20 <small>/1.000 searches</small>
+        $ 39.20 <small>/1,000 searches</small>
     </div>
 </div>
     </td>
@@ -546,7 +481,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 0.88 <small>/1M. tokens</small>
+                $ 0.88 <small>/1M tokens</small>
             </div>
         </div>
         
@@ -581,7 +516,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 0.88 <small>/1M. tokens</small>
+                $ 0.88 <small>/1M tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -589,7 +524,7 @@ All prices are in United States dollars.
         Internet search:
     </small>
     <div>
-        $ 39.20 <small>/1.000 searches</small>
+        $ 39.20 <small>/1,000 searches</small>
     </div>
 </div>
     </td>
@@ -619,7 +554,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 0.66 <small>/1M. tokens</small>
+                $ 0.66 <small>/1M tokens</small>
             </div>
         </div>
         
@@ -654,7 +589,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 0.33 <small>/1M. tokens</small>
+                $ 0.33 <small>/1M tokens</small>
             </div>
         </div>
         
@@ -708,7 +643,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 2.40 <small>/1M. tokens</small>
+                $ 2.40 <small>/1M tokens</small>
             </div>
         </div>
         
@@ -739,7 +674,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 1.40 <small>/1M. tokens</small>
+                $ 1.40 <small>/1M tokens</small>
             </div>
         </div>
         
@@ -774,7 +709,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 0.79 <small>/1M. tokens</small>
+                $ 0.79 <small>/1M tokens</small>
             </div>
         </div>
         
@@ -809,7 +744,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 0.23 <small>/1M. tokens</small>
+                $ 0.23 <small>/1M tokens</small>
             </div>
         </div>
         
@@ -859,7 +794,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 13.50 <small>/1M. tokens</small>
+                $ 13.50 <small>/1M tokens</small>
             </div>
         </div>
         
@@ -894,7 +829,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 11.00 <small>/1M. tokens</small>
+                $ 11.00 <small>/1M tokens</small>
             </div>
         </div>
         
@@ -929,7 +864,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 6.50 <small>/1M. tokens</small>
+                $ 6.50 <small>/1M tokens</small>
             </div>
         </div>
         
@@ -964,7 +899,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 3.00 <small>/1M. tokens</small>
+                $ 3.00 <small>/1M tokens</small>
             </div>
         </div>
         
@@ -999,7 +934,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 1.31 <small>/1M. tokens</small>
+                $ 1.31 <small>/1M tokens</small>
             </div>
         </div>
         
@@ -1034,7 +969,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 0.88 <small>/1M. tokens</small>
+                $ 0.88 <small>/1M tokens</small>
             </div>
         </div>
         
@@ -1088,7 +1023,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 1.23 <small>/1M. tokens</small>
+                $ 1.23 <small>/1M tokens</small>
             </div>
         </div>
         

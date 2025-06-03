@@ -7,8 +7,7 @@ Esses modelos são constantemente atualizados para utilizar as últimas tecnolog
 Atualmente, os modelos Sentinel estão disponíveis em três categorias:
 
 - **sentinel**: altamente inteligente e otimizado para realizar tarefas desafiadoras e resolver problemas complexos.
-- **sentinel-mini**: modelo altamente capaz, com poder de raciocínio e solução de problemas complexos.
-- **sentinel-core**: modelo base otimizado para conversação e entendimento aprimorado.
+- **sentinel-mini**: modelo altamente capaz, otimizado para custo, com poder de raciocínio e solução de problemas complexos.
 
 Sempre que um modelo Sentinel for ter seu preço alterado, uma notificação é enviada para todos os usuários que utilizam o modelo e uma notificação é adicionada na página de notificações.
 
@@ -33,7 +32,7 @@ Além disso, todos os modelos Sentinel possuem uma cadeia de execução das fun�
 
 ## Sentinel Router
 
-Você também pode usar o modelo de roteamento **sentinel-router** que funciona como um modelo de roteador entre os três modelos. Um roteador automaticamente escolhe qual o melhor modelo para resolver o problema do usuário de acordo com a complexidade de seu problema.
+Você também pode usar o modelo de roteamento **sentinel-router** que funciona como um modelo de roteador entre os modelos Sentinel. Um roteador automaticamente escolhe qual o melhor modelo para resolver o problema do usuário de acordo com a complexidade de seu problema.
 
 Como funciona? Um modelo menor analisa o contexto da pergunta e avalia o grau de complexidade que o usuário está enfrentando, e esse modelo responde com o indicador de qual modelo é melhor para responder aquela pergunta. O roteador decide qual é o melhor modelo por mensagem e não por conversa.
 
