@@ -84,9 +84,6 @@ Cria um novo chat client.
         // Opcional. Especifica quantas mensagens o usuário pode enviar por hora no chat. Essa opção é rastreada pelo userTag da sessão.
         "messagesPerHour": 30,
         
-        // Opcional. Especifica o máximo de tokens que uma mensagem do usuário pode conter. Esse campo só é válido quando usado em modelos integrados ao Open Indexer.
-        "userInputMaxTokens": 1024,
-        
         // Opcional. Especifica o limite de mensagens (para o usuário e IA) que uma sessão pode ter.
         "maxMessages": 300
     }

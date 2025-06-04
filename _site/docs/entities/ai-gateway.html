@@ -245,7 +245,19 @@
         &quot;flags&quot;: &quot;0&quot;,
 
         // Opcional. Passa um array de funções para a IA.
-        &quot;tools&quot;: null
+        &quot;tools&quot;: [],
+        
+        // Opcional. Ativa funções de protocolo para modelos Sentinel. Leia &quot;Protocol Functions&quot; para saber mais.
+        &quot;protocolFunctions&quot;: [
+            {
+                &quot;name&quot;: &quot;get-weather&quot;,
+                &quot;description&quot;: &quot;Use essa função para obter dados de clima para a localização informada.&quot;,
+                &quot;callbackUrl&quot;: &quot;https://my-service.com/ai-service&quot;,
+                &quot;contentFormat&quot;: {
+                    &quot;location&quot;: &quot;nome da cidade&quot;
+                }
+            }
+        ]
     }
 }
 </code></pre>

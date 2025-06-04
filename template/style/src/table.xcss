@@ -2,7 +2,6 @@ article {
 
     table,
     .table {
-        --bs-table-bg: --bs-body-contrast !important;
 
         thead {
             opacity: .75;

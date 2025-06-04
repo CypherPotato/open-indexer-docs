@@ -84,10 +84,7 @@ Create a new chat client.
         // Optional. Specifies how many messages the user can send per hour in the chat. This option is tracked by the userTag of the session.
         "messagesPerHour": 30,
         
-        // Optional. Specifies the maximum number of tokens that a user message can contain. This field is only valid when used with models integrated with the Open Indexer.
-        "userInputMaxTokens": 1024,
-        
-        // Optional. Specifies the maximum number of messages (for the user and AI) that a session can have.
+        // Optional. Specifies the limit of messages (for the user and AI) that a session can have.
         "maxMessages": 300
     }
 }
@@ -202,11 +199,11 @@ Get details of an existing chat client.
 
 A chat session is where you create a conversation between your chat client and the user. You can call this endpoint providing additional context for the conversation, such as the user's name, location, etc.
 
-A chat session expires after some time for security reasons of the generated access token. When you call this endpoint providing a `tag`, you can call the same endpoint multiple times and get the active chat session for the informed tag, or create a new chat session if there is no active session.
+A chat session expires after a certain time for security reasons of the generated access token. When you call this endpoint providing a `tag`, you can call the same endpoint multiple times and get the active chat session for the informed tag, or create a new chat if there is no ongoing session.
 
 A chat session also restores all conversation messages from the same session after disconnection. The user can clear the conversation by clicking the clear conversation button in the top right corner of the chat client. This session uses the limits defined by the chat client, such as the maximum number of messages and tokens in the conversation.
 
-A session is automatically renewed for another 3 days when receiving a user message.
+A session is automatically renewed for another 3 days when receiving a message from the user.
 
 > [!IMPORTANT]
 >

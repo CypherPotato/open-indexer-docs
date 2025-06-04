@@ -138,7 +138,19 @@ Não é necessário ter uma coleção para vincular no seu gateway de IA. Você 
         "flags": "0",
 
         // Opcional. Passa um array de funções para a IA.
-        "tools": null
+        "tools": [],
+        
+        // Opcional. Ativa funções de protocolo para modelos Sentinel. Leia "Protocol Functions" para saber mais.
+        "protocolFunctions": [
+            {
+                "name": "get-weather",
+                "description": "Use essa função para obter dados de clima para a localização informada.",
+                "callbackUrl": "https://my-service.com/ai-service",
+                "contentFormat": {
+                    "location": "nome da cidade"
+                }
+            }
+        ]
     }
 }
 ```
