@@ -248,7 +248,7 @@
 
     // o conteúdo do documento que será criado ou sobreposto caso o nome já exista
     &quot;contents&quot;: &quot;Conteúdo do meu documento&quot;,
-
+    
     // parâmetros explicados anteriormente
     &quot;reference&quot;: null,
     &quot;tags&quot;: [&quot;products&quot;, &quot;my-product&quot;]
@@ -260,8 +260,8 @@
     &quot;data&quot;: {
         &quot;documentId&quot;: &quot;0196663c-3a15-72c7-98e6-b496f8e8bb8c&quot;,
         
-        // o estado da operação indica se o documento foi modificado &quot;Modified&quot; ou criado &quot;Created&quot;.
-        &quot;state&quot;: &quot;Modified&quot;
+        // o estado da operação indica se o documento foi modificado &quot;Modified&quot; ou criado &quot;Created&quot;. Sempre virá apenas um valor no array.
+        &quot;state&quot;: [&quot;Modified&quot;]
     }
 }
 </code></pre>
@@ -299,7 +299,7 @@
                     &quot;Clientes&quot;
                 ],
                 &quot;contentsPreview&quot;: &quot;Um cliente é um cadastro na sua platafor...&quot;,
-                &quot;indexState&quot;: &quot;Indexed&quot;
+                &quot;indexState&quot;: [&quot;Indexed&quot;]
             },
             {
                 &quot;id&quot;: &quot;01968452-6a53-7ce3-adad-fad32d508856&quot;,
@@ -310,7 +310,7 @@
                     &quot;Clientes&quot;
                 ],
                 &quot;contentsPreview&quot;: &quot;No cadastro do cliente, é possível modif...&quot;,
-                &quot;indexState&quot;: &quot;Indexed&quot;
+                &quot;indexState&quot;: [&quot;Indexed&quot;]
             },
             ...
         ]
@@ -335,7 +335,7 @@
         
         // representa a situação de indexação do documento.
         // valores válidos: Queud, Indexed, Cancelled
-        &quot;state&quot;: &quot;Indexed&quot;,
+        &quot;state&quot;: [&quot;Indexed&quot;],
 
         // conteúdo do documento indexado
         &quot;contents&quot;: &quot;...&quot;,

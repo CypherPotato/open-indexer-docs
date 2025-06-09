@@ -129,7 +129,7 @@ Essa indexação não é isenta de custo. O custo é relativo à quantidade de t
 
     // o conteúdo do documento que será criado ou sobreposto caso o nome já exista
     "contents": "Conteúdo do meu documento",
-
+    
     // parâmetros explicados anteriormente
     "reference": null,
     "tags": ["products", "my-product"]
@@ -144,8 +144,8 @@ Essa indexação não é isenta de custo. O custo é relativo à quantidade de t
     "data": {
         "documentId": "0196663c-3a15-72c7-98e6-b496f8e8bb8c",
         
-        // o estado da operação indica se o documento foi modificado "Modified" ou criado "Created".
-        "state": "Modified"
+        // o estado da operação indica se o documento foi modificado "Modified" ou criado "Created". Sempre virá apenas um valor no array.
+        "state": ["Modified"]
     }
 }
 ```
@@ -190,7 +190,7 @@ Esse filtro suporta expressões que auxiliam a filtrar o que você está procura
                     "Clientes"
                 ],
                 "contentsPreview": "Um cliente é um cadastro na sua platafor...",
-                "indexState": "Indexed"
+                "indexState": ["Indexed"]
             },
             {
                 "id": "01968452-6a53-7ce3-adad-fad32d508856",
@@ -201,7 +201,7 @@ Esse filtro suporta expressões que auxiliam a filtrar o que você está procura
                     "Clientes"
                 ],
                 "contentsPreview": "No cadastro do cliente, é possível modif...",
-                "indexState": "Indexed"
+                "indexState": ["Indexed"]
             },
             ...
         ]
@@ -233,7 +233,7 @@ Vê detalhes sobre um documento específico.
         
         // representa a situação de indexação do documento.
         // valores válidos: Queud, Indexed, Cancelled
-        "state": "Indexed",
+        "state": ["Indexed"],
 
         // conteúdo do documento indexado
         "contents": "...",

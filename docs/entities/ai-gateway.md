@@ -132,10 +132,10 @@ Não é necessário ter uma coleção para vincular no seu gateway de IA. Você 
 
         // Opcional. Especifica se o assistantPrefill e o stop devem ser incluídos na mensagem gerada pela assistente.
         "includePrefillingInMessages": false,
-
+        
         // Opcional. Especifica flags especiais para o modelo. Deixe como "0" para não usar nenhuma flag. As flags permitidas são:
         //      NoSystemInstruct: ao invés de usar system prompt, insere as instruções do system em uma mensagem de usuário
-        "flags": "0",
+        "flags": ["Flag1", "Flag2"],
 
         // Opcional. Passa um array de funções para a IA.
         "tools": [],

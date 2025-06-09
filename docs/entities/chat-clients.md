@@ -30,9 +30,9 @@ Cria um novo chat client.
     "clientParameters": {
         
         // Opcional. Especifica o código da linguagem que será usada no chat para maioria dos elementos, como mensagens de erro, botões, etc.
-        //      Valores: pt-BR, en
-        "languageCode": "pt-BR" | "en",
-
+        //      Valores: pt-BR, en, null (automático com base no navegador)
+        "languageCode": "pt-BR" | "en" | null,
+        
         // Opcional. Especifica um código JavaScript para executar no chat.
         "customScripts": null,
 
