@@ -25,53 +25,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <tr>
     <td>
         <code>
-            @aivax/sentinel-router
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada + saída:
-            </small>
-            <div>
-                $ 100,000,000.00 <small>/1M. tokens</small>
-            </div>
-        </div>
-        
-    </td>
-    <td>
-        Sentinel's router, which automatically selects the best Sentinel model to perform a task according to its complexity.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Raciocínio
-</div>
-<div>
-    <i class="ri-global-line"></i>
-    Pesquisa na internet
-</div>
-<div>
-    <i class="ri-link-m"></i>
-    Acessar links
-</div>
-<div>
-    <i class="ri-code-s-slash-line"></i>
-    Execução de código
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
             @aivax/sentinel
         </code>
     </td>
@@ -96,7 +49,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         Raciocínio Sentinel:
     </small>
     <div>
-        $ 101,000,000.00 <small>/1m tokens</small>
+        $ 1.00 <small>/1m tokens</small>
     </div>
 </div>
     </td>
@@ -161,7 +114,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         Raciocínio Sentinel:
     </small>
     <div>
-        $ 101,000,000.00 <small>/1m tokens</small>
+        $ 1.00 <small>/1m tokens</small>
     </div>
 </div>
     </td>
@@ -195,6 +148,53 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-chat-history-line"></i>
     Memória persistente
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @aivax/sentinel-router
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada + saída:
+            </small>
+            <div>
+                $ 0.40 <small>/1M. tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        Sentinel's router, which automatically selects the best Sentinel model to perform a task according to its complexity.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Raciocínio
+</div>
+<div>
+    <i class="ri-global-line"></i>
+    Pesquisa na internet
+</div>
+<div>
+    <i class="ri-link-m"></i>
+    Acessar links
+</div>
+<div>
+    <i class="ri-code-s-slash-line"></i>
+    Execução de código
 </div>
         </div>
     </td>
