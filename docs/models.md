@@ -84,6 +84,10 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-chat-history-line"></i>
     Memória persistente
 </div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
         </div>
     </td>
 </tr>
@@ -148,6 +152,10 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-chat-history-line"></i>
     Memória persistente
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
 </div>
         </div>
     </td>

@@ -22,6 +22,16 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "assets/diagrams/protocol-functions-2.drawio.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/diagrams/protocol-functions-2.drawio.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "assets/flag/brazil.png",
       "output": {
         "resource": {

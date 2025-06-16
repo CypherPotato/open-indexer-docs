@@ -12,8 +12,8 @@ items:
   href: models.md
 - name: Sentinel
   href: sentinel.md
-# - name: Funções server-side
-#   href: protocol-functions.md
+- name: Funções server-side
+  href: protocol-functions.md
 
 - name: Usando a API
 

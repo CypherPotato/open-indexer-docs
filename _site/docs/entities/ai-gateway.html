@@ -187,10 +187,10 @@
         
         // Opcional. ID da coleção que será usada como base de conhecimento pela IA.
         &quot;knowledgeCollectionId&quot;: &quot;01965b62-17c4-7258-9aa8-af5139799527&quot;,
-
+        
         // Opcional. Especifica quantos documentos devem ser anexados no contexto da IA.
         &quot;knowledgeBaseMaximumResults&quot;: 16,
-
+        
         // Opcional. Especifica a pontuação mínima de similaridade que a busca de documentos deve anexar no contexto da IA.
         &quot;knowledgeBaseMinimumScore&quot;: 0.55,
 
@@ -243,7 +243,7 @@
         // Opcional. Especifica flags especiais para o modelo. Deixe como &quot;0&quot; para não usar nenhuma flag. As flags permitidas são:
         //      NoSystemInstruct: ao invés de usar system prompt, insere as instruções do system em uma mensagem de usuário
         &quot;flags&quot;: [&quot;Flag1&quot;, &quot;Flag2&quot;],
-
+        
         // Opcional. Passa um array de funções para a IA.
         &quot;tools&quot;: [],
         
@@ -257,6 +257,11 @@
                     &quot;location&quot;: &quot;nome da cidade&quot;
                 }
             }
+        ],
+        
+        // Opcional. Fornece endpoints onde o modelo pode obter por funções de protocolo Sentinel. Leia &quot;Protocol Functions&quot; para saber mais.
+        &quot;protocolFunctionSources&quot;: [
+            &quot;https://my-external-api.com/api/scp/listings&quot;
         ]
     }
 }
@@ -376,13 +381,7 @@ data: [END]
             &quot;topP&quot;: null,
             &quot;presencePenalty&quot;: null,
             &quot;stop&quot;: null,
-            &quot;maxCompletionTokens&quot;: 4096,
-            &quot;systemInstruction&quot;: &quot;[...]&quot;,
-            &quot;userPromptTemplate&quot;: null,
-            &quot;assistantPrefill&quot;: null,
-            &quot;includePrefillingInMessages&quot;: false,
-            &quot;flags&quot;: &quot;0&quot;,
-            &quot;tools&quot;: null
+            ...
         }
     }
 }

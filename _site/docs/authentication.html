@@ -154,6 +154,31 @@
     }
 }
 </code></pre>
+<h2 id="autenticando-um-nonce">Autenticando um nonce</h2>
+<p>Nonces são gerados por webhooks e funções de protocolo para autenticar transações feitas pela AIVAX em conteúdos externos. Em requisições que incluam o cabeçalho <code>X-Aivax-Nonce</code>, valide esse token chamando este endpoint:</p>
+<div class="request-item get">
+    <span>POST</span>
+    <span>
+        /api/v1/auth/nonce
+    </span>
+</div>
+<pre><code class="lang-json">{
+    &quot;nonce&quot;: &quot;kgnjcyjy7ksz5eeocc4iw14bre.7cahcn8phfmrdkidhqaecp4e4w&quot;
+}
+</code></pre>
+<blockquote>
+<p>Observação: essa rota requer autenticação para funcionar.</p>
+</blockquote>
+<p>Uma resposta para um nonce validado é retornada neste formato:</p>
+<pre><code class="lang-json">{
+    &quot;message&quot;: null,
+    &quot;data&quot;: {
+        &quot;validated&quot;: true,
+        &quot;reason&quot;: &quot;The nonce informed is valid and has been consumed.&quot;
+    }
+}
+</code></pre>
+<p>Ao validar um nonce, ele é consumido, e não é possível validar o mesmo nonce novamente. Nonces devem ser validados em até 10 minutos de sua emissão.</p>
 
 </article>
 

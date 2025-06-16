@@ -22,9 +22,9 @@ Limit legends:
 | --- | --- | --- |
 | Document search | 50 | - |
 | Document insertion | - | 100 |
-| Inference | 5 | 500 |
-| Function | 5 | 500 |
-| Function (Live) | 3 | 30 |
+| Inference | 5 | 300 |
+| Function | 5 | 300 |
+| Function (Live) | 2 | 30 |
 
 # [Tier 1](#tab/tier1)
 
@@ -34,7 +34,7 @@ Limit legends:
 | Document insertion | - | 3,000 |
 | Inference | 75 | 1,000 |
 | Function | 50 | 1,000 |
-| Function (Live) | 5 | 200 |
+| Function (Live) | 20 | 500 |
 
 # [Tier 2](#tab/tier2)
 
@@ -44,7 +44,7 @@ Limit legends:
 | Document insertion | - | 10,000 |
 | Inference | 150 | - |
 | Function | 50 | 10,000 |
-| Function (Live) | 10 | 400 |
+| Function (Live) | 50 | 600 |
 
 # [Tier 3](#tab/tier3)
 
@@ -60,6 +60,6 @@ Limit legends:
 
 - **Document search**: includes semantic search of documents in a collection by the search endpoint `../collections/{id}/query`.
 - **Document insertion**: includes creation and modification of documents in a collection.
-- **Inference**: every inference call, either by the Open-AI compatible API, by the route `/ai-gateways/{id}/inference`, or by each message sent by a client chat session.
+- **Inference**: every inference call, either by the Open-AI compatible API, by the route `/ai-gateways/{id}/inference` or by each message sent by a client chat session.
 - **Function**: every function call `/functions`.
-- **Function (Live)**: every function call connected to the internet by the `webSearch` parameter. Does not include `fetch` calls.
+- **Function (Live)**: every function call connected to the internet through internet search (does not include `fetch`).

@@ -22,8 +22,6 @@ Através da propriedade `fetch`, você pode fornecer uma lista de URLs para sere
 
 O tamanho máximo que pode ser lido de uma URL do fetch é 10 Mb. O máximo de itens para o fetch são 10 URLs.
 
-Retentativas de geração do conteúdo JSON não pesquisam na internet novamente nem chamam o conteúdo do fetch.
-
 Requisições que pesquisam na internet trazem bons resultados e dispensam crawlers, scrappers ou a necessidade de pagar por uma API específica, mas podem ser custosas e relativamente lentas para serem obtidas. Considere usar um cache do lado da sua aplicação para dados que não precisam ser constantementes atualizados, como dados meteorológicos, estatísticas diárias, etc. A Open Indexer não realiza nenhum cache pelo nosso lado.
 
 #### Requisição
@@ -66,13 +64,6 @@ Requisições que pesquisam na internet trazem bons resultados e dispensam crawl
     
     // Opcional. Define o tempo limite em segundos para obter um JSON válido antes da API retornar um erro. Deve ser um número entre 1 e 3600 (uma hora).
     "timeout": 300,
-    
-    // Opcional. Permite que o modelo faça uma busca na internet para aperfeiçoar a construção da resposta.
-    "webSearch": {
-        
-        // Obrigatório. Ativa ou desativa a pesquisa na internet da função.
-        "enabled": true
-    },
     
     // Opcional. Adiciona recursos externos para complementar a geração da resposta.
     "fetch": {
@@ -131,6 +122,12 @@ Requisições que pesquisam na internet trazem bons resultados e dispensam crawl
 - A estrutura de saída do modelo é a mesma que informada em `responseSchema`.
 - A estrutura de entrada é indiferente.
 
+## Funções em tempo real com modelos Sentinel
+
+Você pode usar os agentes Sentinel para executar funções inteligentes que envolvam pesquisa na internet, execução de código, resolução de contas matemáticas e todas as outras funcionalidades que agentes Sentinel consigam fornecer.
+
+Agentes Sentinel são conectados à internet por padrão, portanto, é natural que ele pesquise algo na internet para complementar sua resposta. Ao usar chamar uma função com um modelo que pesquisa na internet, como um agente Sentinel, o limite de consumo contabilizado é de Live Function.
+
 ## Exemplos
 
 Confira exemplos de funções de IA para várias tarefas cotidianas:
@@ -170,6 +167,42 @@ Confira exemplos de funções de IA para várias tarefas cotidianas:
 }
 ```
 
+#### Avaliar uma expressão matemática
+
+<div class="request-item post">
+    <span>POST</span>
+    <span>
+        /api/v1/functions/json
+    </span>
+</div>
+
+```json
+{
+    "modelName": "@aivax/sentinel-mini",
+    "instructions": "Avalie a conta matemática informada e forneça o resultado.",
+    "responseSchema": {
+        "result": "..."
+    },
+    "inputData": {
+        "mathProblem": "12 + (42 / pi) ^ 20"
+    }
+}
+```
+
+```json
+{
+    "message": null,
+    "data": {
+        "result": {
+            "result": "3.3265063290400284e+22"
+        },
+        "attempt": 0,
+        "elapsedMilliseconds": 3869,
+        "warnings": []
+    }
+}
+```
+
 #### Trazer últimas notícias e clima de uma determinada cidade
 
 <div class="request-item post">
@@ -181,7 +214,7 @@ Confira exemplos de funções de IA para várias tarefas cotidianas:
 
 ```json
 {
-    "modelName": "@google/gemini-2.0-flash-lite",
+    "modelName": "@aivax/sentinel-mini",
     "instructions": "Pesquise as 5 últimas notícias e dados meteorológicos para a cidade informada.",
     "responseSchema": {
         "latestNews": [
@@ -199,9 +232,6 @@ Confira exemplos de funções de IA para várias tarefas cotidianas:
     },
     "inputData": {
         "city": "São José do Rio Preto"
-    },
-    "webSearch": {
-        "enabled": true
     }
 }
 ```
@@ -213,39 +243,40 @@ Confira exemplos de funções de IA para várias tarefas cotidianas:
         "result": {
             "latestNews": [
                 {
-                    "title": "GCM prende trio por tráfico de drogas no Calçadão de Rio Preto",
-                    "details": "A Guarda Civil Municipal (GCM) de São José do Rio Preto prendeu, na noite desta terça-feira (6), três pessoas suspeitas de tráfico de drogas no Calçadão [4, 9].",
-                    "link": "https://dhoje.com.br/gcm-prende-trio-por-trafico-de-drogas-no-calcadao-de-rio-preto/"
+                    "title": "Festival Paralímpico no Instituto Lucy Montoro",
+                    "details": "Familiares e pacientes do Instituto de Reabilitação Lucy Montoro de Rio Preto (SP) participaram neste sábado (14) do Festival Paralímpico.",
+                    "link": "https://g1.globo.com/sp/sao-jose-do-rio-preto-aracatuba/cidade/sao-jose-do-rio-preto/"
                 },
                 {
-                    "title": "Emprego Apoiado faz seleção para pessoas com deficiência",
-                    "details": "Distribuidora de bebidas de Rio Preto faz seleção nesta quinta-feira, 8/5, das 9h às 11h [4, 9].",
-                    "link": "https://dhoje.com.br/emprego-apoiado-faz-selecao-para-pessoas-com-deficiencia/"
+                    "title": "Investimento imobiliário na zona Leste de Rio Preto",
+                    "details": "Empreendimentos residenciais marcam o maior investimento imobiliário na zona Leste de Rio Preto.",
+                    "link": "https://www.gazetaderiopreto.com.br/"
                 },
                 {
-                    "title": "Fundo Social distribui Enxoval do Amor para gestantes em Rio Preto",
-                    "details": "Campanha do Fundo Social mobiliza voluntárias e população para apoiar mães em Rio Preto [4].",
-                    "link": "https://dhoje.com.br/fundo-social-distribui-enxoval-do-amor-para-gestantes-em-rio-preto/"
+                    "title": "Acidente na Washington Luís",
+                    "details": "Motociclista é hospitalizado após se envolver em acidente na Washington Luís, em Rio Preto.",
+                    "link": "https://www.diariodaregiao.com.br/cidades"
                 },
                 {
-                    "title": "PM abre 2,2 mil vagas para policiais da reserva atuarem",
-                    "details": "A Polícia Militar de São Paulo publicou, nesta terça-feira, 6, edital para contratação de 2.200 policiais militares da reserva para exercerem [4].",
-                    "link": "https://dhoje.com.br/pm-abre-22-mil-vagas-para-policiais-da-reserva-atuarem/"
+                    "title": "Curso gratuito para artistas",
+                    "details": "Curso gratuito ensina artistas de Rio Preto e região a escrever projetos para editais culturais.",
+                    "link": "https://www.diariodaregiao.com.br/"
                 },
                 {
-                    "title": "Rio Preto pode receber R$ 63,8 milhões do Governo do Estado de São Paulo para obras de melhoria",
-                    "details": "Prefeito busca R$ 63,8 milhões para viabilizar pacotaço de obras [4].",
-                    "link": "https://dhoje.com.br/infraestrutura-prefeito-busca-r-638-milhoes-para-viabilizar-pacotaco-de-obras/"
+                    "title": "PIX automático",
+                    "details": "Modalidade permite pagar contas recorrentes, como de energia, telefone, escolas, academias, entre outras, de forma automática pelo PIX.",
+                    "link": "https://g1.globo.com/sp/sao-jose-do-rio-preto-aracatuba/"
                 }
             ],
             "weather": {
-                "currentTemperature": 18,
+                "currentTemperature": 23,
                 "currentWeather": "sunny",
                 "forecast": "sunny"
             }
         },
-        "attempt": 1,
-        "elapsedMilliseconds": 4187
+        "attempt": 0,
+        "elapsedMilliseconds": 10990,
+        "warnings": []
     }
 }
 ```
@@ -261,17 +292,13 @@ Confira exemplos de funções de IA para várias tarefas cotidianas:
 
 ```json
 {
-    "modelName": "@google/gemini-1.5-flash-8b",
+    "modelName": "@aivax/sentinel-mini",
     "instructions": "Traga a contagem de casos e mortes por COVID-19.",
     "responseSchema": {
         "deathsWorld": 0,
         "deathsBrazil": 0,
         "casesWorld": 0,
         "casesBrazil": 0
-    },
-    "inputData": null,
-    "webSearch": {
-        "enabled": true
     }
 }
 ```
@@ -303,7 +330,7 @@ Confira exemplos de funções de IA para várias tarefas cotidianas:
 
 ```json
 {
-    "modelName": "@google/gemini-1.5-flash-8b",
+    "modelName": "@aivax/sentinel-mini",
     "instructions": "Pesquise e formate uma lista de 10 artistas no TOP 10 do streaming musical por gênero.",
     "responseSchema": {
         "edm": [
@@ -322,10 +349,7 @@ Confira exemplos de funções de IA para várias tarefas cotidianas:
             "..."
         ]
     },
-    "inputData": null,
-    "webSearch": {
-        "enabled": true
-    }
+    "inputData": null
 }
 ```
 
@@ -335,44 +359,45 @@ Confira exemplos de funções de IA para várias tarefas cotidianas:
     "data": {
         "result": {
             "edm": [
-                "David Guetta",
-                "Calvin Harris",
-                "The Chainsmokers",
                 "Marshmello",
-                "Avicii",
-                "Kygo",
-                "Tiesto",
-                "DJ Snake",
+                "Swedish House Mafia",
+                "Skrillex",
+                "Illenium",
+                "John Summit",
+                "Kaskade",
                 "Daft Punk",
-                "Skrillex"
+                "Deadmau5",
+                "Avicii",
+                "Calvin Harris"
             ],
             "rap": [
                 "Drake",
-                "Eminem",
-                "Kanye West",
-                "Juice WRLD",
-                "Travis Scott",
-                "XXXTENTACION",
                 "Kendrick Lamar",
-                "Future",
+                "Eminem",
+                "Travis Scott",
                 "J. Cole",
-                "Nicki Minaj"
+                "Nicki Minaj",
+                "21 Savage",
+                "Metro Boomin",
+                "Lil Wayne",
+                "Bad Bunny"
             ],
             "pop": [
                 "Taylor Swift",
-                "Drake",
-                "Bad Bunny",
+                "Bruno Mars",
                 "The Weeknd",
-                "Ed Sheeran",
-                "Ariana Grande",
-                "Justin Bieber",
+                "Lady Gaga",
                 "Billie Eilish",
-                "Rihanna",
-                "Bruno Mars"
+                "Sabrina Carpenter",
+                "Ariana Grande",
+                "Ed Sheeran",
+                "Post Malone",
+                "Doja Cat"
             ]
         },
-        "attempt": 1,
-        "elapsedMilliseconds": 8370
+        "attempt": 0,
+        "elapsedMilliseconds": 14961,
+        "warnings": []
     }
 }
 ```

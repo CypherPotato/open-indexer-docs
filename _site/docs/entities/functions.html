@@ -135,7 +135,6 @@
 <p>Se for o caso do modelo de busca online não conseguir estruturar um JSON válido, o modelo escolhido na requisição ficará responsável por essa tarefa, e irá começar o encadeamento de tentativas de geração. Modelos mais inteligentes acertam a geração nas primeiras tentativas.</p>
 <p>Através da propriedade <code>fetch</code>, você pode fornecer uma lista de URLs para serem anexadas no contexto da geração. O Open Indexer faz uma requisição GET para acessar os conteúdos fornecidos e renderiza-os no conteúdo da requisição. Somente respostas 2xx ou 3xx são aceitas e o conteúdo da resposta deve ser textual. Respostas em HTML são sanitizadas para incluirem somente o texto da página, sem script e CSS.</p>
 <p>O tamanho máximo que pode ser lido de uma URL do fetch é 10 Mb. O máximo de itens para o fetch são 10 URLs.</p>
-<p>Retentativas de geração do conteúdo JSON não pesquisam na internet novamente nem chamam o conteúdo do fetch.</p>
 <p>Requisições que pesquisam na internet trazem bons resultados e dispensam crawlers, scrappers ou a necessidade de pagar por uma API específica, mas podem ser custosas e relativamente lentas para serem obtidas. Considere usar um cache do lado da sua aplicação para dados que não precisam ser constantementes atualizados, como dados meteorológicos, estatísticas diárias, etc. A Open Indexer não realiza nenhum cache pelo nosso lado.</p>
 <h4 id="requisição">Requisição</h4>
 <div class="request-item post">
@@ -174,13 +173,6 @@
     
     // Opcional. Define o tempo limite em segundos para obter um JSON válido antes da API retornar um erro. Deve ser um número entre 1 e 3600 (uma hora).
     &quot;timeout&quot;: 300,
-    
-    // Opcional. Permite que o modelo faça uma busca na internet para aperfeiçoar a construção da resposta.
-    &quot;webSearch&quot;: {
-        
-        // Obrigatório. Ativa ou desativa a pesquisa na internet da função.
-        &quot;enabled&quot;: true
-    },
     
     // Opcional. Adiciona recursos externos para complementar a geração da resposta.
     &quot;fetch&quot;: {
@@ -235,6 +227,9 @@
 <li>A estrutura de saída do modelo é a mesma que informada em <code>responseSchema</code>.</li>
 <li>A estrutura de entrada é indiferente.</li>
 </ul>
+<h2 id="funções-em-tempo-real-com-modelos-sentinel">Funções em tempo real com modelos Sentinel</h2>
+<p>Você pode usar os agentes Sentinel para executar funções inteligentes que envolvam pesquisa na internet, execução de código, resolução de contas matemáticas e todas as outras funcionalidades que agentes Sentinel consigam fornecer.</p>
+<p>Agentes Sentinel são conectados à internet por padrão, portanto, é natural que ele pesquise algo na internet para complementar sua resposta. Ao usar chamar uma função com um modelo que pesquisa na internet, como um agente Sentinel, o limite de consumo contabilizado é de Live Function.</p>
 <h2 id="exemplos">Exemplos</h2>
 <p>Confira exemplos de funções de IA para várias tarefas cotidianas:</p>
 <h4 id="resumir-pedido-e-classificar-se-requer-atenção-ou-não">Resumir pedido e classificar se requer atenção ou não</h4>
@@ -266,6 +261,36 @@
     }
 }
 </code></pre>
+<h4 id="avaliar-uma-expressão-matemática">Avaliar uma expressão matemática</h4>
+<div class="request-item post">
+    <span>POST</span>
+    <span>
+        /api/v1/functions/json
+    </span>
+</div>
+<pre><code class="lang-json">{
+    &quot;modelName&quot;: &quot;@aivax/sentinel-mini&quot;,
+    &quot;instructions&quot;: &quot;Avalie a conta matemática informada e forneça o resultado.&quot;,
+    &quot;responseSchema&quot;: {
+        &quot;result&quot;: &quot;...&quot;
+    },
+    &quot;inputData&quot;: {
+        &quot;mathProblem&quot;: &quot;12 + (42 / pi) ^ 20&quot;
+    }
+}
+</code></pre>
+<pre><code class="lang-json">{
+    &quot;message&quot;: null,
+    &quot;data&quot;: {
+        &quot;result&quot;: {
+            &quot;result&quot;: &quot;3.3265063290400284e+22&quot;
+        },
+        &quot;attempt&quot;: 0,
+        &quot;elapsedMilliseconds&quot;: 3869,
+        &quot;warnings&quot;: []
+    }
+}
+</code></pre>
 <h4 id="trazer-últimas-notícias-e-clima-de-uma-determinada-cidade">Trazer últimas notícias e clima de uma determinada cidade</h4>
 <div class="request-item post">
     <span>POST</span>
@@ -274,7 +299,7 @@
     </span>
 </div>
 <pre><code class="lang-json">{
-    &quot;modelName&quot;: &quot;@google/gemini-2.0-flash-lite&quot;,
+    &quot;modelName&quot;: &quot;@aivax/sentinel-mini&quot;,
     &quot;instructions&quot;: &quot;Pesquise as 5 últimas notícias e dados meteorológicos para a cidade informada.&quot;,
     &quot;responseSchema&quot;: {
         &quot;latestNews&quot;: [
@@ -292,9 +317,6 @@
     },
     &quot;inputData&quot;: {
         &quot;city&quot;: &quot;São José do Rio Preto&quot;
-    },
-    &quot;webSearch&quot;: {
-        &quot;enabled&quot;: true
     }
 }
 </code></pre>
@@ -304,39 +326,40 @@
         &quot;result&quot;: {
             &quot;latestNews&quot;: [
                 {
-                    &quot;title&quot;: &quot;GCM prende trio por tráfico de drogas no Calçadão de Rio Preto&quot;,
-                    &quot;details&quot;: &quot;A Guarda Civil Municipal (GCM) de São José do Rio Preto prendeu, na noite desta terça-feira (6), três pessoas suspeitas de tráfico de drogas no Calçadão [4, 9].&quot;,
-                    &quot;link&quot;: &quot;https://dhoje.com.br/gcm-prende-trio-por-trafico-de-drogas-no-calcadao-de-rio-preto/&quot;
+                    &quot;title&quot;: &quot;Festival Paralímpico no Instituto Lucy Montoro&quot;,
+                    &quot;details&quot;: &quot;Familiares e pacientes do Instituto de Reabilitação Lucy Montoro de Rio Preto (SP) participaram neste sábado (14) do Festival Paralímpico.&quot;,
+                    &quot;link&quot;: &quot;https://g1.globo.com/sp/sao-jose-do-rio-preto-aracatuba/cidade/sao-jose-do-rio-preto/&quot;
                 },
                 {
-                    &quot;title&quot;: &quot;Emprego Apoiado faz seleção para pessoas com deficiência&quot;,
-                    &quot;details&quot;: &quot;Distribuidora de bebidas de Rio Preto faz seleção nesta quinta-feira, 8/5, das 9h às 11h [4, 9].&quot;,
-                    &quot;link&quot;: &quot;https://dhoje.com.br/emprego-apoiado-faz-selecao-para-pessoas-com-deficiencia/&quot;
+                    &quot;title&quot;: &quot;Investimento imobiliário na zona Leste de Rio Preto&quot;,
+                    &quot;details&quot;: &quot;Empreendimentos residenciais marcam o maior investimento imobiliário na zona Leste de Rio Preto.&quot;,
+                    &quot;link&quot;: &quot;https://www.gazetaderiopreto.com.br/&quot;
                 },
                 {
-                    &quot;title&quot;: &quot;Fundo Social distribui Enxoval do Amor para gestantes em Rio Preto&quot;,
-                    &quot;details&quot;: &quot;Campanha do Fundo Social mobiliza voluntárias e população para apoiar mães em Rio Preto [4].&quot;,
-                    &quot;link&quot;: &quot;https://dhoje.com.br/fundo-social-distribui-enxoval-do-amor-para-gestantes-em-rio-preto/&quot;
+                    &quot;title&quot;: &quot;Acidente na Washington Luís&quot;,
+                    &quot;details&quot;: &quot;Motociclista é hospitalizado após se envolver em acidente na Washington Luís, em Rio Preto.&quot;,
+                    &quot;link&quot;: &quot;https://www.diariodaregiao.com.br/cidades&quot;
                 },
                 {
-                    &quot;title&quot;: &quot;PM abre 2,2 mil vagas para policiais da reserva atuarem&quot;,
-                    &quot;details&quot;: &quot;A Polícia Militar de São Paulo publicou, nesta terça-feira, 6, edital para contratação de 2.200 policiais militares da reserva para exercerem [4].&quot;,
-                    &quot;link&quot;: &quot;https://dhoje.com.br/pm-abre-22-mil-vagas-para-policiais-da-reserva-atuarem/&quot;
+                    &quot;title&quot;: &quot;Curso gratuito para artistas&quot;,
+                    &quot;details&quot;: &quot;Curso gratuito ensina artistas de Rio Preto e região a escrever projetos para editais culturais.&quot;,
+                    &quot;link&quot;: &quot;https://www.diariodaregiao.com.br/&quot;
                 },
                 {
-                    &quot;title&quot;: &quot;Rio Preto pode receber R$ 63,8 milhões do Governo do Estado de São Paulo para obras de melhoria&quot;,
-                    &quot;details&quot;: &quot;Prefeito busca R$ 63,8 milhões para viabilizar pacotaço de obras [4].&quot;,
-                    &quot;link&quot;: &quot;https://dhoje.com.br/infraestrutura-prefeito-busca-r-638-milhoes-para-viabilizar-pacotaco-de-obras/&quot;
+                    &quot;title&quot;: &quot;PIX automático&quot;,
+                    &quot;details&quot;: &quot;Modalidade permite pagar contas recorrentes, como de energia, telefone, escolas, academias, entre outras, de forma automática pelo PIX.&quot;,
+                    &quot;link&quot;: &quot;https://g1.globo.com/sp/sao-jose-do-rio-preto-aracatuba/&quot;
                 }
             ],
             &quot;weather&quot;: {
-                &quot;currentTemperature&quot;: 18,
+                &quot;currentTemperature&quot;: 23,
                 &quot;currentWeather&quot;: &quot;sunny&quot;,
                 &quot;forecast&quot;: &quot;sunny&quot;
             }
         },
-        &quot;attempt&quot;: 1,
-        &quot;elapsedMilliseconds&quot;: 4187
+        &quot;attempt&quot;: 0,
+        &quot;elapsedMilliseconds&quot;: 10990,
+        &quot;warnings&quot;: []
     }
 }
 </code></pre>
@@ -348,17 +371,13 @@
     </span>
 </div>
 <pre><code class="lang-json">{
-    &quot;modelName&quot;: &quot;@google/gemini-1.5-flash-8b&quot;,
+    &quot;modelName&quot;: &quot;@aivax/sentinel-mini&quot;,
     &quot;instructions&quot;: &quot;Traga a contagem de casos e mortes por COVID-19.&quot;,
     &quot;responseSchema&quot;: {
         &quot;deathsWorld&quot;: 0,
         &quot;deathsBrazil&quot;: 0,
         &quot;casesWorld&quot;: 0,
         &quot;casesBrazil&quot;: 0
-    },
-    &quot;inputData&quot;: null,
-    &quot;webSearch&quot;: {
-        &quot;enabled&quot;: true
     }
 }
 </code></pre>
@@ -384,7 +403,7 @@
     </span>
 </div>
 <pre><code class="lang-json">{
-    &quot;modelName&quot;: &quot;@google/gemini-1.5-flash-8b&quot;,
+    &quot;modelName&quot;: &quot;@aivax/sentinel-mini&quot;,
     &quot;instructions&quot;: &quot;Pesquise e formate uma lista de 10 artistas no TOP 10 do streaming musical por gênero.&quot;,
     &quot;responseSchema&quot;: {
         &quot;edm&quot;: [
@@ -403,10 +422,7 @@
             &quot;...&quot;
         ]
     },
-    &quot;inputData&quot;: null,
-    &quot;webSearch&quot;: {
-        &quot;enabled&quot;: true
-    }
+    &quot;inputData&quot;: null
 }
 </code></pre>
 <pre><code class="lang-json">{
@@ -414,44 +430,45 @@
     &quot;data&quot;: {
         &quot;result&quot;: {
             &quot;edm&quot;: [
-                &quot;David Guetta&quot;,
-                &quot;Calvin Harris&quot;,
-                &quot;The Chainsmokers&quot;,
                 &quot;Marshmello&quot;,
-                &quot;Avicii&quot;,
-                &quot;Kygo&quot;,
-                &quot;Tiesto&quot;,
-                &quot;DJ Snake&quot;,
+                &quot;Swedish House Mafia&quot;,
+                &quot;Skrillex&quot;,
+                &quot;Illenium&quot;,
+                &quot;John Summit&quot;,
+                &quot;Kaskade&quot;,
                 &quot;Daft Punk&quot;,
-                &quot;Skrillex&quot;
+                &quot;Deadmau5&quot;,
+                &quot;Avicii&quot;,
+                &quot;Calvin Harris&quot;
             ],
             &quot;rap&quot;: [
                 &quot;Drake&quot;,
-                &quot;Eminem&quot;,
-                &quot;Kanye West&quot;,
-                &quot;Juice WRLD&quot;,
-                &quot;Travis Scott&quot;,
-                &quot;XXXTENTACION&quot;,
                 &quot;Kendrick Lamar&quot;,
-                &quot;Future&quot;,
+                &quot;Eminem&quot;,
+                &quot;Travis Scott&quot;,
                 &quot;J. Cole&quot;,
-                &quot;Nicki Minaj&quot;
+                &quot;Nicki Minaj&quot;,
+                &quot;21 Savage&quot;,
+                &quot;Metro Boomin&quot;,
+                &quot;Lil Wayne&quot;,
+                &quot;Bad Bunny&quot;
             ],
             &quot;pop&quot;: [
                 &quot;Taylor Swift&quot;,
-                &quot;Drake&quot;,
-                &quot;Bad Bunny&quot;,
+                &quot;Bruno Mars&quot;,
                 &quot;The Weeknd&quot;,
-                &quot;Ed Sheeran&quot;,
-                &quot;Ariana Grande&quot;,
-                &quot;Justin Bieber&quot;,
+                &quot;Lady Gaga&quot;,
                 &quot;Billie Eilish&quot;,
-                &quot;Rihanna&quot;,
-                &quot;Bruno Mars&quot;
+                &quot;Sabrina Carpenter&quot;,
+                &quot;Ariana Grande&quot;,
+                &quot;Ed Sheeran&quot;,
+                &quot;Post Malone&quot;,
+                &quot;Doja Cat&quot;
             ]
         },
-        &quot;attempt&quot;: 1,
-        &quot;elapsedMilliseconds&quot;: 8370
+        &quot;attempt&quot;: 0,
+        &quot;elapsedMilliseconds&quot;: 14961,
+        &quot;warnings&quot;: []
     }
 }
 </code></pre>

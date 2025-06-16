@@ -127,7 +127,7 @@
 <p>The AI gateways are a service provided by the Open Indexer to create an inference tunnel between an LLM model and a knowledge base. It is possible to:</p>
 <ul>
 <li>Create a model with customized instructions</li>
-<li>Use a model provided by you through an OpenAI compatible endpoint, or use a model made available by the Open Indexer</li>
+<li>Use a model provided by you through an OpenAI-compatible endpoint, or use a model made available by the Open Indexer</li>
 <li>Customize inference parameters, such as temperature, top_p, prefill</li>
 <li>Use a knowledge collection as the foundation for AI responses</li>
 </ul>
@@ -138,24 +138,24 @@
 <p>You can see the available models on the <a href="/docs/en/models">models page</a>.</p>
 <h2 id="choosing-a-search-strategy">Choosing a search strategy</h2>
 <p>If you are using a knowledge collection with an AI model, you can choose a strategy that the AI will use to perform an information search. Each strategy is more refined than the other. Some create better results than others, but it is essential to perform practical tests with several strategies to understand which one fits best in the model, conversation, and user tone.</p>
-<p>It may be necessary to make adjustments to the system prompt to better inform the AI how to consider the documents attached to the conversation. The documents are attached as a user message, limited to the parameters you define in the acquisition strategy.</p>
+<p>It may be necessary to make adjustments to the system prompt to better inform the AI how to consider the attached documents in the conversation. The documents are attached as a user message, limited to the parameters you define in the acquisition strategy.</p>
 <p>Rewrite strategies usually generate the best results at a low latency and cost. The rewrite model used always has the lowest cost, usually chosen by an internal pool that decides which model has the lowest latency at the moment.</p>
-<p>Strategies without rewrite cost:</p>
+<p>Strategies without rewriting cost:</p>
 <ul>
-<li><code>Plain</code>: the default strategy. It is the least optimized and has no rewrite cost: the last user message is used as a search term to search the attached collection of the gateway.</li>
-<li><code>Concatenate</code>: concatenates the last N user messages into lines, and then the result of the concatenation is used as a search term.</li>
+<li><code>Plain</code>: the default strategy. It is the least optimized and has no rewriting cost: the last user message is used as a search term to search the attached collection.</li>
+<li><code>Concatenate</code>: concatenates the last N user messages in lines, and then the result of the concatenation is used as a search term.</li>
 </ul>
-<p>Strategies with rewrite cost (inference tokens are charged):</p>
+<p>Strategies with rewriting cost (inference tokens are charged):</p>
 <ul>
 <li><code>UserRewrite</code>: rewrites the last N user messages using a smaller model, creating a contextualized question about what the user means.</li>
 <li><code>FullRewrite</code>: rewrites the last N*2 chat messages using a smaller model. Similar to <code>UserRewrite</code>, but also considers the assistant's messages in formulating the new question. It usually creates the best questions, with a slightly higher cost. It is the most stable and consistent strategy. It works with any model.</li>
 </ul>
-<p>Function strategies:</p>
+<p>Strategy functions:</p>
 <ul>
-<li><code>QueryFunction</code>: provides a search function in the integrated collection for the AI model. You should adjust the system instructions to define the ideal scenarios for the model to call this function when necessary. It may not work as well with smaller models.</li>
+<li><code>QueryFunction</code>: provides a search function in the integrated collection for the AI model. You should adjust the system instructions to define the ideal scenarios for the model to call this function when necessary. It may not work as well in smaller models.</li>
 </ul>
 <h2 id="using-ai-functions-tools">Using AI functions (tools)</h2>
-<p>At the moment, it is not possible to specify function calls through our API, either through the AI-Gateway or the OpenAI compatible API. This feature is on our radar for future implementation.</p>
+<p>At the moment, it is not possible to specify function calls through our API, either through the AI-Gateway or the OpenAI-compatible API. This feature is on our radar for future implementation.</p>
 <p>If this is critical for your AI model to work, you can use the <a href="/docs/en/search">document search API</a> in your model.</p>
 <h2 id="creating-an-ai-gateway">Creating an AI gateway</h2>
 <p>If you are using a model provided by you, have the following in hand:</p>
@@ -187,10 +187,10 @@
         
         // Optional. ID of the collection that will be used as the knowledge base by the AI.
         &quot;knowledgeCollectionId&quot;: &quot;01965b62-17c4-7258-9aa8-af5139799527&quot;,
-
+        
         // Optional. Specifies how many documents should be attached to the AI context.
         &quot;knowledgeBaseMaximumResults&quot;: 16,
-
+        
         // Optional. Specifies the minimum similarity score that the document search should attach to the AI context.
         &quot;knowledgeBaseMinimumScore&quot;: 0.55,
 
@@ -206,7 +206,7 @@
             // Optional. Specifies the number of messages that should be considered for the UserRewrite and FullRewrite strategies. Note: for FullRewrite, the value is always multiplied by 2 to consider assistant messages.
             &quot;rewriteContextSize&quot;: 3,
 
-            // Optional. Specifies the number of user messages that should be concatenated into the search term.
+            // Optional. Specifies the number of user messages that should be concatenated in the search term.
             &quot;concatenateContextSize&quot;: 3
         }
 
@@ -229,7 +229,7 @@
         &quot;maxCompletionTokens&quot;: 4096,
         
         // Optional. Specifies the system prompt used in the model.
-        &quot;systemInstruction&quot;: &quot;You are a helpful assistant.&quot;,
+        &quot;systemInstruction&quot;: &quot;You are a friendly assistant.&quot;,
 
         // Optional. Transforms the user's question into the indicated format, where &quot;{prompt}&quot; is the user's original prompt.
         &quot;userPromptTemplate&quot;: null,
@@ -239,11 +239,11 @@
 
         // Optional. Specifies whether the assistantPrefill and stop should be included in the message generated by the assistant.
         &quot;includePrefillingInMessages&quot;: false,
-
-        // Optional. Specifies special flags for the model. Leave as &quot;0&quot; to not use any flag. The allowed flags are:
-        //      NoSystemInstruct: instead of using system prompt, inserts system instructions into a user message
-        &quot;flags&quot;: &quot;0&quot;,
-
+        
+        // Optional. Specifies special flags for the model. Leave as &quot;0&quot; to not use any flags. The allowed flags are:
+        //      NoSystemInstruct: instead of using the system prompt, insert the system instructions in a user message
+        &quot;flags&quot;: [&quot;Flag1&quot;, &quot;Flag2&quot;],
+        
         // Optional. Passes an array of functions to the AI.
         &quot;tools&quot;: [],
         
@@ -257,6 +257,11 @@
                     &quot;location&quot;: &quot;city name&quot;
                 }
             }
+        ],
+        
+        // Optional. Provides endpoints where the model can obtain protocol functions by Sentinel. Read &quot;Protocol Functions&quot; to learn more.
+        &quot;protocolFunctionSources&quot;: [
+            &quot;https://my-external-api.com/api/scp/listings&quot;
         ]
     }
 }
@@ -285,7 +290,7 @@
 }
 </code></pre>
 <h2 id="using-an-ai-gateway">Using an AI gateway</h2>
-<p>The endpoint for conversing with an AI gateway is simple: it only expects the conversation. You can receive the response at once or by streaming.</p>
+<p>The conversation endpoint with an AI gateway is simple: it only expects the conversation. You can receive the response at once or by streaming.</p>
 <h4 id="request-2">Request</h4>
 <div class="request-item patch">
     <span>POST</span>
@@ -376,13 +381,7 @@ data: [END]
             &quot;topP&quot;: null,
             &quot;presencePenalty&quot;: null,
             &quot;stop&quot;: null,
-            &quot;maxCompletionTokens&quot;: 4096,
-            &quot;systemInstruction&quot;: &quot;[...]&quot;,
-            &quot;userPromptTemplate&quot;: null,
-            &quot;assistantPrefill&quot;: null,
-            &quot;includePrefillingInMessages&quot;: false,
-            &quot;flags&quot;: &quot;0&quot;,
-            &quot;tools&quot;: null
+            ...
         }
     }
 }
@@ -420,7 +419,7 @@ data: [END]
     // The &quot;model&quot; field is required, but it does nothing in this request. It only exists to be compatible with the Open AI API. You can leave it empty or write anything in its place, as the considered model is the one defined in the AI Gateway.
     &quot;model&quot;: &quot;foobar&quot;,
     
-    // The messages must follow the Open AI format. Only &quot;system&quot; and &quot;user&quot; are supported as conversation &quot;roles&quot;.
+    // The messages must follow the OpenAI format. Only &quot;system&quot; and &quot;user&quot; are supported as conversation &quot;roles&quot;.
     &quot;messages&quot;: [
         {
             &quot;role&quot;: &quot;system&quot;,

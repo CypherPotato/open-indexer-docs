@@ -84,6 +84,10 @@ All prices are in United States dollars.
     <i class="ri-chat-history-line"></i>
     Persistent memory
 </div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
+</div>
         </div>
     </td>
 </tr>
@@ -148,6 +152,10 @@ All prices are in United States dollars.
 <div>
     <i class="ri-chat-history-line"></i>
     Persistent memory
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
 </div>
         </div>
     </td>

@@ -177,16 +177,16 @@
 <tr>
 <td>Inference</td>
 <td>5</td>
-<td>500</td>
+<td>300</td>
 </tr>
 <tr>
 <td>Function</td>
 <td>5</td>
-<td>500</td>
+<td>300</td>
 </tr>
 <tr>
 <td>Function (Live)</td>
-<td>3</td>
+<td>2</td>
 <td>30</td>
 </tr>
 </tbody>
@@ -225,8 +225,8 @@
 </tr>
 <tr>
 <td>Function (Live)</td>
-<td>5</td>
-<td>200</td>
+<td>20</td>
+<td>500</td>
 </tr>
 </tbody>
 </table>
@@ -264,8 +264,8 @@
 </tr>
 <tr>
 <td>Function (Live)</td>
-<td>10</td>
-<td>400</td>
+<td>50</td>
+<td>600</td>
 </tr>
 </tbody>
 </table>
@@ -314,9 +314,9 @@
 <ul>
 <li><strong>Document search</strong>: includes semantic search of documents in a collection by the search endpoint <code>../collections/{id}/query</code>.</li>
 <li><strong>Document insertion</strong>: includes creation and modification of documents in a collection.</li>
-<li><strong>Inference</strong>: every inference call, either by the Open-AI compatible API, by the route <code>/ai-gateways/{id}/inference</code>, or by each message sent by a client chat session.</li>
+<li><strong>Inference</strong>: every inference call, either by the Open-AI compatible API, by the route <code>/ai-gateways/{id}/inference</code> or by each message sent by a client chat session.</li>
 <li><strong>Function</strong>: every function call <code>/functions</code>.</li>
-<li><strong>Function (Live)</strong>: every function call connected to the internet by the <code>webSearch</code> parameter. Does not include <code>fetch</code> calls.</li>
+<li><strong>Function (Live)</strong>: every function call connected to the internet through internet search (does not include <code>fetch</code>).</li>
 </ul>
 
 </article>

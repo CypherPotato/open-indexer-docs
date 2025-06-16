@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Fun&#231;&#245;es de protocolo | AIVAX </title>
+        <title>Fun&#231;&#245;es do lado do servidor | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="Fun&#231;&#245;es de protocolo | AIVAX ">
+        <meta name="title" content="Fun&#231;&#245;es do lado do servidor | AIVAX ">
 
 
         <link rel="icon" href="../assets/img/favicon.ico">
@@ -122,14 +122,12 @@
                 </div>
 
                 <article data-uid="">
-<h1 id="funções-de-protocolo">Funções de protocolo</h1>
+<h1 id="funções-do-lado-do-servidor">Funções do lado do servidor</h1>
 
-<p>As funções de protocolo da AIVAX, ou <em>server-side functions</em>, é uma implementação customizada de chamadas de função criada pela AIVAX que permite que o modelo siga estritamente um contexto de função que não é baseada em documentos JSON. Esse recurso é disponível para modelos com <a href="/docs/sentinel">raciocínio Sentinel</a>.</p>
+<p>As funções de protocolo da AIVAX, ou <em>server-side functions</em>, é uma implementação customizada de chamadas de função criada pela AIVAX que permite que o modelo siga estritamente um contexto de função que não é baseada em documentos JSON. Esse recurso é disponível para modelos com <a href="/docs/sentinel">raciocínio Sentinel</a>. Similar ao MCP, mas um pouco mais simples.</p>
 <p>As funções de protocolo permitem a tomada de ações no lado do servidor da AIVAX, removendo a necessidade de implementação da função no lado do cliente e integrando com aplicações e serviços existentes.</p>
 <img src="/assets/diagrams/protocol-functions-1.drawio.svg">
 <p>Essas funções esperam um <strong>callback</strong> através de uma URL, e quando o modelo decide chamar a função, o callback é acessado com os parâmetros informados pela própria assistente. A assistente não sabe qual URL ela está chamando, pois a mesma permanece invisível tanto para a assistente quanto para o usuário.</p>
-<h2 id="definindo-funções-de-protocolo">Definindo funções de protocolo</h2>
-<p>Essas funções são definidas no <a href="/entities/ai-gateway.md">AI-gateway</a>, o que permite a criação de agentes inteligentes que realizam ações sem intervenção humana. Elas seguem uma sintaxe simples, esperam o nome da função, uma descrição do que ela faz e os parâmetros de invocação.</p>
 <h3 id="escolhendo-o-nome-da-função">Escolhendo o nome da função</h3>
 <p>O nome da função deve ser simples e determinístico ao que essa função faz. Evite nomes difíceis de advinhar ou que não remetam ao papel da função, pois a assistente pode se confundir e não chamar a função quando apropriado.</p>
 <p>Como um exemplo, vamos pensar em uma função de consultar um usuário em um banco de dados externo. Os nomes a seguir são bons exemplos para considerar para a chamada:</p>
@@ -148,8 +146,116 @@
 <p>Tendo o nome da função, podemos pensar na descrição da função.</p>
 <h3 id="escolhendo-a-descrição-da-função">Escolhendo a descrição da função.</h3>
 <p>A descrição da função deve explicar conceitualmente duas situações: o que ela faz e quando deve ser chamada pela assistente. Essa descrição deve incluir os cenários que a assistente deve considerar chamar ela e quando não deve ser chamada, fornecendo poucos exemplos de chamadas (one-shot) e/ou tornando explícitas as regras da função.</p>
-<h3 id="criando-o-endpoint-que-a-função-chamará">Criando o endpoint que a função chamará</h3>
-<h3 id="criando-a-definição-da-função">Criando a definição da função</h3>
+<h2 id="definindo-funções-de-protocolo">Definindo funções de protocolo</h2>
+<p>Essas funções são definidas no <a href="/entities/ai-gateway.md">AI-gateway</a>, o que permite a criação de agentes inteligentes que realizam ações sem intervenção humana. Elas seguem uma sintaxe simples, esperam o nome da função, uma descrição do que ela faz e os parâmetros de invocação.</p>
+<p>Funções de protocolo são definidas no AI gateway seguindo o JSON:</p>
+<div class="request-item post">
+    <span>POST</span>
+    <span>
+        /api/v1/ai-gateways
+    </span>
+</div>
+<pre><code class="lang-json">{
+    &quot;name&quot;: &quot;my-ai-gateway&quot;,
+    &quot;parameters&quot;: {
+        ...
+        &quot;protocolFunctions&quot;: [
+            {
+                &quot;name&quot;: &quot;list-clients&quot;,
+                &quot;description&quot;: &quot;Use essa ferramenta para listar e procurar pelos clientes do usuário.&quot;,
+                &quot;callbackUrl&quot;: &quot;https://my-external-api.com/api/scp/users&quot;,
+                &quot;contentFormat&quot;: null
+            },
+            {
+                &quot;name&quot;: &quot;view-client&quot;,
+                &quot;description&quot;: &quot;Use essa ferramenta para obter detalhes e pedidos de um cliente através do seu ID.&quot;,
+                &quot;callbackUrl&quot;: &quot;https://my-external-api.com/api/scp/users&quot;,
+                &quot;contentFormat&quot;: {
+                    &quot;user_id&quot;: &quot;guid&quot;
+                }
+            }
+        ]
+    }
+}
+</code></pre>
+<p>No snippet acima, você está fornecendo duas funções para seu modelo de IA: <code>list-clients</code> e <code>view-client</code>, o qual irá decidir qual será executada durante o seu raciocínio. Você pode fornecer também um formato de conteúdo JSON para qual o modelo irá chamar sua API fornecendo o contéudo informado.</p>
+<p>Você também pode definir as lista de funções suportadas através de um endpoint. Toda vez que o modelo receber uma mensagem, ele irá consultar o endpoint fornecido para obter uma lista de funções que ele possa executar.</p>
+<img src="/assets/diagrams/protocol-functions-2.drawio.svg">
+<p>Defina os endpoints de listagem de funções no seu AI gateway:</p>
+<div class="request-item post">
+    <span>POST</span>
+    <span>
+        /api/v1/ai-gateways
+    </span>
+</div>
+<pre><code class="lang-json">{
+    &quot;name&quot;: &quot;my-ai-gateway&quot;,
+    &quot;parameters&quot;: {
+        ...
+        &quot;protocolFunctionSources&quot;: [
+            &quot;https://my-external-api.com/api/scp/listings&quot;
+        ]
+    }
+}
+</code></pre>
+<p>Os endpoint de fornecimento de funções deve responder seguindo o formato:</p>
+<div class="request-item post">
+    <span>GET</span>
+    <span>
+        https://my-external-api.com/api/scp/listings
+    </span>
+</div>
+<pre><code class="lang-json">{
+    &quot;functions&quot;: [
+        {
+            &quot;name&quot;: &quot;list-clients&quot;,
+            &quot;description&quot;: &quot;Use essa ferramenta para listar e procurar pelos clientes do usuário.&quot;,
+            &quot;callbackUrl&quot;: &quot;https://my-external-api.com/api/scp/users&quot;,
+            &quot;contentFormat&quot;: null
+        },
+        {
+            &quot;name&quot;: &quot;view-client&quot;,
+            &quot;description&quot;: &quot;Use essa ferramenta para obter detalhes e pedidos de um cliente através do seu ID.&quot;,
+            &quot;callbackUrl&quot;: &quot;https://my-external-api.com/api/scp/users&quot;,
+            &quot;contentFormat&quot;: {
+                &quot;user_id&quot;: &quot;guid&quot;
+            }
+        }
+    ]
+}
+</code></pre>
+<p>Essas funções são armazenadas em cache por 10 minutos antes de uma nova requisição ser feita no endpoint fornecido.</p>
+<h3 id="lidando-com-chamada-de-funções">Lidando com chamada de funções</h3>
+<p>As funções são invocadas no endpoint fornecido em <code>callbackUrl</code> através de uma requisição HTTP POST, com o corpo:</p>
+<pre><code class="lang-json">{
+    &quot;function&quot;: {
+        &quot;name&quot;: &quot;view-client&quot;,
+        &quot;content&quot;: {
+            &quot;user_id&quot;: &quot;3e5a2823-98fa-49a1-831a-0c4c5d33450e&quot;
+        }
+    },
+    &quot;context&quot;: {
+        &quot;externalUserId&quot;: &quot;...&quot;,
+        &quot;moment&quot;: &quot;2025-05-18T03:36:27&quot;
+    }
+}
+</code></pre>
+<p>A resposta dessa ação deve responder sempre com um status HTTP OK (2xx ou 3xx), até mesmo para erros que a assistente possa ter cometido. Uma resposta não OK irá indicar para a assistente que não foi possível chamar a função e ela não irá continuar com o que estava planejando fazer.</p>
+<h4 id="formato-das-respostas">Formato das respostas</h4>
+<p>As respostas bem sucedidas devem ser textuais e serão anexadas como resposta da função do jeito que for respondida pelo endpoint. Não há formato JSON ou estrutura para essa resposta, mas é aconselhável que dê uma resposta simples, humanamente legível, para que a assistente consiga ler o resultado da ação.</p>
+<p>Erros podem ser comuns, como não encontrar um cliente pelo ID ou algum campo não estiver no formato desejado. Nestes casos, responda com um status OK e no corpo da resposta inclua uma descrição humana do erro e como a assistente pode contornar ele.</p>
+<p><strong>É garantido</strong> que a requisição irá seguir estritamente o formato de conteúdo fornecido pela definição da função. Funções que não esperam argumentos não devem especificar um formato de conteúdo para essa função. Você também pode indicar para o modelo de como ele deve preencher os campos do conteúdo da função nas instruções da função. Conteúdos mais complexos, aninhados ou com alta profundidade de estrutura pode aumentar o tempo de geração deste conteúdo, pois aumenta a chance da assistente cometer erros e falhar na validação do conteúdo gerado.</p>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>Quanto mais funções você definir, mais tokens você irá consumir no processo de raciocínio. A definição da função, bem como o formato dela, consome tokens do processo de raciocínio.</p>
+</div>
+<h4 id="autenticação">Autenticação</h4>
+<p>A autenticação das requisições são feitas pelo cabeçalho <code>X-Aivax-Nonce</code> enviado em todas as requisições de protocolo das funções, até mesmo as de listagem.</p>
+<p>Veja o manual de <a href="/docs/authentication">autenticação</a> para entender como autenticar requisições reversas do AIVAX.</p>
+<h4 id="autenticação-de-usuário">Autenticação de usuário</h4>
+<p>As chamadas de função enviam um campo <code>$.context.externalUserId</code> contendo a tag de usuário criada em uma <a href="/docs/entities/chat-clients">sessão de chat</a>. Essa tag pode ser usada para autenticar o usuário que chamou essa função.</p>
+<h4 id="considerações-de-segurança">Considerações de segurança</h4>
+<p>Para o modelo de IA, somente é visível o nome, descrição e formato da função. Ela não é capaz de ver o endpoint para onde essa função aponta. Além disso, ela não possui acesso à tag do usuário que está autenticado em um <a href="/docs/entities/chat-clients">cliente de chat</a>.</p>
 
 </article>
 

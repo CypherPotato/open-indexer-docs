@@ -80,10 +80,10 @@ Não é necessário ter uma coleção para vincular no seu gateway de IA. Você 
         
         // Opcional. ID da coleção que será usada como base de conhecimento pela IA.
         "knowledgeCollectionId": "01965b62-17c4-7258-9aa8-af5139799527",
-
+        
         // Opcional. Especifica quantos documentos devem ser anexados no contexto da IA.
         "knowledgeBaseMaximumResults": 16,
-
+        
         // Opcional. Especifica a pontuação mínima de similaridade que a busca de documentos deve anexar no contexto da IA.
         "knowledgeBaseMinimumScore": 0.55,
 
@@ -136,7 +136,7 @@ Não é necessário ter uma coleção para vincular no seu gateway de IA. Você 
         // Opcional. Especifica flags especiais para o modelo. Deixe como "0" para não usar nenhuma flag. As flags permitidas são:
         //      NoSystemInstruct: ao invés de usar system prompt, insere as instruções do system em uma mensagem de usuário
         "flags": ["Flag1", "Flag2"],
-
+        
         // Opcional. Passa um array de funções para a IA.
         "tools": [],
         
@@ -150,6 +150,11 @@ Não é necessário ter uma coleção para vincular no seu gateway de IA. Você 
                     "location": "nome da cidade"
                 }
             }
+        ],
+        
+        // Opcional. Fornece endpoints onde o modelo pode obter por funções de protocolo Sentinel. Leia "Protocol Functions" para saber mais.
+        "protocolFunctionSources": [
+            "https://my-external-api.com/api/scp/listings"
         ]
     }
 }
@@ -302,13 +307,7 @@ A requisição abaixo traz detalhes de um AI gateway.
             "topP": null,
             "presencePenalty": null,
             "stop": null,
-            "maxCompletionTokens": 4096,
-            "systemInstruction": "[...]",
-            "userPromptTemplate": null,
-            "assistantPrefill": null,
-            "includePrefillingInMessages": false,
-            "flags": "0",
-            "tools": null
+            ...
         }
     }
 }

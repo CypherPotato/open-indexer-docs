@@ -45,3 +45,36 @@ Sua Login Key é a chave que você usa para acessar seu painel de usuário e con
     }
 }
 ```
+
+## Autenticando um nonce
+
+Nonces são gerados por webhooks e funções de protocolo para autenticar transações feitas pela AIVAX em conteúdos externos. Em requisições que incluam o cabeçalho `X-Aivax-Nonce`, valide esse token chamando este endpoint:
+
+<div class="request-item get">
+    <span>POST</span>
+    <span>
+        /api/v1/auth/nonce
+    </span>
+</div>
+
+```json
+{
+    "nonce": "kgnjcyjy7ksz5eeocc4iw14bre.7cahcn8phfmrdkidhqaecp4e4w"
+}
+```
+
+> Observação: essa rota requer autenticação para funcionar.
+
+Uma resposta para um nonce validado é retornada neste formato:
+
+```json
+{
+    "message": null,
+    "data": {
+        "validated": true,
+        "reason": "The nonce informed is valid and has been consumed."
+    }
+}
+```
+
+Ao validar um nonce, ele é consumido, e não é possível validar o mesmo nonce novamente. Nonces devem ser validados em até 10 minutos de sua emissão.

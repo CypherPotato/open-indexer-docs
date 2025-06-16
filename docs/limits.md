@@ -22,9 +22,9 @@ Legendas dos limites:
 | --- | --- | --- |
 | Pesquisa de documentos | 50 | - |
 | Inserção de documentos | - | 100 |
-| Inferência | 5 | 500 |
-| Função | 5 | 500 |
-| Função (Live) | 3 | 30 |
+| Inferência | 5 | 300 |
+| Função | 5 | 300 |
+| Função (Live) | 2 | 30 |
 
 # [Tier 1](#tab/tier1)
 
@@ -34,7 +34,7 @@ Legendas dos limites:
 | Inserção de documentos | - | 3.000 |
 | Inferência | 75 | 1.000 |
 | Função | 50 | 1.000 |
-| Função (Live) | 5 | 200 |
+| Função (Live) | 20 | 500 |
 
 # [Tier 2](#tab/tier2)
 
@@ -44,7 +44,7 @@ Legendas dos limites:
 | Inserção de documentos | - | 10.000 |
 | Inferência | 150 | - |
 | Função | 50 | 10.000 |
-| Função (Live) | 10 | 400 |
+| Função (Live) | 50 | 600 |
 
 # [Tier 3](#tab/tier3)
 
@@ -62,4 +62,4 @@ Legendas dos limites:
 - **Inserção de documentos**: inclui criação e modificação de documentos em uma coleção.
 - **Inferência**: toda chamada de inferência, seja pela API Open-AI compatível, pela rota `/ai-gateways/{id}/inference` ou por cada mensagem enviada por uma sessão de cliente de chat.
 - **Função**: toda chamada de função `/functions`.
-- **Função (Live)**: toda chamada de função conectada à internet pelo parâmetro `webSearch`. Não inclui chamadas `fetch`.
+- **Função (Live)**: toda chamada de função conectada à internet através de pesquisa na internet (não inclui `fetch`).
