@@ -58,8 +58,10 @@ Limit legends:
 
 ---
 
-- **Document search**: includes semantic search of documents in a collection by the search endpoint `../collections/{id}/query`.
+- **Document search**: includes semantic search of documents in a collection through the search endpoint `../collections/{id}/query`.
 - **Document insertion**: includes creation and modification of documents in a collection.
-- **Inference**: every inference call, either by the Open-AI compatible API, by the route `/ai-gateways/{id}/inference` or by each message sent by a client chat session.
+- **Inference**: every inference call, either through the Open-AI compatible API, the `/ai-gateways/{id}/inference` route, or each message sent by a client chat session.
 - **Function**: every function call `/functions`.
 - **Function (Live)**: every function call connected to the internet through internet search (does not include `fetch`).
+
+There is no limit for inference on models defined by you, only on those provided by AIVAX.

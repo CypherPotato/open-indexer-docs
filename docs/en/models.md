@@ -34,7 +34,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 1.31 <small>/1M. tokens</small>
+                $ 3.70 <small>/1M. tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -54,7 +54,7 @@ All prices are in United States dollars.
 </div>
     </td>
     <td>
-        Highly intelligent and optimized to perform challenging tasks and solve complex problems.
+        The smartest Sentinel model with built-in deep thinking.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -65,8 +65,12 @@ All prices are in United States dollars.
     Function calls
 </div>
 <div>
+    <i class="ri-lightbulb-flash-line"></i>
+    Sentinel reasoning
+</div>
+<div>
     <i class="ri-lightbulb-line"></i>
-    Reasoning
+    Deep thinking
 </div>
 <div>
     <i class="ri-global-line"></i>
@@ -83,10 +87,6 @@ All prices are in United States dollars.
 <div>
     <i class="ri-chat-history-line"></i>
     Persistent memory
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
 </div>
         </div>
     </td>
@@ -103,7 +103,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 0.88 <small>/1M. tokens</small>
+                $ 2.90 <small>/1M. tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -123,7 +123,7 @@ All prices are in United States dollars.
 </div>
     </td>
     <td>
-        Highly capable model, with reasoning power and complex problem-solving.
+        The cost-optimized version of Sentinel for performant and intelligent conversations.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -134,8 +134,12 @@ All prices are in United States dollars.
     Function calls
 </div>
 <div>
+    <i class="ri-lightbulb-flash-line"></i>
+    Sentinel reasoning
+</div>
+<div>
     <i class="ri-lightbulb-line"></i>
-    Reasoning
+    Deep thinking
 </div>
 <div>
     <i class="ri-global-line"></i>
@@ -152,6 +156,128 @@ All prices are in United States dollars.
 <div>
     <i class="ri-chat-history-line"></i>
     Persistent memory
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @aivax/sentinel-core
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 0.90 <small>/1M. tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Internet search:
+    </small>
+    <div>
+        $ 5.60 <small>/1.000 searches</small>
+    </div>
+</div><div class="item-pricing">
+    <small>
+        Sentinel reasoning:
+    </small>
+    <div>
+        $ 1.00 <small>/1m tokens</small>
+    </div>
+</div>
+    </td>
+    <td>
+        Sentinel's cheapest model for easy chat tasks.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-lightbulb-flash-line"></i>
+    Sentinel reasoning
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Deep thinking
+</div>
+<div>
+    <i class="ri-global-line"></i>
+    Internet search
+</div>
+<div>
+    <i class="ri-link-m"></i>
+    Access links
+</div>
+<div>
+    <i class="ri-code-s-slash-line"></i>
+    Code execution
+</div>
+<div>
+    <i class="ri-chat-history-line"></i>
+    Persistent memory
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @aivax/sentinel-lambda
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 0.60 <small>/1M. tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Internet search:
+    </small>
+    <div>
+        $ 5.60 <small>/1.000 searches</small>
+    </div>
+</div><div class="item-pricing">
+    <small>
+        Sentinel reasoning:
+    </small>
+    <div>
+        $ 1.00 <small>/1m tokens</small>
+    </div>
+</div>
+    </td>
+    <td>
+        Sentinel model optimized for function usage.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-lightbulb-flash-line"></i>
+    Sentinel reasoning
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Deep thinking
+</div>
+<div>
+    <i class="ri-global-line"></i>
+    Internet search
+</div>
+<div>
+    <i class="ri-code-s-slash-line"></i>
+    Code execution
 </div>
 <div>
     <i class="ri-braces-line"></i>
@@ -180,30 +306,6 @@ All prices are in United States dollars.
     <td>
         Sentinel's router, which automatically selects the best Sentinel model to perform a task according to its complexity.
         <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Input: accepts images
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Reasoning
-</div>
-<div>
-    <i class="ri-global-line"></i>
-    Internet search
-</div>
-<div>
-    <i class="ri-link-m"></i>
-    Access links
-</div>
-<div>
-    <i class="ri-code-s-slash-line"></i>
-    Code execution
-</div>
         </div>
     </td>
 </tr>
@@ -302,7 +404,7 @@ All prices are in United States dollars.
 </div>
 <div>
     <i class="ri-lightbulb-line"></i>
-    Reasoning
+    Deep thinking
 </div>
         </div>
     </td>
@@ -356,46 +458,7 @@ All prices are in United States dollars.
 </div>
 <div>
     <i class="ri-lightbulb-line"></i>
-    Reasoning
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @google/gemini-2.5-flash-th
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Input + output:
-            </small>
-            <div>
-                $ 4.65 <small>/1M. tokens</small>
-            </div>
-        </div>
-        
-    </td>
-    <td>
-        Latest generation model with integrated reasoning and thought.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Input: accepts images, videos, audio
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Reasoning
+    Deep thinking
 </div>
 <div>
     <i class="ri-braces-line"></i>
@@ -416,7 +479,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 1.31 <small>/1M. tokens</small>
+                $ 3.80 <small>/1M. tokens</small>
             </div>
         </div>
         
@@ -451,7 +514,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 1.31 <small>/1M. tokens</small>
+                $ 3.80 <small>/1M. tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -473,6 +536,119 @@ All prices are in United States dollars.
 <div>
     <i class="ri-global-line"></i>
     Internet search
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @google/gemini-2.5-flash-th
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 3.80 <small>/1M. tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        Latest generation model with integrated reasoning and thought.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images, videos, audio
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Deep thinking
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @google/gemini-2.5-flash-lite-th
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 0.88 <small>/1M. tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        Gemini 2.5 Flash Lite model with thinking enabled.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images, videos, audio
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Deep thinking
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @google/gemini-2.5-flash-lite
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 0.88 <small>/1M. tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        The smallest and most cost-effective model for the newest Gemini series, built for at-scale usage.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images, videos, audio
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
 </div>
         </div>
     </td>
@@ -886,7 +1062,7 @@ All prices are in United States dollars.
 </div>
 <div>
     <i class="ri-lightbulb-line"></i>
-    Reasoning
+    Deep thinking
 </div>
 <div>
     <i class="ri-braces-line"></i>
@@ -1045,7 +1221,7 @@ All prices are in United States dollars.
 </div>
 <div>
     <i class="ri-lightbulb-line"></i>
-    Reasoning
+    Deep thinking
 </div>
         </div>
     </td>

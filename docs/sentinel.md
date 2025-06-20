@@ -6,8 +6,9 @@ Esses modelos são constantemente atualizados para utilizar as últimas tecnolog
 
 Atualmente, os modelos Sentinel estão disponíveis em três categorias:
 
-- **sentinel**: altamente inteligente e otimizado para realizar tarefas desafiadoras e resolver problemas complexos.
-- **sentinel-mini**: modelo altamente capaz, otimizado para custo, com poder de raciocínio e solução de problemas complexos.
+- **sentinel**: altamente inteligente. Faz uso do pensamento profundo do próprio modelo para complementar a resposta.
+- **sentinel-mini**: inteligente e capaz para a maioria das tarefas complexas de chat.
+- **sentinel-core**: modelo otimizado para custo, com menor capacidade de conversação, mas com raciocínio Sentinel.
 
 Sempre que um modelo Sentinel for ter seu preço alterado, uma notificação é enviada para todos os usuários que utilizam o modelo e uma notificação é adicionada na página de notificações.
 
@@ -38,8 +39,14 @@ Como funciona? Um modelo menor analisa o contexto da pergunta e avalia o grau de
 
 Um modelo de roteador pode ajudar à reduzir custos e manter a qualidade da conversação, usando recursos de pensamento profundo somente quando necessário.
 
+## Sentinel Lambda
+
+O agente `sentinel-lambda` é otimizado para uso em [funções JSON](/entities/functions), sendo capaz de pesquisar na internet, executar código e acessar links, o que melhora ainda mais a precisão da execução das funções inteligentes.
+
 ## Sentinel Reasoning
 
 O mecanismo de pensamento profundo do Sentinel é um motor de raciocínio plug-and-play que fornece todo o contexto necessário para o modelo Sentinel responder a pergunta do usuário. Durante o processo de pensamento, Sentinel chama funções, realiza cálculos e executa código, visando fornecer uma resposta elaborada e precisa para o usuário, mesmo usado com modelos menores e menos inteligentes.
 
 A precificação do reasoning do Sentinel e os tokens do Sentinel são separadas: você perceberá que ao usar o modelo Sentinel, verá lançamentos do roteamento, raciocínio e inferência. Essa divisão é feita para fornecer transparência sobre o uso do Sentinel.
+
+Esse processo de raciocínio não é um processo de raciocínio completo de um modelo e sim um algoritmo feito para planejar a execução da solução de uma tarefa através das [funções de protocolo](/protocol-functions) fornecidas ao modelo. O agente `@aivax/sentinel` combina o uso dos dois processos de raciocínio: o Sentinel e o do próprio modelo, o que cria uma resposta ainda mais elaborada para o usuário.

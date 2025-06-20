@@ -124,7 +124,7 @@ Requisições que pesquisam na internet trazem bons resultados e dispensam crawl
 
 ## Funções em tempo real com modelos Sentinel
 
-Você pode usar os agentes Sentinel para executar funções inteligentes que envolvam pesquisa na internet, execução de código, resolução de contas matemáticas e todas as outras funcionalidades que agentes Sentinel consigam fornecer.
+Você pode usar o agente `@aivax/sentinel-lambda` para executar funções inteligentes que envolvam pesquisa na internet, execução de código, resolução de contas matemáticas e todas as outras funcionalidades que agentes Sentinel consigam fornecer.
 
 Agentes Sentinel são conectados à internet por padrão, portanto, é natural que ele pesquise algo na internet para complementar sua resposta. Ao usar chamar uma função com um modelo que pesquisa na internet, como um agente Sentinel, o limite de consumo contabilizado é de Live Function.
 
@@ -178,7 +178,7 @@ Confira exemplos de funções de IA para várias tarefas cotidianas:
 
 ```json
 {
-    "modelName": "@aivax/sentinel-mini",
+    "modelName": "@aivax/sentinel-lambda",
     "instructions": "Avalie a conta matemática informada e forneça o resultado.",
     "responseSchema": {
         "result": "..."
@@ -214,7 +214,7 @@ Confira exemplos de funções de IA para várias tarefas cotidianas:
 
 ```json
 {
-    "modelName": "@aivax/sentinel-mini",
+    "modelName": "@aivax/sentinel-lambda",
     "instructions": "Pesquise as 5 últimas notícias e dados meteorológicos para a cidade informada.",
     "responseSchema": {
         "latestNews": [
@@ -292,7 +292,7 @@ Confira exemplos de funções de IA para várias tarefas cotidianas:
 
 ```json
 {
-    "modelName": "@aivax/sentinel-mini",
+    "modelName": "@aivax/sentinel-lambda",
     "instructions": "Traga a contagem de casos e mortes por COVID-19.",
     "responseSchema": {
         "deathsWorld": 0,
@@ -330,7 +330,7 @@ Confira exemplos de funções de IA para várias tarefas cotidianas:
 
 ```json
 {
-    "modelName": "@aivax/sentinel-mini",
+    "modelName": "@aivax/sentinel-lambda",
     "instructions": "Pesquise e formate uma lista de 10 artistas no TOP 10 do streaming musical por gênero.",
     "responseSchema": {
         "edm": [

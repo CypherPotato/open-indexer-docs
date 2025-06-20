@@ -2,14 +2,14 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>API Limits | AIVAX </title>
+        <title>Interfaces de API | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="API Limits | AIVAX ">
+        <meta name="title" content="Interfaces de API | AIVAX ">
 
 
-        <link rel="icon" href="../../assets/img/favicon.ico">
-        <link rel="stylesheet" href="../../public/docfx.min.css">
-        <link rel="stylesheet" href="../../public/main.css">
+        <link rel="icon" href="../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../public/docfx.min.css">
+        <link rel="stylesheet" href="../public/main.css">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
@@ -17,13 +17,13 @@
         
         <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
 
-        <meta name="docfx:navrel" content="../../toc.html">
+        <meta name="docfx:navrel" content="../toc.html">
         <meta name="docfx:tocrel" content="toc.html">
 
-        <meta name="docfx:rel" content="../../">
+        <meta name="docfx:rel" content="../">
 
 
-        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/en/limits.md/#L1">
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/api-integrations.md/#L1">
         <meta name="loc:inThisArticle" content="In this article">
         <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
         <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -37,7 +37,7 @@
         <meta name="loc:copy" content="Copy">
         <meta name="loc:downloadPdf" content="Download PDF">
         
-        <script type="module" src="./../../public/docfx.min.js"></script>
+        <script type="module" src="./../public/docfx.min.js"></script>
         <script>
             const theme = localStorage.getItem('theme') || 'auto';
             document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
@@ -60,8 +60,8 @@
         <header class="bg-body border-bottom">
             <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
                 <div class="container-xxl flex-nowrap">
-                    <a class="navbar-brand" href="../../index.html">
-                        <img id="logo" class="svg" src="../../assets/img/aivax.png" alt="AIVAX">
+                    <a class="navbar-brand" href="../index.html">
+                        <img id="logo" class="svg" src="../assets/img/aivax.png" alt="AIVAX">
                         AIVAX
                     </a>
                     <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
@@ -122,208 +122,106 @@
                 </div>
 
                 <article data-uid="">
-<h1 id="api-limits">API Limits</h1>
+<h1 id="interfaces-de-api">Interfaces de API</h1>
 
-<p>Rate limits (&quot;rate limiters&quot;) regulate the number of requests you can send in a time window. These limits help Open Indexer prevent abuse and provide a stable API to everyone.</p>
-<p>The API limits below are the same for all embedded AIVAX models. These limits are categorized by operations performed by the API. Each account has a tier that defines which limits are applied to the account. Tiers change according to the total invested in Open Indexer and the time the account has existed.</p>
+<p>Você pode usar a inferência da AIVAX com uma API/SDK existente, fazendo uma troca plug-and-play do serviço. Note que, algumas interfaces possuem limitações quanto à personalização dos agentes e assistentes.</p>
+<h2 id="interface-openai-compatível">Interface OpenAI compatível</h2>
+<p>A Open Indexer provê um endpoint compatível com a interface OpenAI através de um AI-gateway, o que facilita a integração do modelo criado pela Open Indexer com aplicações existentes. Vale ressaltar que somente algumas propriedades são suportadas.</p>
+<p>Em um gateway de IA, você já configura os parâmetros do modelo, como System Prompt, temperatura e nome do modelo. Ao usar esse endpoint, alguns valores do gateway podem ser sobrescritos pela requisição.</p>
+<p>O prefixo da API é:</p>
+<pre><code class="lang-text">https://inference.aivax.net/api/v1/open-ai
+</code></pre>
+<p>No momento, os seguintes endpoints são compatíveis com a API OpenAI:</p>
 <ul>
-<li><strong>Tier zero (free account):</strong> new account that has never added credits.</li>
-<li><strong>Tier 1</strong>: account created at least 48 hours ago and has added any credit value.</li>
-<li><strong>Tier 2</strong>: account created at least 1 month ago and has added at least $100 in credits.</li>
-<li><strong>Tier 3</strong>: account created at least 3 months ago and has added at least $1,000 in credits.</li>
+<li><code>/chat-completions</code></li>
+<li><code>/models</code></li>
 </ul>
-<p>The measurement is by <strong>credit addition</strong> and not by consumption. For example, you don't need to consume $100 in credits to advance to Tier 2.</p>
-<p>Limit legends:</p>
-<ul>
-<li><strong>RPM</strong>: requests per minute.</li>
-<li><strong>RPD</strong>: requests per day (24 hours).</li>
-</ul>
-<div class="tabGroup" id="tabgroup_1">
-<ul role="tablist">
-<li role="presentation">
-<a href="#tabpanel_1_free" role="tab" aria-controls="tabpanel_1_free" data-tab="free" tabindex="0" aria-selected="true">Free</a>
-</li>
-<li role="presentation">
-<a href="#tabpanel_1_tier1" role="tab" aria-controls="tabpanel_1_tier1" data-tab="tier1" tabindex="-1">Tier 1</a>
-</li>
-<li role="presentation">
-<a href="#tabpanel_1_tier2" role="tab" aria-controls="tabpanel_1_tier2" data-tab="tier2" tabindex="-1">Tier 2</a>
-</li>
-<li role="presentation">
-<a href="#tabpanel_1_tier3" role="tab" aria-controls="tabpanel_1_tier3" data-tab="tier3" tabindex="-1">Tier 3</a>
-</li>
-</ul>
-<section id="tabpanel_1_free" role="tabpanel" data-tab="free">
-
-<table>
-<thead>
-<tr>
-<th>Operation</th>
-<th>RPM</th>
-<th>RPD</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Document search</td>
-<td>50</td>
-<td>-</td>
-</tr>
-<tr>
-<td>Document insertion</td>
-<td>-</td>
-<td>100</td>
-</tr>
-<tr>
-<td>Inference</td>
-<td>5</td>
-<td>300</td>
-</tr>
-<tr>
-<td>Function</td>
-<td>5</td>
-<td>300</td>
-</tr>
-<tr>
-<td>Function (Live)</td>
-<td>2</td>
-<td>30</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="tabpanel_1_tier1" role="tabpanel" data-tab="tier1" aria-hidden="true" hidden="hidden">
-
-<table>
-<thead>
-<tr>
-<th>Operation</th>
-<th>RPM</th>
-<th>RPD</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Document search</td>
-<td>150</td>
-<td>-</td>
-</tr>
-<tr>
-<td>Document insertion</td>
-<td>-</td>
-<td>3,000</td>
-</tr>
-<tr>
-<td>Inference</td>
-<td>75</td>
-<td>1,000</td>
-</tr>
-<tr>
-<td>Function</td>
-<td>50</td>
-<td>1,000</td>
-</tr>
-<tr>
-<td>Function (Live)</td>
-<td>20</td>
-<td>500</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="tabpanel_1_tier2" role="tabpanel" data-tab="tier2" aria-hidden="true" hidden="hidden">
-
-<table>
-<thead>
-<tr>
-<th>Operation</th>
-<th>RPM</th>
-<th>RPD</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Document search</td>
-<td>300</td>
-<td>-</td>
-</tr>
-<tr>
-<td>Document insertion</td>
-<td>-</td>
-<td>10,000</td>
-</tr>
-<tr>
-<td>Inference</td>
-<td>150</td>
-<td>-</td>
-</tr>
-<tr>
-<td>Function</td>
-<td>50</td>
-<td>10,000</td>
-</tr>
-<tr>
-<td>Function (Live)</td>
-<td>50</td>
-<td>600</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="tabpanel_1_tier3" role="tabpanel" data-tab="tier3" aria-hidden="true" hidden="hidden">
-
-<table>
-<thead>
-<tr>
-<th>Operation</th>
-<th>RPM</th>
-<th>RPD</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Document search</td>
-<td>1,000</td>
-<td>-</td>
-</tr>
-<tr>
-<td>Document insertion</td>
-<td>-</td>
-<td>30,000</td>
-</tr>
-<tr>
-<td>Inference</td>
-<td>1,000</td>
-<td>-</td>
-</tr>
-<tr>
-<td>Function</td>
-<td>750</td>
-<td>-</td>
-</tr>
-<tr>
-<td>Function (Live)</td>
-<td>200</td>
-<td>-</td>
-</tr>
-</tbody>
-</table>
-</section>
+<h4 id="requisição">Requisição</h4>
+<div class="request-item post">
+    <span>POST</span>
+    <span>
+        /api/v1/open-ai/chat-completions
+    </span>
 </div>
+<pre><code class="lang-json">{
+    // No campo model, insira o ID do seu gateway de IA ou no formato &quot;nome-do-gateway:parte-do-id&quot;
+    &quot;model&quot;: &quot;019709af-c909-7545-bb5d-1e08da93400a&quot;,
+    
+    // As mensagens devem seguir o formato da Open AI. Somente &quot;system&quot; e &quot;user&quot; são suportados como &quot;roles&quot; da conversa.
+    &quot;messages&quot;: [
+        {
+            &quot;role&quot;: &quot;system&quot;,
+            &quot;content&quot;: &quot;You are a helpful assistant.&quot;
+        },
+        {
+            &quot;role&quot;: &quot;user&quot;,
+            &quot;content&quot;: &quot;Hello!&quot;
+        }
+    ],
+    
+    // Ambas propriedades são equivalentes e opcionais e vão substituir o campo maxCompletionTokens se forem enviadas na requisição.
+    &quot;max_completion_tokens&quot;: 1024,
+    &quot;max_tokens&quot;: 1024,
+    
+    // Opcional. Substitui o parâmetro do gateway.
+    &quot;stop&quot;: &quot;\n&quot;,
+    
+    // Opcional. Por padrão a resposta não é por streaming.
+    &quot;stream&quot;: true
+}
+</code></pre>
+<h4 id="resposta-para-não-streaming">Resposta para não-streaming</h4>
+<pre><code class="lang-json">{
+    &quot;id&quot;: &quot;019672f3-699c-7d45-8484-7a23f4cdc079&quot;,
+    &quot;object&quot;: &quot;chat.completion&quot;,
+    &quot;created&quot;: 1745685277,
+    &quot;model&quot;: &quot;gemini-2.0-flash-lite&quot;,
+    &quot;choices&quot;: [
+        {
+            &quot;index&quot;: 0,
+            &quot;message&quot;: {
+                &quot;role&quot;: &quot;assistant&quot;,
+                &quot;content&quot;: &quot;Hi there! How can I help you today?\n&quot;,
+                &quot;refusal&quot;: null,
+                &quot;annotations&quot;: []
+            },
+            &quot;logprobs&quot;: null,
+            &quot;finish_reason&quot;: &quot;stop&quot;
+        }
+    ],
+    &quot;usage&quot;: {
+        &quot;prompt_tokens&quot;: 0,
+        &quot;completion_tokens&quot;: 0,
+        &quot;total_tokens&quot;: 0
+    },
+    &quot;service_tier&quot;: &quot;default&quot;
+}
+</code></pre>
+<h4 id="resposta-para-streaming">Resposta para streaming</h4>
+<pre><code class="lang-json">data: {&quot;id&quot;:&quot;019672f4-9a58-7932-82f0-022e457a2e63&quot;,&quot;object&quot;:&quot;chat.completion.chunk&quot;,&quot;created&quot;:1745685355,&quot;model&quot;:&quot;gemini-2.0-flash-lite&quot;,&quot;system_fingerprint&quot;:&quot;fp_2i0nmn&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;finish_reason&quot;:null,&quot;delta&quot;:{&quot;role&quot;:&quot;assistant&quot;,&quot;content&quot;:&quot;Hi&quot;}}]}
 
+data: {&quot;id&quot;:&quot;019672f4-9ab9-73a2-bdb8-23c4481453a8&quot;,&quot;object&quot;:&quot;chat.completion.chunk&quot;,&quot;created&quot;:1745685355,&quot;model&quot;:&quot;gemini-2.0-flash-lite&quot;,&quot;system_fingerprint&quot;:&quot;fp_ar1qol&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;finish_reason&quot;:null,&quot;delta&quot;:{&quot;content&quot;:&quot; there! How can I help you today?\n&quot;}}]}
+
+...
+
+data: {&quot;id&quot;:&quot;019672f4-9ac0-7ddf-a76a-e7f8043dd082&quot;,&quot;object&quot;:&quot;chat.completion.chunk&quot;,&quot;created&quot;:1745685355,&quot;model&quot;:&quot;gemini-2.0-flash-lite&quot;,&quot;system_fingerprint&quot;:&quot;fp_3e84ge&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;finish_reason&quot;:&quot;stop&quot;,&quot;delta&quot;:{}}]}
+</code></pre>
+<h2 id="interface-ollama-compatível">Interface Ollama compatível</h2>
+<p>A AIVAX fornece também um endpoint compatível com diversas rotas Ollama.</p>
+<p>O prefixo da API é:</p>
+<pre><code class="lang-text">https://inference.aivax.net/api/v1/ollama
+</code></pre>
+<p>Os endpoints disponíveis são:</p>
 <ul>
-<li><strong>Document search</strong>: includes semantic search of documents in a collection through the search endpoint <code>../collections/{id}/query</code>.</li>
-<li><strong>Document insertion</strong>: includes creation and modification of documents in a collection.</li>
-<li><strong>Inference</strong>: every inference call, either through the Open-AI compatible API, the <code>/ai-gateways/{id}/inference</code> route, or each message sent by a client chat session.</li>
-<li><strong>Function</strong>: every function call <code>/functions</code>.</li>
-<li><strong>Function (Live)</strong>: every function call connected to the internet through internet search (does not include <code>fetch</code>).</li>
+<li><code>/</code></li>
+<li><code>/api/tags</code></li>
+<li><code>/api/chat</code> (somente streaming)</li>
 </ul>
-<p>There is no limit for inference on models defined by you, only on those provided by AIVAX.</p>
 
 </article>
 
                 <div class="contribution d-print-none">
-                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/en/limits.md/#L1" class="edit-link">Edit this page</a>
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/api-integrations.md/#L1" class="edit-link">Edit this page</a>
                 </div>
 
                 <div class="next-article d-print-none border-top" id="nextArticle"></div>

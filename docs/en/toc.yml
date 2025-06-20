@@ -12,6 +12,8 @@ items:
   href: sentinel.md
 - name: Server-side Functions
   href: protocol-functions.md
+- name: Integrations and SDKs
+  href: api-integrations.md
 - name: Using the API
 - name: Collections
   href: entities/collections.md

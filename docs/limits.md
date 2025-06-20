@@ -63,3 +63,5 @@ Legendas dos limites:
 - **Inferência**: toda chamada de inferência, seja pela API Open-AI compatível, pela rota `/ai-gateways/{id}/inference` ou por cada mensagem enviada por uma sessão de cliente de chat.
 - **Função**: toda chamada de função `/functions`.
 - **Função (Live)**: toda chamada de função conectada à internet através de pesquisa na internet (não inclui `fetch`).
+
+Não há nenhum limite para inferência em modelos definidos por você, apenas pelos providos pela AIVAX.

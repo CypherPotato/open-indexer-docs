@@ -4,19 +4,19 @@ Functions are a way to force your model to process information using JSON as an 
 
 It can be useful for categorizing comments, applying moderation to reviews, or processing information with the help of AI.
 
-Currently, it is only possible to use functions with models provided by Open Indexer.
+Currently, it is only possible to use functions with [models provided by Open Indexer]().
 
 ## Calling a Function
 
-To call an AI function, you will need to inform what the AI should respond to and provide a JSON schema that it should follow.
+To call an AI function, you will need to specify what the AI should respond with and provide a JSON schema that it should follow.
 
-Less intelligent models tend to fail JSON generation, generating an invalid or problematic document. To fix this, adjust your model, the instruction, and the attempt parameter if necessary.
+Less intelligent models tend to fail to generate JSON, generating an invalid or problematic document. To fix this, adjust your model, the instruction, and the attempt parameter if necessary.
 
-You are charged for each attempt the AI tries to generate. Slightly more intelligent models tend to generate correct results on the first attempt. It is guaranteed that a valid JSON will be generated, and this JSON will follow the same schema provided in the request.
+You are charged for each attempt the AI tries to generate. Slightly more intelligent models tend to generate correct results on the first attempt. It is guaranteed that a valid JSON will be generated and that this JSON will follow the same schema provided in the request.
 
-Additionally, you can opt to activate **internet search** for function calls. This option can be useful for bringing relevant data in real-time when structuring your response. When using this function, a model with internet access will be used to obtain data from the internet to structure your response. This model will also try to structure your response based on the provided data, and if it can formulate a valid JSON, the step of calling the structuring model is ignored, and the response is immediately returned.
+Additionally, you can opt to activate **internet search** for function calls. This option can be useful for bringing relevant data in real-time when structuring your response. When using this function, a model with internet access will be used to obtain data from the internet to structure your response. This model will also try to structure your response based on the provided data, and if it can formulate a valid JSON, the step of calling the structuring model is ignored and the response is immediately returned.
 
-If the online search model cannot structure a valid JSON, the model chosen in the request will be responsible for this task and will start the attempt chain to generate. More intelligent models get it right on the first attempts.
+If the online search model is unable to structure a valid JSON, the model chosen in the request will be responsible for this task, and it will start the attempt chain to generate. More intelligent models get it right on the first attempts.
 
 Through the `fetch` property, you can provide a list of URLs to be attached to the generation context. Open Indexer makes a GET request to access the provided content and renders it in the request content. Only 2xx or 3xx responses are accepted, and the response content must be textual. HTML responses are sanitized to include only the page text, without scripts and CSS.
 
@@ -39,7 +39,7 @@ Requests that search the internet bring good results and dispense with crawlers,
     "modelName": "@metaai/llama-3.1-8b",
     
     // Required. Explain what your model should do with the input and how it should bring the response.
-    "instructions": "Classify the user's comment, indicating whether it is positive or negative, and if it has any relevant information (number between 0 (not relevant) and 10 (very relevant))",
+    "instructions": "Classify the user's comment, indicating whether it is positive or negative, and if it has any relevant information (number between 0 (not very relevant) and 10 (very relevant))",
     
     // Required. The JSON object that the model should generate. You can provide generation examples in the instruction field. This object must be a valid JSON in the API.
     // This object must be an object, an array, or a string.
@@ -56,7 +56,7 @@ Requests that search the internet bring good results and dispense with crawlers,
     
     // Optional. Defines a JSON input for the model. Can be any type of JSON value.
     "inputData": {
-        "userComment": "Terrible market. Has a guard inside watching you so you don't steal and the butchers ignore you and serve pretty girls in front of you. But thank God there are other markets coming and the end of this circus will arrive"
+        "userComment": "Terrible market. Has a guard inside watching you so you don't steal and the butchers ignore you and serve pretty girls in front of you. But thank God there are other markets coming and the end of this nonsense will come"
     },
     
     // Optional. Defines how many attempts the model should try before the API returns an error. Must be a number between 1 and 30.
@@ -80,10 +80,10 @@ Requests that search the internet bring good results and dispense with crawlers,
         //      ignore  -> ignores the error and adds the error to the AI generation
         "fetchFailAction": "fail" | "warn" | "ignore",
         
-        // Optional. Defines the timeout in seconds for the maximum response time and reading the content. The maximum is 120 seconds (two minutes).
+        // Optional. Defines the timeout in seconds for the maximum response time and reading the contents. The maximum is 120 seconds (two minutes).
         "timeout": 10,
         
-        // Optional. Defines the maximum content size in the number of characters that can be included in the AI generation before being truncated.
+        // Optional. Defines the maximum content size in characters that can be included in the AI generation before being truncated.
         "pageMaxLength": 2048
     }
 }
@@ -117,14 +117,14 @@ Requests that search the internet bring good results and dispense with crawlers,
 
 - Specify enumerated values with `"{value1|value2|value3}"`. In this way, the model should choose one of the values presented in the JSON generation.
 - All values are placeholders for the model generation.
-- Indicate what a field is or what value it should receive with a hint in its own placeholder or indicate directly in the function instructions.
+- Indicate what a field is or what it should receive as a value with a hint in its own placeholder or indicate directly in the function instructions.
 - All values can be null, unless you specify directly to the model that they cannot.
 - The output structure of the model is the same as informed in `responseSchema`.
 - The input structure is irrelevant.
 
 ## Real-time Functions with Sentinel Models
 
-You can use Sentinel agents to execute intelligent functions that involve internet search, code execution, mathematical problem-solving, and all other functionalities that Sentinel agents can provide.
+You can use the `@aivax/sentinel-lambda` agent to execute intelligent functions that involve internet search, code execution, mathematical problem solving, and all other functionalities that Sentinel agents can provide.
 
 Sentinel agents are connected to the internet by default, so it is natural that they search for something on the internet to complement their response. When using a function call with a model that searches the internet, such as a Sentinel agent, the consumption limit is Live Function.
 
@@ -178,7 +178,7 @@ Check out examples of AI functions for various everyday tasks:
 
 ```json
 {
-    "modelName": "@aivax/sentinel-mini",
+    "modelName": "@aivax/sentinel-lambda",
     "instructions": "Evaluate the given math problem and provide the result.",
     "responseSchema": {
         "result": "..."
@@ -214,7 +214,7 @@ Check out examples of AI functions for various everyday tasks:
 
 ```json
 {
-    "modelName": "@aivax/sentinel-mini",
+    "modelName": "@aivax/sentinel-lambda",
     "instructions": "Search for the 5 latest news and weather data for the given city.",
     "responseSchema": {
         "latestNews": [
@@ -249,7 +249,7 @@ Check out examples of AI functions for various everyday tasks:
                 },
                 {
                     "title": "Real estate investment in the east zone of Rio Preto",
-                    "details": "Residential developments mark the largest real estate investment in the east zone of Rio Preto.",
+                    "details": "Residential projects mark the largest real estate investment in the east zone of Rio Preto.",
                     "link": "https://www.gazetaderiopreto.com.br/"
                 },
                 {
@@ -292,8 +292,8 @@ Check out examples of AI functions for various everyday tasks:
 
 ```json
 {
-    "modelName": "@aivax/sentinel-mini",
-    "instructions": "Bring the count of cases and deaths from COVID-19.",
+    "modelName": "@aivax/sentinel-lambda",
+    "instructions": "Bring the count of cases and deaths due to COVID-19.",
     "responseSchema": {
         "deathsWorld": 0,
         "deathsBrazil": 0,
@@ -319,7 +319,7 @@ Check out examples of AI functions for various everyday tasks:
 }
 ```
 
-#### Bring Artists on the Rise by Music Genre
+#### Bring Top Artists by Music Genre
 
 <div class="request-item post">
     <span>POST</span>
@@ -330,7 +330,7 @@ Check out examples of AI functions for various everyday tasks:
 
 ```json
 {
-    "modelName": "@aivax/sentinel-mini",
+    "modelName": "@aivax/sentinel-lambda",
     "instructions": "Search and format a list of 10 artists in the TOP 10 of music streaming by genre.",
     "responseSchema": {
         "edm": [

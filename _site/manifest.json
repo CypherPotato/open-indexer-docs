@@ -532,10 +532,30 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "docs/api-integrations.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/api-integrations.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "docs/authentication.md",
       "output": {
         ".html": {
           "relative_path": "docs/authentication.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/en/api-integrations.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/en/api-integrations.html"
         }
       },
       "version": ""

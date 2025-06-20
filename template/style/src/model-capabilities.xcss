@@ -1,6 +1,8 @@
 .model-capabilities {
     margin-top: 6px;
     font-size: .8rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 
     > div {
         opacity: .8;

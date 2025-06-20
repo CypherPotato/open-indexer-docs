@@ -1,13 +1,13 @@
 # AI Gateway
 
-The AI gateways are a service provided by the Open Indexer to create an inference tunnel between an LLM model and a knowledge base. It is possible to:
+The AI gateways are a service that the Open Indexer provides to create an inference tunnel between an LLM model and a knowledge base. It is possible to:
 
 - Create a model with customized instructions
-- Use a model provided by you through an OpenAI-compatible endpoint, or use a model made available by the Open Indexer
+- Use a model provided by you through an OpenAI compatible endpoint, or use a model made available by the Open Indexer
 - Customize inference parameters, such as temperature, top_p, prefill
 - Use a knowledge collection as the foundation for AI responses
 
-Among other features. With the AI Gateway, you create a ready-to-use model, parameterized and based on the instructions you define.
+Among other features. With the AI Gateway, you create a model ready for use, parameterized and based on the instructions you define.
 
 ## Models
 
@@ -15,33 +15,33 @@ You can bring an AI model compatible with the OpenAI interface to the AI gateway
 
 When using a model, you will notice that some are more intelligent than others for certain tasks. Some models are better with certain data acquisition strategies than others. Perform tests to find the best model.
 
-You can see the available models on the [models page](/docs/en/models).
+You can view the available models on the [models page](/docs/en/models).
 
 ## Choosing a search strategy
 
-If you are using a knowledge collection with an AI model, you can choose a strategy that the AI will use to perform an information search. Each strategy is more refined than the other. Some create better results than others, but it is essential to perform practical tests with several strategies to understand which one fits best in the model, conversation, and user tone.
+If you are using a knowledge collection with an AI model, you can choose a strategy that the AI will use to search for information. Each strategy is more refined than the other. Some create better results than others, but it is essential to perform practical tests with several strategies to understand which one fits best in the model, conversation, and user tone.
 
-It may be necessary to make adjustments to the system prompt to better inform the AI how to consider the attached documents in the conversation. The documents are attached as a user message, limited to the parameters you define in the acquisition strategy.
+It may be necessary to make adjustments to the system prompt to better inform the AI how to consider the documents attached to the conversation. The documents are attached as a user message, limited to the parameters you define in the acquisition strategy.
 
 Rewrite strategies usually generate the best results at a low latency and cost. The rewrite model used always has the lowest cost, usually chosen by an internal pool that decides which model has the lowest latency at the moment.
 
 Strategies without rewriting cost:
 
-- `Plain`: the default strategy. It is the least optimized and has no rewriting cost: the last user message is used as a search term to search the attached collection.
+- `Plain`: the default strategy. It is the least optimized and has no rewriting cost: the last user message is used as a search term to search the attached collection of the gateway.
 - `Concatenate`: concatenates the last N user messages in lines, and then the result of the concatenation is used as a search term.
 
 Strategies with rewriting cost (inference tokens are charged):
 
-- `UserRewrite`: rewrites the last N user messages using a smaller model, creating a contextualized question about what the user means.
+- `UserRewrite`: rewrites the last N user messages using a smaller model, creating a contextualized question of what the user wants to say.
 - `FullRewrite`: rewrites the last N*2 chat messages using a smaller model. Similar to `UserRewrite`, but also considers the assistant's messages in formulating the new question. It usually creates the best questions, with a slightly higher cost. It is the most stable and consistent strategy. It works with any model.
 
 Strategy functions:
 
-- `QueryFunction`: provides a search function in the integrated collection for the AI model. You should adjust the system instructions to define the ideal scenarios for the model to call this function when necessary. It may not work as well in smaller models.
+- `QueryFunction`: provides a search function in the integrated collection for the AI model. You should adjust the system instructions to the ideal scenarios for the model to call this function when necessary. It may not work as well in smaller models.
 
 ## Using AI functions (tools)
 
-At the moment, it is not possible to specify function calls through our API, either through the AI-Gateway or the OpenAI-compatible API. This feature is on our radar for future implementation.
+At the moment, it is not possible to specify function calls through our API, either through the AI-Gateway or the OpenAI compatible API. This feature is on our radar for future implementation.
 
 If this is critical for your AI model to work, you can use the [document search API](/docs/en/search) in your model.
 
@@ -118,10 +118,10 @@ It is not necessary to have a collection to link to your AI gateway. You can cre
         // Optional. Specifies a "stop" term for the model.
         "stop": null,
 
-        // Optional. Specifies the maximum number of response tokens of the model.
+        // Optional. Specifies the maximum response tokens of the model.
         "maxCompletionTokens": 4096,
         
-        // Optional. Specifies the system prompt used in the model.
+        // Optional. Specifies the system-prompt used in the model.
         "systemInstruction": "You are a friendly assistant.",
 
         // Optional. Transforms the user's question into the indicated format, where "{prompt}" is the user's original prompt.
@@ -133,8 +133,8 @@ It is not necessary to have a collection to link to your AI gateway. You can cre
         // Optional. Specifies whether the assistantPrefill and stop should be included in the message generated by the assistant.
         "includePrefillingInMessages": false,
         
-        // Optional. Specifies special flags for the model. Leave as "0" to not use any flags. The allowed flags are:
-        //      NoSystemInstruct: instead of using the system prompt, insert the system instructions in a user message
+        // Optional. Specifies special flags for the model. Leave as "0" to not use any flag. The allowed flags are:
+        //      NoSystemInstruct: instead of using system prompt, inserts system instructions in a user message
         "flags": ["Flag1", "Flag2"],
         
         // Optional. Passes an array of functions to the AI.
@@ -152,7 +152,7 @@ It is not necessary to have a collection to link to your AI gateway. You can cre
             }
         ],
         
-        // Optional. Provides endpoints where the model can obtain protocol functions by Sentinel. Read "Protocol Functions" to learn more.
+        // Optional. Provides endpoints where the model can obtain protocol functions Sentinel. Read "Protocol Functions" to learn more.
         "protocolFunctionSources": [
             "https://my-external-api.com/api/scp/listings"
         ]
@@ -170,7 +170,6 @@ It is not necessary to have a collection to link to your AI gateway. You can cre
     }
 }
 ```
-
 
 ## Editing an AI gateway
 
@@ -194,10 +193,9 @@ The request body is basically the same as the create AI gateway endpoint. Instea
 }
 ```
 
-
 ## Using an AI gateway
 
-The conversation endpoint with an AI gateway is simple: it only expects the conversation. You can receive the response at once or by streaming.
+The endpoint for conversing with an AI gateway is simple: it only expects the conversation. You can receive the response at once or by streaming.
 
 #### Request
 
@@ -241,7 +239,6 @@ data: [END]
 
 #### Response for stream=false
 
-
 ```json
 {
     "message": null,
@@ -269,7 +266,6 @@ data: [END]
     }
 }
 ```
-
 
 ## Viewing an AI gateway
 
@@ -314,7 +310,6 @@ The request below brings details of an AI gateway.
 }
 ```
 
-
 ## Deleting an AI gateway
 
 Permanently removes an AI gateway.
@@ -339,92 +334,4 @@ Permanently removes an AI gateway.
     "message": "AI gateway deleted.",
     "data": null
 }
-```
-
-
-## OpenAI endpoint
-
-The Open Indexer provides an endpoint compatible with the OpenAI interface through an AI gateway, which facilitates the integration of the model created by the Open Indexer with existing applications. It is worth noting that only some properties are supported.
-
-In an AI gateway, you already configure the model parameters, such as System Prompt, temperature, and model name. When using this endpoint, some gateway values can be overwritten by the request.
-
-#### Request
-
-<div class="request-item post">
-    <span>POST</span>
-    <span>
-        /api/v1/ai-gateways/<span>{ai-gateway-id}</span>/open-ai/v1/chat/completions
-    </span>
-</div>
-
-```json
-{
-    // The "model" field is required, but it does nothing in this request. It only exists to be compatible with the Open AI API. You can leave it empty or write anything in its place, as the considered model is the one defined in the AI Gateway.
-    "model": "foobar",
-    
-    // The messages must follow the OpenAI format. Only "system" and "user" are supported as conversation "roles".
-    "messages": [
-        {
-            "role": "system",
-            "content": "You are a helpful assistant."
-        },
-        {
-            "role": "user",
-            "content": "Hello!"
-        }
-    ],
-    
-    // Both properties are equivalent and optional and will replace the maxCompletionTokens field if sent in the request.
-    "max_completion_tokens": 1024,
-    "max_tokens": 1024,
-    
-    // Optional. Replaces the gateway parameter.
-    "stop": "\n",
-    
-    // Optional. By default, the response is not streaming.
-    "stream": true
-}
-```
-
-#### Response for non-streaming
-
-```json
-{
-    "id": "019672f3-699c-7d45-8484-7a23f4cdc079",
-    "object": "chat.completion",
-    "created": 1745685277,
-    "model": "gemini-2.0-flash-lite",
-    "choices": [
-        {
-            "index": 0,
-            "message": {
-                "role": "assistant",
-                "content": "Hi there! How can I help you today?\n",
-                "refusal": null,
-                "annotations": []
-            },
-            "logprobs": null,
-            "finish_reason": "stop"
-        }
-    ],
-    "usage": {
-        "prompt_tokens": 0,
-        "completion_tokens": 0,
-        "total_tokens": 0
-    },
-    "service_tier": "default"
-}
-```
-
-
-#### Response for streaming
-
-```text
-data: {"id":"019672f4-9a58-7932-82f0-022e457a2e63","object":"chat.completion.chunk","created":1745685355,"model":"gemini-2.0-flash-lite","system_fingerprint":"fp_2i0nmn","choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant","content":"Hi"}}]}
-
-data: {"id":"019672f4-9ab9-73a2-bdb8-23c4481453a8","object":"chat.completion.chunk","created":1745685355,"model":"gemini-2.0-flash-lite","system_fingerprint":"fp_ar1qol","choices":[{"index":0,"finish_reason":null,"delta":{"content":" there! How can I help you today?\n"}}]}
-
-... 
-
-data: {"id":"019672f4-9ac0-7ddf-a76a-e7f8043dd082","object":"chat.completion.chunk","created":1745685355,"model":"gemini-2.0-flash-lite","system_fingerprint":"fp_3e84ge","choices":[{"index":0,"finish_reason":"stop","delta":{}}]}
 ```
