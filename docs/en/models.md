@@ -34,7 +34,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 3.70 <small>/1M. tokens</small>
+                $ 3.75 <small>/1M. tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -103,7 +103,7 @@ All prices are in United States dollars.
                 Input + output:
             </small>
             <div>
-                $ 2.90 <small>/1M. tokens</small>
+                $ 1.19 <small>/1M. tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -124,75 +124,6 @@ All prices are in United States dollars.
     </td>
     <td>
         The cost-optimized version of Sentinel for performant and intelligent conversations.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Input: accepts images
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
-<div>
-    <i class="ri-lightbulb-flash-line"></i>
-    Sentinel reasoning
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Deep thinking
-</div>
-<div>
-    <i class="ri-global-line"></i>
-    Internet search
-</div>
-<div>
-    <i class="ri-link-m"></i>
-    Access links
-</div>
-<div>
-    <i class="ri-code-s-slash-line"></i>
-    Code execution
-</div>
-<div>
-    <i class="ri-chat-history-line"></i>
-    Persistent memory
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @aivax/sentinel-core
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Input + output:
-            </small>
-            <div>
-                $ 0.90 <small>/1M. tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-    <small>
-        Internet search:
-    </small>
-    <div>
-        $ 5.60 <small>/1.000 searches</small>
-    </div>
-</div><div class="item-pricing">
-    <small>
-        Sentinel reasoning:
-    </small>
-    <div>
-        $ 1.00 <small>/1m tokens</small>
-    </div>
-</div>
-    </td>
-    <td>
-        Sentinel's cheapest model for easy chat tasks.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -312,56 +243,6 @@ All prices are in United States dollars.
     </tbody>
 </table>
 
-## <img src="/assets/icon/cognitivecomputations.svg" class="inline-icon"> cognitivecomputations
-
-<table>
-    <thead>
-        <colgroup>
-            <col style="width: 30%" />
-            <col style="width: 20%" />
-            <col style="width: 50%" />
-        </colgroup>
-        <tr>
-            <th>Model Name</th>
-            <th>Prices</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-<tr>
-    <td>
-        <code>
-            @cognitivecomputations/dolphin2.9
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Input + output:
-            </small>
-            <div>
-                $ 2.60 <small>/1M. tokens</small>
-            </div>
-        </div>
-        
-    </td>
-    <td>
-        An experimental model based on Mistral that is completely uncensored. Use responsibly.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
-</div>
-        </div>
-    </td>
-</tr>
-    </tbody>
-</table>
-
 ## <img src="/assets/icon/deepseekai.svg" class="inline-icon"> deepseekai
 
 <table>
@@ -398,10 +279,6 @@ All prices are in United States dollars.
     <td>
         Model with deep reasoning and thought, best for more demanding tasks.
         <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
 <div>
     <i class="ri-lightbulb-line"></i>
     Deep thinking
@@ -459,10 +336,6 @@ All prices are in United States dollars.
 <div>
     <i class="ri-lightbulb-line"></i>
     Deep thinking
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
 </div>
         </div>
     </td>
@@ -572,10 +445,6 @@ All prices are in United States dollars.
     <i class="ri-lightbulb-line"></i>
     Deep thinking
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
-</div>
         </div>
     </td>
 </tr>
@@ -610,10 +479,6 @@ All prices are in United States dollars.
 <div>
     <i class="ri-lightbulb-line"></i>
     Deep thinking
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
 </div>
         </div>
     </td>
@@ -1064,10 +929,6 @@ All prices are in United States dollars.
     <i class="ri-lightbulb-line"></i>
     Deep thinking
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
-</div>
         </div>
     </td>
 </tr>
@@ -1198,6 +1059,33 @@ All prices are in United States dollars.
 <tr>
     <td>
         <code>
+            @qwen/qwen3-32b
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input + output:
+            </small>
+            <div>
+                $ 1.58 <small>/1M. tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        Latest generation of LLMs in the Qwen series, offering advancements in reasoning, instruction-following, agent capabilities, and multilingual support.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Deep thinking
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
             @qwen/qwq-32b
         </code>
     </td>
@@ -1215,10 +1103,6 @@ All prices are in United States dollars.
     <td>
         Conversational model with thinking and reasoning for solving complex tasks.
         <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
 <div>
     <i class="ri-lightbulb-line"></i>
     Deep thinking

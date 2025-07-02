@@ -34,7 +34,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada + saída:
             </small>
             <div>
-                $ 3.70 <small>/1M. tokens</small>
+                $ 3.75 <small>/1M. tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -103,7 +103,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada + saída:
             </small>
             <div>
-                $ 2.90 <small>/1M. tokens</small>
+                $ 1.19 <small>/1M. tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -124,75 +124,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     </td>
     <td>
         The cost-optimized version of Sentinel for performant and intelligent conversations.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-lightbulb-flash-line"></i>
-    Raciocínio Sentinel
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
-</div>
-<div>
-    <i class="ri-global-line"></i>
-    Pesquisa na internet
-</div>
-<div>
-    <i class="ri-link-m"></i>
-    Acessar links
-</div>
-<div>
-    <i class="ri-code-s-slash-line"></i>
-    Execução de código
-</div>
-<div>
-    <i class="ri-chat-history-line"></i>
-    Memória persistente
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @aivax/sentinel-core
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada + saída:
-            </small>
-            <div>
-                $ 0.90 <small>/1M. tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-    <small>
-        Pesquisa na internet:
-    </small>
-    <div>
-        $ 5.60 <small>/1.000 pesquisas</small>
-    </div>
-</div><div class="item-pricing">
-    <small>
-        Raciocínio Sentinel:
-    </small>
-    <div>
-        $ 1.00 <small>/1m tokens</small>
-    </div>
-</div>
-    </td>
-    <td>
-        Sentinel's cheapest model for easy chat tasks.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -312,56 +243,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     </tbody>
 </table>
 
-## <img src="/assets/icon/cognitivecomputations.svg" class="inline-icon"> cognitivecomputations
-
-<table>
-    <thead>
-        <colgroup>
-            <col style="width: 30%" />
-            <col style="width: 20%" />
-            <col style="width: 50%" />
-        </colgroup>
-        <tr>
-            <th>Nome do modelo</th>
-            <th>Preços</th>
-            <th>Descrição</th>
-        </tr>
-    </thead>
-    <tbody>
-<tr>
-    <td>
-        <code>
-            @cognitivecomputations/dolphin2.9
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada + saída:
-            </small>
-            <div>
-                $ 2.60 <small>/1M. tokens</small>
-            </div>
-        </div>
-        
-    </td>
-    <td>
-        An experimental model based on Mistral that is completely uncensored. Use responsibly.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-    </tbody>
-</table>
-
 ## <img src="/assets/icon/deepseekai.svg" class="inline-icon"> deepseekai
 
 <table>
@@ -398,10 +279,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         Model with deep reasoning and thought, best for more demanding tasks.
         <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
 <div>
     <i class="ri-lightbulb-line"></i>
     Pensamento profundo
@@ -459,10 +336,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-lightbulb-line"></i>
     Pensamento profundo
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
 </div>
         </div>
     </td>
@@ -572,10 +445,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-lightbulb-line"></i>
     Pensamento profundo
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -610,10 +479,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-lightbulb-line"></i>
     Pensamento profundo
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
 </div>
         </div>
     </td>
@@ -1064,10 +929,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-lightbulb-line"></i>
     Pensamento profundo
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -1198,6 +1059,33 @@ Todos os preços estão em dólares dos Estados Unidos.
 <tr>
     <td>
         <code>
+            @qwen/qwen3-32b
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada + saída:
+            </small>
+            <div>
+                $ 1.58 <small>/1M. tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        Latest generation of LLMs in the Qwen series, offering advancements in reasoning, instruction-following, agent capabilities, and multilingual support.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Pensamento profundo
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
             @qwen/qwq-32b
         </code>
     </td>
@@ -1215,10 +1103,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         Conversational model with thinking and reasoning for solving complex tasks.
         <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
 <div>
     <i class="ri-lightbulb-line"></i>
     Pensamento profundo

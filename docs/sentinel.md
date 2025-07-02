@@ -49,4 +49,8 @@ O mecanismo de pensamento profundo do Sentinel é um motor de raciocínio plug-a
 
 A precificação do reasoning do Sentinel e os tokens do Sentinel são separadas: você perceberá que ao usar o modelo Sentinel, verá lançamentos do roteamento, raciocínio e inferência. Essa divisão é feita para fornecer transparência sobre o uso do Sentinel.
 
-Esse processo de raciocínio não é um processo de raciocínio completo de um modelo e sim um algoritmo feito para planejar a execução da solução de uma tarefa através das [funções de protocolo](/protocol-functions) fornecidas ao modelo. O agente `@aivax/sentinel` combina o uso dos dois processos de raciocínio: o Sentinel e o do próprio modelo, o que cria uma resposta ainda mais elaborada para o usuário.
+Como o raciocínio Sentinel é feito por partes, você poderá ter várias incidências de raciocínio para uma só pergunta. Isso ocorre por quê, quando o Sentinel entender que deve chamar uma função, ele irá pensar novamente quando tiver o resultado da função. A partir disso, ele pode chamar outras funções em cadeia, até ter informação suficiente para resolver o problema do usuário.
+
+Internamente, dois modelos de pensamento são usados. Um mais completo com CoT (chain-of-thought) é usado, e outro menor é usado para sumarizar o conteúdo do pensamento. A sumarização reduz a quantia de tokens enviadas ao modelo maior para reduzir custos e manter a mesma linha de raciocínio.
+
+O agente `sentinel` pensa muito mais que o `sentinel-mini`, o que leva o modelo à criar uma resposta mais precisa para situações complexas. Ao usar o roteador sentinel, o agente Sentinel mais inteligente é escolhido somente em situações altamente complexas e difíceis.

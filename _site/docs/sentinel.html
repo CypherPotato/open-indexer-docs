@@ -158,7 +158,9 @@
 <h2 id="sentinel-reasoning">Sentinel Reasoning</h2>
 <p>O mecanismo de pensamento profundo do Sentinel é um motor de raciocínio plug-and-play que fornece todo o contexto necessário para o modelo Sentinel responder a pergunta do usuário. Durante o processo de pensamento, Sentinel chama funções, realiza cálculos e executa código, visando fornecer uma resposta elaborada e precisa para o usuário, mesmo usado com modelos menores e menos inteligentes.</p>
 <p>A precificação do reasoning do Sentinel e os tokens do Sentinel são separadas: você perceberá que ao usar o modelo Sentinel, verá lançamentos do roteamento, raciocínio e inferência. Essa divisão é feita para fornecer transparência sobre o uso do Sentinel.</p>
-<p>Esse processo de raciocínio não é um processo de raciocínio completo de um modelo e sim um algoritmo feito para planejar a execução da solução de uma tarefa através das <a href="/protocol-functions">funções de protocolo</a> fornecidas ao modelo. O agente <code>@aivax/sentinel</code> combina o uso dos dois processos de raciocínio: o Sentinel e o do próprio modelo, o que cria uma resposta ainda mais elaborada para o usuário.</p>
+<p>Como o raciocínio Sentinel é feito por partes, você poderá ter várias incidências de raciocínio para uma só pergunta. Isso ocorre por quê, quando o Sentinel entender que deve chamar uma função, ele irá pensar novamente quando tiver o resultado da função. A partir disso, ele pode chamar outras funções em cadeia, até ter informação suficiente para resolver o problema do usuário.</p>
+<p>Internamente, dois modelos de pensamento são usados. Um mais completo com CoT (chain-of-thought) é usado, e outro menor é usado para sumarizar o conteúdo do pensamento. A sumarização reduz a quantia de tokens enviadas ao modelo maior para reduzir custos e manter a mesma linha de raciocínio.</p>
+<p>O agente <code>sentinel</code> pensa muito mais que o <code>sentinel-mini</code>, o que leva o modelo à criar uma resposta mais precisa para situações complexas. Ao usar o roteador sentinel, o agente Sentinel mais inteligente é escolhido somente em situações altamente complexas e difíceis.</p>
 
 </article>
 
