@@ -126,16 +126,16 @@
 
 <p>Funções é uma forma de forçar seu modelo à processamento de informações usando JSON como intermédio de comunicação. Com as funções, você consegue fazer qualquer modelo responder no formato JSON que você quiser.</p>
 <p>Pode ser útil para categorizar comentários, aplicar moderação em avaliações ou processar informações com auxílio da IA.</p>
-<p>No momento, só é possível usar funções com <a href="">modelos providos pela Open Indexer</a>.</p>
+<p>No momento, só é possível usar funções com <a href="">modelos providos pela AIVAX</a>.</p>
 <h2 id="chamar-uma-função">Chamar uma função</h2>
 <p>Para chamar uma função de IA, você precisará informar o que a IA deverá responder e fornecer um esquema JSON que ela deverá seguir.</p>
 <p>Modelos menos inteligentes tendem a falhar a geração de JSON, gerando um documento inválido ou problemático. Para isso, ajuste seu modelo, a instrução e o parâmetro de tentativas se for necessário.</p>
 <p>Você é cobrado por cada tentativa que a IA tentar gerar. Modelos um pouco mais inteligentes tendem a gerar resultados corretos na primeira tentativa. É garantido que um JSON válido será gerado e que esse JSON seguirá o mesmo esquema fornecido na requisição.</p>
 <p>Adicionalmente, você pode optar em ativar <strong>pesquisa na internet</strong> para chamada de função. Essa opção pode ser útil para trazer dados relevantes em tempo real ao estruturar sua resposta. Ao usar essa função, um modelo com acesso na internet será usado para obter dados da internet para estruturar sua resposta. Esse modelo também tentará estruturar sua resposta a partir dos dados fornecidos, e se conseguir formular um JSON válido a etapa de chamar o modelo de estruturação é ignorada e a resposta é imediatamente retornada.</p>
 <p>Se for o caso do modelo de busca online não conseguir estruturar um JSON válido, o modelo escolhido na requisição ficará responsável por essa tarefa, e irá começar o encadeamento de tentativas de geração. Modelos mais inteligentes acertam a geração nas primeiras tentativas.</p>
-<p>Através da propriedade <code>fetch</code>, você pode fornecer uma lista de URLs para serem anexadas no contexto da geração. O Open Indexer faz uma requisição GET para acessar os conteúdos fornecidos e renderiza-os no conteúdo da requisição. Somente respostas 2xx ou 3xx são aceitas e o conteúdo da resposta deve ser textual. Respostas em HTML são sanitizadas para incluirem somente o texto da página, sem script e CSS.</p>
+<p>Através da propriedade <code>fetch</code>, você pode fornecer uma lista de URLs para serem anexadas no contexto da geração. O AIVAX faz uma requisição GET para acessar os conteúdos fornecidos e renderiza-os no conteúdo da requisição. Somente respostas 2xx ou 3xx são aceitas e o conteúdo da resposta deve ser textual. Respostas em HTML são sanitizadas para incluirem somente o texto da página, sem script e CSS.</p>
 <p>O tamanho máximo que pode ser lido de uma URL do fetch é 10 Mb. O máximo de itens para o fetch são 10 URLs.</p>
-<p>Requisições que pesquisam na internet trazem bons resultados e dispensam crawlers, scrappers ou a necessidade de pagar por uma API específica, mas podem ser custosas e relativamente lentas para serem obtidas. Considere usar um cache do lado da sua aplicação para dados que não precisam ser constantementes atualizados, como dados meteorológicos, estatísticas diárias, etc. A Open Indexer não realiza nenhum cache pelo nosso lado.</p>
+<p>Requisições que pesquisam na internet trazem bons resultados e dispensam crawlers, scrappers ou a necessidade de pagar por uma API específica, mas podem ser custosas e relativamente lentas para serem obtidas. Considere usar um cache do lado da sua aplicação para dados que não precisam ser constantementes atualizados, como dados meteorológicos, estatísticas diárias, etc. A AIVAX não realiza nenhum cache pelo nosso lado.</p>
 <h4 id="requisição">Requisição</h4>
 <div class="request-item post">
     <span>POST</span>
@@ -174,10 +174,13 @@
     // Opcional. Define o tempo limite em segundos para obter um JSON válido antes da API retornar um erro. Deve ser um número entre 1 e 3600 (uma hora).
     &quot;timeout&quot;: 300,
     
+    // Opcional. Define a temperatura de geração do JSON. Valores maiores tendem a serem mais criativos, enquanto menores mais determinísticos. Número de 0 à 2.
+    &quot;temperature&quot;: 0.4,
+    
     // Opcional. Adiciona recursos externos para complementar a geração da resposta.
     &quot;fetch&quot;: {
-
-        // Obrigatório. Fornece a lista de URLS que o Open Indexer irá acessar. O máximo são 10 URLs.
+        
+        // Obrigatório. Fornece a lista de URLS que o AIVAX irá acessar para complementar a geração de resposta. O máximo são 10 URLs.
         &quot;urls&quot;: [
             &quot;https://url1...&quot;,
             &quot;https://url2...&quot;,

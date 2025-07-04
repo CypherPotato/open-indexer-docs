@@ -1,8 +1,8 @@
 # API Limits
 
-Rate limits ("rate limiters") regulate the number of requests you can send in a time window. These limits help Open Indexer prevent abuse and provide a stable API to everyone.
+Rate limits regulate the number of requests you can send in a time window. These limits help AIVAX prevent abuse and provide a stable API to everyone.
 
-The API limits below are the same for all embedded AIVAX models. These limits are categorized by operations performed by the API. Each account has a tier that defines which limits are applied to the account. Tiers change according to the total invested in Open Indexer and the time the account has existed.
+The API limits below are the same for all AIVAX embedded models. These limits are categorized by operations performed by the API. Each account has a tier that defines which limits are applied to the account. Tiers change according to the total invested in AIVAX and the time the account exists.
 
 - **Tier zero (free account):** new account that has never added credits.
 - **Tier 1**: account created at least 48 hours ago and has added any credit value.
@@ -32,8 +32,8 @@ Limit legends:
 | --- | --- | --- |
 | Document search | 150 | - |
 | Document insertion | - | 3,000 |
-| Inference | 75 | 1,000 |
-| Function | 50 | 1,000 |
+| Inference | 75 | 10,000 |
+| Function | 60 | 10,000 |
 | Function (Live) | 20 | 500 |
 
 # [Tier 2](#tab/tier2)
@@ -43,8 +43,8 @@ Limit legends:
 | Document search | 300 | - |
 | Document insertion | - | 10,000 |
 | Inference | 150 | - |
-| Function | 50 | 10,000 |
-| Function (Live) | 50 | 600 |
+| Function | 60 | - |
+| Function (Live) | 60 | - |
 
 # [Tier 3](#tab/tier3)
 
@@ -53,7 +53,7 @@ Limit legends:
 | Document search | 1,000 | - |
 | Document insertion | - | 30,000 |
 | Inference | 1,000 | - |
-| Function | 750 | - |
+| Function | 500 | - |
 | Function (Live) | 200 | - |
 
 ---

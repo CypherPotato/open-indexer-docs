@@ -124,8 +124,8 @@
                 <article data-uid="">
 <h1 id="search">Search</h1>
 
-<p>The search API, through the query key obtained from the collections, performs a semantic search in it, performing an intelligent comparison for each indexed document in a collection.</p>
-<p>After creating a collection, you will get its ID. Use the ID of your collection to perform the search in the indexed documents of the same.</p>
+<p>The search API, through the query key obtained from the collections, performs a semantic search on it, performing an intelligent comparison for each indexed document in a collection.</p>
+<p>After creating a collection, you will get its ID. Use the ID of your collection to perform the search on the indexed documents of the same.</p>
 <p>Use the endpoints of this API to embed the semantic search of documents in your AI model or chatbot.</p>
 <h2 id="searching-documents">Searching documents</h2>
 <p>This endpoint expects a GET request with the following parameters:</p>
@@ -176,7 +176,7 @@
     ]
 }
 </code></pre>
-<p>For the search result, the higher the score, the more similar the document is to the search term. The Open Indexer uses embedding models that allow task orientation. For the search, the term is vectorized with a <code>DOCUMENT_QUERY</code> orientation. For document indexing, the orientation is <code>DOCUMENT_RETRIEVAL</code>, which provides a more optimized search and not to verify the similarity between documents.</p>
+<p>For the search result, the higher the score, the more similar the document is to the search term. AIVAX uses embedding models that allow task orientation. For the search, the term is vectorized with a <code>DOCUMENT_QUERY</code> orientation. For document indexing, the orientation is <code>DOCUMENT_RETRIEVAL</code>, which provides a more optimized search and not to verify the similarity between documents.</p>
 
 </article>
 

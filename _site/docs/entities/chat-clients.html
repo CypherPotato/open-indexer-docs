@@ -127,7 +127,7 @@
 <p>Um cliente de chat provê uma interface de usuário através de um <a href="/docs/entities/ai-gateway">AI Gateway</a> que permite o usuário conversar com sua assistente. Um chat client é integrado à inferência do AI gateway e dá suporte para pensamento profundo, pesquisa e conversa por texto. Recursos multi-modais, como envio de imagens e áudio estão em desenvolvimento.</p>
 <div class="NOTE">
 <h5>Note</h5>
-<p>A Open Indexer nunca armazena o conteúdo de um chat entre um cliente e o usuário. Você pode usar JavaScript para essa tarefa, mas sob sua responsabilidade de uso e armazenamento.</p>
+<p>A AIVAX nunca armazena o conteúdo de um chat entre um cliente e o usuário. Você pode usar JavaScript para essa tarefa, mas sob sua responsabilidade de uso e armazenamento.</p>
 </div>
 <p>Você pode personalizar a interface do seu chat client com CSS e JavaScript personalizado, além de poder escolher a linguagem dos recursos do chat.</p>
 <h2 id="criando-um-chat-client">Criando um chat client</h2>
@@ -179,7 +179,7 @@
         &quot;debug&quot;: true,
         
         // Opcional. Especifica se o chat suporta processamento de mídia multi-modal, especificando quais botões ficarão visíveis para enviar o conteúdo multimídia ao modelo.
-        // Document é processado internamente como markdown pela Open Indexer.
+        // Document é processado internamente como markdown pela AIVAX.
         &quot;inputModes&quot;: [&quot;Image&quot;, &quot;Audio&quot;, &quot;Document&quot;],
         
         // Opcional. Especifica quais origens devem ser permitidas para embutir o cliente de chat em um iframe. Se esse campo estiver vazio, qualquer origem será aceita.
@@ -298,7 +298,7 @@
 <p>Uma sessão é automaticamente renovada por mais 3 dias ao receber uma mensagem do usuário.</p>
 <div class="IMPORTANT">
 <h5>Important</h5>
-<p>Só é possível determinar a quantidade de tokens usados em uma mensagem ao usar um <a href="/docs/models">modelo provido pela Open Indexer</a>. Se você usar um modelo externo, a propriedade <code>limitingParameters.userInputMaxTokens</code> será ignorada.</p>
+<p>Só é possível determinar a quantidade de tokens usados em uma mensagem ao usar um <a href="/docs/models">modelo provido pela AIVAX</a>. Se você usar um modelo externo, a propriedade <code>limitingParameters.userInputMaxTokens</code> será ignorada.</p>
 </div>
 <div class="request-item post">
     <span>POST</span>

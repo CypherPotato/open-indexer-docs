@@ -4,7 +4,7 @@ Você pode usar a inferência da AIVAX com uma API/SDK existente, fazendo uma tr
 
 ## Interface OpenAI compatível
 
-A Open Indexer provê um endpoint compatível com a interface OpenAI através de um AI-gateway, o que facilita a integração do modelo criado pela Open Indexer com aplicações existentes. Vale ressaltar que somente algumas propriedades são suportadas.
+A AIVAX provê um endpoint compatível com a interface OpenAI através de um AI-gateway, o que facilita a integração do modelo criado pela AIVAX com aplicações existentes. Vale ressaltar que somente algumas propriedades são suportadas.
 
 Em um gateway de IA, você já configura os parâmetros do modelo, como System Prompt, temperatura e nome do modelo. Ao usar esse endpoint, alguns valores do gateway podem ser sobrescritos pela requisição.
 

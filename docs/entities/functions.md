@@ -4,7 +4,7 @@ Funções é uma forma de forçar seu modelo à processamento de informações u
 
 Pode ser útil para categorizar comentários, aplicar moderação em avaliações ou processar informações com auxílio da IA.
 
-No momento, só é possível usar funções com [modelos providos pela Open Indexer]().
+No momento, só é possível usar funções com [modelos providos pela AIVAX]().
 
 ## Chamar uma função
 
@@ -18,11 +18,11 @@ Adicionalmente, você pode optar em ativar **pesquisa na internet** para chamada
 
 Se for o caso do modelo de busca online não conseguir estruturar um JSON válido, o modelo escolhido na requisição ficará responsável por essa tarefa, e irá começar o encadeamento de tentativas de geração. Modelos mais inteligentes acertam a geração nas primeiras tentativas.
 
-Através da propriedade `fetch`, você pode fornecer uma lista de URLs para serem anexadas no contexto da geração. O Open Indexer faz uma requisição GET para acessar os conteúdos fornecidos e renderiza-os no conteúdo da requisição. Somente respostas 2xx ou 3xx são aceitas e o conteúdo da resposta deve ser textual. Respostas em HTML são sanitizadas para incluirem somente o texto da página, sem script e CSS.
+Através da propriedade `fetch`, você pode fornecer uma lista de URLs para serem anexadas no contexto da geração. O AIVAX faz uma requisição GET para acessar os conteúdos fornecidos e renderiza-os no conteúdo da requisição. Somente respostas 2xx ou 3xx são aceitas e o conteúdo da resposta deve ser textual. Respostas em HTML são sanitizadas para incluirem somente o texto da página, sem script e CSS.
 
 O tamanho máximo que pode ser lido de uma URL do fetch é 10 Mb. O máximo de itens para o fetch são 10 URLs.
 
-Requisições que pesquisam na internet trazem bons resultados e dispensam crawlers, scrappers ou a necessidade de pagar por uma API específica, mas podem ser custosas e relativamente lentas para serem obtidas. Considere usar um cache do lado da sua aplicação para dados que não precisam ser constantementes atualizados, como dados meteorológicos, estatísticas diárias, etc. A Open Indexer não realiza nenhum cache pelo nosso lado.
+Requisições que pesquisam na internet trazem bons resultados e dispensam crawlers, scrappers ou a necessidade de pagar por uma API específica, mas podem ser custosas e relativamente lentas para serem obtidas. Considere usar um cache do lado da sua aplicação para dados que não precisam ser constantementes atualizados, como dados meteorológicos, estatísticas diárias, etc. A AIVAX não realiza nenhum cache pelo nosso lado.
 
 #### Requisição
 
@@ -65,10 +65,13 @@ Requisições que pesquisam na internet trazem bons resultados e dispensam crawl
     // Opcional. Define o tempo limite em segundos para obter um JSON válido antes da API retornar um erro. Deve ser um número entre 1 e 3600 (uma hora).
     "timeout": 300,
     
+    // Opcional. Define a temperatura de geração do JSON. Valores maiores tendem a serem mais criativos, enquanto menores mais determinísticos. Número de 0 à 2.
+    "temperature": 0.4,
+    
     // Opcional. Adiciona recursos externos para complementar a geração da resposta.
     "fetch": {
-
-        // Obrigatório. Fornece a lista de URLS que o Open Indexer irá acessar. O máximo são 10 URLs.
+        
+        // Obrigatório. Fornece a lista de URLS que o AIVAX irá acessar para complementar a geração de resposta. O máximo são 10 URLs.
         "urls": [
             "https://url1...",
             "https://url2...",

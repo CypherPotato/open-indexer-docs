@@ -1,8 +1,8 @@
 # Limites da API
 
-Limites de taxa ("rate limiters") regulam o número de requisições que você pode enviar em uma janela de tempo. Esses limites ajudam a Open Indexer a prevenir abuso e fornecer uma API estável à todos.
+Limites de taxa ("rate limiters") regulam o número de requisições que você pode enviar em uma janela de tempo. Esses limites ajudam a AIVAX a prevenir abuso e fornecer uma API estável à todos.
 
-Os limites da API abaixo são os mesmos para todos os modelos embutidos da AIVAX. Esses limites são categorizados por operações feitas pela API. Cada conta possui um tier que define quais limites são aplicados à conta. Tiers mudam de acordo com o total investido na Open Indexer e o tempo que a conta existe.
+Os limites da API abaixo são os mesmos para todos os modelos embutidos da AIVAX. Esses limites são categorizados por operações feitas pela API. Cada conta possui um tier que define quais limites são aplicados à conta. Tiers mudam de acordo com o total investido na AIVAX e o tempo que a conta existe.
 
 - **Tier zero (conta grátis):** conta nova que nunca adicionou créditos.
 - **Tier 1**: conta criada há pelo menos 48 horas e que já adicionou qualquer valor em créditos.
@@ -32,8 +32,8 @@ Legendas dos limites:
 | --- | --- | --- |
 | Pesquisa de documentos | 150 | - |
 | Inserção de documentos | - | 3.000 |
-| Inferência | 75 | 1.000 |
-| Função | 50 | 1.000 |
+| Inferência | 75 | 10.000 |
+| Função | 60 | 10.000 |
 | Função (Live) | 20 | 500 |
 
 # [Tier 2](#tab/tier2)
@@ -43,8 +43,8 @@ Legendas dos limites:
 | Pesquisa de documentos | 300 | - |
 | Inserção de documentos | - | 10.000 |
 | Inferência | 150 | - |
-| Função | 50 | 10.000 |
-| Função (Live) | 50 | 600 |
+| Função | 60 | - |
+| Função (Live) | 60 | - |
 
 # [Tier 3](#tab/tier3)
 
@@ -53,7 +53,7 @@ Legendas dos limites:
 | Pesquisa de documentos | 1.000 | - |
 | Inserção de documentos | - | 30.000 |
 | Inferência | 1.000 | - |
-| Função | 750 | - |
+| Função | 500 | - |
 | Função (Live) | 200 | - |
 
 ---

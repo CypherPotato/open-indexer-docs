@@ -63,4 +63,4 @@ term=Qual a cor do honda CIVIC?
 }
 ```
 
-Para o resultado da busca, quanto maior o score, mais semelhante é o documento para o termo da busca. O Open Indexer utiliza modelos de embedding que permitem a orientação da tarefa. Para a busca, o termo é vetorizado com uma orientação `DOCUMENT_QUERY`. Para indexação dos documentos, a orientação é `DOCUMENT_RETRIEVAL`, o que fornece uma busca mais otimizada e não para averiguar a similaridade entre documentos.
+Para o resultado da busca, quanto maior o score, mais semelhante é o documento para o termo da busca. O AIVAX utiliza modelos de embedding que permitem a orientação da tarefa. Para a busca, o termo é vetorizado com uma orientação `DOCUMENT_QUERY`. Para indexação dos documentos, a orientação é `DOCUMENT_RETRIEVAL`, o que fornece uma busca mais otimizada e não para averiguar a similaridade entre documentos.

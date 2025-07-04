@@ -1,8 +1,8 @@
 # Search
 
-The search API, through the query key obtained from the collections, performs a semantic search in it, performing an intelligent comparison for each indexed document in a collection.
+The search API, through the query key obtained from the collections, performs a semantic search on it, performing an intelligent comparison for each indexed document in a collection.
 
-After creating a collection, you will get its ID. Use the ID of your collection to perform the search in the indexed documents of the same.
+After creating a collection, you will get its ID. Use the ID of your collection to perform the search on the indexed documents of the same.
 
 Use the endpoints of this API to embed the semantic search of documents in your AI model or chatbot.
 
@@ -63,4 +63,4 @@ term=What is the color of the Honda CIVIC?
 }
 ```
 
-For the search result, the higher the score, the more similar the document is to the search term. The Open Indexer uses embedding models that allow task orientation. For the search, the term is vectorized with a `DOCUMENT_QUERY` orientation. For document indexing, the orientation is `DOCUMENT_RETRIEVAL`, which provides a more optimized search and not to verify the similarity between documents.
+For the search result, the higher the score, the more similar the document is to the search term. AIVAX uses embedding models that allow task orientation. For the search, the term is vectorized with a `DOCUMENT_QUERY` orientation. For document indexing, the orientation is `DOCUMENT_RETRIEVAL`, which provides a more optimized search and not to verify the similarity between documents.

@@ -4,7 +4,7 @@ Um cliente de chat provê uma interface de usuário através de um [AI Gateway](
 
 > [!NOTE]
 >
-> A Open Indexer nunca armazena o conteúdo de um chat entre um cliente e o usuário. Você pode usar JavaScript para essa tarefa, mas sob sua responsabilidade de uso e armazenamento.
+> A AIVAX nunca armazena o conteúdo de um chat entre um cliente e o usuário. Você pode usar JavaScript para essa tarefa, mas sob sua responsabilidade de uso e armazenamento.
 
 Você pode personalizar a interface do seu chat client com CSS e JavaScript personalizado, além de poder escolher a linguagem dos recursos do chat.
 
@@ -61,7 +61,7 @@ Cria um novo chat client.
         "debug": true,
         
         // Opcional. Especifica se o chat suporta processamento de mídia multi-modal, especificando quais botões ficarão visíveis para enviar o conteúdo multimídia ao modelo.
-        // Document é processado internamente como markdown pela Open Indexer.
+        // Document é processado internamente como markdown pela AIVAX.
         "inputModes": ["Image", "Audio", "Document"],
         
         // Opcional. Especifica quais origens devem ser permitidas para embutir o cliente de chat em um iframe. Se esse campo estiver vazio, qualquer origem será aceita.
@@ -207,7 +207,7 @@ Uma sessão é automaticamente renovada por mais 3 dias ao receber uma mensagem 
 
 > [!IMPORTANT]
 >
-> Só é possível determinar a quantidade de tokens usados em uma mensagem ao usar um [modelo provido pela Open Indexer](/docs/models). Se você usar um modelo externo, a propriedade `limitingParameters.userInputMaxTokens` será ignorada.
+> Só é possível determinar a quantidade de tokens usados em uma mensagem ao usar um [modelo provido pela AIVAX](/docs/models). Se você usar um modelo externo, a propriedade `limitingParameters.userInputMaxTokens` será ignorada.
 
 <div class="request-item post">
     <span>POST</span>

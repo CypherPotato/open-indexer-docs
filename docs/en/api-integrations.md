@@ -1,12 +1,12 @@
 # API Interfaces
 
-You can use AIVAX inference with an existing API/SDK, making a plug-and-play service swap. Note that some interfaces have limitations regarding agent and assistant customization.
+You can use AIVAX inference with an existing API/SDK, making a plug-and-play switch of the service. Note that some interfaces have limitations regarding agent and assistant customization.
 
 ## OpenAI Compatible Interface
 
-Open Indexer provides an endpoint compatible with the OpenAI interface through an AI-gateway, making it easier to integrate the model created by Open Indexer with existing applications. It is worth noting that only some properties are supported.
+AIVAX provides an endpoint compatible with the OpenAI interface through an AI-gateway, making it easier to integrate the AIVAX-created model with existing applications. It is worth noting that only some properties are supported.
 
-In an AI gateway, you already configure the model parameters, such as System Prompt, temperature, and model name. When using this endpoint, some gateway values can be overridden by the request.
+In an AI gateway, you can configure the model parameters, such as System Prompt, temperature, and model name. When using this endpoint, some gateway values can be overwritten by the request.
 
 The API prefix is:
 
@@ -52,12 +52,12 @@ Currently, the following endpoints are compatible with the OpenAI API:
     // Optional. Replaces the gateway parameter.
     "stop": "\n",
     
-    // Optional. By default, the response is not streaming.
+    // Optional. By default, the response is not streamed.
     "stream": true
 }
 ```
 
-#### Response for Non-Streaming
+#### Non-Streaming Response
 
 ```json
 {
@@ -88,14 +88,14 @@ Currently, the following endpoints are compatible with the OpenAI API:
 ```
 
 
-#### Response for Streaming
+#### Streaming Response
 
 ```json
 data: {"id":"019672f4-9a58-7932-82f0-022e457a2e63","object":"chat.completion.chunk","created":1745685355,"model":"gemini-2.0-flash-lite","system_fingerprint":"fp_2i0nmn","choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant","content":"Hi"}}]}
 
 data: {"id":"019672f4-9ab9-73a2-bdb8-23c4481453a8","object":"chat.completion.chunk","created":1745685355,"model":"gemini-2.0-flash-lite","system_fingerprint":"fp_ar1qol","choices":[{"index":0,"finish_reason":null,"delta":{"content":" there! How can I help you today?\n"}}]}
 
-...
+... 
 
 data: {"id":"019672f4-9ac0-7ddf-a76a-e7f8043dd082","object":"chat.completion.chunk","created":1745685355,"model":"gemini-2.0-flash-lite","system_fingerprint":"fp_3e84ge","choices":[{"index":0,"finish_reason":"stop","delta":{}}]}
 ```

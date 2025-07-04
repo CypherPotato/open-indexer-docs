@@ -4,7 +4,7 @@ A chat client provides a user interface through an [AI Gateway](/docs/en/entitie
 
 > [!NOTE]
 >
-> The Open Indexer never stores the content of a chat between a client and the user. You can use JavaScript for this task, but it is your responsibility to use and store it.
+> AIVAX never stores the content of a chat between a client and the user. You can use JavaScript for this task, but it's your responsibility to use and store it.
 
 You can customize the interface of your chat client with custom CSS and JavaScript, as well as choose the language of the chat features.
 
@@ -30,9 +30,9 @@ Create a new chat client.
     "clientParameters": {
         
         // Optional. Specifies the language code to be used in the chat for most elements, such as error messages, buttons, etc.
-        //      Values: pt-BR, en
-        "languageCode": "pt-BR" | "en",
-
+        //      Values: pt-BR, en, null (automatic based on the browser)
+        "languageCode": "pt-BR" | "en" | null,
+        
         // Optional. Specifies a JavaScript code to execute in the chat.
         "customScripts": null,
 
@@ -61,13 +61,13 @@ Create a new chat client.
         "debug": true,
         
         // Optional. Specifies whether the chat supports multi-modal media processing, specifying which buttons will be visible to send multimedia content to the model.
-        // Document is processed internally as markdown by the Open Indexer.
+        // Document is processed internally as markdown by AIVAX.
         "inputModes": ["Image", "Audio", "Document"],
         
         // Optional. Specifies which origins should be allowed to embed the chat client in an iframe. If this field is empty, any origin will be accepted.
         "allowedFrameOrigins": ["https://my-domain.com.br"],
         
-        // Optional. Specifies conversation suggestion buttons when starting a new chat session. You can add as many buttons as you want, but it is recommended to have up to 3 buttons.
+        // Optional. Specifies conversation suggestion buttons when starting a new chat session. You can add as many buttons as you want, but it's recommended to have up to 3 buttons.
         "suggestionButtons": [
             {
                 // Title to be displayed on the button.
@@ -203,11 +203,11 @@ A chat session expires after a certain time for security reasons of the generate
 
 A chat session also restores all conversation messages from the same session after disconnection. The user can clear the conversation by clicking the clear conversation button in the top right corner of the chat client. This session uses the limits defined by the chat client, such as the maximum number of messages and tokens in the conversation.
 
-A session is automatically renewed for another 3 days when receiving a message from the user.
+A session is automatically renewed for another 3 days when receiving a user message.
 
 > [!IMPORTANT]
 >
-> It is only possible to determine the number of tokens used in a message when using a [model provided by the Open Indexer](/docs/en/models). If you use an external model, the `limitingParameters.userInputMaxTokens` property will be ignored.
+> It's only possible to determine the number of tokens used in a message when using a [model provided by AIVAX](/docs/en/models). If you use an external model, the `limitingParameters.userInputMaxTokens` property will be ignored.
 
 <div class="request-item post">
     <span>POST</span>

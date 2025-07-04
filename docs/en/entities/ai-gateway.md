@@ -1,9 +1,9 @@
 # AI Gateway
 
-The AI gateways are a service that the Open Indexer provides to create an inference tunnel between an LLM model and a knowledge base. It is possible to:
+The AI gateways are a service provided by AIVAX to create an inference tunnel between an LLM model and a knowledge base. It is possible to:
 
 - Create a model with customized instructions
-- Use a model provided by you through an OpenAI compatible endpoint, or use a model made available by the Open Indexer
+- Use a model provided by you through an OpenAI compatible endpoint, or use a model made available by AIVAX
 - Customize inference parameters, such as temperature, top_p, prefill
 - Use a knowledge collection as the foundation for AI responses
 
@@ -11,7 +11,7 @@ Among other features. With the AI Gateway, you create a model ready for use, par
 
 ## Models
 
-You can bring an AI model compatible with the OpenAI interface to the AI gateway. If you bring your AI model, we will only charge for the document search attached to the AI. You can also use one of the models below that are already ready to start with the Open Indexer.
+You can bring an AI model compatible with the OpenAI interface to the AI gateway. If you bring your AI model, we will only charge for the document search attached to the AI. You can also use one of the models below that are already ready to start with AIVAX.
 
 When using a model, you will notice that some are more intelligent than others for certain tasks. Some models are better with certain data acquisition strategies than others. Perform tests to find the best model.
 
@@ -19,25 +19,25 @@ You can view the available models on the [models page](/docs/en/models).
 
 ## Choosing a search strategy
 
-If you are using a knowledge collection with an AI model, you can choose a strategy that the AI will use to search for information. Each strategy is more refined than the other. Some create better results than others, but it is essential to perform practical tests with several strategies to understand which one fits best in the model, conversation, and user tone.
+If you are using a knowledge collection with an AI model, you can choose a strategy that the AI will use to perform an information search. Each strategy is more refined than the other. Some create better results than others, but it is essential to perform practical tests with several strategies to understand which one fits best in the model, conversation, and user tone.
 
-It may be necessary to make adjustments to the system prompt to better inform the AI how to consider the documents attached to the conversation. The documents are attached as a user message, limited to the parameters you define in the acquisition strategy.
+It may be necessary to make adjustments to the system prompt to better inform how the AI should consider the documents attached to the conversation. The documents are attached as a user message, limited to the parameters you define in the acquisition strategy.
 
-Rewrite strategies usually generate the best results at a low latency and cost. The rewrite model used always has the lowest cost, usually chosen by an internal pool that decides which model has the lowest latency at the moment.
+Rewrite strategies usually generate the best results at a low latency and cost. The rewrite model used is always the one with the lowest cost, usually chosen by an internal pool that decides which model has the lowest latency at the moment.
 
-Strategies without rewriting cost:
+Strategies without rewrite cost:
 
-- `Plain`: the default strategy. It is the least optimized and has no rewriting cost: the last user message is used as a search term to search the attached collection of the gateway.
+- `Plain`: the default strategy. It is the least optimized and has no rewrite cost: the last user message is used as a search term to search in the attached collection of the gateway.
 - `Concatenate`: concatenates the last N user messages in lines, and then the result of the concatenation is used as a search term.
 
-Strategies with rewriting cost (inference tokens are charged):
+Strategies with rewrite cost (inference tokens are charged):
 
-- `UserRewrite`: rewrites the last N user messages using a smaller model, creating a contextualized question of what the user wants to say.
+- `UserRewrite`: rewrites the last N user messages using a smaller model, creating a contextualized question about what the user wants to say.
 - `FullRewrite`: rewrites the last N*2 chat messages using a smaller model. Similar to `UserRewrite`, but also considers the assistant's messages in formulating the new question. It usually creates the best questions, with a slightly higher cost. It is the most stable and consistent strategy. It works with any model.
 
 Strategy functions:
 
-- `QueryFunction`: provides a search function in the integrated collection for the AI model. You should adjust the system instructions to the ideal scenarios for the model to call this function when necessary. It may not work as well in smaller models.
+- `QueryFunction`: provides a search function in the integrated collection for the AI model. You should adjust the system instructions to define the ideal scenarios for the model to call this function when necessary. It may not work as well in smaller models.
 
 ## Using AI functions (tools)
 
@@ -72,7 +72,7 @@ It is not necessary to have a collection to link to your AI gateway. You can cre
     "parameters": {
 
         // Required. Endpoint compatible with OpenAI chat/completions, or use @integrated
-        // to use a model provided by the Open Indexer.
+        // to use a model provided by AIVAX.
         "baseAddress": "@integrated",
 
         // Required. Specifies the name of the model that will be used in inference.
@@ -118,13 +118,13 @@ It is not necessary to have a collection to link to your AI gateway. You can cre
         // Optional. Specifies a "stop" term for the model.
         "stop": null,
 
-        // Optional. Specifies the maximum response tokens of the model.
+        // Optional. Specifies the maximum number of response tokens of the model.
         "maxCompletionTokens": 4096,
         
         // Optional. Specifies the system-prompt used in the model.
         "systemInstruction": "You are a friendly assistant.",
 
-        // Optional. Transforms the user's question into the indicated format, where "{prompt}" is the user's original prompt.
+        // Optional. Transforms the user's question into the format indicated below, where "{prompt}" is the user's original prompt.
         "userPromptTemplate": null,
         
         // Optional. Specifies a prefill (initialization) of the assistant's message.
@@ -152,7 +152,7 @@ It is not necessary to have a collection to link to your AI gateway. You can cre
             }
         ],
         
-        // Optional. Provides endpoints where the model can obtain protocol functions Sentinel. Read "Protocol Functions" to learn more.
+        // Optional. Provides endpoints where the model can obtain protocol functions by Sentinel. Read "Protocol Functions" to learn more.
         "protocolFunctionSources": [
             "https://my-external-api.com/api/scp/listings"
         ]
@@ -195,7 +195,7 @@ The request body is basically the same as the create AI gateway endpoint. Instea
 
 ## Using an AI gateway
 
-The endpoint for conversing with an AI gateway is simple: it only expects the conversation. You can receive the response at once or by streaming.
+The conversation endpoint with an AI gateway is simple: it only expects the conversation. You can receive the response at once or by streaming.
 
 #### Request
 

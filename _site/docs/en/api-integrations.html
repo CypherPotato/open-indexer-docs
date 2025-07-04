@@ -124,10 +124,10 @@
                 <article data-uid="">
 <h1 id="api-interfaces">API Interfaces</h1>
 
-<p>You can use AIVAX inference with an existing API/SDK, making a plug-and-play service swap. Note that some interfaces have limitations regarding agent and assistant customization.</p>
+<p>You can use AIVAX inference with an existing API/SDK, making a plug-and-play switch of the service. Note that some interfaces have limitations regarding agent and assistant customization.</p>
 <h2 id="openai-compatible-interface">OpenAI Compatible Interface</h2>
-<p>Open Indexer provides an endpoint compatible with the OpenAI interface through an AI-gateway, making it easier to integrate the model created by Open Indexer with existing applications. It is worth noting that only some properties are supported.</p>
-<p>In an AI gateway, you already configure the model parameters, such as System Prompt, temperature, and model name. When using this endpoint, some gateway values can be overridden by the request.</p>
+<p>AIVAX provides an endpoint compatible with the OpenAI interface through an AI-gateway, making it easier to integrate the AIVAX-created model with existing applications. It is worth noting that only some properties are supported.</p>
+<p>In an AI gateway, you can configure the model parameters, such as System Prompt, temperature, and model name. When using this endpoint, some gateway values can be overwritten by the request.</p>
 <p>The API prefix is:</p>
 <pre><code class="lang-text">https://inference.aivax.net/api/v1/open-ai
 </code></pre>
@@ -166,11 +166,11 @@
     // Optional. Replaces the gateway parameter.
     &quot;stop&quot;: &quot;\n&quot;,
     
-    // Optional. By default, the response is not streaming.
+    // Optional. By default, the response is not streamed.
     &quot;stream&quot;: true
 }
 </code></pre>
-<h4 id="response-for-non-streaming">Response for Non-Streaming</h4>
+<h4 id="non-streaming-response">Non-Streaming Response</h4>
 <pre><code class="lang-json">{
     &quot;id&quot;: &quot;019672f3-699c-7d45-8484-7a23f4cdc079&quot;,
     &quot;object&quot;: &quot;chat.completion&quot;,
@@ -197,12 +197,12 @@
     &quot;service_tier&quot;: &quot;default&quot;
 }
 </code></pre>
-<h4 id="response-for-streaming">Response for Streaming</h4>
+<h4 id="streaming-response">Streaming Response</h4>
 <pre><code class="lang-json">data: {&quot;id&quot;:&quot;019672f4-9a58-7932-82f0-022e457a2e63&quot;,&quot;object&quot;:&quot;chat.completion.chunk&quot;,&quot;created&quot;:1745685355,&quot;model&quot;:&quot;gemini-2.0-flash-lite&quot;,&quot;system_fingerprint&quot;:&quot;fp_2i0nmn&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;finish_reason&quot;:null,&quot;delta&quot;:{&quot;role&quot;:&quot;assistant&quot;,&quot;content&quot;:&quot;Hi&quot;}}]}
 
 data: {&quot;id&quot;:&quot;019672f4-9ab9-73a2-bdb8-23c4481453a8&quot;,&quot;object&quot;:&quot;chat.completion.chunk&quot;,&quot;created&quot;:1745685355,&quot;model&quot;:&quot;gemini-2.0-flash-lite&quot;,&quot;system_fingerprint&quot;:&quot;fp_ar1qol&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;finish_reason&quot;:null,&quot;delta&quot;:{&quot;content&quot;:&quot; there! How can I help you today?\n&quot;}}]}
 
-...
+... 
 
 data: {&quot;id&quot;:&quot;019672f4-9ac0-7ddf-a76a-e7f8043dd082&quot;,&quot;object&quot;:&quot;chat.completion.chunk&quot;,&quot;created&quot;:1745685355,&quot;model&quot;:&quot;gemini-2.0-flash-lite&quot;,&quot;system_fingerprint&quot;:&quot;fp_3e84ge&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;finish_reason&quot;:&quot;stop&quot;,&quot;delta&quot;:{}}]}
 </code></pre>
