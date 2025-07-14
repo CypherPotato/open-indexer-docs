@@ -132,28 +132,6 @@
 <pre><code class="lang-bash">curl https://inference.aivax.net/api/v1/information/models.txt?api-key=oky_gr5uepj...
 </code></pre>
 <p>Não há necessidade de enviar o esquema de autenticação <code>Bearer</code> em ambos cabeçalhos, mas é possível por questões de compatibilidade.</p>
-<h2 id="obtendo-a-api-key-a-partir-da-login-key">Obtendo a API Key a partir da Login Key</h2>
-<p>Sua Login Key é a chave que você usa para acessar seu painel de usuário e controlar as diversas funções da AIVAX. A partir dessa chave é possível recuperar sua API key:</p>
-<h4 id="requisição">Requisição</h4>
-<div class="request-item get">
-    <span>GET</span>
-    <span>
-        /api/v1/auth/login
-    </span>
-</div>
-<pre><code class="lang-json">{
-    &quot;loginKey&quot;: &quot;n38oy4nq2orry7&quot;
-}
-</code></pre>
-<h4 id="resposta">Resposta</h4>
-<pre><code class="lang-json">{
-    &quot;message&quot;: null,
-    &quot;data&quot;: {
-        &quot;apiKey&quot;: &quot;oky_gr5uepj18yhdec3z6nskw3w1kqfbaawcfrwe837c8o&quot;,
-        &quot;accountName&quot;: &quot;Fernando Diniz&quot;
-    }
-}
-</code></pre>
 <h2 id="autenticando-um-nonce">Autenticando um nonce</h2>
 <p>Nonces são gerados por webhooks e funções de protocolo para autenticar transações feitas pela AIVAX em conteúdos externos. Em requisições que incluam o cabeçalho <code>X-Aivax-Nonce</code>, valide esse token chamando este endpoint:</p>
 <div class="request-item get">

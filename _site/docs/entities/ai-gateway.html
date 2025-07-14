@@ -154,256 +154,63 @@
 <ul>
 <li><code>QueryFunction</code>: fornece uma função de pesquisa na coleção integrada para o modelo de IA. Você deverá ajustar nas instruções do sistema os cenários ideais para o modelo chamar essa função quando necessário. Pode não funcionar tão bem em modelos menores.</li>
 </ul>
-<h2 id="usando-funções-tools-de-ia">Usando funções (tools) de IA</h2>
-<p>No momento, não é possível especificar chamadas de função através da nossa API, seja pelo AI-Gateway ou pela API OpenAI compatível. Esse recurso está no nosso radar para implementação futura.</p>
-<p>Se isso é crítico para seu modelo de IA funcionar, você pode usar a API de <a href="/docs/search">busca de documentos</a> no seu modelo.</p>
-<h2 id="criando-um-gateway-de-ia">Criando um gateway de IA</h2>
-<p>Se for usar um modelo providenciado por você, tenha em mãos:</p>
-<ul>
-<li>O base address compatível com a API OpenAI</li>
-<li>A chave de API do endpoint (se aplicável)</li>
-<li>O nome do modelo de inferência.</li>
-</ul>
-<p>Não é necessário ter uma coleção para vincular no seu gateway de IA. Você pode criar um gateway de IA e vincular uma base de conhecimento nela posteriormente.</p>
+<h2 id="usar-um-gateway-de-ia">Usar um gateway de IA</h2>
+<p>A AIVAX provê um endpoint compatível com a interface OpenAI através de um AI-gateway, o que facilita a integração do modelo criado pela AIVAX com aplicações e SDKs existentes. Vale ressaltar que somente algumas propriedades são suportadas.</p>
+<p>Em um gateway de IA, você já configura os parâmetros do modelo, como System Prompt, temperatura e nome do modelo. Ao usar esse endpoint, alguns valores do gateway podem ser sobrescritos pela requisição.</p>
 <h4 id="requisição">Requisição</h4>
 <div class="request-item post">
     <span>POST</span>
     <span>
-        /api/v1/ai-gateways
+        /api/v1/chat-completions
     </span>
 </div>
 <pre><code class="lang-json">{
-    // Nome do gateway para identificá-lo posteriormente.
-    &quot;name&quot;: &quot;my-gateway-model&quot;,
-    
-    &quot;parameters&quot;: {
-
-        // Obrigatório. Endpoint compatível com chat/completions da OpenAI, ou use @integrated
-        // para usar um modelo provido pela AIVAX.
-        &quot;baseAddress&quot;: &quot;@integrated&quot;,
-
-        // Obrigatório. Especifica o nome do modelo que será usado na inferência.
-        &quot;modelName&quot;: &quot;@groq/compound-beta&quot;,
-        
-        // Opcional. ID da coleção que será usada como base de conhecimento pela IA.
-        &quot;knowledgeCollectionId&quot;: &quot;01965b62-17c4-7258-9aa8-af5139799527&quot;,
-        
-        // Opcional. Especifica quantos documentos devem ser anexados no contexto da IA.
-        &quot;knowledgeBaseMaximumResults&quot;: 16,
-        
-        // Opcional. Especifica a pontuação mínima de similaridade que a busca de documentos deve anexar no contexto da IA.
-        &quot;knowledgeBaseMinimumScore&quot;: 0.55,
-
-        // Opcional. Especifica se referências de documentos devem ser anexadas no contexto da IA.
-        &quot;knowledgeUseReferences&quot;: false,
-
-        // Opcional. Especifica a estratégia de obtenção de documentos. Leia &quot;Escolhendo uma estratégia de busca&quot; para saber mais.
-        &quot;queryStrategy&quot;: &quot;UserRewrite&quot;,
-        
-        // Opcional. Parâmetros da estratégia de obtenção.
-        &quot;queryStrategyParameters&quot;: {
-
-            // Opcional. Especifica a quantidade de mensagens que devem ser consideradas para as estratégias UserRewrite e FullRewrite. Nota: para FullRewrite, o valor sempre é multiplicado por 2 para considerar mensagens da assistente.
-            &quot;rewriteContextSize&quot;: 3,
-
-            // Opcional. Especifica a quantidade de mensagens do usuário que devem ser concatenadas no termo da busca.
-            &quot;concatenateContextSize&quot;: 3
-        },
-
-        // Opcional. Especifica a chave de api &quot;Authorization: Bearer ...&quot; usado na inferência. Deixe nulo se usar um modelo embutido da AIVAX.
-        &quot;apiKey&quot;: null,
-        
-        // Opcional. Especifica a temperatura do modelo.
-        &quot;temperature&quot;: 1.25,
-        
-        // Opcional. Especifica o nucleos sampling do modelo.
-        &quot;topP&quot;: null,
-
-        // Opcional. Especifica a penalidade de presença de tokens do modelo.
-        &quot;presencePenalty&quot;: null,
-
-        // Opcional. Especifica um termo de &quot;stop&quot; para o modelo.
-        &quot;stop&quot;: null,
-
-        // Opcional. Especifica o máximo de tokens de resposta do modelo.
-        &quot;maxCompletionTokens&quot;: 4096,
-        
-        // Opcional. Especifica o system-prompt usado no modelo.
-        &quot;systemInstruction&quot;: &quot;Você é uma assistente amigável.&quot;,
-
-        // Opcional. Transforma a pergunta do usuário para o formato indicado abaixo, onde &quot;{prompt}&quot; é o prompt original do usuário.
-        &quot;userPromptTemplate&quot;: null,
-        
-        // Opcional. Especifica um prefill (inicialização) da mensagem da assistente.
-        &quot;assistantPrefill&quot;: null,
-
-        // Opcional. Especifica se o assistantPrefill e o stop devem ser incluídos na mensagem gerada pela assistente.
-        &quot;includePrefillingInMessages&quot;: false,
-        
-        // Opcional. Especifica flags especiais para o modelo. Deixe como &quot;0&quot; para não usar nenhuma flag. As flags permitidas são:
-        //      NoSystemInstruct: ao invés de usar system prompt, insere as instruções do system em uma mensagem de usuário
-        &quot;flags&quot;: [&quot;Flag1&quot;, &quot;Flag2&quot;],
-        
-        // Opcional. Passa um array de funções para a IA.
-        &quot;tools&quot;: [],
-        
-        // Opcional. Ativa funções de protocolo para modelos Sentinel. Leia &quot;Protocol Functions&quot; para saber mais.
-        &quot;protocolFunctions&quot;: [
-            {
-                &quot;name&quot;: &quot;get-weather&quot;,
-                &quot;description&quot;: &quot;Use essa função para obter dados de clima para a localização informada.&quot;,
-                &quot;callbackUrl&quot;: &quot;https://my-service.com/ai-service&quot;,
-                &quot;contentFormat&quot;: {
-                    &quot;location&quot;: &quot;nome da cidade&quot;
-                }
-            }
-        ],
-        
-        // Opcional. Fornece endpoints onde o modelo pode obter por funções de protocolo Sentinel. Leia &quot;Protocol Functions&quot; para saber mais.
-        &quot;protocolFunctionSources&quot;: [
-            &quot;https://my-external-api.com/api/scp/listings&quot;
-        ]
-    }
-}
-</code></pre>
-<h4 id="resposta">Resposta</h4>
-<pre><code class="lang-json">{
-    &quot;message&quot;: null,
-    &quot;data&quot;: {
-        &quot;aiGatewayId&quot;: &quot;01965b64-a8eb-716c-892d-880159a9f12d&quot;
-    }
-}
-</code></pre>
-<h2 id="editar-um-gateway-de-ia">Editar um gateway de IA</h2>
-<p>O corpo da requisição é basicamente o mesmo do endpoint de criar um ai-gateway. Ao invés de usar POST, use PATCH.</p>
-<h4 id="requisição-1">Requisição</h4>
-<div class="request-item patch">
-    <span>PATCH</span>
-    <span>
-        /api/v1/ai-gateways/<span>{ai-gateway-id}</span>
-    </span>
-</div>
-<h4 id="resposta-1">Resposta</h4>
-<pre><code class="lang-json">{
-    &quot;message&quot;: &quot;Gateway editted.&quot;,
-    &quot;data&quot;: null
-}
-</code></pre>
-<h2 id="usar-um-gateway-de-ia">Usar um gateway de IA</h2>
-<p>O endpoint de conversação com um gateway de IA é simples: ele espera apenas a conversa. Você pode receber a resposta de uma vez ou por streaming.</p>
-<h4 id="requisição-2">Requisição</h4>
-<div class="request-item patch">
-    <span>POST</span>
-    <span>
-        /api/v1/ai-gateways/<span>{ai-gateway-id}</span>/inference
-    </span>
-</div>
-<pre><code class="lang-json">{
+    &quot;model&quot;: &quot;0197cb0f-893a-7b7d-be0a-71ada1208aaf&quot;,
     &quot;messages&quot;: [
         {
             &quot;role&quot;: &quot;user&quot;,
-            &quot;content&quot;: &quot;Como eu posso ligar meu Civic 2015?&quot;
+            &quot;content&quot;: &quot;Quem é você?&quot;
         }
     ],
-    &quot;stream&quot;: true
+    &quot;stream&quot;: false
 }
 </code></pre>
-<h4 id="resposta-para-streamtrue">Resposta para stream=true</h4>
-<p>A resposta de streaming é baseada em server-sent events. A primeira linha sempre é uma resposta com informações de depuração.</p>
-<pre><code class="lang-text">data: {&quot;content&quot;:&quot;&quot;,&quot;isFirstChunkMetadata&quot;:true,&quot;embeddedDocuments&quot;:[],&quot;debugInfo&quot;:[{&quot;name&quot;:&quot;EmbeddingTimeMs&quot;,&quot;value&quot;:7.5045},{&quot;name&quot;:&quot;InferenceTimeMs&quot;,&quot;value&quot;:0},{&quot;name&quot;:&quot;ElapsedTotalMs&quot;,&quot;value&quot;:8.3489},{&quot;name&quot;:&quot;KnowledgeQueryText&quot;,&quot;value&quot;:null}]}
+<h4 id="resposta-para-não-streaming">Resposta para não-streaming</h4>
+<pre><code class="lang-json">{
+    &quot;id&quot;: &quot;0197dbdc-6456-7d54-b7ec-04cb9c80f460&quot;,
+    &quot;object&quot;: &quot;chat.completion&quot;,
+    &quot;created&quot;: 1751740343,
+    &quot;model&quot;: &quot;@aivax/sentinel-mini&quot;,
+    &quot;choices&quot;: [
+        {
+            &quot;index&quot;: 0,
+            &quot;message&quot;: {
+                &quot;role&quot;: &quot;assistant&quot;,
+                &quot;completion_text&quot;: &quot;Oi! 😊 Eu sou a Zia, a assistente inteligente do Zé do Ingresso. Tô aqui pra te ajudar com tudo sobre ingressos, eventos, e tudo que rola na nossa querida São José do Rio Preto. Se precisar de alguma coisa, tipo saber sobre nomeação de ja o bagulho, só chamar! Vamos juntos aproveitar tudo o que tiver rolando! O que você precisa? 🥳 &quot;,
+                &quot;refusal&quot;: null,
+                &quot;annotations&quot;: []
+            },
+            &quot;logprobs&quot;: null,
+            &quot;finish_reason&quot;: &quot;stop&quot;
+        }
+    ],
+    &quot;usage&quot;: {
+        &quot;prompt_tokens&quot;: 1118,
+        &quot;completion_tokens&quot;: 88,
+        &quot;total_tokens&quot;: 1206
+    },
+    &quot;sentinel_usage&quot;: null,
+    &quot;service_tier&quot;: &quot;default&quot;
+}
+</code></pre>
+<h4 id="resposta-streaming">Resposta streaming</h4>
+<pre><code class="lang-text">data: {&quot;id&quot;:&quot;0197dbde-c40b-720d-a13e-f689c303c571&quot;,&quot;object&quot;:&quot;chat.completion.chunk&quot;,&quot;created&quot;:1751740498,&quot;model&quot;:&quot;gpt-4o-mini&quot;,&quot;system_fingerprint&quot;:&quot;fp_y8jidd&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;finish_reason&quot;:null,&quot;delta&quot;:{&quot;role&quot;:&quot;assistant&quot;,&quot;content&quot;:&quot;&quot;}}],&quot;usage&quot;:null,&quot;sentinel_usage&quot;:null}
 
-data: {&quot;content&quot;:&quot;[...]&quot;,&quot;isFirstChunkMetadata&quot;:false,&quot;embeddedDocuments&quot;:[],&quot;debugInfo&quot;:[]}
-
-data: {&quot;content&quot;:&quot;[...]&quot;,&quot;isFirstChunkMetadata&quot;:false,&quot;embeddedDocuments&quot;:[],&quot;debugInfo&quot;:[]}
-
-data: {&quot;content&quot;:&quot;[...]&quot;,&quot;isFirstChunkMetadata&quot;:false,&quot;embeddedDocuments&quot;:[],&quot;debugInfo&quot;:[]}
-
-data: {&quot;content&quot;:&quot;[...]&quot;,&quot;isFirstChunkMetadata&quot;:false,&quot;embeddedDocuments&quot;:[],&quot;debugInfo&quot;:[]}
 ...
 
-data: [END]
-</code></pre>
-<h4 id="resposta-para-streamfalse">Resposta para stream=false</h4>
-<pre><code class="lang-json">{
-    &quot;message&quot;: null,
-    &quot;data&quot;: {
-        &quot;generatedMessage&quot;: &quot;[...]&quot;,
-        &quot;embeddedDocuments&quot;: [],
-        &quot;debugInfo&quot;: [
-            {
-                &quot;name&quot;: &quot;EmbeddingTimeMs&quot;,
-                &quot;value&quot;: 4140.8628
-            },
-            {
-                &quot;name&quot;: &quot;InferenceTimeMs&quot;,
-                &quot;value&quot;: 4140.803
-            },
-            {
-                &quot;name&quot;: &quot;ElapsedTotalMs&quot;,
-                &quot;value&quot;: 4141.4771
-            },
-            {
-                &quot;name&quot;: &quot;KnowledgeQueryText&quot;,
-                &quot;value&quot;: null
-            }
-        ]
-    }
-}
-</code></pre>
-<h2 id="ver-um-gateway-de-ia">Ver um gateway de IA</h2>
-<p>A requisição abaixo traz detalhes de um AI gateway.</p>
-<h4 id="requisição-3">Requisição</h4>
-<div class="request-item get">
-    <span>GET</span>
-    <span>
-        /api/v1/ai-gateways/<span>{ai-gateway-id}</span>
-    </span>
-</div>
-<h4 id="resposta-2">Resposta</h4>
-<pre><code class="lang-json">{
-    &quot;message&quot;: null,
-    &quot;data&quot;: {
-        &quot;name&quot;: &quot;my-gateway-client&quot;,
-        &quot;parameters&quot;: {
-            &quot;baseAddress&quot;: &quot;@integrated&quot;,
-            &quot;knowledgeCollectionId&quot;: &quot;01965b54-7fbd-70cd-982b-604de002ac0a&quot;,
-            &quot;knowledgeBaseMaximumResults&quot;: 16,
-            &quot;knowledgeBaseMinimumScore&quot;: 0.55,
-            &quot;knowledgeUseReferences&quot;: false,
-            &quot;queryStrategy&quot;: &quot;ToolCall&quot;,
-            &quot;queryStrategyParameters&quot;: {
-                &quot;rewriteContextSize&quot;: 3,
-                &quot;concatenateContextSize&quot;: 3
-            },
-            &quot;apiKey&quot;: null,
-            &quot;modelName&quot;: &quot;@google/gemini-2.0-flash-lite&quot;,
-            &quot;temperature&quot;: 1.25,
-            &quot;topP&quot;: null,
-            &quot;presencePenalty&quot;: null,
-            &quot;stop&quot;: null,
-            ...
-        }
-    }
-}
-</code></pre>
-<h2 id="excluir-um-gateway-de-ia">Excluir um gateway de IA</h2>
-<p>Permanentemente remove um gateway de IA.</p>
-<div class="WARNING">
-<h5>Warning</h5>
-<p>Ao remover um gateway de IA, todos os chat clients associados também são removidos. Coleções não são removidas.</p>
-</div>
-<h4 id="requisição-4">Requisição</h4>
-<div class="request-item delete">
-    <span>DELETE</span>
-    <span>
-        /api/v1/ai-gateways/<span>{ai-gateway-id}</span>
-    </span>
-</div>
-<h4 id="resposta-3">Resposta</h4>
-<pre><code class="lang-json">{
-    &quot;message&quot;: &quot;AI gateway deleted.&quot;,
-    &quot;data&quot;: null
-}
+data: {&quot;id&quot;:&quot;0197dbde-c88c-7764-8017-c1fee0d79096&quot;,&quot;object&quot;:&quot;chat.completion.chunk&quot;,&quot;created&quot;:1751740500,&quot;model&quot;:&quot;gpt-4o-mini&quot;,&quot;system_fingerprint&quot;:&quot;fp_2he7ot&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;finish_reason&quot;:null,&quot;delta&quot;:{&quot;content&quot;:&quot;&quot;}}],&quot;usage&quot;:null,&quot;sentinel_usage&quot;:null}
+
+data: {&quot;id&quot;:&quot;0197dbde-c890-7329-9e65-faecbe158efa&quot;,&quot;object&quot;:&quot;chat.completion.chunk&quot;,&quot;created&quot;:1751740500,&quot;model&quot;:&quot;@aivax\/sentinel-mini&quot;,&quot;system_fingerprint&quot;:&quot;fp_q6qh7x&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;finish_reason&quot;:&quot;STOP&quot;,&quot;delta&quot;:{}}],&quot;usage&quot;:{&quot;prompt_tokens&quot;:1097,&quot;completion_tokens&quot;:92,&quot;total_tokens&quot;:1189},&quot;sentinel_usage&quot;:null}
 </code></pre>
 
 </article>

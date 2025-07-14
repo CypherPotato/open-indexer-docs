@@ -25,16 +25,24 @@ Todos os preços estão em dólares dos Estados Unidos.
 <tr>
     <td>
         <code>
-            @aivax/sentinel
+            @aivax/fn-1
         </code>
     </td>
     <td>
         <div class="item-pricing">
             <small>
-                Entrada + saída:
+                Entrada:
             </small>
             <div>
-                $ 3.75 <small>/1M. tokens</small>
+                $ 0.10 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.40 <small>/1m tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -42,161 +50,16 @@ Todos os preços estão em dólares dos Estados Unidos.
         Pesquisa na internet:
     </small>
     <div>
-        $ 5.60 <small>/1.000 pesquisas</small>
-    </div>
-</div><div class="item-pricing">
-    <small>
-        Raciocínio Sentinel:
-    </small>
-    <div>
-        $ 1.00 <small>/1m tokens</small>
+        $ 5.00 <small>/1.000 pesquisas</small>
     </div>
 </div>
     </td>
     <td>
-        The smartest Sentinel model with built-in deep thinking.
+        Optimized agent for function usage.
         <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens
-</div>
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
-</div>
-<div>
-    <i class="ri-lightbulb-flash-line"></i>
-    Raciocínio Sentinel
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
-</div>
-<div>
-    <i class="ri-global-line"></i>
-    Pesquisa na internet
-</div>
-<div>
-    <i class="ri-link-m"></i>
-    Acessar links
-</div>
-<div>
-    <i class="ri-code-s-slash-line"></i>
-    Execução de código
-</div>
-<div>
-    <i class="ri-chat-history-line"></i>
-    Memória persistente
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @aivax/sentinel-mini
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada + saída:
-            </small>
-            <div>
-                $ 1.19 <small>/1M. tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-    <small>
-        Pesquisa na internet:
-    </small>
-    <div>
-        $ 5.60 <small>/1.000 pesquisas</small>
-    </div>
-</div><div class="item-pricing">
-    <small>
-        Raciocínio Sentinel:
-    </small>
-    <div>
-        $ 1.00 <small>/1m tokens</small>
-    </div>
-</div>
-    </td>
-    <td>
-        The cost-optimized version of Sentinel for performant and intelligent conversations.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-lightbulb-flash-line"></i>
-    Raciocínio Sentinel
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
-</div>
-<div>
-    <i class="ri-global-line"></i>
-    Pesquisa na internet
-</div>
-<div>
-    <i class="ri-link-m"></i>
-    Acessar links
-</div>
-<div>
-    <i class="ri-code-s-slash-line"></i>
-    Execução de código
-</div>
-<div>
-    <i class="ri-chat-history-line"></i>
-    Memória persistente
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @aivax/sentinel-lambda
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada + saída:
-            </small>
-            <div>
-                $ 0.60 <small>/1M. tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-    <small>
-        Pesquisa na internet:
-    </small>
-    <div>
-        $ 5.60 <small>/1.000 pesquisas</small>
-    </div>
-</div><div class="item-pricing">
-    <small>
-        Raciocínio Sentinel:
-    </small>
-    <div>
-        $ 1.00 <small>/1m tokens</small>
-    </div>
-</div>
-    </td>
-    <td>
-        Sentinel model optimized for function usage.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-lightbulb-flash-line"></i>
-    Raciocínio Sentinel
 </div>
 <div>
     <i class="ri-lightbulb-line"></i>
@@ -214,29 +77,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-braces-line"></i>
     Funções JSON
 </div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @aivax/sentinel-router
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada + saída:
-            </small>
-            <div>
-                $ 0.40 <small>/1M. tokens</small>
-            </div>
-        </div>
-        
-    </td>
-    <td>
-        Sentinel's router, which automatically selects the best Sentinel model to perform a task according to its complexity.
-        <div class="model-capabilities">
         </div>
     </td>
 </tr>
@@ -268,10 +108,18 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada + saída:
+                Entrada:
             </small>
             <div>
-                $ 2.76 <small>/1M. tokens</small>
+                $ 0.75 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.99 <small>/1m tokens</small>
             </div>
         </div>
         
@@ -314,10 +162,18 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada + saída:
+                Entrada:
             </small>
             <div>
-                $ 12.25 <small>/1M. tokens</small>
+                $ 1.25 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 10.00 <small>/1m tokens</small>
             </div>
         </div>
         
@@ -349,16 +205,24 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada + saída:
+                Entrada:
             </small>
             <div>
-                $ 3.80 <small>/1M. tokens</small>
+                $ 0.30 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 2.50 <small>/1m tokens</small>
             </div>
         </div>
         
     </td>
     <td>
-        Same model as Gemini 2.5 Flash, but with the reasoning module turned off.
+        Google's best model in terms of price-performance, offering well-rounded capabilities. 2.5 Flash is best for large scale processing, low-latency, high volume tasks that require thinking, and agentic use cases.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -384,10 +248,18 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada + saída:
+                Entrada:
             </small>
             <div>
-                $ 3.80 <small>/1M. tokens</small>
+                $ 0.30 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 2.50 <small>/1m tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -395,90 +267,24 @@ Todos os preços estão em dólares dos Estados Unidos.
         Pesquisa na internet:
     </small>
     <div>
-        $ 39.20 <small>/1.000 pesquisas</small>
+        $ 35.00 <small>/1.000 pesquisas</small>
     </div>
 </div>
     </td>
     <td>
-        Version of Gemini 2.5 Flash with internet search.
+        Gemini 2.5 Flash with Google internet search.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
     Entrada: aceita imagens, vídeos, áudios
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Pensamento profundo
 </div>
 <div>
     <i class="ri-global-line"></i>
     Pesquisa na internet
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @google/gemini-2.5-flash-th
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada + saída:
-            </small>
-            <div>
-                $ 3.80 <small>/1M. tokens</small>
-            </div>
-        </div>
-        
-    </td>
-    <td>
-        Latest generation model with integrated reasoning and thought.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens, vídeos, áudios
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @google/gemini-2.5-flash-lite-th
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada + saída:
-            </small>
-            <div>
-                $ 0.88 <small>/1M. tokens</small>
-            </div>
-        </div>
-        
-    </td>
-    <td>
-        Gemini 2.5 Flash Lite model with thinking enabled.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens, vídeos, áudios
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
 </div>
         </div>
     </td>
@@ -492,16 +298,24 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada + saída:
+                Entrada:
             </small>
             <div>
-                $ 0.88 <small>/1M. tokens</small>
+                $ 0.10 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.40 <small>/1m tokens</small>
             </div>
         </div>
         
     </td>
     <td>
-        The smallest and most cost effective model for the newest Gemini series, built for at scale usage.
+        A Gemini 2.5 Flash model optimized for cost efficiency and low latency.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -510,6 +324,10 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Pensamento profundo
 </div>
 <div>
     <i class="ri-braces-line"></i>
@@ -527,16 +345,24 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada + saída:
+                Entrada:
             </small>
             <div>
-                $ 0.88 <small>/1M. tokens</small>
+                $ 0.10 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.40 <small>/1m tokens</small>
             </div>
         </div>
         
     </td>
     <td>
-        Offers new generation features, with improved speed and multi-modal generation.
+        Gemini 2.0 Flash delivers next-gen features and improved capabilities, including superior speed, native tool use, and a 1M token context window.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -562,10 +388,18 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada + saída:
+                Entrada:
             </small>
             <div>
-                $ 0.88 <small>/1M. tokens</small>
+                $ 0.10 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.40 <small>/1m tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -573,12 +407,12 @@ Todos os preços estão em dólares dos Estados Unidos.
         Pesquisa na internet:
     </small>
     <div>
-        $ 39.20 <small>/1.000 pesquisas</small>
+        $ 35.00 <small>/1.000 pesquisas</small>
     </div>
 </div>
     </td>
     <td>
-        Version of Gemini 2.0 with internet search via Google.
+        Gemini 2.0 Flash with internet search via Google.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -600,10 +434,18 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada + saída:
+                Entrada:
             </small>
             <div>
-                $ 0.66 <small>/1M. tokens</small>
+                $ 0.08 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.30 <small>/1m tokens</small>
             </div>
         </div>
         
@@ -635,10 +477,18 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada + saída:
+                Entrada:
             </small>
             <div>
-                $ 0.33 <small>/1M. tokens</small>
+                $ 0.04 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.08 <small>/1m tokens</small>
             </div>
         </div>
         
@@ -654,6 +504,60 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-instance-line"></i>
     Chamadas de função
 </div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+    </tbody>
+</table>
+
+## <img src="/assets/icon/inception.svg" class="inline-icon"> inception
+
+<table>
+    <thead>
+        <colgroup>
+            <col style="width: 30%" />
+            <col style="width: 20%" />
+            <col style="width: 50%" />
+        </colgroup>
+        <tr>
+            <th>Nome do modelo</th>
+            <th>Preços</th>
+            <th>Descrição</th>
+        </tr>
+    </thead>
+    <tbody>
+<tr>
+    <td>
+        <code>
+            @inception/mercury
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.25 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 1.00 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        Extremely fast model by generative diffusion.
+        <div class="model-capabilities">
 <div>
     <i class="ri-braces-line"></i>
     Funções JSON
@@ -689,10 +593,18 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada + saída:
+                Entrada:
             </small>
             <div>
-                $ 2.40 <small>/1M. tokens</small>
+                $ 0.59 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.79 <small>/1m tokens</small>
             </div>
         </div>
         
@@ -720,10 +632,18 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada + saída:
+                Entrada:
             </small>
             <div>
-                $ 1.40 <small>/1M. tokens</small>
+                $ 0.20 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.60 <small>/1m tokens</small>
             </div>
         </div>
         
@@ -755,10 +675,18 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada + saída:
+                Entrada:
             </small>
             <div>
-                $ 0.79 <small>/1M. tokens</small>
+                $ 0.11 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.34 <small>/1m tokens</small>
             </div>
         </div>
         
@@ -790,10 +718,18 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada + saída:
+                Entrada:
             </small>
             <div>
-                $ 0.23 <small>/1M. tokens</small>
+                $ 0.05 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.08 <small>/1m tokens</small>
             </div>
         </div>
         
@@ -809,6 +745,180 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-braces-line"></i>
     Funções JSON
 </div>
+        </div>
+    </td>
+</tr>
+    </tbody>
+</table>
+
+## <img src="/assets/icon/model-router.svg" class="inline-icon"> model-router
+
+<table>
+    <thead>
+        <colgroup>
+            <col style="width: 30%" />
+            <col style="width: 20%" />
+            <col style="width: 50%" />
+        </colgroup>
+        <tr>
+            <th>Nome do modelo</th>
+            <th>Preços</th>
+            <th>Descrição</th>
+        </tr>
+    </thead>
+    <tbody>
+<tr>
+    <td>
+        <code>
+            @model-router/gemini
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.08 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.30 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        Model router for Google Gemini. The routing is made between Gemini 2.0 Flash Lite, Gemini 2.0 Flash and Gemini 2.5 Flash.
+        <div class="model-capabilities">
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @model-router/gemini-high
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.08 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.30 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        Model router for Google Gemini. The routing is made between Gemini 2.0 Flash, Gemini 2.5 Flash (low) and Gemini 2.5 Flash (high).
+        <div class="model-capabilities">
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @model-router/openai
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.08 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.30 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        Model router for OpenAI. The routing is made between GPT 4.1 Nano, GPT 4.1 Mini and o4-mini.
+        <div class="model-capabilities">
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @model-router/openai-high
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.08 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.30 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        Model router for OpenAI. The routing is made between GPT 4.1 Mini, o4-mini (low) and o4-mini (high).
+        <div class="model-capabilities">
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @model-router/llama
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.08 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.30 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        Model router for Meta Llama. The routing is made between Llama 4 Scout, Llama 4 Maverick and Llama 3.3 70b.
+        <div class="model-capabilities">
         </div>
     </td>
 </tr>
@@ -840,10 +950,18 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada + saída:
+                Entrada:
             </small>
             <div>
-                $ 13.50 <small>/1M. tokens</small>
+                $ 2.50 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 10.00 <small>/1m tokens</small>
             </div>
         </div>
         
@@ -859,10 +977,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-instance-line"></i>
     Chamadas de função
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -875,10 +989,18 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada + saída:
+                Entrada:
             </small>
             <div>
-                $ 11.00 <small>/1M. tokens</small>
+                $ 2.00 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 8.00 <small>/1m tokens</small>
             </div>
         </div>
         
@@ -894,10 +1016,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-instance-line"></i>
     Chamadas de função
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -910,10 +1028,18 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada + saída:
+                Entrada:
             </small>
             <div>
-                $ 6.50 <small>/1M. tokens</small>
+                $ 1.10 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 4.40 <small>/1m tokens</small>
             </div>
         </div>
         
@@ -924,6 +1050,10 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-image-circle-line"></i>
     Entrada: aceita imagens
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
 </div>
 <div>
     <i class="ri-lightbulb-line"></i>
@@ -941,10 +1071,18 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada + saída:
+                Entrada:
             </small>
             <div>
-                $ 3.00 <small>/1M. tokens</small>
+                $ 0.40 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 1.60 <small>/1m tokens</small>
             </div>
         </div>
         
@@ -960,10 +1098,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-instance-line"></i>
     Chamadas de função
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -976,10 +1110,18 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada + saída:
+                Entrada:
             </small>
             <div>
-                $ 1.31 <small>/1M. tokens</small>
+                $ 0.15 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.60 <small>/1m tokens</small>
             </div>
         </div>
         
@@ -995,10 +1137,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-instance-line"></i>
     Chamadas de função
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -1011,10 +1149,18 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada + saída:
+                Entrada:
             </small>
             <div>
-                $ 0.88 <small>/1M. tokens</small>
+                $ 0.10 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.40 <small>/1m tokens</small>
             </div>
         </div>
         
@@ -1029,10 +1175,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
 </div>
         </div>
     </td>
@@ -1065,10 +1207,18 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada + saída:
+                Entrada:
             </small>
             <div>
-                $ 1.58 <small>/1M. tokens</small>
+                $ 0.29 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.59 <small>/1m tokens</small>
             </div>
         </div>
         
@@ -1092,10 +1242,18 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada + saída:
+                Entrada:
             </small>
             <div>
-                $ 1.23 <small>/1M. tokens</small>
+                $ 0.29 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.39 <small>/1m tokens</small>
             </div>
         </div>
         

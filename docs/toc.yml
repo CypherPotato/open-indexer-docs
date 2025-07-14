@@ -10,12 +10,8 @@ items:
   href: limits.md
 - name: Modelos
   href: models.md
-- name: Sentinel
-  href: sentinel.md
 - name: Funções server-side
   href: protocol-functions.md
-- name: Integrações e SDKs
-  href: api-integrations.md
 
 - name: Usando a API
 

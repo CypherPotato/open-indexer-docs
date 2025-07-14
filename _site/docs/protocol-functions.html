@@ -124,7 +124,7 @@
                 <article data-uid="">
 <h1 id="funções-do-lado-do-servidor">Funções do lado do servidor</h1>
 
-<p>As funções de protocolo da AIVAX, ou <em>server-side functions</em>, é uma implementação customizada de chamadas de função criada pela AIVAX que permite que o modelo siga estritamente um contexto de função que não é baseada em documentos JSON. Esse recurso é disponível para modelos com <a href="/docs/sentinel">raciocínio Sentinel</a>. Similar ao MCP, mas um pouco mais simples.</p>
+<p>As funções de protocolo da AIVAX, ou <em>server-side functions</em>, é uma implementação customizada de chamadas de função criada pela AIVAX que permite que o modelo siga estritamente um contexto de função que não é baseada em documentos JSON. Similar ao MCP, mas um pouco mais simples.</p>
 <p>As funções de protocolo permitem a tomada de ações no lado do servidor da AIVAX, removendo a necessidade de implementação da função no lado do cliente e integrando com aplicações e serviços existentes.</p>
 <img src="/assets/diagrams/protocol-functions-1.drawio.svg">
 <p>Essas funções esperam um <strong>callback</strong> através de uma URL, e quando o modelo decide chamar a função, o callback é acessado com os parâmetros informados pela própria assistente. A assistente não sabe qual URL ela está chamando, pois a mesma permanece invisível tanto para a assistente quanto para o usuário.</p>

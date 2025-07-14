@@ -4,10 +4,14 @@ header.bg-body {
 
 
     nav.navbar {
-        a.navbar-brand > img {
-            width: 48px;
-            height: 48px;
-            margin-right: 16px;
+        a.navbar-brand {
+            font-size: 0;
+            color: transparent;
+
+            > img {
+                height: 20px;
+                margin-inline: 8px;
+            }
         }
 
         #navbar {

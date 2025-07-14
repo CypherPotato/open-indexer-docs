@@ -1,8 +1,8 @@
 # Server-side Functions
 
-The AIVAX protocol functions, or _server-side functions_, are a customized implementation of function calls created by AIVAX that allows the model to strictly follow a function context that is not based on JSON documents. This feature is available for models with [Sentinel reasoning](/docs/en/sentinel). Similar to MCP, but a bit simpler.
+The AIVAX protocol functions, or _server-side functions_, are a customized implementation of function calls created by AIVAX that allows the model to strictly follow a function context that is not based on JSON documents. Similar to MCP, but a bit simpler.
 
-The protocol functions allow for actions to be taken on the AIVAX server-side, removing the need for function implementation on the client-side and integrating with existing applications and services.
+The protocol functions enable actions to be taken on the AIVAX server-side, removing the need to implement the function on the client-side and integrating with existing applications and services.
 
 <img src="/assets/diagrams/protocol-functions-1.drawio.svg">
 
@@ -12,7 +12,7 @@ These functions expect a **callback** through a URL, and when the model decides 
 
 The function name should be simple and deterministic to what the function does. Avoid names that are difficult to guess or do not refer to the function's role, as the assistant may become confused and not call the function when appropriate.
 
-As an example, let's consider a function to query a user in an external database. The following names are good examples to consider for the call:
+For example, let's consider a function to query a user in an external database. The following names are good examples to consider for the call:
 
 - `search-user`
 - `query-user`
@@ -29,7 +29,7 @@ Having the function name, we can think about the function description.
 
 ### Choosing the Function Description
 
-The function description should explain conceptually two situations: what it does and when it should be called by the assistant. This description should include scenarios that the assistant should consider calling it and when it should not be called, providing a few examples of calls (one-shot) and/or making the function rules explicit.
+The function description should conceptually explain two situations: what it does and when it should be called by the assistant. This description should include scenarios that the assistant should consider calling it and when it should not be called, providing a few examples of calls (one-shot) and/or making the function's rules explicit.
 
 ## Defining Protocol Functions
 
@@ -69,7 +69,7 @@ Protocol functions are defined in the AI gateway following the JSON:
 }
 ```
 
-In the snippet above, you are providing two functions for your AI model: `list-clients` and `view-client`, which will decide which one to execute during its reasoning. You can also provide a content format JSON for which the model will call your API providing the informed content.
+In the snippet above, you are providing two functions for your AI model: `list-clients` and `view-client`, which will decide which one to execute during its reasoning. You can also provide a JSON content format for which the model will call your API providing the informed content.
 
 You can also define the list of supported functions through an endpoint. Every time the model receives a message, it will consult the provided endpoint to get a list of functions it can execute.
 
@@ -96,7 +96,7 @@ Define the function listing endpoints in your AI gateway:
 }
 ```
 
-The endpoint for providing functions must respond following the format:
+The function provision endpoint must respond following the format:
 
 <div class="request-item post">
     <span>GET</span>
@@ -151,11 +151,11 @@ The response to this action must always respond with an HTTP OK status (2xx or 3
 
 #### Response Format
 
-Successful responses must be textual and will be attached as a response to the function in the way it is responded by the endpoint. There is no JSON format or structure for this response, but it is advisable to provide a simple, human-readable response so that the assistant can read the result of the action.
+Successful responses must be textual and will be attached as a response to the function in the way it is responded by the endpoint. There is no JSON format or structure for this response, but it is advisable to provide a simple, human-readable response, so that the assistant can read the result of the action.
 
 Errors can be common, such as not finding a client by ID or some field not being in the desired format. In these cases, respond with an OK status and in the response body include a human description of the error and how the assistant can work around it.
 
-**It is guaranteed** that the request will strictly follow the content format provided by the function definition. Functions that do not expect arguments should not specify a content format for that function. You can also indicate to the model how it should fill in the content fields of the function in the function instructions. More complex content, nested or with high structure depth, may increase the time it takes to generate this content, as it increases the chance of the assistant making errors and failing to validate the generated content.
+**It is guaranteed** that the request will strictly follow the content format provided by the function definition. Functions that do not expect arguments should not specify a content format for that function. You can also indicate to the model how it should fill in the function content fields in the function instructions. More complex, nested, or deeply structured content may increase the time it takes to generate this content, as it increases the chance of the assistant making mistakes and failing to validate the generated content.
 
 > [!IMPORTANT]
 >
@@ -173,4 +173,4 @@ Function calls send a `$.context.externalUserId` field containing the user tag c
 
 #### Security Considerations
 
-For the AI model, only the function name, description, and format are visible. It is not capable of seeing the endpoint to which the function points. Additionally, it does not have access to the user tag that is authenticated in a [chat client](/docs/en/entities/chat-clients).
+For the AI model, only the function name, description, and format are visible. It is not capable of seeing the endpoint to which that function points. Additionally, it does not have access to the user tag that is authenticated in a [chat client](/docs/en/entities/chat-clients).

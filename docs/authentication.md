@@ -15,37 +15,6 @@ curl https://inference.aivax.net/api/v1/information/models.txt?api-key=oky_gr5ue
 
 Não há necessidade de enviar o esquema de autenticação `Bearer` em ambos cabeçalhos, mas é possível por questões de compatibilidade.
 
-## Obtendo a API Key a partir da Login Key
-
-Sua Login Key é a chave que você usa para acessar seu painel de usuário e controlar as diversas funções da AIVAX. A partir dessa chave é possível recuperar sua API key:
-
-#### Requisição
-
-<div class="request-item get">
-    <span>GET</span>
-    <span>
-        /api/v1/auth/login
-    </span>
-</div>
-
-```json
-{
-    "loginKey": "n38oy4nq2orry7"
-}
-```
-
-#### Resposta
-
-```json
-{
-    "message": null,
-    "data": {
-        "apiKey": "oky_gr5uepj18yhdec3z6nskw3w1kqfbaawcfrwe837c8o",
-        "accountName": "Fernando Diniz"
-    }
-}
-```
-
 ## Autenticando um nonce
 
 Nonces são gerados por webhooks e funções de protocolo para autenticar transações feitas pela AIVAX em conteúdos externos. Em requisições que incluam o cabeçalho `X-Aivax-Nonce`, valide esse token chamando este endpoint:

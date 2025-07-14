@@ -7,8 +7,8 @@
 }
 
 html[data-bs-theme="dark"] {
-    --primary: rgb(248, 165, 193);
-    --primary-opaque: rgba(248, 165, 200, 0.15);
+    --primary: #3698e7;
+    --primary-opaque: #3698e755;
     --bs-link-color-rgb: 248, 165, 193;
     --bs-code-color: #cd91ff;
     --bs-danger-bg-subtle: #362829;
@@ -38,8 +38,8 @@ html[data-bs-theme="dark"] {
 }
 
 html[data-bs-theme="light"] {
-    --primary: rgb(119, 0, 73);
-    --primary-opaque: rgba(172, 7, 117, 0.15);
+    --primary: #2079c2;
+    --primary-opaque: #2079c255;
     --bs-body-color: #000000;
     --bs-link-color-rgb: 119, 0, 73;
     --bs-code-color: #5342f0;

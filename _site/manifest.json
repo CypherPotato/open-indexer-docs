@@ -152,6 +152,16 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "assets/icon/inception.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/icon/inception.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "assets/icon/metaai.svg",
       "output": {
         "resource": {
@@ -532,30 +542,10 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "docs/api-integrations.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/api-integrations.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
       "source_relative_path": "docs/authentication.md",
       "output": {
         ".html": {
           "relative_path": "docs/authentication.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/en/api-integrations.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/api-integrations.html"
         }
       },
       "version": ""
@@ -671,16 +661,6 @@
       "version": ""
     },
     {
-      "type": "Conceptual",
-      "source_relative_path": "docs/en/sentinel.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/sentinel.html"
-        }
-      },
-      "version": ""
-    },
-    {
       "type": "Toc",
       "source_relative_path": "docs/en/toc.yml",
       "output": {
@@ -789,16 +769,6 @@
       "output": {
         ".html": {
           "relative_path": "docs/protocol-functions.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/sentinel.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/sentinel.html"
         }
       },
       "version": ""

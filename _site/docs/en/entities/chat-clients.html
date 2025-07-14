@@ -127,178 +127,17 @@
 <p>A chat client provides a user interface through an <a href="/docs/en/entities/ai-gateway">AI Gateway</a> that allows the user to converse with their assistant. A chat client is integrated with the AI gateway's inference and supports deep thinking, research, and text conversation. Multi-modal features, such as sending images and audio, are under development.</p>
 <div class="NOTE">
 <h5>Note</h5>
-<p>AIVAX never stores the content of a chat between a client and the user. You can use JavaScript for this task, but it's your responsibility to use and store it.</p>
+<p>AIVAX never stores the content of a chat between a client and the user. You can use JavaScript for this task, but under your responsibility for usage and storage.</p>
 </div>
 <p>You can customize the interface of your chat client with custom CSS and JavaScript, as well as choose the language of the chat features.</p>
-<h2 id="creating-a-chat-client">Creating a Chat Client</h2>
-<p>Create a new chat client.</p>
-<div class="request-item get">
-    <span>POST</span>
-    <span>
-        /api/v1/web-chat-client/
-    </span>
-</div>
-<pre><code class="lang-json">{
-    // Specifies the public name of your chat client
-    &quot;name&quot;: &quot;My Assistant&quot;,
-    
-    // Specifies the ID of the AI gateway to be used by the chat
-    &quot;aiGatewayId&quot;: &quot;01965b64-a8eb-716c-892d-880159a9f12d&quot;,
-
-    &quot;clientParameters&quot;: {
-        
-        // Optional. Specifies the language code to be used in the chat for most elements, such as error messages, buttons, etc.
-        //      Values: pt-BR, en, null (automatic based on the browser)
-        &quot;languageCode&quot;: &quot;pt-BR&quot; | &quot;en&quot; | null,
-        
-        // Optional. Specifies a JavaScript code to execute in the chat.
-        &quot;customScripts&quot;: null,
-
-        // Optional. Specifies a CSS code to apply custom styles to the chat.
-        &quot;customStyles&quot;: null,
-
-        // Optional. Specifies the highlight color of the chat client elements.
-        &quot;primaryColor&quot;: &quot;#eabe44&quot;,
-
-        // Optional. Specifies the title of the chat page.
-        &quot;pageTitle&quot;: &quot;Assistant&quot;,
-
-        // Optional. Specifies the title when entering the chat for the first time.
-        &quot;helloLabel&quot;: &quot;It's great to see you here.&quot;,
-
-        // Optional. Specifies the subtitle when entering the chat for the first time.
-        &quot;helloSubLabel&quot;: &quot;I'm your assistant.&quot;,
-        
-        // Optional. Specifies the placeholder of the message sending field.
-        &quot;textAreaPlaceholder&quot;: &quot;Talk to the assistant&quot;,
-
-        // Optional. Specifies an image/logo to display in the chat for the first time.
-        &quot;logoImageUrl&quot;: null,
-        
-        // Optional. Enables debugging features.
-        &quot;debug&quot;: true,
-        
-        // Optional. Specifies whether the chat supports multi-modal media processing, specifying which buttons will be visible to send multimedia content to the model.
-        // Document is processed internally as markdown by AIVAX.
-        &quot;inputModes&quot;: [&quot;Image&quot;, &quot;Audio&quot;, &quot;Document&quot;],
-        
-        // Optional. Specifies which origins should be allowed to embed the chat client in an iframe. If this field is empty, any origin will be accepted.
-        &quot;allowedFrameOrigins&quot;: [&quot;https://my-domain.com.br&quot;],
-        
-        // Optional. Specifies conversation suggestion buttons when starting a new chat session. You can add as many buttons as you want, but it's recommended to have up to 3 buttons.
-        &quot;suggestionButtons&quot;: [
-            {
-                // Title to be displayed on the button.
-                &quot;label&quot;: &quot;How to buy a car?&quot;,
-                // Prompt to be sent to the model.
-                &quot;prompt&quot;: &quot;Where and how can I buy a car in your store?&quot;
-            },
-            ...
-        ]
-    },
-    
-    &quot;limitingParameters&quot;: {
-        
-        // Optional. Specifies how many messages the user can send per hour in the chat. This option is tracked by the userTag of the session.
-        &quot;messagesPerHour&quot;: 30,
-        
-        // Optional. Specifies the limit of messages (for the user and AI) that a session can have.
-        &quot;maxMessages&quot;: 300
-    }
-}
-</code></pre>
-<h4 id="response">Response</h4>
-<pre><code class="lang-json">{
-    &quot;message&quot;: null,
-    &quot;data&quot;: {
-        &quot;id&quot;: &quot;01965b65-e95e-7795-848c-ff0919ef1436&quot;
-    }
-}
-</code></pre>
-<h2 id="editing-a-chat-client">Editing a Chat Client</h2>
-<p>The body of this request is exactly the same as creating a chat client.</p>
-<div class="request-item get">
-    <span>PUT</span>
-    <span>
-        /api/v1/web-chat-client/<span>{chat-client-id}</span>
-    </span>
-</div>
-<h4 id="response-1">Response</h4>
-<pre><code class="lang-json">{
-    &quot;message&quot;: &quot;Web client updated successfully.&quot;,
-    &quot;data&quot;: null
-}
-</code></pre>
-<h2 id="listing-chat-clients">Listing Chat Clients</h2>
-<p>Get a list of created chat clients.</p>
-<div class="request-item get">
-    <span>GET</span>
-    <span>
-        /api/v1/web-chat-client/
-    </span>
-</div>
-<h4 id="response-2">Response</h4>
-<pre><code class="lang-json">{
-    &quot;message&quot;: null,
-    &quot;data&quot;: [
-        {
-            &quot;id&quot;: &quot;01965b59-daf6-7809-94c8-2a65b7264dba&quot;,
-            &quot;name&quot;: &quot;My Chat Client&quot;
-        },
-        ...
-    ]
-}
-</code></pre>
-<h2 id="viewing-a-specific-chat-client">Viewing a Specific Chat Client</h2>
-<p>Get details of an existing chat client.</p>
-<div class="request-item get">
-    <span>GET</span>
-    <span>
-        /api/v1/web-chat-client/<span>{chat-client-id}</span>
-    </span>
-</div>
-<h4 id="response-3">Response</h4>
-<pre><code class="lang-json">{
-    &quot;message&quot;: null,
-    &quot;data&quot;: {
-        &quot;name&quot;: &quot;My Chat Client&quot;,
-        &quot;aiGateway&quot;: {
-            &quot;id&quot;: &quot;01965b59-49ff-7753-8327-b3b6a6a871f2&quot;,
-            &quot;name&quot;: &quot;gateway-t1&quot;,
-            &quot;knowledgeCollection&quot;: {
-                &quot;id&quot;: &quot;01965b54-7fbd-70cd-982b-604de002ac0a&quot;,
-                &quot;name&quot;: &quot;Car Information&quot;
-            }
-        },
-        &quot;limitingParameters&quot;: {
-            &quot;messagesPerHour&quot;: 30,
-            &quot;userInputMaxTokens&quot;: 1024,
-            &quot;maxMessages&quot;: 500
-        },
-        &quot;clientParameters&quot;: {
-            &quot;languageCode&quot;: &quot;pt-BR&quot;,
-            &quot;customScripts&quot;: null,
-            &quot;customStyles&quot;: null,
-            &quot;primaryColor&quot;: &quot;#f011d2&quot;,
-            &quot;pageTitle&quot;: &quot;Lyra&quot;,
-            &quot;helloLabel&quot;: &quot;It's great to see you here.&quot;,
-            &quot;helloSubLabel&quot;: &quot;I'm your assistant.&quot;,
-            &quot;textAreaPlaceholder&quot;: &quot;Talk to the assistant&quot;,
-            &quot;logoImageUrl&quot;: null,
-            &quot;debug&quot;: true,
-            &quot;allowedFrameOrigins&quot;: []
-        }
-    }
-}
-</code></pre>
 <h2 id="creating-a-chat-session">Creating a Chat Session</h2>
-<p>A chat session is where you create a conversation between your chat client and the user. You can call this endpoint providing additional context for the conversation, such as the user's name, location, etc.</p>
-<p>A chat session expires after a certain time for security reasons of the generated access token. When you call this endpoint providing a <code>tag</code>, you can call the same endpoint multiple times and get the active chat session for the informed tag, or create a new chat if there is no ongoing session.</p>
+<p>A chat session is where you create a conversation between your chat client and the user. You can call this endpoint by providing additional context for the conversation, such as the user's name, location, etc.</p>
+<p>A chat session expires after some time for security of the generated access token. When you call this endpoint by providing a <code>tag</code>, you can call the same endpoint multiple times and get the active chat session for the informed tag, or create a new chat if there is no ongoing session.</p>
 <p>A chat session also restores all conversation messages from the same session after disconnection. The user can clear the conversation by clicking the clear conversation button in the top right corner of the chat client. This session uses the limits defined by the chat client, such as the maximum number of messages and tokens in the conversation.</p>
-<p>A session is automatically renewed for another 3 days when receiving a user message.</p>
+<p>A session is automatically renewed for another 3 days when receiving a message from the user.</p>
 <div class="IMPORTANT">
 <h5>Important</h5>
-<p>It's only possible to determine the number of tokens used in a message when using a <a href="/docs/en/models">model provided by AIVAX</a>. If you use an external model, the <code>limitingParameters.userInputMaxTokens</code> property will be ignored.</p>
+<p>It is only possible to determine the number of tokens used in a message when using a <a href="/docs/en/models">model provided by AIVAX</a>. If you use an external model, the <code>limitingParameters.userInputMaxTokens</code> property will be ignored.</p>
 </div>
 <div class="request-item post">
     <span>POST</span>
@@ -313,11 +152,11 @@
     // Time in seconds for the chat to expire. The minimum is 10 minutes. The maximum is 30 days.
     &quot;expires&quot;: 3600,
 
-    // Optional (recommended). An external ID to identify the session later and reuse it whenever you call the same endpoint. It can be the ID of the user in your database or a string that facilitates the identification of this chat later.
+    // Optional (recommended). An external ID to identify the session later and reuse it whenever calling the same endpoint. It can be the ID of the user in your database or a string that facilitates the identification of this chat later.
     &quot;tag&quot;: &quot;my-user-tag&quot;
 }
 </code></pre>
-<h4 id="response-4">Response</h4>
+<h4 id="response">Response</h4>
 <pre><code class="lang-json">{
     &quot;message&quot;: null,
     &quot;data&quot;: {
