@@ -231,7 +231,7 @@
 <li>A estrutura de entrada é indiferente.</li>
 </ul>
 <h2 id="funções-em-tempo-real-com-modelos-sentinel">Funções em tempo real com modelos Sentinel</h2>
-<p>Você pode usar o agente <code>@aivax/sentinel-lambda</code> para executar funções inteligentes que envolvam pesquisa na internet, execução de código, resolução de contas matemáticas e todas as outras funcionalidades que agentes Sentinel consigam fornecer.</p>
+<p>Você pode usar o agente <code>@aivax/fn-1</code> para executar funções inteligentes que envolvam pesquisa na internet, execução de código, resolução de contas matemáticas e todas as outras funcionalidades que agentes Sentinel consigam fornecer.</p>
 <p>Agentes Sentinel são conectados à internet por padrão, portanto, é natural que ele pesquise algo na internet para complementar sua resposta. Ao usar chamar uma função com um modelo que pesquisa na internet, como um agente Sentinel, o limite de consumo contabilizado é de Live Function.</p>
 <h2 id="exemplos">Exemplos</h2>
 <p>Confira exemplos de funções de IA para várias tarefas cotidianas:</p>
@@ -272,7 +272,7 @@
     </span>
 </div>
 <pre><code class="lang-json">{
-    &quot;modelName&quot;: &quot;@aivax/sentinel-lambda&quot;,
+    &quot;modelName&quot;: &quot;@aivax/fn-1&quot;,
     &quot;instructions&quot;: &quot;Avalie a conta matemática informada e forneça o resultado.&quot;,
     &quot;responseSchema&quot;: {
         &quot;result&quot;: &quot;...&quot;
@@ -302,7 +302,7 @@
     </span>
 </div>
 <pre><code class="lang-json">{
-    &quot;modelName&quot;: &quot;@aivax/sentinel-lambda&quot;,
+    &quot;modelName&quot;: &quot;@aivax/fn-1&quot;,
     &quot;instructions&quot;: &quot;Pesquise as 5 últimas notícias e dados meteorológicos para a cidade informada.&quot;,
     &quot;responseSchema&quot;: {
         &quot;latestNews&quot;: [
@@ -374,7 +374,7 @@
     </span>
 </div>
 <pre><code class="lang-json">{
-    &quot;modelName&quot;: &quot;@aivax/sentinel-lambda&quot;,
+    &quot;modelName&quot;: &quot;@aivax/fn-1&quot;,
     &quot;instructions&quot;: &quot;Traga a contagem de casos e mortes por COVID-19.&quot;,
     &quot;responseSchema&quot;: {
         &quot;deathsWorld&quot;: 0,
@@ -406,7 +406,7 @@
     </span>
 </div>
 <pre><code class="lang-json">{
-    &quot;modelName&quot;: &quot;@aivax/sentinel-lambda&quot;,
+    &quot;modelName&quot;: &quot;@aivax/fn-1&quot;,
     &quot;instructions&quot;: &quot;Pesquise e formate uma lista de 10 artistas no TOP 10 do streaming musical por gênero.&quot;,
     &quot;responseSchema&quot;: {
         &quot;edm&quot;: [
