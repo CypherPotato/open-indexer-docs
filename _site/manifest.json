@@ -192,6 +192,26 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "assets/icon/model-router.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/icon/model-router.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/icon/moonshotai.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/icon/moonshotai.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "assets/icon/openai.svg",
       "output": {
         "resource": {

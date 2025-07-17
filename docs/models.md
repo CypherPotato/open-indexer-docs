@@ -34,7 +34,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada:
             </small>
             <div>
-                $ 0.10 <small>/1m tokens</small>
+                $ 1.10 <small>/1m tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -42,7 +42,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Saída:
             </small>
             <div>
-                $ 0.40 <small>/1m tokens</small>
+                $ 4.40 <small>/1m tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -64,6 +64,60 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-lightbulb-line"></i>
     Pensamento profundo
+</div>
+<div>
+    <i class="ri-global-line"></i>
+    Pesquisa na internet
+</div>
+<div>
+    <i class="ri-code-s-slash-line"></i>
+    Execução de código
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @aivax/fn-1-mini
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.10 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.40 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Pesquisa na internet:
+    </small>
+    <div>
+        $ 5.00 <small>/1.000 pesquisas</small>
+    </div>
+</div>
+    </td>
+    <td>
+        Optimized agent for function usage (no reasoning).
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
 </div>
 <div>
     <i class="ri-global-line"></i>
@@ -199,6 +253,49 @@ Todos os preços estão em dólares dos Estados Unidos.
 <tr>
     <td>
         <code>
+            @google/gemini-1.5-pro
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 1.25 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 5.00 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        Gemini 1.5 Pro is a mid-size multimodal model that is optimized for a wide-range of reasoning tasks.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens, vídeos, áudios
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
             @google/gemini-2.5-flash
         </code>
     </td>
@@ -235,56 +332,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-braces-line"></i>
     Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @google/gemini-2.5-flash-lv
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.30 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 2.50 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-    <small>
-        Pesquisa na internet:
-    </small>
-    <div>
-        $ 35.00 <small>/1.000 pesquisas</small>
-    </div>
-</div>
-    </td>
-    <td>
-        Gemini 2.5 Flash with Google internet search.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens, vídeos, áudios
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
-</div>
-<div>
-    <i class="ri-global-line"></i>
-    Pesquisa na internet
 </div>
         </div>
     </td>
@@ -375,52 +422,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-braces-line"></i>
     Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @google/gemini-2.0-flash-lv
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.10 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 0.40 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-    <small>
-        Pesquisa na internet:
-    </small>
-    <div>
-        $ 35.00 <small>/1.000 pesquisas</small>
-    </div>
-</div>
-    </td>
-    <td>
-        Gemini 2.0 Flash with internet search via Google.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens, vídeos, áudios
-</div>
-<div>
-    <i class="ri-global-line"></i>
-    Pesquisa na internet
 </div>
         </div>
     </td>
@@ -925,6 +926,60 @@ Todos os preços estão em dólares dos Estados Unidos.
     </tbody>
 </table>
 
+## <img src="/assets/icon/moonshotai.svg" class="inline-icon"> moonshotai
+
+<table>
+    <thead>
+        <colgroup>
+            <col style="width: 30%" />
+            <col style="width: 20%" />
+            <col style="width: 50%" />
+        </colgroup>
+        <tr>
+            <th>Nome do modelo</th>
+            <th>Preços</th>
+            <th>Descrição</th>
+        </tr>
+    </thead>
+    <tbody>
+<tr>
+    <td>
+        <code>
+            @moonshotai/kimi-k2
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 1.00 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 3.00 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        Model with 1tri total parameters, 32bi activated parameters, optimized for agentic intelligence.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+        </div>
+    </td>
+</tr>
+    </tbody>
+</table>
+
 ## <img src="/assets/icon/openai.svg" class="inline-icon"> openai
 
 <table>
@@ -941,6 +996,45 @@ Todos os preços estão em dólares dos Estados Unidos.
         </tr>
     </thead>
     <tbody>
+<tr>
+    <td>
+        <code>
+            @openai/chatgpt-4o
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 5.00 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 15.00 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        The GPT-4o model snapshot used by ChatGPT.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+        </div>
+    </td>
+</tr>
 <tr>
     <td>
         <code>
@@ -976,6 +1070,10 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
 </div>
         </div>
     </td>
@@ -1015,6 +1113,10 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
 </div>
         </div>
     </td>
@@ -1059,6 +1161,10 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-lightbulb-line"></i>
     Pensamento profundo
 </div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
         </div>
     </td>
 </tr>
@@ -1097,6 +1203,10 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
 </div>
         </div>
     </td>
@@ -1137,6 +1247,10 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-instance-line"></i>
     Chamadas de função
 </div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
         </div>
     </td>
 </tr>
@@ -1175,6 +1289,10 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
 </div>
         </div>
     </td>
@@ -1227,43 +1345,16 @@ Todos os preços estão em dólares dos Estados Unidos.
         Latest generation of LLMs in the Qwen series, offering advancements in reasoning, instruction-following, agent capabilities, and multilingual support.
         <div class="model-capabilities">
 <div>
-    <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
+    <i class="ri-instance-line"></i>
+    Chamadas de função
 </div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @qwen/qwq-32b
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.29 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 0.39 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-    </td>
-    <td>
-        Conversational model with thinking and reasoning for solving complex tasks.
-        <div class="model-capabilities">
 <div>
     <i class="ri-lightbulb-line"></i>
     Pensamento profundo
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
 </div>
         </div>
     </td>
