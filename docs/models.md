@@ -55,7 +55,7 @@ Todos os preços estão em dólares dos Estados Unidos.
 </div>
     </td>
     <td>
-        Optimized agent for function usage.
+        Optimized agent for function usage. Based on OpenAI o4-mini (low).
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
@@ -113,11 +113,15 @@ Todos os preços estão em dólares dos Estados Unidos.
 </div>
     </td>
     <td>
-        Optimized agent for function usage (no reasoning).
+        Optimized agent for function usage (no reasoning). Based on Gemini 2.5 Flash Lite.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Pensamento profundo
 </div>
 <div>
     <i class="ri-global-line"></i>
@@ -179,7 +183,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         
     </td>
     <td>
-        Model with deep reasoning and thought, best for more demanding tasks.
+        Model with deep reasoning and thought, best for most demanding tasks.
         <div class="model-capabilities">
 <div>
     <i class="ri-lightbulb-line"></i>
@@ -328,6 +332,10 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Pensamento profundo
 </div>
 <div>
     <i class="ri-braces-line"></i>
@@ -794,7 +802,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         
     </td>
     <td>
-        Model router for Google Gemini. The routing is made between Gemini 2.0 Flash Lite, Gemini 2.0 Flash and Gemini 2.5 Flash.
+        Model router for Google Gemini. The routing is made between Gemini 2.0 Flash, Gemini 2.5 Flash Lite and Gemini 2.5 Flash.
         <div class="model-capabilities">
         </div>
     </td>
@@ -825,7 +833,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         
     </td>
     <td>
-        Model router for Google Gemini. The routing is made between Gemini 2.0 Flash, Gemini 2.5 Flash (low) and Gemini 2.5 Flash (high).
+        Model router for Google Gemini. The routing is made between Gemini 2.5 Flash Lite, Gemini 2.5 Flash (low) and Gemini 2.5 Flash (high).
         <div class="model-capabilities">
         </div>
     </td>
