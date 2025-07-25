@@ -74,7 +74,7 @@ Em um gateway de IA, você já configura os parâmetros do modelo, como System P
     "id": "0197dbdc-6456-7d54-b7ec-04cb9c80f460",
     "object": "chat.completion",
     "created": 1751740343,
-    "model": "@aivax/sentinel-mini",
+    "model": "@google/gemini-2.5-flash",
     "choices": [
         {
             "index": 0,
@@ -93,7 +93,6 @@ Em um gateway de IA, você já configura os parâmetros do modelo, como System P
         "completion_tokens": 88,
         "total_tokens": 1206
     },
-    "sentinel_usage": null,
     "service_tier": "default"
 }
 ```
@@ -101,11 +100,11 @@ Em um gateway de IA, você já configura os parâmetros do modelo, como System P
 #### Resposta streaming
 
 ```text
-data: {"id":"0197dbde-c40b-720d-a13e-f689c303c571","object":"chat.completion.chunk","created":1751740498,"model":"gpt-4o-mini","system_fingerprint":"fp_y8jidd","choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant","content":""}}],"usage":null,"sentinel_usage":null}
+data: {"id":"0197dbde-c40b-720d-a13e-f689c303c571","object":"chat.completion.chunk","created":1751740498,"model":"@google/gemini-2.5-flash","system_fingerprint":"fp_y8jidd","choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant","content":""}}],"usage":null,"sentinel_usage":null}
 
 ...
 
-data: {"id":"0197dbde-c88c-7764-8017-c1fee0d79096","object":"chat.completion.chunk","created":1751740500,"model":"gpt-4o-mini","system_fingerprint":"fp_2he7ot","choices":[{"index":0,"finish_reason":null,"delta":{"content":""}}],"usage":null,"sentinel_usage":null}
+data: {"id":"0197dbde-c88c-7764-8017-c1fee0d79096","object":"chat.completion.chunk","created":1751740500,"model":"@google/gemini-2.5-flash","system_fingerprint":"fp_2he7ot","choices":[{"index":0,"finish_reason":null,"delta":{"content":""}}],"usage":null,"sentinel_usage":null}
 
 data: {"id":"0197dbde-c890-7329-9e65-faecbe158efa","object":"chat.completion.chunk","created":1751740500,"model":"@aivax\/sentinel-mini","system_fingerprint":"fp_q6qh7x","choices":[{"index":0,"finish_reason":"STOP","delta":{}}],"usage":{"prompt_tokens":1097,"completion_tokens":92,"total_tokens":1189},"sentinel_usage":null}
 ```

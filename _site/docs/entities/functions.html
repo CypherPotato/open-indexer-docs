@@ -124,11 +124,11 @@
                 <article data-uid="">
 <h1 id="funções">Funções</h1>
 
-<p>Funções é uma forma de forçar seu modelo à processamento de informações usando JSON como intermédio de comunicação. Com as funções, você consegue fazer qualquer modelo responder no formato JSON que você quiser.</p>
+<p>Funções é uma forma de forçar seu modelo ao processamento de informações usando JSON como intermédio de comunicação. Com as funções, você consegue fazer qualquer modelo responder no formato JSON que você quiser.</p>
 <p>Pode ser útil para categorizar comentários, aplicar moderação em avaliações ou processar informações com auxílio da IA.</p>
 <p>No momento, só é possível usar funções com <a href="">modelos providos pela AIVAX</a>.</p>
 <h2 id="chamar-uma-função">Chamar uma função</h2>
-<p>Para chamar uma função de IA, você precisará informar o que a IA deverá responder e fornecer um esquema JSON que ela deverá seguir.</p>
+<p>Para chamar uma função de IA, você precisará informar o que a IA deverá responder e fornecer um JSON Schema que ela deverá seguir.</p>
 <p>Modelos menos inteligentes tendem a falhar a geração de JSON, gerando um documento inválido ou problemático. Para isso, ajuste seu modelo, a instrução e o parâmetro de tentativas se for necessário.</p>
 <p>Você é cobrado por cada tentativa que a IA tentar gerar. Modelos um pouco mais inteligentes tendem a gerar resultados corretos na primeira tentativa. É garantido que um JSON válido será gerado e que esse JSON seguirá o mesmo esquema fornecido na requisição.</p>
 <p>Adicionalmente, você pode optar em ativar <strong>pesquisa na internet</strong> para chamada de função. Essa opção pode ser útil para trazer dados relevantes em tempo real ao estruturar sua resposta. Ao usar essa função, um modelo com acesso na internet será usado para obter dados da internet para estruturar sua resposta. Esse modelo também tentará estruturar sua resposta a partir dos dados fornecidos, e se conseguir formular um JSON válido a etapa de chamar o modelo de estruturação é ignorada e a resposta é imediatamente retornada.</p>
@@ -150,18 +150,22 @@
     // Obrigatório. Explique o que seu modelo deverá fazer com a entrada e como ele deve trazer a resposta.
     &quot;instructions&quot;: &quot;Classifique o comentário do usuário, indicando se é positivo ou negativo, e se possui alguma informação relevante (número entre 0 (pouco relevante) e 10 (muito relevante))&quot;,
     
-    // Obrigatório. O objeto JSON que o modelo deverá gerar. Você pode fornecer exemplos de geração no campo de instruções. Esse objeto deve ser um JSON válido na API.
-    // Esse objeto deve ser um objeto, um array ou uma string.
+    // Obrigatório. O JSON Schema que o modelo deverá seguir para gerar a resposta. Você pode fornecer exemplos de geração no campo de instruções.
     &quot;responseSchema&quot;: {
-        &quot;feedbackType&quot;: &quot;{neutral|positive|negative}&quot;,
-        &quot;informationScore&quot;: 5
+        &quot;type&quot;: &quot;object&quot;,
+        &quot;properties&quot;: {
+            &quot;feedbackType&quot;: {
+                &quot;type&quot;: &quot;string&quot;,
+                &quot;enum&quot;: [&quot;neutral&quot;, &quot;positive&quot;, &quot;negative&quot;]
+            },
+            &quot;informationScore&quot;: {
+                &quot;type&quot;: &quot;integer&quot;,
+                &quot;minimum&quot;: 0,
+                &quot;maximum&quot;: 10
+            }
+        },
+        &quot;required&quot;: [&quot;feedbackType&quot;, &quot;informationScore&quot;]
     },
-    
-    // Opcional. Especifica uma lista de caminhos JSON que a IA deve gerar conteúdo sempre e que esse campo não pode ser nulo. Para arrays, especifique com [*].
-    &quot;requiredFields&quot;: [
-        &quot;$.feedbackType&quot;,
-        &quot;$.informationScore&quot;
-    ],
     
     // Opcional. Define uma entrada JSON para o modelo. Pode ser qualquer tipo de valor JSON.
     &quot;inputData&quot;: {
@@ -188,9 +192,8 @@
     
         // Opcional. Define o comportamento do fetch para erros ao tentar acessar o site. Erros incluem respostas que não são 2xx ou 3xx, timeouts, erros de certificados, etc.
         //      fail    -&gt; retorna um erro na resposta da função (padrão)
-        //      warn    -&gt; adiciona um aviso na resposta da função e não inclui o erro na geração da IA
         //      ignore  -&gt; ignora o erro e adiciona o erro na geração da IA
-        &quot;fetchFailAction&quot;: &quot;fail&quot; | &quot;warn&quot; | &quot;ignore&quot;,
+        &quot;fetchFailAction&quot;: &quot;fail&quot; | &quot;ignore&quot;,
         
         // Opcional. Define o timeout em segundos para o tempo maximo da resposta responder e ler os conteúdos. O máximo é 120 segundos (dois minutos).
         &quot;timeout&quot;: 10,
@@ -204,7 +207,7 @@
 <pre><code class="lang-json">{
     &quot;message&quot;: null,
     &quot;data&quot;: {
-        // o resultado contém o objeto definido em &quot;responseSchema&quot;, com os campos preenchidos pela IA
+        // o resultado contém o objeto gerado pela IA, seguindo o &quot;responseSchema&quot;
         &quot;result&quot;: {
             &quot;feedbackType&quot;: &quot;negative&quot;,
             &quot;informationScore&quot;: 8
@@ -221,18 +224,61 @@
     }
 }
 </code></pre>
-<h2 id="considerações-sobre-o-esquema-json">Considerações sobre o esquema JSON</h2>
+<h2 id="diretrizes-do-json-schema">Diretrizes do JSON Schema</h2>
+<p>O formato de resposta deve ser fornecido por um JSON Schema.</p>
+<p>Por trás dos panos, a AIVAX guia o modelo para gerar uma resposta com o esquema JSON fornecido. Quando o modelo gera algo inválido, indicamos à ele tentar novamente e corrigir os erros até que a saída esteja conforme a especificação fornecida.</p>
+<p>As diretrizes suportadas do JSON Schema da AIVAX são:</p>
 <ul>
-<li>Especifique valores enumerados com <code>&quot;{valor1|valor2|valor3}&quot;</code>. Dessa forma, o modelo deverá escolher um dos valores apresentados na geração do JSON.</li>
-<li>Todos os valores são placeholders para a geração do modelo.</li>
-<li>Indique o que um campo é ou o que deve receber de valor com um hint em seu próprio placeholder ou indique diretamente nas instruções da função.</li>
-<li>Todos os valores podem ser nulos, à menos que você especifique diretamente para o modelo que não podem.</li>
-<li>A estrutura de saída do modelo é a mesma que informada em <code>responseSchema</code>.</li>
-<li>A estrutura de entrada é indiferente.</li>
+<li><code>string</code>:
+<ul>
+<li><code>minLength</code></li>
+<li><code>maxLength</code></li>
+<li><code>pattern</code></li>
+<li><code>format</code>
+<ul>
+<li>Pode ser <code>date-time</code>, <code>email</code>, <code>time</code>, <code>duration</code>, <code>uri</code>, <code>url</code>, <code>ipv4</code>, <code>ipv6</code>, <code>uuid</code> ou <code>guid</code>.</li>
 </ul>
+</li>
+<li><code>enum</code></li>
+</ul>
+</li>
+<li><code>number</code> e <code>integer</code>:
+<ul>
+<li><code>minimum</code></li>
+<li><code>maximum</code></li>
+<li><code>exclusiveMinimum</code></li>
+<li><code>exclusiveMaximum</code></li>
+<li><code>multipleOf</code></li>
+</ul>
+</li>
+<li><code>array</code>
+<ul>
+<li><code>items</code></li>
+<li><code>uniqueItems</code></li>
+<li><code>minItems</code></li>
+<li><code>maxItems</code></li>
+</ul>
+</li>
+<li><code>object</code>
+<ul>
+<li><code>properties</code></li>
+<li><code>required</code></li>
+</ul>
+</li>
+<li><code>bool</code> e <code>boolean</code></li>
+<li><code>null</code></li>
+</ul>
+<p>Além disso, é possível informar um ou mais valores no <code>type</code> do objeto, exemplo:</p>
+<pre><code class="lang-json">{
+    &quot;type&quot;: [&quot;string&quot;, &quot;number&quot;]
+}
+</code></pre>
+<blockquote>
+<p>Nota: <code>number</code> e <code>integer</code> são sinônimos e <code>integer</code> não garante que o número será um inteiro. Se necessário, trunque o número retornado.</p>
+</blockquote>
 <h2 id="funções-em-tempo-real-com-modelos-sentinel">Funções em tempo real com modelos Sentinel</h2>
-<p>Você pode usar o agente <code>@aivax/fn-1</code> para executar funções inteligentes que envolvam pesquisa na internet, execução de código, resolução de contas matemáticas e todas as outras funcionalidades que agentes Sentinel consigam fornecer.</p>
-<p>Agentes Sentinel são conectados à internet por padrão, portanto, é natural que ele pesquise algo na internet para complementar sua resposta. Ao usar chamar uma função com um modelo que pesquisa na internet, como um agente Sentinel, o limite de consumo contabilizado é de Live Function.</p>
+<p>Você pode usar o agente <code>@aivax/fn-1</code> e <code>@aivax/fn-1-mini</code> para executar funções inteligentes que envolvam pesquisa na internet, execução de código e/ou resolução de contas matemáticas.</p>
+<p>Estes agentes são conectados à internet por padrão, portanto, é natural que ele pesquise algo na internet para complementar sua resposta.</p>
 <h2 id="exemplos">Exemplos</h2>
 <p>Confira exemplos de funções de IA para várias tarefas cotidianas:</p>
 <h4 id="resumir-pedido-e-classificar-se-requer-atenção-ou-não">Resumir pedido e classificar se requer atenção ou não</h4>
@@ -246,8 +292,18 @@
     &quot;modelName&quot;: &quot;@metaai/llama-4-scout-17b&quot;,
     &quot;instructions&quot;: &quot;Resuma o comentário do usuário, criando uma descrição curta, com no máximo de 10 palavras indicando o que ele quer fazer. Indique também se esse comentário requer atenção ou não.&quot;,
     &quot;responseSchema&quot;: {
-        &quot;shortSummary&quot;: &quot;...&quot;,
-        &quot;requiresAttention&quot;: false
+        &quot;type&quot;: &quot;object&quot;,
+        &quot;properties&quot;: {
+            &quot;shortSummary&quot;: {
+                &quot;type&quot;: &quot;string&quot;,
+                &quot;description&quot;: &quot;Uma breve descrição do que o usuário quer fazer, com no máximo 10 palavras.&quot;
+            },
+            &quot;requiresAttention&quot;: {
+                &quot;type&quot;: &quot;boolean&quot;,
+                &quot;description&quot;: &quot;Indica se o comentário requer atenção imediata (true) ou não (false).&quot;
+            }
+        },
+        &quot;required&quot;: [&quot;shortSummary&quot;, &quot;requiresAttention&quot;]
     },
     &quot;inputData&quot;: &quot;O cliente fernando de castro está tentando entrar em contato com o suporte desde sexta-feira e diz q vai cancelar se nao falar com alguém hoje. ele tbm disse que é amigo da rebeca do comercial e está ameaçando falar mal da empresa no tiktok. por favor alguém atende esse cara??&quot;
 }
@@ -275,7 +331,14 @@
     &quot;modelName&quot;: &quot;@aivax/fn-1&quot;,
     &quot;instructions&quot;: &quot;Avalie a conta matemática informada e forneça o resultado.&quot;,
     &quot;responseSchema&quot;: {
-        &quot;result&quot;: &quot;...&quot;
+        &quot;type&quot;: &quot;object&quot;,
+        &quot;properties&quot;: {
+            &quot;result&quot;: {
+                &quot;type&quot;: [&quot;string&quot;, &quot;number&quot;],
+                &quot;description&quot;: &quot;O resultado da avaliação da expressão matemática.&quot;
+            }
+        },
+        &quot;required&quot;: [&quot;result&quot;]
     },
     &quot;inputData&quot;: {
         &quot;mathProblem&quot;: &quot;12 + (42 / pi) ^ 20&quot;
@@ -305,18 +368,37 @@
     &quot;modelName&quot;: &quot;@aivax/fn-1&quot;,
     &quot;instructions&quot;: &quot;Pesquise as 5 últimas notícias e dados meteorológicos para a cidade informada.&quot;,
     &quot;responseSchema&quot;: {
-        &quot;latestNews&quot;: [
-            {
-                &quot;title&quot;: &quot;...&quot;,
-                &quot;details&quot;: &quot;...&quot;,
-                &quot;link&quot;: &quot;https://...&quot;
+        &quot;type&quot;: &quot;object&quot;,
+        &quot;properties&quot;: {
+            &quot;latestNews&quot;: {
+                &quot;type&quot;: &quot;array&quot;,
+                &quot;items&quot;: {
+                    &quot;type&quot;: &quot;object&quot;,
+                    &quot;properties&quot;: {
+                        &quot;title&quot;: { &quot;type&quot;: &quot;string&quot; },
+                        &quot;details&quot;: { &quot;type&quot;: &quot;string&quot; },
+                        &quot;link&quot;: { &quot;type&quot;: &quot;string&quot;, &quot;format&quot;: &quot;uri&quot; }
+                    },
+                    &quot;required&quot;: [&quot;title&quot;, &quot;details&quot;, &quot;link&quot;]
+                }
+            },
+            &quot;weather&quot;: {
+                &quot;type&quot;: &quot;object&quot;,
+                &quot;properties&quot;: {
+                    &quot;currentTemperature&quot;: { &quot;type&quot;: &quot;number&quot; },
+                    &quot;currentWeather&quot;: {
+                        &quot;type&quot;: &quot;string&quot;,
+                        &quot;enum&quot;: [&quot;sunny&quot;, &quot;cloudy&quot;, &quot;rain&quot;, &quot;thunderstorm&quot;, &quot;partly cloudy&quot;, &quot;clear&quot;]
+                    },
+                    &quot;forecast&quot;: {
+                        &quot;type&quot;: &quot;string&quot;,
+                        &quot;enum&quot;: [&quot;sunny&quot;, &quot;cloudy&quot;, &quot;rain&quot;, &quot;thunderstorm&quot;, &quot;partly cloudy&quot;, &quot;clear&quot;]
+                    }
+                },
+                &quot;required&quot;: [&quot;currentTemperature&quot;, &quot;currentWeather&quot;, &quot;forecast&quot;]
             }
-        ],
-        &quot;weather&quot;: {
-            &quot;currentTemperature&quot;: 0,
-            &quot;currentWeather&quot;: &quot;{sunny|cloudy|rain|thunderstorm}&quot;,
-            &quot;forecast&quot;: &quot;{sunny|cloudy|rain|thunderstorm}&quot;
-        }
+        },
+        &quot;required&quot;: [&quot;latestNews&quot;, &quot;weather&quot;]
     },
     &quot;inputData&quot;: {
         &quot;city&quot;: &quot;São José do Rio Preto&quot;
@@ -377,10 +459,14 @@
     &quot;modelName&quot;: &quot;@aivax/fn-1&quot;,
     &quot;instructions&quot;: &quot;Traga a contagem de casos e mortes por COVID-19.&quot;,
     &quot;responseSchema&quot;: {
-        &quot;deathsWorld&quot;: 0,
-        &quot;deathsBrazil&quot;: 0,
-        &quot;casesWorld&quot;: 0,
-        &quot;casesBrazil&quot;: 0
+        &quot;type&quot;: &quot;object&quot;,
+        &quot;properties&quot;: {
+            &quot;deathsWorld&quot;: { &quot;type&quot;: &quot;integer&quot;, &quot;description&quot;: &quot;Número total de mortes por COVID-19 no mundo.&quot; },
+            &quot;deathsBrazil&quot;: { &quot;type&quot;: &quot;integer&quot;, &quot;description&quot;: &quot;Número total de mortes por COVID-19 no Brasil.&quot; },
+            &quot;casesWorld&quot;: { &quot;type&quot;: &quot;integer&quot;, &quot;description&quot;: &quot;Número total de casos de COVID-19 no mundo.&quot; },
+            &quot;casesBrazil&quot;: { &quot;type&quot;: &quot;integer&quot;, &quot;description&quot;: &quot;Número total de casos de COVID-19 no Brasil.&quot; }
+        },
+        &quot;required&quot;: [&quot;deathsWorld&quot;, &quot;deathsBrazil&quot;, &quot;casesWorld&quot;, &quot;casesBrazil&quot;]
     }
 }
 </code></pre>
@@ -409,21 +495,28 @@
     &quot;modelName&quot;: &quot;@aivax/fn-1&quot;,
     &quot;instructions&quot;: &quot;Pesquise e formate uma lista de 10 artistas no TOP 10 do streaming musical por gênero.&quot;,
     &quot;responseSchema&quot;: {
-        &quot;edm&quot;: [
-            &quot;artist name&quot;,
-            &quot;artist name&quot;,
-            &quot;...&quot;
-        ],
-        &quot;rap&quot;: [
-            &quot;artist name&quot;,
-            &quot;artist name&quot;,
-            &quot;...&quot;
-        ],
-        &quot;pop&quot;: [
-            &quot;artist name&quot;,
-            &quot;artist name&quot;,
-            &quot;...&quot;
-        ]
+        &quot;type&quot;: &quot;object&quot;,
+        &quot;properties&quot;: {
+            &quot;edm&quot;: {
+                &quot;type&quot;: &quot;array&quot;,
+                &quot;items&quot;: { &quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;Nome de um artista de EDM em alta.&quot; },
+                &quot;minItems&quot;: 10,
+                &quot;maxItems&quot;: 10
+            },
+            &quot;rap&quot;: {
+                &quot;type&quot;: &quot;array&quot;,
+                &quot;items&quot;: { &quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;Nome de um artista de Rap em alta.&quot; },
+                &quot;minItems&quot;: 10,
+                &quot;maxItems&quot;: 10
+            },
+            &quot;pop&quot;: {
+                &quot;type&quot;: &quot;array&quot;,
+                &quot;items&quot;: { &quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;Nome de um artista Pop em alta.&quot; },
+                &quot;minItems&quot;: 10,
+                &quot;maxItems&quot;: 10
+            }
+        },
+        &quot;required&quot;: [&quot;edm&quot;, &quot;rap&quot;, &quot;pop&quot;]
     },
     &quot;inputData&quot;: null
 }

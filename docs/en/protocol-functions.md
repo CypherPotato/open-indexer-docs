@@ -1,8 +1,8 @@
 # Server-side Functions
 
-The AIVAX protocol functions, or _server-side functions_, are a customized implementation of function calls created by AIVAX that allows the model to strictly follow a function context that is not based on JSON documents. Similar to MCP, but a bit simpler.
+The AIVAX protocol functions, or _server-side functions_, are an implementation where the model tool calls occur on the server side. Similar to MCP, but with native support for authentication and optimized to work externally.
 
-The protocol functions enable actions to be taken on the AIVAX server-side, removing the need to implement the function on the client-side and integrating with existing applications and services.
+The protocol functions allow actions to be taken on the AIVAX server side, removing the need to implement the function on the client side and integrating with existing applications and services.
 
 <img src="/assets/diagrams/protocol-functions-1.drawio.svg">
 
@@ -10,12 +10,12 @@ These functions expect a **callback** through a URL, and when the model decides 
 
 ### Choosing the Function Name
 
-The function name should be simple and deterministic to what the function does. Avoid names that are difficult to guess or do not refer to the function's role, as the assistant may become confused and not call the function when appropriate.
+The function name should be simple and deterministic to what this function does. Avoid names that are difficult to guess or do not refer to the role of the function, as the assistant may become confused and not call the function when appropriate.
 
-For example, let's consider a function to query a user in an external database. The following names are good examples to consider for the call:
+As an example, let's consider a function to query a user in an external database. The following names are good examples to consider for the call:
 
-- `search-user`
-- `query-user`
+- `search_user`
+- `query_user`
 - `search_user`
 
 Bad names include:
@@ -29,7 +29,7 @@ Having the function name, we can think about the function description.
 
 ### Choosing the Function Description
 
-The function description should conceptually explain two situations: what it does and when it should be called by the assistant. This description should include scenarios that the assistant should consider calling it and when it should not be called, providing a few examples of calls (one-shot) and/or making the function's rules explicit.
+The function description should explain conceptually two situations: what it does and when it should be called by the assistant. This description should include the scenarios that the assistant should consider calling it and when it should not be called, providing a few examples of calls (one-shot) and/or making the function rules explicit.
 
 ## Defining Protocol Functions
 
@@ -61,7 +61,14 @@ Protocol functions are defined in the AI gateway following the JSON:
                 "description": "Use this tool to get details and orders from a client through their ID.",
                 "callbackUrl": "https://my-external-api.com/api/scp/users",
                 "contentFormat": {
-                    "user_id": "guid"
+                    "type": "object",
+                    "properties": {
+                        "user_id": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    "required": ["user_id"]
                 }
             }
         ]
@@ -119,7 +126,14 @@ The function provision endpoint must respond following the format:
             "description": "Use this tool to get details and orders from a client through their ID.",
             "callbackUrl": "https://my-external-api.com/api/scp/users",
             "contentFormat": {
-                "user_id": "guid"
+                "type": "object",
+                "properties": {
+                    "user_id": {
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                },
+                "required": ["user_id"]
             }
         }
     ]
@@ -155,7 +169,7 @@ Successful responses must be textual and will be attached as a response to the f
 
 Errors can be common, such as not finding a client by ID or some field not being in the desired format. In these cases, respond with an OK status and in the response body include a human description of the error and how the assistant can work around it.
 
-**It is guaranteed** that the request will strictly follow the content format provided by the function definition. Functions that do not expect arguments should not specify a content format for that function. You can also indicate to the model how it should fill in the function content fields in the function instructions. More complex, nested, or deeply structured content may increase the time it takes to generate this content, as it increases the chance of the assistant making mistakes and failing to validate the generated content.
+**It is guaranteed** that the request will strictly follow the JSON schema of the content provided by the function definition. Functions that do not expect arguments should not specify a content format for that function.
 
 > [!IMPORTANT]
 >
@@ -163,13 +177,13 @@ Errors can be common, such as not finding a client by ID or some field not being
 
 #### Authentication
 
-The authentication of requests is done through the `X-Aivax-Nonce` header sent in all protocol function requests, including listing requests.
+The authentication of requests is done through the `X-Aivax-Nonce` header sent in all protocol function requests, even the listing ones.
 
 See the [authentication](/docs/en/authentication) manual to understand how to authenticate reverse AIVAX requests.
 
 #### User Authentication
 
-Function calls send a `$.context.externalUserId` field containing the user tag created in a [chat session](/docs/en/entities/chat-clients). This tag can be used to authenticate the user who called this function.
+Function calls send a field `$.context.externalUserId` containing the user tag created in a [chat session](/docs/en/entities/chat-clients). This tag can be used to authenticate the user who called this function.
 
 #### Security Considerations
 

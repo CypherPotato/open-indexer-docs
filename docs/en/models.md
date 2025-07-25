@@ -50,32 +50,36 @@ All prices are in United States dollars.
         Internet Search:
     </small>
     <div>
-        $ 5.00 <small>/1,000 searches</small>
+        $ 5.00 <small>/1.000 searches</small>
     </div>
 </div>
     </td>
     <td>
-        Optimized agent for function usage.
+        Optimized agent for function usage. Based on OpenAI o4-mini (low).
         <div class="model-capabilities">
 <div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images
+</div>
+<div>
     <i class="ri-instance-line"></i>
-    Function Calls
+    Function calls
 </div>
 <div>
     <i class="ri-lightbulb-line"></i>
-    Deep Thinking
+    Deep thinking
 </div>
 <div>
     <i class="ri-global-line"></i>
-    Internet Search
+    Internet search
 </div>
 <div>
     <i class="ri-code-s-slash-line"></i>
-    Code Execution
+    Code execution
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    JSON Functions
+    JSON functions
 </div>
         </div>
     </td>
@@ -92,7 +96,7 @@ All prices are in United States dollars.
                 Input:
             </small>
             <div>
-                $ 0.10 <small>/1m tokens</small>
+                $ 0.15 <small>/1m tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -100,7 +104,7 @@ All prices are in United States dollars.
                 Output:
             </small>
             <div>
-                $ 0.40 <small>/1m tokens</small>
+                $ 0.60 <small>/1m tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -108,28 +112,32 @@ All prices are in United States dollars.
         Internet Search:
     </small>
     <div>
-        $ 5.00 <small>/1,000 searches</small>
+        $ 5.00 <small>/1.000 searches</small>
     </div>
 </div>
     </td>
     <td>
-        Optimized agent for function usage (no reasoning).
+        Optimized agent for function usage (no reasoning). Based on GPT 4o-mini.
         <div class="model-capabilities">
 <div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images
+</div>
+<div>
     <i class="ri-instance-line"></i>
-    Function Calls
+    Function calls
 </div>
 <div>
     <i class="ri-global-line"></i>
-    Internet Search
+    Internet search
 </div>
 <div>
     <i class="ri-code-s-slash-line"></i>
-    Code Execution
+    Code execution
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    JSON Functions
+    JSON functions
 </div>
         </div>
     </td>
@@ -179,11 +187,11 @@ All prices are in United States dollars.
         
     </td>
     <td>
-        Model with deep reasoning and thought, best for more demanding tasks.
+        Model with deep reasoning and thought, best for most demanding tasks.
         <div class="model-capabilities">
 <div>
     <i class="ri-lightbulb-line"></i>
-    Deep Thinking
+    Deep thinking
 </div>
         </div>
     </td>
@@ -241,11 +249,11 @@ All prices are in United States dollars.
 </div>
 <div>
     <i class="ri-instance-line"></i>
-    Function Calls
+    Function calls
 </div>
 <div>
     <i class="ri-lightbulb-line"></i>
-    Deep Thinking
+    Deep thinking
 </div>
         </div>
     </td>
@@ -284,11 +292,11 @@ All prices are in United States dollars.
 </div>
 <div>
     <i class="ri-instance-line"></i>
-    Function Calls
+    Function calls
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    JSON Functions
+    JSON functions
 </div>
         </div>
     </td>
@@ -327,11 +335,15 @@ All prices are in United States dollars.
 </div>
 <div>
     <i class="ri-instance-line"></i>
-    Function Calls
+    Function calls
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Deep thinking
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    JSON Functions
+    JSON functions
 </div>
         </div>
     </td>
@@ -370,15 +382,15 @@ All prices are in United States dollars.
 </div>
 <div>
     <i class="ri-instance-line"></i>
-    Function Calls
+    Function calls
 </div>
 <div>
     <i class="ri-lightbulb-line"></i>
-    Deep Thinking
+    Deep thinking
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    JSON Functions
+    JSON functions
 </div>
         </div>
     </td>
@@ -417,11 +429,11 @@ All prices are in United States dollars.
 </div>
 <div>
     <i class="ri-instance-line"></i>
-    Function Calls
+    Function calls
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    JSON Functions
+    JSON functions
 </div>
         </div>
     </td>
@@ -460,11 +472,11 @@ All prices are in United States dollars.
 </div>
 <div>
     <i class="ri-instance-line"></i>
-    Function Calls
+    Function calls
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    JSON Functions
+    JSON functions
 </div>
         </div>
     </td>
@@ -503,11 +515,11 @@ All prices are in United States dollars.
 </div>
 <div>
     <i class="ri-instance-line"></i>
-    Function Calls
+    Function calls
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    JSON Functions
+    JSON functions
 </div>
         </div>
     </td>
@@ -561,7 +573,7 @@ All prices are in United States dollars.
         <div class="model-capabilities">
 <div>
     <i class="ri-braces-line"></i>
-    JSON Functions
+    JSON functions
 </div>
         </div>
     </td>
@@ -615,11 +627,11 @@ All prices are in United States dollars.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
-    Function Calls
+    Function calls
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    JSON Functions
+    JSON functions
 </div>
         </div>
     </td>
@@ -658,11 +670,11 @@ All prices are in United States dollars.
 </div>
 <div>
     <i class="ri-instance-line"></i>
-    Function Calls
+    Function calls
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    JSON Functions
+    JSON functions
 </div>
         </div>
     </td>
@@ -701,11 +713,11 @@ All prices are in United States dollars.
 </div>
 <div>
     <i class="ri-instance-line"></i>
-    Function Calls
+    Function calls
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    JSON Functions
+    JSON functions
 </div>
         </div>
     </td>
@@ -740,11 +752,11 @@ All prices are in United States dollars.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
-    Function Calls
+    Function calls
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    JSON Functions
+    JSON functions
 </div>
         </div>
     </td>
@@ -794,7 +806,7 @@ All prices are in United States dollars.
         
     </td>
     <td>
-        Model router for Google Gemini. The routing is made between Gemini 2.0 Flash Lite, Gemini 2.0 Flash and Gemini 2.5 Flash.
+        Model router for Google Gemini. The routing is made between Gemini 2.0 Flash, Gemini 2.5 Flash Lite and Gemini 2.5 Flash.
         <div class="model-capabilities">
         </div>
     </td>
@@ -825,7 +837,7 @@ All prices are in United States dollars.
         
     </td>
     <td>
-        Model router for Google Gemini. The routing is made between Gemini 2.0 Flash, Gemini 2.5 Flash (low) and Gemini 2.5 Flash (high).
+        Model router for Google Gemini. The routing is made between Gemini 2.5 Flash Lite, Gemini 2.5 Flash (low) and Gemini 2.5 Flash (high).
         <div class="model-capabilities">
         </div>
     </td>
@@ -972,7 +984,11 @@ All prices are in United States dollars.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
-    Function Calls
+    Function calls
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
 </div>
         </div>
     </td>
@@ -1030,7 +1046,7 @@ All prices are in United States dollars.
 </div>
 <div>
     <i class="ri-instance-line"></i>
-    Function Calls
+    Function calls
 </div>
         </div>
     </td>
@@ -1069,11 +1085,11 @@ All prices are in United States dollars.
 </div>
 <div>
     <i class="ri-instance-line"></i>
-    Function Calls
+    Function calls
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    JSON Functions
+    JSON functions
 </div>
         </div>
     </td>
@@ -1112,11 +1128,11 @@ All prices are in United States dollars.
 </div>
 <div>
     <i class="ri-instance-line"></i>
-    Function Calls
+    Function calls
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    JSON Functions
+    JSON functions
 </div>
         </div>
     </td>
@@ -1155,15 +1171,15 @@ All prices are in United States dollars.
 </div>
 <div>
     <i class="ri-instance-line"></i>
-    Function Calls
+    Function calls
 </div>
 <div>
     <i class="ri-lightbulb-line"></i>
-    Deep Thinking
+    Deep thinking
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    JSON Functions
+    JSON functions
 </div>
         </div>
     </td>
@@ -1202,11 +1218,11 @@ All prices are in United States dollars.
 </div>
 <div>
     <i class="ri-instance-line"></i>
-    Function Calls
+    Function calls
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    JSON Functions
+    JSON functions
 </div>
         </div>
     </td>
@@ -1245,11 +1261,11 @@ All prices are in United States dollars.
 </div>
 <div>
     <i class="ri-instance-line"></i>
-    Function Calls
+    Function calls
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    JSON Functions
+    JSON functions
 </div>
         </div>
     </td>
@@ -1288,11 +1304,11 @@ All prices are in United States dollars.
 </div>
 <div>
     <i class="ri-instance-line"></i>
-    Function Calls
+    Function calls
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    JSON Functions
+    JSON functions
 </div>
         </div>
     </td>
@@ -1346,15 +1362,15 @@ All prices are in United States dollars.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
-    Function Calls
+    Function calls
 </div>
 <div>
     <i class="ri-lightbulb-line"></i>
-    Deep Thinking
+    Deep thinking
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    JSON Functions
+    JSON functions
 </div>
         </div>
     </td>

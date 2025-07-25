@@ -1,6 +1,6 @@
 # Funções
 
-Funções é uma forma de forçar seu modelo à processamento de informações usando JSON como intermédio de comunicação. Com as funções, você consegue fazer qualquer modelo responder no formato JSON que você quiser.
+Funções é uma forma de forçar seu modelo ao processamento de informações usando JSON como intermédio de comunicação. Com as funções, você consegue fazer qualquer modelo responder no formato JSON que você quiser.
 
 Pode ser útil para categorizar comentários, aplicar moderação em avaliações ou processar informações com auxílio da IA.
 
@@ -8,7 +8,7 @@ No momento, só é possível usar funções com [modelos providos pela AIVAX]().
 
 ## Chamar uma função
 
-Para chamar uma função de IA, você precisará informar o que a IA deverá responder e fornecer um esquema JSON que ela deverá seguir.
+Para chamar uma função de IA, você precisará informar o que a IA deverá responder e fornecer um JSON Schema que ela deverá seguir.
 
 Modelos menos inteligentes tendem a falhar a geração de JSON, gerando um documento inválido ou problemático. Para isso, ajuste seu modelo, a instrução e o parâmetro de tentativas se for necessário.
 
@@ -41,18 +41,22 @@ Requisições que pesquisam na internet trazem bons resultados e dispensam crawl
     // Obrigatório. Explique o que seu modelo deverá fazer com a entrada e como ele deve trazer a resposta.
     "instructions": "Classifique o comentário do usuário, indicando se é positivo ou negativo, e se possui alguma informação relevante (número entre 0 (pouco relevante) e 10 (muito relevante))",
     
-    // Obrigatório. O objeto JSON que o modelo deverá gerar. Você pode fornecer exemplos de geração no campo de instruções. Esse objeto deve ser um JSON válido na API.
-    // Esse objeto deve ser um objeto, um array ou uma string.
+    // Obrigatório. O JSON Schema que o modelo deverá seguir para gerar a resposta. Você pode fornecer exemplos de geração no campo de instruções.
     "responseSchema": {
-        "feedbackType": "{neutral|positive|negative}",
-        "informationScore": 5
+        "type": "object",
+        "properties": {
+            "feedbackType": {
+                "type": "string",
+                "enum": ["neutral", "positive", "negative"]
+            },
+            "informationScore": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 10
+            }
+        },
+        "required": ["feedbackType", "informationScore"]
     },
-    
-    // Opcional. Especifica uma lista de caminhos JSON que a IA deve gerar conteúdo sempre e que esse campo não pode ser nulo. Para arrays, especifique com [*].
-    "requiredFields": [
-        "$.feedbackType",
-        "$.informationScore"
-    ],
     
     // Opcional. Define uma entrada JSON para o modelo. Pode ser qualquer tipo de valor JSON.
     "inputData": {
@@ -79,9 +83,8 @@ Requisições que pesquisam na internet trazem bons resultados e dispensam crawl
     
         // Opcional. Define o comportamento do fetch para erros ao tentar acessar o site. Erros incluem respostas que não são 2xx ou 3xx, timeouts, erros de certificados, etc.
         //      fail    -> retorna um erro na resposta da função (padrão)
-        //      warn    -> adiciona um aviso na resposta da função e não inclui o erro na geração da IA
         //      ignore  -> ignora o erro e adiciona o erro na geração da IA
-        "fetchFailAction": "fail" | "warn" | "ignore",
+        "fetchFailAction": "fail" | "ignore",
         
         // Opcional. Define o timeout em segundos para o tempo maximo da resposta responder e ler os conteúdos. O máximo é 120 segundos (dois minutos).
         "timeout": 10,
@@ -98,7 +101,7 @@ Requisições que pesquisam na internet trazem bons resultados e dispensam crawl
 {
     "message": null,
     "data": {
-        // o resultado contém o objeto definido em "responseSchema", com os campos preenchidos pela IA
+        // o resultado contém o objeto gerado pela IA, seguindo o "responseSchema"
         "result": {
             "feedbackType": "negative",
             "informationScore": 8
@@ -116,20 +119,53 @@ Requisições que pesquisam na internet trazem bons resultados e dispensam crawl
 }
 ```
 
-## Considerações sobre o esquema JSON
+## Diretrizes do JSON Schema
 
-- Especifique valores enumerados com `"{valor1|valor2|valor3}"`. Dessa forma, o modelo deverá escolher um dos valores apresentados na geração do JSON.
-- Todos os valores são placeholders para a geração do modelo.
-- Indique o que um campo é ou o que deve receber de valor com um hint em seu próprio placeholder ou indique diretamente nas instruções da função.
-- Todos os valores podem ser nulos, à menos que você especifique diretamente para o modelo que não podem.
-- A estrutura de saída do modelo é a mesma que informada em `responseSchema`.
-- A estrutura de entrada é indiferente.
+O formato de resposta deve ser fornecido por um JSON Schema.
+
+Por trás dos panos, a AIVAX guia o modelo para gerar uma resposta com o esquema JSON fornecido. Quando o modelo gera algo inválido, indicamos à ele tentar novamente e corrigir os erros até que a saída esteja conforme a especificação fornecida.
+
+As diretrizes suportadas do JSON Schema da AIVAX são:
+
+- `string`:
+    - `minLength`
+    - `maxLength`
+    - `pattern`
+    - `format`
+        - Pode ser `date-time`, `email`, `time`, `duration`, `uri`, `url`, `ipv4`, `ipv6`, `uuid` ou `guid`.
+    - `enum`
+- `number` e `integer`:
+    - `minimum`
+    - `maximum`
+    - `exclusiveMinimum`
+    - `exclusiveMaximum`
+    - `multipleOf`
+- `array`
+    - `items`
+    - `uniqueItems`
+    - `minItems`
+    - `maxItems`
+- `object`
+    - `properties`
+    - `required`
+- `bool` e `boolean`
+- `null`
+
+Além disso, é possível informar um ou mais valores no `type` do objeto, exemplo:
+
+```json
+{
+    "type": ["string", "number"]
+}
+```
+
+> Nota: `number` e `integer` são sinônimos e `integer` não garante que o número será um inteiro. Se necessário, trunque o número retornado.
 
 ## Funções em tempo real com modelos Sentinel
 
-Você pode usar o agente `@aivax/fn-1` para executar funções inteligentes que envolvam pesquisa na internet, execução de código, resolução de contas matemáticas e todas as outras funcionalidades que agentes Sentinel consigam fornecer.
+Você pode usar o agente `@aivax/fn-1` e `@aivax/fn-1-mini` para executar funções inteligentes que envolvam pesquisa na internet, execução de código e/ou resolução de contas matemáticas.
 
-Agentes Sentinel são conectados à internet por padrão, portanto, é natural que ele pesquise algo na internet para complementar sua resposta. Ao usar chamar uma função com um modelo que pesquisa na internet, como um agente Sentinel, o limite de consumo contabilizado é de Live Function.
+Estes agentes são conectados à internet por padrão, portanto, é natural que ele pesquise algo na internet para complementar sua resposta.
 
 ## Exemplos
 
@@ -149,8 +185,18 @@ Confira exemplos de funções de IA para várias tarefas cotidianas:
     "modelName": "@metaai/llama-4-scout-17b",
     "instructions": "Resuma o comentário do usuário, criando uma descrição curta, com no máximo de 10 palavras indicando o que ele quer fazer. Indique também se esse comentário requer atenção ou não.",
     "responseSchema": {
-        "shortSummary": "...",
-        "requiresAttention": false
+        "type": "object",
+        "properties": {
+            "shortSummary": {
+                "type": "string",
+                "description": "Uma breve descrição do que o usuário quer fazer, com no máximo 10 palavras."
+            },
+            "requiresAttention": {
+                "type": "boolean",
+                "description": "Indica se o comentário requer atenção imediata (true) ou não (false)."
+            }
+        },
+        "required": ["shortSummary", "requiresAttention"]
     },
     "inputData": "O cliente fernando de castro está tentando entrar em contato com o suporte desde sexta-feira e diz q vai cancelar se nao falar com alguém hoje. ele tbm disse que é amigo da rebeca do comercial e está ameaçando falar mal da empresa no tiktok. por favor alguém atende esse cara??"
 }
@@ -184,7 +230,14 @@ Confira exemplos de funções de IA para várias tarefas cotidianas:
     "modelName": "@aivax/fn-1",
     "instructions": "Avalie a conta matemática informada e forneça o resultado.",
     "responseSchema": {
-        "result": "..."
+        "type": "object",
+        "properties": {
+            "result": {
+                "type": ["string", "number"],
+                "description": "O resultado da avaliação da expressão matemática."
+            }
+        },
+        "required": ["result"]
     },
     "inputData": {
         "mathProblem": "12 + (42 / pi) ^ 20"
@@ -220,18 +273,37 @@ Confira exemplos de funções de IA para várias tarefas cotidianas:
     "modelName": "@aivax/fn-1",
     "instructions": "Pesquise as 5 últimas notícias e dados meteorológicos para a cidade informada.",
     "responseSchema": {
-        "latestNews": [
-            {
-                "title": "...",
-                "details": "...",
-                "link": "https://..."
+        "type": "object",
+        "properties": {
+            "latestNews": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "title": { "type": "string" },
+                        "details": { "type": "string" },
+                        "link": { "type": "string", "format": "uri" }
+                    },
+                    "required": ["title", "details", "link"]
+                }
+            },
+            "weather": {
+                "type": "object",
+                "properties": {
+                    "currentTemperature": { "type": "number" },
+                    "currentWeather": {
+                        "type": "string",
+                        "enum": ["sunny", "cloudy", "rain", "thunderstorm", "partly cloudy", "clear"]
+                    },
+                    "forecast": {
+                        "type": "string",
+                        "enum": ["sunny", "cloudy", "rain", "thunderstorm", "partly cloudy", "clear"]
+                    }
+                },
+                "required": ["currentTemperature", "currentWeather", "forecast"]
             }
-        ],
-        "weather": {
-            "currentTemperature": 0,
-            "currentWeather": "{sunny|cloudy|rain|thunderstorm}",
-            "forecast": "{sunny|cloudy|rain|thunderstorm}"
-        }
+        },
+        "required": ["latestNews", "weather"]
     },
     "inputData": {
         "city": "São José do Rio Preto"
@@ -298,10 +370,14 @@ Confira exemplos de funções de IA para várias tarefas cotidianas:
     "modelName": "@aivax/fn-1",
     "instructions": "Traga a contagem de casos e mortes por COVID-19.",
     "responseSchema": {
-        "deathsWorld": 0,
-        "deathsBrazil": 0,
-        "casesWorld": 0,
-        "casesBrazil": 0
+        "type": "object",
+        "properties": {
+            "deathsWorld": { "type": "integer", "description": "Número total de mortes por COVID-19 no mundo." },
+            "deathsBrazil": { "type": "integer", "description": "Número total de mortes por COVID-19 no Brasil." },
+            "casesWorld": { "type": "integer", "description": "Número total de casos de COVID-19 no mundo." },
+            "casesBrazil": { "type": "integer", "description": "Número total de casos de COVID-19 no Brasil." }
+        },
+        "required": ["deathsWorld", "deathsBrazil", "casesWorld", "casesBrazil"]
     }
 }
 ```
@@ -336,21 +412,28 @@ Confira exemplos de funções de IA para várias tarefas cotidianas:
     "modelName": "@aivax/fn-1",
     "instructions": "Pesquise e formate uma lista de 10 artistas no TOP 10 do streaming musical por gênero.",
     "responseSchema": {
-        "edm": [
-            "artist name",
-            "artist name",
-            "..."
-        ],
-        "rap": [
-            "artist name",
-            "artist name",
-            "..."
-        ],
-        "pop": [
-            "artist name",
-            "artist name",
-            "..."
-        ]
+        "type": "object",
+        "properties": {
+            "edm": {
+                "type": "array",
+                "items": { "type": "string", "description": "Nome de um artista de EDM em alta." },
+                "minItems": 10,
+                "maxItems": 10
+            },
+            "rap": {
+                "type": "array",
+                "items": { "type": "string", "description": "Nome de um artista de Rap em alta." },
+                "minItems": 10,
+                "maxItems": 10
+            },
+            "pop": {
+                "type": "array",
+                "items": { "type": "string", "description": "Nome de um artista Pop em alta." },
+                "minItems": 10,
+                "maxItems": 10
+            }
+        },
+        "required": ["edm", "rap", "pop"]
     },
     "inputData": null
 }

@@ -137,26 +137,26 @@
 <p>When using a model, you will notice that some are more intelligent than others for specific tasks. Some models are better with certain data acquisition strategies than others. Perform tests to find the best model.</p>
 <p>You can view the available models on the <a href="/docs/en/models">models page</a>.</p>
 <h2 id="choosing-a-search-strategy">Choosing a search strategy</h2>
-<p>If you are using a knowledge collection with an AI model, you can choose a strategy that the AI will use to perform an information search. Each strategy is more refined than the other. Some create better results than others, but it is essential to perform practical tests with several strategies to understand which one fits best in the model, conversation, and user tone.</p>
+<p>If you are using a knowledge collection with an AI model, you can choose a strategy that the AI will use to search for information. Each strategy is more refined than the other. Some create better results than others, but it is essential to perform practical tests with several strategies to understand which one fits best in the model, conversation, and user tone.</p>
 <p>It may be necessary to make adjustments to the system prompt to better inform the AI how to consider the documents attached to the conversation. The documents are attached as a user message, limited to the parameters you define in the acquisition strategy.</p>
-<p>Rewrite strategies usually generate the best results at a low latency and cost. The rewrite model used is always the one with the lowest cost, usually chosen by an internal pool that decides which model has the lowest latency at the moment.</p>
-<p>Strategies without rewrite cost:</p>
+<p>Strategies with rewriting typically generate the best results at a low latency and cost. The rewriting model used is always the one with the lowest cost, usually chosen by an internal pool that decides which model has the lowest latency at the moment.</p>
+<p>Strategies without rewriting cost:</p>
 <ul>
-<li><code>Plain</code>: the default strategy. It is the least optimized and has no rewrite cost: the last user message is used as a search term to search the attached collection of the gateway.</li>
+<li><code>Plain</code>: the default strategy. It is the least optimized and has no rewriting cost: the last user message is used as a search term to search the attached collection of the gateway.</li>
 <li><code>Concatenate</code>: concatenates the last N user messages in lines, and then the result of the concatenation is used as a search term.</li>
 </ul>
-<p>Strategies with rewrite cost (inference tokens are charged):</p>
+<p>Strategies with rewriting cost (inference tokens are charged):</p>
 <ul>
-<li><code>UserRewrite</code>: rewrites the last N user messages using a smaller model, creating a contextualized question about what the user wants to say.</li>
-<li><code>FullRewrite</code>: rewrites the last N*2 chat messages using a smaller model. Similar to <code>UserRewrite</code>, but also considers the assistant's messages in formulating the new question. It usually creates the best questions, with a slightly higher cost. It is the most stable and consistent strategy. It works with any model.</li>
+<li><code>UserRewrite</code>: rewrites the last N user messages using a smaller model, creating a contextualized question about what the user means.</li>
+<li><code>FullRewrite</code>: rewrites the last N*2 chat messages using a smaller model. Similar to <code>UserRewrite</code>, but also considers the assistant's messages in formulating the new question. Generally creates the best questions, with a slightly higher cost. It is the most stable and consistent strategy. Works with any model.</li>
 </ul>
 <p>Function strategies:</p>
 <ul>
-<li><code>QueryFunction</code>: provides a search function in the integrated collection for the AI model. You should adjust the system instructions to define the ideal scenarios for the model to call this function when necessary. It may not work as well with smaller models.</li>
+<li><code>QueryFunction</code>: provides a search function in the integrated collection for the AI model. You should adjust the system instructions to define the ideal scenarios for the model to call this function when necessary. May not work as well with smaller models.</li>
 </ul>
 <h2 id="using-an-ai-gateway">Using an AI gateway</h2>
 <p>AIVAX provides an endpoint compatible with the OpenAI interface through an AI-gateway, which facilitates the integration of the model created by AIVAX with existing applications and SDKs. It is worth noting that only some properties are supported.</p>
-<p>In an AI gateway, you already configure the model parameters, such as System Prompt, temperature, and model name. When using this endpoint, some gateway values can be overridden by the request.</p>
+<p>In an AI gateway, you already configure the model parameters, such as System Prompt, temperature, and model name. When using this endpoint, some gateway values can be overwritten by the request.</p>
 <h4 id="request">Request</h4>
 <div class="request-item post">
     <span>POST</span>
@@ -180,13 +180,13 @@
     &quot;id&quot;: &quot;0197dbdc-6456-7d54-b7ec-04cb9c80f460&quot;,
     &quot;object&quot;: &quot;chat.completion&quot;,
     &quot;created&quot;: 1751740343,
-    &quot;model&quot;: &quot;@aivax/sentinel-mini&quot;,
+    &quot;model&quot;: &quot;@google/gemini-2.5-flash&quot;,
     &quot;choices&quot;: [
         {
             &quot;index&quot;: 0,
             &quot;message&quot;: {
                 &quot;role&quot;: &quot;assistant&quot;,
-                &quot;completion_text&quot;: &quot;Hi! I'm Zia, the intelligent assistant from Zé do Ingresso. I'm here to help you with everything about tickets, events, and everything that happens in our beloved São José do Rio Preto. If you need anything, just call! Let's enjoy everything together! What do you need? &quot;,
+                &quot;completion_text&quot;: &quot;Hi! I'm Zia, the intelligent assistant from Zé do Ingresso. I'm here to help you with everything about tickets, events, and everything that happens in our beloved São José do Rio Preto. If you need something, just call! Let's enjoy everything that's happening together! What do you need? &quot;,
                 &quot;refusal&quot;: null,
                 &quot;annotations&quot;: []
             },
@@ -199,18 +199,17 @@
         &quot;completion_tokens&quot;: 88,
         &quot;total_tokens&quot;: 1206
     },
-    &quot;sentinel_usage&quot;: null,
     &quot;service_tier&quot;: &quot;default&quot;
 }
 </code></pre>
-<h4 id="streaming-response">Streaming response</h4>
-<pre><code class="lang-text">data: {&quot;id&quot;:&quot;0197dbde-c40b-720d-a13e-f689c303c571&quot;,&quot;object&quot;:&quot;chat.completion.chunk&quot;,&quot;created&quot;:1751740498,&quot;model&quot;:&quot;gpt-4o-mini&quot;,&quot;system_fingerprint&quot;:&quot;fp_y8jidd&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;finish_reason&quot;:null,&quot;delta&quot;:{&quot;role&quot;:&quot;assistant&quot;,&quot;content&quot;:&quot;&quot;}}],&quot;usage&quot;:null,&quot;sentinel_usage&quot;:null}
+<h4 id="response-streaming">Response streaming</h4>
+<pre><code class="lang-text">data: {&quot;id&quot;:&quot;0197dbde-c40b-720d-a13e-f689c303c571&quot;,&quot;object&quot;:&quot;chat.completion.chunk&quot;,&quot;created&quot;:1751740498,&quot;model&quot;:&quot;@google/gemini-2.5-flash&quot;,&quot;system_fingerprint&quot;:&quot;fp_y8jidd&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;finish_reason&quot;:null,&quot;delta&quot;:{&quot;role&quot;:&quot;assistant&quot;,&quot;content&quot;:&quot;&quot;}}],&quot;usage&quot;:null,&quot;sentinel_usage&quot;:null}
 
 ...
 
-data: {&quot;id&quot;:&quot;0197dbde-c88c-7764-8017-c1fee0d79096&quot;,&quot;object&quot;:&quot;chat.completion.chunk&quot;,&quot;created&quot;:1751740500,&quot;model&quot;:&quot;gpt-4o-mini&quot;,&quot;system_fingerprint&quot;:&quot;fp_2he7ot&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;finish_reason&quot;:null,&quot;delta&quot;:{&quot;content&quot;:&quot;&quot;}}],&quot;usage&quot;:null,&quot;sentinel_usage&quot;:null}
+data: {&quot;id&quot;:&quot;0197dbde-c88c-7764-8017-c1fee0d79096&quot;,&quot;object&quot;:&quot;chat.completion.chunk&quot;,&quot;created&quot;:1751740500,&quot;model&quot;:&quot;@google/gemini-2.5-flash&quot;,&quot;system_fingerprint&quot;:&quot;fp_2he7ot&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;finish_reason&quot;:null,&quot;delta&quot;:{&quot;content&quot;:&quot;&quot;}}],&quot;usage&quot;:null,&quot;sentinel_usage&quot;:null}
 
-data: {&quot;id&quot;:&quot;0197dbde-c890-7329-9e65-faecbe158efa&quot;,&quot;object&quot;:&quot;chat.completion.chunk&quot;,&quot;created&quot;:1751740500,&quot;model&quot;:&quot;@aivax\/sentinel-mini&quot;,&quot;system_fingerprint&quot;:&quot;fp_q6qh7x&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;finish_reason&quot;:&quot;STOP&quot;,&quot;delta&quot;:{}}],&quot;usage&quot;:{&quot;prompt_tokens&quot;:1097,&quot;completion_tokens&quot;:92,&quot;total_tokens&quot;:1189},&quot;sentinel_usage&quot;:null}
+data: {&quot;id&quot;:&quot;0197dbde-c890-7329-9e65-faecbe158efa&quot;,&quot;object&quot;:&quot;chat.completion.chunk&quot;,&quot;created&quot;:1751740500,&quot;model&quot;:&quot;@aivax/sentinel-mini&quot;,&quot;system_fingerprint&quot;:&quot;fp_q6qh7x&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;finish_reason&quot;:&quot;STOP&quot;,&quot;delta&quot;:{}}],&quot;usage&quot;:{&quot;prompt_tokens&quot;:1097,&quot;completion_tokens&quot;:92,&quot;total_tokens&quot;:1189},&quot;sentinel_usage&quot;:null}
 </code></pre>
 
 </article>

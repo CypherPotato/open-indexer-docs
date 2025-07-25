@@ -180,7 +180,7 @@
     &quot;id&quot;: &quot;0197dbdc-6456-7d54-b7ec-04cb9c80f460&quot;,
     &quot;object&quot;: &quot;chat.completion&quot;,
     &quot;created&quot;: 1751740343,
-    &quot;model&quot;: &quot;@aivax/sentinel-mini&quot;,
+    &quot;model&quot;: &quot;@google/gemini-2.5-flash&quot;,
     &quot;choices&quot;: [
         {
             &quot;index&quot;: 0,
@@ -199,16 +199,15 @@
         &quot;completion_tokens&quot;: 88,
         &quot;total_tokens&quot;: 1206
     },
-    &quot;sentinel_usage&quot;: null,
     &quot;service_tier&quot;: &quot;default&quot;
 }
 </code></pre>
 <h4 id="resposta-streaming">Resposta streaming</h4>
-<pre><code class="lang-text">data: {&quot;id&quot;:&quot;0197dbde-c40b-720d-a13e-f689c303c571&quot;,&quot;object&quot;:&quot;chat.completion.chunk&quot;,&quot;created&quot;:1751740498,&quot;model&quot;:&quot;gpt-4o-mini&quot;,&quot;system_fingerprint&quot;:&quot;fp_y8jidd&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;finish_reason&quot;:null,&quot;delta&quot;:{&quot;role&quot;:&quot;assistant&quot;,&quot;content&quot;:&quot;&quot;}}],&quot;usage&quot;:null,&quot;sentinel_usage&quot;:null}
+<pre><code class="lang-text">data: {&quot;id&quot;:&quot;0197dbde-c40b-720d-a13e-f689c303c571&quot;,&quot;object&quot;:&quot;chat.completion.chunk&quot;,&quot;created&quot;:1751740498,&quot;model&quot;:&quot;@google/gemini-2.5-flash&quot;,&quot;system_fingerprint&quot;:&quot;fp_y8jidd&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;finish_reason&quot;:null,&quot;delta&quot;:{&quot;role&quot;:&quot;assistant&quot;,&quot;content&quot;:&quot;&quot;}}],&quot;usage&quot;:null,&quot;sentinel_usage&quot;:null}
 
 ...
 
-data: {&quot;id&quot;:&quot;0197dbde-c88c-7764-8017-c1fee0d79096&quot;,&quot;object&quot;:&quot;chat.completion.chunk&quot;,&quot;created&quot;:1751740500,&quot;model&quot;:&quot;gpt-4o-mini&quot;,&quot;system_fingerprint&quot;:&quot;fp_2he7ot&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;finish_reason&quot;:null,&quot;delta&quot;:{&quot;content&quot;:&quot;&quot;}}],&quot;usage&quot;:null,&quot;sentinel_usage&quot;:null}
+data: {&quot;id&quot;:&quot;0197dbde-c88c-7764-8017-c1fee0d79096&quot;,&quot;object&quot;:&quot;chat.completion.chunk&quot;,&quot;created&quot;:1751740500,&quot;model&quot;:&quot;@google/gemini-2.5-flash&quot;,&quot;system_fingerprint&quot;:&quot;fp_2he7ot&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;finish_reason&quot;:null,&quot;delta&quot;:{&quot;content&quot;:&quot;&quot;}}],&quot;usage&quot;:null,&quot;sentinel_usage&quot;:null}
 
 data: {&quot;id&quot;:&quot;0197dbde-c890-7329-9e65-faecbe158efa&quot;,&quot;object&quot;:&quot;chat.completion.chunk&quot;,&quot;created&quot;:1751740500,&quot;model&quot;:&quot;@aivax\/sentinel-mini&quot;,&quot;system_fingerprint&quot;:&quot;fp_q6qh7x&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;finish_reason&quot;:&quot;STOP&quot;,&quot;delta&quot;:{}}],&quot;usage&quot;:{&quot;prompt_tokens&quot;:1097,&quot;completion_tokens&quot;:92,&quot;total_tokens&quot;:1189},&quot;sentinel_usage&quot;:null}
 </code></pre>

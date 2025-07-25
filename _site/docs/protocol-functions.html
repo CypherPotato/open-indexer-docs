@@ -124,7 +124,7 @@
                 <article data-uid="">
 <h1 id="funções-do-lado-do-servidor">Funções do lado do servidor</h1>
 
-<p>As funções de protocolo da AIVAX, ou <em>server-side functions</em>, é uma implementação customizada de chamadas de função criada pela AIVAX que permite que o modelo siga estritamente um contexto de função que não é baseada em documentos JSON. Similar ao MCP, mas um pouco mais simples.</p>
+<p>As funções de protocolo da AIVAX, ou <em>server-side functions</em>, é uma implementação em que a chamada de ferramentas do modelo ocorre do lado do servidor. Similar ao MCP, mas com suporte nativo à autenticação e otimizado para funcionar externamente.</p>
 <p>As funções de protocolo permitem a tomada de ações no lado do servidor da AIVAX, removendo a necessidade de implementação da função no lado do cliente e integrando com aplicações e serviços existentes.</p>
 <img src="/assets/diagrams/protocol-functions-1.drawio.svg">
 <p>Essas funções esperam um <strong>callback</strong> através de uma URL, e quando o modelo decide chamar a função, o callback é acessado com os parâmetros informados pela própria assistente. A assistente não sabe qual URL ela está chamando, pois a mesma permanece invisível tanto para a assistente quanto para o usuário.</p>
@@ -132,8 +132,8 @@
 <p>O nome da função deve ser simples e determinístico ao que essa função faz. Evite nomes difíceis de advinhar ou que não remetam ao papel da função, pois a assistente pode se confundir e não chamar a função quando apropriado.</p>
 <p>Como um exemplo, vamos pensar em uma função de consultar um usuário em um banco de dados externo. Os nomes a seguir são bons exemplos para considerar para a chamada:</p>
 <ul>
-<li><code>search-user</code></li>
-<li><code>query-user</code></li>
+<li><code>search_user</code></li>
+<li><code>query_user</code></li>
 <li><code>search_user</code></li>
 </ul>
 <p>Nomes ruins incluem:</p>
@@ -171,7 +171,14 @@
                 &quot;description&quot;: &quot;Use essa ferramenta para obter detalhes e pedidos de um cliente através do seu ID.&quot;,
                 &quot;callbackUrl&quot;: &quot;https://my-external-api.com/api/scp/users&quot;,
                 &quot;contentFormat&quot;: {
-                    &quot;user_id&quot;: &quot;guid&quot;
+                    &quot;type&quot;: &quot;object&quot;,
+                    &quot;properties&quot;: {
+                        &quot;user_id&quot;: {
+                            &quot;type&quot;: &quot;string&quot;,
+                            &quot;format&quot;: &quot;uuid&quot;
+                        }
+                    },
+                    &quot;required&quot;: [&quot;user_id&quot;]
                 }
             }
         ]
@@ -218,7 +225,14 @@
             &quot;description&quot;: &quot;Use essa ferramenta para obter detalhes e pedidos de um cliente através do seu ID.&quot;,
             &quot;callbackUrl&quot;: &quot;https://my-external-api.com/api/scp/users&quot;,
             &quot;contentFormat&quot;: {
-                &quot;user_id&quot;: &quot;guid&quot;
+                &quot;type&quot;: &quot;object&quot;,
+                &quot;properties&quot;: {
+                    &quot;user_id&quot;: {
+                        &quot;type&quot;: &quot;string&quot;,
+                        &quot;format&quot;: &quot;uuid&quot;
+                    }
+                },
+                &quot;required&quot;: [&quot;user_id&quot;]
             }
         }
     ]
@@ -244,7 +258,7 @@
 <h4 id="formato-das-respostas">Formato das respostas</h4>
 <p>As respostas bem sucedidas devem ser textuais e serão anexadas como resposta da função do jeito que for respondida pelo endpoint. Não há formato JSON ou estrutura para essa resposta, mas é aconselhável que dê uma resposta simples, humanamente legível, para que a assistente consiga ler o resultado da ação.</p>
 <p>Erros podem ser comuns, como não encontrar um cliente pelo ID ou algum campo não estiver no formato desejado. Nestes casos, responda com um status OK e no corpo da resposta inclua uma descrição humana do erro e como a assistente pode contornar ele.</p>
-<p><strong>É garantido</strong> que a requisição irá seguir estritamente o formato de conteúdo fornecido pela definição da função. Funções que não esperam argumentos não devem especificar um formato de conteúdo para essa função. Você também pode indicar para o modelo de como ele deve preencher os campos do conteúdo da função nas instruções da função. Conteúdos mais complexos, aninhados ou com alta profundidade de estrutura pode aumentar o tempo de geração deste conteúdo, pois aumenta a chance da assistente cometer erros e falhar na validação do conteúdo gerado.</p>
+<p><strong>É garantido</strong> que a requisição irá seguir estritamente o esquema JSON do conteúdo fornecido pela definição da função. Funções que não esperam argumentos não devem especificar um formato de conteúdo para essa função.</p>
 <div class="IMPORTANT">
 <h5>Important</h5>
 <p>Quanto mais funções você definir, mais tokens você irá consumir no processo de raciocínio. A definição da função, bem como o formato dela, consome tokens do processo de raciocínio.</p>

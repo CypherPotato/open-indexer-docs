@@ -58,6 +58,10 @@ Todos os preços estão em dólares dos Estados Unidos.
         Optimized agent for function usage. Based on OpenAI o4-mini (low).
         <div class="model-capabilities">
 <div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens
+</div>
+<div>
     <i class="ri-instance-line"></i>
     Chamadas de função
 </div>
@@ -92,7 +96,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada:
             </small>
             <div>
-                $ 0.10 <small>/1m tokens</small>
+                $ 0.15 <small>/1m tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -100,7 +104,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Saída:
             </small>
             <div>
-                $ 0.40 <small>/1m tokens</small>
+                $ 0.60 <small>/1m tokens</small>
             </div>
         </div>
         <div class="item-pricing">
@@ -113,15 +117,15 @@ Todos os preços estão em dólares dos Estados Unidos.
 </div>
     </td>
     <td>
-        Optimized agent for function usage (no reasoning). Based on Gemini 2.5 Flash Lite.
+        Optimized agent for function usage (no reasoning). Based on GPT 4o-mini.
         <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens
+</div>
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
 </div>
 <div>
     <i class="ri-global-line"></i>
@@ -981,6 +985,10 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
 </div>
         </div>
     </td>

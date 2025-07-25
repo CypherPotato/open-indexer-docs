@@ -1,6 +1,6 @@
 # Funções do lado do servidor
 
-As funções de protocolo da AIVAX, ou _server-side functions_, é uma implementação customizada de chamadas de função criada pela AIVAX que permite que o modelo siga estritamente um contexto de função que não é baseada em documentos JSON. Similar ao MCP, mas um pouco mais simples.
+As funções de protocolo da AIVAX, ou _server-side functions_, é uma implementação em que a chamada de ferramentas do modelo ocorre do lado do servidor. Similar ao MCP, mas com suporte nativo à autenticação e otimizado para funcionar externamente.
 
 As funções de protocolo permitem a tomada de ações no lado do servidor da AIVAX, removendo a necessidade de implementação da função no lado do cliente e integrando com aplicações e serviços existentes.
 
@@ -14,8 +14,8 @@ O nome da função deve ser simples e determinístico ao que essa função faz. 
 
 Como um exemplo, vamos pensar em uma função de consultar um usuário em um banco de dados externo. Os nomes a seguir são bons exemplos para considerar para a chamada:
 
-- `search-user`
-- `query-user`
+- `search_user`
+- `query_user`
 - `search_user`
 
 Nomes ruins incluem:
@@ -61,7 +61,14 @@ Funções de protocolo são definidas no AI gateway seguindo o JSON:
                 "description": "Use essa ferramenta para obter detalhes e pedidos de um cliente através do seu ID.",
                 "callbackUrl": "https://my-external-api.com/api/scp/users",
                 "contentFormat": {
-                    "user_id": "guid"
+                    "type": "object",
+                    "properties": {
+                        "user_id": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    "required": ["user_id"]
                 }
             }
         ]
@@ -119,7 +126,14 @@ Os endpoint de fornecimento de funções deve responder seguindo o formato:
             "description": "Use essa ferramenta para obter detalhes e pedidos de um cliente através do seu ID.",
             "callbackUrl": "https://my-external-api.com/api/scp/users",
             "contentFormat": {
-                "user_id": "guid"
+                "type": "object",
+                "properties": {
+                    "user_id": {
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                },
+                "required": ["user_id"]
             }
         }
     ]
@@ -155,7 +169,7 @@ As respostas bem sucedidas devem ser textuais e serão anexadas como resposta da
 
 Erros podem ser comuns, como não encontrar um cliente pelo ID ou algum campo não estiver no formato desejado. Nestes casos, responda com um status OK e no corpo da resposta inclua uma descrição humana do erro e como a assistente pode contornar ele.
 
-**É garantido** que a requisição irá seguir estritamente o formato de conteúdo fornecido pela definição da função. Funções que não esperam argumentos não devem especificar um formato de conteúdo para essa função. Você também pode indicar para o modelo de como ele deve preencher os campos do conteúdo da função nas instruções da função. Conteúdos mais complexos, aninhados ou com alta profundidade de estrutura pode aumentar o tempo de geração deste conteúdo, pois aumenta a chance da assistente cometer erros e falhar na validação do conteúdo gerado.
+**É garantido** que a requisição irá seguir estritamente o esquema JSON do conteúdo fornecido pela definição da função. Funções que não esperam argumentos não devem especificar um formato de conteúdo para essa função.
 
 > [!IMPORTANT]
 >

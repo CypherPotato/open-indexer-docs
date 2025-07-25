@@ -8,21 +8,21 @@ Currently, it is only possible to use functions with [models provided by AIVAX](
 
 ## Calling a Function
 
-To call an AI function, you will need to specify what the AI should respond with and provide a JSON schema that it should follow.
+To call an AI function, you will need to inform what the AI should respond with and provide a JSON Schema that it should follow.
 
-Less intelligent models tend to fail to generate JSON, generating an invalid or problematic document. To fix this, adjust your model, instruction, and attempt parameter if necessary.
+Less intelligent models tend to fail JSON generation, generating an invalid or problematic document. To fix this, adjust your model, instruction, and attempt parameter if necessary.
 
-You are charged for each attempt the AI makes to generate a JSON. More intelligent models tend to generate correct results on the first attempt. It is guaranteed that a valid JSON will be generated and that this JSON will follow the same schema provided in the request.
+You are charged for each attempt the AI tries to generate. Slightly more intelligent models tend to generate correct results on the first attempt. It is guaranteed that a valid JSON will be generated and that this JSON will follow the same schema provided in the request.
 
-Additionally, you can opt to activate **internet search** for function calls. This option can be useful for bringing relevant data in real-time when structuring your response. When using this function, a model with internet access will be used to obtain data from the internet to structure your response. This model will also attempt to structure your response based on the provided data, and if it can formulate a valid JSON, the step of calling the structuring model is ignored and the response is immediately returned.
+Additionally, you can opt to activate **internet search** for function calls. This option can be useful for bringing relevant data in real-time when structuring your response. When using this function, a model with internet access will be used to obtain data from the internet to structure your response. This model will also try to structure your response based on the provided data, and if it can formulate a valid JSON, the step of calling the structuring model is ignored and the response is immediately returned.
 
-If the online search model cannot structure a valid JSON, the model chosen in the request will be responsible for this task, and it will start the attempt chain to generate a JSON. More intelligent models get it right on the first attempts.
+If the online search model cannot structure a valid JSON, the model chosen in the request will be responsible for this task and will start the attempt chain to generate. More intelligent models hit the generation on the first attempts.
 
-Through the `fetch` property, you can provide a list of URLs to be attached to the generation context. AIVAX makes a GET request to access the provided content and renders it in the request content. Only 2xx or 3xx responses are accepted, and the response content must be text. HTML responses are sanitized to include only the page text, without scripts and CSS.
+Through the `fetch` property, you can provide a list of URLs to be attached to the generation context. AIVAX makes a GET request to access the provided content and renders it in the request content. Only 2xx or 3xx responses are accepted, and the response content must be textual. HTML responses are sanitized to include only the page text, without scripts and CSS.
 
 The maximum size that can be read from a fetch URL is 10 Mb. The maximum number of items for fetch is 10 URLs.
 
-Requests that search the internet bring good results and dispense with crawlers, scrapers, or the need to pay for a specific API, but they can be expensive and relatively slow to obtain. Consider using a cache on the side of your application for data that does not need to be constantly updated, such as weather data, daily statistics, etc. AIVAX does not perform any caching on our side.
+Requests that search the internet bring good results and dispense with crawlers, scrapers, or the need to pay for a specific API, but can be costly and relatively slow to obtain. Consider using a cache on the side of your application for data that does not need to be constantly updated, such as weather data, daily statistics, etc. AIVAX does not perform any caching on our side.
 
 #### Request
 
@@ -39,33 +39,37 @@ Requests that search the internet bring good results and dispense with crawlers,
     "modelName": "@metaai/llama-3.1-8b",
     
     // Required. Explain what your model should do with the input and how it should bring the response.
-    "instructions": "Classify the user's comment, indicating whether it is positive or negative, and if it has any relevant information (number between 0 (not very relevant) and 10 (very relevant))",
+    "instructions": "Classify the user's comment, indicating whether it is positive or negative, and if it has any relevant information (number between 0 (little relevant) and 10 (very relevant))",
     
-    // Required. The JSON object that the model should generate. You can provide generation examples in the instructions field. This object must be a valid JSON in the API.
-    // This object must be an object, an array, or a string.
+    // Required. The JSON Schema that the model should follow to generate the response. You can provide generation examples in the instruction field.
     "responseSchema": {
-        "feedbackType": "{neutral|positive|negative}",
-        "informationScore": 5
+        "type": "object",
+        "properties": {
+            "feedbackType": {
+                "type": "string",
+                "enum": ["neutral", "positive", "negative"]
+            },
+            "informationScore": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 10
+            }
+        },
+        "required": ["feedbackType", "informationScore"]
     },
-    
-    // Optional. Specifies a list of JSON paths that the AI must always generate content for and that this field cannot be null. For arrays, specify with [*].
-    "requiredFields": [
-        "$.feedbackType",
-        "$.informationScore"
-    ],
     
     // Optional. Defines a JSON input for the model. Can be any type of JSON value.
     "inputData": {
         "userComment": "Pessimo mercado. Tem guarda dentro te vigiando pra vc nao roubar e os acougueiros te ignoram e atendem mocinhas bonitinhas na tua frente.  Mas graças a Deus tem outros mercados chegando e o fim dessa palhaçada vai chegar"
     },
     
-    // Optional. Defines how many attempts the model should try before the API returns an error. Must be a number between 1 and 30.
+    // Optional. Defines how many attempts the model should try before the API returns an error. Should be a number between 1 and 30.
     "maxAttempts": 10,
     
-    // Optional. Defines the time limit in seconds to obtain a valid JSON before the API returns an error. Must be a number between 1 and 3600 (one hour).
+    // Optional. Defines the time limit in seconds to obtain a valid JSON before the API returns an error. Should be a number between 1 and 3600 (one hour).
     "timeout": 300,
     
-    // Optional. Defines the generation temperature of the JSON. Higher values tend to be more creative, while lower values are more deterministic. Number from 0 to 2.
+    // Optional. Defines the temperature of JSON generation. Higher values tend to be more creative, while lower values are more deterministic. Number from 0 to 2.
     "temperature": 0.4,
     
     // Optional. Adds external resources to complement the response generation.
@@ -79,14 +83,13 @@ Requests that search the internet bring good results and dispense with crawlers,
     
         // Optional. Defines the fetch behavior for errors when trying to access the site. Errors include responses that are not 2xx or 3xx, timeouts, certificate errors, etc.
         //      fail    -> returns an error in the function response (default)
-        //      warn    -> adds a warning to the function response and does not include the error in the AI generation
         //      ignore  -> ignores the error and adds the error to the AI generation
-        "fetchFailAction": "fail" | "warn" | "ignore",
+        "fetchFailAction": "fail" | "ignore",
         
         // Optional. Defines the timeout in seconds for the maximum response time and reading the contents. The maximum is 120 seconds (two minutes).
         "timeout": 10,
         
-        // Optional. Defines the maximum content size in the number of characters that can be included in the AI generation before being truncated.
+        // Optional. Defines the maximum content size in character quantity that can be included in the AI generation before being truncated.
         "pageMaxLength": 2048
     }
 }
@@ -98,7 +101,7 @@ Requests that search the internet bring good results and dispense with crawlers,
 {
     "message": null,
     "data": {
-        // the result contains the object defined in "responseSchema", with the fields filled in by the AI
+        // the result contains the object generated by the AI, following the "responseSchema"
         "result": {
             "feedbackType": "negative",
             "informationScore": 8
@@ -116,20 +119,53 @@ Requests that search the internet bring good results and dispense with crawlers,
 }
 ```
 
-## Considerations about the JSON Schema
+## JSON Schema Guidelines
 
-- Specify enumerated values with `"{value1|value2|value3}"`. In this way, the model should choose one of the values presented in the generation of the JSON.
-- All values are placeholders for the model generation.
-- Indicate what a field is or what it should receive as a value with a hint in its own placeholder or indicate directly in the function instructions.
-- All values can be null, unless you specify directly to the model that they cannot.
-- The output structure of the model is the same as informed in `responseSchema`.
-- The input structure is irrelevant.
+The response format must be provided by a JSON Schema.
+
+Behind the scenes, AIVAX guides the model to generate a response with the provided JSON Schema. When the model generates something invalid, we indicate to it to try again and correct the errors until the output is according to the provided specification.
+
+The supported JSON Schema guidelines from AIVAX are:
+
+- `string`:
+    - `minLength`
+    - `maxLength`
+    - `pattern`
+    - `format`
+        - Can be `date-time`, `email`, `time`, `duration`, `uri`, `url`, `ipv4`, `ipv6`, `uuid` or `guid`.
+    - `enum`
+- `number` and `integer`:
+    - `minimum`
+    - `maximum`
+    - `exclusiveMinimum`
+    - `exclusiveMaximum`
+    - `multipleOf`
+- `array`:
+    - `items`
+    - `uniqueItems`
+    - `minItems`
+    - `maxItems`
+- `object`:
+    - `properties`
+    - `required`
+- `bool` and `boolean`
+- `null`
+
+Additionally, it is possible to inform one or more values in the `type` of the object, example:
+
+```json
+{
+    "type": ["string", "number"]
+}
+```
+
+> Note: `number` and `integer` are synonymous, and `integer` does not guarantee that the number will be an integer. If necessary, truncate the returned number.
 
 ## Real-time Functions with Sentinel Models
 
-You can use the `@aivax/fn-1` agent to execute intelligent functions that involve internet search, code execution, mathematical problem solving, and all other functionalities that Sentinel agents can provide.
+You can use the `@aivax/fn-1` and `@aivax/fn-1-mini` agents to execute intelligent functions that involve internet search, code execution, and/or mathematical problem-solving.
 
-Sentinel agents are connected to the internet by default, so it is natural that they search for something on the internet to complement their response. When using a function call with a model that searches the internet, such as a Sentinel agent, the consumption limit is Live Function.
+These agents are connected to the internet by default, so it is natural that they search for something on the internet to complement their response.
 
 ## Examples
 
@@ -149,10 +185,20 @@ Check out examples of AI functions for various everyday tasks:
     "modelName": "@metaai/llama-4-scout-17b",
     "instructions": "Summarize the user's comment, creating a short description, with a maximum of 10 words indicating what they want to do. Also, indicate if this comment requires attention or not.",
     "responseSchema": {
-        "shortSummary": "...",
-        "requiresAttention": false
+        "type": "object",
+        "properties": {
+            "shortSummary": {
+                "type": "string",
+                "description": "A brief description of what the user wants to do, with a maximum of 10 words."
+            },
+            "requiresAttention": {
+                "type": "boolean",
+                "description": "Indicates if the comment requires immediate attention (true) or not (false)."
+            }
+        },
+        "required": ["shortSummary", "requiresAttention"]
     },
-    "inputData": "O cliente fernando de castro está tentando entrar em contato com o suporte desde sexta-feira e diz q vai cancelar se nao falar com alguém hoje. ele tbm disse que é amigo da rebeca do comercial e está ameaçando falar mal da empresa no tiktok. por favor alguém atende esse cara??"
+    "inputData": "The client Fernando de Castro has been trying to contact support since Friday and says he will cancel if he doesn't speak to someone today. He also said he is a friend of Rebeca from the commercial and is threatening to speak badly about the company on TikTok. Please, can someone attend to this guy??"
 }
 ```
 
@@ -161,7 +207,7 @@ Check out examples of AI functions for various everyday tasks:
     "message": null,
     "data": {
         "result": {
-            "shortSummary": "Cliente quer contato com suporte para evitar cancelamento e ameaça",
+            "shortSummary": "Client wants contact with support to avoid cancellation and threat",
             "requiresAttention": true
         },
         "attempt": 1,
@@ -182,9 +228,16 @@ Check out examples of AI functions for various everyday tasks:
 ```json
 {
     "modelName": "@aivax/fn-1",
-    "instructions": "Evaluate the given mathematical expression and provide the result.",
+    "instructions": "Evaluate the given mathematical problem and provide the result.",
     "responseSchema": {
-        "result": "..."
+        "type": "object",
+        "properties": {
+            "result": {
+                "type": ["string", "number"],
+                "description": "The result of the mathematical expression evaluation."
+            }
+        },
+        "required": ["result"]
     },
     "inputData": {
         "mathProblem": "12 + (42 / pi) ^ 20"
@@ -220,18 +273,37 @@ Check out examples of AI functions for various everyday tasks:
     "modelName": "@aivax/fn-1",
     "instructions": "Search for the 5 latest news and weather data for the given city.",
     "responseSchema": {
-        "latestNews": [
-            {
-                "title": "...",
-                "details": "...",
-                "link": "https://..."
+        "type": "object",
+        "properties": {
+            "latestNews": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "title": { "type": "string" },
+                        "details": { "type": "string" },
+                        "link": { "type": "string", "format": "uri" }
+                    },
+                    "required": ["title", "details", "link"]
+                }
+            },
+            "weather": {
+                "type": "object",
+                "properties": {
+                    "currentTemperature": { "type": "number" },
+                    "currentWeather": {
+                        "type": "string",
+                        "enum": ["sunny", "cloudy", "rain", "thunderstorm", "partly cloudy", "clear"]
+                    },
+                    "forecast": {
+                        "type": "string",
+                        "enum": ["sunny", "cloudy", "rain", "thunderstorm", "partly cloudy", "clear"]
+                    }
+                },
+                "required": ["currentTemperature", "currentWeather", "forecast"]
             }
-        ],
-        "weather": {
-            "currentTemperature": 0,
-            "currentWeather": "{sunny|cloudy|rain|thunderstorm}",
-            "forecast": "{sunny|cloudy|rain|thunderstorm}"
-        }
+        },
+        "required": ["latestNews", "weather"]
     },
     "inputData": {
         "city": "São José do Rio Preto"
@@ -298,10 +370,14 @@ Check out examples of AI functions for various everyday tasks:
     "modelName": "@aivax/fn-1",
     "instructions": "Bring the count of cases and deaths by COVID-19.",
     "responseSchema": {
-        "deathsWorld": 0,
-        "deathsBrazil": 0,
-        "casesWorld": 0,
-        "casesBrazil": 0
+        "type": "object",
+        "properties": {
+            "deathsWorld": { "type": "integer", "description": "Total number of deaths by COVID-19 in the world." },
+            "deathsBrazil": { "type": "integer", "description": "Total number of deaths by COVID-19 in Brazil." },
+            "casesWorld": { "type": "integer", "description": "Total number of cases of COVID-19 in the world." },
+            "casesBrazil": { "type": "integer", "description": "Total number of cases of COVID-19 in Brazil." }
+        },
+        "required": ["deathsWorld", "deathsBrazil", "casesWorld", "casesBrazil"]
     }
 }
 ```
@@ -336,21 +412,28 @@ Check out examples of AI functions for various everyday tasks:
     "modelName": "@aivax/fn-1",
     "instructions": "Search and format a list of 10 artists in the TOP 10 of music streaming by genre.",
     "responseSchema": {
-        "edm": [
-            "artist name",
-            "artist name",
-            "..."
-        ],
-        "rap": [
-            "artist name",
-            "artist name",
-            "..."
-        ],
-        "pop": [
-            "artist name",
-            "artist name",
-            "..."
-        ]
+        "type": "object",
+        "properties": {
+            "edm": {
+                "type": "array",
+                "items": { "type": "string", "description": "Name of a top EDM artist." },
+                "minItems": 10,
+                "maxItems": 10
+            },
+            "rap": {
+                "type": "array",
+                "items": { "type": "string", "description": "Name of a top Rap artist." },
+                "minItems": 10,
+                "maxItems": 10
+            },
+            "pop": {
+                "type": "array",
+                "items": { "type": "string", "description": "Name of a top Pop artist." },
+                "minItems": 10,
+                "maxItems": 10
+            }
+        },
+        "required": ["edm", "rap", "pop"]
     },
     "inputData": null
 }
