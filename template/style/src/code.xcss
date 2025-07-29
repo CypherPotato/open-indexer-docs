@@ -30,7 +30,7 @@ pre > code.hljs.has-line-numbers {
 
 html[data-bs-theme="light"] {
     .hljs {
-        background-color: --code-bg;
+        background-color: white;
         border-radius: 8px;
         border: 1px solid --code-block-border;
 
@@ -54,14 +54,14 @@ html[data-bs-theme="light"] {
 
 html[data-bs-theme="dark"] {
     .hljs {
-        background-color: --code-bg;
+        background-color: #0c0e11;
         border-radius: 8px;
         border: 1px solid --code-block-border;
-        
+
         .hljs-meta {
             color: #4ec9b0;
         }
-        
+
         .hljs-meta-value {
             color: #9ac18a;
         }

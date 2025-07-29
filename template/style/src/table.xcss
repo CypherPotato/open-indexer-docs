@@ -1,14 +1,10 @@
-article {
+article table {
 
-    table,
-    .table {
+    thead {
+        opacity: .75;
+    }
 
-        thead {
-            opacity: .75;
-        }
-        
-        > :not(caption) > * > * {
-            border-width: 1px 0 !important;
-        }
+    > :not(caption) > * > * {
+        border-width: 1px 0 !important;
     }
 }

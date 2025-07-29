@@ -9,17 +9,18 @@
     // nav wrapper
     > .toc-offcanvas,
     > .affix {
-        max-width: 200px !important;
+        max-width: 300px !important;
         top: calc(60px) !important;
         max-height: calc(100svh - 60px) !important;
     }
-
+    
     > .content {
         padding-block: 50px;
-        
+        max-width: unset !important;
+
         > * {
             margin: 0 auto;
-            max-width: 920px;
+            max-width: 720px;
             width: 100%;
         }
     }
