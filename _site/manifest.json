@@ -652,6 +652,26 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "docs/en/legal/privacy-policy.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/en/legal/privacy-policy.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/en/legal/terms-of-service.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/en/legal/terms-of-service.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "docs/en/limits.md",
       "output": {
         ".html": {
@@ -759,6 +779,26 @@
       "output": {
         ".html": {
           "relative_path": "docs/getting-started.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/legal/privacy-policy.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/legal/privacy-policy.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/legal/terms-of-service.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/legal/terms-of-service.html"
         }
       },
       "version": ""

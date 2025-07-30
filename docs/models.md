@@ -1335,6 +1335,45 @@ Todos os preços estão em dólares dos Estados Unidos.
 <tr>
     <td>
         <code>
+            @qwen/qwen3-235b-a22b
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.60 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 1.20 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        This non-thinking version offers powerful multilingual capabilities with significant improvements in instruction following, logical reasoning, mathematics, coding, and tool usage.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
             @qwen/qwen3-32b
         </code>
     </td>
