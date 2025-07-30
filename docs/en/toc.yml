@@ -23,3 +23,8 @@ items:
   href: entities/chat-clients.md
 - name: Functions
   href: entities/functions.md
+- name: Documents
+- name: Privacy Policy
+  href: legal/privacy-policy.md
+- name: Terms of Service
+  href: legal/terms-of-service.md
