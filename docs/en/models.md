@@ -572,6 +572,10 @@ All prices are in United States dollars.
         Extremely fast model by generative diffusion.
         <div class="model-capabilities">
 <div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
     <i class="ri-braces-line"></i>
     JSON functions
 </div>
@@ -1140,6 +1144,53 @@ All prices are in United States dollars.
 <tr>
     <td>
         <code>
+            @openai/o3
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 2.00 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 8.00 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        A well-rounded and powerful model across domains. It sets a new standard for math, science, coding, and visual reasoning tasks.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Deep thinking
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
             @openai/o4-mini
         </code>
     </td>
@@ -1169,6 +1220,49 @@ All prices are in United States dollars.
     <i class="ri-image-circle-line"></i>
     Input: accepts images
 </div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Deep thinking
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @openai/o3-mini
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 1.10 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 4.40 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        o3-mini provides high intelligence at the same cost and latency targets of previous versions of o-mini series.
+        <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
     Function calls
@@ -1334,46 +1428,4 @@ All prices are in United States dollars.
     <tbody>
 <tr>
     <td>
-        <code>
-            @qwen/qwen3-32b
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Input:
-            </small>
-            <div>
-                $ 0.29 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-            <small>
-                Output:
-            </small>
-            <div>
-                $ 0.59 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-    </td>
-    <td>
-        Latest generation of LLMs in the Qwen series, offering advancements in reasoning, instruction-following, agent capabilities, and multilingual support.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Deep thinking
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
-</div>
-        </div>
-    </td>
-</tr>
-    </tbody>
-</table>
+       

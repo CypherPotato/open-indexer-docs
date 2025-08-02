@@ -1,0 +1,323 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Built-in Tools | AIVAX </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="Built-in Tools | AIVAX ">
+
+
+        <link rel="icon" href="../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+        
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../toc.html">
+        <meta name="docfx:tocrel" content="toc.html">
+
+        <meta name="docfx:rel" content="../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/en/builtin-tools.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+                
+        <script>            
+            function switchLanguage(lang) {
+                const docPart = window.location.pathname.match(/\/docs\/((en)\/)?(.*)/)[3];
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../index.html">
+                        <img id="logo" class="svg" src="../../assets/img/aivax.png" alt="AIVAX">
+                        AIVAX
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/en/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="built-in-tools">Built-in Tools</h1>
+
+<p>AIVAX provides a list of built-in tools for you to enable in your model. These tools can be used in conjunction with the <a href="/docs/en/protocol-functions">server-side functions</a>.</p>
+<p>Some functions have a cost. This cost is applied to models used by AIVAX and those you provide through BYOK (bring-your-own-key), so it's essential to add balance if you intend to use these tools.</p>
+<p>Note that each model decides which function to call and its parameters. Not all models can follow the calling rules.</p>
+<h2 id="internet-search">Internet Search</h2>
+<p>This function enables internet search in your model. With this, the model can query specific or real-time information, such as weather data, news, game results, etc.</p>
+<p>The internet search is performed by multiple providers, chosen according to network availability and latency. The current providers used by AIVAX are <a href="https://www.linkup.so/">linkup</a> and <a href="https://exa.ai/">Exa</a>.</p>
+<p>AIVAX provides two types of configurable search through your dashboard:</p>
+<ul>
+<li><strong>Full</strong>: the search performed is complete, inserting the entire content of each result found into the conversation context.</li>
+<li><strong>Summarized</strong>: the search performed is summarized, inserting a summary made by AI by the search provider itself into the conversation context.</li>
+</ul>
+<p>The cost of both modes is <strong>$5</strong> per <strong>1,000</strong> searches performed. The <code>Full</code> mode may consume more conversation input tokens, but it can provide more accurate results.</p>
+<h2 id="code-execution">Code Execution</h2>
+<p>This function allows the model to execute JavaScript code and inspect the execution result. With this, the model can evaluate mathematical expression results and other situations that are better represented through code.</p>
+<p>The code is executed in a protected environment with very few available functions. The model will not be able to access I/O, internet access, or import scripts through this tool.</p>
+<p>This function has no cost.</p>
+<h2 id="url-context">URL Context</h2>
+<p>This function allows the model to access external content in URLs and links provided by the user. With this function, the model can access links and evaluate their content.</p>
+<p>Note that some destinations may identify access as a bot and block access, since this function is not crawling but a simple GET request to the destination.</p>
+<p>The model can access up to 5 links at a time. Only the first 10MB of the links are read. When obtaining the link content, the system checks the return content and handles it according to each type:</p>
+<ul>
+<li>HTML content is rendered: HTML tags, scripts, CSS, and &quot;noise&quot; are removed from the access result, keeping only the pure text of the link.</li>
+<li>Other textual content: the content is read directly, and no transformation is performed.</li>
+<li>Non-textual content: when the link responds with non-textual content and the response indicates a file name (either by path or by <code>Content-Disposition</code> header), the system attempts to convert the downloaded file to a textual version.</li>
+</ul>
+<p>This function has no cost.</p>
+<h2 id="memory">Memory</h2>
+<p>This function allows the model to store relevant content for use in multiple conversations.</p>
+<blockquote>
+<p>Currently, this function is only available when used in <a href="/docs/en/entities/chat-clients">chat clients</a> and when the session is identified by a <code>tag</code>.</p>
+</blockquote>
+<p>Through the session <code>tag</code>, the model stores relevant conversation data, such as name preferences, reminders, or actions the assistant should perform.</p>
+<p>The instruction of this memory instructs the model not to save sensitive or personal data; however, it is not guaranteed that the model will always follow this rule.</p>
+<p>The data is stored for one year in AIVAX's databases and can be deleted at any time by the platform. For every conversation by a chat client, this data is obtained and attached to the conversation.</p>
+<p>This function has no cost.</p>
+<h2 id="image-generation">Image Generation</h2>
+<p>This function allows the model to create AI-generated images.</p>
+<p>The AI-generated images are attached to the conversation context but are not directly visible to the assistant.</p>
+<p>Currently, there are four categories of generated images:</p>
+<p><img src="/assets/img/imgquality.png" alt="Image quality"></p>
+<ul>
+<li><strong>Low quality</strong>: generates images quickly with a low cost, but may generate many artifacts, such as extra fingers, distorted eyes, or misplaced arms.</li>
+<li><strong>Medium quality</strong>: balances good quality and speed, but may still generate artifacts.</li>
+<li><strong>High quality</strong>: higher quality in images and lower chance of artifacts in the image.</li>
+<li><strong>Very high quality</strong>: the highest quality in image generation. After generation, an upscaling model performs the adjustment on the created image.</li>
+</ul>
+<p>This function has a cost. The cost varies depending on the processing time of each image, which is affected by processing consumption, queue size, models used, etc. Image generation occurs on an external provider, so the cost may change according to various factors.</p>
+<p>The example image above shows a forecast of the price of each image quality.</p>
+<p>You can also activate the generation of explicit and adult images in image generation. When you activate this feature, the model will be allowed to generate adult material. For this to happen, the model must also &quot;agree&quot; to generate this content. Certain models have a lower security filter than others. For example, Gemini models have the lowest security filter, making them a viable option for role-play and generating this type of material.</p>
+<p>You are always responsible for the <a href="/docs/en/legal/terms-of-service.md">material you generate</a>, and the generated material must be compatible with our terms of service.</p>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/en/builtin-tools.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>

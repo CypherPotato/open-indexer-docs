@@ -8,6 +8,9 @@ items:
   href: limits.md
 - name: Models
   href: models.md
+- name: Tools and Functions
+- name: Factory Tools
+  href: builtin-tools.md
 - name: Server-side Functions
   href: protocol-functions.md
 - name: Using the API
@@ -23,7 +26,7 @@ items:
   href: entities/chat-clients.md
 - name: Functions
   href: entities/functions.md
-- name: Documents
+- name: Legal Documents
 - name: Privacy Policy
   href: legal/privacy-policy.md
 - name: Terms of Service

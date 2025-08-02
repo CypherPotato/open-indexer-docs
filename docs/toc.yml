@@ -10,6 +10,11 @@ items:
   href: limits.md
 - name: Modelos
   href: models.md
+
+- name: Ferramentas e funções
+
+- name: Ferramentas de fábrica
+  href: builtin-tools.md
 - name: Funções server-side
   href: protocol-functions.md
 
@@ -28,7 +33,7 @@ items:
 - name: Funções
   href: entities/functions.md
 
-- name: Documentos
+- name: Documentos legais
 
 - name: Política de privacidade
   href: legal/privacy-policy.md

@@ -572,6 +572,10 @@ Todos os preços estão em dólares dos Estados Unidos.
         Extremely fast model by generative diffusion.
         <div class="model-capabilities">
 <div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
     <i class="ri-braces-line"></i>
     Funções JSON
 </div>
@@ -1140,6 +1144,53 @@ Todos os preços estão em dólares dos Estados Unidos.
 <tr>
     <td>
         <code>
+            @openai/o3
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 2.00 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 8.00 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        A well-rounded and powerful model across domains. It sets a new standard for math, science, coding, and visual reasoning tasks.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Pensamento profundo
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
             @openai/o4-mini
         </code>
     </td>
@@ -1169,6 +1220,49 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-image-circle-line"></i>
     Entrada: aceita imagens
 </div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Pensamento profundo
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @openai/o3-mini
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 1.10 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 4.40 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        o3-mini provides high intelligence at the same cost and latency targets of previous versions of o-mini series.
+        <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
@@ -1335,6 +1429,45 @@ Todos os preços estão em dólares dos Estados Unidos.
 <tr>
     <td>
         <code>
+            @qwen/qwen3-480b-coder
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 2.00 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 2.00 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        Lightning-fast AI model focused for coding tasks.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
             @qwen/qwen3-235b-a22b
         </code>
     </td>
@@ -1363,6 +1496,49 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @qwen/qwen3-235b-a22b-think
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.60 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 1.20 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        The thinking variant of the Qwen3 235b model, with significantly improved performance of reasoning tasks.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Pensamento profundo
 </div>
 <div>
     <i class="ri-braces-line"></i>
