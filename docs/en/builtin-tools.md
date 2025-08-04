@@ -1,6 +1,6 @@
 # Built-in Tools
 
-AIVAX provides a list of built-in tools for you to enable in your model. These tools can be used in conjunction with the [server-side functions](/docs/en/protocol-functions).
+AIVAX provides a list of built-in tools for you to enable in your model. These tools can be used in conjunction with [server-side functions](/docs/en/protocol-functions).
 
 Some functions have a cost. This cost is applied to models used by AIVAX and those you provide through BYOK (bring-your-own-key), so it's essential to add balance if you intend to use these tools.
 
@@ -8,14 +8,14 @@ Note that each model decides which function to call and its parameters. Not all 
 
 ## Internet Search
 
-This function enables internet search in your model. With this, the model can query specific or real-time information, such as weather data, news, game results, etc.
+This function enables internet search in your model. With this, the model can query specific information or real-time data, such as weather, news, game results, etc.
 
-The internet search is performed by multiple providers, chosen according to network availability and latency. The current providers used by AIVAX are [linkup](https://www.linkup.so/) and [Exa](https://exa.ai/).
+The internet search is performed by multiple providers, chosen based on network availability and latency. The current providers used by AIVAX are [linkup](https://www.linkup.so/) and [Exa](https://exa.ai/).
 
 AIVAX provides two types of configurable search through your dashboard:
 
 - **Full**: the search performed is complete, inserting the entire content of each result found into the conversation context.
-- **Summarized**: the search performed is summarized, inserting a summary made by AI by the search provider itself into the conversation context.
+- **Summarized**: the search performed is summarized, inserting a summary made by AI by the search provider into the conversation context.
 
 The cost of both modes is **$5** per **1,000** searches performed. The `Full` mode may consume more conversation input tokens, but it can provide more accurate results.
 
@@ -31,13 +31,13 @@ This function has no cost.
 
 This function allows the model to access external content in URLs and links provided by the user. With this function, the model can access links and evaluate their content.
 
-Note that some destinations may identify access as a bot and block access, since this function is not crawling but a simple GET request to the destination.
+Note that some destinations may identify access as a bot and block access, since this function is not a crawl but a simple GET request to the destination.
 
 The model can access up to 5 links at a time. Only the first 10MB of the links are read. When obtaining the link content, the system checks the return content and handles it according to each type:
 
 - HTML content is rendered: HTML tags, scripts, CSS, and "noise" are removed from the access result, keeping only the pure text of the link.
 - Other textual content: the content is read directly, and no transformation is performed.
-- Non-textual content: when the link responds with non-textual content and the response indicates a file name (either by path or by `Content-Disposition` header), the system attempts to convert the downloaded file to a textual version.
+- Non-textual content: when the link responds with non-textual content and the response indicates a file name (either by path or by the `Content-Disposition` header), the system attempts to convert the downloaded file to a textual version.
 
 This function has no cost.
 
@@ -74,6 +74,20 @@ This function has a cost. The cost varies depending on the processing time of ea
 
 The example image above shows a forecast of the price of each image quality.
 
-You can also activate the generation of explicit and adult images in image generation. When you activate this feature, the model will be allowed to generate adult material. For this to happen, the model must also "agree" to generate this content. Certain models have a lower security filter than others. For example, Gemini models have the lowest security filter, making them a viable option for role-play and generating this type of material.
+You can also activate the generation of explicit and adult images in image generation. When activating this feature, the model will be allowed to generate adult material. For this to happen, the model must also "agree" to generate this content. Certain models have a lower security filter than others. For example, Gemini models have the lowest security filter, making them a viable option for role-playing and generating this type of material.
 
-You are always responsible for the [material you generate](/docs/en/legal/terms-of-service.md), and the generated material must be compatible with our terms of service.
+You are always responsible for the [generated material](/docs/en/legal/terms-of-service.md), and the generated material must be compatible with our terms of service.
+
+## Post Search on X
+
+This function allows the model to search for posts on X (formerly Twitter).
+
+It is a direct alternative to `web_search`, as it can be used to search for up-to-date information in real-time, such as news, information, game results, etc. This tool brings much more recent results than the conventional internet search tool.
+
+It is not recommended to use both functions together, as they have the same objective.
+
+Currently, the last 20 posts on a specific topic are inserted into the conversation context, containing a link and author.
+
+Currently, it is not possible to access posts from specific profiles.
+
+The cost of this function is **$5** per **1,000** searches performed.

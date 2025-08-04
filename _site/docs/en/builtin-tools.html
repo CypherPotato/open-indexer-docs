@@ -124,16 +124,16 @@
                 <article data-uid="">
 <h1 id="built-in-tools">Built-in Tools</h1>
 
-<p>AIVAX provides a list of built-in tools for you to enable in your model. These tools can be used in conjunction with the <a href="/docs/en/protocol-functions">server-side functions</a>.</p>
+<p>AIVAX provides a list of built-in tools for you to enable in your model. These tools can be used in conjunction with <a href="/docs/en/protocol-functions">server-side functions</a>.</p>
 <p>Some functions have a cost. This cost is applied to models used by AIVAX and those you provide through BYOK (bring-your-own-key), so it's essential to add balance if you intend to use these tools.</p>
 <p>Note that each model decides which function to call and its parameters. Not all models can follow the calling rules.</p>
 <h2 id="internet-search">Internet Search</h2>
-<p>This function enables internet search in your model. With this, the model can query specific or real-time information, such as weather data, news, game results, etc.</p>
-<p>The internet search is performed by multiple providers, chosen according to network availability and latency. The current providers used by AIVAX are <a href="https://www.linkup.so/">linkup</a> and <a href="https://exa.ai/">Exa</a>.</p>
+<p>This function enables internet search in your model. With this, the model can query specific information or real-time data, such as weather, news, game results, etc.</p>
+<p>The internet search is performed by multiple providers, chosen based on network availability and latency. The current providers used by AIVAX are <a href="https://www.linkup.so/">linkup</a> and <a href="https://exa.ai/">Exa</a>.</p>
 <p>AIVAX provides two types of configurable search through your dashboard:</p>
 <ul>
 <li><strong>Full</strong>: the search performed is complete, inserting the entire content of each result found into the conversation context.</li>
-<li><strong>Summarized</strong>: the search performed is summarized, inserting a summary made by AI by the search provider itself into the conversation context.</li>
+<li><strong>Summarized</strong>: the search performed is summarized, inserting a summary made by AI by the search provider into the conversation context.</li>
 </ul>
 <p>The cost of both modes is <strong>$5</strong> per <strong>1,000</strong> searches performed. The <code>Full</code> mode may consume more conversation input tokens, but it can provide more accurate results.</p>
 <h2 id="code-execution">Code Execution</h2>
@@ -142,12 +142,12 @@
 <p>This function has no cost.</p>
 <h2 id="url-context">URL Context</h2>
 <p>This function allows the model to access external content in URLs and links provided by the user. With this function, the model can access links and evaluate their content.</p>
-<p>Note that some destinations may identify access as a bot and block access, since this function is not crawling but a simple GET request to the destination.</p>
+<p>Note that some destinations may identify access as a bot and block access, since this function is not a crawl but a simple GET request to the destination.</p>
 <p>The model can access up to 5 links at a time. Only the first 10MB of the links are read. When obtaining the link content, the system checks the return content and handles it according to each type:</p>
 <ul>
 <li>HTML content is rendered: HTML tags, scripts, CSS, and &quot;noise&quot; are removed from the access result, keeping only the pure text of the link.</li>
 <li>Other textual content: the content is read directly, and no transformation is performed.</li>
-<li>Non-textual content: when the link responds with non-textual content and the response indicates a file name (either by path or by <code>Content-Disposition</code> header), the system attempts to convert the downloaded file to a textual version.</li>
+<li>Non-textual content: when the link responds with non-textual content and the response indicates a file name (either by path or by the <code>Content-Disposition</code> header), the system attempts to convert the downloaded file to a textual version.</li>
 </ul>
 <p>This function has no cost.</p>
 <h2 id="memory">Memory</h2>
@@ -172,8 +172,15 @@
 </ul>
 <p>This function has a cost. The cost varies depending on the processing time of each image, which is affected by processing consumption, queue size, models used, etc. Image generation occurs on an external provider, so the cost may change according to various factors.</p>
 <p>The example image above shows a forecast of the price of each image quality.</p>
-<p>You can also activate the generation of explicit and adult images in image generation. When you activate this feature, the model will be allowed to generate adult material. For this to happen, the model must also &quot;agree&quot; to generate this content. Certain models have a lower security filter than others. For example, Gemini models have the lowest security filter, making them a viable option for role-play and generating this type of material.</p>
-<p>You are always responsible for the <a href="/docs/en/legal/terms-of-service.md">material you generate</a>, and the generated material must be compatible with our terms of service.</p>
+<p>You can also activate the generation of explicit and adult images in image generation. When activating this feature, the model will be allowed to generate adult material. For this to happen, the model must also &quot;agree&quot; to generate this content. Certain models have a lower security filter than others. For example, Gemini models have the lowest security filter, making them a viable option for role-playing and generating this type of material.</p>
+<p>You are always responsible for the <a href="/docs/en/legal/terms-of-service.md">generated material</a>, and the generated material must be compatible with our terms of service.</p>
+<h2 id="post-search-on-x">Post Search on X</h2>
+<p>This function allows the model to search for posts on X (formerly Twitter).</p>
+<p>It is a direct alternative to <code>web_search</code>, as it can be used to search for up-to-date information in real-time, such as news, information, game results, etc. This tool brings much more recent results than the conventional internet search tool.</p>
+<p>It is not recommended to use both functions together, as they have the same objective.</p>
+<p>Currently, the last 20 posts on a specific topic are inserted into the conversation context, containing a link and author.</p>
+<p>Currently, it is not possible to access posts from specific profiles.</p>
+<p>The cost of this function is <strong>$5</strong> per <strong>1,000</strong> searches performed.</p>
 
 </article>
 

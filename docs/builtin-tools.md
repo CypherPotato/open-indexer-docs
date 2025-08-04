@@ -77,3 +77,17 @@ A imagem de exemplo acima mostra uma previsão do preço de cada qualidade de im
 Você também pode ativar a geração de imagens explícitas e adultas na geração de imagem. Ao ativar esse recurso, o modelo será permitido gerar material adulto. Para isso ocorrer, o modelo também deve "concordar" em gerar esse conteúdo. Certos modelos possuem um filtro de segurança menor que outros. Por exemplo, os modelos Gemini são os com o menor filtro de segurança, sendo uma opção viável para role-play e geração desse tipo de material.
 
 Você é sempre responsável pelo [material que gera](/docs/legal/terms-of-service.md) e o material gerado deve ser compatível com nossos termos de serviço.
+
+## Pesquisa de posts no X
+
+Essa função permite o modelo pesquisar por posts no X (antigo Twitter).
+
+É uma alternativa direta ao `web_search`, pois pode ser usada para procurar por informações atualizadas em tempo real, como notícias, informações, resultados de jogos, etc. Essa ferramenta traz resultados muito mais recentes que a ferramenta de pesquisa na internet convencional.
+
+Não é recomendado usar as duas funções em conjunto pois elas possuem o mesmo objetivo.
+
+No momento, os últimos 20 posts de um determinado assunto é inserido no contexto da conversa, contendo link e autor.
+
+No momento, não é possível acessar posts de perfis específicos.
+
+O custo dessa função é de **$5** à cada **1.000** pesquisas realizadas.
