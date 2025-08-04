@@ -125,9 +125,9 @@
 <h1 id="api-limits">API Limits</h1>
 
 <p>Rate limits regulate the number of requests you can send in a time window. These limits help AIVAX prevent abuse and provide a stable API to everyone.</p>
-<p>The API limits below are the same for all AIVAX embedded models. These limits are categorized by operations performed by the API. Each account has a tier that defines which limits are applied to the account. Tiers change according to the total invested in AIVAX and the time the account exists.</p>
+<p>The API limits below are the same for all AIVAX embedded models. These limits are categorized by operations made by the API. Each account has a tier that defines which limits are applied to the account. Tiers change according to the total invested in AIVAX and the time the account exists.</p>
 <ul>
-<li><strong>Tier zero (free account):</strong> new account that has never added credits.</li>
+<li><strong>Tier zero:</strong> new account that has never added credits or has test credits.</li>
 <li><strong>Tier 1</strong>: account created at least 48 hours ago and has added any credit value.</li>
 <li><strong>Tier 2</strong>: account created at least 1 month ago and has added at least $100 in credits.</li>
 <li><strong>Tier 3</strong>: account created at least 3 months ago and has added at least $1,000 in credits.</li>
@@ -141,7 +141,7 @@
 <div class="tabGroup" id="tabgroup_1">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_1_free" role="tab" aria-controls="tabpanel_1_free" data-tab="free" tabindex="0" aria-selected="true">Free</a>
+<a href="#tabpanel_1_free" role="tab" aria-controls="tabpanel_1_free" data-tab="free" tabindex="0" aria-selected="true">New Account</a>
 </li>
 <li role="presentation">
 <a href="#tabpanel_1_tier1" role="tab" aria-controls="tabpanel_1_tier1" data-tab="tier1" tabindex="-1">Tier 1</a>
@@ -180,12 +180,7 @@
 <td>300</td>
 </tr>
 <tr>
-<td>Function</td>
-<td>5</td>
-<td>300</td>
-</tr>
-<tr>
-<td>Function (Live)</td>
+<td>Internet function</td>
 <td>2</td>
 <td>30</td>
 </tr>
@@ -219,12 +214,7 @@
 <td>10,000</td>
 </tr>
 <tr>
-<td>Function</td>
-<td>60</td>
-<td>10,000</td>
-</tr>
-<tr>
-<td>Function (Live)</td>
+<td>Internet function</td>
 <td>20</td>
 <td>500</td>
 </tr>
@@ -258,12 +248,7 @@
 <td>-</td>
 </tr>
 <tr>
-<td>Function</td>
-<td>60</td>
-<td>-</td>
-</tr>
-<tr>
-<td>Function (Live)</td>
+<td>Internet function</td>
 <td>60</td>
 <td>-</td>
 </tr>
@@ -297,12 +282,7 @@
 <td>-</td>
 </tr>
 <tr>
-<td>Function</td>
-<td>500</td>
-<td>-</td>
-</tr>
-<tr>
-<td>Function (Live)</td>
+<td>Internet function</td>
 <td>200</td>
 <td>-</td>
 </tr>
@@ -312,13 +292,13 @@
 </div>
 
 <ul>
-<li><strong>Document search</strong>: includes semantic search of documents in a collection through the search endpoint <code>../collections/{id}/query</code>.</li>
+<li><strong>Document search</strong>: includes semantic search of documents in a collection by the search endpoint <code>../collections/{id}/query</code>.</li>
 <li><strong>Document insertion</strong>: includes creation and modification of documents in a collection.</li>
-<li><strong>Inference</strong>: every inference call, either through the Open-AI compatible API, the <code>/ai-gateways/{id}/inference</code> route, or each message sent by a client chat session.</li>
-<li><strong>Function</strong>: every function call <code>/functions</code>.</li>
-<li><strong>Function (Live)</strong>: every function call connected to the internet through internet search (does not include <code>fetch</code>).</li>
+<li><strong>Inference</strong>: every inference or function call, either by chat client or API.</li>
+<li><strong>Internet function</strong>: every function call connected to the internet through internet search (does not include <code>fetch</code>).</li>
 </ul>
-<p>There is no limit for inference on models defined by you, only on those provided by AIVAX.</p>
+<h2 id="limits-for-byok-bring-your-own-key">Limits for BYOK (Bring-your-own-key)</h2>
+<p>For models provided by you, the applied limit is <strong>3,600</strong> requests per minute.</p>
 
 </article>
 
