@@ -6,6 +6,8 @@ items:
   href: getting-started.md
 - name: Autenticação
   href: authentication.md
+- name: Precificação
+  href: pricing.md
 - name: Limites de taxa
   href: limits.md
 - name: Modelos

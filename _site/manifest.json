@@ -722,6 +722,16 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "docs/en/pricing.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/en/pricing.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "docs/en/protocol-functions.md",
       "output": {
         ".html": {
@@ -849,6 +859,16 @@
       "output": {
         ".html": {
           "relative_path": "docs/models.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pricing.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pricing.html"
         }
       },
       "version": ""
