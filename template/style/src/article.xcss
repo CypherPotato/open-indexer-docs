@@ -1,7 +1,8 @@
 article {
     color: --article-color;
     --bs-table-color: --article-color;
-    
+    padding-bottom: 200px;
+
     p,
     li {
         line-height: 1.75;
