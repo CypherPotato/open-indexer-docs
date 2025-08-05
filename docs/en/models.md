@@ -1324,6 +1324,49 @@ All prices are in United States dollars.
 <tr>
     <td>
         <code>
+            @openai/gpt-oss-120b
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 0.15 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 0.75 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        OpenAI's flagship open source model, built on a Mixture-of-Experts (MoE) architecture with 120 billion parameters and 128 experts.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Deep thinking
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
             @openai/gpt-4o-mini
         </code>
     </td>
@@ -1367,7 +1410,7 @@ All prices are in United States dollars.
 <tr>
     <td>
         <code>
-            @openai/gpt-4.1-nano
+            @openai/gpt-oss-20b
         </code>
     </td>
     <td>
@@ -1384,48 +1427,3 @@ All prices are in United States dollars.
                 Output:
             </small>
             <div>
-                $ 0.40 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-    </td>
-    <td>
-        The fastest and cheapest GPT 4.1 model.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Input: accepts images
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
-</div>
-        </div>
-    </td>
-</tr>
-    </tbody>
-</table>
-
-## <img src="/assets/icon/qwen.svg" class="inline-icon"> qwen
-
-<table>
-    <thead>
-        <colgroup>
-            <col style="width: 30%" />
-            <col style="width: 20%" />
-            <col style="width: 50%" />
-        </colgroup>
-        <tr>
-            <th>Model Name</th>
-            <th>Prices</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-<tr>
-    <td>
-       

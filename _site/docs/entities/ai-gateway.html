@@ -211,6 +211,26 @@ data: {&quot;id&quot;:&quot;0197dbde-c88c-7764-8017-c1fee0d79096&quot;,&quot;obj
 
 data: {&quot;id&quot;:&quot;0197dbde-c890-7329-9e65-faecbe158efa&quot;,&quot;object&quot;:&quot;chat.completion.chunk&quot;,&quot;created&quot;:1751740500,&quot;model&quot;:&quot;@aivax\/sentinel-mini&quot;,&quot;system_fingerprint&quot;:&quot;fp_q6qh7x&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;finish_reason&quot;:&quot;STOP&quot;,&quot;delta&quot;:{}}],&quot;usage&quot;:{&quot;prompt_tokens&quot;:1097,&quot;completion_tokens&quot;:92,&quot;total_tokens&quot;:1189},&quot;sentinel_usage&quot;:null}
 </code></pre>
+<h2 id="uso-com-sdks">Uso com SDKs</h2>
+<p>Por prover endpoints compatíveis com a interface OpenAI, a AIVAX é totalmente compatível com SDKs existentes, facilitando a integração plug-and-play.</p>
+<p>Veja o exemplo abaixo:</p>
+<pre><code class="lang-python">from openai import OpenAI
+ 
+client = OpenAI(
+    base_url=&quot;https://inference.aivax.net/api/v1&quot;,
+    api_key=&quot;oky_gr5u...oqbfd3d9y&quot;
+)
+ 
+response = client.chat.completions.create(
+    model=&quot;my-gateway:50c3&quot;, # you can also provide your ai-gateway full ID here
+    messages=[
+        {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Explain why AI-gateways are useful.&quot;}
+    ]
+)
+ 
+print(response.choices[0].message.content)
+</code></pre>
+<p>No momento, a AIVAX só suporta o formato <code>chat/completions</code>. No futuro, pretendemos criar suporte para a API Responses.</p>
 
 </article>
 

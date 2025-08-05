@@ -108,3 +108,29 @@ data: {"id":"0197dbde-c88c-7764-8017-c1fee0d79096","object":"chat.completion.chu
 
 data: {"id":"0197dbde-c890-7329-9e65-faecbe158efa","object":"chat.completion.chunk","created":1751740500,"model":"@aivax\/sentinel-mini","system_fingerprint":"fp_q6qh7x","choices":[{"index":0,"finish_reason":"STOP","delta":{}}],"usage":{"prompt_tokens":1097,"completion_tokens":92,"total_tokens":1189},"sentinel_usage":null}
 ```
+
+## Uso com SDKs
+
+Por prover endpoints compatíveis com a interface OpenAI, a AIVAX é totalmente compatível com SDKs existentes, facilitando a integração plug-and-play.
+
+Veja o exemplo abaixo:
+
+```python
+from openai import OpenAI
+ 
+client = OpenAI(
+    base_url="https://inference.aivax.net/api/v1",
+    api_key="oky_gr5u...oqbfd3d9y"
+)
+ 
+response = client.chat.completions.create(
+    model="my-gateway:50c3", # you can also provide your ai-gateway full ID here
+    messages=[
+        {"role": "user", "content": "Explain why AI-gateways are useful."}
+    ]
+)
+ 
+print(response.choices[0].message.content)
+```
+
+No momento, a AIVAX só suporta o formato `chat/completions`. No futuro, pretendemos criar suporte para a API Responses.
