@@ -126,16 +126,12 @@
 
 <p>Funções é uma forma de forçar seu modelo ao processamento de informações usando JSON como intermédio de comunicação. Com as funções, você consegue fazer qualquer modelo responder no formato JSON que você quiser.</p>
 <p>Pode ser útil para categorizar comentários, aplicar moderação em avaliações ou processar informações com auxílio da IA.</p>
-<p>No momento, só é possível usar funções com <a href="">modelos providos pela AIVAX</a>.</p>
+<p>No momento, só é possível usar funções com <a href="/docs/models">modelos providos pela AIVAX</a>.</p>
 <h2 id="chamar-uma-função">Chamar uma função</h2>
 <p>Para chamar uma função de IA, você precisará informar o que a IA deverá responder e fornecer um JSON Schema que ela deverá seguir.</p>
 <p>Modelos menos inteligentes tendem a falhar a geração de JSON, gerando um documento inválido ou problemático. Para isso, ajuste seu modelo, a instrução e o parâmetro de tentativas se for necessário.</p>
 <p>Você é cobrado por cada tentativa que a IA tentar gerar. Modelos um pouco mais inteligentes tendem a gerar resultados corretos na primeira tentativa. É garantido que um JSON válido será gerado e que esse JSON seguirá o mesmo esquema fornecido na requisição.</p>
-<p>Adicionalmente, você pode optar em ativar <strong>pesquisa na internet</strong> para chamada de função. Essa opção pode ser útil para trazer dados relevantes em tempo real ao estruturar sua resposta. Ao usar essa função, um modelo com acesso na internet será usado para obter dados da internet para estruturar sua resposta. Esse modelo também tentará estruturar sua resposta a partir dos dados fornecidos, e se conseguir formular um JSON válido a etapa de chamar o modelo de estruturação é ignorada e a resposta é imediatamente retornada.</p>
-<p>Se for o caso do modelo de busca online não conseguir estruturar um JSON válido, o modelo escolhido na requisição ficará responsável por essa tarefa, e irá começar o encadeamento de tentativas de geração. Modelos mais inteligentes acertam a geração nas primeiras tentativas.</p>
-<p>Através da propriedade <code>fetch</code>, você pode fornecer uma lista de URLs para serem anexadas no contexto da geração. O AIVAX faz uma requisição GET para acessar os conteúdos fornecidos e renderiza-os no conteúdo da requisição. Somente respostas 2xx ou 3xx são aceitas e o conteúdo da resposta deve ser textual. Respostas em HTML são sanitizadas para incluirem somente o texto da página, sem script e CSS.</p>
-<p>O tamanho máximo que pode ser lido de uma URL do fetch é 10 Mb. O máximo de itens para o fetch são 10 URLs.</p>
-<p>Requisições que pesquisam na internet trazem bons resultados e dispensam crawlers, scrappers ou a necessidade de pagar por uma API específica, mas podem ser custosas e relativamente lentas para serem obtidas. Considere usar um cache do lado da sua aplicação para dados que não precisam ser constantementes atualizados, como dados meteorológicos, estatísticas diárias, etc. A AIVAX não realiza nenhum cache pelo nosso lado.</p>
+<p>Considere usar um cache do lado da sua aplicação para dados que não precisam ser constantementes atualizados, como dados meteorológicos, estatísticas diárias, etc. A AIVAX não realiza nenhum cache pelo nosso lado.</p>
 <h4 id="requisição">Requisição</h4>
 <div class="request-item post">
     <span>POST</span>
@@ -181,47 +177,61 @@
     // Opcional. Define a temperatura de geração do JSON. Valores maiores tendem a serem mais criativos, enquanto menores mais determinísticos. Número de 0 à 2.
     &quot;temperature&quot;: 0.4,
     
-    // Opcional. Adiciona recursos externos para complementar a geração da resposta.
-    &quot;fetch&quot;: {
-        
-        // Obrigatório. Fornece a lista de URLS que o AIVAX irá acessar para complementar a geração de resposta. O máximo são 10 URLs.
-        &quot;urls&quot;: [
-            &quot;https://url1...&quot;,
-            &quot;https://url2...&quot;,
-        ],
+    // Opcional. Fornece contexto adicional para a geração através de mensagens no formato chat/completions. Você pode fornecer conteúdo multi-modalidades também para modelos compatíveis.
+    &quot;context&quot;: [
+        {
+            &quot;role&quot;: &quot;user&quot;,
+            &quot;content&quot;: &quot;Additional context&quot;
+        }
+    ],
     
-        // Opcional. Define o comportamento do fetch para erros ao tentar acessar o site. Erros incluem respostas que não são 2xx ou 3xx, timeouts, erros de certificados, etc.
-        //      fail    -&gt; retorna um erro na resposta da função (padrão)
-        //      ignore  -&gt; ignora o erro e adiciona o erro na geração da IA
-        &quot;fetchFailAction&quot;: &quot;fail&quot; | &quot;ignore&quot;,
-        
-        // Opcional. Define o timeout em segundos para o tempo maximo da resposta responder e ler os conteúdos. O máximo é 120 segundos (dois minutos).
-        &quot;timeout&quot;: 10,
-        
-        // Opcional. Define o tamanho máximo do conteúdo em quantidade de caracteres que podem ser incluídos na geração da IA antes de serem truncados.
-        &quot;pageMaxLength&quot;: 2048
+    // Opcional. Fornece funções embutidas da AIVAX para a geração da ferramenta.
+    &quot;tools&quot;: [
+        &quot;WebSearch&quot;,
+        &quot;Code&quot;,
+        &quot;OpenUrl&quot;,
+        &quot;ImageGeneration&quot;,
+        &quot;XPostsSearch&quot;
+    ],
+    
+    // Opcional. Define parâmetros de geração de ferramentas.
+    &quot;toolsOptions&quot;: {
+        &quot;webSearchMode&quot;: &quot;Full&quot; | &quot;Summarized&quot;,
+        &quot;webSearchMaxResults&quot;: 10,
+        &quot;imageGenerationMaxResults&quot;: 2,
+        &quot;imageGenerationQuality&quot;: &quot;Low&quot; | &quot;Medium&quot; | &quot;High&quot; | &quot;Highest&quot;,
+        &quot;imageGenerationAllowMatureContent&quot;: false
     }
 }
 </code></pre>
 <h4 id="resposta">Resposta</h4>
 <pre><code class="lang-json">{
-    &quot;message&quot;: null,
-    &quot;data&quot;: {
-        // o resultado contém o objeto gerado pela IA, seguindo o &quot;responseSchema&quot;
-        &quot;result&quot;: {
-            &quot;feedbackType&quot;: &quot;negative&quot;,
-            &quot;informationScore&quot;: 8
-        },
-        
-        // em qual tentativa a IA conseguiu um JSON válido
-        &quot;attempt&quot;: 1,
-        
-        // o tempo em milissegundos para obter um JSON válido
-        &quot;elapsedMilliseconds&quot;: 527,
-        
-        // avisos produzidos pela geração
-        &quot;warnings&quot;: []
-    }
+  &quot;result&quot;: {
+    &quot;requiresAttention&quot;: true,
+    &quot;shortSummary&quot;: &quot;Customer threatens cancellation and bad publicity if not contacted today.&quot;
+  },
+  &quot;attempt&quot;: 0,
+  &quot;elapsedMilliseconds&quot;: 1235,
+  &quot;warnings&quot;: [],
+  &quot;context&quot;: {
+    &quot;generatedUsage&quot;: [
+      {
+        &quot;sku&quot;: &quot;inference.functions.json.in&quot;,
+        &quot;amount&quot;: 0.0000123,
+        &quot;unitPrice&quot;: 1e-7,
+        &quot;quantity&quot;: 123,
+        &quot;description&quot;: &quot;JSON function rendering (@google/gemini-2.0-flash)&quot;
+      },
+      {
+        &quot;sku&quot;: &quot;inference.functions.json.out&quot;,
+        &quot;amount&quot;: 0.0000116,
+        &quot;unitPrice&quot;: 4e-7,
+        &quot;quantity&quot;: 29,
+        &quot;description&quot;: &quot;JSON function rendering (@google/gemini-2.0-flash)&quot;
+      }
+    ],
+    &quot;runnedFunctions&quot;: []
+  }
 }
 </code></pre>
 <h2 id="diretrizes-do-json-schema">Diretrizes do JSON Schema</h2>
@@ -274,14 +284,13 @@
 }
 </code></pre>
 <blockquote>
-<p>Nota: <code>number</code> e <code>integer</code> são sinônimos e <code>integer</code> não garante que o número será um inteiro. Se necessário, trunque o número retornado.</p>
+<p>Nota: <code>number</code> e <code>integer</code> são sinônimos e <code>integer</code> não garante que o número será um inteiro.</p>
 </blockquote>
-<h2 id="funções-em-tempo-real-com-modelos-sentinel">Funções em tempo real com modelos Sentinel</h2>
-<p>Você pode usar o agente <code>@aivax/fn-1</code> e <code>@aivax/fn-1-mini</code> para executar funções inteligentes que envolvam pesquisa na internet, execução de código e/ou resolução de contas matemáticas.</p>
-<p>Estes agentes são conectados à internet por padrão, portanto, é natural que ele pesquise algo na internet para complementar sua resposta.</p>
+<h2 id="funções-em-ferramentas">Funções em ferramentas</h2>
+<p>É possível usar <a href="/docs/builtin-tools">ferramentas embutidas</a> as funções JSON. Isso irá permitir que o modelo chame funções para obter contexto necessário para gerar o JSON final.</p>
 <h2 id="exemplos">Exemplos</h2>
 <p>Confira exemplos de funções de IA para várias tarefas cotidianas:</p>
-<h4 id="resumir-pedido-e-classificar-se-requer-atenção-ou-não">Resumir pedido e classificar se requer atenção ou não</h4>
+<h4 id="classificar-comentários-bons-ou-ruins">Classificar comentários bons ou ruins</h4>
 <div class="request-item post">
     <span>POST</span>
     <span>
@@ -289,35 +298,59 @@
     </span>
 </div>
 <pre><code class="lang-json">{
-    &quot;modelName&quot;: &quot;@metaai/llama-4-scout-17b&quot;,
-    &quot;instructions&quot;: &quot;Resuma o comentário do usuário, criando uma descrição curta, com no máximo de 10 palavras indicando o que ele quer fazer. Indique também se esse comentário requer atenção ou não.&quot;,
+    &quot;modelName&quot;: &quot;@google/gemini-2.0-flash&quot;,
+    &quot;instructions&quot;: &quot;Classifique o comentário do usuário fornecendo uma nota para seu comentário.&quot;,
+    &quot;inputData&quot;: {
+        &quot;inputText&quot;: &quot;A comida é boa, mas o ambiente é muito barulhento e um pouco sujo também.&quot;
+    },
     &quot;responseSchema&quot;: {
         &quot;type&quot;: &quot;object&quot;,
         &quot;properties&quot;: {
-            &quot;shortSummary&quot;: {
+            &quot;commentSummary&quot;: {
                 &quot;type&quot;: &quot;string&quot;,
-                &quot;description&quot;: &quot;Uma breve descrição do que o usuário quer fazer, com no máximo 10 palavras.&quot;
+                &quot;description&quot;: &quot;Resumo do que o usuário quis dizer.&quot;
             },
-            &quot;requiresAttention&quot;: {
-                &quot;type&quot;: &quot;boolean&quot;,
-                &quot;description&quot;: &quot;Indica se o comentário requer atenção imediata (true) ou não (false).&quot;
+            &quot;score&quot;: {
+                &quot;type&quot;: &quot;integer&quot;,
+                &quot;min&quot;: 1,
+                &quot;max&quot;: 5,
+                &quot;description&quot;: &quot;A nota extraída da avaliação, sendo 1 muito ruim e 5 muito bom.&quot;
             }
         },
-        &quot;required&quot;: [&quot;shortSummary&quot;, &quot;requiresAttention&quot;]
-    },
-    &quot;inputData&quot;: &quot;O cliente fernando de castro está tentando entrar em contato com o suporte desde sexta-feira e diz q vai cancelar se nao falar com alguém hoje. ele tbm disse que é amigo da rebeca do comercial e está ameaçando falar mal da empresa no tiktok. por favor alguém atende esse cara??&quot;
+        &quot;required&quot;: [
+            &quot;commentSummary&quot;,
+            &quot;score&quot;
+        ]
+    }
 }
 </code></pre>
 <pre><code class="lang-json">{
-    &quot;message&quot;: null,
-    &quot;data&quot;: {
-        &quot;result&quot;: {
-            &quot;shortSummary&quot;: &quot;Cliente quer contato com suporte para evitar cancelamento e ameaça&quot;,
-            &quot;requiresAttention&quot;: true
-        },
-        &quot;attempt&quot;: 1,
-        &quot;elapsedMilliseconds&quot;: 639
-    }
+  &quot;result&quot;: {
+    &quot;commentSummary&quot;: &quot;The food is good, but the environment is noisy and a bit dirty.&quot;,
+    &quot;score&quot;: 3
+  },
+  &quot;attempt&quot;: 0,
+  &quot;elapsedMilliseconds&quot;: 788,
+  &quot;warnings&quot;: [],
+  &quot;context&quot;: {
+    &quot;generatedUsage&quot;: [
+      {
+        &quot;sku&quot;: &quot;inference.functions.json.in&quot;,
+        &quot;amount&quot;: 0.0000083,
+        &quot;unitPrice&quot;: 1e-7,
+        &quot;quantity&quot;: 83,
+        &quot;description&quot;: &quot;JSON function rendering (@google/gemini-2.0-flash)&quot;
+      },
+      {
+        &quot;sku&quot;: &quot;inference.functions.json.out&quot;,
+        &quot;amount&quot;: 0.0000128,
+        &quot;unitPrice&quot;: 4e-7,
+        &quot;quantity&quot;: 32,
+        &quot;description&quot;: &quot;JSON function rendering (@google/gemini-2.0-flash)&quot;
+      }
+    ],
+    &quot;runnedFunctions&quot;: []
+  }
 }
 </code></pre>
 <h4 id="avaliar-uma-expressão-matemática">Avaliar uma expressão matemática</h4>
@@ -328,33 +361,98 @@
     </span>
 </div>
 <pre><code class="lang-json">{
-    &quot;modelName&quot;: &quot;@aivax/fn-1&quot;,
-    &quot;instructions&quot;: &quot;Avalie a conta matemática informada e forneça o resultado.&quot;,
+    &quot;modelName&quot;: &quot;@qwen/qwen3-32b&quot;,
+    &quot;instructions&quot;: &quot;Evaluate the given math problem and provide the result step-by-step.&quot;,
+    &quot;inputData&quot;: {
+        &quot;inputText&quot;: &quot;what is two plus two minus pi ?&quot;
+    },
     &quot;responseSchema&quot;: {
         &quot;type&quot;: &quot;object&quot;,
         &quot;properties&quot;: {
-            &quot;result&quot;: {
-                &quot;type&quot;: [&quot;string&quot;, &quot;number&quot;],
-                &quot;description&quot;: &quot;O resultado da avaliação da expressão matemática.&quot;
+            &quot;steps&quot;: {
+                &quot;type&quot;: &quot;array&quot;,
+                &quot;items&quot;: {
+                    &quot;type&quot;: &quot;object&quot;,
+                    &quot;properties&quot;: {
+                        &quot;stepDescription&quot;: {
+                            &quot;type&quot;: &quot;string&quot;,
+                            &quot;description&quot;: &quot;Current math step description.&quot;
+                        },
+                        &quot;carry&quot;: {
+                            &quot;type&quot;: &quot;number&quot;,
+                            &quot;description&quot;: &quot;The current result.&quot;
+                        }
+                    },
+                    &quot;required&quot;: [
+                        &quot;stepDescription&quot;,
+                        &quot;carry&quot;
+                    ]
+                },
+                &quot;minItems&quot;: 1
+            },
+            &quot;finalResult&quot;: {
+                &quot;type&quot;: &quot;number&quot;,
+                &quot;description&quot;: &quot;The math operation final result.&quot;
             }
         },
-        &quot;required&quot;: [&quot;result&quot;]
+        &quot;required&quot;: [
+            &quot;steps&quot;,
+            &quot;finalResult&quot;
+        ]
     },
-    &quot;inputData&quot;: {
-        &quot;mathProblem&quot;: &quot;12 + (42 / pi) ^ 20&quot;
-    }
+    &quot;tools&quot;: [
+        &quot;Code&quot;
+    ]
 }
 </code></pre>
 <pre><code class="lang-json">{
-    &quot;message&quot;: null,
-    &quot;data&quot;: {
-        &quot;result&quot;: {
-            &quot;result&quot;: &quot;3.3265063290400284e+22&quot;
-        },
-        &quot;attempt&quot;: 0,
-        &quot;elapsedMilliseconds&quot;: 3869,
-        &quot;warnings&quot;: []
-    }
+  &quot;result&quot;: {
+    &quot;steps&quot;: [
+      {
+        &quot;stepDescription&quot;: &quot;Add 2 and 2&quot;,
+        &quot;carry&quot;: 4
+      },
+      {
+        &quot;stepDescription&quot;: &quot;Subtract pi (π) from the result&quot;,
+        &quot;carry&quot;: 0.858407346410207
+      }
+    ],
+    &quot;finalResult&quot;: 0.858407346410207
+  },
+  &quot;attempt&quot;: 0,
+  &quot;elapsedMilliseconds&quot;: 5775,
+  &quot;warnings&quot;: [],
+  &quot;context&quot;: {
+    &quot;generatedUsage&quot;: [
+      {
+        &quot;sku&quot;: &quot;inference.functions.json.in&quot;,
+        &quot;amount&quot;: 0.00031001,
+        &quot;unitPrice&quot;: 2.9e-7,
+        &quot;quantity&quot;: 1069,
+        &quot;description&quot;: &quot;JSON function rendering (@qwen/qwen3-32b)&quot;
+      },
+      {
+        &quot;sku&quot;: &quot;inference.functions.json.out&quot;,
+        &quot;amount&quot;: 0.00054162,
+        &quot;unitPrice&quot;: 5.9e-7,
+        &quot;quantity&quot;: 918,
+        &quot;description&quot;: &quot;JSON function rendering (@qwen/qwen3-32b)&quot;
+      }
+    ],
+    &quot;runnedFunctions&quot;: [
+      {
+        &quot;functionName&quot;: &quot;evaluate_code&quot;,
+        &quot;success&quot;: true,
+        &quot;context&quot;: {
+          &quot;arguments&quot;: &quot;console.log(2 + 2 - Math.PI);&quot;,
+          &quot;result&quot;: {
+            &quot;evaluatedCode&quot;: &quot;console.log(2 + 2 - Math.PI);&quot;,
+            &quot;result&quot;: &quot;0.8584073464102069\nScript evaluation result: undefined\n&quot;
+          }
+        }
+      }
+    ]
+  }
 }
 </code></pre>
 <h4 id="trazer-últimas-notícias-e-clima-de-uma-determinada-cidade">Trazer últimas notícias e clima de uma determinada cidade</h4>
@@ -365,8 +463,11 @@
     </span>
 </div>
 <pre><code class="lang-json">{
-    &quot;modelName&quot;: &quot;@aivax/fn-1&quot;,
-    &quot;instructions&quot;: &quot;Pesquise as 5 últimas notícias e dados meteorológicos para a cidade informada.&quot;,
+    &quot;modelName&quot;: &quot;@openai/gpt-4o-mini&quot;,
+    &quot;instructions&quot;: &quot;Search for the 5 latest news and weather data for the given city.&quot;,
+    &quot;inputData&quot;: {
+        &quot;city&quot;: &quot;Tokyo&quot;
+    },
     &quot;responseSchema&quot;: {
         &quot;type&quot;: &quot;object&quot;,
         &quot;properties&quot;: {
@@ -375,113 +476,181 @@
                 &quot;items&quot;: {
                     &quot;type&quot;: &quot;object&quot;,
                     &quot;properties&quot;: {
-                        &quot;title&quot;: { &quot;type&quot;: &quot;string&quot; },
-                        &quot;details&quot;: { &quot;type&quot;: &quot;string&quot; },
-                        &quot;link&quot;: { &quot;type&quot;: &quot;string&quot;, &quot;format&quot;: &quot;uri&quot; }
+                        &quot;title&quot;: {
+                            &quot;type&quot;: &quot;string&quot;
+                        },
+                        &quot;details&quot;: {
+                            &quot;type&quot;: &quot;string&quot;
+                        },
+                        &quot;link&quot;: {
+                            &quot;type&quot;: &quot;string&quot;,
+                            &quot;format&quot;: &quot;uri&quot;
+                        }
                     },
-                    &quot;required&quot;: [&quot;title&quot;, &quot;details&quot;, &quot;link&quot;]
+                    &quot;required&quot;: [
+                        &quot;title&quot;,
+                        &quot;details&quot;,
+                        &quot;link&quot;
+                    ],
+                    &quot;additionalProperties&quot;: false
                 }
             },
             &quot;weather&quot;: {
                 &quot;type&quot;: &quot;object&quot;,
                 &quot;properties&quot;: {
-                    &quot;currentTemperature&quot;: { &quot;type&quot;: &quot;number&quot; },
+                    &quot;currentTemperature&quot;: {
+                        &quot;type&quot;: &quot;number&quot;
+                    },
                     &quot;currentWeather&quot;: {
                         &quot;type&quot;: &quot;string&quot;,
-                        &quot;enum&quot;: [&quot;sunny&quot;, &quot;cloudy&quot;, &quot;rain&quot;, &quot;thunderstorm&quot;, &quot;partly cloudy&quot;, &quot;clear&quot;]
+                        &quot;enum&quot;: [
+                            &quot;sunny&quot;,
+                            &quot;cloudy&quot;,
+                            &quot;rain&quot;,
+                            &quot;thunderstorm&quot;
+                        ]
                     },
                     &quot;forecast&quot;: {
                         &quot;type&quot;: &quot;string&quot;,
-                        &quot;enum&quot;: [&quot;sunny&quot;, &quot;cloudy&quot;, &quot;rain&quot;, &quot;thunderstorm&quot;, &quot;partly cloudy&quot;, &quot;clear&quot;]
+                        &quot;enum&quot;: [
+                            &quot;sunny&quot;,
+                            &quot;cloudy&quot;,
+                            &quot;rain&quot;,
+                            &quot;thunderstorm&quot;
+                        ]
                     }
                 },
-                &quot;required&quot;: [&quot;currentTemperature&quot;, &quot;currentWeather&quot;, &quot;forecast&quot;]
+                &quot;required&quot;: [
+                    &quot;currentTemperature&quot;,
+                    &quot;currentWeather&quot;,
+                    &quot;forecast&quot;
+                ],
+                &quot;additionalProperties&quot;: false
+            },
+            &quot;assistantSummary&quot;: {
+                &quot;type&quot;: &quot;string&quot;
             }
         },
-        &quot;required&quot;: [&quot;latestNews&quot;, &quot;weather&quot;]
+        &quot;required&quot;: [
+            &quot;latestNews&quot;,
+            &quot;weather&quot;,
+            &quot;assistantSummary&quot;
+        ],
+        &quot;additionalProperties&quot;: false
     },
-    &quot;inputData&quot;: {
-        &quot;city&quot;: &quot;São José do Rio Preto&quot;
-    }
+    &quot;tools&quot;: [
+        &quot;XPostsSearch&quot;,
+        &quot;WebSearch&quot;
+    ]
 }
 </code></pre>
 <pre><code class="lang-json">{
-    &quot;message&quot;: null,
-    &quot;data&quot;: {
-        &quot;result&quot;: {
-            &quot;latestNews&quot;: [
-                {
-                    &quot;title&quot;: &quot;Festival Paralímpico no Instituto Lucy Montoro&quot;,
-                    &quot;details&quot;: &quot;Familiares e pacientes do Instituto de Reabilitação Lucy Montoro de Rio Preto (SP) participaram neste sábado (14) do Festival Paralímpico.&quot;,
-                    &quot;link&quot;: &quot;https://g1.globo.com/sp/sao-jose-do-rio-preto-aracatuba/cidade/sao-jose-do-rio-preto/&quot;
-                },
-                {
-                    &quot;title&quot;: &quot;Investimento imobiliário na zona Leste de Rio Preto&quot;,
-                    &quot;details&quot;: &quot;Empreendimentos residenciais marcam o maior investimento imobiliário na zona Leste de Rio Preto.&quot;,
-                    &quot;link&quot;: &quot;https://www.gazetaderiopreto.com.br/&quot;
-                },
-                {
-                    &quot;title&quot;: &quot;Acidente na Washington Luís&quot;,
-                    &quot;details&quot;: &quot;Motociclista é hospitalizado após se envolver em acidente na Washington Luís, em Rio Preto.&quot;,
-                    &quot;link&quot;: &quot;https://www.diariodaregiao.com.br/cidades&quot;
-                },
-                {
-                    &quot;title&quot;: &quot;Curso gratuito para artistas&quot;,
-                    &quot;details&quot;: &quot;Curso gratuito ensina artistas de Rio Preto e região a escrever projetos para editais culturais.&quot;,
-                    &quot;link&quot;: &quot;https://www.diariodaregiao.com.br/&quot;
-                },
-                {
-                    &quot;title&quot;: &quot;PIX automático&quot;,
-                    &quot;details&quot;: &quot;Modalidade permite pagar contas recorrentes, como de energia, telefone, escolas, academias, entre outras, de forma automática pelo PIX.&quot;,
-                    &quot;link&quot;: &quot;https://g1.globo.com/sp/sao-jose-do-rio-preto-aracatuba/&quot;
-                }
-            ],
-            &quot;weather&quot;: {
-                &quot;currentTemperature&quot;: 23,
-                &quot;currentWeather&quot;: &quot;sunny&quot;,
-                &quot;forecast&quot;: &quot;sunny&quot;
-            }
-        },
-        &quot;attempt&quot;: 0,
-        &quot;elapsedMilliseconds&quot;: 10990,
-        &quot;warnings&quot;: []
-    }
-}
-</code></pre>
-<h4 id="trazer-estatísticas-da-covid-19-em-tempo-real">Trazer estatísticas da COVID-19 em tempo real</h4>
-<div class="request-item post">
-    <span>POST</span>
-    <span>
-        /api/v1/functions/json
-    </span>
-</div>
-<pre><code class="lang-json">{
-    &quot;modelName&quot;: &quot;@aivax/fn-1&quot;,
-    &quot;instructions&quot;: &quot;Traga a contagem de casos e mortes por COVID-19.&quot;,
-    &quot;responseSchema&quot;: {
-        &quot;type&quot;: &quot;object&quot;,
-        &quot;properties&quot;: {
-            &quot;deathsWorld&quot;: { &quot;type&quot;: &quot;integer&quot;, &quot;description&quot;: &quot;Número total de mortes por COVID-19 no mundo.&quot; },
-            &quot;deathsBrazil&quot;: { &quot;type&quot;: &quot;integer&quot;, &quot;description&quot;: &quot;Número total de mortes por COVID-19 no Brasil.&quot; },
-            &quot;casesWorld&quot;: { &quot;type&quot;: &quot;integer&quot;, &quot;description&quot;: &quot;Número total de casos de COVID-19 no mundo.&quot; },
-            &quot;casesBrazil&quot;: { &quot;type&quot;: &quot;integer&quot;, &quot;description&quot;: &quot;Número total de casos de COVID-19 no Brasil.&quot; }
-        },
-        &quot;required&quot;: [&quot;deathsWorld&quot;, &quot;deathsBrazil&quot;, &quot;casesWorld&quot;, &quot;casesBrazil&quot;]
-    }
-}
-</code></pre>
-<pre><code class="lang-json">{
-    &quot;message&quot;: null,
-    &quot;data&quot;: {
-        &quot;result&quot;: {
-            &quot;deathsWorld&quot;: 7010681,
-            &quot;deathsBrazil&quot;: 711380,
-            &quot;casesWorld&quot;: 704753890,
-            &quot;casesBrazil&quot;: 38743918
-        },
-        &quot;attempt&quot;: 1,
-        &quot;elapsedMilliseconds&quot;: 1620
-    }
+  &quot;result&quot;: {
+    &quot;latestNews&quot;: [
+      {
+        &quot;title&quot;: &quot;Indian Ambassador to Japan Expands Cooperation&quot;,
+        &quot;details&quot;: &quot;Indian Ambassador to Japan Sibi George expressed eagerness to expand cooperation between India and Japan in business, technology, and security.&quot;,
+        &quot;link&quot;: &quot;https://japannews.yomiuri.co.jp/&quot;
+      },
+      {
+        &quot;title&quot;: &quot;Emperor Emeritus Akihito Discharged from Hospital&quot;,
+        &quot;details&quot;: &quot;Japan’s Emperor Emeritus Akihito was discharged from the University hospital.&quot;,
+        &quot;link&quot;: &quot;https://www.japantimes.co.jp/&quot;
+      },
+      {
+        &quot;title&quot;: &quot;Tokyo Stocks Climb Following Wall Street Gains&quot;,
+        &quot;details&quot;: &quot;Tokyo stocks climbed in the morning following Wall Street gains.&quot;,
+        &quot;link&quot;: &quot;https://www.independent.co.uk/topic/tokyo&quot;
+      },
+      {
+        &quot;title&quot;: &quot;Tightening of Business Manager Visa Requirements&quot;,
+        &quot;details&quot;: &quot;Tokyo is tightening requirements for popular business manager visas.&quot;,
+        &quot;link&quot;: &quot;https://www.japantimes.co.jp/latest-news/&quot;
+      },
+      {
+        &quot;title&quot;: &quot;ANA Plans Affordable Flying Taxi Service&quot;,
+        &quot;details&quot;: &quot;ANA plans to launch an affordable flying taxi service in Japan by 2027.&quot;,
+        &quot;link&quot;: &quot;https://www.japantimes.co.jp/&quot;
+      }
+    ],
+    &quot;weather&quot;: {
+      &quot;currentTemperature&quot;: 31,
+      &quot;currentWeather&quot;: &quot;cloudy&quot;,
+      &quot;forecast&quot;: &quot;rain&quot;
+    },
+    &quot;assistantSummary&quot;: &quot;The latest news from Tokyo includes diplomatic and economic updates, while the current weather is partly cloudy with a temperature of 31°C.&quot;
+  },
+  &quot;attempt&quot;: 0,
+  &quot;elapsedMilliseconds&quot;: 19772,
+  &quot;warnings&quot;: [],
+  &quot;context&quot;: {
+    &quot;generatedUsage&quot;: [
+      {
+        &quot;sku&quot;: &quot;serviceusage.web_search&quot;,
+        &quot;amount&quot;: 0.005,
+        &quot;unitPrice&quot;: 0.005,
+        &quot;quantity&quot;: 1,
+        &quot;description&quot;: &quot;Web Search request&quot;
+      },
+      {
+        &quot;sku&quot;: &quot;serviceusage.web_search&quot;,
+        &quot;amount&quot;: 0.005,
+        &quot;unitPrice&quot;: 0.005,
+        &quot;quantity&quot;: 1,
+        &quot;description&quot;: &quot;Web Search request&quot;
+      },
+      {
+        &quot;sku&quot;: &quot;inference.functions.json.in&quot;,
+        &quot;amount&quot;: 0.000453,
+        &quot;unitPrice&quot;: 1.5e-7,
+        &quot;quantity&quot;: 3020,
+        &quot;description&quot;: &quot;JSON function rendering (@openai/gpt-4o-mini)&quot;
+      },
+      {
+        &quot;sku&quot;: &quot;inference.functions.json.out&quot;,
+        &quot;amount&quot;: 0.0002406,
+        &quot;unitPrice&quot;: 6e-7,
+        &quot;quantity&quot;: 401,
+        &quot;description&quot;: &quot;JSON function rendering (@openai/gpt-4o-mini)&quot;
+      }
+    ],
+    &quot;runnedFunctions&quot;: [
+      {
+        &quot;functionName&quot;: &quot;web_search&quot;,
+        &quot;success&quot;: true,
+        &quot;context&quot;: {
+          &quot;arguments&quot;: {
+            &quot;search_term&quot;: &quot;Tokyo weather&quot;
+          },
+          &quot;result&quot;: {
+            &quot;results&quot;: [
+              {
+                &quot;title&quot;: &quot;Search results&quot;,
+                &quot;url&quot;: &quot;&quot;
+              }
+            ]
+          }
+        }
+      },
+      {
+        &quot;functionName&quot;: &quot;web_search&quot;,
+        &quot;success&quot;: true,
+        &quot;context&quot;: {
+          &quot;arguments&quot;: {
+            &quot;search_term&quot;: &quot;latest news in Tokyo&quot;
+          },
+          &quot;result&quot;: {
+            &quot;results&quot;: [
+              {
+                &quot;title&quot;: &quot;Search results&quot;,
+                &quot;url&quot;: &quot;&quot;
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
 }
 </code></pre>
 <h4 id="trazer-artistas-em-alta-por-gênero-musical">Trazer artistas em alta por gênero musical</h4>
@@ -492,80 +661,283 @@
     </span>
 </div>
 <pre><code class="lang-json">{
-    &quot;modelName&quot;: &quot;@aivax/fn-1&quot;,
-    &quot;instructions&quot;: &quot;Pesquise e formate uma lista de 10 artistas no TOP 10 do streaming musical por gênero.&quot;,
-    &quot;responseSchema&quot;: {
-        &quot;type&quot;: &quot;object&quot;,
-        &quot;properties&quot;: {
-            &quot;edm&quot;: {
-                &quot;type&quot;: &quot;array&quot;,
-                &quot;items&quot;: { &quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;Nome de um artista de EDM em alta.&quot; },
-                &quot;minItems&quot;: 10,
-                &quot;maxItems&quot;: 10
+            &quot;modelName&quot;: &quot;@openai/gpt-4.1-mini&quot;,
+            &quot;instructions&quot;: &quot;A função deve pesquisar, usando os últimos posts do X, as plataformas de streaming musical (como Spotify, Apple Music etc.) e identificar os 10 artistas mais tocados no gênero informado pelo usuário. Em seguida, deve formatar um objeto contendo uma lista ordenada de 10 artistas, incluindo posição (1–10), nome e número estimado de streams.&quot;,
+            &quot;inputData&quot;: {
+                &quot;genre&quot;: &quot;dubstep&quot;
             },
-            &quot;rap&quot;: {
-                &quot;type&quot;: &quot;array&quot;,
-                &quot;items&quot;: { &quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;Nome de um artista de Rap em alta.&quot; },
-                &quot;minItems&quot;: 10,
-                &quot;maxItems&quot;: 10
+            &quot;responseSchema&quot;: {
+                &quot;type&quot;: &quot;object&quot;,
+                &quot;properties&quot;: {
+                    &quot;artists&quot;: {
+                        &quot;type&quot;: &quot;array&quot;,
+                        &quot;description&quot;: &quot;Lista dos 10 artistas mais tocados no gênero especificado&quot;,
+                        &quot;items&quot;: {
+                            &quot;type&quot;: &quot;object&quot;,
+                            &quot;properties&quot;: {
+                                &quot;rank&quot;: {
+                                    &quot;type&quot;: &quot;integer&quot;,
+                                    &quot;description&quot;: &quot;Posição no Top 10&quot;,
+                                    &quot;minimum&quot;: 1,
+                                    &quot;maximum&quot;: 10
+                                },
+                                &quot;name&quot;: {
+                                    &quot;type&quot;: &quot;string&quot;,
+                                    &quot;description&quot;: &quot;Nome do artista&quot;
+                                },
+                                &quot;monthlyStreams&quot;: {
+                                    &quot;type&quot;: &quot;string&quot;,
+                                    &quot;description&quot;: &quot;Número aproximado de streams mensais, formatado, ex: \&quot;150M\&quot;&quot;
+                                },
+                                &quot;source&quot;: {
+                                    &quot;type&quot;: &quot;string&quot;,
+                                    &quot;description&quot;: &quot;Plataforma ou fonte de dados&quot;
+                                }
+                            },
+                            &quot;required&quot;: [
+                                &quot;rank&quot;,
+                                &quot;name&quot;,
+                                &quot;monthlyStreams&quot;,
+                                &quot;source&quot;
+                            ],
+                            &quot;additionalProperties&quot;: false
+                        }
+                    }
+                },
+                &quot;required&quot;: [
+                    &quot;artists&quot;
+                ],
+                &quot;additionalProperties&quot;: false
             },
-            &quot;pop&quot;: {
-                &quot;type&quot;: &quot;array&quot;,
-                &quot;items&quot;: { &quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;Nome de um artista Pop em alta.&quot; },
-                &quot;minItems&quot;: 10,
-                &quot;maxItems&quot;: 10
-            }
-        },
-        &quot;required&quot;: [&quot;edm&quot;, &quot;rap&quot;, &quot;pop&quot;]
-    },
-    &quot;inputData&quot;: null
-}
+            &quot;maxAttempts&quot;: 4,
+            &quot;temperature&quot;: 1,
+            &quot;tools&quot;: [
+                &quot;XPostsSearch&quot;,
+                &quot;WebSearch&quot;
+            ],
+            &quot;toolsOptions&quot;: {}
+        }
 </code></pre>
 <pre><code class="lang-json">{
-    &quot;message&quot;: null,
-    &quot;data&quot;: {
-        &quot;result&quot;: {
-            &quot;edm&quot;: [
-                &quot;Marshmello&quot;,
-                &quot;Swedish House Mafia&quot;,
-                &quot;Skrillex&quot;,
-                &quot;Illenium&quot;,
-                &quot;John Summit&quot;,
-                &quot;Kaskade&quot;,
-                &quot;Daft Punk&quot;,
-                &quot;Deadmau5&quot;,
-                &quot;Avicii&quot;,
-                &quot;Calvin Harris&quot;
-            ],
-            &quot;rap&quot;: [
-                &quot;Drake&quot;,
-                &quot;Kendrick Lamar&quot;,
-                &quot;Eminem&quot;,
-                &quot;Travis Scott&quot;,
-                &quot;J. Cole&quot;,
-                &quot;Nicki Minaj&quot;,
-                &quot;21 Savage&quot;,
-                &quot;Metro Boomin&quot;,
-                &quot;Lil Wayne&quot;,
-                &quot;Bad Bunny&quot;
-            ],
-            &quot;pop&quot;: [
-                &quot;Taylor Swift&quot;,
-                &quot;Bruno Mars&quot;,
-                &quot;The Weeknd&quot;,
-                &quot;Lady Gaga&quot;,
-                &quot;Billie Eilish&quot;,
-                &quot;Sabrina Carpenter&quot;,
-                &quot;Ariana Grande&quot;,
-                &quot;Ed Sheeran&quot;,
-                &quot;Post Malone&quot;,
-                &quot;Doja Cat&quot;
-            ]
-        },
-        &quot;attempt&quot;: 0,
-        &quot;elapsedMilliseconds&quot;: 14961,
-        &quot;warnings&quot;: []
-    }
+  &quot;result&quot;: {
+    &quot;artists&quot;: [
+      {
+        &quot;rank&quot;: 1,
+        &quot;name&quot;: &quot;Skrillex&quot;,
+        &quot;monthlyStreams&quot;: &quot;31M&quot;,
+        &quot;source&quot;: &quot;Spotify&quot;
+      },
+      {
+        &quot;rank&quot;: 2,
+        &quot;name&quot;: &quot;Virtual Riot&quot;,
+        &quot;monthlyStreams&quot;: &quot;12M&quot;,
+        &quot;source&quot;: &quot;Spotify&quot;
+      },
+      {
+        &quot;rank&quot;: 3,
+        &quot;name&quot;: &quot;Excision&quot;,
+        &quot;monthlyStreams&quot;: &quot;11M&quot;,
+        &quot;source&quot;: &quot;Spotify&quot;
+      },
+      {
+        &quot;rank&quot;: 4,
+        &quot;name&quot;: &quot;Zeds Dead&quot;,
+        &quot;monthlyStreams&quot;: &quot;10M&quot;,
+        &quot;source&quot;: &quot;Spotify&quot;
+      },
+      {
+        &quot;rank&quot;: 5,
+        &quot;name&quot;: &quot;Flux Pavilion&quot;,
+        &quot;monthlyStreams&quot;: &quot;9M&quot;,
+        &quot;source&quot;: &quot;Spotify&quot;
+      },
+      {
+        &quot;rank&quot;: 6,
+        &quot;name&quot;: &quot;Illenium&quot;,
+        &quot;monthlyStreams&quot;: &quot;8.5M&quot;,
+        &quot;source&quot;: &quot;Spotify&quot;
+      },
+      {
+        &quot;rank&quot;: 7,
+        &quot;name&quot;: &quot;Rusko&quot;,
+        &quot;monthlyStreams&quot;: &quot;7M&quot;,
+        &quot;source&quot;: &quot;Spotify&quot;
+      },
+      {
+        &quot;rank&quot;: 8,
+        &quot;name&quot;: &quot;Bassnectar&quot;,
+        &quot;monthlyStreams&quot;: &quot;6M&quot;,
+        &quot;source&quot;: &quot;Spotify&quot;
+      },
+      {
+        &quot;rank&quot;: 9,
+        &quot;name&quot;: &quot;Seven Lions&quot;,
+        &quot;monthlyStreams&quot;: &quot;5.5M&quot;,
+        &quot;source&quot;: &quot;Spotify&quot;
+      },
+      {
+        &quot;rank&quot;: 10,
+        &quot;name&quot;: &quot;Getter&quot;,
+        &quot;monthlyStreams&quot;: &quot;5M&quot;,
+        &quot;source&quot;: &quot;Spotify&quot;
+      }
+    ]
+  },
+  &quot;attempt&quot;: 0,
+  &quot;elapsedMilliseconds&quot;: 11243,
+  &quot;warnings&quot;: [],
+  &quot;context&quot;: {
+    &quot;generatedUsage&quot;: [
+      {
+        &quot;sku&quot;: &quot;serviceusage.x_api.search&quot;,
+        &quot;amount&quot;: 0.005,
+        &quot;unitPrice&quot;: 0.005,
+        &quot;quantity&quot;: 1,
+        &quot;description&quot;: &quot;X Posts search&quot;
+      },
+      {
+        &quot;sku&quot;: &quot;inference.functions.json.in&quot;,
+        &quot;amount&quot;: 0.0016448,
+        &quot;unitPrice&quot;: 4e-7,
+        &quot;quantity&quot;: 4112,
+        &quot;description&quot;: &quot;JSON function rendering (@openai/gpt-4.1-mini)&quot;
+      },
+      {
+        &quot;sku&quot;: &quot;inference.functions.json.out&quot;,
+        &quot;amount&quot;: 0.0006272,
+        &quot;unitPrice&quot;: 0.0000016,
+        &quot;quantity&quot;: 392,
+        &quot;description&quot;: &quot;JSON function rendering (@openai/gpt-4.1-mini)&quot;
+      }
+    ],
+    &quot;runnedFunctions&quot;: [
+      {
+        &quot;functionName&quot;: &quot;x_posts_search&quot;,
+        &quot;success&quot;: true,
+        &quot;context&quot;: {
+          &quot;arguments&quot;: {
+            &quot;search_query&quot;: &quot;dubstep artists Spotify OR Apple Music OR streaming&quot;
+          },
+          &quot;result&quot;: [
+            {
+              &quot;url&quot;: &quot;https://x.com/nathanielblow/status/1867148757466304607&quot;,
+              &quot;text&quot;: &quot;NOW LIVE ON APPLE MUSIC. SPOTIFY. YOUTUBE MUSIC.\n\nEnjoy. https://t.co/apUxnXc7IE&quot;,
+              &quot;authorUserName&quot;: &quot;nathanielblow&quot;,
+              &quot;createdAt&quot;: &quot;2024-12-12T10:05:28&quot;
+            },
+            {
+              &quot;url&quot;: &quot;https://x.com/yobrxxzy/status/1754800896041505222&quot;,
+              &quot;text&quot;: &quot;MOST STREAMED ARTISTS ON THESE STREAMING PLATFORMS 🇳🇬\n\nApple Music — WIZKID\nSpotify — WIZKID\nYouTube — BURNA BOY\nPandora — WIZKID\nTidal  — WIZKID\nLine Music — WIZKID\nAudiomack — ASAKE\nDeezer — WIZKID\nBoomplay — BURNA BOY\nSoundCloud — BURNA BOY\nShazam — WIZKID https://t.co/Nm2jO5R5P6&quot;,
+              &quot;authorUserName&quot;: &quot;yobrxxzy&quot;,
+              &quot;createdAt&quot;: &quot;2024-02-06T09:35:10&quot;
+            },
+            {
+              &quot;url&quot;: &quot;https://x.com/yobrxxzy/status/1922763266549301642&quot;,
+              &quot;text&quot;: &quot;MOST STREAMED ARTISTS ON THESE DSP:\n\nApple Music — WIZKID\nSpotify — WIZKID\nPandora — WIZKID\nYouTube — BURNA BOY\nTidal  — WIZKID\nLine Music — WIZKID\nAudiomack — ASAKE\nDeezer — WIZKID\nBoomplay — BURNA BOY\nDeezer — WIZKID\nAnghami — REMA\nSoundCloud — BURNA BOY\nShazam — WIZKID\n\n🐐 https://t.co/3aUCGbYiEO&quot;,
+              &quot;authorUserName&quot;: &quot;yobrxxzy&quot;,
+              &quot;createdAt&quot;: &quot;2025-05-14T21:17:40&quot;
+            },
+            {
+              &quot;url&quot;: &quot;https://x.com/yobrxxzy/status/1856816512524587343&quot;,
+              &quot;text&quot;: &quot;MOST STREAMED ARTISTS ON THESE DSP:\n\nApple Music — WIZKID\nSpotify — WIZKID\nYouTube — BURNA BOY\nPandora — WIZKID\nTidal  — WIZKID\nLine Music — WIZKID\nAudiomack — ASAKE\nDeezer — WIZKID\nBoomplay — BURNA BOY\nDeezer — WIZKID\nAnghami — REMA\nSoundCloud — BURNA BOY\nShazam — WIZKID\n\n🐐 https://t.co/yL2tmJJpHM&quot;,
+              &quot;authorUserName&quot;: &quot;yobrxxzy&quot;,
+              &quot;createdAt&quot;: &quot;2024-11-13T21:48:49&quot;
+            },
+            {
+              &quot;url&quot;: &quot;https://x.com/hourjinnie/status/1858756269902881208&quot;,
+              &quot;text&quot;: &quot;PLAYLISTS! Let’s get to streaming and utilize all our tools! More pl coming tomorrow!!!\n\nSPOTIFY\n\nhttps://t.co/L0HRMpYEQG\n\nhttps://t.co/HmhdB859e5\n\nhttps://t.co/FA4eDmvvkS\n\nhttps://t.co/ZOedbxiKmO\n\nhttps://t.co/DyPs0qpOMQ\n\nDeezer\n\nhttps://t.co/36PY8aXkV7\n\nApple Music \n\nhttps://t.co/wk5MXtzDYC\n\nhttps://t.co/OgovuVtoDq\n\nPandora \n\nhttps://t.co/idkimHTTjp\n\nhttps://t.co/WQ83YKeUOK&quot;,
+              &quot;authorUserName&quot;: &quot;hourjinnie&quot;,
+              &quot;createdAt&quot;: &quot;2024-11-19T06:16:43&quot;
+            },
+            {
+              &quot;url&quot;: &quot;https://x.com/yobrxxzy/status/1653723618944090112&quot;,
+              &quot;text&quot;: &quot;MOST STREAMED ARTISTS ON THESE STREAMING PLATFORMS:\n\nApple Music — WIZKID\nSpotify — WIZKID\nYouTube — BURNA BOY\nPandora — WIZKID\nTidal  — WIZKID\nAudiomack — BURNA BOY\nDeezer — WIZKID\nBoomplay — BURNA BOY\nSoundCloud — WIZKID\nShazam — WIZKID\n\nWhere is @davido ? https://t.co/JOcwJZ2HUU&quot;,
+              &quot;authorUserName&quot;: &quot;yobrxxzy&quot;,
+              &quot;createdAt&quot;: &quot;2023-05-03T11:30:10&quot;
+            },
+            {
+              &quot;url&quot;: &quot;https://x.com/EyelanderMusic/status/1882525103482872115&quot;,
+              &quot;text&quot;: &quot;YO IF YOU THINK DUBSTEP IS GETTING “STALE” \n\nGET THE HELL OFF OF SPOTIFY AND ON TO SOUNDCLOUD \n\nTHERE IS SOOO MUCH INSANE UNDERGROUND TALENT THAT RELEASE MOSTLY JUST TO SOUNDCLOUD. \n\n(Plus that’s usually where all showcases, remixes and flips are for copyright purposes)&quot;,
+              &quot;authorUserName&quot;: &quot;EyelanderMusic&quot;,
+              &quot;createdAt&quot;: &quot;2025-01-23T20:25:34&quot;
+            },
+            {
+              &quot;url&quot;: &quot;https://x.com/thisiscyclops/status/1815084003050791422&quot;,
+              &quot;text&quot;: &quot;i like that more dubstep artists are doing albums this year. like i know it’s not the best release move in 2024 but that kinda lets you know that they’re doing it out of love for the music rather than like the Best Spotify Strategy 👍&quot;,
+              &quot;authorUserName&quot;: &quot;thisiscyclops&quot;,
+              &quot;createdAt&quot;: &quot;2024-07-21T17:58:43&quot;
+            },
+            {
+              &quot;url&quot;: &quot;https://x.com/mewaolix/status/1886435921895235989&quot;,
+              &quot;text&quot;: &quot;Stays, we can easily reach #3 if we push a little 🥹\n\n(DSP counts Spotify, Apple Music, Amazon Music, Deezer, YT Music, Anghami, Gaana, Joox, Melon, JioSaavn, Boomplay, etc) https://t.co/P2hFoSmbtT&quot;,
+              &quot;authorUserName&quot;: &quot;mewaolix&quot;,
+              &quot;createdAt&quot;: &quot;2025-02-03T15:25:46&quot;
+            },
+            {
+              &quot;url&quot;: &quot;https://x.com/bhadext/status/1951588819561546145&quot;,
+              &quot;text&quot;: &quot;Listen to my songs on Apple music, 🙏\nBhadext \n\nHere: https://t.co/3u79BQvHAZ https://t.co/lmMjN7m2oR&quot;,
+              &quot;authorUserName&quot;: &quot;bhadext&quot;,
+              &quot;createdAt&quot;: &quot;2025-08-02T10:20:08&quot;
+            },
+            {
+              &quot;url&quot;: &quot;https://x.com/runthismusic/status/1853150149788209234&quot;,
+              &quot;text&quot;: &quot;What if 'Sticky' by @tylerthecreator was Dubstep? \nOUT NOW ON SC + FREE DL 💚💿\n@skybreakedm https://t.co/OjaU8um8GC&quot;,
+              &quot;authorUserName&quot;: &quot;runthismusic&quot;,
+              &quot;createdAt&quot;: &quot;2024-11-03T19:00:00&quot;
+            },
+            {
+              &quot;url&quot;: &quot;https://x.com/BTStreamingID/status/1953425910612320348&quot;,
+              &quot;text&quot;: &quot;Party start 🎉\n\nPlaylist 🎶\n\nSpotify : \n1.Premium: https://t.co/qJwpckiSlS\n2. Free: https://t.co/NqIV40psvp\nApple music: https://t.co/dblVEdcd1q\nYouTube: https://t.co/gmCR3oyfze  \nYouTube Music: https://t.co/xhxF2rt90o\n\n#BTS #방탄소년단 #PTD_ON_STAGE_LIVE\n#BangtanPlaylistID&quot;,
+              &quot;authorUserName&quot;: &quot;BTStreamingID&quot;,
+              &quot;createdAt&quot;: &quot;2025-08-07T12:00:04&quot;
+            },
+            {
+              &quot;url&quot;: &quot;https://x.com/NewEDMToday/status/1728069779066392828&quot;,
+              &quot;text&quot;: &quot;@FlatlandFunk_ @FrankieSinn2k @gabybaumusic @Gladez @grislymusik @HELOSPHEREmusic @HUMANSION_music @kausedubs @Kuhlosul_ @LazrusOfficial @SHEISLUTHIEN @LVCiDdubz @MagMag_dubstep @MVSLOTUNES @raddixofficial @RazrDub @ScarexxDub @SmilesOnlyMusic @soulvalient @SpeedShift6 @stvnkfvcemusic @itstoxicmusic @TremorrOfficial @TyphonOfficial @Verosdubz @voyagerdubz @wilco_beats @zovahofficial all been released on: @Emengy \n\ngenre of music: #edm #dubstep\n\nwith 30 tracks\n\n54 artists\n\nhttps://t.co/H9KmeiXJB4&quot;,
+              &quot;authorUserName&quot;: &quot;NewEDMToday&quot;,
+              &quot;createdAt&quot;: &quot;2023-11-24T15:15:15&quot;
+            },
+            {
+              &quot;url&quot;: &quot;https://x.com/offsetemusic/status/1729861632308744501&quot;,
+              &quot;text&quot;: &quot;i mostly use my local files to listen to music, but i'll share my spotify wrapped anyway\n\ni'm happy to see @canotodubz here as no. 1, he's one of the most unique dubstep artists i've discovered this year https://t.co/OUBhgtikn9&quot;,
+              &quot;authorUserName&quot;: &quot;offsetemusic&quot;,
+              &quot;createdAt&quot;: &quot;2023-11-29T13:55:27&quot;
+            },
+            {
+              &quot;url&quot;: &quot;https://x.com/paulpoint_/status/1882728999962468414&quot;,
+              &quot;text&quot;: &quot;Good Morning 🌞 \n\nEspecially, Electronic Music Artists\n\nUse any of these?\n—Laptop \n——MIDI Keyboard\n———Software\n\nHow about these?\n—Spotify\n——Soundcloud\n———Apple Music\n\nMaking sounds like these?\n—House\n——Techno\n———Trance\n————DnB? ...Dubstep??\n\nIf you answered yes to anything above and you are staying consistent\n\nIf you are incessantly networking and improving your use of the above, particularly for live\n\nThen you may well be taking home your slice of a $25 Bn dollar industry\n\nExcited? Well are you? Keep making sounds on your computer 🤝\n\nCan't wait to hear your next track!\n\nP.&quot;,
+              &quot;authorUserName&quot;: &quot;paulpoint_&quot;,
+              &quot;createdAt&quot;: &quot;2025-01-24T09:55:47&quot;
+            },
+            {
+              &quot;url&quot;: &quot;https://x.com/Gunfingers_eu/status/1701277617280663828&quot;,
+              &quot;text&quot;: &quot;Join Kaps on his bass music journey! From listener to passionate player, he's mastered the dubstep genre, sharing stages with many confirmed artists.\nExpect a wealth of experience and skills for your enjoyment!\n\nSC : https://t.co/s5sqmIzrK6\n\nSpotify : https://t.co/o8bmaRXTNU https://t.co/6DVahvcr5D&quot;,
+              &quot;authorUserName&quot;: &quot;Gunfingers_eu&quot;,
+              &quot;createdAt&quot;: &quot;2023-09-11T16:52:46&quot;
+            },
+            {
+              &quot;url&quot;: &quot;https://x.com/ballsackious/status/1714854867645149399&quot;,
+              &quot;text&quot;: &quot;This new dirt monkey album is another\nbeautiful example of dubstep artists \nbranching out to other genres and sounds and creating something gorgeous and unique\n\nIt's so common now. So much good music is coming out I'm so pleased \n\nhttps://t.co/BJBXGa1Llz&quot;,
+              &quot;authorUserName&quot;: &quot;ballsackious&quot;,
+              &quot;createdAt&quot;: &quot;2023-10-19T04:03:55&quot;
+            },
+            {
+              &quot;url&quot;: &quot;https://x.com/karmiclink/status/1951358837828509849&quot;,
+              &quot;text&quot;: &quot;Our full karmic discography is LIVE in all major digital streaming platforms (Deezer, Spotify, Youtube, Apple Music, Amazon Music, TikTok, Tidal, Facebook &amp;amp; Instagram for your stories &amp;amp; reels)! ☯ #karmiclink #cult #dark #metal #project #rock #athens ☯ @TuneCore https://t.co/WWlVrUTVOc&quot;,
+              &quot;authorUserName&quot;: &quot;karmiclink&quot;,
+              &quot;createdAt&quot;: &quot;2025-08-01T19:06:16&quot;
+            },
+            {
+              &quot;url&quot;: &quot;https://x.com/OneRougeWave/status/1953444705204588608&quot;,
+              &quot;text&quot;: &quot;Oh yeah.. almost forgot😅.. \nStream my music 🎶…\n\nhttps://t.co/mUNJL5AAGf\n\nhttps://t.co/aFqbVnuzZV\n\n#wavyboss https://t.co/c8mnh9mw3d&quot;,
+              &quot;authorUserName&quot;: &quot;OneRougeWave&quot;,
+              &quot;createdAt&quot;: &quot;2025-08-07T13:14:45&quot;
+            }
+          ]
+        }
+      }
+    ]
+  }
 }
 </code></pre>
 

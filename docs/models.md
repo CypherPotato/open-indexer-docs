@@ -872,7 +872,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         
     </td>
     <td>
-        Model router for OpenAI. The routing is made between GPT 4.1 Nano, GPT 4.1 Mini and o4-mini.
+        Model router for OpenAI. The routing is made between GPT 5 Nano, GPT 5 Mini and o4-mini.
         <div class="model-capabilities">
         </div>
     </td>
@@ -903,7 +903,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         
     </td>
     <td>
-        Model router for OpenAI. The routing is made between GPT 4.1 Mini, o4-mini (low) and o4-mini (high).
+        Model router for OpenAI. The routing is made between GPT 5 Mini, o4-mini (low) and o4-mini (high).
         <div class="model-capabilities">
         </div>
     </td>
@@ -1101,6 +1101,96 @@ Todos os preços estão em dólares dos Estados Unidos.
 <tr>
     <td>
         <code>
+            @openai/gpt-5
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 1.25 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 10.00 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        OpenAI's newest flagship model for coding, reasoning, and agentic tasks across domains.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Pensamento profundo
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @openai/gpt-5-chat
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 1.25 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 10.00 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        GPT-5 snapshot currently used by OpenAI's ChatGPT.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
             @openai/gpt-4.1
         </code>
     </td>
@@ -1270,6 +1360,49 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-lightbulb-line"></i>
     Pensamento profundo
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @openai/gpt-5-mini
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.25 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 2.00 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        GPT-5 mini is a faster, more cost-efficient version of GPT-5.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
 </div>
 <div>
     <i class="ri-braces-line"></i>
@@ -1477,6 +1610,49 @@ Todos os preços estão em dólares dos Estados Unidos.
     </td>
     <td>
         The fastest and cheapest GPT 4.1 model.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @openai/gpt-5-nano
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.05 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.40 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        OpenAI's fastest, cheapest version of GPT-5.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>

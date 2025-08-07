@@ -872,7 +872,7 @@ All prices are in United States dollars.
         
     </td>
     <td>
-        Model router for OpenAI. The routing is made between GPT 4.1 Nano, GPT 4.1 Mini and o4-mini.
+        Model router for OpenAI. The routing is made between GPT 5 Nano, GPT 5 Mini and o4-mini.
         <div class="model-capabilities">
         </div>
     </td>
@@ -903,7 +903,7 @@ All prices are in United States dollars.
         
     </td>
     <td>
-        Model router for OpenAI. The routing is made between GPT 4.1 Mini, o4-mini (low) and o4-mini (high).
+        Model router for OpenAI. The routing is made between GPT 5 Mini, o4-mini (low) and o4-mini (high).
         <div class="model-capabilities">
         </div>
     </td>
@@ -1082,6 +1082,96 @@ All prices are in United States dollars.
     </td>
     <td>
         Dedicated to tasks requiring reasoning for mathematical and logical problem solving.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @openai/gpt-5
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 1.25 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 10.00 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        OpenAI's newest flagship model for coding, reasoning, and agentic tasks across domains.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Deep thinking
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @openai/gpt-5-chat
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 1.25 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 10.00 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        GPT-5 snapshot currently used by OpenAI's ChatGPT.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -1281,6 +1371,49 @@ All prices are in United States dollars.
 <tr>
     <td>
         <code>
+            @openai/gpt-5-mini
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 0.25 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 2.00 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        GPT-5 mini is a faster, more cost-efficient version of GPT-5.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
             @openai/gpt-4.1-mini
         </code>
     </td>
@@ -1294,136 +1427,4 @@ All prices are in United States dollars.
             </div>
         </div>
         <div class="item-pricing">
-            <small>
-                Output:
-            </small>
-            <div>
-                $ 1.60 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-    </td>
-    <td>
-        Fast and cheap for focused tasks.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Input: accepts images
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @openai/gpt-oss-120b
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Input:
-            </small>
-            <div>
-                $ 0.15 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-            <small>
-                Output:
-            </small>
-            <div>
-                $ 0.75 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-    </td>
-    <td>
-        OpenAI's flagship open source model, built on a Mixture-of-Experts (MoE) architecture with 120 billion parameters and 128 experts.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Deep thinking
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @openai/gpt-4o-mini
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Input:
-            </small>
-            <div>
-                $ 0.15 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-            <small>
-                Output:
-            </small>
-            <div>
-                $ 0.60 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-    </td>
-    <td>
-        Smaller version of 4o, optimized for everyday tasks.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Input: accepts images
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @openai/gpt-oss-20b
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Input:
-            </small>
-            <div>
-                $ 0.10 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-            <small>
-                Output:
-            </small>
-            <div>
+            <small
