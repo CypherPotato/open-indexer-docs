@@ -129,8 +129,24 @@
 <p>Usamos diferentes <a href="/docs/builtin-tools">serviços</a> para ajudar você à criar assistentes agênticos. Algumas ferramentas e serviços possuem custo, e estes custos são repassados para sua conta sem nenhuma taxa adicional.</p>
 <p>A inferência é cobrada em dólares americanos (USD), portanto, pode existir flutuação de moeda ao converter da sua moeda local para o dólar americano.</p>
 <h2 id="bring-your-own-key-byok">Bring-your-own-key (BYOK)</h2>
-<p>Você pode trazer sua própria chave de API compatível com OpenAI para usar diretamente na AIVAX. Como não sabemos qual modelo você estará usando, não cobramos nada em cima da inferência que você usar em seus modelos. Além disso, ao usar seu próprio modelo com a AIVAX, os limites de taxa são aumentados para <strong>3.600 requisições por minuto</strong>, que é o equivalente à 60 requisições por segundo.</p>
+<p>Você pode trazer sua própria chave de API compatível com OpenAI para usar diretamente na AIVAX. Como não sabemos qual modelo você estará usando, não cobramos nada em cima da inferência que você usar em seus modelos. Além disso, ao usar seu próprio modelo com a AIVAX, os limites de taxa são aumentados para <strong>1.500 requisições por minuto</strong>, sem limitação ao peso de tokens, que é o equivalente à 60 requisições por segundo.</p>
 <p>Note que, você ainda é cobrado para serviços que usar com seus próprios modelos, como <a href="/docs/entities/collections.md">RAG</a>, pesquisa na internet, geração de imagens, etc. Se sua conta ficar com saldo negativo, você não conseguirá usar nenhum serviço, incluindo inferência para suas próprias API-keys, até que adicione saldo novamente.</p>
+<h2 id="rag-coleções">RAG (coleções)</h2>
+<p>Atualmente, o modelo padrão usado para incorporação de coleções é o <a href="https://ai.google.dev/gemini-api/docs/pricing#gemini-embedding">Gemini Embedding</a>, o qual é precificado em <strong>$ 0,15</strong> para 1 milhão de tokens de entrada.</p>
+<p>Outros documentos podem ser vetorizados usando outros modelos de incorporação depreciados no sistema, mas ativos por compatibilidade:</p>
+<ul>
+<li><code>@google/gemini-embedding-001</code>, $ 0,15 por milhão de tokens. (padrão)</li>
+<li><code>@google/text-embedding-004</code>, $ 0,10 por milhão de tokens. (depreciado)</li>
+<li><code>@baai/bge-m3</code>, $0,012 por milhão de tokens. (depreciado)</li>
+</ul>
+<p>No momento, não cobramos taxa de computação e/ou armazenamento de vetores.</p>
+<p>Para a cobrança ocorrer, precisamos calcular quantos tokens foram processados da entrada, e nem todos os provedores de incorporação retornam a quantia de tokens indexados. Portanto, usamos uma aproximação para calcular a quantia de tokens processados:</p>
+<pre><code>tokens = ceil(utf8_bytes_count / 4)
+</code></pre>
+<p>O resultado dessa aproximação é o que cobramos de você.</p>
+<h2 id="ferramentas">Ferramentas</h2>
+<p>Ferramentas fornecidas pela AIVAX (<a href="/docs/builtin-tools">ferramentas embutidas</a>) possuem precificações e limites distintos de uma para outra.</p>
+<p>Para funções que você define para sua API, não há nenhuma cobrança.</p>
 
 </article>
 

@@ -15,63 +15,69 @@ Legendas dos limites:
 
 - **RPM**: requisições por minuto.
 - **RPD**: requisições por dia (24 horas).
+- **TPM**: tokens de entrada por minuto.
 
 # [Conta nova](#tab/free)
 
-| Operação | RPM | RPD |
-| --- | --- | --- |
-| Pesquisa de documentos | 50 | - |
-| Inserção de documentos | - | 100 |
-| Inferência | 5 | 300 |
-| Ferramentas (compartilhado) | - | 100 |
-| Ferramenta `web_search` | - | 20 |
-| Ferramenta `x_posts_search` | - | 20 |
-| Ferramenta `generate_image` | - | 5 |
+| Operação | RPM | RPD | TPM |
+| --- | ---: | ---: | ---: |
+| Pesquisa de documentos | 50 | - | - |
+| Inserção de documentos | - | 100 | - |
+| Inferência | 5 | 300 | 50.000 |
+| Inferência (modelos high-end) | - | - | - |
+| Ferramentas (compartilhado) | - | 100 | - |
+| Ferramenta `web_search` | - | 20 | - |
+| Ferramenta `x_posts_search` | - | 20 | - |
+| Ferramenta `generate_image` | - | 5 | - |
 
 # [Tier 1](#tab/tier1)
 
-| Operação | RPM | RPD |
-| --- | --- | --- |
-| Pesquisa de documentos | 150 | - |
-| Inserção de documentos | - | 3.000 |
-| Inferência | 75 | 10.000 |
-| Ferramentas (compartilhado) | - | 1.000 |
-| Ferramenta `web_search` | - | 300 |
-| Ferramenta `x_posts_search` | - | 300 |
-| Ferramenta `generate_image` | - | 30 |
+| Operação | RPM | RPD | TPM |
+| --- | ---: | ---: | ---: |
+| Pesquisa de documentos | 150 | - | - |
+| Inserção de documentos | - | 3.000 | - |
+| Inferência | 75 | 10.000 | 1.000.000 |
+| Inferência (modelos high-end) | 75 | 10.000 | 200.000 |
+| Ferramentas (compartilhado) | - | 1.000 | - |
+| Ferramenta `web_search` | - | 300 | - |
+| Ferramenta `x_posts_search` | - | 300 | - |
+| Ferramenta `generate_image` | - | 30 | - |
 
 # [Tier 2](#tab/tier2)
 
-| Operação | RPM | RPD |
-| --- | --- | --- |
-| Pesquisa de documentos | 300 | - |
-| Inserção de documentos | - | 10.000 |
-| Inferência | 200 | - |
-| Ferramentas (compartilhado) | - | 10.000 |
-| Ferramenta `web_search` | - | 1.000 |
-| Ferramenta `x_posts_search` | - | 1.000 |
-| Ferramenta `generate_image` | - | 300 |
+| Operação | RPM | RPD | TPM |
+| --- | ---: | ---: | ---: |
+| Pesquisa de documentos | 300 | - | - |
+| Inserção de documentos | - | 10.000 | - |
+| Inferência | 200 | - | 4.000.000 |
+| Inferência (modelos high-end) | 200 | - | 1.000.000 |
+| Ferramentas (compartilhado) | - | 10.000 | - |
+| Ferramenta `web_search` | - | 1.000 | - |
+| Ferramenta `x_posts_search` | - | 1.000 | - |
+| Ferramenta `generate_image` | - | 300 | - |
 
 # [Tier 3](#tab/tier3)
 
-| Operação | RPM | RPD |
-| --- | --- | --- |
-| Pesquisa de documentos | 1.000 | - |
-| Inserção de documentos | - | 30.000 |
-| Inferência | 1.000 | - |
-| Ferramentas (compartilhado) | - | 50.000 |
-| Ferramenta `web_search` | - | 10.000 |
-| Ferramenta `x_posts_search` | - | 10.000 |
-| Ferramenta `generate_image` | - | 1.000 |
+| Operação | RPM | RPD | TPM |
+| --- | ---: | ---: | ---: |
+| Pesquisa de documentos | 1.000 | - | - |
+| Inserção de documentos | - | 30.000 | - |
+| Inferência | 1.000 | - | 10.000.000 |
+| Inferência (modelos high-end) | 1.000 | - | 4.000.000 |
+| Ferramentas (compartilhado) | - | 50.000 | - |
+| Ferramenta `web_search` | - | 10.000 | - |
+| Ferramenta `x_posts_search` | - | 10.000 | - |
+| Ferramenta `generate_image` | - | 1.000 | - |
 
 ---
 
 - **Pesquisa de documentos**: inclui pesquisa semântica de documentos em uma coleção pelo endpoint de pesquisa `../collections/{id}/query`.
 - **Inserção de documentos**: inclui criação e modificação de documentos em uma coleção.
 - **Inferência**: toda chamada de inferência ou função, seja por chat client ou API.
+    - modelos high-end se referem à modelos que necessitam de Tier 1 para poder ser usado.
 - **Ferramentas (compartilhado)**: toda [ferramenta integrada](/docs/builtin-tools) invocada pela assistente. Esse limite é compartilhado para todas as ferramentas providas pela AIVAX e não é usado para ferramentas definidas por você ou suas APIs.
 - **Ferramenta (nome da ferramenta)**: todo uso da ferramenta mencionada.
 
 ## Limites para BYOK (Bring-your-own-key)
 
-Para modelos providos por você, o limite aplicado é de **3.600** requisições por minuto.
+Para modelos providos por você, o limite aplicado é de **1.500** requisições por minuto. Esse limite é separado do limite de inferência integrada.

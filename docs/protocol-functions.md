@@ -16,7 +16,6 @@ Como um exemplo, vamos pensar em uma função de consultar um usuário em um ban
 
 - `search_user`
 - `query_user`
-- `search_user`
 
 Nomes ruins incluem:
 
@@ -51,13 +50,13 @@ Funções de protocolo são definidas no AI gateway seguindo o JSON:
         ...
         "protocolFunctions": [
             {
-                "name": "list-clients",
+                "name": "list_clients",
                 "description": "Use essa ferramenta para listar e procurar pelos clientes do usuário.",
                 "callbackUrl": "https://my-external-api.com/api/scp/users",
                 "contentFormat": null
             },
             {
-                "name": "view-client",
+                "name": "view_client",
                 "description": "Use essa ferramenta para obter detalhes e pedidos de um cliente através do seu ID.",
                 "callbackUrl": "https://my-external-api.com/api/scp/users",
                 "contentFormat": {
@@ -76,7 +75,7 @@ Funções de protocolo são definidas no AI gateway seguindo o JSON:
 }
 ```
 
-No snippet acima, você está fornecendo duas funções para seu modelo de IA: `list-clients` e `view-client`, o qual irá decidir qual será executada durante o seu raciocínio. Você pode fornecer também um formato de conteúdo JSON para qual o modelo irá chamar sua API fornecendo o contéudo informado.
+No snippet acima, você está fornecendo duas funções para seu modelo de IA: `list_clients` e `view_client`, o qual irá decidir qual será executada durante o seu raciocínio. Você pode fornecer também um formato de conteúdo JSON para qual o modelo irá chamar sua API fornecendo o contéudo informado.
 
 Você também pode definir as lista de funções suportadas através de um endpoint. Toda vez que o modelo receber uma mensagem, ele irá consultar o endpoint fornecido para obter uma lista de funções que ele possa executar.
 
@@ -116,13 +115,13 @@ Os endpoint de fornecimento de funções deve responder seguindo o formato:
 {
     "functions": [
         {
-            "name": "list-clients",
+            "name": "list_clients",
             "description": "Use essa ferramenta para listar e procurar pelos clientes do usuário.",
             "callbackUrl": "https://my-external-api.com/api/scp/users",
             "contentFormat": null
         },
         {
-            "name": "view-client",
+            "name": "view_client",
             "description": "Use essa ferramenta para obter detalhes e pedidos de um cliente através do seu ID.",
             "callbackUrl": "https://my-external-api.com/api/scp/users",
             "contentFormat": {
@@ -149,7 +148,7 @@ As funções são invocadas no endpoint fornecido em `callbackUrl` através de u
 ```json
 {
     "function": {
-        "name": "view-client",
+        "name": "view_client",
         "content": {
             "user_id": "3e5a2823-98fa-49a1-831a-0c4c5d33450e"
         }
@@ -169,11 +168,11 @@ As respostas bem sucedidas devem ser textuais e serão anexadas como resposta da
 
 Erros podem ser comuns, como não encontrar um cliente pelo ID ou algum campo não estiver no formato desejado. Nestes casos, responda com um status OK e no corpo da resposta inclua uma descrição humana do erro e como a assistente pode contornar ele.
 
-**É garantido** que a requisição irá seguir estritamente o esquema JSON do conteúdo fornecido pela definição da função. Funções que não esperam argumentos não devem especificar um formato de conteúdo para essa função.
+**É garantido** que a requisição irá seguir estritamente o JSON Schema do conteúdo fornecido pela definição da função. Funções que não esperam argumentos não devem especificar um formato de conteúdo para essa função.
 
 > [!IMPORTANT]
 >
-> Quanto mais funções você definir, mais tokens você irá consumir no processo de raciocínio. A definição da função, bem como o formato dela, consome tokens do processo de raciocínio. 
+> Quanto mais funções você definir, mais de entrada tokens você irá consumir no processo de raciocínio. A definição da função, bem como o formato dela, consome tokens do processo de raciocínio.
 
 #### Autenticação
 
@@ -188,3 +187,64 @@ As chamadas de função enviam um campo `$.context.externalUserId` contendo a ta
 #### Considerações de segurança
 
 Para o modelo de IA, somente é visível o nome, descrição e formato da função. Ela não é capaz de ver o endpoint para onde essa função aponta. Além disso, ela não possui acesso à tag do usuário que está autenticado em um [cliente de chat](/docs/entities/chat-clients).
+
+## Funções especialistas
+
+Além das [funções embutidas](/docs/builtin-tools), você pode definir funções especialistas, que executam tarefas específicas na sua conta da AIVAX.
+
+Você define funções especialistas pelo esquema de URL `aivax://`, seguindo o exemplo abaixo:
+
+```json
+{
+    "name": "my-ai-gateway",
+    "parameters": {
+        ...
+        "protocolFunctions": [
+            {
+                "name": "search_disease",
+                "description": "Use essa ferramenta para pesquisar por doenças, tratamentos e sintomas.",
+                "callbackUrl": "aivax://query-collection?collection-id=0196f5ef-9334-742b-a988-f913bb3be5ba&top=5&min=0.4",
+                "contentFormat": {
+                    "type": "object",
+                    "properties": {
+                        "query": {
+                            "type": "string",
+                            "description": "Nome da doença, tratamento ou sintomas."
+                        }
+                    },
+                    "required": [
+                        "query"
+                    ]
+                }
+            }
+        ]
+    }
+}
+```
+
+A função acima cria uma ferramenta para IA consultar em uma [coleção de documentos](/docs/entities/collections) específica, guiando a assistente do que ela deve pesquisar nessa coleção e o que esperar de uma resposta. Dessa forma, você pode vincular várias coleções de RAG para uma assistente poder buscar conteúdo especialista.
+
+Você pode personalizar a descrição das propriedades do JSON Schema de funções especialistas mas não sua estrutura, pois nosso backend espera um formato específico para chamar as funções. Os parâmetros de funções especialistas são fornecidos na URL através de parâmetros da query.
+
+Atualmente, apenas uma função especialista existe:
+- `query-collection`: executa uma pesquisa RAG em uma coleção informada.
+    Parâmetros da query:
+    - `collection-id`: o UUID da coleção que será pesquisada.
+    - `top`: um número indicando quantos documentos devem ser retornados na pesquisa.
+    - `min`: um decimal indicando qual a pontuação mínima de similaridade da busca.
+
+    Formato JSON da função:
+    ```json
+    {
+        "type": "object",
+        "properties": {
+            "query": {
+                "type": "string",
+                "description": "Conteúdo da pesquisa."
+            }
+        },
+        "required": [
+            "query"
+        ]
+    }
+    ```

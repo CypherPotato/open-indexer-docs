@@ -134,7 +134,6 @@
 <ul>
 <li><code>search_user</code></li>
 <li><code>query_user</code></li>
-<li><code>search_user</code></li>
 </ul>
 <p>Nomes ruins incluem:</p>
 <ul>
@@ -161,13 +160,13 @@
         ...
         &quot;protocolFunctions&quot;: [
             {
-                &quot;name&quot;: &quot;list-clients&quot;,
+                &quot;name&quot;: &quot;list_clients&quot;,
                 &quot;description&quot;: &quot;Use essa ferramenta para listar e procurar pelos clientes do usuário.&quot;,
                 &quot;callbackUrl&quot;: &quot;https://my-external-api.com/api/scp/users&quot;,
                 &quot;contentFormat&quot;: null
             },
             {
-                &quot;name&quot;: &quot;view-client&quot;,
+                &quot;name&quot;: &quot;view_client&quot;,
                 &quot;description&quot;: &quot;Use essa ferramenta para obter detalhes e pedidos de um cliente através do seu ID.&quot;,
                 &quot;callbackUrl&quot;: &quot;https://my-external-api.com/api/scp/users&quot;,
                 &quot;contentFormat&quot;: {
@@ -185,7 +184,7 @@
     }
 }
 </code></pre>
-<p>No snippet acima, você está fornecendo duas funções para seu modelo de IA: <code>list-clients</code> e <code>view-client</code>, o qual irá decidir qual será executada durante o seu raciocínio. Você pode fornecer também um formato de conteúdo JSON para qual o modelo irá chamar sua API fornecendo o contéudo informado.</p>
+<p>No snippet acima, você está fornecendo duas funções para seu modelo de IA: <code>list_clients</code> e <code>view_client</code>, o qual irá decidir qual será executada durante o seu raciocínio. Você pode fornecer também um formato de conteúdo JSON para qual o modelo irá chamar sua API fornecendo o contéudo informado.</p>
 <p>Você também pode definir as lista de funções suportadas através de um endpoint. Toda vez que o modelo receber uma mensagem, ele irá consultar o endpoint fornecido para obter uma lista de funções que ele possa executar.</p>
 <img src="/assets/diagrams/protocol-functions-2.drawio.svg">
 <p>Defina os endpoints de listagem de funções no seu AI gateway:</p>
@@ -215,13 +214,13 @@
 <pre><code class="lang-json">{
     &quot;functions&quot;: [
         {
-            &quot;name&quot;: &quot;list-clients&quot;,
+            &quot;name&quot;: &quot;list_clients&quot;,
             &quot;description&quot;: &quot;Use essa ferramenta para listar e procurar pelos clientes do usuário.&quot;,
             &quot;callbackUrl&quot;: &quot;https://my-external-api.com/api/scp/users&quot;,
             &quot;contentFormat&quot;: null
         },
         {
-            &quot;name&quot;: &quot;view-client&quot;,
+            &quot;name&quot;: &quot;view_client&quot;,
             &quot;description&quot;: &quot;Use essa ferramenta para obter detalhes e pedidos de um cliente através do seu ID.&quot;,
             &quot;callbackUrl&quot;: &quot;https://my-external-api.com/api/scp/users&quot;,
             &quot;contentFormat&quot;: {
@@ -243,7 +242,7 @@
 <p>As funções são invocadas no endpoint fornecido em <code>callbackUrl</code> através de uma requisição HTTP POST, com o corpo:</p>
 <pre><code class="lang-json">{
     &quot;function&quot;: {
-        &quot;name&quot;: &quot;view-client&quot;,
+        &quot;name&quot;: &quot;view_client&quot;,
         &quot;content&quot;: {
             &quot;user_id&quot;: &quot;3e5a2823-98fa-49a1-831a-0c4c5d33450e&quot;
         }
@@ -258,10 +257,10 @@
 <h4 id="formato-das-respostas">Formato das respostas</h4>
 <p>As respostas bem sucedidas devem ser textuais e serão anexadas como resposta da função do jeito que for respondida pelo endpoint. Não há formato JSON ou estrutura para essa resposta, mas é aconselhável que dê uma resposta simples, humanamente legível, para que a assistente consiga ler o resultado da ação.</p>
 <p>Erros podem ser comuns, como não encontrar um cliente pelo ID ou algum campo não estiver no formato desejado. Nestes casos, responda com um status OK e no corpo da resposta inclua uma descrição humana do erro e como a assistente pode contornar ele.</p>
-<p><strong>É garantido</strong> que a requisição irá seguir estritamente o esquema JSON do conteúdo fornecido pela definição da função. Funções que não esperam argumentos não devem especificar um formato de conteúdo para essa função.</p>
+<p><strong>É garantido</strong> que a requisição irá seguir estritamente o JSON Schema do conteúdo fornecido pela definição da função. Funções que não esperam argumentos não devem especificar um formato de conteúdo para essa função.</p>
 <div class="IMPORTANT">
 <h5>Important</h5>
-<p>Quanto mais funções você definir, mais tokens você irá consumir no processo de raciocínio. A definição da função, bem como o formato dela, consome tokens do processo de raciocínio.</p>
+<p>Quanto mais funções você definir, mais de entrada tokens você irá consumir no processo de raciocínio. A definição da função, bem como o formato dela, consome tokens do processo de raciocínio.</p>
 </div>
 <h4 id="autenticação">Autenticação</h4>
 <p>A autenticação das requisições são feitas pelo cabeçalho <code>X-Aivax-Nonce</code> enviado em todas as requisições de protocolo das funções, até mesmo as de listagem.</p>
@@ -270,6 +269,62 @@
 <p>As chamadas de função enviam um campo <code>$.context.externalUserId</code> contendo a tag de usuário criada em uma <a href="/docs/entities/chat-clients">sessão de chat</a>. Essa tag pode ser usada para autenticar o usuário que chamou essa função.</p>
 <h4 id="considerações-de-segurança">Considerações de segurança</h4>
 <p>Para o modelo de IA, somente é visível o nome, descrição e formato da função. Ela não é capaz de ver o endpoint para onde essa função aponta. Além disso, ela não possui acesso à tag do usuário que está autenticado em um <a href="/docs/entities/chat-clients">cliente de chat</a>.</p>
+<h2 id="funções-especialistas">Funções especialistas</h2>
+<p>Além das <a href="/docs/builtin-tools">funções embutidas</a>, você pode definir funções especialistas, que executam tarefas específicas na sua conta da AIVAX.</p>
+<p>Você define funções especialistas pelo esquema de URL <code>aivax://</code>, seguindo o exemplo abaixo:</p>
+<pre><code class="lang-json">{
+    &quot;name&quot;: &quot;my-ai-gateway&quot;,
+    &quot;parameters&quot;: {
+        ...
+        &quot;protocolFunctions&quot;: [
+            {
+                &quot;name&quot;: &quot;search_disease&quot;,
+                &quot;description&quot;: &quot;Use essa ferramenta para pesquisar por doenças, tratamentos e sintomas.&quot;,
+                &quot;callbackUrl&quot;: &quot;aivax://query-collection?collection-id=0196f5ef-9334-742b-a988-f913bb3be5ba&amp;top=5&amp;min=0.4&quot;,
+                &quot;contentFormat&quot;: {
+                    &quot;type&quot;: &quot;object&quot;,
+                    &quot;properties&quot;: {
+                        &quot;query&quot;: {
+                            &quot;type&quot;: &quot;string&quot;,
+                            &quot;description&quot;: &quot;Nome da doença, tratamento ou sintomas.&quot;
+                        }
+                    },
+                    &quot;required&quot;: [
+                        &quot;query&quot;
+                    ]
+                }
+            }
+        ]
+    }
+}
+</code></pre>
+<p>A função acima cria uma ferramenta para IA consultar em uma <a href="/docs/entities/collections">coleção de documentos</a> específica, guiando a assistente do que ela deve pesquisar nessa coleção e o que esperar de uma resposta. Dessa forma, você pode vincular várias coleções de RAG para uma assistente poder buscar conteúdo especialista.</p>
+<p>Você pode personalizar a descrição das propriedades do JSON Schema de funções especialistas mas não sua estrutura, pois nosso backend espera um formato específico para chamar as funções. Os parâmetros de funções especialistas são fornecidos na URL através de parâmetros da query.</p>
+<p>Atualmente, apenas uma função especialista existe:</p>
+<ul>
+<li><p><code>query-collection</code>: executa uma pesquisa RAG em uma coleção informada.
+Parâmetros da query:</p>
+<ul>
+<li><code>collection-id</code>: o UUID da coleção que será pesquisada.</li>
+<li><code>top</code>: um número indicando quantos documentos devem ser retornados na pesquisa.</li>
+<li><code>min</code>: um decimal indicando qual a pontuação mínima de similaridade da busca.</li>
+</ul>
+<p>Formato JSON da função:</p>
+<pre><code class="lang-json">{
+    &quot;type&quot;: &quot;object&quot;,
+    &quot;properties&quot;: {
+        &quot;query&quot;: {
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;description&quot;: &quot;Conteúdo da pesquisa.&quot;
+        }
+    },
+    &quot;required&quot;: [
+        &quot;query&quot;
+    ]
+}
+</code></pre>
+</li>
+</ul>
 
 </article>
 

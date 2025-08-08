@@ -10,6 +10,30 @@ A inferência é cobrada em dólares americanos (USD), portanto, pode existir fl
 
 ## Bring-your-own-key (BYOK)
 
-Você pode trazer sua própria chave de API compatível com OpenAI para usar diretamente na AIVAX. Como não sabemos qual modelo você estará usando, não cobramos nada em cima da inferência que você usar em seus modelos. Além disso, ao usar seu próprio modelo com a AIVAX, os limites de taxa são aumentados para **3.600 requisições por minuto**, que é o equivalente à 60 requisições por segundo.
+Você pode trazer sua própria chave de API compatível com OpenAI para usar diretamente na AIVAX. Como não sabemos qual modelo você estará usando, não cobramos nada em cima da inferência que você usar em seus modelos. Além disso, ao usar seu próprio modelo com a AIVAX, os limites de taxa são aumentados para **1.500 requisições por minuto**, sem limitação ao peso de tokens, que é o equivalente à 60 requisições por segundo.
 
 Note que, você ainda é cobrado para serviços que usar com seus próprios modelos, como [RAG](/docs/entities/collections.md), pesquisa na internet, geração de imagens, etc. Se sua conta ficar com saldo negativo, você não conseguirá usar nenhum serviço, incluindo inferência para suas próprias API-keys, até que adicione saldo novamente.
+
+## RAG (coleções)
+
+Atualmente, o modelo padrão usado para incorporação de coleções é o [Gemini Embedding](https://ai.google.dev/gemini-api/docs/pricing#gemini-embedding), o qual é precificado em **$ 0,15** para 1 milhão de tokens de entrada.
+
+Outros documentos podem ser vetorizados usando outros modelos de incorporação depreciados no sistema, mas ativos por compatibilidade:
+
+- `@google/gemini-embedding-001`, $ 0,15 por milhão de tokens. (padrão)
+- `@google/text-embedding-004`, $ 0,10 por milhão de tokens. (depreciado)
+- `@baai/bge-m3`, $0,012 por milhão de tokens. (depreciado)
+
+No momento, não cobramos taxa de computação e/ou armazenamento de vetores.
+
+Para a cobrança ocorrer, precisamos calcular quantos tokens foram processados da entrada, e nem todos os provedores de incorporação retornam a quantia de tokens indexados. Portanto, usamos uma aproximação para calcular a quantia de tokens processados:
+
+    tokens = ceil(utf8_bytes_count / 4)
+
+O resultado dessa aproximação é o que cobramos de você.
+
+## Ferramentas
+
+Ferramentas fornecidas pela AIVAX ([ferramentas embutidas](/docs/builtin-tools)) possuem precificações e limites distintos de uma para outra.
+
+Para funções que você define para sua API, não há nenhuma cobrança.
