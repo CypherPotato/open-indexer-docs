@@ -1,0 +1,7 @@
+items:
+- name: Inference
+  href: ai-gateway.md
+- name: Workers
+  href: workers.md
+- name: Pipelines
+  href: pipelines.md

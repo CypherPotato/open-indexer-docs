@@ -612,10 +612,43 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "docs/en/entities/ai-gateway.md",
+      "source_relative_path": "docs/en/entities/ai-gateways/ai-gateway.md",
       "output": {
         ".html": {
-          "relative_path": "docs/en/entities/ai-gateway.html"
+          "relative_path": "docs/en/entities/ai-gateways/ai-gateway.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/en/entities/ai-gateways/pipelines.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/en/entities/ai-gateways/pipelines.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "docs/en/entities/ai-gateways/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docs/en/entities/ai-gateways/toc.html"
+        },
+        ".json": {
+          "relative_path": "docs/en/entities/ai-gateways/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/en/entities/ai-gateways/workers.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/en/entities/ai-gateways/workers.html"
         }
       },
       "version": ""
@@ -755,10 +788,43 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "docs/entities/ai-gateway.md",
+      "source_relative_path": "docs/entities/ai-gateways/ai-gateway.md",
       "output": {
         ".html": {
-          "relative_path": "docs/entities/ai-gateway.html"
+          "relative_path": "docs/entities/ai-gateways/ai-gateway.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/entities/ai-gateways/pipelines.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/entities/ai-gateways/pipelines.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "docs/entities/ai-gateways/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docs/entities/ai-gateways/toc.html"
+        },
+        ".json": {
+          "relative_path": "docs/entities/ai-gateways/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/entities/ai-gateways/workers.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/entities/ai-gateways/workers.html"
         }
       },
       "version": ""

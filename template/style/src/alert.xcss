@@ -10,4 +10,12 @@
     h5 {
         color: --bs-alert-color;
     }
+
+    p {
+        margin: 0;
+
+        + p {
+            margin-top: 1em;
+        }
+    }
 }

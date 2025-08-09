@@ -100,7 +100,7 @@ html {
 
     & [data-bs-theme="light"] {
         .alert {
-            border: 1px solid #00000020;
+            border-left-color: #00000020;
         }
     }
 
@@ -134,7 +134,7 @@ html {
 
     & [data-bs-theme="dark"] {
         .alert {
-            border: 1px solid #ffffff20;
+            border-left-color: #ffffff20;
         }
     }
 

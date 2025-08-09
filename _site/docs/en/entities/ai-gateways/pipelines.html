@@ -1,0 +1,325 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>AI Pipelines | AIVAX </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="AI Pipelines | AIVAX ">
+
+
+        <link rel="icon" href="../../../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+        
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../../../toc.html">
+        <meta name="docfx:tocrel" content="../../toc.html">
+
+        <meta name="docfx:rel" content="../../../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/en/entities/ai-gateways/pipelines.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+                
+        <script>            
+            function switchLanguage(lang) {
+                const docPart = window.location.pathname.match(/\/docs\/((en)\/)?(.*)/)[3];
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../../../index.html">
+                        <img id="logo" class="svg" src="../../../../assets/img/aivax.png" alt="AIVAX">
+                        AIVAX
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/en/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="ai-pipelines">AI Pipelines</h1>
+
+<p>AIVAX provides several pipelines to use in your AI gateway.</p>
+<p>You can use multiple pipelines to run in the context of your gateway.</p>
+<h2 id="rag">RAG</h2>
+<p>Through <a href="/docs/en/entities/collections">collections</a>, you can link a collection of documents to your AI gateway. You can set the embedding parameters, such as number of documents, minimum score, and embedding strategy.</p>
+<p>Each embedding strategy is more refined than the other. Some produce better results than others, but it is important to conduct practical tests with various strategies to understand which fits best with the model, conversation, and user tone.</p>
+<p>It may be necessary to adjust the system prompt to better inform how the AI should consider the attached documents in the conversation. The documents are attached as a user message, limited by the parameters you define in the retrieval strategy.</p>
+<p>Rewrite strategies usually generate the best results at low latency and cost. The rewrite model used is always the one with the lowest cost, usually chosen by an internal pool that decides which model has the lowest latency at the moment.</p>
+<h3 id="strategies-without-rewrite-cost">Strategies without rewrite cost:</h3>
+<ul>
+<li><code>Plain</code>: the default strategy. It is the least optimized and has no rewrite cost: the last user message is used as the search term to query the gateway's attached collection.</li>
+<li><code>Concatenate</code>: concatenates the last N user messages in lines, and then the result of the concatenation is used as the search term.</li>
+</ul>
+<h3 id="strategies-with-rewrite-cost-inference-tokens-are-charged">Strategies with rewrite cost (inference tokens are charged):</h3>
+<ul>
+<li><code>UserRewrite</code>: rewrites the last N user messages using a smaller model, creating a contextual question about what the user wants to say.</li>
+<li><code>FullRewrite</code>: rewrites the last N*2 chat messages using a smaller model. Similar to <code>UserRewrite</code>, but also considers the assistant's messages when formulating the new question. Usually creates the best questions, with a slightly higher cost. It is the most stable and consistent strategy. Works with any model.</li>
+</ul>
+<h3 id="function-strategies">Function strategies:</h3>
+<ul>
+<li><code>QueryFunction</code>: provides a search function in the integrated collection for the AI model. You should adjust the system instructions with ideal scenarios for the model to call this function when necessary. May not work as well on smaller models.</li>
+</ul>
+<p>When defining a RAG collection in your gateway's pipeline, the first message in the conversation context will be the result of the RAG embedding as a user message (except when used as tools where the embedding result is attached as a tool response).</p>
+<p>Defining many RAG response documents increases input token consumption and may increase the final inference cost.</p>
+<h2 id="fixing-instructions">Fixing instructions</h2>
+<p>The instruction pipeline allows prefixing instructions in various places of the model, guiding and restricting the model's response format.</p>
+<p>The current ways to define instructions are:</p>
+<ul>
+<li><strong>System instructions</strong>: inserts a fixed text into the system prompt of the context.</li>
+<li><strong>User prompt template</strong>: reformats the user's question to follow a specific question format.</li>
+<li><strong>Assistant initialization (prefill)</strong>: initializes the assistant's message with initial generation tokens.</li>
+</ul>
+<p>These parameters can be very useful for prompt engineering, however, they may not be compatible with all models.</p>
+<p><strong>Attention</strong>: prefixing instructions, templates, and initializations can remove the model's reasoning, multi‑modal interpretation, and tool‑calling capabilities.</p>
+<h2 id="parameterization">Parameterization</h2>
+<p>The parameterization pipeline configures the initial inference hyperparameters, such as temperature, nucleus sampling, presence penalty, and other inference hyperparameters.</p>
+<h2 id="truncating">Truncating</h2>
+<p>The truncating pipeline allows setting the size of a conversation in tokens before it is trimmed.</p>
+<p>When this pipeline is enabled, before each inference, it calculates whether <code>num_of_chars / 4</code> is greater than the maximum input tokens for the conversation. If the context is larger, the pipeline starts removing messages from the beginning of the conversation until the messages fit within the specified context.</p>
+<p>At least one user message (commonly the last message) is kept in the conversation. All other messages are removed, except system instructions.</p>
+<p>Alternatively, you can define that when the limit is reached, an error is thrown in the API instead of truncating the context.</p>
+<h2 id="tool-message-truncating">Tool message truncating</h2>
+<p>The tool message counting pipeline is similar to truncating: it removes older tool responses and preserves only the newest.</p>
+<p>This can be useful when previous tool responses are no longer useful in newer messages and occupy space in the context, but can be detrimental when using agentic models that call tools in a chain.</p>
+<p>This pipeline is configured in the number of tool messages to be preserved instead of tokens. When a tool message is considered old, it is not removed, but its content is removed.</p>
+<h2 id="serverside-tools">Server‑side tools</h2>
+<p>This pipeline allows execution of AIVAX server‑side tools, similar to the MCP protocol.</p>
+<p>Read more about this pipeline <a href="/docs/en/protocol-functions">here</a>.</p>
+<h2 id="builtin-tools">Built‑in tools</h2>
+<p>You can add tools provided by AIVAX to your gateway, such as internet search, image generation, and link access. See all available tools <a href="/docs/en/builtin-tools">here</a>.</p>
+<h2 id="workers">Workers</h2>
+<p>Workers define the behavior of your gateway remotely, used to control when certain events should be aborted or continued.</p>
+<p>Read more about this pipeline <a href="/docs/en/entities/ai-gateways/workers">here</a>.</p>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/en/entities/ai-gateways/pipelines.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>

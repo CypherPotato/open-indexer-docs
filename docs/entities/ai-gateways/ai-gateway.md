@@ -17,28 +17,6 @@ Ao usar um modelo, você perceberá que alguns são mais inteligentes que outros
 
 Você pode ver os modelos disponíveis na [página de modelos](/docs/models).
 
-## Escolhendo uma estratégia de busca
-
-Se você for usar uma coleção de conhecimento com um modelo de IA, você poderá escolher uma estratégia que a IA usará para realizar uma busca por informação. Cada estratégia é mais refinada que a outra. Algumas criam resultados melhores que as demais, mas é importante realizar testes práticos com várias estratégias para entender qual se ajusta melhor no modelo, conversa e tom do usuário.
-
-Talvez seja necessário realizar ajustes no prompt do sistema para informar melhor como a IA deverá considerar os documentos anexados na conversa. Os documentos são anexados como uma mensagem do usuário, limitados aos parâmetros que você define na estratégia de obtenção.
-
-Estratégias com reescrita normalmente geram os melhores resultados à um baixo custo de latência e custo. O modelo de reescrita usado sempre o com menor custo, escolhido normalmente por um pool interno que decide o modelo que está com menor latência no momento.
-
-Estratégias sem custo de reescrita:
-
-- `Plain`: a estratégia padrão. É a menos otimizada e não possui custo de reescrita: a última mensagem do usuário é usada como termo de busca para pesquisar na coleção anexada do gateway.
-- `Concatenate`: Concatena em linhas as últimas N mensagens do usuário, e então o resultado da concatenação é usada como termo de busca.
-
-Estratégias com custo de reescrita (os tokens de inferência são cobrados):
-
-- `UserRewrite`: reescreve as últimas N mensagens do usuário usando um modelo menor, criando uma pergunta contextualizada no que o usuário quer dizer.
-- `FullRewrite`: reescreve as últimas N*2 mensagens do chat usando um modelo menor. Similar ao `UserRewrite`, mas considera também as mensagens da assistente na formulação da nova pergunta. Geralmente cria as melhores perguntas, com um custo um pouco maior. É a estratégia mais estável e consistente. Funciona com qualquer modelo.
-
-Estratégias de função:
-
-- `QueryFunction`: fornece uma função de pesquisa na coleção integrada para o modelo de IA. Você deverá ajustar nas instruções do sistema os cenários ideais para o modelo chamar essa função quando necessário. Pode não funcionar tão bem em modelos menores.
-
 ## Usar um gateway de IA
 
 A AIVAX provê um endpoint compatível com a interface OpenAI através de um AI-gateway, o que facilita a integração do modelo criado pela AIVAX com aplicações e SDKs existentes. Vale ressaltar que somente algumas propriedades são suportadas.
