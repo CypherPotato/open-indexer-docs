@@ -132,31 +132,137 @@
 <pre><code class="lang-bash">curl https://inference.aivax.net/api/v1/information/models.txt?api-key=oky_gr5uepj...
 </code></pre>
 <p>Não há necessidade de enviar o esquema de autenticação <code>Bearer</code> em ambos cabeçalhos, mas é possível por questões de compatibilidade.</p>
-<h2 id="autenticando-um-nonce">Autenticando um nonce</h2>
-<p>Nonces são gerados por webhooks e funções de protocolo para autenticar transações feitas pela AIVAX em conteúdos externos. Em requisições que incluam o cabeçalho <code>X-Aivax-Nonce</code>, valide esse token chamando este endpoint:</p>
-<div class="request-item get">
-    <span>POST</span>
-    <span>
-        /api/v1/auth/nonce
-    </span>
-</div>
-<pre><code class="lang-json">{
-    &quot;nonce&quot;: &quot;kgnjcyjy7ksz5eeocc4iw14bre.7cahcn8phfmrdkidhqaecp4e4w&quot;
-}
-</code></pre>
-<blockquote>
-<p>Observação: essa rota requer autenticação para funcionar.</p>
-</blockquote>
-<p>Uma resposta para um nonce validado é retornada neste formato:</p>
-<pre><code class="lang-json">{
-    &quot;message&quot;: null,
-    &quot;data&quot;: {
-        &quot;validated&quot;: true,
-        &quot;reason&quot;: &quot;The nonce informed is valid and has been consumed.&quot;
+<h2 id="autenticando-hooks">Autenticando hooks</h2>
+<p>Requisições da AIVAX para seus serviços, seja workers de gateways de IA ou chamadas de função server-side, um cabeçalho <code>X-Request-Nonce</code> é encaminhado em todas as requisições conténdo um hash BCrypt sendo um salto da <a href="https://console.aivax.net/dashboard/account">chave de hook</a> definida em sua conta.</p>
+<p>A validação é simples: verifique se o hash em <code>X-Request-Nonce</code> é um produto da chave de salto definida em sua conta.</p>
+<p>Dessa forma, você poderá autenticar se as requisições da AIVAX para seus serviços são genuínas através desse token. Se sua conta não tiver definido uma chave de hook, esse cabeçalho não será enviado.</p>
+<p>Veja os exemplos abaixo para validação da chave de hook:</p>
+<div class="tabGroup" id="tabgroup_1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_1_csharp-sisk" role="tab" aria-controls="tabpanel_1_csharp-sisk" data-tab="csharp-sisk" tabindex="0" aria-selected="true">C# (com Sisk)</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_1_python-flask" role="tab" aria-controls="tabpanel_1_python-flask" data-tab="python-flask" tabindex="-1">Python (com Flask)</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_1_js-express" role="tab" aria-controls="tabpanel_1_js-express" data-tab="js-express" tabindex="-1">JavaScript (com Express.js)</a>
+</li>
+</ul>
+<section id="tabpanel_1_csharp-sisk" role="tabpanel" data-tab="csharp-sisk">
+
+<pre><code class="lang-csharp">using BCrypt.Net;
+
+[RoutePrefix(&quot;/api/aivax-protocol-functions&quot;)]
+internal class MyController : Controller
+{
+    public MyController()
+    {
+        this.HasRequestHandler(RequestHandler.Create(
+            execute: (req, ctx) =&gt;
+            {
+                // Obtém o nonce enviado da requisição
+                var hash = this.Request.Headers [&quot;X-Request-Nonce&quot;];
+                if (hash == null)
+                {
+                    return new HttpResponse(HttpStatusInformation.Unauthorized);
+                }
+                
+                // Valida o hook usando a biblioteca BCrypt.Net
+                var secretWord = Environment.GetEnvironmentVariable (&quot;AIVAX_HOOK_SECRET&quot;);
+                if (!BCrypt.Net.BCrypt.Verify(secretWord, hash, enhancedEntropy: false))
+                {
+                    return new HttpResponse(HttpStatusInformation.Forbidden);
+                }
+                
+                // Continua a requisição após hook validado
+                return null;
+            }));
     }
+    ...
 }
 </code></pre>
-<p>Ao validar um nonce, ele é consumido, e não é possível validar o mesmo nonce novamente. Nonces devem ser validados em até 10 minutos de sua emissão.</p>
+</section>
+<section id="tabpanel_1_python-flask" role="tabpanel" data-tab="python-flask" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-python">from flask import Flask, request, abort
+import os
+import bcrypt
+
+app = Flask(__name__)
+
+@app.before_request
+def autenticar_token():
+    # 1. Lê o cabeçalho que contém o hash do token
+    token_hash = request.headers.get(&quot;X-Request-Nonce&quot;)
+    if not token_hash:
+        abort(401)
+
+    # 2. Carrega o segredo em texto puro das variáveis de ambiente
+    secret = os.getenv(&quot;AIVAX_HOOK_SECRET&quot;)
+    if secret is None:
+        abort(500)
+
+    # 3. Verifica se o hash recebido corresponde ao segredo
+    if not bcrypt.checkpw(secret.encode(&quot;utf-8&quot;),
+                          token_hash.encode(&quot;utf-8&quot;)):
+        abort(403)
+
+@app.route(&quot;/api/aivax-protocol-functions/some-action&quot;, methods=[&quot;POST&quot;])
+def some_action():
+    return &quot;&quot;, 204
+
+if __name__ == &quot;__main__&quot;:
+    app.run(host=&quot;0.0.0.0&quot;, port=5000)
+</code></pre>
+</section>
+<section id="tabpanel_1_js-express" role="tabpanel" data-tab="js-express" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-javascript">require('dotenv').config()
+const express = require('express')
+const bcrypt = require('bcrypt')
+
+const app = express()
+
+app.use(async (req, res, next) =&gt; {
+  const tokenHash = req.header('X-Request-Nonce')
+  if (!tokenHash) {
+    return res.sendStatus(401)
+  }
+
+  // 2. Carrega o segredo em texto puro das variáveis de ambiente
+  const secret = process.env.AIVAX_HOOK_SECRET
+  if (!secret) {
+    return res.sendStatus(500)
+  }
+
+  try {
+    // 3. Verifica se o hash recebido corresponde ao segredo
+    const match = await bcrypt.compare(secret, tokenHash)
+    if (!match) {
+      return res.sendStatus(403)
+    }
+    
+    next()
+  } catch (err) {
+    return res.sendStatus(500)
+  }
+})
+
+app.post(
+  '/api/aivax-protocol-functions/some-action',
+  (req, res) =&gt; {
+    res.sendStatus(204)
+  }
+)
+
+const PORT = process.env.PORT || 3000
+app.listen(PORT, () =&gt; {
+  console.log(`Server running on port ${PORT}`)
+})
+</code></pre>
+</section>
+</div>
 
 </article>
 
