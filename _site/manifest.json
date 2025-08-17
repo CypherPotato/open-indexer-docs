@@ -232,6 +232,16 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "assets/icon/zai-org.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/icon/zai-org.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "assets/img/Icon.png",
       "output": {
         "resource": {
