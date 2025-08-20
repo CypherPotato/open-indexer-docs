@@ -51,6 +51,10 @@ Todos os preços estão em dólares dos Estados Unidos.
         High-capacity chain-of-thought reasoning model with a massive 164K token context window. Ideal for complex math, step-by-step logic, and advanced code authoring.
         <div class="model-capabilities">
 <div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
     <i class="ri-lightbulb-line"></i>
     Pensamento profundo
 </div>
@@ -90,6 +94,10 @@ Todos os preços estão em dólares dos Estados Unidos.
         Balanced reasoning model with a 128K token context. Delivers efficient tool calling, reliable code assistance, and strong analytical output at lower cost.
         <div class="model-capabilities">
 <div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
     <i class="ri-braces-line"></i>
     Funções JSON
 </div>
@@ -124,10 +132,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         Distilled Llama 3 70B model emulating R1’s chain-of-thought prowess. Offers transparent reasoning blocks and fast throughput on Groq hardware.
         <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
 <div>
     <i class="ri-lightbulb-line"></i>
     Pensamento profundo
@@ -897,6 +901,64 @@ Todos os preços estão em dólares dos Estados Unidos.
     </td>
     <td>
         Model with 1tri total parameters, 32bi activated parameters, optimized for agentic intelligence.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+    </tbody>
+</table>
+
+## <img src="/assets/icon/nvidia.svg" class="inline-icon"> nvidia
+
+<table>
+    <thead>
+        <colgroup>
+            <col style="width: 30%" />
+            <col style="width: 20%" />
+            <col style="width: 50%" />
+        </colgroup>
+        <tr>
+            <th>Nome do modelo</th>
+            <th>Preços</th>
+            <th>Descrição</th>
+        </tr>
+    </thead>
+    <tbody>
+<tr>
+    <td>
+        <code>
+            @nvidia/llama-3.1-70b-nemotron
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.88 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.88 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        Llama-3.1-Nemotron-70B-Instruct is a large language model customized by NVIDIA to improve the helpfulness of LLM generated responses to user queries.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
@@ -1702,10 +1764,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         Thinking variant of the 235B/22-expert MoE model with a 64K-token context. Delivers enhanced chain-of-thought reasoning, ultrafast inference, full tool calling and JSON functions for complex problem solving.
         <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
 <div>
     <i class="ri-lightbulb-line"></i>
     Pensamento profundo
