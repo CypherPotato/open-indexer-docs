@@ -1,10 +1,10 @@
-# Modelos
+# Models
 
-A AIVAX provê modelos de diferentes provedores para tornar o desenvolvimento ainda mais rápido, dispensando a necessidade de ter que configurar uma conta para cada provedor para ter acessos aos seus modelos mais recentes.
+AIVAX provides models from different providers to make development even faster, eliminating the need to configure an account for each provider to access their latest models.
 
-Veja a lista abaixo dos modelos disponíveis e suas precificações. Todos os preços consideram o total de entrada e saída de tokens, com ou sem cache.
+See the list below of available models and their pricing. All prices consider the total input and output tokens, with or without cache.
 
-Todos os preços estão em dólares dos Estados Unidos.
+All prices are in United States dollars.
 
 ## <img src="/assets/icon/deepseekai.svg" class="inline-icon"> deepseekai
 
@@ -16,9 +16,9 @@ Todos os preços estão em dólares dos Estados Unidos.
             <col style="width: 50%" />
         </colgroup>
         <tr>
-            <th>Nome do modelo</th>
-            <th>Preços</th>
-            <th>Descrição</th>
+            <th>Model name</th>
+            <th>Pricing</th>
+            <th>Description</th>
         </tr>
     </thead>
     <tbody>
@@ -31,7 +31,7 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada:
+                Input:
             </small>
             <div>
                 $ 0.80 <small>/1m tokens</small>
@@ -39,7 +39,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
         <div class="item-pricing">
             <small>
-                Saída:
+                Output:
             </small>
             <div>
                 $ 2.40 <small>/1m tokens</small>
@@ -52,15 +52,15 @@ Todos os preços estão em dólares dos Estados Unidos.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
-    Chamadas de função
+    Function calls
 </div>
 <div>
     <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
+    Deep reasoning
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    Funções JSON
+    JSON functions
 </div>
         </div>
     </td>
@@ -74,7 +74,7 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada:
+                Input:
             </small>
             <div>
                 $ 0.50 <small>/1m tokens</small>
@@ -82,7 +82,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
         <div class="item-pricing">
             <small>
-                Saída:
+                Output:
             </small>
             <div>
                 $ 1.50 <small>/1m tokens</small>
@@ -95,11 +95,11 @@ Todos os preços estão em dólares dos Estados Unidos.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
-    Chamadas de função
+    Function calls
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    Funções JSON
+    JSON functions
 </div>
         </div>
     </td>
@@ -113,7 +113,7 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada:
+                Input:
             </small>
             <div>
                 $ 0.75 <small>/1m tokens</small>
@@ -121,7 +121,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
         <div class="item-pricing">
             <small>
-                Saída:
+                Output:
             </small>
             <div>
                 $ 0.99 <small>/1m tokens</small>
@@ -134,11 +134,65 @@ Todos os preços estão em dólares dos Estados Unidos.
         <div class="model-capabilities">
 <div>
     <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
+    Deep reasoning
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    Funções JSON
+    JSON functions
+</div>
+        </div>
+    </td>
+</tr>
+    </tbody>
+</table>
+
+## <img src="/assets/icon/dolphin.svg" class="inline-icon"> dolphin
+
+<table>
+    <thead>
+        <colgroup>
+            <col style="width: 30%" />
+            <col style="width: 20%" />
+            <col style="width: 50%" />
+        </colgroup>
+        <tr>
+            <th>Model name</th>
+            <th>Pricing</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+<tr>
+    <td>
+        <code>
+            @dolphin/mixtral-8x22b
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 0.90 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 0.90 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        Dolphin Mistral 8x22b is a collaborative project with the goal of creating the most uncensored version of Mixtral model.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
 </div>
         </div>
     </td>
@@ -156,9 +210,9 @@ Todos os preços estão em dólares dos Estados Unidos.
             <col style="width: 50%" />
         </colgroup>
         <tr>
-            <th>Nome do modelo</th>
-            <th>Preços</th>
-            <th>Descrição</th>
+            <th>Model name</th>
+            <th>Pricing</th>
+            <th>Description</th>
         </tr>
     </thead>
     <tbody>
@@ -171,7 +225,7 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada:
+                Input:
             </small>
             <div>
                 $ 1.25 <small>/1m tokens</small>
@@ -179,7 +233,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
         <div class="item-pricing">
             <small>
-                Saída:
+                Output:
             </small>
             <div>
                 $ 10.00 <small>/1m tokens</small>
@@ -192,15 +246,15 @@ Todos os preços estão em dólares dos Estados Unidos.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens, vídeos, áudios
+    Input: accepts images, videos, audio
 </div>
 <div>
     <i class="ri-instance-line"></i>
-    Chamadas de função
+    Function calls
 </div>
 <div>
     <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
+    Deep reasoning
 </div>
         </div>
     </td>
@@ -214,7 +268,7 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada:
+                Input:
             </small>
             <div>
                 $ 1.25 <small>/1m tokens</small>
@@ -222,7 +276,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
         <div class="item-pricing">
             <small>
-                Saída:
+                Output:
             </small>
             <div>
                 $ 5.00 <small>/1m tokens</small>
@@ -235,15 +289,15 @@ Todos os preços estão em dólares dos Estados Unidos.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens, vídeos, áudios
+    Input: accepts images, videos, audio
 </div>
 <div>
     <i class="ri-instance-line"></i>
-    Chamadas de função
+    Function calls
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    Funções JSON
+    JSON functions
 </div>
         </div>
     </td>
@@ -257,7 +311,7 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada:
+                Input:
             </small>
             <div>
                 $ 0.30 <small>/1m tokens</small>
@@ -265,7 +319,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
         <div class="item-pricing">
             <small>
-                Saída:
+                Output:
             </small>
             <div>
                 $ 2.50 <small>/1m tokens</small>
@@ -278,19 +332,19 @@ Todos os preços estão em dólares dos Estados Unidos.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens, vídeos, áudios
+    Input: accepts images, videos, audio
 </div>
 <div>
     <i class="ri-instance-line"></i>
-    Chamadas de função
+    Function calls
 </div>
 <div>
     <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
+    Deep reasoning
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    Funções JSON
+    JSON functions
 </div>
         </div>
     </td>
@@ -304,7 +358,7 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada:
+                Input:
             </small>
             <div>
                 $ 0.10 <small>/1m tokens</small>
@@ -312,7 +366,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
         <div class="item-pricing">
             <small>
-                Saída:
+                Output:
             </small>
             <div>
                 $ 0.40 <small>/1m tokens</small>
@@ -325,19 +379,19 @@ Todos os preços estão em dólares dos Estados Unidos.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens, vídeos, áudios
+    Input: accepts images, videos, audio
 </div>
 <div>
     <i class="ri-instance-line"></i>
-    Chamadas de função
+    Function calls
 </div>
 <div>
     <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
+    Deep reasoning
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    Funções JSON
+    JSON functions
 </div>
         </div>
     </td>
@@ -351,7 +405,7 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada:
+                Input:
             </small>
             <div>
                 $ 0.10 <small>/1m tokens</small>
@@ -359,7 +413,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
         <div class="item-pricing">
             <small>
-                Saída:
+                Output:
             </small>
             <div>
                 $ 0.40 <small>/1m tokens</small>
@@ -372,15 +426,15 @@ Todos os preços estão em dólares dos Estados Unidos.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens, vídeos, áudios
+    Input: accepts images, videos, audio
 </div>
 <div>
     <i class="ri-instance-line"></i>
-    Chamadas de função
+    Function calls
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    Funções JSON
+    JSON functions
 </div>
         </div>
     </td>
@@ -394,7 +448,7 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada:
+                Input:
             </small>
             <div>
                 $ 0.08 <small>/1m tokens</small>
@@ -402,7 +456,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
         <div class="item-pricing">
             <small>
-                Saída:
+                Output:
             </small>
             <div>
                 $ 0.30 <small>/1m tokens</small>
@@ -415,15 +469,15 @@ Todos os preços estão em dólares dos Estados Unidos.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens, vídeos, áudios
+    Input: accepts images, videos, audio
 </div>
 <div>
     <i class="ri-instance-line"></i>
-    Chamadas de função
+    Function calls
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    Funções JSON
+    JSON functions
 </div>
         </div>
     </td>
@@ -437,7 +491,7 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada:
+                Input:
             </small>
             <div>
                 $ 0.04 <small>/1m tokens</small>
@@ -445,7 +499,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
         <div class="item-pricing">
             <small>
-                Saída:
+                Output:
             </small>
             <div>
                 $ 0.08 <small>/1m tokens</small>
@@ -458,15 +512,15 @@ Todos os preços estão em dólares dos Estados Unidos.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens, vídeos, áudios
+    Input: accepts images, videos, audio
 </div>
 <div>
     <i class="ri-instance-line"></i>
-    Chamadas de função
+    Function calls
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    Funções JSON
+    JSON functions
 </div>
         </div>
     </td>
@@ -484,9 +538,9 @@ Todos os preços estão em dólares dos Estados Unidos.
             <col style="width: 50%" />
         </colgroup>
         <tr>
-            <th>Nome do modelo</th>
-            <th>Preços</th>
-            <th>Descrição</th>
+            <th>Model name</th>
+            <th>Pricing</th>
+            <th>Description</th>
         </tr>
     </thead>
     <tbody>
@@ -499,7 +553,7 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada:
+                Input:
             </small>
             <div>
                 $ 0.25 <small>/1m tokens</small>
@@ -507,7 +561,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
         <div class="item-pricing">
             <small>
-                Saída:
+                Output:
             </small>
             <div>
                 $ 1.00 <small>/1m tokens</small>
@@ -520,11 +574,11 @@ Todos os preços estão em dólares dos Estados Unidos.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
-    Chamadas de função
+    Function calls
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    Funções JSON
+    JSON functions
 </div>
         </div>
     </td>
@@ -542,9 +596,9 @@ Todos os preços estão em dólares dos Estados Unidos.
             <col style="width: 50%" />
         </colgroup>
         <tr>
-            <th>Nome do modelo</th>
-            <th>Preços</th>
-            <th>Descrição</th>
+            <th>Model name</th>
+            <th>Pricing</th>
+            <th>Description</th>
         </tr>
     </thead>
     <tbody>
@@ -557,7 +611,7 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada:
+                Input:
             </small>
             <div>
                 $ 0.59 <small>/1m tokens</small>
@@ -565,7 +619,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
         <div class="item-pricing">
             <small>
-                Saída:
+                Output:
             </small>
             <div>
                 $ 0.79 <small>/1m tokens</small>
@@ -578,11 +632,11 @@ Todos os preços estão em dólares dos Estados Unidos.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
-    Chamadas de função
+    Function calls
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    Funções JSON
+    JSON functions
 </div>
         </div>
     </td>
@@ -596,7 +650,7 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada:
+                Input:
             </small>
             <div>
                 $ 0.20 <small>/1m tokens</small>
@@ -604,7 +658,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
         <div class="item-pricing">
             <small>
-                Saída:
+                Output:
             </small>
             <div>
                 $ 0.60 <small>/1m tokens</small>
@@ -617,15 +671,15 @@ Todos os preços estão em dólares dos Estados Unidos.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens
+    Input: accepts images
 </div>
 <div>
     <i class="ri-instance-line"></i>
-    Chamadas de função
+    Function calls
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    Funções JSON
+    JSON functions
 </div>
         </div>
     </td>
@@ -639,7 +693,7 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada:
+                Input:
             </small>
             <div>
                 $ 0.11 <small>/1m tokens</small>
@@ -647,7 +701,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
         <div class="item-pricing">
             <small>
-                Saída:
+                Output:
             </small>
             <div>
                 $ 0.34 <small>/1m tokens</small>
@@ -660,15 +714,15 @@ Todos os preços estão em dólares dos Estados Unidos.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens
+    Input: accepts images
 </div>
 <div>
     <i class="ri-instance-line"></i>
-    Chamadas de função
+    Function calls
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    Funções JSON
+    JSON functions
 </div>
         </div>
     </td>
@@ -682,7 +736,7 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada:
+                Input:
             </small>
             <div>
                 $ 0.05 <small>/1m tokens</small>
@@ -690,7 +744,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
         <div class="item-pricing">
             <small>
-                Saída:
+                Output:
             </small>
             <div>
                 $ 0.08 <small>/1m tokens</small>
@@ -703,11 +757,11 @@ Todos os preços estão em dólares dos Estados Unidos.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
-    Chamadas de função
+    Function calls
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    Funções JSON
+    JSON functions
 </div>
         </div>
     </td>
@@ -725,9 +779,9 @@ Todos os preços estão em dólares dos Estados Unidos.
             <col style="width: 50%" />
         </colgroup>
         <tr>
-            <th>Nome do modelo</th>
-            <th>Preços</th>
-            <th>Descrição</th>
+            <th>Model name</th>
+            <th>Pricing</th>
+            <th>Description</th>
         </tr>
     </thead>
     <tbody>
@@ -740,7 +794,7 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada:
+                Input:
             </small>
             <div>
                 $ 0.08 <small>/1m tokens</small>
@@ -748,7 +802,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
         <div class="item-pricing">
             <small>
-                Saída:
+                Output:
             </small>
             <div>
                 $ 0.30 <small>/1m tokens</small>
@@ -771,7 +825,7 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada:
+                Input:
             </small>
             <div>
                 $ 0.08 <small>/1m tokens</small>
@@ -779,7 +833,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
         <div class="item-pricing">
             <small>
-                Saída:
+                Output:
             </small>
             <div>
                 $ 0.30 <small>/1m tokens</small>
@@ -802,7 +856,7 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada:
+                Input:
             </small>
             <div>
                 $ 0.08 <small>/1m tokens</small>
@@ -810,7 +864,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
         <div class="item-pricing">
             <small>
-                Saída:
+                Output:
             </small>
             <div>
                 $ 0.30 <small>/1m tokens</small>
@@ -833,7 +887,7 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada:
+                Input:
             </small>
             <div>
                 $ 0.08 <small>/1m tokens</small>
@@ -841,7 +895,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
         <div class="item-pricing">
             <small>
-                Saída:
+                Output:
             </small>
             <div>
                 $ 0.30 <small>/1m tokens</small>
@@ -868,9 +922,9 @@ Todos os preços estão em dólares dos Estados Unidos.
             <col style="width: 50%" />
         </colgroup>
         <tr>
-            <th>Nome do modelo</th>
-            <th>Preços</th>
-            <th>Descrição</th>
+            <th>Model name</th>
+            <th>Pricing</th>
+            <th>Description</th>
         </tr>
     </thead>
     <tbody>
@@ -883,7 +937,7 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada:
+                Input:
             </small>
             <div>
                 $ 1.00 <small>/1m tokens</small>
@@ -891,7 +945,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
         <div class="item-pricing">
             <small>
-                Saída:
+                Output:
             </small>
             <div>
                 $ 3.00 <small>/1m tokens</small>
@@ -900,15 +954,15 @@ Todos os preços estão em dólares dos Estados Unidos.
         
     </td>
     <td>
-        Model with 1tri total parameters, 32bi activated parameters, optimized for agentic intelligence.
+        Model with 1 trillion total parameters, 32 billion activated parameters, optimized for agentic intelligence.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
-    Chamadas de função
+    Function calls
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    Funções JSON
+    JSON functions
 </div>
         </div>
     </td>
@@ -926,9 +980,9 @@ Todos os preços estão em dólares dos Estados Unidos.
             <col style="width: 50%" />
         </colgroup>
         <tr>
-            <th>Nome do modelo</th>
-            <th>Preços</th>
-            <th>Descrição</th>
+            <th>Model name</th>
+            <th>Pricing</th>
+            <th>Description</th>
         </tr>
     </thead>
     <tbody>
@@ -941,7 +995,7 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada:
+                Input:
             </small>
             <div>
                 $ 0.88 <small>/1m tokens</small>
@@ -949,7 +1003,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
         <div class="item-pricing">
             <small>
-                Saída:
+                Output:
             </small>
             <div>
                 $ 0.88 <small>/1m tokens</small>
@@ -962,11 +1016,11 @@ Todos os preços estão em dólares dos Estados Unidos.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
-    Chamadas de função
+    Function calls
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    Funções JSON
+    JSON functions
 </div>
         </div>
     </td>
@@ -984,9 +1038,9 @@ Todos os preços estão em dólares dos Estados Unidos.
             <col style="width: 50%" />
         </colgroup>
         <tr>
-            <th>Nome do modelo</th>
-            <th>Preços</th>
-            <th>Descrição</th>
+            <th>Model name</th>
+            <th>Pricing</th>
+            <th>Description</th>
         </tr>
     </thead>
     <tbody>
@@ -999,7 +1053,7 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada:
+                Input:
             </small>
             <div>
                 $ 5.00 <small>/1m tokens</small>
@@ -1007,7 +1061,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
         <div class="item-pricing">
             <small>
-                Saída:
+                Output:
             </small>
             <div>
                 $ 15.00 <small>/1m tokens</small>
@@ -1020,11 +1074,11 @@ Todos os preços estão em dólares dos Estados Unidos.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens
+    Input: accepts images
 </div>
 <div>
     <i class="ri-instance-line"></i>
-    Chamadas de função
+    Function calls
 </div>
         </div>
     </td>
@@ -1038,7 +1092,7 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada:
+                Input:
             </small>
             <div>
                 $ 2.50 <small>/1m tokens</small>
@@ -1046,7 +1100,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
         <div class="item-pricing">
             <small>
-                Saída:
+                Output:
             </small>
             <div>
                 $ 10.00 <small>/1m tokens</small>
@@ -1059,15 +1113,15 @@ Todos os preços estão em dólares dos Estados Unidos.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens
+    Input: accepts images
 </div>
 <div>
     <i class="ri-instance-line"></i>
-    Chamadas de função
+    Function calls
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    Funções JSON
+    JSON functions
 </div>
         </div>
     </td>
@@ -1081,7 +1135,7 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada:
+                Input:
             </small>
             <div>
                 $ 1.25 <small>/1m tokens</small>
@@ -1089,7 +1143,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
         <div class="item-pricing">
             <small>
-                Saída:
+                Output:
             </small>
             <div>
                 $ 10.00 <small>/1m tokens</small>
@@ -1102,19 +1156,19 @@ Todos os preços estão em dólares dos Estados Unidos.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens
+    Input: accepts images
 </div>
 <div>
     <i class="ri-instance-line"></i>
-    Chamadas de função
+    Function calls
 </div>
 <div>
     <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
+    Deep reasoning
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    Funções JSON
+    JSON functions
 </div>
         </div>
     </td>
@@ -1128,7 +1182,7 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada:
+                Input:
             </small>
             <div>
                 $ 1.25 <small>/1m tokens</small>
@@ -1136,7 +1190,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
         <div class="item-pricing">
             <small>
-                Saída:
+                Output:
             </small>
             <div>
                 $ 10.00 <small>/1m tokens</small>
@@ -1149,11 +1203,11 @@ Todos os preços estão em dólares dos Estados Unidos.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens
+    Input: accepts images
 </div>
 <div>
     <i class="ri-instance-line"></i>
-    Chamadas de função
+    Function calls
 </div>
         </div>
     </td>
@@ -1167,7 +1221,7 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada:
+                Input:
             </small>
             <div>
                 $ 2.00 <small>/1m tokens</small>
@@ -1175,7 +1229,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
         <div class="item-pricing">
             <small>
-                Saída:
+                Output:
             </small>
             <div>
                 $ 8.00 <small>/1m tokens</small>
@@ -1188,15 +1242,15 @@ Todos os preços estão em dólares dos Estados Unidos.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens
+    Input: accepts images
 </div>
 <div>
     <i class="ri-instance-line"></i>
-    Chamadas de função
+    Function calls
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    Funções JSON
+    JSON functions
 </div>
         </div>
     </td>
@@ -1210,7 +1264,7 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada:
+                Input:
             </small>
             <div>
                 $ 2.00 <small>/1m tokens</small>
@@ -1218,7 +1272,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
         <div class="item-pricing">
             <small>
-                Saída:
+                Output:
             </small>
             <div>
                 $ 8.00 <small>/1m tokens</small>
@@ -1231,19 +1285,19 @@ Todos os preços estão em dólares dos Estados Unidos.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens
+    Input: accepts images
 </div>
 <div>
     <i class="ri-instance-line"></i>
-    Chamadas de função
+    Function calls
 </div>
 <div>
     <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
+    Deep reasoning
 </div>
 <div>
     <i class="ri-braces-line"></i>
-    Funções JSON
+    JSON functions
 </div>
         </div>
     </td>
@@ -1257,7 +1311,7 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         <div class="item-pricing">
             <small>
-                Entrada:
+                Input:
             </small>
             <div>
                 $ 1.10 <small>/1m tokens</small>
@@ -1265,7 +1319,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
         <div class="item-pricing">
             <small>
-                Saída:
+                Output:
             </small>
             <div>
                 $ 4.40 <small>/1m tokens</small>
@@ -1278,651 +1332,4 @@ Todos os preços estão em dólares dos Estados Unidos.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @openai/o3-mini
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 1.10 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 4.40 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-    </td>
-    <td>
-        o3-mini provides high intelligence at the same cost and latency targets of previous versions of o-mini series.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @openai/gpt-5-mini
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.25 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 2.00 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-    </td>
-    <td>
-        GPT-5 mini is a faster, more cost-efficient version of GPT-5.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @openai/gpt-4.1-mini
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.40 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 1.60 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-    </td>
-    <td>
-        Fast and cheap for focused tasks.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @openai/gpt-oss-120b
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.15 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 0.75 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-    </td>
-    <td>
-        OpenAI's flagship open source model, built on a Mixture-of-Experts (MoE) architecture with 120 billion parameters and 128 experts.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @openai/gpt-4o-mini
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.15 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 0.60 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-    </td>
-    <td>
-        Smaller version of 4o, optimized for everyday tasks.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @openai/gpt-oss-20b
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.10 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 0.50 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-    </td>
-    <td>
-        OpenAI's flagship open source model, built on a Mixture-of-Experts (MoE) architecture with 20 billion parameters and 128 experts.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @openai/gpt-4.1-nano
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.10 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 0.40 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-    </td>
-    <td>
-        The fastest and cheapest GPT 4.1 model.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @openai/gpt-5-nano
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.05 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 0.40 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-    </td>
-    <td>
-        OpenAI's fastest, cheapest version of GPT-5.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-    </tbody>
-</table>
-
-## <img src="/assets/icon/qwen.svg" class="inline-icon"> qwen
-
-<table>
-    <thead>
-        <colgroup>
-            <col style="width: 30%" />
-            <col style="width: 20%" />
-            <col style="width: 50%" />
-        </colgroup>
-        <tr>
-            <th>Nome do modelo</th>
-            <th>Preços</th>
-            <th>Descrição</th>
-        </tr>
-    </thead>
-    <tbody>
-<tr>
-    <td>
-        <code>
-            @qwen/qwen3-480b-coder
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 2.00 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 2.00 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-    </td>
-    <td>
-        480B-parameter coder-specialized LLM with a 64K-token context window, ultrafast inference and structured JSON outputs. Optimized for high-throughput code generation, debugging, review and documentation across multiple languages.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @qwen/qwen3-235b-a22b
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.60 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 1.20 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-    </td>
-    <td>
-        Cost-efficient MoE model with 235B parameters (22 experts) and a 64K-token context window. Excels in instruction following, logical reasoning, mathematics, coding, multilingual tasks, tool integration, and structured JSON outputs.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @qwen/qwen3-235b-a22b-think
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.60 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 1.20 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-    </td>
-    <td>
-        Thinking variant of the 235B/22-expert MoE model with a 64K-token context. Delivers enhanced chain-of-thought reasoning, ultrafast inference, full tool calling and JSON functions for complex problem solving.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @qwen/qwen3-32b
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.29 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 0.59 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-    </td>
-    <td>
-        32B-parameter LLM with a 131K-token context window, offering advanced chain-of-thought reasoning, seamless tool calling, native JSON outputs, and robust multilingual fluency.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-    </tbody>
-</table>
-
-## <img src="/assets/icon/zai-org.svg" class="inline-icon"> zai-org
-
-<table>
-    <thead>
-        <colgroup>
-            <col style="width: 30%" />
-            <col style="width: 20%" />
-            <col style="width: 50%" />
-        </colgroup>
-        <tr>
-            <th>Nome do modelo</th>
-            <th>Preços</th>
-            <th>Descrição</th>
-        </tr>
-    </thead>
-    <tbody>
-<tr>
-    <td>
-        <code>
-            @zai-org/glm-4.5
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.55 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 2.19 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-    </td>
-    <td>
-        High-capacity Mixture-of-Experts model (335B/32 experts) with a 131K-token context window. Combines deep reasoning, fast tool calling and native JSON function outputs for large-scale language understanding and structured data tasks.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @zai-org/glm-4.5-air
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.22 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 0.88 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-    </td>
-    <td>
-        Cost-efficient MoE variant (110B/32 experts) of GLM-4.5 with a 131K-token context. Delivers high-speed inference, full tool integration and JSON function support for budget-sensitive deployments.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-    </tbody>
-</table>
-
+    Input: accepts images

@@ -6,145 +6,6 @@ Veja a lista abaixo dos modelos disponíveis e suas precificações. Todos os pr
 
 Todos os preços estão em dólares dos Estados Unidos.
 
-## <img src="/assets/icon/aivax.svg" class="inline-icon"> aivax
-
-<table>
-    <thead>
-        <colgroup>
-            <col style="width: 30%" />
-            <col style="width: 20%" />
-            <col style="width: 50%" />
-        </colgroup>
-        <tr>
-            <th>Nome do modelo</th>
-            <th>Preços</th>
-            <th>Descrição</th>
-        </tr>
-    </thead>
-    <tbody>
-<tr>
-    <td>
-        <code>
-            @aivax/fn-1
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 1.10 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 4.40 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-    <small>
-        Pesquisa na internet:
-    </small>
-    <div>
-        $ 5.00 <small>/1.000 pesquisas</small>
-    </div>
-</div>
-    </td>
-    <td>
-        Optimized agent for function usage. Based on OpenAI o4-mini (low).
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
-</div>
-<div>
-    <i class="ri-global-line"></i>
-    Pesquisa na internet
-</div>
-<div>
-    <i class="ri-code-s-slash-line"></i>
-    Execução de código
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @aivax/fn-1-mini
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.15 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 0.60 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-    <small>
-        Pesquisa na internet:
-    </small>
-    <div>
-        $ 5.00 <small>/1.000 pesquisas</small>
-    </div>
-</div>
-    </td>
-    <td>
-        Optimized agent for function usage (no reasoning). Based on GPT 4o-mini.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-global-line"></i>
-    Pesquisa na internet
-</div>
-<div>
-    <i class="ri-code-s-slash-line"></i>
-    Execução de código
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-    </tbody>
-</table>
-
 ## <img src="/assets/icon/deepseekai.svg" class="inline-icon"> deepseekai
 
 <table>
@@ -161,6 +22,88 @@ Todos os preços estão em dólares dos Estados Unidos.
         </tr>
     </thead>
     <tbody>
+<tr>
+    <td>
+        <code>
+            @deepseekai/r1
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.80 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 2.40 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        High-capacity chain-of-thought reasoning model with a massive 164K token context window. Ideal for complex math, step-by-step logic, and advanced code authoring.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Pensamento profundo
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @deepseekai/v3
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.50 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 1.50 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        Balanced reasoning model with a 128K token context. Delivers efficient tool calling, reliable code assistance, and strong analytical output at lower cost.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
 <tr>
     <td>
         <code>
@@ -187,11 +130,69 @@ Todos os preços estão em dólares dos Estados Unidos.
         
     </td>
     <td>
-        Model with deep reasoning and thought, best for most demanding tasks.
+        Distilled Llama 3 70B model emulating R1’s chain-of-thought prowess. Offers transparent reasoning blocks and fast throughput on Groq hardware.
         <div class="model-capabilities">
 <div>
     <i class="ri-lightbulb-line"></i>
     Pensamento profundo
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+    </tbody>
+</table>
+
+## <img src="/assets/icon/dolphin.svg" class="inline-icon"> dolphin
+
+<table>
+    <thead>
+        <colgroup>
+            <col style="width: 30%" />
+            <col style="width: 20%" />
+            <col style="width: 50%" />
+        </colgroup>
+        <tr>
+            <th>Nome do modelo</th>
+            <th>Preços</th>
+            <th>Descrição</th>
+        </tr>
+    </thead>
+    <tbody>
+<tr>
+    <td>
+        <code>
+            @dolphin/mixtral-8x22b
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.90 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.90 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        Dolphin Mistral 8x22b is a collaborative project with the goal of creating the most uncensored version of Mixtral model.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
 </div>
         </div>
     </td>
@@ -810,38 +811,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         
     </td>
     <td>
-        Model router for Google Gemini. The routing is made between Gemini 2.0 Flash, Gemini 2.5 Flash Lite and Gemini 2.5 Flash.
-        <div class="model-capabilities">
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @model-router/gemini-high
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.08 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 0.30 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-    </td>
-    <td>
-        Model router for Google Gemini. The routing is made between Gemini 2.5 Flash Lite, Gemini 2.5 Flash (low) and Gemini 2.5 Flash (high).
+        Model router for Google Gemini. The routing is made between Gemini 2.0 Flash, Gemini 2.5 Flash (no thinking) and Gemini 2.5 Flash (dynamic thinking).
         <div class="model-capabilities">
         </div>
     </td>
@@ -985,6 +955,64 @@ Todos os preços estão em dólares dos Estados Unidos.
     </td>
     <td>
         Model with 1tri total parameters, 32bi activated parameters, optimized for agentic intelligence.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+    </tbody>
+</table>
+
+## <img src="/assets/icon/nvidia.svg" class="inline-icon"> nvidia
+
+<table>
+    <thead>
+        <colgroup>
+            <col style="width: 30%" />
+            <col style="width: 20%" />
+            <col style="width: 50%" />
+        </colgroup>
+        <tr>
+            <th>Nome do modelo</th>
+            <th>Preços</th>
+            <th>Descrição</th>
+        </tr>
+    </thead>
+    <tbody>
+<tr>
+    <td>
+        <code>
+            @nvidia/llama-3.1-70b-nemotron
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.88 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.88 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        Llama-3.1-Nemotron-70B-Instruct is a large language model customized by NVIDIA to improve the helpfulness of LLM generated responses to user queries.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
@@ -1180,10 +1208,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
 </div>
         </div>
     </td>
@@ -1457,6 +1481,49 @@ Todos os preços estão em dólares dos Estados Unidos.
 <tr>
     <td>
         <code>
+            @openai/gpt-oss-120b:lightning
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.25 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.69 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        OpenAI's flagship open source model, built on a Mixture-of-Experts (MoE) architecture with 120 billion parameters and 128 experts.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Pensamento profundo
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
             @openai/gpt-oss-120b
         </code>
     </td>
@@ -1714,7 +1781,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         
     </td>
     <td>
-        Lightning-fast AI model focused for coding tasks.
+        480B-parameter coder-specialized LLM with a 64K-token context window, ultrafast inference and structured JSON outputs. Optimized for high-throughput code generation, debugging, review and documentation across multiple languages.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
@@ -1753,7 +1820,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         
     </td>
     <td>
-        This non-thinking version offers powerful multilingual capabilities with significant improvements in instruction following, logical reasoning, mathematics, coding, and tool usage.
+        Cost-efficient MoE model with 235B parameters (22 experts) and a 64K-token context window. Excels in instruction following, logical reasoning, mathematics, coding, multilingual tasks, tool integration, and structured JSON outputs.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
@@ -1792,7 +1859,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         
     </td>
     <td>
-        The thinking variant of the Qwen3 235b model, with significantly improved performance of reasoning tasks.
+        Thinking variant of the 235B/22-expert MoE model with a 64K-token context. Delivers enhanced chain-of-thought reasoning, ultrafast inference, full tool calling and JSON functions for complex problem solving.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
@@ -1835,7 +1902,112 @@ Todos os preços estão em dólares dos Estados Unidos.
         
     </td>
     <td>
-        Latest generation of LLMs in the Qwen series, offering advancements in reasoning, instruction-following, agent capabilities, and multilingual support.
+        32B-parameter LLM with a 131K-token context window, offering advanced chain-of-thought reasoning, seamless tool calling, native JSON outputs, and robust multilingual fluency.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Pensamento profundo
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+    </tbody>
+</table>
+
+## <img src="/assets/icon/zai-org.svg" class="inline-icon"> zai-org
+
+<table>
+    <thead>
+        <colgroup>
+            <col style="width: 30%" />
+            <col style="width: 20%" />
+            <col style="width: 50%" />
+        </colgroup>
+        <tr>
+            <th>Nome do modelo</th>
+            <th>Preços</th>
+            <th>Descrição</th>
+        </tr>
+    </thead>
+    <tbody>
+<tr>
+    <td>
+        <code>
+            @zai-org/glm-4.5
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.55 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 2.19 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        High-capacity Mixture-of-Experts model (335B/32 experts) with a 131K-token context window. Combines deep reasoning, fast tool calling and native JSON function outputs for large-scale language understanding and structured data tasks.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Pensamento profundo
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @zai-org/glm-4.5-air
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.22 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.88 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+    </td>
+    <td>
+        Cost-efficient MoE variant (110B/32 experts) of GLM-4.5 with a 131K-token context. Delivers high-speed inference, full tool integration and JSON function support for budget-sensitive deployments.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>

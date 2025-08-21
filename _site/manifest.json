@@ -132,6 +132,16 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "assets/icon/dolphin.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/icon/dolphin.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "assets/icon/google.svg",
       "output": {
         "resource": {
