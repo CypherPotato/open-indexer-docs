@@ -147,51 +147,100 @@
     </span>
 </div>
 <pre><code class="lang-json">{
-    &quot;model&quot;: &quot;0197cb0f-893a-7b7d-be0a-71ada1208aaf&quot;,
+    &quot;model&quot;: &quot;0198683a-2b6d-7066-9598-6ea119c219f2&quot;,
     &quot;messages&quot;: [
         {
             &quot;role&quot;: &quot;user&quot;,
-            &quot;content&quot;: &quot;Quem é você?&quot;
+            &quot;content&quot;: &quot;Qual a capital da França?&quot;
         }
     ],
-    &quot;stream&quot;: false
+    &quot;stream&quot;: false,
+    &quot;metadata&quot;: {
+        &quot;foo&quot;: &quot;bar&quot;
+    }
 }
 </code></pre>
 <h4 id="resposta-para-não-streaming">Resposta para não-streaming</h4>
 <pre><code class="lang-json">{
-    &quot;id&quot;: &quot;0197dbdc-6456-7d54-b7ec-04cb9c80f460&quot;,
+    &quot;id&quot;: &quot;0198d24c-c9ce-70fe-9cf3-00644ef5f2e2&quot;,
     &quot;object&quot;: &quot;chat.completion&quot;,
-    &quot;created&quot;: 1751740343,
-    &quot;model&quot;: &quot;@google/gemini-2.5-flash&quot;,
+    &quot;created&quot;: 1755874904,
+    &quot;model&quot;: &quot;@openai/gpt-5-mini&quot;,
     &quot;choices&quot;: [
         {
             &quot;index&quot;: 0,
             &quot;message&quot;: {
                 &quot;role&quot;: &quot;assistant&quot;,
-                &quot;completion_text&quot;: &quot;Oi! 😊 Eu sou a Zia, a assistente inteligente do Zé do Ingresso. Tô aqui pra te ajudar com tudo sobre ingressos, eventos, e tudo que rola na nossa querida São José do Rio Preto. Se precisar de alguma coisa, tipo saber sobre nomeação de ja o bagulho, só chamar! Vamos juntos aproveitar tudo o que tiver rolando! O que você precisa? 🥳 &quot;,
+                &quot;content&quot;: &quot;A capital da França é Paris.&quot;,
                 &quot;refusal&quot;: null,
-                &quot;annotations&quot;: []
+                &quot;annotations&quot;: [],
+                &quot;tool_calls&quot;: []
             },
             &quot;logprobs&quot;: null,
             &quot;finish_reason&quot;: &quot;stop&quot;
         }
     ],
     &quot;usage&quot;: {
-        &quot;prompt_tokens&quot;: 1118,
-        &quot;completion_tokens&quot;: 88,
-        &quot;total_tokens&quot;: 1206
+        &quot;prompt_tokens&quot;: 84,
+        &quot;completion_tokens&quot;: 16,
+        &quot;total_tokens&quot;: 1892,
+        &quot;prompt_tokens_details&quot;: {
+            &quot;cached_tokens&quot;: 1792
+        }
     },
-    &quot;service_tier&quot;: &quot;default&quot;
+    &quot;service_tier&quot;: &quot;default&quot;,
+    &quot;generation_context&quot;: {
+        &quot;generated_usage&quot;: [
+            {
+                &quot;sku&quot;: &quot;inference.resolving.routing_complexity.in&quot;,
+                &quot;amount&quot;: 0.0000207,
+                &quot;unit_price&quot;: 7.5e-8,
+                &quot;quantity&quot;: 276,
+                &quot;description&quot;: &quot;Inference for model routing&quot;
+            },
+            {
+                &quot;sku&quot;: &quot;inference.resolving.routing_complexity.out&quot;,
+                &quot;amount&quot;: 3e-7,
+                &quot;unit_price&quot;: 3e-7,
+                &quot;quantity&quot;: 1,
+                &quot;description&quot;: &quot;Inference for model routing&quot;
+            },
+            {
+                &quot;sku&quot;: &quot;inference.chat_completions.in&quot;,
+                &quot;amount&quot;: 0.000021,
+                &quot;unit_price&quot;: 2.5e-7,
+                &quot;quantity&quot;: 84,
+                &quot;description&quot;: &quot;Inference for AI model '@openai/gpt-5-mini'&quot;
+            },
+            {
+                &quot;sku&quot;: &quot;inference.chat_completions.out&quot;,
+                &quot;amount&quot;: 0.000032,
+                &quot;unit_price&quot;: 0.000002,
+                &quot;quantity&quot;: 16,
+                &quot;description&quot;: &quot;Inference for AI model '@openai/gpt-5-mini'&quot;
+            },
+            {
+                &quot;sku&quot;: &quot;inference.chat_completions.in.cached&quot;,
+                &quot;amount&quot;: 0.0000448,
+                &quot;unit_price&quot;: 2.5e-8,
+                &quot;quantity&quot;: 1792,
+                &quot;description&quot;: &quot;Inference for AI model '@openai/gpt-5-mini'&quot;
+            }
+        ],
+        &quot;runned_functions&quot;: []
+    }
 }
 </code></pre>
 <h4 id="resposta-streaming">Resposta streaming</h4>
-<pre><code class="lang-text">data: {&quot;id&quot;:&quot;0197dbde-c40b-720d-a13e-f689c303c571&quot;,&quot;object&quot;:&quot;chat.completion.chunk&quot;,&quot;created&quot;:1751740498,&quot;model&quot;:&quot;@google/gemini-2.5-flash&quot;,&quot;system_fingerprint&quot;:&quot;fp_y8jidd&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;finish_reason&quot;:null,&quot;delta&quot;:{&quot;role&quot;:&quot;assistant&quot;,&quot;content&quot;:&quot;&quot;}}],&quot;usage&quot;:null,&quot;sentinel_usage&quot;:null}
+<pre><code class="lang-text">data: {&quot;id&quot;:&quot;chatcmpl-0198d263-fd80-7645-98b0-3966004e11df&quot;,&quot;object&quot;:&quot;chat.completion.chunk&quot;,&quot;created&quot;:1755876425,&quot;model&quot;:&quot;@openai\/gpt-5-mini&quot;,&quot;system_fingerprint&quot;:&quot;fp_2su4hm&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;finish_reason&quot;:&quot;stop&quot;,&quot;logprobs&quot;:null,&quot;delta&quot;:{&quot;role&quot;:&quot;assistant&quot;,&quot;content&quot;:&quot;&quot;}}],&quot;usage&quot;:null}
 
 ...
 
-data: {&quot;id&quot;:&quot;0197dbde-c88c-7764-8017-c1fee0d79096&quot;,&quot;object&quot;:&quot;chat.completion.chunk&quot;,&quot;created&quot;:1751740500,&quot;model&quot;:&quot;@google/gemini-2.5-flash&quot;,&quot;system_fingerprint&quot;:&quot;fp_2he7ot&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;finish_reason&quot;:null,&quot;delta&quot;:{&quot;content&quot;:&quot;&quot;}}],&quot;usage&quot;:null,&quot;sentinel_usage&quot;:null}
+data: {&quot;id&quot;:&quot;chatcmpl-0198d263-ff5a-7f53-99e2-b59d5cdae470&quot;,&quot;object&quot;:&quot;chat.completion.chunk&quot;,&quot;created&quot;:1755876425,&quot;model&quot;:&quot;@openai\/gpt-5-mini&quot;,&quot;system_fingerprint&quot;:&quot;fp_7ibly5&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;finish_reason&quot;:&quot;stop&quot;,&quot;logprobs&quot;:null,&quot;delta&quot;:{&quot;content&quot;:&quot;&quot;}}],&quot;usage&quot;:null}
 
-data: {&quot;id&quot;:&quot;0197dbde-c890-7329-9e65-faecbe158efa&quot;,&quot;object&quot;:&quot;chat.completion.chunk&quot;,&quot;created&quot;:1751740500,&quot;model&quot;:&quot;@aivax\/sentinel-mini&quot;,&quot;system_fingerprint&quot;:&quot;fp_q6qh7x&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;finish_reason&quot;:&quot;STOP&quot;,&quot;delta&quot;:{}}],&quot;usage&quot;:{&quot;prompt_tokens&quot;:1097,&quot;completion_tokens&quot;:92,&quot;total_tokens&quot;:1189},&quot;sentinel_usage&quot;:null}
+data: {&quot;id&quot;:&quot;chatcmpl-0198d263-ff80-7d8f-91e7-c61ac2a9e870&quot;,&quot;object&quot;:&quot;chat.completion.chunk&quot;,&quot;created&quot;:1755876425,&quot;model&quot;:&quot;@openai\/gpt-5-mini&quot;,&quot;system_fingerprint&quot;:&quot;fp_552km8&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;finish_reason&quot;:&quot;stop&quot;,&quot;logprobs&quot;:null,&quot;delta&quot;:{}}],&quot;usage&quot;:{&quot;prompt_tokens&quot;:1873,&quot;completion_tokens&quot;:41,&quot;total_tokens&quot;:1914}}
+
+data: [END]
 </code></pre>
 <h2 id="uso-com-sdks">Uso com SDKs</h2>
 <p>Por prover endpoints compatíveis com a interface OpenAI, a AIVAX é totalmente compatível com SDKs existentes, facilitando a integração plug-and-play.</p>

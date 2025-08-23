@@ -1,27 +1,27 @@
 # AI Gateway
 
-The AI gateways are a service that AIVAX provides to create an inference tunnel between an LLM model and a knowledge base. With it you can:
+AI gateways are a service that AIVAX provides to create an inference tunnel between an LLM model and a knowledge base. With it you can:
 
 - Create a model with custom instructions
-- Use a model provided by you through a compatible OpenAI endpoint, or use a model provided by AIVAX
-- Customize inference parameters such as temperature, top_p, prefill
+- Use a model provided by you through a compatible OpenAI endpoint, or use a model made available by AIVAX
+- Customize inference parameters, such as temperature, top_p, prefill
 - Use a knowledge collection as the foundation for AI responses
 
-Among other features. With the AI Gateway, you create a ready‑to‑use model, parameterized and based on the instructions you define.
+Among other features. With the AI Gateway, you create a ready‑to‑use model, parametrized and grounded in the instructions you define.
 
 ## Models
 
-You can bring an AI model compatible with the OpenAI interface to the AI gateway. If you bring your own AI model, we will only charge for the document search attached to the AI. You can also use one of the models below that are already ready to start with AIVAX.
+You can bring an AI model compatible with the OpenAI interface to the AI gateway. If you bring your own AI model, we will charge only for the document search attached to the AI. You can also use one of the models below that are already ready to start with AIVAX.
 
-When using a model, you will notice that some are smarter than others for certain tasks. Some models are better with certain data retrieval strategies than others. Run tests to find the best model.
+When using a model, you will notice that some are smarter than others for certain tasks. Some models perform better with certain data‑retrieval strategies than others. Run tests to find the best model.
 
 You can see the available models on the [models page](/docs/en/models).
 
 ## Using an AI gateway
 
-AIVAX provides an endpoint compatible with the OpenAI interface through an AI gateway, which makes it easier to integrate the model created by AIVAX with existing applications and SDKs. Note that only some properties are supported.
+AIVAX provides an endpoint compatible with the OpenAI interface through an AI‑gateway, which makes it easy to integrate the model created by AIVAX with existing applications and SDKs. Note that only a subset of properties are supported.
 
-In an AI gateway, you already configure model parameters such as System Prompt, temperature, and model name. When using this endpoint, some gateway values can be overridden by the request.
+In an AI gateway, you already configure the model parameters, such as System Prompt, temperature, and model name. When using this endpoint, some gateway values can be overridden by the request.
 
 #### Request
 
@@ -34,14 +34,17 @@ In an AI gateway, you already configure model parameters such as System Prompt, 
 
 ```json
 {
-    "model": "0197cb0f-893a-7b7d-be0a-71ada1208aaf",
+    "model": "0198683a-2b6d-7066-9598-6ea119c219f2",
     "messages": [
         {
             "role": "user",
-            "content": "Who are you?"
+            "content": "Qual a capital da França?"
         }
     ],
-    "stream": false
+    "stream": false,
+    "metadata": {
+        "foo": "bar"
+    }
 }
 ```
 
@@ -49,42 +52,88 @@ In an AI gateway, you already configure model parameters such as System Prompt, 
 
 ```json
 {
-    "id": "0197dbdc-6456-7d54-b7ec-04cb9c80f460",
+    "id": "0198d24c-c9ce-70fe-9cf3-00644ef5f2e2",
     "object": "chat.completion",
-    "created": 1751740343,
-    "model": "@google/gemini-2.5-flash",
+    "created": 1755874904,
+    "model": "@openai/gpt-5-mini",
     "choices": [
         {
             "index": 0,
             "message": {
                 "role": "assistant",
-                "completion_text": "Hi! 😊 I am Zia, the smart assistant of Zé do Ingresso. I'm here to help you with everything about tickets, events, and everything happening in our beloved São José do Rio Preto. If you need anything, like learning about the naming of the thing, just ask! Let's enjoy everything that's happening! What do you need? 🥳 ",
+                "content": "A capital da França é Paris.",
                 "refusal": null,
-                "annotations": []
+                "annotations": [],
+                "tool_calls": []
             },
             "logprobs": null,
             "finish_reason": "stop"
         }
     ],
     "usage": {
-        "prompt_tokens": 1118,
-        "completion_tokens": 88,
-        "total_tokens": 1206
+        "prompt_tokens": 84,
+        "completion_tokens": 16,
+        "total_tokens": 1892,
+        "prompt_tokens_details": {
+            "cached_tokens": 1792
+        }
     },
-    "service_tier": "default"
+    "service_tier": "default",
+    "generation_context": {
+        "generated_usage": [
+            {
+                "sku": "inference.resolving.routing_complexity.in",
+                "amount": 0.0000207,
+                "unit_price": 7.5e-8,
+                "quantity": 276,
+                "description": "Inference for model routing"
+            },
+            {
+                "sku": "inference.resolving.routing_complexity.out",
+                "amount": 3e-7,
+                "unit_price": 3e-7,
+                "quantity": 1,
+                "description": "Inference for model routing"
+            },
+            {
+                "sku": "inference.chat_completions.in",
+                "amount": 0.000021,
+                "unit_price": 2.5e-7,
+                "quantity": 84,
+                "description": "Inference for AI model '@openai/gpt-5-mini'"
+            },
+            {
+                "sku": "inference.chat_completions.out",
+                "amount": 0.000032,
+                "unit_price": 0.000002,
+                "quantity": 16,
+                "description": "Inference for AI model '@openai/gpt-5-mini'"
+            },
+            {
+                "sku": "inference.chat_completions.in.cached",
+                "amount": 0.0000448,
+                "unit_price": 2.5e-8,
+                "quantity": 1792,
+                "description": "Inference for AI model '@openai/gpt-5-mini'"
+            }
+        ],
+        "runned_functions": []
+    }
 }
 ```
 
 #### Streaming response
 
 ```text
-data: {"id":"0197dbde-c40b-720d-a13e-f689c303c571","object":"chat.completion.chunk","created":1751740498,"model":"@google/gemini-2.5-flash","system_fingerprint":"fp_y8jidd","choices":[{"index":0,"finish_reason":null,"delta":{"role":"assistant","content":""}}],"usage":null,"sentinel_usage":null}
+data: {"id":"chatcmpl-0198d263-fd80-7645-98b0-3966004e11df","object":"chat.completion.chunk","created":1755876425,"model":"@openai\/gpt-5-mini","system_fingerprint":"fp_2su4hm","choices":[{"index":0,"finish_reason":"stop","logprobs":null,"delta":{"role":"assistant","content":""}}],"usage":null}
 
 ...
 
-data: {"id":"0197dbde-c88c-7764-8017-c1fee0d79096","object":"chat.completion.chunk","created":1751740500,"model":"@google/gemini-2.5-flash","system_fingerprint":"fp_2he7ot","choices":[{"index":0,"finish_reason":null,"delta":{"content":""}}],"usage":null,"sentinel_usage":null}
+data: {"id":"chatcmpl-0198d263-ff5a-7f53-99e2-b59d5cdae470","object":"chat.completion.chunk","created":1755876425,"model":"@openai\/gpt-5-mini","system_fingerprint":"fp_7ibly5","choices":[{"index":0,"finish_reason":"stop","logprobs":null,"delta":{"content":""}}],"usage":null}
 
-data: {"id":"0197dbde-c890-7329-9e65-faecbe158efa","object":"chat.completion.chunk","created":1751740500,"model":"@aivax\/sentinel-mini","system_fingerprint":"fp_q6qh7x","choices":[{"index":0,"finish_reason":"STOP","delta":{}}],"usage":{"prompt_tokens":1097,"completion_tokens":92,"total_tokens":1189},"sentinel_usage":null}
+data: {"id":"chatcmpl-0198d263-ff80-7d8f-91e7-c61ac2a9e870","object":"chat.completion.chunk","created":1755876425,"model":"@openai\/gpt-5-mini","system_fingerprint":"fp_552km8","choices":[{"index":0,"finish_reason":"stop","logprobs":null,"delta":{}}],"usage":{"prompt_tokens":1873,"completion_tokens":41,"total_tokens":1914}}
+
+data: [END]
 ```
 
 ## Usage with SDKs

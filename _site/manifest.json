@@ -252,6 +252,16 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "assets/icon/unknown.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/icon/unknown.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "assets/icon/zai-org.svg",
       "output": {
         "resource": {
