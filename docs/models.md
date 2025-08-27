@@ -34,18 +34,18 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada:
             </small>
             <div>
-                $ 0.80 <small>/1m tokens</small>
+                $ 0.70 <small>/1m tokens</small>
             </div>
         </div>
+        
         <div class="item-pricing">
             <small>
                 Saída:
             </small>
             <div>
-                $ 2.40 <small>/1m tokens</small>
+                $ 2.50 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         High-capacity chain-of-thought reasoning model with a massive 164K token context window. Ideal for complex math, step-by-step logic, and advanced code authoring.
@@ -56,7 +56,50 @@ Todos os preços estão em dólares dos Estados Unidos.
 </div>
 <div>
     <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
+    Raciocínio
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @deepseekai/v3.1
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.55 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 1.66 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        A 675B-parameter hybrid LLM with 163K context that supports both thinking and non‑thinking chat modes.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Raciocínio
 </div>
 <div>
     <i class="ri-braces-line"></i>
@@ -80,6 +123,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.50 <small>/1m tokens</small>
             </div>
         </div>
+        
         <div class="item-pricing">
             <small>
                 Saída:
@@ -88,7 +132,6 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 1.50 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         Balanced reasoning model with a 128K token context. Delivers efficient tool calling, reliable code assistance, and strong analytical output at lower cost.
@@ -119,6 +162,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.75 <small>/1m tokens</small>
             </div>
         </div>
+        
         <div class="item-pricing">
             <small>
                 Saída:
@@ -127,69 +171,14 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.99 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         Distilled Llama 3 70B model emulating R1’s chain-of-thought prowess. Offers transparent reasoning blocks and fast throughput on Groq hardware.
         <div class="model-capabilities">
 <div>
     <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
+    Raciocínio
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-    </tbody>
-</table>
-
-## <img src="/assets/icon/dolphin.svg" class="inline-icon"> dolphin
-
-<table>
-    <thead>
-        <colgroup>
-            <col style="width: 30%" />
-            <col style="width: 20%" />
-            <col style="width: 50%" />
-        </colgroup>
-        <tr>
-            <th>Nome do modelo</th>
-            <th>Preços</th>
-            <th>Descrição</th>
-        </tr>
-    </thead>
-    <tbody>
-<tr>
-    <td>
-        <code>
-            @dolphin/mixtral-8x22b
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.90 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 0.90 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-    </td>
-    <td>
-        Dolphin Mistral 8x22b is a collaborative project with the goal of creating the most uncensored version of Mixtral model.
-        <div class="model-capabilities">
 <div>
     <i class="ri-braces-line"></i>
     Funções JSON
@@ -232,6 +221,14 @@ Todos os preços estão em dólares dos Estados Unidos.
             </div>
         </div>
         <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.31 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
             <small>
                 Saída:
             </small>
@@ -239,7 +236,6 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 10.00 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         One of the most powerful models today.
@@ -254,50 +250,7 @@ Todos os preços estão em dólares dos Estados Unidos.
 </div>
 <div>
     <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @google/gemini-1.5-pro
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 1.25 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 5.00 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-    </td>
-    <td>
-        Gemini 1.5 Pro is a mid-size multimodal model that is optimized for a wide-range of reasoning tasks.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens, vídeos, áudios
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
+    Raciocínio
 </div>
         </div>
     </td>
@@ -318,6 +271,14 @@ Todos os preços estão em dólares dos Estados Unidos.
             </div>
         </div>
         <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.08 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
             <small>
                 Saída:
             </small>
@@ -325,7 +286,6 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 2.50 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         Google's best model in terms of price-performance, offering well-rounded capabilities. 2.5 Flash is best for large scale processing, low-latency, high volume tasks that require thinking, and agentic use cases.
@@ -340,7 +300,7 @@ Todos os preços estão em dólares dos Estados Unidos.
 </div>
 <div>
     <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
+    Raciocínio
 </div>
 <div>
     <i class="ri-braces-line"></i>
@@ -365,6 +325,14 @@ Todos os preços estão em dólares dos Estados Unidos.
             </div>
         </div>
         <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.03 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
             <small>
                 Saída:
             </small>
@@ -372,7 +340,6 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.40 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         A Gemini 2.5 Flash model optimized for cost efficiency and low latency.
@@ -387,7 +354,7 @@ Todos os preços estão em dólares dos Estados Unidos.
 </div>
 <div>
     <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
+    Raciocínio
 </div>
 <div>
     <i class="ri-braces-line"></i>
@@ -412,6 +379,14 @@ Todos os preços estão em dólares dos Estados Unidos.
             </div>
         </div>
         <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.03 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
             <small>
                 Saída:
             </small>
@@ -419,7 +394,6 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.40 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         Gemini 2.0 Flash delivers next-gen features and improved capabilities, including superior speed, native tool use, and a 1M token context window.
@@ -454,6 +428,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.08 <small>/1m tokens</small>
             </div>
         </div>
+        
         <div class="item-pricing">
             <small>
                 Saída:
@@ -462,53 +437,9 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.30 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         General-purpose model, with image recognition, smart and fast. Great for an economical chat.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens, vídeos, áudios
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @google/gemini-1.5-flash-8b
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.04 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 0.08 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-    </td>
-    <td>
-        Previous generation general-purpose model, optimized for less demanding and simple tasks.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -559,6 +490,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.25 <small>/1m tokens</small>
             </div>
         </div>
+        
         <div class="item-pricing">
             <small>
                 Saída:
@@ -567,7 +499,6 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 1.00 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         Extremely fast model by generative diffusion.
@@ -617,6 +548,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.59 <small>/1m tokens</small>
             </div>
         </div>
+        
         <div class="item-pricing">
             <small>
                 Saída:
@@ -625,7 +557,6 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.79 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         Previous generation model with many parameters and surprisingly fast speed.
@@ -656,6 +587,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.20 <small>/1m tokens</small>
             </div>
         </div>
+        
         <div class="item-pricing">
             <small>
                 Saída:
@@ -664,7 +596,6 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.60 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         Fast model, with 17 billion activated parameters and 128 experts.
@@ -699,6 +630,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.11 <small>/1m tokens</small>
             </div>
         </div>
+        
         <div class="item-pricing">
             <small>
                 Saída:
@@ -707,7 +639,6 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.34 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         Smaller version of the Llama 4 family with 17 billion activated parameters and 16 experts.
@@ -742,6 +673,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.05 <small>/1m tokens</small>
             </div>
         </div>
+        
         <div class="item-pricing">
             <small>
                 Saída:
@@ -750,7 +682,6 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.08 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         Cheap and fast model for less demanding tasks.
@@ -800,6 +731,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.08 <small>/1m tokens</small>
             </div>
         </div>
+        
         <div class="item-pricing">
             <small>
                 Saída:
@@ -808,7 +740,6 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.30 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         Model router for Google Gemini. The routing is made between Gemini 2.0 Flash, Gemini 2.5 Flash (no thinking) and Gemini 2.5 Flash (dynamic thinking).
@@ -831,6 +762,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.08 <small>/1m tokens</small>
             </div>
         </div>
+        
         <div class="item-pricing">
             <small>
                 Saída:
@@ -839,10 +771,9 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.30 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
-        Model router for OpenAI. The routing is made between GPT 5 Nano, GPT 5 Mini and o4-mini.
+        Model router for OpenAI. The routing is made between GPT 5 Nano (minimal), GPT 5 Mini (Low) and GPT-5 Mini (medium).
         <div class="model-capabilities">
         </div>
     </td>
@@ -862,6 +793,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.08 <small>/1m tokens</small>
             </div>
         </div>
+        
         <div class="item-pricing">
             <small>
                 Saída:
@@ -870,10 +802,9 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.30 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
-        Model router for OpenAI. The routing is made between GPT 5 Mini, o4-mini (low) and o4-mini (high).
+        Model router for OpenAI. The routing is made between GPT 5 Mini (low), o4-mini (low) and o4-mini (high).
         <div class="model-capabilities">
         </div>
     </td>
@@ -893,6 +824,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.08 <small>/1m tokens</small>
             </div>
         </div>
+        
         <div class="item-pricing">
             <small>
                 Saída:
@@ -901,7 +833,6 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.30 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         Model router for Meta Llama. The routing is made between Llama 4 Scout, Llama 4 Maverick and Llama 3.3 70b.
@@ -944,6 +875,14 @@ Todos os preços estão em dólares dos Estados Unidos.
             </div>
         </div>
         <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.50 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
             <small>
                 Saída:
             </small>
@@ -951,7 +890,6 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 3.00 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         Model with 1tri total parameters, 32bi activated parameters, optimized for agentic intelligence.
@@ -959,6 +897,111 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+    </tbody>
+</table>
+
+## <img src="/assets/icon/nous-research.svg" class="inline-icon"> nous-research
+
+<table>
+    <thead>
+        <colgroup>
+            <col style="width: 30%" />
+            <col style="width: 20%" />
+            <col style="width: 50%" />
+        </colgroup>
+        <tr>
+            <th>Nome do modelo</th>
+            <th>Preços</th>
+            <th>Descrição</th>
+        </tr>
+    </thead>
+    <tbody>
+<tr>
+    <td>
+        <code>
+            @nous-research/hermes4-405b
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 1.00 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 3.00 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Hermes‑4‑405B is a high‑capability Llama‑3.1‑based chat model featuring hybrid reasoning, structured JSON output, and built‑in function‑calling support.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Raciocínio
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @nous-research/hermes4-70b
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.13 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.40 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Hermes‑4‑70B is a Llama‑3.1‑based chat model with hybrid reasoning, structured JSON output, and built‑in function‑calling capabilities.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Raciocínio
 </div>
 <div>
     <i class="ri-braces-line"></i>
@@ -989,7 +1032,7 @@ Todos os preços estão em dólares dos Estados Unidos.
 <tr>
     <td>
         <code>
-            @nvidia/llama-3.1-70b-nemotron
+            @nvidia/llama-3.1-235b-nemotron-ultra
         </code>
     </td>
     <td>
@@ -998,26 +1041,57 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada:
             </small>
             <div>
-                $ 0.88 <small>/1m tokens</small>
+                $ 0.60 <small>/1m tokens</small>
             </div>
         </div>
+        
         <div class="item-pricing">
             <small>
                 Saída:
             </small>
             <div>
-                $ 0.88 <small>/1m tokens</small>
+                $ 1.80 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        A 253‑billion‑parameter Llama‑3.1‑based LLM optimized for high‑throughput reasoning with a 128K token context.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @nvidia/llama-3.1-49b-nemotron-super
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.13 <small>/1m tokens</small>
             </div>
         </div>
         
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.40 <small>/1m tokens</small>
+            </div>
+        </div>
     </td>
     <td>
-        Llama-3.1-Nemotron-70B-Instruct is a large language model customized by NVIDIA to improve the helpfulness of LLM generated responses to user queries.
+        A 49.9‑billion‑parameter Llama‑3.3‑based LLM optimized for high‑throughput reasoning with a 128K token context.
         <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
 <div>
     <i class="ri-braces-line"></i>
     Funções JSON
@@ -1059,6 +1133,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 5.00 <small>/1m tokens</small>
             </div>
         </div>
+        
         <div class="item-pricing">
             <small>
                 Saída:
@@ -1067,7 +1142,6 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 15.00 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         The GPT-4o model snapshot used by ChatGPT.
@@ -1099,6 +1173,14 @@ Todos os preços estão em dólares dos Estados Unidos.
             </div>
         </div>
         <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 1.25 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
             <small>
                 Saída:
             </small>
@@ -1106,7 +1188,6 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 10.00 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         Dedicated to tasks requiring reasoning for mathematical and logical problem solving.
@@ -1142,6 +1223,14 @@ Todos os preços estão em dólares dos Estados Unidos.
             </div>
         </div>
         <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.13 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
             <small>
                 Saída:
             </small>
@@ -1149,7 +1238,6 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 10.00 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         OpenAI's newest flagship model for coding, reasoning, and agentic tasks across domains.
@@ -1164,7 +1252,7 @@ Todos os preços estão em dólares dos Estados Unidos.
 </div>
 <div>
     <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
+    Raciocínio
 </div>
 <div>
     <i class="ri-braces-line"></i>
@@ -1189,6 +1277,14 @@ Todos os preços estão em dólares dos Estados Unidos.
             </div>
         </div>
         <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.13 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
             <small>
                 Saída:
             </small>
@@ -1196,7 +1292,6 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 10.00 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         GPT-5 snapshot currently used by OpenAI's ChatGPT.
@@ -1228,6 +1323,14 @@ Todos os preços estão em dólares dos Estados Unidos.
             </div>
         </div>
         <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.50 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
             <small>
                 Saída:
             </small>
@@ -1235,7 +1338,6 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 8.00 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         Versatile, highly intelligent, and top-of-the-line. One of the most capable models currently available.
@@ -1271,6 +1373,14 @@ Todos os preços estão em dólares dos Estados Unidos.
             </div>
         </div>
         <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.50 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
             <small>
                 Saída:
             </small>
@@ -1278,7 +1388,6 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 8.00 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         A well-rounded and powerful model across domains. It sets a new standard for math, science, coding, and visual reasoning tasks.
@@ -1293,7 +1402,7 @@ Todos os preços estão em dólares dos Estados Unidos.
 </div>
 <div>
     <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
+    Raciocínio
 </div>
 <div>
     <i class="ri-braces-line"></i>
@@ -1318,6 +1427,14 @@ Todos os preços estão em dólares dos Estados Unidos.
             </div>
         </div>
         <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.28 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
             <small>
                 Saída:
             </small>
@@ -1325,7 +1442,6 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 4.40 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         Optimized for fast, effective reasoning with exceptionally efficient performance in coding and visual tasks.
@@ -1340,7 +1456,7 @@ Todos os preços estão em dólares dos Estados Unidos.
 </div>
 <div>
     <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
+    Raciocínio
 </div>
 <div>
     <i class="ri-braces-line"></i>
@@ -1365,6 +1481,14 @@ Todos os preços estão em dólares dos Estados Unidos.
             </div>
         </div>
         <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.55 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
             <small>
                 Saída:
             </small>
@@ -1372,7 +1496,6 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 4.40 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         o3-mini provides high intelligence at the same cost and latency targets of previous versions of o-mini series.
@@ -1383,7 +1506,7 @@ Todos os preços estão em dólares dos Estados Unidos.
 </div>
 <div>
     <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
+    Raciocínio
 </div>
 <div>
     <i class="ri-braces-line"></i>
@@ -1408,6 +1531,14 @@ Todos os preços estão em dólares dos Estados Unidos.
             </div>
         </div>
         <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.03 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
             <small>
                 Saída:
             </small>
@@ -1415,7 +1546,6 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 2.00 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         GPT-5 mini is a faster, more cost-efficient version of GPT-5.
@@ -1451,6 +1581,14 @@ Todos os preços estão em dólares dos Estados Unidos.
             </div>
         </div>
         <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.10 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
             <small>
                 Saída:
             </small>
@@ -1458,7 +1596,6 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 1.60 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         Fast and cheap for focused tasks.
@@ -1493,6 +1630,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.25 <small>/1m tokens</small>
             </div>
         </div>
+        
         <div class="item-pricing">
             <small>
                 Saída:
@@ -1501,7 +1639,6 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.69 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         OpenAI's flagship open source model, built on a Mixture-of-Experts (MoE) architecture with 120 billion parameters and 128 experts.
@@ -1512,7 +1649,7 @@ Todos os preços estão em dólares dos Estados Unidos.
 </div>
 <div>
     <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
+    Raciocínio
 </div>
 <div>
     <i class="ri-braces-line"></i>
@@ -1536,6 +1673,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.15 <small>/1m tokens</small>
             </div>
         </div>
+        
         <div class="item-pricing">
             <small>
                 Saída:
@@ -1544,7 +1682,6 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.75 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         OpenAI's flagship open source model, built on a Mixture-of-Experts (MoE) architecture with 120 billion parameters and 128 experts.
@@ -1555,7 +1692,7 @@ Todos os preços estão em dólares dos Estados Unidos.
 </div>
 <div>
     <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
+    Raciocínio
 </div>
 <div>
     <i class="ri-braces-line"></i>
@@ -1580,6 +1717,14 @@ Todos os preços estão em dólares dos Estados Unidos.
             </div>
         </div>
         <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.08 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
             <small>
                 Saída:
             </small>
@@ -1587,7 +1732,6 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.60 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         Smaller version of 4o, optimized for everyday tasks.
@@ -1622,6 +1766,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.10 <small>/1m tokens</small>
             </div>
         </div>
+        
         <div class="item-pricing">
             <small>
                 Saída:
@@ -1630,7 +1775,6 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.50 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         OpenAI's flagship open source model, built on a Mixture-of-Experts (MoE) architecture with 20 billion parameters and 128 experts.
@@ -1641,7 +1785,7 @@ Todos os preços estão em dólares dos Estados Unidos.
 </div>
 <div>
     <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
+    Raciocínio
 </div>
 <div>
     <i class="ri-braces-line"></i>
@@ -1666,6 +1810,14 @@ Todos os preços estão em dólares dos Estados Unidos.
             </div>
         </div>
         <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.03 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
             <small>
                 Saída:
             </small>
@@ -1673,7 +1825,6 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.40 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         The fastest and cheapest GPT 4.1 model.
@@ -1709,6 +1860,14 @@ Todos os preços estão em dólares dos Estados Unidos.
             </div>
         </div>
         <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.01 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
             <small>
                 Saída:
             </small>
@@ -1716,7 +1875,6 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.40 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         OpenAI's fastest, cheapest version of GPT-5.
@@ -1770,6 +1928,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 2.00 <small>/1m tokens</small>
             </div>
         </div>
+        
         <div class="item-pricing">
             <small>
                 Saída:
@@ -1778,7 +1937,6 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 2.00 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         480B-parameter coder-specialized LLM with a 64K-token context window, ultrafast inference and structured JSON outputs. Optimized for high-throughput code generation, debugging, review and documentation across multiple languages.
@@ -1809,6 +1967,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.60 <small>/1m tokens</small>
             </div>
         </div>
+        
         <div class="item-pricing">
             <small>
                 Saída:
@@ -1817,7 +1976,6 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 1.20 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         Cost-efficient MoE model with 235B parameters (22 experts) and a 64K-token context window. Excels in instruction following, logical reasoning, mathematics, coding, multilingual tasks, tool integration, and structured JSON outputs.
@@ -1848,6 +2006,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.60 <small>/1m tokens</small>
             </div>
         </div>
+        
         <div class="item-pricing">
             <small>
                 Saída:
@@ -1856,7 +2015,6 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 1.20 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         Thinking variant of the 235B/22-expert MoE model with a 64K-token context. Delivers enhanced chain-of-thought reasoning, ultrafast inference, full tool calling and JSON functions for complex problem solving.
@@ -1867,7 +2025,7 @@ Todos os preços estão em dólares dos Estados Unidos.
 </div>
 <div>
     <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
+    Raciocínio
 </div>
 <div>
     <i class="ri-braces-line"></i>
@@ -1891,6 +2049,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.29 <small>/1m tokens</small>
             </div>
         </div>
+        
         <div class="item-pricing">
             <small>
                 Saída:
@@ -1899,7 +2058,6 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.59 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         32B-parameter LLM with a 131K-token context window, offering advanced chain-of-thought reasoning, seamless tool calling, native JSON outputs, and robust multilingual fluency.
@@ -1910,7 +2068,7 @@ Todos os preços estão em dólares dos Estados Unidos.
 </div>
 <div>
     <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
+    Raciocínio
 </div>
 <div>
     <i class="ri-braces-line"></i>
@@ -1950,18 +2108,18 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada:
             </small>
             <div>
-                $ 0.55 <small>/1m tokens</small>
+                $ 0.60 <small>/1m tokens</small>
             </div>
         </div>
+        
         <div class="item-pricing">
             <small>
                 Saída:
             </small>
             <div>
-                $ 2.19 <small>/1m tokens</small>
+                $ 2.20 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         High-capacity Mixture-of-Experts model (335B/32 experts) with a 131K-token context window. Combines deep reasoning, fast tool calling and native JSON function outputs for large-scale language understanding and structured data tasks.
@@ -1972,7 +2130,7 @@ Todos os preços estão em dólares dos Estados Unidos.
 </div>
 <div>
     <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
+    Raciocínio
 </div>
 <div>
     <i class="ri-braces-line"></i>
@@ -1993,18 +2151,18 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada:
             </small>
             <div>
-                $ 0.22 <small>/1m tokens</small>
+                $ 0.20 <small>/1m tokens</small>
             </div>
         </div>
+        
         <div class="item-pricing">
             <small>
                 Saída:
             </small>
             <div>
-                $ 0.88 <small>/1m tokens</small>
+                $ 1.20 <small>/1m tokens</small>
             </div>
         </div>
-        
     </td>
     <td>
         Cost-efficient MoE variant (110B/32 experts) of GLM-4.5 with a 131K-token context. Delivers high-speed inference, full tool integration and JSON function support for budget-sensitive deployments.
@@ -2015,7 +2173,7 @@ Todos os preços estão em dólares dos Estados Unidos.
 </div>
 <div>
     <i class="ri-lightbulb-line"></i>
-    Pensamento profundo
+    Raciocínio
 </div>
 <div>
     <i class="ri-braces-line"></i>
