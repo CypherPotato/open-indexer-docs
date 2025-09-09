@@ -17,7 +17,9 @@ items:
 
 - name: Ferramentas de fábrica
   href: builtin-tools.md
-- name: Funções server-side
+- name: Funções MCP
+  href: mcp.md
+- name: Funções de protocolo
   href: protocol-functions.md
 
 - name: Usando a API

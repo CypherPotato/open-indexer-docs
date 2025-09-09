@@ -12,6 +12,16 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "assets/diagrams/mcp-1.drawio.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/diagrams/mcp-1.drawio.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "assets/diagrams/protocol-functions-1.drawio.svg",
       "output": {
         "resource": {
@@ -116,6 +126,16 @@
       "output": {
         "resource": {
           "relative_path": "assets/icon/cognitivecomputations.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/icon/cohere.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/icon/cohere.svg"
         }
       },
       "version": ""
@@ -266,6 +286,16 @@
       "output": {
         "resource": {
           "relative_path": "assets/icon/unknown.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/icon/x-ai.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/icon/x-ai.svg"
         }
       },
       "version": ""
@@ -795,6 +825,16 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "docs/en/mcp.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/en/mcp.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "docs/en/models.md",
       "output": {
         ".html": {
@@ -965,6 +1005,16 @@
       "output": {
         ".html": {
           "relative_path": "docs/limits.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/mcp.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/mcp.html"
         }
       },
       "version": ""

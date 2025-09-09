@@ -35,7 +35,12 @@ Se uma sessão estiver próxima de expirar, ela é renovada por mais 20 minutos 
     "contextLocation": "https://example.com/context.txt",
     
     // Opcional (recomendado). Um id externo para identificar a sessão posteriormente e reaproveitá-la sempre que chamar o mesmo endpoint. Pode ser o ID do usuário do seu banco de dados ou uma string que facilite a identificação desse chat posteriormente.
-    "tag": "my-user-tag"    
+    "tag": "my-user-tag",
+    
+    // Opcional. Metadata adicional para armazenar no cliente. Não visível para a assistente.
+    "metadata": {
+        "foo": "bar"
+    }
 }
 ```
 

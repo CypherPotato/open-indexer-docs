@@ -1,20 +1,20 @@
 # Functions
 
-Functions are a way to force your model to process information using JSON as an intermediate communication medium. With functions, you can make any model respond in the JSON format you want.
+Functions are a way to force your model to process information using JSON as an intermediate communication. With functions, you can make any model respond in the JSON format you want.
 
-It can be useful for categorizing comments, applying moderation to reviews, or processing information with the help of AI.
+It can be useful for categorizing comments, applying moderation to reviews, or processing information with AI assistance.
 
-Currently, it is only possible to use functions with [models provided by AIVAX](/docs/en/models).
+Currently, functions can only be used with [models provided by AIVAX](/docs/en/models).
 
-## Calling a Function
+## Calling a function
 
-To call an AI function, you will need to inform what the AI should respond to and provide a JSON Schema that it should follow.
+To call an AI function, you need to specify what the AI should respond with and provide a JSON Schema that it must follow.
 
-Less intelligent models tend to fail to generate JSON, generating an invalid or problematic document. To fix this, adjust your model, the instruction, and the attempt parameter if necessary.
+Less intelligent models tend to fail at generating JSON, producing an invalid or problematic document. To address this, adjust your model, the instruction, and the retry parameter if necessary.
 
-You are charged for each attempt the AI tries to generate. Slightly more intelligent models tend to generate correct results on the first attempt. It is guaranteed that a valid JSON will be generated and that this JSON will follow the same schema provided in the request.
+You are charged for each attempt the AI makes to generate. Slightly smarter models tend to produce correct results on the first try. It is guaranteed that a valid JSON will be generated and that this JSON will follow the same schema provided in the request.
 
-Consider using a cache on the side of your application for data that does not need to be constantly updated, such as weather data, daily statistics, etc. AIVAX does not perform any caching on our side.
+Consider using a cache on your application side for data that does not need to be constantly updated, such as weather data, daily statistics, etc. AIVAX does not perform any caching on our side.
 
 #### Request
 
@@ -27,13 +27,13 @@ Consider using a cache on the side of your application for data that does not ne
 
 ```json
 {
-    // Required. Specify the name of the integrated model to be used to perform the action.
+    // Required. Specify the name of the integrated model that will be used to perform the action.
     "modelName": "@metaai/llama-3.1-8b",
     
-    // Required. Explain what your model should do with the input and how it should bring the response.
-    "instructions": "Classify the user's comment, indicating whether it is positive or negative, and if it has any relevant information (number between 0 (not relevant) and 10 (very relevant))",
+    // Required. Explain what your model should do with the input and how it should produce the response.
+    "instructions": "Classify the user's comment, indicating whether it is positive or negative, and whether it contains any relevant information (a number between 0 (not very relevant) and 10 (very relevant))",
     
-    // Required. The JSON Schema that the model should follow to generate the response. You can provide examples of generation in the instructions field.
+    // Required. The JSON Schema that the model must follow to generate the response. You can provide generation examples in the instructions field.
     "responseSchema": {
         "type": "object",
         "properties": {
@@ -52,19 +52,19 @@ Consider using a cache on the side of your application for data that does not ne
     
     // Optional. Defines a JSON input for the model. Can be any type of JSON value.
     "inputData": {
-        "userComment": "Terrible market. There's a guard inside watching you so you don't steal and the butchers ignore you and serve pretty girls in front of you. But thank God there are other markets coming and the end of this nonsense will come"
+        "userComment": "Terrible market. There is a guard inside watching you so you don't steal and the butchers ignore you and serve pretty girls in front of you.  But thank God other markets are arriving and the end of this nonsense will come"
     },
     
-    // Optional. Defines how many attempts the model should try before the API returns an error. Should be a number between 1 and 30.
+    // Optional. Defines how many attempts the model should try before the API returns an error. Must be a number between 1 and 30.
     "maxAttempts": 10,
     
-    // Optional. Defines the time limit in seconds to obtain a valid JSON before the API returns an error. Should be a number between 1 and 3600 (one hour).
+    // Optional. Defines the timeout in seconds to obtain a valid JSON before the API returns an error. Must be a number between 1 and 3600 (one hour).
     "timeout": 300,
     
-    // Optional. Defines the temperature of JSON generation. Higher values tend to be more creative, while lower values are more deterministic. Number from 0 to 2.
+    // Optional. Defines the temperature for JSON generation. Higher values tend to be more creative, while lower values are more deterministic. Number from 0 to 2.
     "temperature": 0.4,
     
-    // Optional. Provides additional context for generation through chat/completions messages. You can also provide multi-modal content for compatible models.
+    // Optional. Provides additional context for generation via chat/completions‑style messages. You can also provide multimodal content for compatible models.
     "context": [
         {
             "role": "user",
@@ -72,7 +72,7 @@ Consider using a cache on the side of your application for data that does not ne
         }
     ],
     
-    // Optional. Provides built-in AIVAX tools for JSON generation.
+    // Optional. Provides built‑in AIVAX tools for the generation.
     "tools": [
         "WebSearch",
         "Code",
@@ -88,6 +88,11 @@ Consider using a cache on the side of your application for data that does not ne
         "imageGenerationMaxResults": 2,
         "imageGenerationQuality": "Low" | "Medium" | "High" | "Highest",
         "imageGenerationAllowMatureContent": false
+    },
+    
+    // Optional. Additional function metadata. Not visible to the assistant.
+    "metadata": {
+        "foo": "bar"
     }
 }
 ```
@@ -129,9 +134,9 @@ Consider using a cache on the side of your application for data that does not ne
 
 The response format must be provided by a JSON Schema.
 
-Behind the scenes, AIVAX guides the model to generate a response with the provided JSON schema. When the model generates something invalid, we indicate to it to try again and correct the errors until the output conforms to the provided specification.
+Behind the scenes, AIVAX guides the model to generate a response with the provided JSON schema. When the model generates something invalid, we tell it to try again and correct the errors until the output conforms to the supplied specification.
 
-The supported JSON Schema guidelines from AIVAX are:
+The supported JSON Schema directives of AIVAX are:
 
 - `string`:
     - `minLength`
@@ -157,7 +162,7 @@ The supported JSON Schema guidelines from AIVAX are:
 - `bool` and `boolean`
 - `null`
 
-Additionally, it is possible to inform one or more values in the `type` of the object, example:
+Additionally, you can specify one or more values in the `type` of the object, for example:
 
 ```json
 {
@@ -167,9 +172,9 @@ Additionally, it is possible to inform one or more values in the `type` of the o
 
 > Note: `number` and `integer` are synonyms and `integer` does not guarantee that the number will be an integer.
 
-## Functions in Tools
+## Functions in tools
 
-It is possible to use [built-in tools](/docs/en/builtin-tools) with JSON functions. This will allow the model to call functions to obtain the necessary context to generate the final JSON.
+It is possible to use [built‑in tools](/docs/en/builtin-tools) as JSON functions. This will allow the model to call functions to obtain the necessary context to generate the final JSON.
 
 ## Examples
 
@@ -187,22 +192,22 @@ Check out examples of AI functions for various everyday tasks:
 ```json
 {
     "modelName": "@google/gemini-2.0-flash",
-    "instructions": "Classify the user's comment, providing a note for their comment.",
+    "instructions": "Classify the user's comment by providing a rating for the comment.",
     "inputData": {
-        "inputText": "The food is good, but the environment is very noisy and a bit dirty too."
+        "inputText": "The food is good, but the environment is very noisy and a bit dirty as well."
     },
     "responseSchema": {
         "type": "object",
         "properties": {
             "commentSummary": {
                 "type": "string",
-                "description": "Summary of what the user meant to say."
+                "description": "Summary of what the user meant."
             },
             "score": {
                 "type": "integer",
                 "min": 1,
                 "max": 5,
-                "description": "The note extracted from the evaluation, being 1 very bad and 5 very good."
+                "description": "The rating extracted from the evaluation, where 1 is very bad and 5 is very good."
             }
         },
         "required": [
@@ -244,7 +249,7 @@ Check out examples of AI functions for various everyday tasks:
 }
 ```
 
-#### Evaluate a math expression
+#### Evaluate a mathematical expression
 
 <div class="request-item post">
     <span>POST</span>
@@ -352,7 +357,7 @@ Check out examples of AI functions for various everyday tasks:
 }
 ```
 
-#### Bring the latest news and weather from a specific city
+#### Fetch latest news and weather for a given city
 
 <div class="request-item post">
     <span>POST</span>
@@ -556,7 +561,7 @@ Check out examples of AI functions for various everyday tasks:
 }
 ```
 
-#### Bring top artists by music genre
+#### Fetch trending artists by musical genre
 
 <div class="request-item post">
     <span>POST</span>
@@ -568,7 +573,7 @@ Check out examples of AI functions for various everyday tasks:
 ```json
 {
             "modelName": "@openai/gpt-4.1-mini",
-            "instructions": "The function should search, using the latest posts from X, the music streaming platforms (such as Spotify, Apple Music, etc.) and identify the 10 most played artists in the genre informed by the user. Then, it should format an object containing a list of 10 artists, including position (1-10), name, and estimated number of streams.",
+            "instructions": "The function should search, using the latest X posts, the music streaming platforms (like Spotify, Apple Music etc.) and identify the 10 most played artists in the genre provided by the user. Then, it should format an object containing an ordered list of 10 artists, including position (1–10), name and estimated number of streams.",
             "inputData": {
                 "genre": "dubstep"
             },
@@ -728,105 +733,4 @@ Check out examples of AI functions for various everyday tasks:
           },
           "result": [
             {
-              "url": "https://x.com/nathanielblow/status/1867148757466304607",
-              "text": "NOW LIVE ON APPLE MUSIC. SPOTIFY. YOUTUBE MUSIC.\n\nEnjoy. https://t.co/apUxnXc7IE",
-              "authorUserName": "nathanielblow",
-              "createdAt": "2024-12-12T10:05:28"
-            },
-            {
-              "url": "https://x.com/yobrxxzy/status/1754800896041505222",
-              "text": "MOST STREAMED ARTISTS ON THESE STREAMING PLATFORMS \n\nApple Music — WIZKID\nSpotify — WIZKID\nYouTube — BURNA BOY\nPandora — WIZKID\nTidal  — WIZKID\nLine Music — WIZKID\nAudiomack — ASAKE\nDeezer — WIZKID\nBoomplay — BURNA BOY\nSoundCloud — BURNA BOY\nShazam — WIZKID https://t.co/Nm2jO5R5P6",
-              "authorUserName": "yobrxxzy",
-              "createdAt": "2024-02-06T09:35:10"
-            },
-            {
-              "url": "https://x.com/yobrxxzy/status/1922763266549301642",
-              "text": "MOST STREAMED ARTISTS ON THESE DSP:\n\nApple Music — WIZKID\nSpotify — WIZKID\nPandora — WIZKID\nYouTube — BURNA BOY\nTidal  — WIZKID\nLine Music — WIZKID\nAudiomack — ASAKE\nDeezer — WIZKID\nBoomplay — BURNA BOY\nDeezer — WIZKID\nAnghami — REMA\nSoundCloud — BURNA BOY\nShazam — WIZKID\n\n https://t.co/3aUCGbYiEO",
-              "authorUserName": "yobrxxzy",
-              "createdAt": "2025-05-14T21:17:40"
-            },
-            {
-              "url": "https://x.com/yobrxxzy/status/1856816512524587343",
-              "text": "MOST STREAMED ARTISTS ON THESE DSP:\n\nApple Music — WIZKID\nSpotify — WIZKID\nYouTube — BURNA BOY\nPandora — WIZKID\nTidal  — WIZKID\nLine Music — WIZKID\nAudiomack — ASAKE\nDeezer — WIZKID\nBoomplay — BURNA BOY\nDeezer — WIZKID\nAnghami — REMA\nSoundCloud — BURNA BOY\nShazam — WIZKID\n\n https://t.co/yL2tmJJpHM",
-              "authorUserName": "yobrxxzy",
-              "createdAt": "2024-11-13T21:48:49"
-            },
-            {
-              "url": "https://x.com/hourjinnie/status/1858756269902881208",
-              "text": "PLAYLISTS! Let’s get to streaming and utilize all our tools! More pl coming tomorrow!!!\n\nSPOTIFY\n\nhttps://t.co/L0HRMpYEQG\n\nhttps://t.co/HmhdB859e5\n\nhttps://t.co/FA4eDmvvkS\n\nhttps://t.co/ZOedbxiKmO\n\nhttps://t.co/DyPs0qpOMQ\n\nDeezer\n\nhttps://t.co/36PY8aXkV7\n\nApple Music \n\nhttps://t.co/wk5MXtzDYC\n\nhttps://t.co/OgovuVtoDq\n\nPandora \n\nhttps://t.co/idkimHTTjp\n\nhttps://t.co/WQ83YKeUOK",
-              "authorUserName": "hourjinnie",
-              "createdAt": "2024-11-19T06:16:43"
-            },
-            {
-              "url": "https://x.com/runthismusic/status/1853150149788209234",
-              "text": "What if 'Sticky' by @tylerthecreator was Dubstep? \nOUT NOW ON SC + FREE DL \n@skybreakedm https://t.co/OjaU8um8GC",
-              "authorUserName": "runthismusic",
-              "createdAt": "2024-11-03T19:00:00"
-            },
-            {
-              "url": "https://x.com/BTStreamingID/status/1953425910612320348",
-              "text": "Party start \n\nPlaylist \n\nSpotify : \n1.Premium: https://t.co/qJwpckiSlS\n2. Free: https://t.co/NqIV40psvp\nApple music: https://t.co/dblVEdcd1q\nYouTube: https://t.co/gmCR3oyfze  \nYouTube Music: https://t.co/xhxF2rt90o\n\n#BTS #방탄소년단 #PTD_ON_STAGE_LIVE\n#BangtanPlaylistID",
-              "authorUserName": "BTStreamingID",
-              "createdAt": "2025-08-07T12:00:04"
-            },
-            {
-              "url": "https://x.com/NewEDMToday/status/1728069779066392828",
-              "text": "@FlatlandFunk_ @FrankieSinn2k @gabybaumusic @Gladez @grislymusik @HELOSPHEREmusic @HUMANSION_music @kausedubs @Kuhlosul_ @LazrusOfficial @SHEISLUTHIEN @LVCiDdubz @MagMag_dubstep @MVSLOTUNES @raddixofficial @RazrDub @ScarexxDub @SmilesOnlyMusic @soulvalient @SpeedShift6 @stvnkfvcemusic @itstoxicmusic @TremorrOfficial @TyphonOfficial @Verosdubz @voyagerdubz @wilco_beats @zovahofficial all been released on: @Emengy \n\ngenre of music: #edm #dubstep\n\nwith 30 tracks\n\n54 artists\n\nhttps://t.co/H9KmeiXJB4",
-              "authorUserName": "NewEDMToday",
-              "createdAt": "2023-11-24T15:15:15"
-            },
-            {
-              "url": "https://x.com/offsetemusic/status/1729861632308744501",
-              "text": "i mostly use my local files to listen to music, but i'll share my spotify wrapped anyway\n\ni'm happy to see @canotodubz here as no. 1, he's one of the most unique dubstep artists i've discovered this year https://t.co/OUBhgtikn9",
-              "authorUserName": "offsetemusic",
-              "createdAt": "2023-11-29T13:55:27"
-            },
-            {
-              "url": "https://x.com/paulpoint_/status/1882728999962468414",
-              "text": "Good Morning \n\nEspecially, Electronic Music Artists\n\nUse any of these?\n—Laptop \n——MIDI Keyboard\n———Software\n\nHow about these?\n—Spotify\n——Soundcloud\n———Apple Music\n\nMaking sounds like these?\n—House\n——Techno\n———Trance\n————DnB? ...Dubstep??\n\nIf you answered yes to anything above and you are staying consistent\n\nIf you are incessantly networking and improving your use of the above, particularly for live\n\nThen you may well be taking home your slice of a $25 Bn dollar industry\n\nExcited? Well are you? Keep making sounds on your computer \n\nCan't wait to hear your next track!\n\nP.",
-              "authorUserName": "paulpoint_",
-              "createdAt": "2025-01-24T09:55:47"
-            },
-            {
-              "url": "https://x.com/Gunfingers_eu/status/1701277617280663828",
-              "text": "Join Kaps on his bass music journey! From listener to passionate player, he's mastered the dubstep genre, sharing stages with many confirmed artists.\nExpect a wealth of experience and skills for your enjoyment!\n\nSC : https://t.co/s5sqmIzrK6\n\nSpotify : https://t.co/o8bmaRXTNU https://t.co/6DVahvcr5D",
-              "authorUserName": "Gunfingers_eu",
-              "createdAt": "2023-09-11T16:52:46"
-            },
-            {
-              "url": "https://x.com/ballsackious/status/1714854867645149399",
-              "text": "i like that more dubstep artists are doing albums this year. like i know it’s not the best release move in 2024 but that kinda lets you know that they’re doing it out of love for the music rather than like the Best Spotify Strategy ",
-              "authorUserName": "ballsackious",
-              "createdAt": "2023-10-19T04:03:55"
-            },
-            {
-              "url": "https://x.com/mewaolix/status/1886435921895235989",
-              "text": "Stays, we can easily reach #3 if we push a little \n\n(DSP counts Spotify, Apple Music, Amazon Music, Deezer, YT Music, Anghami, Gaana, Joox, Melon, JioSaavn, Boomplay, etc) https://t.co/P2hFoSmbtT",
-              "authorUserName": "mewaolix",
-              "createdAt": "2025-02-03T15:25:46"
-            },
-            {
-              "url": "https://x.com/bhadext/status/1951588819561546145",
-              "text": "Listen to my songs on Apple music, \nBhadext \n\nHere: https://t.co/3u79BQvHAZ https://t.co/lmMjN7m2oR",
-              "authorUserName": "bhadext",
-              "createdAt": "2025-08-02T10:20:08"
-            },
-            {
-              "url": "https://x.com/runthismusic/status/1853150149788209234",
-              "text": "What if 'Sticky' by @tylerthecreator was Dubstep? \nOUT NOW ON SC + FREE DL \n@skybreakedm https://t.co/OjaU8um8GC",
-              "authorUserName": "runthismusic",
-              "createdAt": "2024-11-03T19:00:00"
-            },
-            {
-              "url": "https://x.com/OneRougeWave/status/1953444705204588608",
-              "text": "Oh yeah.. almost forgot.. \nStream my music …\n\nhttps://t.co/mUNJL5AAGf\n\nhttps://t.co/aFqbVnuzZV\n\n#wavyboss https://t.co/c8mnh9mw3d",
-              "authorUserName": "OneRougeWave",
-              "createdAt": "2025-08-07T13:14:45"
-            }
-          ]
-        }
-      }
-    ]
-  }
-}
-```
+              "url": "https://

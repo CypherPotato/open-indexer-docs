@@ -88,6 +88,11 @@ Considere usar um cache do lado da sua aplicação para dados que não precisam 
         "imageGenerationMaxResults": 2,
         "imageGenerationQuality": "Low" | "Medium" | "High" | "Highest",
         "imageGenerationAllowMatureContent": false
+    },
+    
+    // Opcional. Metadata adicional da função. Não visível para a assistente.
+    "metadata": {
+        "foo": "bar"
     }
 }
 ```

@@ -149,7 +149,12 @@
     &quot;contextLocation&quot;: &quot;https://example.com/context.txt&quot;,
     
     // Opcional (recomendado). Um id externo para identificar a sessão posteriormente e reaproveitá-la sempre que chamar o mesmo endpoint. Pode ser o ID do usuário do seu banco de dados ou uma string que facilite a identificação desse chat posteriormente.
-    &quot;tag&quot;: &quot;my-user-tag&quot;    
+    &quot;tag&quot;: &quot;my-user-tag&quot;,
+    
+    // Opcional. Metadata adicional para armazenar no cliente. Não visível para a assistente.
+    &quot;metadata&quot;: {
+        &quot;foo&quot;: &quot;bar&quot;
+    }
 }
 </code></pre>
 <h4 id="resposta">Resposta</h4>

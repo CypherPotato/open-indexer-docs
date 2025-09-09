@@ -6,7 +6,7 @@ Veja a lista abaixo dos modelos disponíveis e suas precificações. Todos os pr
 
 Todos os preços estão em dólares dos Estados Unidos.
 
-## <img src="/assets/icon/deepseekai.svg" class="inline-icon"> deepseekai
+## <img src="/assets/icon/cohere.svg" class="inline-icon"> cohere
 
 <table>
     <thead>
@@ -25,81 +25,34 @@ Todos os preços estão em dólares dos Estados Unidos.
 <tr>
     <td>
         <code>
-            @deepseekai/r1
+            @cohere/command-a
         </code>
     </td>
     <td>
         <div class="item-pricing">
             <small>
                 Entrada:
-            </small>
-            <div>
-                $ 0.70 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Saída:
             </small>
             <div>
                 $ 2.50 <small>/1m tokens</small>
             </div>
         </div>
-    </td>
-    <td>
-        High-capacity chain-of-thought reasoning model with a massive 164K token context window. Ideal for complex math, step-by-step logic, and advanced code authoring.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Raciocínio
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @deepseekai/v3.1
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.55 <small>/1m tokens</small>
-            </div>
-        </div>
         
         <div class="item-pricing">
             <small>
                 Saída:
             </small>
             <div>
-                $ 1.66 <small>/1m tokens</small>
+                $ 10.00 <small>/1m tokens</small>
             </div>
         </div>
     </td>
     <td>
-        A 675B-parameter hybrid LLM with 163K context that supports both thinking and non‑thinking chat modes.
+        Command A is a highly efficient generative model that excels at agentic and multilingual use cases.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Raciocínio
 </div>
 <div>
     <i class="ri-braces-line"></i>
@@ -111,7 +64,7 @@ Todos os preços estão em dólares dos Estados Unidos.
 <tr>
     <td>
         <code>
-            @deepseekai/v3
+            @cohere/command-r
         </code>
     </td>
     <td>
@@ -134,7 +87,147 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
     </td>
     <td>
-        Balanced reasoning model with a 128K token context. Delivers efficient tool calling, reliable code assistance, and strong analytical output at lower cost.
+        Command R is a scalable generative model targeting RAG and Tool Use to enable production-scale AI for enterprise.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @cohere/command-r-plus
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.50 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 1.50 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Command R+ is a state-of-the-art RAG-optimized model designed to tackle enterprise-grade workloads.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+    </tbody>
+</table>
+
+## <img src="/assets/icon/deepseekai.svg" class="inline-icon"> deepseekai
+
+<table>
+    <thead>
+        <colgroup>
+            <col style="width: 30%" />
+            <col style="width: 20%" />
+            <col style="width: 50%" />
+        </colgroup>
+        <tr>
+            <th>Nome do modelo</th>
+            <th>Preços</th>
+            <th>Descrição</th>
+        </tr>
+    </thead>
+    <tbody>
+<tr>
+    <td>
+        <code>
+            @deepseekai/r1-0528
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 1.35 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 5.40 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        The DeepSeek R1 0528 model has improved reasoning capabilities, this version also offers a reduced hallucination rate, enhanced support for function calling, and better experience for vibe coding.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Raciocínio
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @deepseekai/v3-0324
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 1.14 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 4.56 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        DeepSeek-V3-0324 demonstrates notable improvements over its predecessor, DeepSeek-V3, in several key aspects, including enhanced reasoning, improved function calling, and superior code generation capabilities.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
@@ -874,14 +967,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 1.00 <small>/1m tokens</small>
             </div>
         </div>
-        <div class="item-pricing">
-    <small>
-        Entrada (em cache):
-    </small>
-    <div>
-        $ 0.50 <small>/1m tokens</small>
-    </div>
-</div>
+        
         <div class="item-pricing">
             <small>
                 Saída:
@@ -898,200 +984,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-instance-line"></i>
     Chamadas de função
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-    </tbody>
-</table>
-
-## <img src="/assets/icon/nous-research.svg" class="inline-icon"> nous-research
-
-<table>
-    <thead>
-        <colgroup>
-            <col style="width: 30%" />
-            <col style="width: 20%" />
-            <col style="width: 50%" />
-        </colgroup>
-        <tr>
-            <th>Nome do modelo</th>
-            <th>Preços</th>
-            <th>Descrição</th>
-        </tr>
-    </thead>
-    <tbody>
-<tr>
-    <td>
-        <code>
-            @nous-research/hermes4-405b
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 1.00 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 3.00 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        Hermes‑4‑405B is a high‑capability Llama‑3.1‑based chat model featuring hybrid reasoning, structured JSON output, and built‑in function‑calling support.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Raciocínio
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @nous-research/hermes4-70b
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.13 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 0.40 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        Hermes‑4‑70B is a Llama‑3.1‑based chat model with hybrid reasoning, structured JSON output, and built‑in function‑calling capabilities.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Raciocínio
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-    </tbody>
-</table>
-
-## <img src="/assets/icon/nvidia.svg" class="inline-icon"> nvidia
-
-<table>
-    <thead>
-        <colgroup>
-            <col style="width: 30%" />
-            <col style="width: 20%" />
-            <col style="width: 50%" />
-        </colgroup>
-        <tr>
-            <th>Nome do modelo</th>
-            <th>Preços</th>
-            <th>Descrição</th>
-        </tr>
-    </thead>
-    <tbody>
-<tr>
-    <td>
-        <code>
-            @nvidia/llama-3.1-235b-nemotron-ultra
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.60 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 1.80 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        A 253‑billion‑parameter Llama‑3.1‑based LLM optimized for high‑throughput reasoning with a 128K token context.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @nvidia/llama-3.1-49b-nemotron-super
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.13 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 0.40 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        A 49.9‑billion‑parameter Llama‑3.3‑based LLM optimized for high‑throughput reasoning with a 128K token context.
-        <div class="model-capabilities">
 <div>
     <i class="ri-braces-line"></i>
     Funções JSON
@@ -1618,49 +1510,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <tr>
     <td>
         <code>
-            @openai/gpt-oss-120b:lightning
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.25 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 0.69 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        OpenAI's flagship open source model, built on a Mixture-of-Experts (MoE) architecture with 120 billion parameters and 128 experts.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Raciocínio
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
             @openai/gpt-oss-120b
         </code>
     </td>
@@ -1916,127 +1765,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <tr>
     <td>
         <code>
-            @qwen/qwen3-480b-coder
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 2.00 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 2.00 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        480B-parameter coder-specialized LLM with a 64K-token context window, ultrafast inference and structured JSON outputs. Optimized for high-throughput code generation, debugging, review and documentation across multiple languages.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @qwen/qwen3-235b-a22b
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.60 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 1.20 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        Cost-efficient MoE model with 235B parameters (22 experts) and a 64K-token context window. Excels in instruction following, logical reasoning, mathematics, coding, multilingual tasks, tool integration, and structured JSON outputs.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @qwen/qwen3-235b-a22b-think
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.60 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 1.20 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        Thinking variant of the 235B/22-expert MoE model with a 64K-token context. Delivers enhanced chain-of-thought reasoning, ultrafast inference, full tool calling and JSON functions for complex problem solving.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Raciocínio
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
             @qwen/qwen3-32b
         </code>
     </td>
@@ -2080,7 +1808,7 @@ Todos os preços estão em dólares dos Estados Unidos.
     </tbody>
 </table>
 
-## <img src="/assets/icon/zai-org.svg" class="inline-icon"> zai-org
+## <img src="/assets/icon/x-ai.svg" class="inline-icon"> x-ai
 
 <table>
     <thead>
@@ -2099,7 +1827,7 @@ Todos os preços estão em dólares dos Estados Unidos.
 <tr>
     <td>
         <code>
-            @zai-org/glm-4.5
+            @x-ai/grok-3
         </code>
     </td>
     <td>
@@ -2108,7 +1836,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada:
             </small>
             <div>
-                $ 0.60 <small>/1m tokens</small>
+                $ 3.00 <small>/1m tokens</small>
             </div>
         </div>
         
@@ -2117,20 +1845,16 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Saída:
             </small>
             <div>
-                $ 2.20 <small>/1m tokens</small>
+                $ 15.00 <small>/1m tokens</small>
             </div>
         </div>
     </td>
     <td>
-        High-capacity Mixture-of-Experts model (335B/32 experts) with a 131K-token context window. Combines deep reasoning, fast tool calling and native JSON function outputs for large-scale language understanding and structured data tasks.
+        Grok 3 is xAI's debut model, pretrained by Colossus at supermassive scale to excel in specialized domains like finance, healthcare, and the law.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Raciocínio
 </div>
 <div>
     <i class="ri-braces-line"></i>
@@ -2142,7 +1866,7 @@ Todos os preços estão em dólares dos Estados Unidos.
 <tr>
     <td>
         <code>
-            @zai-org/glm-4.5-air
+            @x-ai/grok-3-mini
         </code>
     </td>
     <td>
@@ -2151,7 +1875,7 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada:
             </small>
             <div>
-                $ 0.20 <small>/1m tokens</small>
+                $ 0.25 <small>/1m tokens</small>
             </div>
         </div>
         
@@ -2160,12 +1884,12 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Saída:
             </small>
             <div>
-                $ 1.20 <small>/1m tokens</small>
+                $ 1.27 <small>/1m tokens</small>
             </div>
         </div>
     </td>
     <td>
-        Cost-efficient MoE variant (110B/32 experts) of GLM-4.5 with a 131K-token context. Delivers high-speed inference, full tool integration and JSON function support for budget-sensitive deployments.
+        Grok 3 Mini is a lightweight model that thinks before responding. Trained on mathematic and scientific problems, it is great for logic-based tasks.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>

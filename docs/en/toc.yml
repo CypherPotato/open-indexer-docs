@@ -1,5 +1,7 @@
 items:
+
 - name: Introduction
+
 - name: Getting Started
   href: getting-started.md
 - name: Authentication
@@ -10,12 +12,18 @@ items:
   href: limits.md 
 - name: Models
   href: models.md
+
 - name: Tools and Functions
+
 - name: Built-in Tools
   href: builtin-tools.md
-- name: Server-side Functions
+- name: MCP Functions
+  href: mcp.md
+- name: Protocol Functions
   href: protocol-functions.md
+
 - name: Using the API
+
 - name: Collections
   href: entities/collections.md
 - name: Documents
@@ -28,7 +36,9 @@ items:
   href: entities/chat-clients.md
 - name: Functions
   href: entities/functions.md
+
 - name: Legal Documents
+
 - name: Privacy Policy
   href: legal/privacy-policy.md
 - name: Terms of Service
