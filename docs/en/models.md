@@ -59,6 +59,10 @@ All prices are in United States dollars.
     Function calls
 </div>
 <div>
+    <i class="ri-lightbulb-line"></i>
+    Reasoning
+</div>
+<div>
     <i class="ri-braces-line"></i>
     JSON functions
 </div>
@@ -100,6 +104,10 @@ All prices are in United States dollars.
 <div>
     <i class="ri-instance-line"></i>
     Function calls
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Reasoning
 </div>
 <div>
     <i class="ri-braces-line"></i>
@@ -166,6 +174,60 @@ All prices are in United States dollars.
         </tr>
     </thead>
     <tbody>
+<tr>
+    <td>
+        <code>
+            @anthropic/claude-4.5-sonnet
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 3.00 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Input (cached):
+    </small>
+    <div>
+        $ 0.30 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 15.00 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Claude Sonnet 4.5 is the newest model in the Sonnet series, offering improvements and updates over Sonnet 4.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Reasoning
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
+</div>
+        </div>
+    </td>
+</tr>
 <tr>
     <td>
         <code>
@@ -270,6 +332,56 @@ All prices are in United States dollars.
         </div>
     </td>
 </tr>
+<tr>
+    <td>
+        <code>
+            @anthropic/claude-3-haiku
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 0.25 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Input (cached):
+    </small>
+    <div>
+        $ 0.03 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 1.25 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Claude 3 Haiku is Anthropic's fastest model yet, designed for enterprise workloads which often involve longer prompts.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
+</div>
+        </div>
+    </td>
+</tr>
     </tbody>
 </table>
 
@@ -324,100 +436,6 @@ All prices are in United States dollars.
 <div>
     <i class="ri-instance-line"></i>
     Function calls
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @cohere/command-r-plus
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Input:
-            </small>
-            <div>
-                $ 2.50 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Output:
-            </small>
-            <div>
-                $ 10.00 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        Command R+ is Cohere's newest large language model, optimized for conversational interaction and long-context tasks. It aims at being extremely performant, enabling companies to move beyond proof of concept and into production.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Input: accepts images
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Reasoning
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @cohere/command-r
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Input:
-            </small>
-            <div>
-                $ 0.15 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Output:
-            </small>
-            <div>
-                $ 0.60 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        Command R is a large language model optimized for conversational interaction and long context tasks. It targets the "scalable" category of models that balance high performance with strong accuracy, enabling companies to move beyond proof of concept and into production.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Input: accepts images
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Reasoning
 </div>
 <div>
     <i class="ri-braces-line"></i>
@@ -499,6 +517,56 @@ All prices are in United States dollars.
     <td>
         <code>
             @deepseekai/v3.1
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 0.27 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Input (cached):
+    </small>
+    <div>
+        $ 0.22 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 1.00 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        DeepSeek-V3.1 is post-trained on the top of DeepSeek-V3.1-Base, which is built upon the original V3 base checkpoint through a two-phase long context extension approach, following the methodology outlined in the original DeepSeek-V3 report.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Reasoning
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @deepseekai/v3.1-terminus
         </code>
     </td>
     <td>
@@ -876,6 +944,107 @@ All prices are in United States dollars.
     </tbody>
 </table>
 
+## <img src="/assets/icon/meituan.svg" class="inline-icon"> meituan
+
+<table>
+    <thead>
+        <colgroup>
+            <col style="width: 30%" />
+            <col style="width: 20%" />
+            <col style="width: 50%" />
+        </colgroup>
+        <tr>
+            <th>Model name</th>
+            <th>Pricing</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+<tr>
+    <td>
+        <code>
+            @meituan/longcat-flash-chat
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 0.15 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 1.50 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        LongCat-Flash-Chat is a high-throughput MoE chat model (128k context) optimized for agentic tasks.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @meituan/longcat-flash-think
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 0.15 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 1.50 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        LongCat-Flash-Thinking is a high-throughput MoE reasoning model (128k context) optimized for agentic tasks.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Reasoning
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
+</div>
+        </div>
+    </td>
+</tr>
+    </tbody>
+</table>
+
 ## <img src="/assets/icon/metaai.svg" class="inline-icon"> metaai
 
 <table>
@@ -1059,232 +1228,4 @@ All prices are in United States dollars.
     </tbody>
 </table>
 
-## <img src="/assets/icon/mistral.svg" class="inline-icon"> mistral
-
-<table>
-    <thead>
-        <colgroup>
-            <col style="width: 30%" />
-            <col style="width: 20%" />
-            <col style="width: 50%" />
-        </colgroup>
-        <tr>
-            <th>Model name</th>
-            <th>Pricing</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-<tr>
-    <td>
-        <code>
-            @mistral/small-3.2
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Input:
-            </small>
-            <div>
-                $ 0.08 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Output:
-            </small>
-            <div>
-                $ 0.20 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        Mistral-Small-3.2-24B-Instruct is a drop-in upgrade over the 3.1 release, with markedly better instruction following, roughly half the infinite-generation errors, and a more robust function-calling interface—while otherwise matching or slightly improving on all previous text and vision benchmarks.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @mistral/nemo-12b-it-2407
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Input:
-            </small>
-            <div>
-                $ 0.02 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Output:
-            </small>
-            <div>
-                $ 0.04 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        12B model trained jointly by Mistral AI and NVIDIA, it significantly outperforms existing models smaller or similar in size.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
-</div>
-        </div>
-    </td>
-</tr>
-    </tbody>
-</table>
-
-## <img src="/assets/icon/model-router.svg" class="inline-icon"> model-router
-
-<table>
-    <thead>
-        <colgroup>
-            <col style="width: 30%" />
-            <col style="width: 20%" />
-            <col style="width: 50%" />
-        </colgroup>
-        <tr>
-            <th>Model name</th>
-            <th>Pricing</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-<tr>
-    <td>
-        <code>
-            @model-router/gemini
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Input:
-            </small>
-            <div>
-                $ 0.08 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Output:
-            </small>
-            <div>
-                $ 0.30 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        Model router for Google Gemini. The routing is made between Gemini 2.0 Flash, Gemini 2.5 Flash (no thinking) and Gemini 2.5 Flash (dynamic thinking).
-        <div class="model-capabilities">
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @model-router/openai
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Input:
-            </small>
-            <div>
-                $ 0.08 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Output:
-            </small>
-            <div>
-                $ 0.30 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        Model router for OpenAI. The routing is made between GPT 5 Nano (minimal), GPT 5 Mini (Low) and GPT-5 Mini (medium).
-        <div class="model-capabilities">
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @model-router/openai-high
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Input:
-            </small>
-            <div>
-                $ 0.08 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Output:
-            </small>
-            <div>
-                $ 0.30 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        Model router for OpenAI. The routing is made between GPT 5 Mini (low), o4-mini (low) and o4-mini (high).
-        <div class="model-capabilities">
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @model-router/llama
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Input:
-            </small>
-            <div>
-                $ 0.08 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Output:
-            </small>
-            <div>
-                $ 0.30 <small>/1m tokens</small>
-            </div
+## <img src="/assets

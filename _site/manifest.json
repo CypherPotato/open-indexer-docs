@@ -322,10 +322,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "assets/icon/zai-org.svg",
+      "source_relative_path": "assets/icon/z-ai.svg",
       "output": {
         "resource": {
-          "relative_path": "assets/icon/zai-org.svg"
+          "relative_path": "assets/icon/z-ai.svg"
         }
       },
       "version": ""
