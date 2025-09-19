@@ -122,6 +122,16 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "assets/icon/amazon.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/icon/amazon.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "assets/icon/anthropic.svg",
       "output": {
         "resource": {

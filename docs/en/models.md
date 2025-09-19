@@ -6,6 +6,150 @@ See the list below of available models and their pricing. All prices consider th
 
 All prices are in United States dollars.
 
+## <img src="/assets/icon/amazon.svg" class="inline-icon"> amazon
+
+<table>
+    <thead>
+        <colgroup>
+            <col style="width: 30%" />
+            <col style="width: 20%" />
+            <col style="width: 50%" />
+        </colgroup>
+        <tr>
+            <th>Model name</th>
+            <th>Pricing</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+<tr>
+    <td>
+        <code>
+            @amazon/nova-pro
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 0.80 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 3.20 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        A highly capable multimodal model with the best combination of accuracy, speed, and cost for a wide range of tasks.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images, videos
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @amazon/nova-lite
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 0.06 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 0.24 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        A very low cost multimodal model that is lightning fast for processing image, video, and text inputs.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images, videos
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @amazon/nova-micro
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 0.04 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 0.14 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        A text-only model that delivers the lowest latency responses at very low cost.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
+</div>
+        </div>
+    </td>
+</tr>
+    </tbody>
+</table>
+
 ## <img src="/assets/icon/anthropic.svg" class="inline-icon"> anthropic
 
 <table>
@@ -34,7 +178,130 @@ All prices are in United States dollars.
                 Input:
             </small>
             <div>
-                $ 3.30 <small>/1m tokens</small>
+                $ 3.00 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Input (cached):
+    </small>
+    <div>
+        $ 0.30 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 15.00 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Anthropic's mid-size model with superior intelligence for high-volume uses in coding, in-depth research, agents, & more.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Reasoning
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @anthropic/claude-3.5-haiku
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 0.80 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Input (cached):
+    </small>
+    <div>
+        $ 0.08 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 4.00 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Claude 3.5 Haiku is the next generation of our fastest model. For a similar speed to Claude 3 Haiku, Claude 3.5 Haiku improves across every skill set and surpasses Claude 3 Opus, the largest model in our previous generation, on many intelligence benchmarks.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
+</div>
+        </div>
+    </td>
+</tr>
+    </tbody>
+</table>
+
+## <img src="/assets/icon/cohere.svg" class="inline-icon"> cohere
+
+<table>
+    <thead>
+        <colgroup>
+            <col style="width: 30%" />
+            <col style="width: 20%" />
+            <col style="width: 50%" />
+        </colgroup>
+        <tr>
+            <th>Model name</th>
+            <th>Pricing</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+<tr>
+    <td>
+        <code>
+            @cohere/command-a
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 2.50 <small>/1m tokens</small>
             </div>
         </div>
         
@@ -43,12 +310,102 @@ All prices are in United States dollars.
                 Output:
             </small>
             <div>
-                $ 16.50 <small>/1m tokens</small>
+                $ 10.00 <small>/1m tokens</small>
             </div>
         </div>
     </td>
     <td>
-        Anthropic's mid-size model with superior intelligence for high-volume uses in coding, in-depth research, agents, & more.
+        Command A is Cohere's most performant model to date, excelling at tool use, agents, retrieval augmented generation (RAG), and multilingual use cases. Command A has a context length of 256K, only requires two GPUs to run, and has 150% higher throughput compared to Command R+ 08-2024.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @cohere/command-r-plus
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 2.50 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 10.00 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Command R+ is Cohere's newest large language model, optimized for conversational interaction and long-context tasks. It aims at being extremely performant, enabling companies to move beyond proof of concept and into production.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Reasoning
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @cohere/command-r
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 0.15 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 0.60 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Command R is a large language model optimized for conversational interaction and long context tasks. It targets the "scalable" category of models that balance high performance with strong accuracy, enabling companies to move beyond proof of concept and into production.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -600,7 +957,7 @@ All prices are in United States dollars.
         </div>
     </td>
     <td>
-        Fast model, with 17 billion activated parameters and 128 experts.
+        Fast model, with 17 billion activated parameters and 128 experts.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -643,7 +1000,7 @@ All prices are in United States dollars.
         </div>
     </td>
     <td>
-        Smaller version of the Llama 4 family with 17 billion activated parameters and 16 experts.
+        Smaller version of the Llama 4 family with 17 billion activated parameters and 16 experts.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -744,7 +1101,7 @@ All prices are in United States dollars.
         </div>
     </td>
     <td>
-        Mistral‑Small‑3.2‑24B‑Instruct is a drop-in upgrade over the 3.1 release, with markedly better instruction following, roughly half the infinite‑generation errors, and a more robust function‑calling interface—while otherwise matching or slightly improving on all previous text and vision benchmarks.
+        Mistral-Small-3.2-24B-Instruct is a drop-in upgrade over the 3.1 release, with markedly better instruction following, roughly half the infinite-generation errors, and a more robust function-calling interface—while otherwise matching or slightly improving on all previous text and vision benchmarks.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
@@ -841,7 +1198,7 @@ All prices are in United States dollars.
         </div>
     </td>
     <td>
-        Model router for Google Gemini. The routing is made between Gemini 2.0 Flash, Gemini 2.5 Flash (no thinking) and Gemini 2.5 Flash (dynamic thinking).
+        Model router for Google Gemini. The routing is made between Gemini 2.0 Flash, Gemini 2.5 Flash (no thinking) and Gemini 2.5 Flash (dynamic thinking).
         <div class="model-capabilities">
         </div>
     </td>
@@ -872,7 +1229,7 @@ All prices are in United States dollars.
         </div>
     </td>
     <td>
-        Model router for OpenAI. The routing is made between GPT 5 Nano (minimal), GPT 5 Mini (Low) and GPT‑5 Mini (medium).
+        Model router for OpenAI. The routing is made between GPT 5 Nano (minimal), GPT 5 Mini (Low) and GPT-5 Mini (medium).
         <div class="model-capabilities">
         </div>
     </td>
@@ -903,7 +1260,7 @@ All prices are in United States dollars.
         </div>
     </td>
     <td>
-        Model router for OpenAI. The routing is made between GPT 5 Mini (low), o4‑mini (low) and o4‑mini (high).
+        Model router for OpenAI. The routing is made between GPT 5 Mini (low), o4-mini (low) and o4-mini (high).
         <div class="model-capabilities">
         </div>
     </td>
@@ -930,406 +1287,4 @@ All prices are in United States dollars.
             </small>
             <div>
                 $ 0.30 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        Model router for Meta Llama. The routing is made between Llama 4 Scout, Llama 4 Maverick and Llama 3.3 70b.
-        <div class="model-capabilities">
-        </div>
-    </td>
-</tr>
-    </tbody>
-</table>
-
-## <img src="/assets/icon/moonshotai.svg" class="inline-icon"> moonshotai
-
-<table>
-    <thead>
-        <colgroup>
-            <col style="width: 30%" />
-            <col style="width: 20%" />
-            <col style="width: 50%" />
-        </colgroup>
-        <tr>
-            <th>Model name</th>
-            <th>Pricing</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-<tr>
-    <td>
-        <code>
-            @moonshotai/kimi-k2
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Input:
-            </small>
-            <div>
-                $ 1.00 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Output:
-            </small>
-            <div>
-                $ 3.00 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        Model with 1 tri total parameters, 32 bi activated parameters, optimized for agentic intelligence.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
-</div>
-        </div>
-    </td>
-</tr>
-    </tbody>
-</table>
-
-## <img src="/assets/icon/openai.svg" class="inline-icon"> openai
-
-<table>
-    <thead>
-        <colgroup>
-            <col style="width: 30%" />
-            <col style="width: 20%" />
-            <col style="width: 50%" />
-        </colgroup>
-        <tr>
-            <th>Model name</th>
-            <th>Pricing</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-<tr>
-    <td>
-        <code>
-            @openai/chatgpt-4o
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Input:
-            </small>
-            <div>
-                $ 5.00 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Output:
-            </small>
-            <div>
-                $ 15.00 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        The GPT‑4o model snapshot used by ChatGPT.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Input: accepts images
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @openai/gpt-4o
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Input:
-            </small>
-            <div>
-                $ 2.50 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-    <small>
-        Input (cached):
-    </small>
-    <div>
-        $ 1.25 <small>/1m tokens</small>
-    </div>
-</div>
-        <div class="item-pricing">
-            <small>
-                Output:
-            </small>
-            <div>
-                $ 10.00 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        Dedicated to tasks requiring reasoning for mathematical and logical problem solving.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Input: accepts images
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @openai/gpt-5-chat
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Input:
-            </small>
-            <div>
-                $ 1.25 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-    <small>
-        Input (cached):
-    </small>
-    <div>
-        $ 0.13 <small>/1m tokens</small>
-    </div>
-</div>
-        <div class="item-pricing">
-            <small>
-                Output:
-            </small>
-            <div>
-                $ 10.00 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        GPT‑5 snapshot currently used by OpenAI's ChatGPT.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Input: accepts images
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @openai/gpt-5
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Input:
-            </small>
-            <div>
-                $ 1.25 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-    <small>
-        Input (cached):
-    </small>
-    <div>
-        $ 0.13 <small>/1m tokens</small>
-    </div>
-</div>
-        <div class="item-pricing">
-            <small>
-                Output:
-            </small>
-            <div>
-                $ 10.00 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        OpenAI's newest flagship model for coding, reasoning, and agentic tasks across domains.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Input: accepts images
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Reasoning
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @openai/gpt-4.1
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Input:
-            </small>
-            <div>
-                $ 2.00 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-    <small>
-        Input (cached):
-    </small>
-    <div>
-        $ 0.50 <small>/1m tokens</small>
-    </div>
-</div>
-        <div class="item-pricing">
-            <small>
-                Output:
-            </small>
-            <div>
-                $ 8.00 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        Versatile, highly intelligent, and top‑of‑the‑line. One of the most capable models currently available.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Input: accepts images
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @openai/o3
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Input:
-            </small>
-            <div>
-                $ 2.00 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-    <small>
-        Input (cached):
-    </small>
-    <div>
-        $ 0.50 <small>/1m tokens</small>
-    </div>
-</div>
-        <div class="item-pricing">
-            <small>
-                Output:
-            </small>
-            <div>
-                $ 8.00 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        A well‑rounded and powerful model across domains. It sets a new standard for math, science, coding, and visual reasoning tasks.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Input: accepts images
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Reasoning
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @openai/o4-mini
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Input:
-            </small>
-            <div>
-                $ 1.10 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-    <small>
-        Input (cached):
-    </small>
-    <div>
-        $ 0.28 <small>/1m tokens</small>
-    </div>
-</div>
-        <div class="item-pr
+            </div
