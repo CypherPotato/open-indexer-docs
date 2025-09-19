@@ -122,6 +122,16 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "assets/icon/anthropic.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/icon/anthropic.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "assets/icon/cognitivecomputations.svg",
       "output": {
         "resource": {
@@ -336,16 +346,6 @@
       "output": {
         "resource": {
           "relative_path": "assets/img/bg.jpg"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "assets/img/favicon.ico",
-      "output": {
-        "resource": {
-          "relative_path": "assets/img/favicon.ico"
         }
       },
       "version": ""
