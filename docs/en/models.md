@@ -516,7 +516,7 @@ All prices are in United States dollars.
 <tr>
     <td>
         <code>
-            @deepseekai/v3.1
+            @deepseekai/v3.1-terminus
         </code>
     </td>
     <td>
@@ -566,7 +566,7 @@ All prices are in United States dollars.
 <tr>
     <td>
         <code>
-            @deepseekai/v3.1-terminus
+            @deepseekai/v3.2
         </code>
     </td>
     <td>
@@ -578,25 +578,18 @@ All prices are in United States dollars.
                 $ 0.27 <small>/1m tokens</small>
             </div>
         </div>
-        <div class="item-pricing">
-    <small>
-        Input (cached):
-    </small>
-    <div>
-        $ 0.22 <small>/1m tokens</small>
-    </div>
-</div>
+        
         <div class="item-pricing">
             <small>
                 Output:
             </small>
             <div>
-                $ 1.00 <small>/1m tokens</small>
+                $ 0.40 <small>/1m tokens</small>
             </div>
         </div>
     </td>
     <td>
-        DeepSeek-V3.1 is post-trained on the top of DeepSeek-V3.1-Base, which is built upon the original V3 base checkpoint through a two-phase long context extension approach, following the methodology outlined in the original DeepSeek-V3 report.
+        DeepSeek-V3.2-Exp is an intermediate step toward the next-generation architecture of the DeepSeek models by introducing DeepSeek Sparse Attention—a sparse attention mechanism designed to explore and validate optimizations for training and inference efficiency in long-context scenarios.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
@@ -944,107 +937,6 @@ All prices are in United States dollars.
     </tbody>
 </table>
 
-## <img src="/assets/icon/meituan.svg" class="inline-icon"> meituan
-
-<table>
-    <thead>
-        <colgroup>
-            <col style="width: 30%" />
-            <col style="width: 20%" />
-            <col style="width: 50%" />
-        </colgroup>
-        <tr>
-            <th>Model name</th>
-            <th>Pricing</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-<tr>
-    <td>
-        <code>
-            @meituan/longcat-flash-chat
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Input:
-            </small>
-            <div>
-                $ 0.15 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Output:
-            </small>
-            <div>
-                $ 1.50 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        LongCat-Flash-Chat is a high-throughput MoE chat model (128k context) optimized for agentic tasks.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @meituan/longcat-flash-think
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Input:
-            </small>
-            <div>
-                $ 0.15 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Output:
-            </small>
-            <div>
-                $ 1.50 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        LongCat-Flash-Thinking is a high-throughput MoE reasoning model (128k context) optimized for agentic tasks.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Reasoning
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
-</div>
-        </div>
-    </td>
-</tr>
-    </tbody>
-</table>
-
 ## <img src="/assets/icon/metaai.svg" class="inline-icon"> metaai
 
 <table>
@@ -1228,4 +1120,105 @@ All prices are in United States dollars.
     </tbody>
 </table>
 
-## <img src="/assets
+## <img src="/assets/icon/mistral.svg" class="inline-icon"> mistral
+
+<table>
+    <thead>
+        <colgroup>
+            <col style="width: 30%" />
+            <col style="width: 20%" />
+            <col style="width: 50%" />
+        </colgroup>
+        <tr>
+            <th>Model name</th>
+            <th>Pricing</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+<tr>
+    <td>
+        <code>
+            @mistral/pixtral-large
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 2.00 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 6.00 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Pixtral Large is the second model in our multimodal family and demonstrates frontier-level image understanding. Particularly, the model is able to understand documents, charts and natural images, while maintaining the leading text-only understanding of Mistral Large 2.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @mistral/magistral-medium
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 2.00 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 5.00 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Mistral's frontier-class reasoning model update released September 2025 with vision support.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Reasoning
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
+</div>
+        </div>
+    </td>
+</

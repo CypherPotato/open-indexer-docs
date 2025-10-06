@@ -516,7 +516,7 @@ Todos os preços estão em dólares dos Estados Unidos.
 <tr>
     <td>
         <code>
-            @deepseekai/v3.1
+            @deepseekai/v3.1-terminus
         </code>
     </td>
     <td>
@@ -566,7 +566,7 @@ Todos os preços estão em dólares dos Estados Unidos.
 <tr>
     <td>
         <code>
-            @deepseekai/v3.1-terminus
+            @deepseekai/v3.2
         </code>
     </td>
     <td>
@@ -578,25 +578,18 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 0.27 <small>/1m tokens</small>
             </div>
         </div>
-        <div class="item-pricing">
-    <small>
-        Entrada (em cache):
-    </small>
-    <div>
-        $ 0.22 <small>/1m tokens</small>
-    </div>
-</div>
+        
         <div class="item-pricing">
             <small>
                 Saída:
             </small>
             <div>
-                $ 1.00 <small>/1m tokens</small>
+                $ 0.40 <small>/1m tokens</small>
             </div>
         </div>
     </td>
     <td>
-        DeepSeek-V3.1 is post-trained on the top of DeepSeek-V3.1-Base, which is built upon the original V3 base checkpoint through a two-phase long context extension approach, following the methodology outlined in the original DeepSeek-V3 report.
+        DeepSeek-V3.2-Exp is an intermediate step toward the next-generation architecture of the DeepSeek models by introducing DeepSeek Sparse Attention—a sparse attention mechanism designed to explore and validate optimizations for training and inference efficiency in long-context scenarios.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
@@ -933,107 +926,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-    </tbody>
-</table>
-
-## <img src="/assets/icon/meituan.svg" class="inline-icon"> meituan
-
-<table>
-    <thead>
-        <colgroup>
-            <col style="width: 30%" />
-            <col style="width: 20%" />
-            <col style="width: 50%" />
-        </colgroup>
-        <tr>
-            <th>Nome do modelo</th>
-            <th>Preços</th>
-            <th>Descrição</th>
-        </tr>
-    </thead>
-    <tbody>
-<tr>
-    <td>
-        <code>
-            @meituan/longcat-flash-chat
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.15 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 1.50 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        LongCat-Flash-Chat is a high-throughput MoE chat model (128k context) optimized for agentic tasks.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @meituan/longcat-flash-think
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.15 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 1.50 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        LongCat-Flash-Thinking is a high-throughput MoE reasoning model (128k context) optimized for agentic tasks.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Raciocínio
 </div>
 <div>
     <i class="ri-braces-line"></i>
@@ -1671,7 +1563,14 @@ Todos os preços estão em dólares dos Estados Unidos.
                 $ 1.00 <small>/1m tokens</small>
             </div>
         </div>
-        
+        <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.50 <small>/1m tokens</small>
+    </div>
+</div>
         <div class="item-pricing">
             <small>
                 Saída:
@@ -1714,45 +1613,6 @@ Todos os preços estão em dólares dos Estados Unidos.
         </tr>
     </thead>
     <tbody>
-<tr>
-    <td>
-        <code>
-            @openai/chatgpt-4o
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 5.00 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 15.00 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        The GPT-4o model snapshot used by ChatGPT.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-        </div>
-    </td>
-</tr>
 <tr>
     <td>
         <code>
@@ -2722,6 +2582,60 @@ Todos os preços estão em dólares dos Estados Unidos.
     </tbody>
 </table>
 
+## <img src="/assets/icon/venice.svg" class="inline-icon"> venice
+
+<table>
+    <thead>
+        <colgroup>
+            <col style="width: 30%" />
+            <col style="width: 20%" />
+            <col style="width: 50%" />
+        </colgroup>
+        <tr>
+            <th>Nome do modelo</th>
+            <th>Preços</th>
+            <th>Descrição</th>
+        </tr>
+    </thead>
+    <tbody>
+<tr>
+    <td>
+        <code>
+            @venice/dphn-24b-uncensored
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.10 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.45 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Venice Uncensored is a fine-tuned version of Mistral-Small-24B-Instruct-2501, created by dphn.ai in partnership with Venice.ai.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+    </tbody>
+</table>
+
 ## <img src="/assets/icon/x-ai.svg" class="inline-icon"> x-ai
 
 <table>
@@ -3001,7 +2915,7 @@ Todos os preços estão em dólares dos Estados Unidos.
 <tr>
     <td>
         <code>
-            @z-ai/glm-4.5
+            @z-ai/glm-4.6
         </code>
     </td>
     <td>
@@ -3019,12 +2933,12 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Saída:
             </small>
             <div>
-                $ 2.20 <small>/1m tokens</small>
+                $ 2.00 <small>/1m tokens</small>
             </div>
         </div>
     </td>
     <td>
-        A 355b parameter hybrid reasoning model (32 B active) for intelligent agents, supporting both thinking and non‑thinking modes with tool‑calling.
+        GLM‑4.6 is a high‑capacity LLM with a 200K‑token context window, strong coding and reasoning abilities, and enhanced tool‑use capabilities.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
@@ -3073,6 +2987,49 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-image-circle-line"></i>
     Entrada: aceita imagens, vídeos
 </div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Raciocínio
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @z-ai/glm-4.5
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.38 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 1.60 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        A 355b parameter hybrid reasoning model (32 B active) for intelligent agents, supporting both thinking and non‑thinking modes with tool‑calling.
+        <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
