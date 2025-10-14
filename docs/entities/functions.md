@@ -6,6 +6,12 @@ Pode ser útil para categorizar comentários, aplicar moderação em avaliaçõe
 
 No momento, só é possível usar funções com [modelos providos pela AIVAX](/docs/models).
 
+## Código serverless
+
+É possível hospedar códigos JavaScript na AIVAX que executam tarefas agênticas, como funções, inferência e comunicação com outros serviços.
+
+Leia mais sobre [serverless aqui](/docs/serverless).
+
 ## Chamar uma função
 
 Para chamar uma função de IA, você precisará informar o que a IA deverá responder e fornecer um JSON Schema que ela deverá seguir.

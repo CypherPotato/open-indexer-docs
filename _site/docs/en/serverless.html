@@ -2,14 +2,14 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Limites da API | AIVAX </title>
+        <title>Serverless Functions | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="Limites da API | AIVAX ">
+        <meta name="title" content="Serverless Functions | AIVAX ">
 
 
-        <link rel="icon" href="../assets/img/favicon.ico">
-        <link rel="stylesheet" href="../public/docfx.min.css">
-        <link rel="stylesheet" href="../public/main.css">
+        <link rel="icon" href="../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../public/main.css">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
@@ -17,13 +17,13 @@
         
         <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
 
-        <meta name="docfx:navrel" content="../toc.html">
+        <meta name="docfx:navrel" content="../../toc.html">
         <meta name="docfx:tocrel" content="toc.html">
 
-        <meta name="docfx:rel" content="../">
+        <meta name="docfx:rel" content="../../">
 
 
-        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/limits.md/#L1">
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/en/serverless.md/#L1">
         <meta name="loc:inThisArticle" content="In this article">
         <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
         <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -37,7 +37,7 @@
         <meta name="loc:copy" content="Copy">
         <meta name="loc:downloadPdf" content="Download PDF">
         
-        <script type="module" src="./../public/docfx.min.js"></script>
+        <script type="module" src="./../../public/docfx.min.js"></script>
         <script>
             const theme = localStorage.getItem('theme') || 'auto';
             document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
@@ -60,8 +60,8 @@
         <header class="bg-body border-bottom">
             <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
                 <div class="container-xxl flex-nowrap">
-                    <a class="navbar-brand" href="../index.html">
-                        <img id="logo" class="svg" src="../assets/img/aivax.png" alt="AIVAX">
+                    <a class="navbar-brand" href="../../index.html">
+                        <img id="logo" class="svg" src="../../assets/img/aivax.png" alt="AIVAX">
                         AIVAX
                     </a>
                     <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
@@ -122,344 +122,185 @@
                 </div>
 
                 <article data-uid="">
-<h1 id="limites-da-api">Limites da API</h1>
+<h1 id="serverless-functions">Serverless Functions</h1>
 
-<p>Limites de taxa (&quot;rate limiters&quot;) regulam o número de requisições que você pode enviar em uma janela de tempo. Esses limites ajudam a AIVAX a prevenir abuso e fornecer uma API estável à todos.</p>
-<p>Os limites da API abaixo são os mesmos para todos os modelos embutidos da AIVAX. Esses limites são categorizados por operações feitas pela API. Cada conta possui um tier que define quais limites são aplicados à conta. Tiers mudam de acordo com o total investido na AIVAX e o tempo que a conta existe.</p>
+<p>AIVAX provides serverless functions in JavaScript to perform agentic operations using the AIVAX server, without the need for server hosting or code.</p>
+<p>With this tool, you can host JavaScript code that receives a request and responds according to your source code.</p>
+<h2 id="api">API</h2>
+<p>The available API of AIVAX serverless provides some custom tools and classes:</p>
 <ul>
-<li><strong>Tier zero:</strong> conta nova que nunca adicionou créditos ou que possui créditos de teste.</li>
-<li><strong>Tier 1</strong>: conta criada há pelo menos 48 horas e que já adicionou qualquer valor em créditos.</li>
-<li><strong>Tier 2</strong>: conta criada há pelo menos 1 mês e que já adicionou pelo menos $ 100 em créditos.</li>
-<li><strong>Tier 3</strong>: conta criada há pelo menos 3 meses e que já adicionou pelo menos $ 1.000 em créditos.</li>
-</ul>
-<p>A medição é pela <strong>adição de créditos</strong> e não pelo seu consumo. Por exemplo, você não precisa consumir $ 100 em créditos para avançar ao Tier 2.</p>
-<p>Legendas dos limites:</p>
+<li><code>console</code>
 <ul>
-<li><strong>RPM</strong>: requisições por minuto.</li>
-<li><strong>RPD</strong>: requisições por dia (24 horas).</li>
-<li><strong>TPM</strong>: tokens de entrada por minuto.</li>
+<li><code>log(...args)</code> to write to the debug console.</li>
+<li><code>error(...args)</code> to write an error to the debug console.</li>
+<li><code>warn(...args)</code> to write a warning to the debug console.</li>
+<li><code>info(...args)</code> to write an info to the debug console.</li>
+<li><code>table(data, columns)</code> to write a table to the debug console.</li>
 </ul>
-<div class="tabGroup" id="tabgroup_1">
-<ul role="tablist">
-<li role="presentation">
-<a href="#tabpanel_1_free" role="tab" aria-controls="tabpanel_1_free" data-tab="free" tabindex="0" aria-selected="true">Conta nova</a>
 </li>
-<li role="presentation">
-<a href="#tabpanel_1_tier1" role="tab" aria-controls="tabpanel_1_tier1" data-tab="tier1" tabindex="-1">Tier 1</a>
-</li>
-<li role="presentation">
-<a href="#tabpanel_1_tier2" role="tab" aria-controls="tabpanel_1_tier2" data-tab="tier2" tabindex="-1">Tier 2</a>
-</li>
-<li role="presentation">
-<a href="#tabpanel_1_tier3" role="tab" aria-controls="tabpanel_1_tier3" data-tab="tier3" tabindex="-1">Tier 3</a>
+<li><code>fetch(url, options) -&gt; Promise&lt;Response&gt;</code>
+<ul>
+<li><code>options.body</code> can be a <code>string</code>, a <code>FormData</code>, or null.</li>
+<li><code>options.method</code> a string representing the HTTP method.</li>
+<li><code>options.headers</code> an object containing the request's HTTP headers.</li>
+<li><code>options.timeout</code> an integer representing the request timeout.</li>
+<li><code>options.redirect</code> a string that can be <code>follow</code> or <code>manual</code>.</li>
+<li>The response is an object:</li>
+<li><code>async Response.text()</code> returns a <code>Promise&lt;string&gt;</code> with the content.</li>
+<li><code>async Response.json()</code> returns a <code>Promise&lt;object&gt;</code> with the JSON content.</li>
+<li><code>Response.ok</code> a boolean indicating whether the response is successful.</li>
+<li><code>Response.status</code> an integer containing the response status code.</li>
+<li><code>Response.statusText</code> a string containing the response status reason. May be null.</li>
+<li><code>Response.headers</code> an object containing the response headers.</li>
+<li><code>Response.url</code> the URL of the request that produced this response.</li>
+</ul>
 </li>
 </ul>
-<section id="tabpanel_1_free" role="tabpanel" data-tab="free">
+<p>Serverless request reading methods:</p>
+<ul>
+<li><code>req.headers</code> returns an object containing the current request's headers.</li>
+<li><code>req.query</code> returns an object containing the request's query parameters.</li>
+<li><code>req.cookies</code> returns an object containing the cookies set in the request.</li>
+<li><code>req.path</code> reads the path (without the query string) of the request.</li>
+<li><code>req.fullPath</code> reads the path (with the query string) of the request.</li>
+<li><code>req.url</code> reads the full URL of the request, containing the full request path (authority, path, and query).</li>
+<li><code>req.method</code> reads the request method.</li>
+<li><code>req.json()</code> reads the request body as a JSON value.</li>
+<li><code>req.text()</code> reads the request body as text.</li>
+<li><code>req.blob()</code> reads the request body as an ArrayBuffer.</li>
+<li><code>req.form()</code> reads the request body as form-data.</li>
+<li><code>req.multipartForm()</code> reads the request body as multipart form-data.</li>
+</ul>
+<p>And writing methods for the serverless response:</p>
+<ul>
+<li><code>res.status(status)</code> sets the numeric status of the response.</li>
+<li><code>res.header(name, value)</code> adds a header to the response.</li>
+<li><code>res.text(t)</code> sets the response body as text.</li>
+<li><code>res.json(t)</code> sets the response body as JSON.</li>
+<li><code>res.error(message, status)</code> returns a JSON error in the response with the given status and immediately terminates script execution.</li>
+</ul>
+<p>And special agentic methods:</p>
+<ul>
+<li><code>async ai.complete(model, prompt, options)</code> completes the text provided in prompt. Prompt can be a string or an array of messages. The model can be a model provided by AIVAX or a Slug or ID of an AI gateway in your account. Options include properties passed to the chat/completions route, e.g., <code>temperature</code> or <code>tools</code>. The response is the JSON from AIVAX inference response.</li>
+<li><code>async ai.completeText(model, prompt, options)</code> works the same as the method above, but instead of returning a JSON with inference response objects, it returns only the text generated by the assistant.</li>
+<li><code>async api.get(path)</code> makes an authenticated GET request to an AIVAX endpoint.</li>
+<li><code>async api.post(path, body)</code> makes an authenticated POST request with a JSON body to an AIVAX endpoint.</li>
+<li><code>async api.put(path, body)</code> makes an authenticated PUT request with a JSON body to an AIVAX endpoint.</li>
+<li><code>async api.patch(path, body)</code> makes an authenticated PATCH request with a JSON body to an AIVAX endpoint.</li>
+<li><code>async api.delete(path)</code> makes an authenticated DELETE request to an AIVAX endpoint.</li>
+</ul>
+<p>And some special middleware functions:</p>
+<ul>
+<li><code>async authenticate()</code> authenticates the request with an API key from your account.</li>
+<li><code>sleep(ms)</code> waits the specified time in milliseconds before continuing, limited to 3 minutes.</li>
+<li><code>rate_limit(threshold, seconds)</code> applies a rate limiter at the function and request IP level based on the specified threshold and duration in seconds.</li>
+</ul>
+<h2 id="example">Example</h2>
+<p>The example below illustrates an almost complete code that receives a request, authenticates it, runs a function for it, and returns the result.</p>
+<blockquote>
+<p>[!IMPORTANT] Attention: no serverless function has authentication by default. Authenticate your functions by creating custom logic for this or using the asynchronous <code>authenticate()</code> method.</p>
+</blockquote>
+<pre><code class="lang-js">async function main() {
 
-<table>
-<thead>
-<tr>
-<th>Operação</th>
-<th style="text-align: right;">RPM</th>
-<th style="text-align: right;">RPD</th>
-<th style="text-align: right;">TPM</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Pesquisa de documentos</td>
-<td style="text-align: right;">50</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Inserção de documentos</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">100</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Inferência</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">300</td>
-<td style="text-align: right;">50.000</td>
-</tr>
-<tr>
-<td>Inferência (modelos high-end)</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Execução serverless</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">100</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Ferramentas (compartilhado)</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">100</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Ferramenta <code>web_search</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Ferramenta <code>x_posts_search</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Ferramenta <code>generate_image</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">-</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="tabpanel_1_tier1" role="tabpanel" data-tab="tier1" aria-hidden="true" hidden="hidden">
+    // if not authenticated with a valid API key,
+    // exit the function
+    if (!await authenticate()) {
+        res.status(403);
+        return;
+    }
 
-<table>
-<thead>
-<tr>
-<th>Operação</th>
-<th style="text-align: right;">RPM</th>
-<th style="text-align: right;">RPD</th>
-<th style="text-align: right;">TPM</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Pesquisa de documentos</td>
-<td style="text-align: right;">150</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Inserção de documentos</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">3.000</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Inferência</td>
-<td style="text-align: right;">75</td>
-<td style="text-align: right;">10.000</td>
-<td style="text-align: right;">1.000.000</td>
-</tr>
-<tr>
-<td>Inferência (modelos high-end)</td>
-<td style="text-align: right;">75</td>
-<td style="text-align: right;">10.000</td>
-<td style="text-align: right;">200.000</td>
-</tr>
-<tr>
-<td>Execução serverless</td>
-<td style="text-align: right;">30</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Ferramentas (compartilhado)</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">1.000</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Ferramenta <code>web_search</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">300</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Ferramenta <code>x_posts_search</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">300</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Ferramenta <code>generate_image</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">30</td>
-<td style="text-align: right;">-</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="tabpanel_1_tier2" role="tabpanel" data-tab="tier2" aria-hidden="true" hidden="hidden">
+    // apply rate limiter on the request to avoid overload
+    const RATE_LIMIT_THRESHOLD = 10;
+    const RATE_LIMIT_SECONDS = 60;
+    rate_limit(RATE_LIMIT_THRESHOLD, RATE_LIMIT_SECONDS);
 
-<table>
-<thead>
-<tr>
-<th>Operação</th>
-<th style="text-align: right;">RPM</th>
-<th style="text-align: right;">RPD</th>
-<th style="text-align: right;">TPM</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Pesquisa de documentos</td>
-<td style="text-align: right;">300</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Inserção de documentos</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">10.000</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Inferência</td>
-<td style="text-align: right;">200</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">4.000.000</td>
-</tr>
-<tr>
-<td>Inferência (modelos high-end)</td>
-<td style="text-align: right;">200</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">1.000.000</td>
-</tr>
-<tr>
-<td>Execução serverless</td>
-<td style="text-align: right;">100</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Ferramentas (compartilhado)</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">10.000</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Ferramenta <code>web_search</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">1.000</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Ferramenta <code>x_posts_search</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">1.000</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Ferramenta <code>generate_image</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">300</td>
-<td style="text-align: right;">-</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="tabpanel_1_tier3" role="tabpanel" data-tab="tier3" aria-hidden="true" hidden="hidden">
+    // validate that the request is GET
+    if (req.method != 'GET') {
+        res.status(405);
+        return;
+    }
+    
+    // get the query parameter 'q'
+    var cityName = req.query[&quot;q&quot;] || res.error(&quot;'q' is required&quot;);
 
-<table>
-<thead>
-<tr>
-<th>Operação</th>
-<th style="text-align: right;">RPM</th>
-<th style="text-align: right;">RPD</th>
-<th style="text-align: right;">TPM</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Pesquisa de documentos</td>
-<td style="text-align: right;">1.000</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Inserção de documentos</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">30.000</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Inferência</td>
-<td style="text-align: right;">1.000</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">10.000.000</td>
-</tr>
-<tr>
-<td>Inferência (modelos high-end)</td>
-<td style="text-align: right;">1.000</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">4.000.000</td>
-</tr>
-<tr>
-<td>Execução serverless</td>
-<td style="text-align: right;">500</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Ferramentas (compartilhado)</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">50.000</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Ferramenta <code>web_search</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">10.000</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Ferramenta <code>x_posts_search</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">10.000</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Ferramenta <code>generate_image</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">1.000</td>
-<td style="text-align: right;">-</td>
-</tr>
-</tbody>
-</table>
-</section>
+    // perform inference to obtain weather data for the specified city
+    const weather = await api.post(&quot;/api/v1/functions/json&quot;, {
+        modelName: &quot;@x-ai/grok-4-fast&quot;,
+        prompt: &quot;Search for weather data for the specified city.&quot;,
+        responseSchema: {
+            type: &quot;object&quot;,
+            properties: {
+                temperature: {
+                    type: &quot;number&quot;,
+                    description: &quot;The temperature in Celsius of the specified location&quot;
+                },
+                forecast: {
+                    type: &quot;string&quot;,
+                    enum: [&quot;rainy&quot;, &quot;thunder&quot;, &quot;clear&quot;],
+                    description: &quot;The weather forecast for the specified location&quot;
+                }
+            },
+            required: [&quot;temperature&quot;, &quot;forecast&quot;]
+        },
+        inputData: {
+            cityName
+        }
+    });
+
+    // return the JSON in the response
+    const {
+        result
+    } = weather.json.data;
+    res.json(result);
+}
+</code></pre>
+<p>The code below is simpler: it authenticates the request with one of your API keys, receives the request's JSON body, and returns the function's response:</p>
+<pre><code class="lang-js">async function main() {
+
+    if (!await authenticate()) {
+        res.status(403);
+        return;
+    }
+
+    const functionResult = await api.post('/api/v1/functions/json', {
+        modelName: &quot;@metaai/llama-4-scout-17b-16e&quot;,
+        instructions: &quot;Summarize the text provided by the user.&quot;,
+        inputData: req.json(),
+        responseSchema: {
+            type: &quot;object&quot;,
+            properties: {
+                summarizedText: {
+                    type: &quot;string&quot;
+                }
+            }
+        }
+    });
+
+    res.json(functionResult.json.data.result);
+}
+</code></pre>
+<h2 id="limitations">Limitations</h2>
+<p>These functions run in an isolated JavaScript container with certain limitations. These limitations are:</p>
+<ul>
+<li>Maximum memory usage is limited to 32 MB.</li>
+<li>The execution time of each script is limited to 5 minutes.</li>
+<li>The maximum Regex evaluation time is 10 seconds.</li>
+<li>The maximum response size read by Fetch calls is 10 MB (except for calls via AIVAX).</li>
+</ul>
+<h2 id="pricing">Pricing</h2>
+<p>Serverless pricing is charged per execution hour. Each execution accumulates a number of milliseconds. This timing accounts only for the script's execution time and not its compilation, so if your script takes 20 seconds to run, 20,000 milliseconds will be counted. The minimum billed execution time is 20 milliseconds.</p>
+<p>The serverless processing cost is <strong>$1/hour</strong>.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>All accounts have <strong>10 minutes</strong> free every day. If you exceed this limit, you will start being charged for processing. If your account has a negative balance, the function's processing will be cancelled.</p>
 </div>
-
-<ul>
-<li><strong>Pesquisa de documentos</strong>: inclui pesquisa semântica de documentos em uma coleção pelo endpoint de pesquisa <code>../collections/{id}/query</code>.</li>
-<li><strong>Inserção de documentos</strong>: inclui criação e modificação de documentos em uma coleção.</li>
-<li><strong>Inferência</strong>: toda chamada de inferência ou função, seja por chat client ou API.
-<ul>
-<li>modelos high-end se referem à modelos que necessitam de Tier 1 para poder ser usado.</li>
-</ul>
-</li>
-<li><strong>Serverless</strong>: inclui toda chamada de <a href="/docs/serverless">função serverless</a>.</li>
-<li><strong>Ferramentas (compartilhado)</strong>: toda <a href="/docs/builtin-tools">ferramenta integrada</a> invocada pela assistente. Esse limite é compartilhado para todas as ferramentas providas pela AIVAX e não é usado para ferramentas definidas por você ou suas APIs.</li>
-<li><strong>Ferramenta (nome da ferramenta)</strong>: todo uso da ferramenta mencionada.</li>
-</ul>
-<h2 id="grupos-de-modelos">Grupos de modelos</h2>
-<p>Certos modelos possuem multiplicadores de taxa. Esses multiplicadores são aplicados aos &quot;grupos de limites&quot; à certos modelos, bem como:</p>
-<ul>
-<li><strong>Comum</strong>: os limites são multiplicados por 1x</li>
-<li><strong>Descontados</strong>: os limites são multiplicados por 0,5x</li>
-<li><strong>Baixa-latência</strong>: os limites são multiplicados por 0,3x</li>
-<li><strong>Grátis</strong>: os limites são multiplicados por 0,1x</li>
-</ul>
-<p>Por exemplo, se você usar um modelo com desconto no valor, os limites de taxa serão 50% menores para você, portanto, ao invés de 75 requests por minuto no Tier 1, você terá 37 requests.</p>
-<h2 id="limites-para-byok-bring-your-own-key">Limites para BYOK (Bring-your-own-key)</h2>
-<p>Para modelos providos por você, o limite aplicado é de <strong>1.500</strong> requisições por minuto. Esse limite é separado do limite de inferência integrada.</p>
+<h2 id="rate-limits">Rate Limits</h2>
+<p>The rate limits for serverless functions are described in the <a href="/docs/en/limits">rate limits</a>.</p>
 
 </article>
 
                 <div class="contribution d-print-none">
-                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/limits.md/#L1" class="edit-link">Edit this page</a>
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/en/serverless.md/#L1" class="edit-link">Edit this page</a>
                 </div>
 
                 <div class="next-article d-print-none border-top" id="nextArticle"></div>

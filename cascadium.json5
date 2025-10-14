@@ -4,6 +4,6 @@
         "template/style/"
     ],
     merge: "All",
-    outputFile: "template/style/public/main.css",
+    outFile: "template/style/public/main.css",
     filenameTag: "relative"
 }

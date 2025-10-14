@@ -124,13 +124,16 @@
                 <article data-uid="">
 <h1 id="functions">Functions</h1>
 
-<p>Functions are a way to force your model to process information using JSON as an intermediate communication. With functions, you can make any model respond in the JSON format you want.</p>
-<p>It can be useful for categorizing comments, applying moderation to reviews, or processing information with AI assistance.</p>
+<p>Functions are a way to force your model to process information using JSON as an intermediary of communication. With functions, you can make any model respond in the JSON format you want.</p>
+<p>It can be useful for categorizing comments, applying moderation on reviews, or processing information with AI assistance.</p>
 <p>Currently, functions can only be used with <a href="/docs/en/models">models provided by AIVAX</a>.</p>
+<h2 id="serverless-code">Serverless code</h2>
+<p>It is possible to host JavaScript code on AIVAX that performs agentic tasks, such as functions, inference, and communication with other services.</p>
+<p>Read more about <a href="/docs/en/serverless">serverless here</a>.</p>
 <h2 id="calling-a-function">Calling a function</h2>
-<p>To call an AI function, you need to specify what the AI should respond with and provide a JSON Schema that it must follow.</p>
-<p>Less intelligent models tend to fail at generating JSON, producing an invalid or problematic document. To address this, adjust your model, the instruction, and the retry parameter if necessary.</p>
-<p>You are charged for each attempt the AI makes to generate. Slightly smarter models tend to produce correct results on the first try. It is guaranteed that a valid JSON will be generated and that this JSON will follow the same schema provided in the request.</p>
+<p>To call an AI function, you will need to specify what the AI should respond with and provide a JSON Schema that it must follow.</p>
+<p>Less intelligent models tend to fail JSON generation, producing an invalid or problematic document. To address this, adjust your model, the instruction, and the attempts parameter if necessary.</p>
+<p>You are charged for each attempt the AI makes to generate. Slightly smarter models tend to produce correct results on the first attempt. It is guaranteed that a valid JSON will be generated and that this JSON will follow the same schema provided in the request.</p>
 <p>Consider using a cache on your application side for data that does not need to be constantly updated, such as weather data, daily statistics, etc. AIVAX does not perform any caching on our side.</p>
 <h4 id="request">Request</h4>
 <div class="request-item post">
@@ -144,7 +147,7 @@
     &quot;modelName&quot;: &quot;@metaai/llama-3.1-8b&quot;,
     
     // Required. Explain what your model should do with the input and how it should produce the response.
-    &quot;instructions&quot;: &quot;Classify the user's comment, indicating whether it is positive or negative, and whether it contains any relevant information (a number between 0 (not very relevant) and 10 (very relevant))&quot;,
+    &quot;instructions&quot;: &quot;Classify the user's comment, indicating whether it is positive or negative, and whether it contains any relevant information (a number between 0 (not relevant) and 10 (very relevant))&quot;,
     
     // Required. The JSON Schema that the model must follow to generate the response. You can provide generation examples in the instructions field.
     &quot;responseSchema&quot;: {
@@ -163,21 +166,21 @@
         &quot;required&quot;: [&quot;feedbackType&quot;, &quot;informationScore&quot;]
     },
     
-    // Optional. Defines a JSON input for the model. Can be any type of JSON value.
+    // Optional. Define a JSON input for the model. It can be any type of JSON value.
     &quot;inputData&quot;: {
-        &quot;userComment&quot;: &quot;Terrible market. There is a guard inside watching you so you don't steal and the butchers ignore you and serve pretty girls in front of you.  But thank God other markets are arriving and the end of this nonsense will come&quot;
+        &quot;userComment&quot;: &quot;Pessimo mercado. Tem guarda dentro te vigiando pra vc nao roubar e os acougueiros te ignoram e atendem mocinhas bonitinhas na tua frente.  Mas graças a Deus tem outros mercados chegando e o fim dessa palhaçada vai chegar&quot;
     },
     
-    // Optional. Defines how many attempts the model should try before the API returns an error. Must be a number between 1 and 30.
+    // Optional. Define how many attempts the model should try before the API returns an error. Must be a number between 1 and 30.
     &quot;maxAttempts&quot;: 10,
     
-    // Optional. Defines the timeout in seconds to obtain a valid JSON before the API returns an error. Must be a number between 1 and 3600 (one hour).
+    // Optional. Define the timeout in seconds to obtain a valid JSON before the API returns an error. Must be a number between 1 and 3600 (one hour).
     &quot;timeout&quot;: 300,
     
-    // Optional. Defines the temperature for JSON generation. Higher values tend to be more creative, while lower values are more deterministic. Number from 0 to 2.
+    // Optional. Define the temperature for JSON generation. Higher values tend to be more creative, while lower values are more deterministic. Number from 0 to 2.
     &quot;temperature&quot;: 0.4,
     
-    // Optional. Provides additional context for generation via chat/completions‑style messages. You can also provide multimodal content for compatible models.
+    // Optional. Provides additional context for generation via messages in chat/completions format. You can also provide multimodal content for compatible models.
     &quot;context&quot;: [
         {
             &quot;role&quot;: &quot;user&quot;,
@@ -185,7 +188,7 @@
         }
     ],
     
-    // Optional. Provides built‑in AIVAX tools for the generation.
+    // Optional. Provides built-in AIVAX functions for tool generation.
     &quot;tools&quot;: [
         &quot;WebSearch&quot;,
         &quot;Code&quot;,
@@ -194,7 +197,7 @@
         &quot;XPostsSearch&quot;
     ],
     
-    // Optional. Defines tool generation parameters.
+    // Optional. Define tool generation parameters.
     &quot;toolsOptions&quot;: {
         &quot;webSearchMode&quot;: &quot;Full&quot; | &quot;Summarized&quot;,
         &quot;webSearchMaxResults&quot;: 10,
@@ -242,7 +245,7 @@
 <h2 id="json-schema-guidelines">JSON Schema Guidelines</h2>
 <p>The response format must be provided by a JSON Schema.</p>
 <p>Behind the scenes, AIVAX guides the model to generate a response with the provided JSON schema. When the model generates something invalid, we tell it to try again and correct the errors until the output conforms to the supplied specification.</p>
-<p>The supported JSON Schema directives of AIVAX are:</p>
+<p>The supported JSON Schema guidelines of AIVAX are:</p>
 <ul>
 <li><code>string</code>:
 <ul>
@@ -283,7 +286,7 @@
 <li><code>bool</code> and <code>boolean</code></li>
 <li><code>null</code></li>
 </ul>
-<p>Additionally, you can specify one or more values in the <code>type</code> of the object, for example:</p>
+<p>Additionally, you can specify one or more values in the object's <code>type</code>, for example:</p>
 <pre><code class="lang-json">{
     &quot;type&quot;: [&quot;string&quot;, &quot;number&quot;]
 }
@@ -292,7 +295,7 @@
 <p>Note: <code>number</code> and <code>integer</code> are synonyms and <code>integer</code> does not guarantee that the number will be an integer.</p>
 </blockquote>
 <h2 id="functions-in-tools">Functions in tools</h2>
-<p>It is possible to use <a href="/docs/en/builtin-tools">built‑in tools</a> as JSON functions. This will allow the model to call functions to obtain the necessary context to generate the final JSON.</p>
+<p>It is possible to use <a href="/docs/en/builtin-tools">built-in tools</a> as JSON functions. This will allow the model to call functions to obtain the necessary context to generate the final JSON.</p>
 <h2 id="examples">Examples</h2>
 <p>Check out examples of AI functions for various everyday tasks:</p>
 <h4 id="classify-good-or-bad-comments">Classify good or bad comments</h4>
@@ -306,20 +309,20 @@
     &quot;modelName&quot;: &quot;@google/gemini-2.0-flash&quot;,
     &quot;instructions&quot;: &quot;Classify the user's comment by providing a rating for the comment.&quot;,
     &quot;inputData&quot;: {
-        &quot;inputText&quot;: &quot;The food is good, but the environment is very noisy and a bit dirty as well.&quot;
+        &quot;inputText&quot;: &quot;A comida é boa, mas o ambiente é muito barulhento e um pouco sujo também.&quot;
     },
     &quot;responseSchema&quot;: {
         &quot;type&quot;: &quot;object&quot;,
         &quot;properties&quot;: {
             &quot;commentSummary&quot;: {
                 &quot;type&quot;: &quot;string&quot;,
-                &quot;description&quot;: &quot;Summary of what the user meant.&quot;
+                &quot;description&quot;: &quot;Resumo do que o usuário quis dizer.&quot;
             },
             &quot;score&quot;: {
                 &quot;type&quot;: &quot;integer&quot;,
                 &quot;min&quot;: 1,
                 &quot;max&quot;: 5,
-                &quot;description&quot;: &quot;The rating extracted from the evaluation, where 1 is very bad and 5 is very good.&quot;
+                &quot;description&quot;: &quot;A nota extraída da avaliação, sendo 1 muito ruim e 5 muito bom.&quot;
             }
         },
         &quot;required&quot;: [
@@ -658,7 +661,7 @@
   }
 }
 </code></pre>
-<h4 id="fetch-trending-artists-by-musical-genre">Fetch trending artists by musical genre</h4>
+<h4 id="fetch-top-artists-by-musical-genre">Fetch top artists by musical genre</h4>
 <div class="request-item post">
     <span>POST</span>
     <span>
@@ -667,7 +670,7 @@
 </div>
 <pre><code class="lang-json">{
             &quot;modelName&quot;: &quot;@openai/gpt-4.1-mini&quot;,
-            &quot;instructions&quot;: &quot;The function should search, using the latest X posts, the music streaming platforms (like Spotify, Apple Music etc.) and identify the 10 most played artists in the genre provided by the user. Then, it should format an object containing an ordered list of 10 artists, including position (1–10), name and estimated number of streams.&quot;,
+            &quot;instructions&quot;: &quot;The function should search, using the latest X posts, musical streaming platforms (such as Spotify, Apple Music, etc.) and identify the top 10 most-played artists in the genre specified by the user. Then, it should format an object containing an ordered list of 10 artists, including rank (1–10), name, and estimated number of streams.&quot;,
             &quot;inputData&quot;: {
                 &quot;genre&quot;: &quot;dubstep&quot;
             },
@@ -676,7 +679,7 @@
                 &quot;properties&quot;: {
                     &quot;artists&quot;: {
                         &quot;type&quot;: &quot;array&quot;,
-                        &quot;description&quot;: &quot;List of the 10 most played artists in the specified genre&quot;,
+                        &quot;description&quot;: &quot;List of the top 10 artists most played in the specified genre&quot;,
                         &quot;items&quot;: {
                             &quot;type&quot;: &quot;object&quot;,
                             &quot;properties&quot;: {
@@ -825,7 +828,26 @@
           },
           &quot;result&quot;: [
             {
-              &quot;url&quot;: &quot;https://
+              &quot;url&quot;: &quot;https://x.com/nathanielblow/status/1867148757466304607&quot;,
+              &quot;text&quot;: &quot;NOW LIVE ON APPLE MUSIC. SPOTIFY. YOUTUBE MUSIC.\n\nEnjoy. https://t.co/apUxnXc7IE&quot;,
+              &quot;authorUserName&quot;: &quot;nathanielblow&quot;,
+              &quot;createdAt&quot;: &quot;2024-12-12T10:05:28&quot;
+            },
+            {
+              &quot;url&quot;: &quot;https://x.com/yobrxxzy/status/1754800896041505222&quot;,
+              &quot;text&quot;: &quot;MOST STREAMED ARTISTS ON THESE STREAMING PLATFORMS 🇳🇬\n\nApple Music — WIZKID\nSpotify — WIZKID\nYouTube — BURNA BOY\nPandora — WIZKID\nTidal  — WIZKID\nLine Music — WIZKID\nAudiomack — ASAKE\nDeezer — WIZKID\nBoomplay — BURNA BOY\nSoundCloud — BURNA BOY\nShazam — WIZKID https://t.co/Nm2jO5R5P6&quot;,
+              &quot;authorUserName&quot;: &quot;yobrxxzy&quot;,
+              &quot;createdAt&quot;: &quot;2024-02-06T09:35:10&quot;
+            },
+            {
+              &quot;url&quot;: &quot;https://x.com/yobrxxzy/status/1922763266549301642&quot;,
+              &quot;text&quot;: &quot;MOST STREAMED ARTISTS ON THESE DSP:\n\nApple Music — WIZKID\nSpotify — WIZKID\nPandora — WIZKID\nYouTube — BURNA BOY\nTidal  — WIZKID\nLine Music — WIZKID\nAudiomack — ASAKE\nDeezer — WIZKID\nBoomplay — BURNA BOY\nDeezer — WIZKID\nAnghami — REMA\nSoundCloud — BURNA BOY\nShazam — WIZKID\n\n🐐 https://t.co/3aUCGbYiEO&quot;,
+              &quot;authorUserName&quot;: &quot;yobrxxzy&quot;,
+              &quot;createdAt&quot;: &quot;2025-05-14T21:17:40&quot;
+            },
+            {
+              &quot;url&quot;: &quot;https://x.com/yobrxxzy/status/1856816512524587343&quot;,
+              &quot;text&quot;: &quot;MOST STREAMED ARTISTS ON THESE DSP:\n\nApple Music — WIZKID\nSpotify — WIZKID\nYouTube — BURNA BOY\nPandora — WIZKID\nTidal  — WIZKID\nLine Music — WIZKID\nAudiomack — ASAKE\nDeezer — WIZKID\nBoomplay — BURNA BO
 </code></pre>
 
 </article>

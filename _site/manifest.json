@@ -202,6 +202,16 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "assets/icon/gryphe.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/icon/gryphe.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "assets/icon/inception.svg",
       "output": {
         "resource": {
@@ -884,6 +894,16 @@
       "version": ""
     },
     {
+      "type": "Conceptual",
+      "source_relative_path": "docs/en/serverless.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/en/serverless.html"
+        }
+      },
+      "version": ""
+    },
+    {
       "type": "Toc",
       "source_relative_path": "docs/en/toc.yml",
       "output": {
@@ -1065,6 +1085,16 @@
       "output": {
         ".html": {
           "relative_path": "docs/protocol-functions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/serverless.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/serverless.html"
         }
       },
       "version": ""

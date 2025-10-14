@@ -21,6 +21,8 @@ items:
   href: mcp.md
 - name: Protocol Functions
   href: protocol-functions.md
+- name: Serverless
+  href: serverless.md
 
 - name: Using the API
 

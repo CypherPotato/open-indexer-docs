@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Limites da API | AIVAX </title>
+        <title>Fun&#231;&#245;es serverless | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="Limites da API | AIVAX ">
+        <meta name="title" content="Fun&#231;&#245;es serverless | AIVAX ">
 
 
         <link rel="icon" href="../assets/img/favicon.ico">
@@ -23,7 +23,7 @@
         <meta name="docfx:rel" content="../">
 
 
-        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/limits.md/#L1">
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/serverless.md/#L1">
         <meta name="loc:inThisArticle" content="In this article">
         <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
         <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -122,344 +122,186 @@
                 </div>
 
                 <article data-uid="">
-<h1 id="limites-da-api">Limites da API</h1>
+<h1 id="funções-serverless">Funções serverless</h1>
 
-<p>Limites de taxa (&quot;rate limiters&quot;) regulam o número de requisições que você pode enviar em uma janela de tempo. Esses limites ajudam a AIVAX a prevenir abuso e fornecer uma API estável à todos.</p>
-<p>Os limites da API abaixo são os mesmos para todos os modelos embutidos da AIVAX. Esses limites são categorizados por operações feitas pela API. Cada conta possui um tier que define quais limites são aplicados à conta. Tiers mudam de acordo com o total investido na AIVAX e o tempo que a conta existe.</p>
+<p>AIVAX fornece funções serverless em JavaScript para executarem operações agênticas usando o servidor da AIVAX, sem a necessidade de hospedagem de servidor ou código.</p>
+<p>Com essa ferramenta, você pode hospedar códigos JavaScript que recebem uma requisição e respondem de acordo com seu código fonte.</p>
+<h2 id="api">API</h2>
+<p>A API disponível do serverless da AIVAX fornece algumas ferramentas e classes customizadas:</p>
 <ul>
-<li><strong>Tier zero:</strong> conta nova que nunca adicionou créditos ou que possui créditos de teste.</li>
-<li><strong>Tier 1</strong>: conta criada há pelo menos 48 horas e que já adicionou qualquer valor em créditos.</li>
-<li><strong>Tier 2</strong>: conta criada há pelo menos 1 mês e que já adicionou pelo menos $ 100 em créditos.</li>
-<li><strong>Tier 3</strong>: conta criada há pelo menos 3 meses e que já adicionou pelo menos $ 1.000 em créditos.</li>
-</ul>
-<p>A medição é pela <strong>adição de créditos</strong> e não pelo seu consumo. Por exemplo, você não precisa consumir $ 100 em créditos para avançar ao Tier 2.</p>
-<p>Legendas dos limites:</p>
+<li><code>console</code>
 <ul>
-<li><strong>RPM</strong>: requisições por minuto.</li>
-<li><strong>RPD</strong>: requisições por dia (24 horas).</li>
-<li><strong>TPM</strong>: tokens de entrada por minuto.</li>
+<li><code>log(...args)</code> para escrever no console de depuração.</li>
+<li><code>error(...args)</code> para escrever um erro no console de depuração.</li>
+<li><code>warn(...args)</code> para escrever um aviso no console de depuração.</li>
+<li><code>info(...args)</code> para escrever uma informação no console de depuração.</li>
+<li><code>table(data, columns)</code> para escrever uma tabela no console de depuração.</li>
 </ul>
-<div class="tabGroup" id="tabgroup_1">
-<ul role="tablist">
-<li role="presentation">
-<a href="#tabpanel_1_free" role="tab" aria-controls="tabpanel_1_free" data-tab="free" tabindex="0" aria-selected="true">Conta nova</a>
 </li>
-<li role="presentation">
-<a href="#tabpanel_1_tier1" role="tab" aria-controls="tabpanel_1_tier1" data-tab="tier1" tabindex="-1">Tier 1</a>
-</li>
-<li role="presentation">
-<a href="#tabpanel_1_tier2" role="tab" aria-controls="tabpanel_1_tier2" data-tab="tier2" tabindex="-1">Tier 2</a>
-</li>
-<li role="presentation">
-<a href="#tabpanel_1_tier3" role="tab" aria-controls="tabpanel_1_tier3" data-tab="tier3" tabindex="-1">Tier 3</a>
+<li><code>fetch(url, options) -&gt; Promise&lt;Response&gt;</code>
+<ul>
+<li><code>options.body</code> pode ser uma <code>string</code>, um <code>FormData</code> ou nulo.</li>
+<li><code>options.method</code> uma string que representa o método HTTP.</li>
+<li><code>options.headers</code> um objeto contendo os cabeçalhos HTTP da requisição.</li>
+<li><code>options.timeout</code> um inteiro representando o timeout da requisição.</li>
+<li><code>options.redirect</code> uma string que pode ser <code>follow</code> ou <code>manual</code>.
+Sendo que a resposta é um objeto:</li>
+<li><code>async Response.text()</code> traz uma <code>Promise&lt;string&gt;</code> com o conteúdo.</li>
+<li><code>async Response.json()</code> traz uma <code>Promise&lt;object&gt;</code> com o conteúdo JSON.</li>
+<li><code>Response.ok</code> um booleano contendo se a resposta é da classe de sucesso.</li>
+<li><code>Response.status</code> um inteiro contendo o status code da resposta.</li>
+<li><code>Response.statusText</code> uma string contendo o status reason da resposta. Pode ser nulo.</li>
+<li><code>Response.headers</code> um objeto contendo os cabeçalhos da resposta.</li>
+<li><code>Response.url</code> a URL da requisição que produziu essa resposta.</li>
+</ul>
 </li>
 </ul>
-<section id="tabpanel_1_free" role="tabpanel" data-tab="free">
-
-<table>
-<thead>
-<tr>
-<th>Operação</th>
-<th style="text-align: right;">RPM</th>
-<th style="text-align: right;">RPD</th>
-<th style="text-align: right;">TPM</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Pesquisa de documentos</td>
-<td style="text-align: right;">50</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Inserção de documentos</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">100</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Inferência</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">300</td>
-<td style="text-align: right;">50.000</td>
-</tr>
-<tr>
-<td>Inferência (modelos high-end)</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Execução serverless</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">100</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Ferramentas (compartilhado)</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">100</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Ferramenta <code>web_search</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Ferramenta <code>x_posts_search</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Ferramenta <code>generate_image</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">-</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="tabpanel_1_tier1" role="tabpanel" data-tab="tier1" aria-hidden="true" hidden="hidden">
-
-<table>
-<thead>
-<tr>
-<th>Operação</th>
-<th style="text-align: right;">RPM</th>
-<th style="text-align: right;">RPD</th>
-<th style="text-align: right;">TPM</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Pesquisa de documentos</td>
-<td style="text-align: right;">150</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Inserção de documentos</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">3.000</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Inferência</td>
-<td style="text-align: right;">75</td>
-<td style="text-align: right;">10.000</td>
-<td style="text-align: right;">1.000.000</td>
-</tr>
-<tr>
-<td>Inferência (modelos high-end)</td>
-<td style="text-align: right;">75</td>
-<td style="text-align: right;">10.000</td>
-<td style="text-align: right;">200.000</td>
-</tr>
-<tr>
-<td>Execução serverless</td>
-<td style="text-align: right;">30</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Ferramentas (compartilhado)</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">1.000</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Ferramenta <code>web_search</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">300</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Ferramenta <code>x_posts_search</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">300</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Ferramenta <code>generate_image</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">30</td>
-<td style="text-align: right;">-</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="tabpanel_1_tier2" role="tabpanel" data-tab="tier2" aria-hidden="true" hidden="hidden">
-
-<table>
-<thead>
-<tr>
-<th>Operação</th>
-<th style="text-align: right;">RPM</th>
-<th style="text-align: right;">RPD</th>
-<th style="text-align: right;">TPM</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Pesquisa de documentos</td>
-<td style="text-align: right;">300</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Inserção de documentos</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">10.000</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Inferência</td>
-<td style="text-align: right;">200</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">4.000.000</td>
-</tr>
-<tr>
-<td>Inferência (modelos high-end)</td>
-<td style="text-align: right;">200</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">1.000.000</td>
-</tr>
-<tr>
-<td>Execução serverless</td>
-<td style="text-align: right;">100</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Ferramentas (compartilhado)</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">10.000</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Ferramenta <code>web_search</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">1.000</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Ferramenta <code>x_posts_search</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">1.000</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Ferramenta <code>generate_image</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">300</td>
-<td style="text-align: right;">-</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="tabpanel_1_tier3" role="tabpanel" data-tab="tier3" aria-hidden="true" hidden="hidden">
-
-<table>
-<thead>
-<tr>
-<th>Operação</th>
-<th style="text-align: right;">RPM</th>
-<th style="text-align: right;">RPD</th>
-<th style="text-align: right;">TPM</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Pesquisa de documentos</td>
-<td style="text-align: right;">1.000</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Inserção de documentos</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">30.000</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Inferência</td>
-<td style="text-align: right;">1.000</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">10.000.000</td>
-</tr>
-<tr>
-<td>Inferência (modelos high-end)</td>
-<td style="text-align: right;">1.000</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">4.000.000</td>
-</tr>
-<tr>
-<td>Execução serverless</td>
-<td style="text-align: right;">500</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Ferramentas (compartilhado)</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">50.000</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Ferramenta <code>web_search</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">10.000</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Ferramenta <code>x_posts_search</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">10.000</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td>Ferramenta <code>generate_image</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">1.000</td>
-<td style="text-align: right;">-</td>
-</tr>
-</tbody>
-</table>
-</section>
+<p>Métodos de leitura de requisição do serverless:</p>
+<ul>
+<li><code>req.headers</code> traz um objeto contendo os cabeçalhos da requisição atual.</li>
+<li><code>req.query</code> traz um objeto contendo os parâmetros da query da requisição.</li>
+<li><code>req.cookies</code> traz um objeto contendo os cookies definidos na requisição.</li>
+<li><code>req.path</code> lê o caminho (sem a query string) da requisição.</li>
+<li><code>req.fullPath</code> lê o caminho (com a query string) da requisição.</li>
+<li><code>req.url</code> lê a URL completa da requisição, contendo o caminho completo da requisição (autoridade, caminho e query).</li>
+<li><code>req.method</code> lê o método da requisição.</li>
+<li><code>req.json()</code> lê o corpo da requisição para um valor JSON.</li>
+<li><code>req.text()</code> lê o corpo da requisição em texto.</li>
+<li><code>req.blob()</code> lê o corpo da requisição em um ArrayBuffer.</li>
+<li><code>req.form()</code> lê o corpo da requisição em um form-data.</li>
+<li><code>req.multipartForm()</code> lê o corpo da requisição em um multipart form-data.</li>
+</ul>
+<p>E métodos de escrita para resposta do serverless:</p>
+<ul>
+<li><code>res.status(status)</code> define o status numérico da resposta.</li>
+<li><code>res.header(name, value)</code> adiciona um cabeçalho na resposta.</li>
+<li><code>res.text(t)</code> define o corpo da resposta como um texto.</li>
+<li><code>res.json(t)</code> define o corpo da resposta como um JSON.</li>
+<li><code>res.error(message, status)</code> retorna um erro JSON na resposta com o status informado e encerra imediatamente a execução do script.</li>
+</ul>
+<p>E métodos especiais agênticos:</p>
+<ul>
+<li><code>async ai.complete(model, prompt, options)</code> completa o texto informado em prompt. Prompt pode ser uma string ou um array de mensagens. O modelo pode ser um modelo fornecido pela AIVAX ou um Slug ou ID de um AI gateway da sua conta. Opções incluem propriedades que são passadas para a rota de chat/completions, exemplo: <code>temperature</code> ou <code>tools</code>. A resposta é o JSON da resposta da AIVAX de inferência.</li>
+<li><code>async ai.completeText(model, prompt, options)</code> funciona da mesma forma do método acima, mas ao invés de retornar um JSON com os objetos de resposta da inferência, retorna apenas o texto gerado pela assistente.</li>
+<li><code>async api.get(path)</code> faz uma requisição GET autenticada para algum endpoint da AIVAX.</li>
+<li><code>async api.post(path, body)</code> faz uma requisição POST autenticada com um corpo JSON para algum endpoint da AIVAX.</li>
+<li><code>async api.put(path, body)</code> faz uma requisição PUT autenticada com um corpo JSON para algum endpoint da AIVAX.</li>
+<li><code>async api.patch(path, body)</code> faz uma requisição PATCH autenticada com um corpo JSON para algum endpoint da AIVAX.</li>
+<li><code>async api.delete(path)</code> faz uma requisição DELETE autenticada para algum endpoint da AIVAX.</li>
+</ul>
+<p>E algumas funções especiais de middleware:</p>
+<ul>
+<li><code>async authenticate()</code> autentica a requisição com uma API key da sua conta.</li>
+<li><code>sleep(ms)</code> aguarda o tempo especificado em milissegundos antes de continuar, limitado à 3 minutos.</li>
+<li><code>rate_limit(threshold, seconds)</code> aplica um rate-limiter à nível da função e do IP de requisição sobre o threshold e duração em segundos especificada.</li>
+</ul>
+<h2 id="exemplo">Exemplo</h2>
+<p>O exemplo abaixo ilustra um código quase completo, que recebe uma requisição, autentica-a, executa uma função para ela e retorna o resultado.</p>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>Atenção: nenhuma função serverless possui autenticação por padrão. Autentique suas funções criando uma lógica especialmente para isso ou usando o método assíncrono <code>authenticate()</code>.</p>
 </div>
+<pre><code class="lang-js">async function main() {
 
+    // se não estiver autenticado por uma chave de API válida,
+    // sai da função
+    if (!await authenticate()) {
+        res.status(403);
+        return;
+    }
+
+    // aplica rate limiter na requisição para evitar sobrecarga
+    const RATE_LIMIT_THRESHOLD = 10;
+    const RATE_LIMIT_SECONDS = 60;
+    rate_limit(RATE_LIMIT_THRESHOLD, RATE_LIMIT_SECONDS);
+
+    // valida se a requisição é GET
+    if (req.method != 'GET') {
+        res.status(405);
+        return;
+    }
+    
+    // obtém o parâmetro da query 'q'
+    var cityName = req.query[&quot;q&quot;] || res.error(&quot;'q' is required&quot;);
+
+    // realiza inferência para obter dados de clima para cidade informada
+    const weather = await api.post(&quot;/api/v1/functions/json&quot;, {
+        modelName: &quot;@x-ai/grok-4-fast&quot;,
+        prompt: &quot;Pesquise dados de clima para a cidade informada.&quot;,
+        responseSchema: {
+            type: &quot;object&quot;,
+            properties: {
+                temperature: {
+                    type: &quot;number&quot;,
+                    description: &quot;A temperatura em Celsius do local informado&quot;
+                },
+                forecast: {
+                    type: &quot;string&quot;,
+                    enum: [&quot;rainy&quot;, &quot;thunder&quot;, &quot;clear&quot;],
+                    description: &quot;A previsão do tempo para o local informado&quot;
+                }
+            },
+            required: [&quot;temperature&quot;, &quot;forecast&quot;]
+        },
+        inputData: {
+            cityName
+        }
+    });
+
+    // retorna o JSON na resposta
+    const {
+        result
+    } = weather.json.data;
+    res.json(result);
+}
+</code></pre>
+<p>O código abaixo é mais simples: ele autentica a requisição com uma API-key sua, recebe o corpo JSON da requisição e retorna a resposta da função:</p>
+<pre><code class="lang-js">async function main() {
+
+    if (!await authenticate()) {
+        res.status(403);
+        return;
+    }
+
+    const functionResult = await api.post('/api/v1/functions/json', {
+        modelName: &quot;@metaai/llama-4-scout-17b-16e&quot;,
+        instructions: &quot;Encurte o texto informado pelo usuário.&quot;,
+        inputData: req.json(),
+        responseSchema: {
+            type: &quot;object&quot;,
+            properties: {
+                summarizedText: {
+                    type: &quot;string&quot;
+                }
+            }
+        }
+    });
+
+    res.json(functionResult.json.data.result);
+}
+</code></pre>
+<h2 id="limitações">Limitações</h2>
+<p>Essas funções executam em um contâiner JavaScript isolado com certas limitações. Essas limitações são:</p>
 <ul>
-<li><strong>Pesquisa de documentos</strong>: inclui pesquisa semântica de documentos em uma coleção pelo endpoint de pesquisa <code>../collections/{id}/query</code>.</li>
-<li><strong>Inserção de documentos</strong>: inclui criação e modificação de documentos em uma coleção.</li>
-<li><strong>Inferência</strong>: toda chamada de inferência ou função, seja por chat client ou API.
-<ul>
-<li>modelos high-end se referem à modelos que necessitam de Tier 1 para poder ser usado.</li>
+<li>O uso máximo de memória é limitado para 32 MB.</li>
+<li>O tempo de execução de cada script é limitado à 5 minutos.</li>
+<li>O tempo máximo de avaliação de Regex é de 10 segundos.</li>
+<li>O tamanho máximo de resposta lido por chamadas Fetch é de 10 MB (exceto para chamadas pela AIVAX).</li>
 </ul>
-</li>
-<li><strong>Serverless</strong>: inclui toda chamada de <a href="/docs/serverless">função serverless</a>.</li>
-<li><strong>Ferramentas (compartilhado)</strong>: toda <a href="/docs/builtin-tools">ferramenta integrada</a> invocada pela assistente. Esse limite é compartilhado para todas as ferramentas providas pela AIVAX e não é usado para ferramentas definidas por você ou suas APIs.</li>
-<li><strong>Ferramenta (nome da ferramenta)</strong>: todo uso da ferramenta mencionada.</li>
-</ul>
-<h2 id="grupos-de-modelos">Grupos de modelos</h2>
-<p>Certos modelos possuem multiplicadores de taxa. Esses multiplicadores são aplicados aos &quot;grupos de limites&quot; à certos modelos, bem como:</p>
-<ul>
-<li><strong>Comum</strong>: os limites são multiplicados por 1x</li>
-<li><strong>Descontados</strong>: os limites são multiplicados por 0,5x</li>
-<li><strong>Baixa-latência</strong>: os limites são multiplicados por 0,3x</li>
-<li><strong>Grátis</strong>: os limites são multiplicados por 0,1x</li>
-</ul>
-<p>Por exemplo, se você usar um modelo com desconto no valor, os limites de taxa serão 50% menores para você, portanto, ao invés de 75 requests por minuto no Tier 1, você terá 37 requests.</p>
-<h2 id="limites-para-byok-bring-your-own-key">Limites para BYOK (Bring-your-own-key)</h2>
-<p>Para modelos providos por você, o limite aplicado é de <strong>1.500</strong> requisições por minuto. Esse limite é separado do limite de inferência integrada.</p>
+<h2 id="precificação">Precificação</h2>
+<p>O preço do serverless é cobrado por hora de execução. Cada execução acumula uma quantia de milisegundos. Essa temporização contabiliza somente o tempo de execução do script e não sua compilação, portanto, se o seu script demorar 20 segundos para ser executado, 20.000 milissegundos serão contabilizados. O tempo mínimo de execução debitado é de 20 milissegundos.</p>
+<p>O custo de processamento serverless é de <strong>$1/hora</strong>.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Todas as contas possuem <strong>10 minutos</strong> grátis todos os dias. Se você ultrapassar esse limite, você começará a ser debitado pelo valor de processamento. Se sua conta tiver saldo negativo, o processamento da função será cancelado.</p>
+</div>
+<h2 id="limites-de-taxa">Limites de taxa</h2>
+<p>Os limites de taxa para funções serverless são descritas nos <a href="/docs/limits">limites de taxa</a>.</p>
 
 </article>
 
                 <div class="contribution d-print-none">
-                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/limits.md/#L1" class="edit-link">Edit this page</a>
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/serverless.md/#L1" class="edit-link">Edit this page</a>
                 </div>
 
                 <div class="next-article d-print-none border-top" id="nextArticle"></div>
