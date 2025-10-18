@@ -1,1 +1,1 @@
-node translate.js "English" "en"
+bun translate.js "English" "en"

@@ -124,178 +124,261 @@
                 <article data-uid="">
 <h1 id="serverless-functions">Serverless Functions</h1>
 
-<p>AIVAX provides serverless functions in JavaScript to perform agentic operations using the AIVAX server, without the need for server hosting or code.</p>
-<p>With this tool, you can host JavaScript code that receives a request and responds according to your source code.</p>
-<h2 id="api">API</h2>
-<p>The available API of AIVAX serverless provides some custom tools and classes:</p>
+<p>AIVAX's serverless functions allow you to run JavaScript on demand, in a managed environment, to create agentic endpoints without having to maintain servers.</p>
+<p>Each request triggers the execution of your script, which reads data from the <code>req</code> object and writes the response to the <code>res</code> object.</p>
+<h2 id="execution-flow-in-30-seconds">Execution flow in 30 seconds</h2>
 <ul>
-<li><code>console</code>
+<li>Write an <code>async function main()</code>; it is called on each request.</li>
+<li>Use <code>req</code> to read method, headers, query, and body.</li>
+<li>Build the response with <code>res.status()</code>, <code>res.header()</code>, <code>res.text()</code> or <code>res.json()</code>.</li>
+<li>Optionally, authenticate with <code>await authenticate()</code> and apply rate limiting with <code>rate_limit()</code>.</li>
+<li>You can call models with <code>ai.complete(...)</code> or access internal APIs with <code>api.get/post/...</code>.</li>
+</ul>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>No function is authenticated by default. Protect your endpoints by implementing your own logic or using <code>await authenticate()</code>.</p>
+</div>
+<h2 id="supported-global-objects">Supported global objects</h2>
+<p>Below is the reference of objects and methods available in the environment, as implemented by the engine.</p>
+<h3 id="console">console</h3>
 <ul>
-<li><code>log(...args)</code> to write to the debug console.</li>
-<li><code>error(...args)</code> to write an error to the debug console.</li>
-<li><code>warn(...args)</code> to write a warning to the debug console.</li>
-<li><code>info(...args)</code> to write an info to the debug console.</li>
-<li><code>table(data, columns)</code> to write a table to the debug console.</li>
+<li><code>log(...args)</code>/ <code>error(...args)</code> / <code>warn(...args)</code> / <code>info(...args)</code>
+<ul>
+<li>Writes to the debug console.</li>
+<li>Strings/objects are serialized (objects via <code>JSON.stringify</code>).</li>
 </ul>
 </li>
-<li><code>fetch(url, options) -&gt; Promise&lt;Response&gt;</code>
+<li><code>table(data, columns?)</code>
 <ul>
-<li><code>options.body</code> can be a <code>string</code>, a <code>FormData</code>, or null.</li>
-<li><code>options.method</code> a string representing the HTTP method.</li>
-<li><code>options.headers</code> an object containing the request's HTTP headers.</li>
-<li><code>options.timeout</code> an integer representing the request timeout.</li>
-<li><code>options.redirect</code> a string that can be <code>follow</code> or <code>manual</code>.</li>
-<li>The response is an object:</li>
-<li><code>async Response.text()</code> returns a <code>Promise&lt;string&gt;</code> with the content.</li>
-<li><code>async Response.json()</code> returns a <code>Promise&lt;object&gt;</code> with the JSON content.</li>
-<li><code>Response.ok</code> a boolean indicating whether the response is successful.</li>
-<li><code>Response.status</code> an integer containing the response status code.</li>
-<li><code>Response.statusText</code> a string containing the response status reason. May be null.</li>
-<li><code>Response.headers</code> an object containing the response headers.</li>
-<li><code>Response.url</code> the URL of the request that produced this response.</li>
+<li>Arrays: prints a header row with <code>(index)</code> + columns. If <code>columns</code> is not provided, columns are inferred from the union of object keys in the array. Empty arrays print <code>(empty array)</code>.</li>
+<li>Objects: lists <code>key: value</code> per line.</li>
+<li>Other types: prints directly with <code>log</code>.</li>
 </ul>
 </li>
 </ul>
-<p>Serverless request reading methods:</p>
+<p>Notes</p>
 <ul>
-<li><code>req.headers</code> returns an object containing the current request's headers.</li>
-<li><code>req.query</code> returns an object containing the request's query parameters.</li>
-<li><code>req.cookies</code> returns an object containing the cookies set in the request.</li>
-<li><code>req.path</code> reads the path (without the query string) of the request.</li>
-<li><code>req.fullPath</code> reads the path (with the query string) of the request.</li>
-<li><code>req.url</code> reads the full URL of the request, containing the full request path (authority, path, and query).</li>
-<li><code>req.method</code> reads the request method.</li>
-<li><code>req.json()</code> reads the request body as a JSON value.</li>
-<li><code>req.text()</code> reads the request body as text.</li>
-<li><code>req.blob()</code> reads the request body as an ArrayBuffer.</li>
-<li><code>req.form()</code> reads the request body as form-data.</li>
-<li><code>req.multipartForm()</code> reads the request body as multipart form-data.</li>
+<li>For multiple arguments, <code>log</code> concatenates with a space. Objects are serialized with <code>JSON.stringify</code>.</li>
 </ul>
-<p>And writing methods for the serverless response:</p>
+<h3 id="fetchurl-options---promise">fetch(url, options?) -&gt; Promise<response></response></h3>
 <ul>
-<li><code>res.status(status)</code> sets the numeric status of the response.</li>
-<li><code>res.header(name, value)</code> adds a header to the response.</li>
-<li><code>res.text(t)</code> sets the response body as text.</li>
-<li><code>res.json(t)</code> sets the response body as JSON.</li>
-<li><code>res.error(message, status)</code> returns a JSON error in the response with the given status and immediately terminates script execution.</li>
+<li><code>options.body</code>: <code>string</code>, <code>FormData</code> or <code>null</code>.</li>
+<li><code>options.method</code>: HTTP method.</li>
+<li><code>options.headers</code>: object with headers.</li>
+<li><code>options.timeout</code>: integer (ms) request timeout.</li>
+<li><code>options.redirect</code>: <code>follow</code> | <code>manual</code>.</li>
 </ul>
-<p>And special agentic methods:</p>
+<p>Response object:</p>
 <ul>
-<li><code>async ai.complete(model, prompt, options)</code> completes the text provided in prompt. Prompt can be a string or an array of messages. The model can be a model provided by AIVAX or a Slug or ID of an AI gateway in your account. Options include properties passed to the chat/completions route, e.g., <code>temperature</code> or <code>tools</code>. The response is the JSON from AIVAX inference response.</li>
-<li><code>async ai.completeText(model, prompt, options)</code> works the same as the method above, but instead of returning a JSON with inference response objects, it returns only the text generated by the assistant.</li>
-<li><code>async api.get(path)</code> makes an authenticated GET request to an AIVAX endpoint.</li>
-<li><code>async api.post(path, body)</code> makes an authenticated POST request with a JSON body to an AIVAX endpoint.</li>
-<li><code>async api.put(path, body)</code> makes an authenticated PUT request with a JSON body to an AIVAX endpoint.</li>
-<li><code>async api.patch(path, body)</code> makes an authenticated PATCH request with a JSON body to an AIVAX endpoint.</li>
-<li><code>async api.delete(path)</code> makes an authenticated DELETE request to an AIVAX endpoint.</li>
+<li><code>async text(): Promise&lt;string&gt;</code></li>
+<li><code>async json(): Promise&lt;object&gt;</code></li>
+<li><code>ok: boolean</code></li>
+<li><code>status: number</code></li>
+<li><code>statusText: string | null</code></li>
+<li><code>headers: object</code></li>
+<li><code>url: string</code></li>
 </ul>
-<p>And some special middleware functions:</p>
+<p>Errors and notes</p>
 <ul>
-<li><code>async authenticate()</code> authenticates the request with an API key from your account.</li>
-<li><code>sleep(ms)</code> waits the specified time in milliseconds before continuing, limited to 3 minutes.</li>
-<li><code>rate_limit(threshold, seconds)</code> applies a rate limiter at the function and request IP level based on the specified threshold and duration in seconds.</li>
+<li><code>Response.json()</code> throws if the body is not valid JSON.</li>
+<li>The body is not a stream; read it with <code>text()</code> or <code>json()</code>.</li>
 </ul>
-<h2 id="example">Example</h2>
-<p>The example below illustrates an almost complete code that receives a request, authenticates it, runs a function for it, and returns the result.</p>
-<blockquote>
-<p>[!IMPORTANT] Attention: no serverless function has authentication by default. Authenticate your functions by creating custom logic for this or using the asynchronous <code>authenticate()</code> method.</p>
-</blockquote>
+<h3 id="req-request-reading">req (request reading)</h3>
+<ul>
+<li><code>headers: object</code> - request headers.</li>
+<li><code>query: object</code> - query string parameters.</li>
+<li><code>cookies: object</code> - present cookies.</li>
+<li><code>method: string</code> - HTTP method.</li>
+<li><code>path: string</code> - path without query.</li>
+<li><code>fullPath: string</code> - path with query.</li>
+<li><code>url: string</code> - full URL.</li>
+<li><code>json(): any</code> - body as JSON.</li>
+<li><code>text(): string</code> - body as text.</li>
+<li><code>blob(): ArrayBuffer</code> - binary body.</li>
+<li><code>form(): object</code> - simple form-data.</li>
+<li><code>multipartForm(): object</code> - multipart form-data.</li>
+</ul>
+<p>Errors and notes</p>
+<ul>
+<li><code>req.json()</code> throws if the body is not valid JSON.</li>
+</ul>
+<h3 id="res-response-writing">res (response writing)</h3>
+<ul>
+<li><code>status(code: number): void</code> - sets HTTP status.</li>
+<li><code>header(name: string, value: string): void</code> - adds a header.</li>
+<li><code>text(body: string): void</code> - sets the response body as text.</li>
+<li><code>json(data: any): void</code> - sets the response body as JSON.</li>
+<li><code>error(message: string, status = 400): never</code> - sets status and body <code>{ error: message }</code> and immediately terminates script execution.</li>
+</ul>
+<p>Notes</p>
+<ul>
+<li>Only <code>res.error(...)</code> interrupts execution. After <code>res.text(...)</code> or <code>res.json(...)</code>, return from the function (<code>return</code>) if you want to avoid further processing.</li>
+</ul>
+<h3 id="ai-inference">ai (inference)</h3>
+<ul>
+<li><code>async complete(model, prompt, options?)</code>
+<ul>
+<li>Input
+<ul>
+<li><code>model: string</code> - name/slug/ID of the model or account gateway.</li>
+<li><code>prompt: string | any[]</code> - text or array of messages (forwarded as <code>prompt</code>).</li>
+<li><code>options?: object</code> - additional properties forwarded to the endpoint, merged into the body with <code>stream: false</code>.</li>
+</ul>
+</li>
+<li>Return: JSON object of the response from the chat/completions endpoint.</li>
+</ul>
+</li>
+<li><code>async completeText(model, prompt, options?)</code>
+<ul>
+<li>Return: <code>string</code> with the content of <code>choices[0].message.content</code> from the result of <code>complete</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="api-authenticated-internal-http">api (authenticated internal HTTP)</h3>
+<ul>
+<li><code>async get(path)</code>
+<ul>
+<li>Return: response object with <code>text</code> (string) and <code>.json</code> property (getter) that parses <code>text</code> via <code>JSON.parse</code>.</li>
+</ul>
+</li>
+<li><code>async post(path, body)</code>
+<ul>
+<li>Body is serialized with <code>JSON.stringify(body)</code>.</li>
+<li>Return: same as <code>get</code>, with <code>.text</code> and getter <code>.json</code>.</li>
+</ul>
+</li>
+<li><code>put(path, body)</code> / <code>patch(path, body)</code> / <code>delete(path)</code>
+<ul>
+<li>Return: promise for the raw internal result (without the <code>.json</code> getter).</li>
+</ul>
+</li>
+</ul>
+<p>Notes</p>
+<ul>
+<li><code>path</code> is relative to AIVAX's internal API.</li>
+<li>The <code>.json</code> getter throws if <code>text</code> does not contain valid JSON.</li>
+</ul>
+<h3 id="helpers">Helpers</h3>
+<ul>
+<li><code>async authenticate(): Promise&lt;boolean&gt;</code> - validates the request with your account's API key.</li>
+<li><code>sleep(ms: number): void</code> - waits the specified time in milliseconds (limited to 3 minutes).</li>
+<li><code>rate_limit(threshold: number, seconds: number): void</code> - applies rate limiting per function and IP over the indicated period.</li>
+</ul>
+<hr>
+<h2 id="practical-examples">Practical examples</h2>
+<h3 id="1-hello-world">1) Hello World</h3>
 <pre><code class="lang-js">async function main() {
-
-    // if not authenticated with a valid API key,
-    // exit the function
-    if (!await authenticate()) {
-        res.status(403);
-        return;
-    }
-
-    // apply rate limiter on the request to avoid overload
-    const RATE_LIMIT_THRESHOLD = 10;
-    const RATE_LIMIT_SECONDS = 60;
-    rate_limit(RATE_LIMIT_THRESHOLD, RATE_LIMIT_SECONDS);
-
-    // validate that the request is GET
-    if (req.method != 'GET') {
+    if (req.method !== 'GET') {
         res.status(405);
         return;
     }
-    
-    // get the query parameter 'q'
-    var cityName = req.query[&quot;q&quot;] || res.error(&quot;'q' is required&quot;);
-
-    // perform inference to obtain weather data for the specified city
-    const weather = await api.post(&quot;/api/v1/functions/json&quot;, {
-        modelName: &quot;@x-ai/grok-4-fast&quot;,
-        prompt: &quot;Search for weather data for the specified city.&quot;,
-        responseSchema: {
-            type: &quot;object&quot;,
-            properties: {
-                temperature: {
-                    type: &quot;number&quot;,
-                    description: &quot;The temperature in Celsius of the specified location&quot;
-                },
-                forecast: {
-                    type: &quot;string&quot;,
-                    enum: [&quot;rainy&quot;, &quot;thunder&quot;, &quot;clear&quot;],
-                    description: &quot;The weather forecast for the specified location&quot;
-                }
-            },
-            required: [&quot;temperature&quot;, &quot;forecast&quot;]
-        },
-        inputData: {
-            cityName
-        }
-    });
-
-    // return the JSON in the response
-    const {
-        result
-    } = weather.json.data;
-    res.json(result);
+    res.text('hello world');
 }
 </code></pre>
-<p>The code below is simpler: it authenticates the request with one of your API keys, receives the request's JSON body, and returns the function's response:</p>
+<h3 id="2-authentication--rate-limit--query-param">2) Authentication + rate limit + query param</h3>
 <pre><code class="lang-js">async function main() {
-
     if (!await authenticate()) {
         res.status(403);
         return;
     }
 
-    const functionResult = await api.post('/api/v1/functions/json', {
-        modelName: &quot;@metaai/llama-4-scout-17b-16e&quot;,
-        instructions: &quot;Summarize the text provided by the user.&quot;,
-        inputData: req.json(),
-        responseSchema: {
-            type: &quot;object&quot;,
-            properties: {
-                summarizedText: {
-                    type: &quot;string&quot;
-                }
-            }
-        }
-    });
+    rate_limit(10, 60); // up to 10 requests per IP every 60s
 
-    res.json(functionResult.json.data.result);
+    if (req.method !== 'GET') {
+        res.status(405);
+        return;
+    }
+
+    const city = req.query.q || res.error(&quot;'q' is required&quot;);
+    res.json({ city });
 }
 </code></pre>
-<h2 id="limitations">Limitations</h2>
-<p>These functions run in an isolated JavaScript container with certain limitations. These limitations are:</p>
+<h3 id="3-json-body-with-error-handling">3) JSON body with error handling</h3>
+<pre><code class="lang-js">async function main() {
+    let data;
+    try {
+        data = req.json();
+    } catch {
+        res.error('Invalid JSON', 400);
+    }
+
+    // use the payload
+    res.json({ received: data });
+}
+</code></pre>
+<h3 id="4-ai-call-direct-text">4) AI call (direct text)</h3>
+<pre><code class="lang-js">async function main() {
+    if (!await authenticate()) {
+        res.status(403);
+        return;
+    }
+
+    const prompt = req.query.p || 'Say hello briefly.';
+    const text = await ai.completeText('@metaai/llama-4-scout-17b-16e', prompt, { temperature: 0.7 });
+    res.text(text);
+}
+</code></pre>
+<h3 id="5-full-example-json-function">5) Full example (JSON function)</h3>
+<pre><code class="lang-js">async function main() {
+    if (!await authenticate()) {
+        res.status(403);
+        return;
+    }
+
+    rate_limit(10, 60);
+
+    if (req.method !== 'GET') {
+        res.status(405);
+        return;
+    }
+
+    const cityName = req.query.q || res.error(&quot;'q' is required&quot;);
+
+    const weather = await api.post('/api/v1/functions/json', {
+        modelName: '@x-ai/grok-4-fast',
+        prompt: 'Search weather data for the given city.',
+        responseSchema: {
+            type: 'object',
+            properties: {
+                temperature: { type: 'number', description: 'Temperature in °C' },
+                forecast: { type: 'string', enum: ['rainy', 'thunder', 'clear'] }
+            },
+            required: ['temperature', 'forecast']
+        },
+        inputData: { cityName }
+    });
+
+    res.json(weather.json.data.result);
+}
+</code></pre>
+<h3 id="6-sleep-controlled-wait">6) Sleep (controlled wait)</h3>
+<pre><code class="lang-js">async function main() {
+    // wait 200 ms
+    sleep(200);
+    res.text('ok');
+}
+</code></pre>
+<h2 id="engine-limitations">Engine limitations</h2>
+<p>Functions run in an isolated JavaScript container with the following restrictions:</p>
 <ul>
-<li>Maximum memory usage is limited to 32 MB.</li>
-<li>The execution time of each script is limited to 5 minutes.</li>
-<li>The maximum Regex evaluation time is 10 seconds.</li>
-<li>The maximum response size read by Fetch calls is 10 MB (except for calls via AIVAX).</li>
+<li>Maximum memory per execution: 32 MB.</li>
+<li>Maximum execution time per script: 5 minutes.</li>
+<li>Maximum evaluation time for RegExp expressions: 10 seconds.</li>
+<li>Maximum response size read by <code>fetch</code>: 10 MB (except internal AIVAX calls).</li>
 </ul>
+<div class="TIP">
+<h5>Tip</h5>
+<p>Handle user input, validate methods/headers and use <code>res.error()</code> for consistent error responses. Prefer <code>rate_limit()</code> on public endpoints.</p>
+</div>
 <h2 id="pricing">Pricing</h2>
-<p>Serverless pricing is charged per execution hour. Each execution accumulates a number of milliseconds. This timing accounts only for the script's execution time and not its compilation, so if your script takes 20 seconds to run, 20,000 milliseconds will be counted. The minimum billed execution time is 20 milliseconds.</p>
+<p>Billing is done per execution hour. Each call accumulates milliseconds only from the script's execution time (does not include compilation). E.g., if the script takes 20 seconds, 20,000 ms will be counted. The minimum charge per execution is 20 ms.</p>
 <p>The serverless processing cost is <strong>$1/hour</strong>.</p>
 <div class="NOTE">
 <h5>Note</h5>
-<p>All accounts have <strong>10 minutes</strong> free every day. If you exceed this limit, you will start being charged for processing. If your account has a negative balance, the function's processing will be cancelled.</p>
+<p>All accounts have <strong>10 minutes</strong> free per day. Once exceeded, billing starts. If the account goes negative, function execution is halted.</p>
 </div>
-<h2 id="rate-limits">Rate Limits</h2>
-<p>The rate limits for serverless functions are described in the <a href="/docs/en/limits">rate limits</a>.</p>
+<h2 id="rate-limits">Rate limits</h2>
+<p>The global rate limits for serverless functions are described in <a href="/docs/en/limits">rate limits</a>.</p>
 
 </article>
 

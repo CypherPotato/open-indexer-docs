@@ -1,182 +1,259 @@
 # Funções serverless
 
-AIVAX fornece funções serverless em JavaScript para executarem operações agênticas usando o servidor da AIVAX, sem a necessidade de hospedagem de servidor ou código.
+As funções serverless da AIVAX permitem executar JavaScript sob demanda, em um ambiente gerenciado, para criar endpoints agênticos sem precisar manter servidores.
 
-Com essa ferramenta, você pode hospedar códigos JavaScript que recebem uma requisição e respondem de acordo com seu código fonte.
+Cada requisição dispara a execução do seu script, que lê dados do objeto `req` e escreve a resposta no objeto `res`.
 
-## API
+## Fluxo de execução em 30 segundos
 
-A API disponível do serverless da AIVAX fornece algumas ferramentas e classes customizadas:
-
-- `console`
-    - `log(...args)` para escrever no console de depuração.
-    - `error(...args)` para escrever um erro no console de depuração.
-    - `warn(...args)` para escrever um aviso no console de depuração.
-    - `info(...args)` para escrever uma informação no console de depuração.
-    - `table(data, columns)` para escrever uma tabela no console de depuração.
-- `fetch(url, options) -> Promise<Response>`
-    - `options.body` pode ser uma `string`, um `FormData` ou nulo.
-    - `options.method` uma string que representa o método HTTP.
-    - `options.headers` um objeto contendo os cabeçalhos HTTP da requisição.
-    - `options.timeout` um inteiro representando o timeout da requisição.
-    - `options.redirect` uma string que pode ser `follow` ou `manual`.
-    Sendo que a resposta é um objeto:
-    - `async Response.text()` traz uma `Promise<string>` com o conteúdo.
-    - `async Response.json()` traz uma `Promise<object>` com o conteúdo JSON.
-    - `Response.ok` um booleano contendo se a resposta é da classe de sucesso.
-    - `Response.status` um inteiro contendo o status code da resposta.
-    - `Response.statusText` uma string contendo o status reason da resposta. Pode ser nulo.
-    - `Response.headers` um objeto contendo os cabeçalhos da resposta.
-    - `Response.url` a URL da requisição que produziu essa resposta.
-
-Métodos de leitura de requisição do serverless:
-
-- `req.headers` traz um objeto contendo os cabeçalhos da requisição atual.
-- `req.query` traz um objeto contendo os parâmetros da query da requisição.
-- `req.cookies` traz um objeto contendo os cookies definidos na requisição.
-- `req.path` lê o caminho (sem a query string) da requisição.
-- `req.fullPath` lê o caminho (com a query string) da requisição.
-- `req.url` lê a URL completa da requisição, contendo o caminho completo da requisição (autoridade, caminho e query).
-- `req.method` lê o método da requisição.
-- `req.json()` lê o corpo da requisição para um valor JSON.
-- `req.text()` lê o corpo da requisição em texto.
-- `req.blob()` lê o corpo da requisição em um ArrayBuffer.
-- `req.form()` lê o corpo da requisição em um form-data.
-- `req.multipartForm()` lê o corpo da requisição em um multipart form-data.
-
-E métodos de escrita para resposta do serverless:
-
-- `res.status(status)` define o status numérico da resposta.
-- `res.header(name, value)` adiciona um cabeçalho na resposta.
-- `res.text(t)` define o corpo da resposta como um texto.
-- `res.json(t)` define o corpo da resposta como um JSON.
-- `res.error(message, status)` retorna um erro JSON na resposta com o status informado e encerra imediatamente a execução do script.
-
-E métodos especiais agênticos:
-
-- `async ai.complete(model, prompt, options)` completa o texto informado em prompt. Prompt pode ser uma string ou um array de mensagens. O modelo pode ser um modelo fornecido pela AIVAX ou um Slug ou ID de um AI gateway da sua conta. Opções incluem propriedades que são passadas para a rota de chat/completions, exemplo: `temperature` ou `tools`. A resposta é o JSON da resposta da AIVAX de inferência.
-- `async ai.completeText(model, prompt, options)` funciona da mesma forma do método acima, mas ao invés de retornar um JSON com os objetos de resposta da inferência, retorna apenas o texto gerado pela assistente.
-- `async api.get(path)` faz uma requisição GET autenticada para algum endpoint da AIVAX.
-- `async api.post(path, body)` faz uma requisição POST autenticada com um corpo JSON para algum endpoint da AIVAX.
-- `async api.put(path, body)` faz uma requisição PUT autenticada com um corpo JSON para algum endpoint da AIVAX.
-- `async api.patch(path, body)` faz uma requisição PATCH autenticada com um corpo JSON para algum endpoint da AIVAX.
-- `async api.delete(path)` faz uma requisição DELETE autenticada para algum endpoint da AIVAX.
-
-E algumas funções especiais de middleware:
-
-- `async authenticate()` autentica a requisição com uma API key da sua conta.
-- `sleep(ms)` aguarda o tempo especificado em milissegundos antes de continuar, limitado à 3 minutos.
-- `rate_limit(threshold, seconds)` aplica um rate-limiter à nível da função e do IP de requisição sobre o threshold e duração em segundos especificada.
-
-## Exemplo
-
-O exemplo abaixo ilustra um código quase completo, que recebe uma requisição, autentica-a, executa uma função para ela e retorna o resultado.
+- Escreva uma função `async function main()`; ela é chamada a cada requisição.
+- Use `req` para ler método, headers, query e corpo.
+- Construa a resposta com `res.status()`, `res.header()`, `res.text()` ou `res.json()`.
+- Opcionalmente, autentique com `await authenticate()` e aplique limitação com `rate_limit()`.
+- Você pode chamar modelos com `ai.complete(...)` ou acessar APIs internas com `api.get/post/...`.
 
 > [!IMPORTANT]
-> Atenção: nenhuma função serverless possui autenticação por padrão. Autentique suas funções criando uma lógica especialmente para isso ou usando o método assíncrono `authenticate()`.
+> Nenhuma função é autenticada por padrão. Proteja seus endpoints implementando lógica própria ou usando `await authenticate()`.
+
+## Objetos globais suportados
+
+A seguir, a referência dos objetos e métodos disponíveis no ambiente, conforme implementados pela engine.
+
+### console
+
+- `log(...args)`/ `error(...args)` / `warn(...args)` / `info(...args)`
+    - Escreve no console de depuração.
+    - Strings/objetos são serializados (objetos via `JSON.stringify`).
+- `table(data, columns?)`
+    - Arrays: imprime uma linha de cabeçalho com `(index)` + colunas. Se `columns` não for informado, as colunas são inferidas pela união das chaves dos objetos no array. Arrays vazios imprimem `(empty array)`.
+    - Objetos: lista `key: value` por linha.
+    - Demais tipos: imprime diretamente com `log`.
+
+Notas
+
+- Para múltiplos argumentos, `log` concatena com espaço. Objetos são serializados com `JSON.stringify`.
+
+### fetch(url, options?) -> Promise<Response>
+
+- `options.body`: `string`, `FormData` ou `null`.
+- `options.method`: método HTTP.
+- `options.headers`: objeto com cabeçalhos.
+- `options.timeout`: inteiro (ms) de timeout da requisição.
+- `options.redirect`: `follow` | `manual`.
+
+Objeto Response:
+
+- `async text(): Promise<string>`
+- `async json(): Promise<object>`
+- `ok: boolean`
+- `status: number`
+- `statusText: string | null`
+- `headers: object`
+- `url: string`
+
+Erros e notas
+
+- `Response.json()` lança se o corpo não for um JSON válido.
+- O corpo não é stream; leia com `text()` ou `json()`.
+
+### req (leitura da requisição)
+
+- `headers: object` - cabeçalhos da requisição.
+- `query: object` - parâmetros da query string.
+- `cookies: object` - cookies presentes.
+- `method: string` - método HTTP.
+- `path: string` - caminho sem query.
+- `fullPath: string` - caminho com query.
+- `url: string` - URL completa.
+- `json(): any` - corpo como JSON.
+- `text(): string` - corpo como texto.
+- `blob(): ArrayBuffer` - corpo binário.
+- `form(): object` - form-data simples.
+- `multipartForm(): object` - multipart form-data.
+
+Erros e notas
+
+- `req.json()` lança se o corpo não for um JSON válido.
+
+### res (escrita da resposta)
+
+- `status(code: number): void` - define status HTTP.
+- `header(name: string, value: string): void` - adiciona cabeçalho.
+- `text(body: string): void` - define o corpo da resposta como texto.
+- `json(data: any): void` - define o corpo da resposta como JSON.
+- `error(message: string, status = 400): never` - define status e corpo `{ error: message }` e encerra imediatamente a execução do script.
+
+Notas
+
+- Apenas `res.error(...)` interrompe a execução. Após `res.text(...)` ou `res.json(...)`, retorne da função (`return`) se quiser evitar processamento adicional.
+
+### ai (inferência)
+
+- `async complete(model, prompt, options?)`
+    - Entrada
+        - `model: string` - nome/slug/ID do modelo ou gateway da conta.
+        - `prompt: string | any[]` - texto ou array de mensagens (encaminhado como `prompt`).
+        - `options?: object` - propriedades adicionais encaminhadas ao endpoint, mescladas ao corpo com `stream: false`.
+    - Retorno: objeto JSON da resposta do endpoint de chat/completions.
+- `async completeText(model, prompt, options?)`
+    - Retorno: `string` com o conteúdo de `choices[0].message.content` do resultado de `complete`.
+
+### api (HTTP interno autenticado)
+
+- `async get(path)`
+    - Retorno: objeto de resposta com `text` (string) e propriedade `.json` (getter) que parseia `text` via `JSON.parse`.
+- `async post(path, body)`
+    - Corpo é serializado com `JSON.stringify(body)`.
+    - Retorno: igual ao `get`, com `.text` e getter `.json`.
+- `put(path, body)` / `patch(path, body)` / `delete(path)`
+    - Retorno: promessa para o resultado bruto interno (sem o getter `.json`).
+
+Notas
+
+- `path` é relativo à API interna da AIVAX.
+- O getter `.json` lança se `text` não contiver JSON válido.
+
+### Helpers
+
+- `async authenticate(): Promise<boolean>` - valida a requisição com a API key da sua conta.
+- `sleep(ms: number): void` - aguarda o tempo informado em milissegundos (limitado a 3 minutos).
+- `rate_limit(threshold: number, seconds: number): void` - aplica rate-limit por função e IP no período indicado.
+
+---
+
+## Exemplos práticos
+
+### 1) Hello World
 
 ```js
 async function main() {
-
-    // se não estiver autenticado por uma chave de API válida,
-    // sai da função
-    if (!await authenticate()) {
-        res.status(403);
-        return;
-    }
-
-    // aplica rate limiter na requisição para evitar sobrecarga
-    const RATE_LIMIT_THRESHOLD = 10;
-    const RATE_LIMIT_SECONDS = 60;
-    rate_limit(RATE_LIMIT_THRESHOLD, RATE_LIMIT_SECONDS);
-
-    // valida se a requisição é GET
-    if (req.method != 'GET') {
+    if (req.method !== 'GET') {
         res.status(405);
         return;
     }
-    
-    // obtém o parâmetro da query 'q'
-    var cityName = req.query["q"] || res.error("'q' is required");
-
-    // realiza inferência para obter dados de clima para cidade informada
-    const weather = await api.post("/api/v1/functions/json", {
-        modelName: "@x-ai/grok-4-fast",
-        prompt: "Pesquise dados de clima para a cidade informada.",
-        responseSchema: {
-            type: "object",
-            properties: {
-                temperature: {
-                    type: "number",
-                    description: "A temperatura em Celsius do local informado"
-                },
-                forecast: {
-                    type: "string",
-                    enum: ["rainy", "thunder", "clear"],
-                    description: "A previsão do tempo para o local informado"
-                }
-            },
-            required: ["temperature", "forecast"]
-        },
-        inputData: {
-            cityName
-        }
-    });
-
-    // retorna o JSON na resposta
-    const {
-        result
-    } = weather.json.data;
-    res.json(result);
+    res.text('hello world');
 }
 ```
 
-O código abaixo é mais simples: ele autentica a requisição com uma API-key sua, recebe o corpo JSON da requisição e retorna a resposta da função:
+### 2) Autenticação + rate limit + query param
 
 ```js
 async function main() {
-
     if (!await authenticate()) {
         res.status(403);
         return;
     }
 
-    const functionResult = await api.post('/api/v1/functions/json', {
-        modelName: "@metaai/llama-4-scout-17b-16e",
-        instructions: "Encurte o texto informado pelo usuário.",
-        inputData: req.json(),
-        responseSchema: {
-            type: "object",
-            properties: {
-                summarizedText: {
-                    type: "string"
-                }
-            }
-        }
-    });
+    rate_limit(10, 60); // até 10 requisições por IP a cada 60s
 
-    res.json(functionResult.json.data.result);
+    if (req.method !== 'GET') {
+        res.status(405);
+        return;
+    }
+
+    const city = req.query.q || res.error("'q' é obrigatório");
+    res.json({ city });
 }
 ```
 
-## Limitações
+### 3) Corpo JSON com tratamento de erro
 
-Essas funções executam em um contâiner JavaScript isolado com certas limitações. Essas limitações são:
+```js
+async function main() {
+    let data;
+    try {
+        data = req.json();
+    } catch {
+        res.error('JSON inválido', 400);
+    }
 
-- O uso máximo de memória é limitado para 32 MB.
-- O tempo de execução de cada script é limitado à 5 minutos.
-- O tempo máximo de avaliação de Regex é de 10 segundos.
-- O tamanho máximo de resposta lido por chamadas Fetch é de 10 MB (exceto para chamadas pela AIVAX).
+    // uso do payload
+    res.json({ received: data });
+}
+```
+
+### 4) Chamada de IA (texto direto)
+
+```js
+async function main() {
+    if (!await authenticate()) {
+        res.status(403);
+        return;
+    }
+
+    const prompt = req.query.p || 'Diga olá de forma breve.';
+    const text = await ai.completeText('@metaai/llama-4-scout-17b-16e', prompt, { temperature: 0.7 });
+    res.text(text);
+}
+```
+
+### 5) Exemplo completo (função JSON)
+
+```js
+async function main() {
+    if (!await authenticate()) {
+        res.status(403);
+        return;
+    }
+
+    rate_limit(10, 60);
+
+    if (req.method !== 'GET') {
+        res.status(405);
+        return;
+    }
+
+    const cityName = req.query.q || res.error("'q' é obrigatório");
+
+    const weather = await api.post('/api/v1/functions/json', {
+        modelName: '@x-ai/grok-4-fast',
+        prompt: 'Pesquise dados de clima para a cidade informada.',
+        responseSchema: {
+            type: 'object',
+            properties: {
+                temperature: { type: 'number', description: 'Temperatura em °C' },
+                forecast: { type: 'string', enum: ['rainy', 'thunder', 'clear'] }
+            },
+            required: ['temperature', 'forecast']
+        },
+        inputData: { cityName }
+    });
+
+    res.json(weather.json.data.result);
+}
+```
+
+### 6) Sleep (espera controlada)
+
+```js
+async function main() {
+    // aguarda 200 ms
+    sleep(200);
+    res.text('ok');
+}
+```
+
+## Limitações da engine
+
+As funções executam em um container JavaScript isolado com as seguintes restrições:
+
+- Memória máxima por execução: 32 MB.
+- Tempo máximo de execução por script: 5 minutos.
+- Tempo máximo de avaliação de expressões RegExp: 10 segundos.
+- Tamanho máximo de resposta lida por `fetch`: 10 MB (exceto chamadas internas da AIVAX).
+
+> [!TIP]
+> Trate entradas do usuário, valide métodos/headers e use `res.error()` para respostas de erro coerentes. Prefira `rate_limit()` em endpoints públicos.
 
 ## Precificação
 
-O preço do serverless é cobrado por hora de execução. Cada execução acumula uma quantia de milisegundos. Essa temporização contabiliza somente o tempo de execução do script e não sua compilação, portanto, se o seu script demorar 20 segundos para ser executado, 20.000 milissegundos serão contabilizados. O tempo mínimo de execução debitado é de 20 milissegundos.
+A cobrança é feita por hora de execução. Cada chamada acumula milissegundos apenas do tempo de execução do script (não inclui compilação). Ex.: se o script levar 20 segundos, serão contabilizados 20.000 ms. O débito mínimo por execução é de 20 ms.
 
 O custo de processamento serverless é de **$1/hora**.
 
 > [!NOTE]
-> Todas as contas possuem **10 minutos** grátis todos os dias. Se você ultrapassar esse limite, você começará a ser debitado pelo valor de processamento. Se sua conta tiver saldo negativo, o processamento da função será cancelado.
+> Todas as contas possuem **10 minutos** grátis por dia. Ao ultrapassar, inicia-se a cobrança. Se a conta ficar negativa, a execução da função é interrompida.
 
 ## Limites de taxa
 
-Os limites de taxa para funções serverless são descritas nos [limites de taxa](/docs/limits).
+Os limites de taxa globais para funções serverless estão descritos em [limites de taxa](/docs/limits).

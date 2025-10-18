@@ -1,5 +1,5 @@
 # reset modified files
-node ".\clean-translations.js";
+bun ".\clean-translations.js";
 
 # translate missing files
 .\translate-all.ps1;
