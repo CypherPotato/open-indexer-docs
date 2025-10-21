@@ -124,13 +124,32 @@
                 <article data-uid="">
 <h1 id="pricing">Pricing</h1>
 
-<p>The AIVAX payment model is <strong>pre-paid</strong>, meaning you use our services with the balance you add to your account. We do not send invoices at the beginning of the month for your usage. This way, it is predictable to know how much you will spend using our inference and agent creation services.</p>
-<p>AIVAX charges a small fee (variable by payment method) when adding credits to cover taxes, payment provider fees, and our service fee. The pricing of models and inference is provided directly by the inference providers and their models, such as Google and OpenAI. There are no fees or additions on top of these prices. You pay the same value you would pay to these providers directly.</p>
-<p>We use different <a href="/docs/en/builtin-tools">services</a> to help you create agentive assistants. Some tools and services have a cost, and these costs are passed on to your account without any additional fees.</p>
-<p>Inference is charged in US dollars (USD), so there may be currency fluctuations when converting from your local currency to US dollars.</p>
-<h2 id="bring-your-own-key-byok">Bring-your-own-key (BYOK)</h2>
-<p>You can bring your own OpenAI-compatible API key to use directly on AIVAX. Since we do not know which model you will be using, we do not charge anything on top of the inference you use on your models. Additionally, when using your own model with AIVAX, the rate limits are increased to <strong>3,600 requests per minute</strong>, which is equivalent to 60 requests per second.</p>
-<p>Note that you are still charged for services you use with your own models, such as <a href="/docs/en/entities/collections.md">RAG</a>, internet search, image generation, etc. If your account has a negative balance, you will not be able to use any services, including inference for your own API keys, until you add balance again.</p>
+<p>The AIVAX payment model is <strong>pre‑paid</strong>, meaning you use our services with the balance you add to your account. We do not send invoices at the beginning of the month for your usage. This makes it predictable to know how much you will spend using our inference and agent‑creation services.</p>
+<p>AIVAX charges a small fee (varying by payment method) at the time credits are added to cover taxes, payment‑provider fees, and our service fee. Model and inference pricing is provided directly by the inference providers and their models, such as Google and OpenAI. There is no additional fee or markup on these prices. You pay the same amount you would pay those providers directly.</p>
+<p>We use different <a href="/docs/en/builtin-tools">services</a> to help you create agentic assistants. Some tools and services have a cost, and these costs are passed on to your account with no extra fee.</p>
+<p>Inference is billed in United States dollars (USD), so there may be currency fluctuation when converting from your local currency to USD.</p>
+<h2 id="expiration">Expiration</h2>
+<p>Some providers have an expiration period for added credits. Since we do not know which model or service you will use with the added balance, we must consider the shortest expiration period to also define our expiration period for the added credits.</p>
+<p>Currently, credits expire after <strong>12 months</strong> from the time they are added. Read more about refunds, expiration, and balance in the <a href="/docs/en/legal/terms-of-service">terms of use</a>.</p>
+<h2 id="bringyourownkey-byok">Bring‑your‑own‑key (BYOK)</h2>
+<p>You can bring your own OpenAI‑compatible API key to use directly with AIVAX. Because we do not know which model you will be using, we do not charge anything on the inference you run with your models. In addition, when using your own model with AIVAX, rate limits are increased to <strong>1,500 requests per minute</strong>, with no token‑weight limitation, which is equivalent to 60 requests per second.</p>
+<p>Note that you are still charged for services you use with your own models, such as <a href="/docs/en/entities/collections.md">RAG</a>, web search, image generation, etc. If your account balance becomes negative, you will not be able to use any service, including inference for your own API keys, until you add balance again.</p>
+<h2 id="rag-collections">RAG (collections)</h2>
+<p>Currently, the default model used for collection embedding is the <a href="https://ai.google.dev/gemini-api/docs/en/pricing#gemini-embedding">Gemini Embedding</a>, which is priced at <strong>$0.15</strong> per 1 million input tokens.</p>
+<p>Other documents can be vectorized using other embedding models that are deprecated in the system but kept for compatibility:</p>
+<ul>
+<li><code>@google/gemini-embedding-001</code>, $0.15 per million tokens. (default)</li>
+<li><code>@google/text-embedding-004</code>, $0.10 per million tokens. (deprecated)</li>
+<li><code>@baai/bge-m3</code>, $0.012 per million tokens. (deprecated)</li>
+</ul>
+<p>At the moment, we do not charge any compute and/or storage fees for vectors.</p>
+<p>For billing to occur, we need to calculate how many tokens were processed from the input, and not all embedding providers return the number of indexed tokens. Therefore, we use an approximation to calculate the number of processed tokens:</p>
+<pre><code class="lang-csharp">tokens = ceil(utf8_bytes_count / 4)
+</code></pre>
+<p>The result of this approximation is what we charge you.</p>
+<h2 id="tools">Tools</h2>
+<p>Tools provided by AIVAX (<a href="/docs/en/builtin-tools">built‑in tools</a>) have distinct pricing and limits from one another.</p>
+<p>For functions you define for your API, there is no charge.</p>
 
 </article>
 

@@ -28,7 +28,7 @@ Em um gateway de IA, você já configura os parâmetros do modelo, como System P
 <div class="request-item post">
     <span>POST</span>
     <span>
-        /api/v1/chat-completions
+        /v1/chat-completions
     </span>
 </div>
 

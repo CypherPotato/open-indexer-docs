@@ -188,7 +188,7 @@
 </table>
 <p>A referência de um documento é um ID que pode ser especificado em vários documentos que precisam estar vinculados em uma busca quando um dos mesmos for correspondido em uma busca de similaridade. Por exemplo, se uma busca encontrar um documento que possui um ID de referência, todos os outros documentos da mesma coleção que compartilham o mesmo ID de referência do documento correspondido também serão incluídos na resposta da busca.</p>
 <p>O uso de referências pode ser útil para quando um documento depende de outro ou mais documentos para fazer sentido. Não há exigência de formato para o ID de referência: qualquer formato é aceito.</p>
-<p>Você pode enviar até <strong>1.000</strong> linhas de documentos por requisição. Se precisar enviar mais documentos, separe o envio em mais requisições. Se você enviar um documento com mais de 1.000 linhas, as linhas seguintes serão ignoradas.</p>
+<p>Você pode enviar até <strong>10.000</strong> linhas de documentos por requisição. Se precisar enviar mais documentos, separe o envio em mais requisições. Se você enviar um documento com mais de 1.000 linhas, as linhas seguintes serão ignoradas.</p>
 <p>Vale notar que documentos muito longos, que excede a quantidade de tokens permitida no modelo de embedding interno, terão seu conteúdo <strong>truncado</strong> e a qualidade de indexação poderá ser gravemente afetada. Para evitar esse problema, envie documentos que contenham entre 20 e 700 palavras.</p>
 <div class="WARNING">
 <h5>Warning</h5>
@@ -260,7 +260,10 @@
     &quot;data&quot;: {
         &quot;documentId&quot;: &quot;0196663c-3a15-72c7-98e6-b496f8e8bb8c&quot;,
         
-        // o estado da operação indica se o documento foi modificado &quot;Modified&quot; ou criado &quot;Created&quot;. Sempre virá apenas um valor no array.
+        // o estado da operação indicando o resultado da operação:
+        // NotModified - não foi modificado (sem alterações)
+        // Modified - houve alterações e o documento foi agendado para indexação
+        // Created - documento não existia e foi agendado para indexação
         &quot;state&quot;: [&quot;Modified&quot;]
     }
 }
@@ -273,6 +276,7 @@
 <li><code>-r &quot;reference&quot;</code> - filtra documentos que possuem esse ID de referência.</li>
 <li><code>-c &quot;content&quot;</code> - filtra documentos que possuem esse trecho em seu conteúdo.</li>
 <li><code>-n &quot;name&quot;</code> - filtra documentos que possuem esse trecho em seu nome.</li>
+<li><code>in &quot;id&quot;</code> - filtra documentos por ID.</li>
 </ul>
 <h4 id="requisição-2">Requisição</h4>
 <div class="request-item get">

@@ -53,7 +53,7 @@ A referência de um documento é um ID que pode ser especificado em vários docu
 
 O uso de referências pode ser útil para quando um documento depende de outro ou mais documentos para fazer sentido. Não há exigência de formato para o ID de referência: qualquer formato é aceito.
 
-Você pode enviar até **1.000** linhas de documentos por requisição. Se precisar enviar mais documentos, separe o envio em mais requisições. Se você enviar um documento com mais de 1.000 linhas, as linhas seguintes serão ignoradas.
+Você pode enviar até **10.000** linhas de documentos por requisição. Se precisar enviar mais documentos, separe o envio em mais requisições. Se você enviar um documento com mais de 1.000 linhas, as linhas seguintes serão ignoradas.
 
 Vale notar que documentos muito longos, que excede a quantidade de tokens permitida no modelo de embedding interno, terão seu conteúdo **truncado** e a qualidade de indexação poderá ser gravemente afetada. Para evitar esse problema, envie documentos que contenham entre 20 e 700 palavras.
 
@@ -144,7 +144,10 @@ Essa indexação não é isenta de custo. O custo é relativo à quantidade de t
     "data": {
         "documentId": "0196663c-3a15-72c7-98e6-b496f8e8bb8c",
         
-        // o estado da operação indica se o documento foi modificado "Modified" ou criado "Created". Sempre virá apenas um valor no array.
+        // o estado da operação indicando o resultado da operação:
+        // NotModified - não foi modificado (sem alterações)
+        // Modified - houve alterações e o documento foi agendado para indexação
+        // Created - documento não existia e foi agendado para indexação
         "state": ["Modified"]
     }
 }
@@ -160,6 +163,7 @@ Esse filtro suporta expressões que auxiliam a filtrar o que você está procura
 - `-r "reference"` - filtra documentos que possuem esse ID de referência.
 - `-c "content"` - filtra documentos que possuem esse trecho em seu conteúdo.
 - `-n "name"` - filtra documentos que possuem esse trecho em seu nome.
+- `in "id"` - filtra documentos por ID.
 
 #### Requisição
 

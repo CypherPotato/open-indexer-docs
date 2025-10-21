@@ -157,6 +157,11 @@
 </ul>
 <p>Esses parâmetros podem ser muito úteis para prompt engineering, no entanto, podem não ser compatível com todos os modelos.</p>
 <p>Atenção: prefixando instruções, templates e inicializações podem remover a capacidade de raciocínio, interpretação multi-modalidades e chamadas de ferramentas do modelo.</p>
+<h2 id="processamento-multi-modal">Processamento multi-modal</h2>
+<p>O pré-processamento de conteúdo multi-modal permite processar áudios, imagens, vídeos e documentos usando modelos com essas capacidades para modelos que não possuem essa capacidade.</p>
+<p>O conteúdo gerado é armazenado em um cache de longo prazo em nossos servidores e são evitados após um certo período que não foi acessado. Após esse período, o conteúdo tende a ser re-processado se novamente inserido na conversa.</p>
+<p>Cada conteúdo multi-modal é convertido para uma representação textual do mesmo através de um modelo auxiliar.</p>
+<p>O custo desse processamento é de <strong>$ 0,10</strong> por milhão de tokens de entrada e <strong>$ 0,40</strong> por milhão de tokens de saída.</p>
 <h2 id="parametrização">Parametrização</h2>
 <p>O pipeline de parametrização configura os hiper-parâmetros iniciais da inferência, como temperatura, nucleus sampling, presence penalty e demais hiperparâmetros de inferência.</p>
 <h2 id="truncating">Truncating</h2>
@@ -173,6 +178,17 @@
 <p>Leia mais sobre esse pipeline <a href="/docs/protocol-functions">aqui</a>.</p>
 <h2 id="ferramentas-embutidas">Ferramentas embutidas</h2>
 <p>Você pode adicionar ferramentas providas pela AIVAX em seu gateway, como pesquisa na internet, geração de imagens e acesso de links. Consulte todas as ferramentas disponíveis <a href="/docs/builtin-tools">aqui</a>.</p>
+<h2 id="interpretador-de-funções">Interpretador de funções</h2>
+<p>É possível alterar o interpretador de funções usado pelo modelo. Isso traz a possibilidade de adicionar a capacidade de <strong>chamar funções</strong> para modelos que não suportam esse recurso.</p>
+<p>Atualmente, existem dois tipos de interpretadores:</p>
+<ul>
+<li>ReAct: um interpretador baseado na técnica <a href="https://www.promptingguide.ai/techniques/react">ReAct prompting</a> usando um modelo auxiliar. O interpretador <code>react.v1.selfcall</code> usa o próprio modelo de inferência para chamar funções antes de gerar uma resposta.</li>
+<li>NtvCall: utiliza outro modelo para chamar funções para o modelo principal. O fluxo é retomado quando o modelo alternativo não chama nenhuma função e começa a criar uma resposta.</li>
+</ul>
+<h2 id="moderação">Moderação</h2>
+<p>Você pode adicionar uma camada de moderação no seu gateway de IA. Um modelo auxiliar irá analisar o contexto inteiro da conversa e irá classificá-la como segura ou insegura de acordo com suas preferências de moderação.</p>
+<p>Conversas classificadas como inseguras são removidas da inferência e o modelo tende a gerar uma resposta indicando que não pode gerar conteúdo sobre aquele assunto.</p>
+<p>O custo da moderação é de <strong>$0,20</strong> por milhão de tokens processados.</p>
 <h2 id="workers">Workers</h2>
 <p>Workers definem o comportamento do seu gateway remotamente, usado para controlar quando certos eventos devem ser abortados ou continuados.</p>
 <p>Leia mais sobre esse pipeline <a href="/docs/entities/ai-gateways/workers">aqui</a>.</p>

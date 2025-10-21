@@ -124,20 +124,20 @@
                 <article data-uid="">
 <h1 id="limites-da-api">Limites da API</h1>
 
-<p>Limites de taxa (&quot;rate limiters&quot;) regulam o número de requisições que você pode enviar em uma janela de tempo. Esses limites ajudam a AIVAX a prevenir abuso e fornecer uma API estável à todos.</p>
-<p>Os limites da API abaixo são os mesmos para todos os modelos embutidos da AIVAX. Esses limites são categorizados por operações feitas pela API. Cada conta possui um tier que define quais limites são aplicados à conta. Tiers mudam de acordo com o total investido na AIVAX e o tempo que a conta existe.</p>
+<p>Os limites de taxa regulam o número de requisições que você pode enviar em uma janela de tempo. Eles ajudam a prevenir abuso e garantir estabilidade para todos os usuários.</p>
+<p>Os limites abaixo são aplicados conforme o tier da sua conta:</p>
 <ul>
 <li><strong>Tier zero:</strong> conta nova que nunca adicionou créditos ou que possui créditos de teste.</li>
-<li><strong>Tier 1</strong>: conta criada há pelo menos 48 horas e que já adicionou qualquer valor em créditos.</li>
-<li><strong>Tier 2</strong>: conta criada há pelo menos 1 mês e que já adicionou pelo menos $ 100 em créditos.</li>
-<li><strong>Tier 3</strong>: conta criada há pelo menos 3 meses e que já adicionou pelo menos $ 1.000 em créditos.</li>
+<li><strong>Tier 1:</strong> conta criada há pelo menos 48 horas e que já adicionou qualquer valor em créditos.</li>
+<li><strong>Tier 2:</strong> conta criada há pelo menos 1 mês e que já adicionou pelo menos $100 em créditos.</li>
+<li><strong>Tier 3:</strong> conta criada há pelo menos 3 meses e que já adicionou pelo menos $1.000 em créditos.</li>
 </ul>
-<p>A medição é pela <strong>adição de créditos</strong> e não pelo seu consumo. Por exemplo, você não precisa consumir $ 100 em créditos para avançar ao Tier 2.</p>
-<p>Legendas dos limites:</p>
+<p>A medição é pela <strong>adição de créditos</strong> e não pelo consumo. Exemplo: não é necessário consumir $100 para avançar ao Tier 2, basta adicionar esse valor.</p>
+<p><strong>Legendas:</strong></p>
 <ul>
-<li><strong>RPM</strong>: requisições por minuto.</li>
-<li><strong>RPD</strong>: requisições por dia (24 horas).</li>
-<li><strong>TPM</strong>: tokens de entrada por minuto.</li>
+<li><strong>RPM</strong>: requisições por minuto</li>
+<li><strong>RPD</strong>: requisições por dia (24h)</li>
+<li><strong>TPM</strong>: tokens de entrada por minuto</li>
 </ul>
 <div class="tabGroup" id="tabgroup_1">
 <ul role="tablist">
@@ -168,27 +168,33 @@
 <tbody>
 <tr>
 <td>Pesquisa de documentos</td>
-<td style="text-align: right;">50</td>
+<td style="text-align: right;">10</td>
 <td style="text-align: right;">-</td>
 <td style="text-align: right;">-</td>
 </tr>
 <tr>
 <td>Inserção de documentos</td>
 <td style="text-align: right;">-</td>
-<td style="text-align: right;">100</td>
+<td style="text-align: right;">30</td>
 <td style="text-align: right;">-</td>
 </tr>
 <tr>
-<td>Inferência</td>
+<td>Inferência (requisições)</td>
 <td style="text-align: right;">5</td>
-<td style="text-align: right;">300</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">-</td>
+</tr>
+<tr>
+<td>Inferência (tokens de entrada)</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">-</td>
 <td style="text-align: right;">50.000</td>
 </tr>
 <tr>
-<td>Inferência (modelos high-end)</td>
+<td>Inferência (tokens de entrada - high-end)</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
+<td style="text-align: right;">0</td>
 </tr>
 <tr>
 <td>Execução serverless</td>
@@ -205,19 +211,19 @@
 <tr>
 <td>Ferramenta <code>web_search</code></td>
 <td style="text-align: right;">-</td>
-<td style="text-align: right;">20</td>
+<td style="text-align: right;">15</td>
 <td style="text-align: right;">-</td>
 </tr>
 <tr>
 <td>Ferramenta <code>x_posts_search</code></td>
 <td style="text-align: right;">-</td>
-<td style="text-align: right;">20</td>
+<td style="text-align: right;">10</td>
 <td style="text-align: right;">-</td>
 </tr>
 <tr>
 <td>Ferramenta <code>generate_image</code></td>
 <td style="text-align: right;">-</td>
-<td style="text-align: right;">5</td>
+<td style="text-align: right;">3</td>
 <td style="text-align: right;">-</td>
 </tr>
 </tbody>
@@ -248,15 +254,21 @@
 <td style="text-align: right;">-</td>
 </tr>
 <tr>
-<td>Inferência</td>
+<td>Inferência (requisições)</td>
 <td style="text-align: right;">75</td>
 <td style="text-align: right;">10.000</td>
+<td style="text-align: right;">-</td>
+</tr>
+<tr>
+<td>Inferência (tokens de entrada)</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">-</td>
 <td style="text-align: right;">1.000.000</td>
 </tr>
 <tr>
-<td>Inferência (modelos high-end)</td>
-<td style="text-align: right;">75</td>
-<td style="text-align: right;">10.000</td>
+<td>Inferência (tokens de entrada - high-end)</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">-</td>
 <td style="text-align: right;">200.000</td>
 </tr>
 <tr>
@@ -280,7 +292,7 @@
 <tr>
 <td>Ferramenta <code>x_posts_search</code></td>
 <td style="text-align: right;">-</td>
-<td style="text-align: right;">300</td>
+<td style="text-align: right;">100</td>
 <td style="text-align: right;">-</td>
 </tr>
 <tr>
@@ -317,14 +329,20 @@
 <td style="text-align: right;">-</td>
 </tr>
 <tr>
-<td>Inferência</td>
+<td>Inferência (requisições)</td>
 <td style="text-align: right;">200</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">-</td>
+</tr>
+<tr>
+<td>Inferência (tokens de entrada)</td>
+<td style="text-align: right;">-</td>
 <td style="text-align: right;">-</td>
 <td style="text-align: right;">4.000.000</td>
 </tr>
 <tr>
-<td>Inferência (modelos high-end)</td>
-<td style="text-align: right;">200</td>
+<td>Inferência (tokens de entrada - high-end)</td>
+<td style="text-align: right;">-</td>
 <td style="text-align: right;">-</td>
 <td style="text-align: right;">1.000.000</td>
 </tr>
@@ -349,7 +367,7 @@
 <tr>
 <td>Ferramenta <code>x_posts_search</code></td>
 <td style="text-align: right;">-</td>
-<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">500</td>
 <td style="text-align: right;">-</td>
 </tr>
 <tr>
@@ -386,14 +404,20 @@
 <td style="text-align: right;">-</td>
 </tr>
 <tr>
-<td>Inferência</td>
+<td>Inferência (requisições)</td>
 <td style="text-align: right;">1.000</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">-</td>
+</tr>
+<tr>
+<td>Inferência (tokens de entrada)</td>
+<td style="text-align: right;">-</td>
 <td style="text-align: right;">-</td>
 <td style="text-align: right;">10.000.000</td>
 </tr>
 <tr>
-<td>Inferência (modelos high-end)</td>
-<td style="text-align: right;">1.000</td>
+<td>Inferência (tokens de entrada - high-end)</td>
+<td style="text-align: right;">-</td>
 <td style="text-align: right;">-</td>
 <td style="text-align: right;">4.000.000</td>
 </tr>
@@ -418,7 +442,7 @@
 <tr>
 <td>Ferramenta <code>x_posts_search</code></td>
 <td style="text-align: right;">-</td>
-<td style="text-align: right;">10.000</td>
+<td style="text-align: right;">5.000</td>
 <td style="text-align: right;">-</td>
 </tr>
 <tr>
@@ -432,29 +456,28 @@
 </section>
 </div>
 
+<p><strong>Descrição das operações:</strong></p>
 <ul>
-<li><strong>Pesquisa de documentos</strong>: inclui pesquisa semântica de documentos em uma coleção pelo endpoint de pesquisa <code>../collections/{id}/query</code>.</li>
-<li><strong>Inserção de documentos</strong>: inclui criação e modificação de documentos em uma coleção.</li>
-<li><strong>Inferência</strong>: toda chamada de inferência ou função, seja por chat client ou API.
-<ul>
-<li>modelos high-end se referem à modelos que necessitam de Tier 1 para poder ser usado.</li>
-</ul>
-</li>
-<li><strong>Serverless</strong>: inclui toda chamada de <a href="/docs/serverless">função serverless</a>.</li>
-<li><strong>Ferramentas (compartilhado)</strong>: toda <a href="/docs/builtin-tools">ferramenta integrada</a> invocada pela assistente. Esse limite é compartilhado para todas as ferramentas providas pela AIVAX e não é usado para ferramentas definidas por você ou suas APIs.</li>
-<li><strong>Ferramenta (nome da ferramenta)</strong>: todo uso da ferramenta mencionada.</li>
+<li><strong>Pesquisa de documentos:</strong> inclui pesquisa semântica de documentos em uma coleção.</li>
+<li><strong>Inserção de documentos:</strong> criação e modificação de documentos em uma coleção.</li>
+<li><strong>Inferência (requisições):</strong> número de chamadas de inferência ou função (API ou chat client).</li>
+<li><strong>Inferência (tokens de entrada):</strong> tokens de entrada usados em inferência.</li>
+<li><strong>Inferência (tokens de entrada - high-end):</strong> tokens de entrada para modelos high-end (Tier 1+).</li>
+<li><strong>Execução serverless:</strong> chamadas de <a href="/docs/serverless">função serverless</a>.</li>
+<li><strong>Ferramentas (compartilhado):</strong> uso de <a href="/docs/builtin-tools">ferramentas integradas</a> providas pela AIVAX (não inclui ferramentas customizadas).</li>
+<li><strong>Ferramenta (nome):</strong> uso individual de cada ferramenta integrada.</li>
 </ul>
 <h2 id="grupos-de-modelos">Grupos de modelos</h2>
-<p>Certos modelos possuem multiplicadores de taxa. Esses multiplicadores são aplicados aos &quot;grupos de limites&quot; à certos modelos, bem como:</p>
+<p>Certos modelos possuem multiplicadores de taxa:</p>
 <ul>
-<li><strong>Comum</strong>: os limites são multiplicados por 1x</li>
-<li><strong>Descontados</strong>: os limites são multiplicados por 0,5x</li>
-<li><strong>Baixa-latência</strong>: os limites são multiplicados por 0,3x</li>
-<li><strong>Grátis</strong>: os limites são multiplicados por 0,1x</li>
+<li><strong>Comum:</strong> 1x</li>
+<li><strong>Descontados:</strong> 0,5x</li>
+<li><strong>Baixa-latência:</strong> 0,3x</li>
+<li><strong>Grátis:</strong> 0,1x</li>
 </ul>
-<p>Por exemplo, se você usar um modelo com desconto no valor, os limites de taxa serão 50% menores para você, portanto, ao invés de 75 requests por minuto no Tier 1, você terá 37 requests.</p>
+<p>Exemplo: se usar um modelo &quot;descontado&quot;, os limites de taxa serão 50% menores (ex: 75 req/min → 37 req/min).</p>
 <h2 id="limites-para-byok-bring-your-own-key">Limites para BYOK (Bring-your-own-key)</h2>
-<p>Para modelos providos por você, o limite aplicado é de <strong>1.500</strong> requisições por minuto. Esse limite é separado do limite de inferência integrada.</p>
+<p>Para modelos providos por você, o limite é <strong>1.500 requisições por minuto</strong> (separado do limite de inferência integrada).</p>
 
 </article>
 

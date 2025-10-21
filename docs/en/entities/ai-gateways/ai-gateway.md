@@ -3,7 +3,7 @@
 AI gateways are a service that AIVAX provides to create an inference tunnel between an LLM model and a knowledge base. With it you can:
 
 - Create a model with custom instructions
-- Use a model provided by you through a compatible OpenAI endpoint, or use a model made available by AIVAX
+- Use a model provided by you through a compatible OpenAI endpoint, or use a model offered by AIVAX
 - Customize inference parameters, such as temperature, top_p, prefill
 - Use a knowledge collection as the foundation for AI responses
 
@@ -13,22 +13,22 @@ Among other features. With the AI Gateway, you create a ready‑to‑use model, 
 
 You can bring an AI model compatible with the OpenAI interface to the AI gateway. If you bring your own AI model, we will charge only for the document search attached to the AI. You can also use one of the models below that are already ready to start with AIVAX.
 
-When using a model, you will notice that some are smarter than others for certain tasks. Some models perform better with certain data‑retrieval strategies than others. Run tests to find the best model.
+When using a model, you will notice that some are smarter than others for specific tasks. Some models perform better with certain data‑retrieval strategies than others. Run tests to find the best model.
 
 You can see the available models on the [models page](/docs/en/models).
 
 ## Using an AI gateway
 
-AIVAX provides an endpoint compatible with the OpenAI interface through an AI‑gateway, which makes it easy to integrate the model created by AIVAX with existing applications and SDKs. Note that only a subset of properties are supported.
+AIVAX provides an endpoint compatible with the OpenAI interface through an AI‑gateway, which simplifies integration of the model created by AIVAX with existing applications and SDKs. Note that only a subset of properties are supported.
 
-In an AI gateway, you already configure the model parameters, such as System Prompt, temperature, and model name. When using this endpoint, some gateway values can be overridden by the request.
+In an AI gateway you already configure model parameters such as System Prompt, temperature, and model name. When using this endpoint, some gateway values can be overridden by the request.
 
 #### Request
 
 <div class="request-item post">
     <span>POST</span>
     <span>
-        /api/v1/chat-completions
+        /v1/chat-completions
     </span>
 </div>
 
@@ -48,7 +48,7 @@ In an AI gateway, you already configure the model parameters, such as System Pro
 }
 ```
 
-#### Response for non‑streaming
+#### Non-streaming response
 
 ```json
 {
@@ -136,7 +136,7 @@ data: {"id":"chatcmpl-0198d263-ff80-7d8f-91e7-c61ac2a9e870","object":"chat.compl
 data: [END]
 ```
 
-## Usage with SDKs
+## Use with SDKs
 
 By providing endpoints compatible with the OpenAI interface, AIVAX is fully compatible with existing SDKs, making plug‑and‑play integration easy.
 

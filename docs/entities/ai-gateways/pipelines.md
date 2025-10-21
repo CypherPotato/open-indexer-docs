@@ -45,6 +45,16 @@ Esses parâmetros podem ser muito úteis para prompt engineering, no entanto, po
 
 Atenção: prefixando instruções, templates e inicializações podem remover a capacidade de raciocínio, interpretação multi-modalidades e chamadas de ferramentas do modelo.
 
+## Processamento multi-modal
+
+O pré-processamento de conteúdo multi-modal permite processar áudios, imagens, vídeos e documentos usando modelos com essas capacidades para modelos que não possuem essa capacidade.
+
+O conteúdo gerado é armazenado em um cache de longo prazo em nossos servidores e são evitados após um certo período que não foi acessado. Após esse período, o conteúdo tende a ser re-processado se novamente inserido na conversa.
+
+Cada conteúdo multi-modal é convertido para uma representação textual do mesmo através de um modelo auxiliar.
+
+O custo desse processamento é de **$ 0,10** por milhão de tokens de entrada e **$ 0,40** por milhão de tokens de saída.
+
 ## Parametrização
 
 O pipeline de parametrização configura os hiper-parâmetros iniciais da inferência, como temperatura, nucleus sampling, presence penalty e demais hiperparâmetros de inferência.
@@ -76,6 +86,22 @@ Leia mais sobre esse pipeline [aqui](/docs/protocol-functions).
 ## Ferramentas embutidas
 
 Você pode adicionar ferramentas providas pela AIVAX em seu gateway, como pesquisa na internet, geração de imagens e acesso de links. Consulte todas as ferramentas disponíveis [aqui](/docs/builtin-tools).
+
+## Interpretador de funções
+
+É possível alterar o interpretador de funções usado pelo modelo. Isso traz a possibilidade de adicionar a capacidade de **chamar funções** para modelos que não suportam esse recurso.
+
+Atualmente, existem dois tipos de interpretadores:
+- ReAct: um interpretador baseado na técnica [ReAct prompting](https://www.promptingguide.ai/techniques/react) usando um modelo auxiliar. O interpretador `react.v1.selfcall` usa o próprio modelo de inferência para chamar funções antes de gerar uma resposta.
+- NtvCall: utiliza outro modelo para chamar funções para o modelo principal. O fluxo é retomado quando o modelo alternativo não chama nenhuma função e começa a criar uma resposta.
+
+## Moderação
+
+Você pode adicionar uma camada de moderação no seu gateway de IA. Um modelo auxiliar irá analisar o contexto inteiro da conversa e irá classificá-la como segura ou insegura de acordo com suas preferências de moderação.
+
+Conversas classificadas como inseguras são removidas da inferência e o modelo tende a gerar uma resposta indicando que não pode gerar conteúdo sobre aquele assunto.
+
+O custo da moderação é de **$0,20** por milhão de tokens processados.
 
 ## Workers
 

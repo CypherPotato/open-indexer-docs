@@ -8,6 +8,12 @@ Usamos diferentes [serviços](/docs/builtin-tools) para ajudar você à criar as
 
 A inferência é cobrada em dólares americanos (USD), portanto, pode existir flutuação de moeda ao converter da sua moeda local para o dólar americano.
 
+## Expiração
+
+Alguns providers possuem prazo de validade para créditos adicionados. Como não sabemos qual modelo ou serviço você irá usar com o saldo adicionado, temos que considerar o menor prazo de validade para também definir o nosso prazo de validade para os créditos adicionados.
+
+Atualmente, créditos expiram após **12 meses** de sua adição. Leia mais sobre reembolsos, expiração e saldo nos [termos de uso](/docs/legal/terms-of-service).
+
 ## Bring-your-own-key (BYOK)
 
 Você pode trazer sua própria chave de API compatível com OpenAI para usar diretamente na AIVAX. Como não sabemos qual modelo você estará usando, não cobramos nada em cima da inferência que você usar em seus modelos. Além disso, ao usar seu próprio modelo com a AIVAX, os limites de taxa são aumentados para **1.500 requisições por minuto**, sem limitação ao peso de tokens, que é o equivalente à 60 requisições por segundo.

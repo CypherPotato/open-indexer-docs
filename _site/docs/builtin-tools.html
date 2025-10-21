@@ -136,6 +136,10 @@
 <li><strong>Summarized</strong>: a pesquisa realizada é resumida, inserindo no contexto da conversa um resumo feito por IA pelo próprio provedor de pesquisa.</li>
 </ul>
 <p>O custo dos dois modos é de <strong>$5</strong> à cada <strong>1.000</strong> pesquisas realizadas. O modo <code>Full</code> pode consumir mais tokens de entrada da conversa, mas pode proporcionar resultados mais precisos.</p>
+<h2 id="pesquisa-avançada-na-internet">Pesquisa avançada na internet</h2>
+<p>Essa função permite que o modelo tenha um navegador da internet e consiga realizar automação, como pesquisas, navegar em sites, preencher formulários e clicar em botões.</p>
+<p>No momento não há parametrização dessa função.</p>
+<p>O custo dessa função é de <strong>$2</strong> por hora de automação, tendo também uma quantia fixa de <strong>$11,10</strong> à cada <strong>1.000</strong> chamadas dessa função.</p>
 <h2 id="execução-de-código">Execução de código</h2>
 <p>Essa função permite que o modelo execute código JavaScript e inspecione o resultado da execução. Com isso, o modelo consegue avaliar através de algoritmos resultados de expressões matemáticas e outras situações que são melhores representadas através de código.</p>
 <p>O código é executado em um ambiente protegido com pouquíssimas funções disponíveis. O modelo não conseguirá acessar I/O, acesso à internet ou importar scripts por essa ferramenta.</p>
@@ -174,6 +178,7 @@
 <p>A imagem de exemplo acima mostra uma previsão do preço de cada qualidade de imagem.</p>
 <p>Você também pode ativar a geração de imagens explícitas e adultas na geração de imagem. Ao ativar esse recurso, o modelo será permitido gerar material adulto. Para isso ocorrer, o modelo também deve &quot;concordar&quot; em gerar esse conteúdo. Certos modelos possuem um filtro de segurança menor que outros. Por exemplo, os modelos Gemini são os com o menor filtro de segurança, sendo uma opção viável para role-play e geração desse tipo de material.</p>
 <p>Você é sempre responsável pelo <a href="/docs/legal/terms-of-service.md">material que gera</a> e o material gerado deve ser compatível com nossos termos de serviço.</p>
+<p>Imagens geradas são armazenadas nos servidores da AIVAX por alguns meses antes de serem permanentemente removidas.</p>
 <h2 id="pesquisa-de-posts-no-x">Pesquisa de posts no X</h2>
 <p>Essa função permite o modelo pesquisar por posts no X (antigo Twitter).</p>
 <p>É uma alternativa direta ao <code>web_search</code>, pois pode ser usada para procurar por informações atualizadas em tempo real, como notícias, informações, resultados de jogos, etc. Essa ferramenta traz resultados muito mais recentes que a ferramenta de pesquisa na internet convencional.</p>
@@ -181,6 +186,16 @@
 <p>No momento, os últimos 20 posts de um determinado assunto é inserido no contexto da conversa, contendo link e autor.</p>
 <p>No momento, não é possível acessar posts de perfis específicos.</p>
 <p>O custo dessa função é de <strong>$5</strong> à cada <strong>1.000</strong> pesquisas realizadas.</p>
+<h2 id="geração-de-documentos">Geração de documentos</h2>
+<p>Essa função permite que o modelo possa criar PDFs a partir de textos em HTML.</p>
+<p>Os arquivos criados são hospedados nos servidores da AIVAX e disponibilizados pelo assistente.</p>
+<p>O conteúdo é hospedado por alguns meses antes de ser permanentemente excluído.</p>
+<p>Essa função não tem custo.</p>
+<h2 id="geração-de-páginas-da-web">Geração de páginas da web</h2>
+<p>Essa função permite que o modelo possa hospedar páginas HTML em servidores da AIVAX.</p>
+<p>Isso permite que o modelo possa hospedar relatórios, landing-pages e outros infográficos em HTML.</p>
+<p>O conteúdo é hospedado por alguns meses antes de ser permanentemente excluído.</p>
+<p>Essa função não tem custo.</p>
 
 </article>
 

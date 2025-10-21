@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>API Limits | AIVAX </title>
+        <title>API Rate Limits | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="API Limits | AIVAX ">
+        <meta name="title" content="API Rate Limits | AIVAX ">
 
 
         <link rel="icon" href="../../assets/img/favicon.ico">
@@ -122,22 +122,22 @@
                 </div>
 
                 <article data-uid="">
-<h1 id="api-limits">API Limits</h1>
+<h1 id="api-rate-limits">API Rate Limits</h1>
 
-<p>Rate limits regulate the number of requests you can send in a time window. These limits help AIVAX prevent abuse and provide a stable API to everyone.</p>
-<p>The API limits below are the same for all embedded AIVAX models. These limits are categorized by operations performed by the API. Each account has a tier that defines which limits apply to the account. Tiers change according to the total invested in AIVAX and the age of the account.</p>
+<p>Rate limits regulate the number of requests you can send within a time window. They help prevent abuse and ensure stability for all users.</p>
+<p>The limits below are applied according to your account tier:</p>
 <ul>
 <li><strong>Tier zero:</strong> new account that has never added credits or that has test credits.</li>
-<li><strong>Tier 1:</strong> account created at least 48 hours ago and that has already added any amount of credits.</li>
-<li><strong>Tier 2:</strong> account created at least 1 month ago and that has already added at least $100 in credits.</li>
-<li><strong>Tier 3:</strong> account created at least 3 months ago and that has already added at least $1,000 in credits.</li>
+<li><strong>Tier 1:</strong> account created at least 48 hours ago and has already added any amount of credits.</li>
+<li><strong>Tier 2:</strong> account created at least 1 month ago and has already added at least $100 in credits.</li>
+<li><strong>Tier 3:</strong> account created at least 3 months ago and has already added at least $1,000 in credits.</li>
 </ul>
-<p>Measurement is based on <strong>credit addition</strong> and not on consumption. For example, you do not need to spend $100 in credits to move to Tier 2.</p>
-<p>Limit legends:</p>
+<p>Measurement is based on <strong>credit addition</strong> rather than consumption. Example: you don't need to spend $100 to move to Tier 2; you just need to add that amount.</p>
+<p><strong>Legend:</strong></p>
 <ul>
-<li><strong>RPM:</strong> requests per minute.</li>
-<li><strong>RPD:</strong> requests per day (24 hours).</li>
-<li><strong>TPM:</strong> input tokens per minute.</li>
+<li><strong>RPM</strong>: requests per minute</li>
+<li><strong>RPD</strong>: requests per day (24h)</li>
+<li><strong>TPM</strong>: input tokens per minute</li>
 </ul>
 <div class="tabGroup" id="tabgroup_1">
 <ul role="tablist">
@@ -168,27 +168,33 @@
 <tbody>
 <tr>
 <td>Document search</td>
-<td style="text-align: right;">50</td>
+<td style="text-align: right;">10</td>
 <td style="text-align: right;">-</td>
 <td style="text-align: right;">-</td>
 </tr>
 <tr>
 <td>Document insertion</td>
 <td style="text-align: right;">-</td>
-<td style="text-align: right;">100</td>
+<td style="text-align: right;">30</td>
 <td style="text-align: right;">-</td>
 </tr>
 <tr>
-<td>Inference</td>
+<td>Inference (requests)</td>
 <td style="text-align: right;">5</td>
-<td style="text-align: right;">300</td>
-<td style="text-align: right;">50,000</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">-</td>
 </tr>
 <tr>
-<td>Inference (high‑end models)</td>
+<td>Inference (input tokens)</td>
 <td style="text-align: right;">-</td>
 <td style="text-align: right;">-</td>
+<td style="text-align: right;">50.000</td>
+</tr>
+<tr>
+<td>Inference (input tokens - high-end)</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">-</td>
+<td style="text-align: right;">0</td>
 </tr>
 <tr>
 <td>Serverless execution</td>
@@ -203,21 +209,21 @@
 <td style="text-align: right;">-</td>
 </tr>
 <tr>
-<td><code>web_search</code> tool</td>
+<td>Tool <code>web_search</code></td>
 <td style="text-align: right;">-</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td><code>x_posts_search</code> tool</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">20</td>
+<td style="text-align: right;">15</td>
 <td style="text-align: right;">-</td>
 </tr>
 <tr>
-<td><code>generate_image</code> tool</td>
+<td>Tool <code>x_posts_search</code></td>
 <td style="text-align: right;">-</td>
-<td style="text-align: right;">5</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">-</td>
+</tr>
+<tr>
+<td>Tool <code>generate_image</code></td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">3</td>
 <td style="text-align: right;">-</td>
 </tr>
 </tbody>
@@ -244,20 +250,26 @@
 <tr>
 <td>Document insertion</td>
 <td style="text-align: right;">-</td>
-<td style="text-align: right;">3,000</td>
+<td style="text-align: right;">3.000</td>
 <td style="text-align: right;">-</td>
 </tr>
 <tr>
-<td>Inference</td>
+<td>Inference (requests)</td>
 <td style="text-align: right;">75</td>
-<td style="text-align: right;">10,000</td>
-<td style="text-align: right;">1,000,000</td>
+<td style="text-align: right;">10.000</td>
+<td style="text-align: right;">-</td>
 </tr>
 <tr>
-<td>Inference (high‑end models)</td>
-<td style="text-align: right;">75</td>
-<td style="text-align: right;">10,000</td>
-<td style="text-align: right;">200,000</td>
+<td>Inference (input tokens)</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">1.000.000</td>
+</tr>
+<tr>
+<td>Inference (input tokens - high-end)</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">200.000</td>
 </tr>
 <tr>
 <td>Serverless execution</td>
@@ -268,23 +280,23 @@
 <tr>
 <td>Tools (shared)</td>
 <td style="text-align: right;">-</td>
-<td style="text-align: right;">1,000</td>
+<td style="text-align: right;">1.000</td>
 <td style="text-align: right;">-</td>
 </tr>
 <tr>
-<td><code>web_search</code> tool</td>
+<td>Tool <code>web_search</code></td>
 <td style="text-align: right;">-</td>
 <td style="text-align: right;">300</td>
 <td style="text-align: right;">-</td>
 </tr>
 <tr>
-<td><code>x_posts_search</code> tool</td>
+<td>Tool <code>x_posts_search</code></td>
 <td style="text-align: right;">-</td>
-<td style="text-align: right;">300</td>
+<td style="text-align: right;">100</td>
 <td style="text-align: right;">-</td>
 </tr>
 <tr>
-<td><code>generate_image</code> tool</td>
+<td>Tool <code>generate_image</code></td>
 <td style="text-align: right;">-</td>
 <td style="text-align: right;">30</td>
 <td style="text-align: right;">-</td>
@@ -313,20 +325,26 @@
 <tr>
 <td>Document insertion</td>
 <td style="text-align: right;">-</td>
-<td style="text-align: right;">10,000</td>
+<td style="text-align: right;">10.000</td>
 <td style="text-align: right;">-</td>
 </tr>
 <tr>
-<td>Inference</td>
+<td>Inference (requests)</td>
 <td style="text-align: right;">200</td>
 <td style="text-align: right;">-</td>
-<td style="text-align: right;">4,000,000</td>
+<td style="text-align: right;">-</td>
 </tr>
 <tr>
-<td>Inference (high‑end models)</td>
-<td style="text-align: right;">200</td>
+<td>Inference (input tokens)</td>
 <td style="text-align: right;">-</td>
-<td style="text-align: right;">1,000,000</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">4.000.000</td>
+</tr>
+<tr>
+<td>Inference (input tokens - high-end)</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">1.000.000</td>
 </tr>
 <tr>
 <td>Serverless execution</td>
@@ -337,23 +355,23 @@
 <tr>
 <td>Tools (shared)</td>
 <td style="text-align: right;">-</td>
-<td style="text-align: right;">10,000</td>
+<td style="text-align: right;">10.000</td>
 <td style="text-align: right;">-</td>
 </tr>
 <tr>
-<td><code>web_search</code> tool</td>
+<td>Tool <code>web_search</code></td>
 <td style="text-align: right;">-</td>
-<td style="text-align: right;">1,000</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td><code>x_posts_search</code> tool</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">1,000</td>
+<td style="text-align: right;">1.000</td>
 <td style="text-align: right;">-</td>
 </tr>
 <tr>
-<td><code>generate_image</code> tool</td>
+<td>Tool <code>x_posts_search</code></td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">500</td>
+<td style="text-align: right;">-</td>
+</tr>
+<tr>
+<td>Tool <code>generate_image</code></td>
 <td style="text-align: right;">-</td>
 <td style="text-align: right;">300</td>
 <td style="text-align: right;">-</td>
@@ -375,27 +393,33 @@
 <tbody>
 <tr>
 <td>Document search</td>
-<td style="text-align: right;">1,000</td>
+<td style="text-align: right;">1.000</td>
 <td style="text-align: right;">-</td>
 <td style="text-align: right;">-</td>
 </tr>
 <tr>
 <td>Document insertion</td>
 <td style="text-align: right;">-</td>
-<td style="text-align: right;">30,000</td>
+<td style="text-align: right;">30.000</td>
 <td style="text-align: right;">-</td>
 </tr>
 <tr>
-<td>Inference</td>
-<td style="text-align: right;">1,000</td>
+<td>Inference (requests)</td>
+<td style="text-align: right;">1.000</td>
 <td style="text-align: right;">-</td>
-<td style="text-align: right;">10,000,000</td>
+<td style="text-align: right;">-</td>
 </tr>
 <tr>
-<td>Inference (high‑end models)</td>
-<td style="text-align: right;">1,000</td>
+<td>Inference (input tokens)</td>
 <td style="text-align: right;">-</td>
-<td style="text-align: right;">4,000,000</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">10.000.000</td>
+</tr>
+<tr>
+<td>Inference (input tokens - high-end)</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">4.000.000</td>
 </tr>
 <tr>
 <td>Serverless execution</td>
@@ -406,25 +430,25 @@
 <tr>
 <td>Tools (shared)</td>
 <td style="text-align: right;">-</td>
-<td style="text-align: right;">50,000</td>
+<td style="text-align: right;">50.000</td>
 <td style="text-align: right;">-</td>
 </tr>
 <tr>
-<td><code>web_search</code> tool</td>
+<td>Tool <code>web_search</code></td>
 <td style="text-align: right;">-</td>
-<td style="text-align: right;">10,000</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr>
-<td><code>x_posts_search</code> tool</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">10,000</td>
+<td style="text-align: right;">10.000</td>
 <td style="text-align: right;">-</td>
 </tr>
 <tr>
-<td><code>generate_image</code> tool</td>
+<td>Tool <code>x_posts_search</code></td>
 <td style="text-align: right;">-</td>
-<td style="text-align: right;">1,000</td>
+<td style="text-align: right;">5.000</td>
+<td style="text-align: right;">-</td>
+</tr>
+<tr>
+<td>Tool <code>generate_image</code></td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">1.000</td>
 <td style="text-align: right;">-</td>
 </tr>
 </tbody>
@@ -432,29 +456,28 @@
 </section>
 </div>
 
+<p><strong>Operation descriptions:</strong></p>
 <ul>
-<li><strong>Document search:</strong> includes semantic search of documents in a collection via the <code>../collections/{id}/query</code> search endpoint.</li>
-<li><strong>Document insertion:</strong> includes creation and modification of documents in a collection.</li>
-<li><strong>Inference:</strong> any inference or function call, whether through chat client or API.
-<ul>
-<li>high‑end models refer to models that require Tier 1 to be used.</li>
-</ul>
-</li>
-<li><strong>Serverless:</strong> includes any call to a <a href="/docs/en/serverless">serverless function</a>.</li>
-<li><strong>Tools (shared):</strong> any <a href="/docs/en/builtin-tools">built‑in tool</a> invoked by the assistant. This limit is shared across all tools provided by AIVAX and does not apply to tools you define or your own APIs.</li>
-<li><strong>Tool (tool name):</strong> any use of the mentioned tool.</li>
+<li><strong>Document search:</strong> includes semantic search of documents in a collection.</li>
+<li><strong>Document insertion:</strong> creation and modification of documents in a collection.</li>
+<li><strong>Inference (requests):</strong> number of inference or function calls (API or chat client).</li>
+<li><strong>Inference (input tokens):</strong> input tokens used in inference.</li>
+<li><strong>Inference (input tokens - high-end):</strong> input tokens for high‑end models (Tier 1+).</li>
+<li><strong>Serverless execution:</strong> calls to <a href="/docs/en/serverless">serverless function</a>.</li>
+<li><strong>Tools (shared):</strong> use of <a href="/docs/en/builtin-tools">built‑in tools</a> provided by AIVAX (does not include custom tools).</li>
+<li><strong>Tool (name):</strong> individual use of each integrated tool.</li>
 </ul>
 <h2 id="model-groups">Model groups</h2>
-<p>Certain models have rate multipliers. These multipliers are applied to the “limit groups” for specific models, as follows:</p>
+<p>Certain models have rate multipliers:</p>
 <ul>
-<li><strong>Common:</strong> limits are multiplied by 1×</li>
-<li><strong>Discounted:</strong> limits are multiplied by 0.5×</li>
-<li><strong>Low‑latency:</strong> limits are multiplied by 0.3×</li>
-<li><strong>Free:</strong> limits are multiplied by 0.1×</li>
+<li><strong>Common:</strong> 1x</li>
+<li><strong>Discounted:</strong> 0.5x</li>
+<li><strong>Low‑latency:</strong> 0.3x</li>
+<li><strong>Free:</strong> 0.1x</li>
 </ul>
-<p>For example, if you use a discounted‑price model, the rate limits will be 50 % lower for you, so instead of 75 requests per minute in Tier 1, you will have 37 requests.</p>
+<p>Example: if you use a &quot;discounted&quot; model, the rate limits will be 50% lower (e.g., 75 req/min → 37 req/min).</p>
 <h2 id="limits-for-byok-bringyourownkey">Limits for BYOK (Bring‑your‑own‑key)</h2>
-<p>For models provided by you, the applied limit is <strong>1,500</strong> requests per minute. This limit is separate from the integrated inference limit.</p>
+<p>For models provided by you, the limit is <strong>1,500 requests per minute</strong> (separate from the integrated inference limit).</p>
 
 </article>
 

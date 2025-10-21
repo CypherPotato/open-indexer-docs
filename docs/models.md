@@ -177,6 +177,60 @@ Todos os preços estão em dólares dos Estados Unidos.
 <tr>
     <td>
         <code>
+            @anthropic/claude-4.1-opus
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 15.00 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 1.50 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 75.00 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Claude Opus 4.1 is Anthropic’s flagship model, offering improved performance in coding, reasoning, and agentic tasks.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Raciocínio
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
             @anthropic/claude-4.5-sonnet
         </code>
     </td>
@@ -274,6 +328,103 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-lightbulb-line"></i>
     Raciocínio
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @anthropic/claude-4.5-sonnet:discounted
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 1.80 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 9.00 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Claude Sonnet 4.5 is the newest model in the Sonnet series, offering improvements and updates over Sonnet 4.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Raciocínio
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @anthropic/claude-4.5-haiku
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 1.00 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.10 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 5.00 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Claude Haiku 4.5 is Anthropic’s fastest and most efficient model, offering near-frontier intelligence with much lower cost and latency than larger Claude models.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
 </div>
 <div>
     <i class="ri-braces-line"></i>
@@ -671,6 +822,57 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-lightbulb-line"></i>
     Raciocínio
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @google/gemini-2.5-pro:discounted
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 1.00 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 8.00 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        One of the most powerful models today.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens, vídeos, áudios
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Raciocínio
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
 </div>
         </div>
     </td>
@@ -1431,7 +1633,44 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
     </td>
     <td>
-        Model router for Google Gemini. The routing is made between Gemini 2.0 Flash, Gemini 2.5 Flash (no thinking) and Gemini 2.5 Flash (dynamic thinking).
+        Model router for Google Gemini. The routing is made between:
+-Gemini 2.0 Flash
+- Gemini 2.5 Flash (no thinking)
+- Gemini 2.5 Flash (thinking)
+        <div class="model-capabilities">
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @model-router/gemini-high
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.08 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.30 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Model router for Google Gemini. The routing is made between:
+-Gemini 2.5 Flash
+- Gemini 2.5 Pro
+- Gemini 2.5 Pro (high)
         <div class="model-capabilities">
         </div>
     </td>
@@ -1462,7 +1701,10 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
     </td>
     <td>
-        Model router for OpenAI. The routing is made between GPT 5 Nano (minimal), GPT 5 Mini (Low) and GPT-5 Mini (medium).
+        Model router for OpenAI. The routing is made between:
+- GPT-5-nano
+- GPT 5-mini-low
+- GPT-5-mini-medium.
         <div class="model-capabilities">
         </div>
     </td>
@@ -1493,7 +1735,10 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
     </td>
     <td>
-        Model router for OpenAI. The routing is made between GPT 5 Mini (low), o4-mini (low) and o4-mini (high).
+        Model router for OpenAI. The routing is made between:
+- GPT-5-mini
+- GPT-5
+-GPT-5-high
         <div class="model-capabilities">
         </div>
     </td>
@@ -1524,7 +1769,44 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
     </td>
     <td>
-        Model router for Meta Llama. The routing is made between Llama 4 Scout, Llama 4 Maverick and Llama 3.3 70b.
+        Model router for Meta Llama. The routing is made between:
+- Llama 4 Scout
+- Llama 4 Maverick
+- Llama 3.3 70b.
+        <div class="model-capabilities">
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @model-router/grok
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.08 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.30 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Model router for X-AI Grok. The routing is made between:
+-Grok 4 Fast (non reasoning)
+- Grok 4 Fast (reasoning)
+- Grok 4
         <div class="model-capabilities">
         </div>
     </td>
@@ -1712,6 +1994,60 @@ Todos os preços estão em dólares dos Estados Unidos.
 <tr>
     <td>
         <code>
+            @openai/gpt-5-codex
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 1.25 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.13 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 10.00 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        GPT-5-Codex is a specialized version of GPT-5 tailored for software engineering and coding tasks.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Raciocínio
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
             @openai/gpt-5
         </code>
     </td>
@@ -1870,6 +2206,53 @@ Todos os preços estão em dólares dos Estados Unidos.
 <tr>
     <td>
         <code>
+            @openai/gpt-5:discounted
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 1.00 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 7.50 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        OpenAI's newest flagship model for coding, reasoning, and agentic tasks across domains.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Raciocínio
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
             @openai/o4-mini
         </code>
     </td>
@@ -1956,6 +2339,53 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         o3-mini provides high intelligence at the same cost and latency targets of previous versions of o-mini series.
         <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Raciocínio
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @openai/o4-mini:discounted
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.70 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 2.20 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Optimized for fast, effective reasoning with exceptionally efficient performance in coding and visual tasks.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens
+</div>
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função

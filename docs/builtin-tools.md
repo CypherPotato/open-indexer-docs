@@ -19,6 +19,14 @@ A AIVAX fornece dois tipos de pesquisa configuráveis pelo seu dashboard:
 
 O custo dos dois modos é de **$5** à cada **1.000** pesquisas realizadas. O modo `Full` pode consumir mais tokens de entrada da conversa, mas pode proporcionar resultados mais precisos.
 
+## Pesquisa avançada na internet
+
+Essa função permite que o modelo tenha um navegador da internet e consiga realizar automação, como pesquisas, navegar em sites, preencher formulários e clicar em botões.
+
+No momento não há parametrização dessa função.
+
+O custo dessa função é de **$2** por hora de automação, tendo também uma quantia fixa de **$11,10** à cada **1.000** chamadas dessa função.
+
 ## Execução de código
 
 Essa função permite que o modelo execute código JavaScript e inspecione o resultado da execução. Com isso, o modelo consegue avaliar através de algoritmos resultados de expressões matemáticas e outras situações que são melhores representadas através de código.
@@ -78,6 +86,8 @@ Você também pode ativar a geração de imagens explícitas e adultas na geraç
 
 Você é sempre responsável pelo [material que gera](/docs/legal/terms-of-service.md) e o material gerado deve ser compatível com nossos termos de serviço.
 
+Imagens geradas são armazenadas nos servidores da AIVAX por alguns meses antes de serem permanentemente removidas.
+
 ## Pesquisa de posts no X
 
 Essa função permite o modelo pesquisar por posts no X (antigo Twitter).
@@ -91,3 +101,23 @@ No momento, os últimos 20 posts de um determinado assunto é inserido no contex
 No momento, não é possível acessar posts de perfis específicos.
 
 O custo dessa função é de **$5** à cada **1.000** pesquisas realizadas.
+
+## Geração de documentos
+
+Essa função permite que o modelo possa criar PDFs a partir de textos em HTML.
+
+Os arquivos criados são hospedados nos servidores da AIVAX e disponibilizados pelo assistente.
+
+O conteúdo é hospedado por alguns meses antes de ser permanentemente excluído.
+
+Essa função não tem custo.
+
+## Geração de páginas da web
+
+Essa função permite que o modelo possa hospedar páginas HTML em servidores da AIVAX.
+
+Isso permite que o modelo possa hospedar relatórios, landing-pages e outros infográficos em HTML.
+
+O conteúdo é hospedado por alguns meses antes de ser permanentemente excluído.
+
+Essa função não tem custo.
