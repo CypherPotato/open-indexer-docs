@@ -1322,6 +1322,68 @@ Todos os preços estão em dólares dos Estados Unidos.
     </tbody>
 </table>
 
+## <img src="/assets/icon/minimax.svg" class="inline-icon"> minimax
+
+<table>
+    <thead>
+        <colgroup>
+            <col style="width: 30%" />
+            <col style="width: 20%" />
+            <col style="width: 50%" />
+        </colgroup>
+        <tr>
+            <th>Nome do modelo</th>
+            <th>Preços</th>
+            <th>Descrição</th>
+        </tr>
+    </thead>
+    <tbody>
+<tr>
+    <td>
+        <code>
+            @minimax/m2
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.30 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 1.20 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        MiniMax-M2 is a compact, high-efficiency large language model optimized for end-to-end coding and agentic workflows.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Raciocínio
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+    </tbody>
+</table>
+
 ## <img src="/assets/icon/mistral.svg" class="inline-icon"> mistral
 
 <table>
@@ -1619,22 +1681,29 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada:
             </small>
             <div>
-                $ 0.08 <small>/1m tokens</small>
+                $ 0.20 <small>/1m tokens</small>
             </div>
         </div>
-        
+        <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.05 <small>/1m tokens</small>
+    </div>
+</div>
         <div class="item-pricing">
             <small>
                 Saída:
             </small>
             <div>
-                $ 0.30 <small>/1m tokens</small>
+                $ 0.50 <small>/1m tokens</small>
             </div>
         </div>
     </td>
     <td>
         Model router for Google Gemini. The routing is made between:
--Gemini 2.0 Flash
+- Gemini 2.0 Flash
 - Gemini 2.5 Flash (no thinking)
 - Gemini 2.5 Flash (thinking)
         <div class="model-capabilities">
@@ -1653,22 +1722,29 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada:
             </small>
             <div>
-                $ 0.08 <small>/1m tokens</small>
+                $ 0.20 <small>/1m tokens</small>
             </div>
         </div>
-        
+        <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.05 <small>/1m tokens</small>
+    </div>
+</div>
         <div class="item-pricing">
             <small>
                 Saída:
             </small>
             <div>
-                $ 0.30 <small>/1m tokens</small>
+                $ 0.50 <small>/1m tokens</small>
             </div>
         </div>
     </td>
     <td>
         Model router for Google Gemini. The routing is made between:
--Gemini 2.5 Flash
+- Gemini 2.5 Flash
 - Gemini 2.5 Pro
 - Gemini 2.5 Pro (high)
         <div class="model-capabilities">
@@ -1687,16 +1763,23 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada:
             </small>
             <div>
-                $ 0.08 <small>/1m tokens</small>
+                $ 0.20 <small>/1m tokens</small>
             </div>
         </div>
-        
+        <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.05 <small>/1m tokens</small>
+    </div>
+</div>
         <div class="item-pricing">
             <small>
                 Saída:
             </small>
             <div>
-                $ 0.30 <small>/1m tokens</small>
+                $ 0.50 <small>/1m tokens</small>
             </div>
         </div>
     </td>
@@ -1721,16 +1804,23 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada:
             </small>
             <div>
-                $ 0.08 <small>/1m tokens</small>
+                $ 0.20 <small>/1m tokens</small>
             </div>
         </div>
-        
+        <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.05 <small>/1m tokens</small>
+    </div>
+</div>
         <div class="item-pricing">
             <small>
                 Saída:
             </small>
             <div>
-                $ 0.30 <small>/1m tokens</small>
+                $ 0.50 <small>/1m tokens</small>
             </div>
         </div>
     </td>
@@ -1739,6 +1829,88 @@ Todos os preços estão em dólares dos Estados Unidos.
 - GPT-5-mini
 - GPT-5
 -GPT-5-high
+        <div class="model-capabilities">
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @model-router/claude
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.20 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.05 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.50 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Model router for Claude. The routing is made between:
+- Claude 3 Haiku
+- Claude 4.5 Haiku
+- Claude 4.5 Sonnet
+        <div class="model-capabilities">
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @model-router/claude-high
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.20 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.05 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.50 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Model router for Claude. The routing is made between:
+- Claude 4.5 Haiku
+- Claude 4.5 Sonnet
+- Claude 4.1 Opus
         <div class="model-capabilities">
         </div>
     </td>
@@ -1755,16 +1927,23 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada:
             </small>
             <div>
-                $ 0.08 <small>/1m tokens</small>
+                $ 0.20 <small>/1m tokens</small>
             </div>
         </div>
-        
+        <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.05 <small>/1m tokens</small>
+    </div>
+</div>
         <div class="item-pricing">
             <small>
                 Saída:
             </small>
             <div>
-                $ 0.30 <small>/1m tokens</small>
+                $ 0.50 <small>/1m tokens</small>
             </div>
         </div>
     </td>
@@ -1789,22 +1968,29 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada:
             </small>
             <div>
-                $ 0.08 <small>/1m tokens</small>
+                $ 0.20 <small>/1m tokens</small>
             </div>
         </div>
-        
+        <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.05 <small>/1m tokens</small>
+    </div>
+</div>
         <div class="item-pricing">
             <small>
                 Saída:
             </small>
             <div>
-                $ 0.30 <small>/1m tokens</small>
+                $ 0.50 <small>/1m tokens</small>
             </div>
         </div>
     </td>
     <td>
         Model router for X-AI Grok. The routing is made between:
--Grok 4 Fast (non reasoning)
+- Grok 4 Fast (non reasoning)
 - Grok 4 Fast (reasoning)
 - Grok 4
         <div class="model-capabilities">
@@ -3369,139 +3555,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     </td>
     <td>
         GLM‑4.6 is a high‑capacity LLM with a 200K‑token context window, strong coding and reasoning abilities, and enhanced tool‑use capabilities.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Raciocínio
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @z-ai/glm-4.5v
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.60 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 1.80 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        A 106 B‑parameter multimodal vision‑language model (12 B active) that handles image, video, and document reasoning with tool‑calling.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens, vídeos
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Raciocínio
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @z-ai/glm-4.5
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.38 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 1.60 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        A 355b parameter hybrid reasoning model (32 B active) for intelligent agents, supporting both thinking and non‑thinking modes with tool‑calling.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Raciocínio
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @z-ai/glm-4.5-air
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.20 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 1.10 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        A compact 106 B‑parameter hybrid‑reasoning model (12 B active) for intelligent agents, supporting both thinking and non‑thinking modes with tool‑calling.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
