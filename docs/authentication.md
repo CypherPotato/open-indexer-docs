@@ -3,7 +3,7 @@
 Quando tiver sua conta em mãos, use sua chave de autenticação única para se autenticar na nossa API através do cabeçalho `Authorization`:
 
 ```bash
-curl https://inference.aivax.net/api/v1/information/models.txt \
+curl https://inference.aivax.net/api/v1/information/models.json \
     -H 'Authorization: Bearer oky_gr5uepj...'
 ```
 

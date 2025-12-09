@@ -1,4 +1,4 @@
-# API Rate Limits
+# API Limits
 
 Rate limits regulate the number of requests you can send within a time window. They help prevent abuse and ensure stability for all users.
 
@@ -9,9 +9,9 @@ The limits below are applied according to your account tier:
 - **Tier 2:** account created at least 1 month ago and has already added at least $100 in credits.
 - **Tier 3:** account created at least 3 months ago and has already added at least $1,000 in credits.
 
-Measurement is based on **credit addition** rather than consumption. Example: you don't need to spend $100 to move to Tier 2; you just need to add that amount.
+Measurement is based on **credit addition** rather than consumption. Example: you do not need to spend $100 to move to Tier 2, just add that amount.
 
-**Legend:**
+**Legends:**
 - **RPM**: requests per minute
 - **RPD**: requests per day (24h)
 - **TPM**: input tokens per minute
@@ -78,12 +78,12 @@ Measurement is based on **credit addition** rather than consumption. Example: yo
 
 ---
 
-**Operation descriptions:**
+**Description of operations:**
 - **Document search:** includes semantic search of documents in a collection.
 - **Document insertion:** creation and modification of documents in a collection.
 - **Inference (requests):** number of inference or function calls (API or chat client).
 - **Inference (input tokens):** input tokens used in inference.
-- **Inference (input tokens - high-end):** input tokens for high‑end models (Tier 1+).
+- **Inference (input tokens - high-end):** input tokens for high-end models (Tier 1+).
 - **Serverless execution:** calls to [serverless function](/docs/en/serverless).
 - **Tools (shared):** use of [built‑in tools](/docs/en/builtin-tools) provided by AIVAX (does not include custom tools).
 - **Tool (name):** individual use of each integrated tool.
@@ -91,13 +91,13 @@ Measurement is based on **credit addition** rather than consumption. Example: yo
 ## Model groups
 
 Certain models have rate multipliers:
-- **Common:** 1x
+- **Standard:** 1x
 - **Discounted:** 0.5x
 - **Low‑latency:** 0.3x
 - **Free:** 0.1x
 
 Example: if you use a "discounted" model, the rate limits will be 50% lower (e.g., 75 req/min → 37 req/min).
 
-## Limits for BYOK (Bring‑your‑own‑key)
+## Limits for BYOK (Bring-your-own-key)
 
 For models provided by you, the limit is **1,500 requests per minute** (separate from the integrated inference limit).

@@ -126,7 +126,7 @@
 
 <p>As funções serverless da AIVAX permitem executar JavaScript sob demanda, em um ambiente gerenciado, para criar endpoints agênticos sem precisar manter servidores.</p>
 <p>Cada requisição dispara a execução do seu script, que lê dados do objeto <code>req</code> e escreve a resposta no objeto <code>res</code>.</p>
-<h2 id="fluxo-de-execução-em-30-segundos">Fluxo de execução em 30 segundos</h2>
+<h2 id="fluxo-de-execução">Fluxo de execução</h2>
 <ul>
 <li>Escreva uma função <code>async function main()</code>; ela é chamada a cada requisição.</li>
 <li>Use <code>req</code> para ler método, headers, query e corpo.</li>
@@ -138,247 +138,228 @@
 <h5>Important</h5>
 <p>Nenhuma função é autenticada por padrão. Proteja seus endpoints implementando lógica própria ou usando <code>await authenticate()</code>.</p>
 </div>
-<h2 id="objetos-globais-suportados">Objetos globais suportados</h2>
-<p>A seguir, a referência dos objetos e métodos disponíveis no ambiente, conforme implementados pela engine.</p>
-<h3 id="console">console</h3>
+<h2 id="referência-da-api">Referência da API</h2>
+<h3 id="funções-globais">Funções Globais</h3>
+<p>Métodos disponíveis globalmente no escopo da função.</p>
 <ul>
-<li><code>log(...args)</code>/ <code>error(...args)</code> / <code>warn(...args)</code> / <code>info(...args)</code>
+<li><code>async authenticate(): Promise&lt;boolean&gt;</code>
 <ul>
-<li>Escreve no console de depuração.</li>
-<li>Strings/objetos são serializados (objetos via <code>JSON.stringify</code>).</li>
+<li>Valida a requisição verificando a API Key da conta. Retorna <code>true</code> se autenticado, <code>false</code> caso contrário.</li>
+</ul>
+</li>
+<li><code>sleep(ms: number): void</code>
+<ul>
+<li>Pausa a execução pelo tempo especificado em milissegundos.</li>
+<li>Limites: Máximo de 3 minutos (180.000 ms). Lança erro se negativo ou acima do limite.</li>
+</ul>
+</li>
+<li><code>rate_limit(threshold: number, seconds: number): void</code>
+<ul>
+<li>Aplica rate-limit por função e IP.</li>
+<li>Se o limite for excedido, interrompe a execução e retorna erro 429.</li>
+</ul>
+</li>
+</ul>
+<h3 id="objeto-console">Objeto <code>console</code></h3>
+<p>Utilizado para depuração. As mensagens são exibidas no terminal de debug da função.</p>
+<ul>
+<li><code>log(...args)</code> / <code>info(...args)</code> / <code>debug(...args)</code> / <code>trace(...args)</code> / <code>warn(...args)</code> / <code>error(...args)</code>
+<ul>
+<li>Escreve mensagens no log. Objetos são serializados automaticamente.</li>
 </ul>
 </li>
 <li><code>table(data, columns?)</code>
 <ul>
-<li>Arrays: imprime uma linha de cabeçalho com <code>(index)</code> + colunas. Se <code>columns</code> não for informado, as colunas são inferidas pela união das chaves dos objetos no array. Arrays vazios imprimem <code>(empty array)</code>.</li>
-<li>Objetos: lista <code>key: value</code> por linha.</li>
-<li>Demais tipos: imprime diretamente com <code>log</code>.</li>
+<li>Exibe dados em formato tabular. Útil para arrays de objetos.</li>
 </ul>
 </li>
 </ul>
-<p>Notas</p>
+<h3 id="objeto-req-request">Objeto <code>req</code> (Request)</h3>
+<p>Fornece acesso aos dados da requisição HTTP recebida.</p>
+<p><strong>Propriedades (Getters):</strong></p>
 <ul>
-<li>Para múltiplos argumentos, <code>log</code> concatena com espaço. Objetos são serializados com <code>JSON.stringify</code>.</li>
+<li><code>headers: object</code> - Dicionário com os cabeçalhos da requisição.</li>
+<li><code>query: object</code> - Dicionário com os parâmetros da query string.</li>
+<li><code>cookies: object</code> - Dicionário com os cookies.</li>
+<li><code>method: string</code> - Método HTTP (GET, POST, etc.).</li>
+<li><code>path: string</code> - Caminho da URL (ex: <code>/minha-funcao</code>).</li>
+<li><code>fullPath: string</code> - Caminho completo incluindo query string.</li>
+<li><code>url: string</code> - URL completa da requisição.</li>
 </ul>
-<h3 id="fetchurl-options---promise">fetch(url, options?) -&gt; Promise<response></response></h3>
+<p><strong>Métodos:</strong></p>
 <ul>
-<li><code>options.body</code>: <code>string</code>, <code>FormData</code> ou <code>null</code>.</li>
-<li><code>options.method</code>: método HTTP.</li>
-<li><code>options.headers</code>: objeto com cabeçalhos.</li>
-<li><code>options.timeout</code>: inteiro (ms) de timeout da requisição.</li>
-<li><code>options.redirect</code>: <code>follow</code> | <code>manual</code>.</li>
+<li><code>json(): any</code> - Lê o corpo da requisição e faz o parse como JSON.</li>
+<li><code>text(): string</code> - Lê o corpo da requisição como texto.</li>
+<li><code>blob(): any</code> - Lê o corpo da requisição como dados binários (raw).</li>
+<li><code>form(): object</code> - Lê o corpo como <code>application/x-www-form-urlencoded</code>.</li>
+<li><code>multipartForm(): object</code> - Lê o corpo como <code>multipart/form-data</code>.</li>
 </ul>
-<p>Objeto Response:</p>
+<h3 id="objeto-res-response">Objeto <code>res</code> (Response)</h3>
+<p>Utilizado para construir e enviar a resposta HTTP.</p>
+<p><strong>Métodos:</strong></p>
 <ul>
-<li><code>async text(): Promise&lt;string&gt;</code></li>
-<li><code>async json(): Promise&lt;object&gt;</code></li>
-<li><code>ok: boolean</code></li>
-<li><code>status: number</code></li>
-<li><code>statusText: string | null</code></li>
-<li><code>headers: object</code></li>
-<li><code>url: string</code></li>
-</ul>
-<p>Erros e notas</p>
+<li><code>status(code: number): void</code>
 <ul>
-<li><code>Response.json()</code> lança se o corpo não for um JSON válido.</li>
-<li>O corpo não é stream; leia com <code>text()</code> ou <code>json()</code>.</li>
+<li>Define o código de status HTTP (ex: 200, 404).</li>
 </ul>
-<h3 id="req-leitura-da-requisição">req (leitura da requisição)</h3>
+</li>
+<li><code>header(name: string, value: string): void</code>
 <ul>
-<li><code>headers: object</code> - cabeçalhos da requisição.</li>
-<li><code>query: object</code> - parâmetros da query string.</li>
-<li><code>cookies: object</code> - cookies presentes.</li>
-<li><code>method: string</code> - método HTTP.</li>
-<li><code>path: string</code> - caminho sem query.</li>
-<li><code>fullPath: string</code> - caminho com query.</li>
-<li><code>url: string</code> - URL completa.</li>
-<li><code>json(): any</code> - corpo como JSON.</li>
-<li><code>text(): string</code> - corpo como texto.</li>
-<li><code>blob(): ArrayBuffer</code> - corpo binário.</li>
-<li><code>form(): object</code> - form-data simples.</li>
-<li><code>multipartForm(): object</code> - multipart form-data.</li>
+<li>Adiciona um cabeçalho à resposta.</li>
 </ul>
-<p>Erros e notas</p>
+</li>
+<li><code>text(body: string): void</code>
 <ul>
-<li><code>req.json()</code> lança se o corpo não for um JSON válido.</li>
+<li>Define o corpo da resposta como texto plano.</li>
 </ul>
-<h3 id="res-escrita-da-resposta">res (escrita da resposta)</h3>
+</li>
+<li><code>json(data: any): void</code>
 <ul>
-<li><code>status(code: number): void</code> - define status HTTP.</li>
-<li><code>header(name: string, value: string): void</code> - adiciona cabeçalho.</li>
-<li><code>text(body: string): void</code> - define o corpo da resposta como texto.</li>
-<li><code>json(data: any): void</code> - define o corpo da resposta como JSON.</li>
-<li><code>error(message: string, status = 400): never</code> - define status e corpo <code>{ error: message }</code> e encerra imediatamente a execução do script.</li>
+<li>Define o corpo da resposta como JSON (serializa automaticamente).</li>
 </ul>
-<p>Notas</p>
+</li>
+<li><code>send(args: any[], contentType: string): void</code>
 <ul>
-<li>Apenas <code>res.error(...)</code> interrompe a execução. Após <code>res.text(...)</code> ou <code>res.json(...)</code>, retorne da função (<code>return</code>) se quiser evitar processamento adicional.</li>
+<li>Envia uma resposta formatada com o Content-Type especificado.</li>
 </ul>
-<h3 id="ai-inferência">ai (inferência)</h3>
+</li>
+<li><code>echo(...args): void</code>
+<ul>
+<li>Envia os argumentos como texto plano (<code>text/plain</code>).</li>
+</ul>
+</li>
+<li><code>sendEvent(content: string, arg?: string): void</code>
+<ul>
+<li>Envia um evento para streams (<code>text/event-stream</code>). Padrão do <code>arg</code> é 'data'.</li>
+</ul>
+</li>
+<li><code>error(message: string, status?: number): never</code>
+<ul>
+<li>Define o status (padrão 400), retorna um JSON <code>{ error: message }</code> e encerra a execução imediatamente.</li>
+</ul>
+</li>
+</ul>
+<h3 id="objeto-fetch">Objeto <code>fetch</code></h3>
+<p>Implementação da API Fetch para fazer requisições HTTP externas.</p>
+<p><code>fetch(url: string, options?: RequestInit): Promise&lt;Response&gt;</code></p>
+<p><strong>Opções (<code>RequestInit</code>):</strong></p>
+<ul>
+<li><code>method</code>: Método HTTP (padrão 'GET').</li>
+<li><code>headers</code>: Objeto com cabeçalhos.</li>
+<li><code>body</code>: Corpo da requisição (<code>string</code> ou <code>FormData</code>).</li>
+<li><code>timeout</code>: Timeout em segundos (padrão 30s, máx 300s).</li>
+<li><code>redirect</code>: 'follow' (padrão) ou 'manual'.</li>
+</ul>
+<p><strong>Retorno (<code>Response</code>):</strong></p>
+<ul>
+<li><code>ok</code>: boolean (status 200-299).</li>
+<li><code>status</code>: number.</li>
+<li><code>statusText</code>: string.</li>
+<li><code>url</code>: string.</li>
+<li><code>headers</code>: object.</li>
+<li><code>text()</code>: Promise<string>.</string></li>
+<li><code>json()</code>: Promise<any>.</any></li>
+</ul>
+<h3 id="objeto-formdata">Objeto <code>FormData</code></h3>
+<p>Disponível para construir corpos de requisição <code>multipart/form-data</code>.</p>
+<ul>
+<li><code>append(name, value)</code></li>
+<li><code>set(name, value)</code></li>
+<li><code>delete(name)</code></li>
+<li><code>get(name)</code></li>
+<li><code>getAll(name)</code></li>
+<li><code>has(name)</code></li>
+<li><code>keys()</code></li>
+<li><code>values()</code></li>
+<li><code>entries()</code></li>
+</ul>
+<h3 id="objeto-api-interno">Objeto <code>api</code> (Interno)</h3>
+<p>Cliente HTTP otimizado e autenticado para chamar endpoints internos da AIVAX.</p>
+<ul>
+<li><code>async get(path)</code></li>
+<li><code>async post(path, body)</code></li>
+<li><code>put(path, body)</code></li>
+<li><code>patch(path, body)</code></li>
+<li><code>delete(path)</code></li>
+</ul>
+<p><strong>Notas:</strong></p>
+<ul>
+<li><code>path</code> deve ser relativo (ex: <code>/api/v1/...</code>).</li>
+<li><code>get</code> e <code>post</code> retornam um objeto estendido com um getter <code>.json</code> para conveniência.</li>
+<li>As chamadas injetam automaticamente headers de autenticação e rastreamento.</li>
+</ul>
+<h3 id="objeto-ai-inferência">Objeto <code>ai</code> (Inferência)</h3>
+<p>Facilitadores para uso dos modelos de IA da plataforma.</p>
 <ul>
 <li><code>async complete(model, prompt, options?)</code>
 <ul>
-<li>Entrada
-<ul>
-<li><code>model: string</code> - nome/slug/ID do modelo ou gateway da conta.</li>
-<li><code>prompt: string | any[]</code> - texto ou array de mensagens (encaminhado como <code>prompt</code>).</li>
-<li><code>options?: object</code> - propriedades adicionais encaminhadas ao endpoint, mescladas ao corpo com <code>stream: false</code>.</li>
-</ul>
-</li>
-<li>Retorno: objeto JSON da resposta do endpoint de chat/completions.</li>
+<li>Chama o endpoint de chat completions.</li>
+<li>Retorna o objeto JSON completo da resposta.</li>
 </ul>
 </li>
 <li><code>async completeText(model, prompt, options?)</code>
 <ul>
-<li>Retorno: <code>string</code> com o conteúdo de <code>choices[0].message.content</code> do resultado de <code>complete</code>.</li>
+<li>Chama o endpoint e retorna apenas o texto da primeira escolha (<code>choices[0].message.content</code>).</li>
 </ul>
 </li>
-</ul>
-<h3 id="api-http-interno-autenticado">api (HTTP interno autenticado)</h3>
-<ul>
-<li><code>async get(path)</code>
-<ul>
-<li>Retorno: objeto de resposta com <code>text</code> (string) e propriedade <code>.json</code> (getter) que parseia <code>text</code> via <code>JSON.parse</code>.</li>
-</ul>
-</li>
-<li><code>async post(path, body)</code>
-<ul>
-<li>Corpo é serializado com <code>JSON.stringify(body)</code>.</li>
-<li>Retorno: igual ao <code>get</code>, com <code>.text</code> e getter <code>.json</code>.</li>
-</ul>
-</li>
-<li><code>put(path, body)</code> / <code>patch(path, body)</code> / <code>delete(path)</code>
-<ul>
-<li>Retorno: promessa para o resultado bruto interno (sem o getter <code>.json</code>).</li>
-</ul>
-</li>
-</ul>
-<p>Notas</p>
-<ul>
-<li><code>path</code> é relativo à API interna da AIVAX.</li>
-<li>O getter <code>.json</code> lança se <code>text</code> não contiver JSON válido.</li>
-</ul>
-<h3 id="helpers">Helpers</h3>
-<ul>
-<li><code>async authenticate(): Promise&lt;boolean&gt;</code> - valida a requisição com a API key da sua conta.</li>
-<li><code>sleep(ms: number): void</code> - aguarda o tempo informado em milissegundos (limitado a 3 minutos).</li>
-<li><code>rate_limit(threshold: number, seconds: number): void</code> - aplica rate-limit por função e IP no período indicado.</li>
 </ul>
 <hr>
-<h2 id="exemplos-práticos">Exemplos práticos</h2>
-<h3 id="1-hello-world">1) Hello World</h3>
-<pre><code class="lang-js">async function main() {
-    if (req.method !== 'GET') {
-        res.status(405);
-        return;
-    }
-    res.text('hello world');
-}
-</code></pre>
-<h3 id="2-autenticação--rate-limit--query-param">2) Autenticação + rate limit + query param</h3>
-<pre><code class="lang-js">async function main() {
-    if (!await authenticate()) {
-        res.status(403);
-        return;
-    }
-
-    rate_limit(10, 60); // até 10 requisições por IP a cada 60s
-
-    if (req.method !== 'GET') {
-        res.status(405);
-        return;
-    }
-
-    const city = req.query.q || res.error(&quot;'q' é obrigatório&quot;);
-    res.json({ city });
-}
-</code></pre>
-<h3 id="3-corpo-json-com-tratamento-de-erro">3) Corpo JSON com tratamento de erro</h3>
-<pre><code class="lang-js">async function main() {
-    let data;
-    try {
-        data = req.json();
-    } catch {
-        res.error('JSON inválido', 400);
-    }
-
-    // uso do payload
-    res.json({ received: data });
-}
-</code></pre>
-<h3 id="4-chamada-de-ia-texto-direto">4) Chamada de IA (texto direto)</h3>
-<pre><code class="lang-js">async function main() {
-    if (!await authenticate()) {
-        res.status(403);
-        return;
-    }
-
-    const prompt = req.query.p || 'Diga olá de forma breve.';
-    const text = await ai.completeText('@metaai/llama-4-scout-17b-16e', prompt, { temperature: 0.7 });
-    res.text(text);
-}
-</code></pre>
-<h3 id="5-exemplo-completo-função-json">5) Exemplo completo (função JSON)</h3>
-<pre><code class="lang-js">async function main() {
-    if (!await authenticate()) {
-        res.status(403);
-        return;
-    }
-
-    rate_limit(10, 60);
-
-    if (req.method !== 'GET') {
-        res.status(405);
-        return;
-    }
-
-    const cityName = req.query.q || res.error(&quot;'q' é obrigatório&quot;);
-
-    const weather = await api.post('/api/v1/functions/json', {
-        modelName: '@x-ai/grok-4-fast',
-        prompt: 'Pesquise dados de clima para a cidade informada.',
-        responseSchema: {
-            type: 'object',
-            properties: {
-                temperature: { type: 'number', description: 'Temperatura em °C' },
-                forecast: { type: 'string', enum: ['rainy', 'thunder', 'clear'] }
-            },
-            required: ['temperature', 'forecast']
-        },
-        inputData: { cityName }
-    });
-
-    res.json(weather.json.data.result);
-}
-</code></pre>
-<h3 id="6-sleep-espera-controlada">6) Sleep (espera controlada)</h3>
-<pre><code class="lang-js">async function main() {
-    // aguarda 200 ms
-    sleep(200);
-    res.text('ok');
-}
-</code></pre>
-<h2 id="limitações-da-engine">Limitações da engine</h2>
-<p>As funções executam em um container JavaScript isolado com as seguintes restrições:</p>
+<h2 id="limites-e-restrições">Limites e Restrições</h2>
+<p>O ambiente de execução possui as seguintes restrições para garantir estabilidade e segurança:</p>
 <ul>
-<li>Memória máxima por execução: 32 MB.</li>
-<li>Tempo máximo de execução por script: 5 minutos.</li>
-<li>Tempo máximo de avaliação de expressões RegExp: 10 segundos.</li>
-<li>Tamanho máximo de resposta lida por <code>fetch</code>: 10 MB (exceto chamadas internas da AIVAX).</li>
+<li><strong>Memória:</strong> 32 MB por execução.</li>
+<li><strong>Timeout de Script:</strong> Varia conforme o plano da conta (30 segundos a 20 minutos).</li>
+<li><strong>Timeout de Regex:</strong> 10 segundos.</li>
+<li><strong>Pilha de Execução:</strong> Máximo de 256 chamadas (stack/recursion depth).</li>
+<li><strong>Fetch:</strong> Respostas limitadas a 10 MB.</li>
 </ul>
-<div class="TIP">
-<h5>Tip</h5>
-<p>Trate entradas do usuário, valide métodos/headers e use <code>res.error()</code> para respostas de erro coerentes. Prefira <code>rate_limit()</code> em endpoints públicos.</p>
-</div>
 <h2 id="precificação">Precificação</h2>
-<p>A cobrança é feita por hora de execução. Cada chamada acumula milissegundos apenas do tempo de execução do script (não inclui compilação). Ex.: se o script levar 20 segundos, serão contabilizados 20.000 ms. O débito mínimo por execução é de 20 ms.</p>
-<p>O custo de processamento serverless é de <strong>$1/hora</strong>.</p>
+<p>A cobrança é baseada no tempo de execução (CPU time).</p>
+<ul>
+<li><strong>Custo:</strong> $1.00 / hora (cobrado por milissegundo).</li>
+<li><strong>Mínimo:</strong> 20 ms por execução.</li>
+<li><strong>Gratuidade:</strong> 10 minutos diários gratuitos para todas as contas.</li>
+</ul>
 <div class="NOTE">
 <h5>Note</h5>
-<p>Todas as contas possuem <strong>10 minutos</strong> grátis por dia. Ao ultrapassar, inicia-se a cobrança. Se a conta ficar negativa, a execução da função é interrompida.</p>
+<p>O tempo de execução descontado (ex: chamadas de rede internas de inferência ou chamadas de API para AIVAX) não é cobrado, mas há um piso mínimo de 20ms por invocação.</p>
 </div>
-<h2 id="limites-de-taxa">Limites de taxa</h2>
-<p>Os limites de taxa globais para funções serverless estão descritos em <a href="/docs/limits">limites de taxa</a>.</p>
+<h2 id="exemplos">Exemplos</h2>
+<h3 id="hello-world">Hello World</h3>
+<pre><code class="lang-javascript">async function main() {
+    res.text(&quot;Olá, mundo!&quot;);
+}
+</code></pre>
+<h3 id="responder-json-com-validação">Responder JSON com Validação</h3>
+<pre><code class="lang-javascript">async function main() {
+    if (req.method !== 'POST') {
+        return res.error(&quot;Método não permitido&quot;, 405);
+    }
+
+    try {
+        const body = req.json();
+        if (!body.nome) throw new Error(&quot;Campo 'nome' obrigatório&quot;);
+        
+        res.json({ 
+            mensagem: `Olá, ${body.nome}`,
+            timestamp: new Date()
+        });
+    } catch (e) {
+        res.error(e.message);
+    }
+}
+</code></pre>
+<h3 id="chamar-ia-e-retornar-texto">Chamar IA e Retornar Texto</h3>
+<pre><code class="lang-javascript">async function main() {
+    if (!await authenticate())
+        return res.error(&quot;Não autorizado&quot;, 401);
+
+    const prompt = req.query.p || &quot;Conte uma piada curta&quot;;
+    const resposta = await ai.completeText('@metaai/llama-3-8b', prompt);
+    
+    res.text(resposta);
+}
+</code></pre>
 
 </article>
 

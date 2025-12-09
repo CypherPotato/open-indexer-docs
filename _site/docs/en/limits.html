@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>API Rate Limits | AIVAX </title>
+        <title>API Limits | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="API Rate Limits | AIVAX ">
+        <meta name="title" content="API Limits | AIVAX ">
 
 
         <link rel="icon" href="../../assets/img/favicon.ico">
@@ -122,7 +122,7 @@
                 </div>
 
                 <article data-uid="">
-<h1 id="api-rate-limits">API Rate Limits</h1>
+<h1 id="api-limits">API Limits</h1>
 
 <p>Rate limits regulate the number of requests you can send within a time window. They help prevent abuse and ensure stability for all users.</p>
 <p>The limits below are applied according to your account tier:</p>
@@ -132,8 +132,8 @@
 <li><strong>Tier 2:</strong> account created at least 1 month ago and has already added at least $100 in credits.</li>
 <li><strong>Tier 3:</strong> account created at least 3 months ago and has already added at least $1,000 in credits.</li>
 </ul>
-<p>Measurement is based on <strong>credit addition</strong> rather than consumption. Example: you don't need to spend $100 to move to Tier 2; you just need to add that amount.</p>
-<p><strong>Legend:</strong></p>
+<p>Measurement is based on <strong>credit addition</strong> rather than consumption. Example: you do not need to spend $100 to move to Tier 2, just add that amount.</p>
+<p><strong>Legends:</strong></p>
 <ul>
 <li><strong>RPM</strong>: requests per minute</li>
 <li><strong>RPD</strong>: requests per day (24h)</li>
@@ -456,13 +456,13 @@
 </section>
 </div>
 
-<p><strong>Operation descriptions:</strong></p>
+<p><strong>Description of operations:</strong></p>
 <ul>
 <li><strong>Document search:</strong> includes semantic search of documents in a collection.</li>
 <li><strong>Document insertion:</strong> creation and modification of documents in a collection.</li>
 <li><strong>Inference (requests):</strong> number of inference or function calls (API or chat client).</li>
 <li><strong>Inference (input tokens):</strong> input tokens used in inference.</li>
-<li><strong>Inference (input tokens - high-end):</strong> input tokens for high‑end models (Tier 1+).</li>
+<li><strong>Inference (input tokens - high-end):</strong> input tokens for high-end models (Tier 1+).</li>
 <li><strong>Serverless execution:</strong> calls to <a href="/docs/en/serverless">serverless function</a>.</li>
 <li><strong>Tools (shared):</strong> use of <a href="/docs/en/builtin-tools">built‑in tools</a> provided by AIVAX (does not include custom tools).</li>
 <li><strong>Tool (name):</strong> individual use of each integrated tool.</li>
@@ -470,13 +470,13 @@
 <h2 id="model-groups">Model groups</h2>
 <p>Certain models have rate multipliers:</p>
 <ul>
-<li><strong>Common:</strong> 1x</li>
+<li><strong>Standard:</strong> 1x</li>
 <li><strong>Discounted:</strong> 0.5x</li>
 <li><strong>Low‑latency:</strong> 0.3x</li>
 <li><strong>Free:</strong> 0.1x</li>
 </ul>
 <p>Example: if you use a &quot;discounted&quot; model, the rate limits will be 50% lower (e.g., 75 req/min → 37 req/min).</p>
-<h2 id="limits-for-byok-bringyourownkey">Limits for BYOK (Bring‑your‑own‑key)</h2>
+<h2 id="limits-for-byok-bring-your-own-key">Limits for BYOK (Bring-your-own-key)</h2>
 <p>For models provided by you, the limit is <strong>1,500 requests per minute</strong> (separate from the integrated inference limit).</p>
 
 </article>

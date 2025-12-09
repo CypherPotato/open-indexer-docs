@@ -1,8 +1,8 @@
 # Models
 
-AIVAX provides models from different providers to make development even faster, eliminating the need to set up an account for each provider to access their latest models.
+AIVAX provides models from different providers to make development even faster, eliminating the need to configure an account for each provider to access their latest models.
 
-See the list below of available models and their pricing. All prices consider the total input and output tokens, with or without caching.
+See the list below of available models and their pricing. All prices consider the total input and output tokens, with or without cache.
 
 All prices are in United States dollars.
 
@@ -231,6 +231,60 @@ All prices are in United States dollars.
 <tr>
     <td>
         <code>
+            @anthropic/claude-4.5-opus
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 5.00 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Input (cached):
+    </small>
+    <div>
+        $ 0.50 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 25.00 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Claude Opus 4.5 is Anthropic’s latest reasoning model, developed for advanced software engineering, complex agent workflows, and extended computer tasks.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Reasoning
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    JSON functions
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
             @anthropic/claude-4.5-sonnet
         </code>
     </td>
@@ -315,54 +369,7 @@ All prices are in United States dollars.
         </div>
     </td>
     <td>
-        Anthropic's mid-size model with superior intelligence for high-volume uses in coding, in-depth research, agents, &amp; more.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Input: accepts images
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Function calls
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Reasoning
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @anthropic/claude-4.5-sonnet:discounted
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Input:
-            </small>
-            <div>
-                $ 1.80 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Output:
-            </small>
-            <div>
-                $ 9.00 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        Claude Sonnet 4.5 is the newest model in the Sonnet series, offering improvements and updates over Sonnet 4.
+        Anthropic's mid-size model with superior intelligence for high-volume uses in coding, in-depth research, agents, & more.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -586,12 +593,4 @@ All prices are in United States dollars.
 </div>
 <div>
     <i class="ri-instance-line"></i>
-    Function calls
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
-</div>
-        </div>
-    </td>
-</tr
+   

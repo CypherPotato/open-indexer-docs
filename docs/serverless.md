@@ -4,7 +4,7 @@ As funções serverless da AIVAX permitem executar JavaScript sob demanda, em um
 
 Cada requisição dispara a execução do seu script, que lê dados do objeto `req` e escreve a resposta no objeto `res`.
 
-## Fluxo de execução em 30 segundos
+## Fluxo de execução
 
 - Escreva uma função `async function main()`; ela é chamada a cada requisição.
 - Use `req` para ler método, headers, query e corpo.
@@ -15,245 +15,198 @@ Cada requisição dispara a execução do seu script, que lê dados do objeto `r
 > [!IMPORTANT]
 > Nenhuma função é autenticada por padrão. Proteja seus endpoints implementando lógica própria ou usando `await authenticate()`.
 
-## Objetos globais suportados
+## Referência da API
 
-A seguir, a referência dos objetos e métodos disponíveis no ambiente, conforme implementados pela engine.
+### Funções Globais
 
-### console
+Métodos disponíveis globalmente no escopo da função.
 
-- `log(...args)`/ `error(...args)` / `warn(...args)` / `info(...args)`
-    - Escreve no console de depuração.
-    - Strings/objetos são serializados (objetos via `JSON.stringify`).
+- `async authenticate(): Promise<boolean>`
+  - Valida a requisição verificando a API Key da conta. Retorna `true` se autenticado, `false` caso contrário.
+- `sleep(ms: number): void`
+  - Pausa a execução pelo tempo especificado em milissegundos.
+  - Limites: Máximo de 3 minutos (180.000 ms). Lança erro se negativo ou acima do limite.
+- `rate_limit(threshold: number, seconds: number): void`
+  - Aplica rate-limit por função e IP.
+  - Se o limite for excedido, interrompe a execução e retorna erro 429.
+
+### Objeto `console`
+
+Utilizado para depuração. As mensagens são exibidas no terminal de debug da função.
+
+- `log(...args)` / `info(...args)` / `debug(...args)` / `trace(...args)` / `warn(...args)` / `error(...args)`
+  - Escreve mensagens no log. Objetos são serializados automaticamente.
 - `table(data, columns?)`
-    - Arrays: imprime uma linha de cabeçalho com `(index)` + colunas. Se `columns` não for informado, as colunas são inferidas pela união das chaves dos objetos no array. Arrays vazios imprimem `(empty array)`.
-    - Objetos: lista `key: value` por linha.
-    - Demais tipos: imprime diretamente com `log`.
+  - Exibe dados em formato tabular. Útil para arrays de objetos.
 
-Notas
+### Objeto `req` (Request)
 
-- Para múltiplos argumentos, `log` concatena com espaço. Objetos são serializados com `JSON.stringify`.
+Fornece acesso aos dados da requisição HTTP recebida.
 
-### fetch(url, options?) -> Promise<Response>
+**Propriedades (Getters):**
+- `headers: object` - Dicionário com os cabeçalhos da requisição.
+- `query: object` - Dicionário com os parâmetros da query string.
+- `cookies: object` - Dicionário com os cookies.
+- `method: string` - Método HTTP (GET, POST, etc.).
+- `path: string` - Caminho da URL (ex: `/minha-funcao`).
+- `fullPath: string` - Caminho completo incluindo query string.
+- `url: string` - URL completa da requisição.
 
-- `options.body`: `string`, `FormData` ou `null`.
-- `options.method`: método HTTP.
-- `options.headers`: objeto com cabeçalhos.
-- `options.timeout`: inteiro (ms) de timeout da requisição.
-- `options.redirect`: `follow` | `manual`.
+**Métodos:**
+- `json(): any` - Lê o corpo da requisição e faz o parse como JSON.
+- `text(): string` - Lê o corpo da requisição como texto.
+- `blob(): any` - Lê o corpo da requisição como dados binários (raw).
+- `form(): object` - Lê o corpo como `application/x-www-form-urlencoded`.
+- `multipartForm(): object` - Lê o corpo como `multipart/form-data`.
 
-Objeto Response:
+### Objeto `res` (Response)
 
-- `async text(): Promise<string>`
-- `async json(): Promise<object>`
-- `ok: boolean`
-- `status: number`
-- `statusText: string | null`
-- `headers: object`
-- `url: string`
+Utilizado para construir e enviar a resposta HTTP.
 
-Erros e notas
+**Métodos:**
+- `status(code: number): void`
+  - Define o código de status HTTP (ex: 200, 404).
+- `header(name: string, value: string): void`
+  - Adiciona um cabeçalho à resposta.
+- `text(body: string): void`
+  - Define o corpo da resposta como texto plano.
+- `json(data: any): void`
+  - Define o corpo da resposta como JSON (serializa automaticamente).
+- `send(args: any[], contentType: string): void`
+  - Envia uma resposta formatada com o Content-Type especificado.
+- `echo(...args): void`
+  - Envia os argumentos como texto plano (`text/plain`).
+- `sendEvent(content: string, arg?: string): void`
+  - Envia um evento para streams (`text/event-stream`). Padrão do `arg` é 'data'.
+- `error(message: string, status?: number): never`
+  - Define o status (padrão 400), retorna um JSON `{ error: message }` e encerra a execução imediatamente.
 
-- `Response.json()` lança se o corpo não for um JSON válido.
-- O corpo não é stream; leia com `text()` ou `json()`.
+### Objeto `fetch`
 
-### req (leitura da requisição)
+Implementação da API Fetch para fazer requisições HTTP externas.
 
-- `headers: object` - cabeçalhos da requisição.
-- `query: object` - parâmetros da query string.
-- `cookies: object` - cookies presentes.
-- `method: string` - método HTTP.
-- `path: string` - caminho sem query.
-- `fullPath: string` - caminho com query.
-- `url: string` - URL completa.
-- `json(): any` - corpo como JSON.
-- `text(): string` - corpo como texto.
-- `blob(): ArrayBuffer` - corpo binário.
-- `form(): object` - form-data simples.
-- `multipartForm(): object` - multipart form-data.
+`fetch(url: string, options?: RequestInit): Promise<Response>`
 
-Erros e notas
+**Opções (`RequestInit`):**
+- `method`: Método HTTP (padrão 'GET').
+- `headers`: Objeto com cabeçalhos.
+- `body`: Corpo da requisição (`string` ou `FormData`).
+- `timeout`: Timeout em segundos (padrão 30s, máx 300s).
+- `redirect`: 'follow' (padrão) ou 'manual'.
 
-- `req.json()` lança se o corpo não for um JSON válido.
+**Retorno (`Response`):**
+- `ok`: boolean (status 200-299).
+- `status`: number.
+- `statusText`: string.
+- `url`: string.
+- `headers`: object.
+- `text()`: Promise<string>.
+- `json()`: Promise<any>.
 
-### res (escrita da resposta)
+### Objeto `FormData`
 
-- `status(code: number): void` - define status HTTP.
-- `header(name: string, value: string): void` - adiciona cabeçalho.
-- `text(body: string): void` - define o corpo da resposta como texto.
-- `json(data: any): void` - define o corpo da resposta como JSON.
-- `error(message: string, status = 400): never` - define status e corpo `{ error: message }` e encerra imediatamente a execução do script.
+Disponível para construir corpos de requisição `multipart/form-data`.
 
-Notas
+- `append(name, value)`
+- `set(name, value)`
+- `delete(name)`
+- `get(name)`
+- `getAll(name)`
+- `has(name)`
+- `keys()`
+- `values()`
+- `entries()`
 
-- Apenas `res.error(...)` interrompe a execução. Após `res.text(...)` ou `res.json(...)`, retorne da função (`return`) se quiser evitar processamento adicional.
+### Objeto `api` (Interno)
 
-### ai (inferência)
-
-- `async complete(model, prompt, options?)`
-    - Entrada
-        - `model: string` - nome/slug/ID do modelo ou gateway da conta.
-        - `prompt: string | any[]` - texto ou array de mensagens (encaminhado como `prompt`).
-        - `options?: object` - propriedades adicionais encaminhadas ao endpoint, mescladas ao corpo com `stream: false`.
-    - Retorno: objeto JSON da resposta do endpoint de chat/completions.
-- `async completeText(model, prompt, options?)`
-    - Retorno: `string` com o conteúdo de `choices[0].message.content` do resultado de `complete`.
-
-### api (HTTP interno autenticado)
+Cliente HTTP otimizado e autenticado para chamar endpoints internos da AIVAX.
 
 - `async get(path)`
-    - Retorno: objeto de resposta com `text` (string) e propriedade `.json` (getter) que parseia `text` via `JSON.parse`.
 - `async post(path, body)`
-    - Corpo é serializado com `JSON.stringify(body)`.
-    - Retorno: igual ao `get`, com `.text` e getter `.json`.
-- `put(path, body)` / `patch(path, body)` / `delete(path)`
-    - Retorno: promessa para o resultado bruto interno (sem o getter `.json`).
+- `put(path, body)`
+- `patch(path, body)`
+- `delete(path)`
 
-Notas
+**Notas:**
+- `path` deve ser relativo (ex: `/api/v1/...`).
+- `get` e `post` retornam um objeto estendido com um getter `.json` para conveniência.
+- As chamadas injetam automaticamente headers de autenticação e rastreamento.
 
-- `path` é relativo à API interna da AIVAX.
-- O getter `.json` lança se `text` não contiver JSON válido.
+### Objeto `ai` (Inferência)
 
-### Helpers
+Facilitadores para uso dos modelos de IA da plataforma.
 
-- `async authenticate(): Promise<boolean>` - valida a requisição com a API key da sua conta.
-- `sleep(ms: number): void` - aguarda o tempo informado em milissegundos (limitado a 3 minutos).
-- `rate_limit(threshold: number, seconds: number): void` - aplica rate-limit por função e IP no período indicado.
+- `async complete(model, prompt, options?)`
+  - Chama o endpoint de chat completions.
+  - Retorna o objeto JSON completo da resposta.
+- `async completeText(model, prompt, options?)`
+  - Chama o endpoint e retorna apenas o texto da primeira escolha (`choices[0].message.content`).
 
 ---
 
-## Exemplos práticos
+## Limites e Restrições
 
-### 1) Hello World
+O ambiente de execução possui as seguintes restrições para garantir estabilidade e segurança:
 
-```js
-async function main() {
-    if (req.method !== 'GET') {
-        res.status(405);
-        return;
-    }
-    res.text('hello world');
-}
-```
-
-### 2) Autenticação + rate limit + query param
-
-```js
-async function main() {
-    if (!await authenticate()) {
-        res.status(403);
-        return;
-    }
-
-    rate_limit(10, 60); // até 10 requisições por IP a cada 60s
-
-    if (req.method !== 'GET') {
-        res.status(405);
-        return;
-    }
-
-    const city = req.query.q || res.error("'q' é obrigatório");
-    res.json({ city });
-}
-```
-
-### 3) Corpo JSON com tratamento de erro
-
-```js
-async function main() {
-    let data;
-    try {
-        data = req.json();
-    } catch {
-        res.error('JSON inválido', 400);
-    }
-
-    // uso do payload
-    res.json({ received: data });
-}
-```
-
-### 4) Chamada de IA (texto direto)
-
-```js
-async function main() {
-    if (!await authenticate()) {
-        res.status(403);
-        return;
-    }
-
-    const prompt = req.query.p || 'Diga olá de forma breve.';
-    const text = await ai.completeText('@metaai/llama-4-scout-17b-16e', prompt, { temperature: 0.7 });
-    res.text(text);
-}
-```
-
-### 5) Exemplo completo (função JSON)
-
-```js
-async function main() {
-    if (!await authenticate()) {
-        res.status(403);
-        return;
-    }
-
-    rate_limit(10, 60);
-
-    if (req.method !== 'GET') {
-        res.status(405);
-        return;
-    }
-
-    const cityName = req.query.q || res.error("'q' é obrigatório");
-
-    const weather = await api.post('/api/v1/functions/json', {
-        modelName: '@x-ai/grok-4-fast',
-        prompt: 'Pesquise dados de clima para a cidade informada.',
-        responseSchema: {
-            type: 'object',
-            properties: {
-                temperature: { type: 'number', description: 'Temperatura em °C' },
-                forecast: { type: 'string', enum: ['rainy', 'thunder', 'clear'] }
-            },
-            required: ['temperature', 'forecast']
-        },
-        inputData: { cityName }
-    });
-
-    res.json(weather.json.data.result);
-}
-```
-
-### 6) Sleep (espera controlada)
-
-```js
-async function main() {
-    // aguarda 200 ms
-    sleep(200);
-    res.text('ok');
-}
-```
-
-## Limitações da engine
-
-As funções executam em um container JavaScript isolado com as seguintes restrições:
-
-- Memória máxima por execução: 32 MB.
-- Tempo máximo de execução por script: 5 minutos.
-- Tempo máximo de avaliação de expressões RegExp: 10 segundos.
-- Tamanho máximo de resposta lida por `fetch`: 10 MB (exceto chamadas internas da AIVAX).
-
-> [!TIP]
-> Trate entradas do usuário, valide métodos/headers e use `res.error()` para respostas de erro coerentes. Prefira `rate_limit()` em endpoints públicos.
+- **Memória:** 32 MB por execução.
+- **Timeout de Script:** Varia conforme o plano da conta (30 segundos a 20 minutos).
+- **Timeout de Regex:** 10 segundos.
+- **Pilha de Execução:** Máximo de 256 chamadas (stack/recursion depth).
+- **Fetch:** Respostas limitadas a 10 MB.
 
 ## Precificação
 
-A cobrança é feita por hora de execução. Cada chamada acumula milissegundos apenas do tempo de execução do script (não inclui compilação). Ex.: se o script levar 20 segundos, serão contabilizados 20.000 ms. O débito mínimo por execução é de 20 ms.
+A cobrança é baseada no tempo de execução (CPU time).
 
-O custo de processamento serverless é de **$1/hora**.
+- **Custo:** $1.00 / hora (cobrado por milissegundo).
+- **Mínimo:** 20 ms por execução.
+- **Gratuidade:** 10 minutos diários gratuitos para todas as contas.
 
 > [!NOTE]
-> Todas as contas possuem **10 minutos** grátis por dia. Ao ultrapassar, inicia-se a cobrança. Se a conta ficar negativa, a execução da função é interrompida.
+> O tempo de execução descontado (ex: chamadas de rede internas de inferência ou chamadas de API para AIVAX) não é cobrado, mas há um piso mínimo de 20ms por invocação.
 
-## Limites de taxa
+## Exemplos
 
-Os limites de taxa globais para funções serverless estão descritos em [limites de taxa](/docs/limits).
+### Hello World
+
+```javascript
+async function main() {
+    res.text("Olá, mundo!");
+}
+```
+
+### Responder JSON com Validação
+
+```javascript
+async function main() {
+    if (req.method !== 'POST') {
+        return res.error("Método não permitido", 405);
+    }
+
+    try {
+        const body = req.json();
+        if (!body.nome) throw new Error("Campo 'nome' obrigatório");
+        
+        res.json({ 
+            mensagem: `Olá, ${body.nome}`,
+            timestamp: new Date()
+        });
+    } catch (e) {
+        res.error(e.message);
+    }
+}
+```
+
+### Chamar IA e Retornar Texto
+
+```javascript
+async function main() {
+    if (!await authenticate())
+        return res.error("Não autorizado", 401);
+
+    const prompt = req.query.p || "Conte uma piada curta";
+    const resposta = await ai.completeText('@metaai/llama-3-8b', prompt);
+    
+    res.text(resposta);
+}
+```

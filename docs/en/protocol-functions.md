@@ -1,12 +1,8 @@
 # Server-side Functions
 
-> [!IMPORTANT]
->
-> Protocol functions are no longer maintained and have been replaced by [MCP functions](/docs/en/mcp).
+The protocol functions of AIVAX, or _server-side functions_, are an implementation where the model tool calls occur on the server side. Similar to MCP, but with native authentication support and optimized to work externally.
 
-The AIVAX protocol functions, or _server-side functions_, are an implementation where the model's tool calls occur on the server side. Similar to MCP, but with native authentication support and optimized to work externally.
-
-Protocol functions allow actions to be taken on the AIVAX server side, removing the need to implement the function on the client side and integrating with existing applications and services.
+Protocol functions allow taking actions on the AIVAX server side, removing the need to implement the function on the client side and integrating with existing applications and services.
 
 <img src="/assets/diagrams/protocol-functions-1.drawio.svg">
 
@@ -14,7 +10,7 @@ These functions expect a **callback** via a URL, and when the model decides to c
 
 ### Choosing the function name
 
-The function name should be simple and deterministic about what the function does. Avoid hard-to-guess names or names that do not reflect the function's role, as the assistant may get confused and not call the function when appropriate.
+The function name should be simple and deterministic to what the function does. Avoid hard‑to‑guess names or names that do not reflect the function’s role, as the assistant may get confused and not call the function when appropriate.
 
 As an example, let's think of a function that queries a user in an external database. The following names are good examples to consider for the call:
 
@@ -36,9 +32,9 @@ The function description should conceptually explain two situations: what it doe
 
 ## Defining protocol functions
 
-These functions are defined in the [AI‑gateway](/entities/ai-gateway.md), which enables the creation of intelligent agents that perform actions without human intervention. They follow a simple syntax, expecting the function name, a description of what it does, and the invocation parameters.
+These functions are defined in the [AI-gateway](/entities/ai-gateway.md), which enables the creation of intelligent agents that perform actions without human intervention. They follow a simple syntax, expecting the function name, a description of what it does, and the invocation parameters.
 
-Protocol functions are defined in the AI gateway using JSON:
+Protocol functions are defined in the AI gateway following the JSON:
 
 <div class="request-item post">
     <span>POST</span>
@@ -81,7 +77,7 @@ Protocol functions are defined in the AI gateway using JSON:
 
 In the snippet above, you are providing two functions for your AI model: `list_clients` and `view_client`, which the model will decide which to execute during its reasoning. You can also provide a JSON content format that the model will use when calling your API with the supplied content.
 
-You can also define the list of supported functions via an endpoint. Every time the model receives a message, it will query the provided endpoint to obtain a list of functions it can execute.
+You can also define the list of supported functions through an endpoint. Every time the model receives a message, it will query the provided endpoint to obtain a list of functions it can execute.
 
 <img src="/assets/diagrams/protocol-functions-2.drawio.svg">
 
@@ -106,7 +102,7 @@ Define the function‑listing endpoints in your AI gateway:
 }
 ```
 
-The function‑provision endpoint must respond using the following format:
+The function‑provision endpoint must respond following the format:
 
 <div class="request-item post">
     <span>GET</span>
@@ -143,7 +139,7 @@ The function‑provision endpoint must respond using the following format:
 }
 ```
 
-These functions are cached for 10 minutes before a new request is made to the supplied endpoint.
+These functions are cached for 10 minutes before a new request is made to the provided endpoint.
 
 ### Handling function calls
 
@@ -168,19 +164,19 @@ The response to this action must always return an HTTP OK status (2xx or 3xx), e
 
 #### Response format
 
-Successful responses should be textual and will be attached as the function's response exactly as returned by the endpoint. There is no JSON format or structure required for this response, but it is advisable to provide a simple, human‑readable answer so the assistant can read the result of the action.
+Successful responses should be textual and will be attached as the function’s answer in whatever form the endpoint returns. There is no JSON format or structure for this response, but it is advisable to give a simple, human‑readable answer so the assistant can read the result of the action.
 
 Errors can be common, such as not finding a client by ID or a field not being in the desired format. In these cases, respond with an OK status and include a human‑readable description of the error and how the assistant can work around it in the response body.
 
 **It is guaranteed** that the request will strictly follow the JSON Schema of the content defined by the function definition. Functions that do not expect arguments should not specify a content format for that function.
 
 > [!IMPORTANT]
->
-> The more functions you define, the more input tokens you will consume during the reasoning process. The function definition, as well as its format, consumes tokens in the reasoning process.
+> 
+> The more functions you define, the more input tokens you will consume in the reasoning process. The function definition, as well as its format, consumes tokens in the reasoning process.
 
 #### Authentication
 
-Request authentication is performed via the `X-Aivax-Nonce` header sent with all protocol function requests, including listing requests.
+Request authentication is performed via the `X-Aivax-Nonce` header sent in all protocol function requests, including listing requests.
 
 See the [authentication](/docs/en/authentication) manual to understand how to authenticate reverse requests from AIVAX.
 
@@ -190,13 +186,13 @@ Function calls send a `$.context.externalUserId` field containing the user tag c
 
 #### Security considerations
 
-For the AI model, only the name, description, and format of the function are visible. It cannot see the endpoint to which the function points. Additionally, it does not have access to the user tag authenticated in a [chat client](/docs/en/entities/chat-clients).
+For the AI model, only the name, description, and format of the function are visible. It cannot see the endpoint to which the function points. Moreover, it does not have access to the user tag authenticated in a [chat client](/docs/en/entities/chat-clients).
 
 ## Specialist functions
 
 In addition to the [built‑in tools](/docs/en/builtin-tools), you can define specialist functions that perform specific tasks in your AIVAX account.
 
-You define specialist functions using the `aivax://` URL scheme, as shown in the example below:
+You define specialist functions using the `aivax://` URL scheme, following the example below:
 
 ```json
 {
@@ -226,29 +222,29 @@ You define specialist functions using the `aivax://` URL scheme, as shown in the
 }
 ```
 
-The function above creates a tool for the AI to query a specific [document collection](/docs/en/entities/collections), guiding the assistant on what to search for in that collection and what to expect in a response. This way, you can link multiple RAG collections so an assistant can retrieve specialist content.
+The function above creates a tool for the AI to query a specific [document collection](/docs/en/entities/collections), guiding the assistant on what to search in that collection and what to expect in a response. This way, you can link multiple RAG collections for an assistant to retrieve specialist content.
 
-You can customize the description of the JSON Schema properties for specialist functions but not their structure, as our backend expects a specific format to call the functions. Specialist function parameters are supplied in the URL via query parameters.
+You can customize the description of the JSON Schema properties for specialist functions but not its structure, as our backend expects a specific format to call the functions. Specialist function parameters are supplied in the URL via query parameters.
 
 Currently, only one specialist function exists:
-- `query-collection`: performs a RAG search on a specified collection.
-    Query parameters:
-    - `collection-id`: the UUID of the collection to be searched.
-    - `top`: a number indicating how many documents should be returned in the search.
-    - `min`: a decimal indicating the minimum similarity score for the search.
+- `query-collection`: performs a RAG search in a specified collection.  
+  Query parameters:
+  - `collection-id`: the UUID of the collection to be searched.
+  - `top`: a number indicating how many documents should be returned in the search.
+  - `min`: a decimal indicating the minimum similarity score of the search.
 
-    JSON format of the function:
-    ```json
-    {
-        "type": "object",
-        "properties": {
-            "query": {
-                "type": "string",
-                "description": "Search content."
-            }
-        },
-        "required": [
-            "query"
-        ]
-    }
-    ```
+  JSON format of the function:
+  ```json
+  {
+      "type": "object",
+      "properties": {
+          "query": {
+              "type": "string",
+              "description": "Search content."
+          }
+      },
+      "required": [
+          "query"
+      ]
+  }
+  ```

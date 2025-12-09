@@ -1,9 +1,9 @@
 # Authentication
 
-When you have your account ready, use your unique authentication key to authenticate to our API via the `Authorization` header:
+When you have your account, use your unique authentication key to authenticate with our API via the `Authorization` header:
 
 ```bash
-curl https://inference.aivax.net/api/v1/information/models.txt \
+curl https://inference.aivax.net/api/v1/information/models.json \
     -H 'Authorization: Bearer oky_gr5uepj...'
 ```
 
@@ -17,13 +17,13 @@ There is no need to send the `Bearer` authentication scheme in both headers, but
 
 ## Authenticating hooks
 
-AIVAX requests to your services, whether AI gateway workers or server‑side function calls, include a `X-Request-Nonce` header in all requests containing a BCrypt hash that is a derived value of the [hook key](https://console.aivax.net/dashboard/account) defined in your account.
+AIVAX requests to your services, whether AI gateway workers or server‑side function calls, include an `X-Request-Nonce` header in every request containing a BCrypt hash that is a derived value of the [hook key](https://console.aivax.net/dashboard/account) set in your account.
 
-The validation is simple: check that the hash in `X-Request-Nonce` is a product of the hook key defined in your account.
+Validation is simple: verify that the hash in `X-Request-Nonce` is a product of the derived key set in your account.
 
-In this way, you can authenticate whether the AIVAX requests to your services are genuine using this token. If your account has not defined a hook key, this header will not be sent.
+In this way, you can authenticate whether AIVAX requests to your services are genuine using this token. If your account has not defined a hook key, this header will not be sent.
 
-See the examples below for validating the hook key:
+See the examples below for hook key validation:
 
 # [C# (with Sisk)](#tab/csharp-sisk)
 
@@ -38,20 +38,20 @@ internal class MyController : Controller
         this.HasRequestHandler(RequestHandler.Create(
             execute: (req, ctx) =>
             {
-                // Retrieves the nonce sent from the request
-                var hash = this.Request.Headers["X-Request-Nonce"];
+                // Get the nonce sent from the request
+                var hash = this.Request.Headers ["X-Request-Nonce"];
                 if (hash == null)
                 {
                     return new HttpResponse(HttpStatusInformation.Unauthorized);
                 }
-
-                // Validates the hook using the BCrypt.Net library
-                var secretWord = Environment.GetEnvironmentVariable("AIVAX_HOOK_SECRET");
+                
+                // Validate the hook using the BCrypt.Net library
+                var secretWord = Environment.GetEnvironmentVariable ("AIVAX_HOOK_SECRET");
                 if (!BCrypt.Net.BCrypt.Verify(secretWord, hash, enhancedEntropy: false))
                 {
                     return new HttpResponse(HttpStatusInformation.Forbidden);
                 }
-
+                
                 // Continue the request after hook validated
                 return null;
             }));
@@ -70,13 +70,13 @@ import bcrypt
 app = Flask(__name__)
 
 @app.before_request
-def authenticate_token():
+def autenticar_token():
     # 1. Read the header containing the token hash
     token_hash = request.headers.get("X-Request-Nonce")
     if not token_hash:
         abort(401)
 
-    # 2. Load the plain‑text secret from environment variables
+    # 2. Load the plain-text secret from environment variables
     secret = os.getenv("AIVAX_HOOK_SECRET")
     if secret is None:
         abort(500)
@@ -109,7 +109,7 @@ app.use(async (req, res, next) => {
     return res.sendStatus(401)
   }
 
-  // 2. Load the plain‑text secret from environment variables
+  // 2. Load the plain-text secret from environment variables
   const secret = process.env.AIVAX_HOOK_SECRET
   if (!secret) {
     return res.sendStatus(500)
@@ -121,7 +121,7 @@ app.use(async (req, res, next) => {
     if (!match) {
       return res.sendStatus(403)
     }
-
+    
     next()
   } catch (err) {
     return res.sendStatus(500)

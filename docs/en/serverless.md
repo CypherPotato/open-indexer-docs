@@ -4,9 +4,9 @@ AIVAX's serverless functions allow you to run JavaScript on demand, in a managed
 
 Each request triggers the execution of your script, which reads data from the `req` object and writes the response to the `res` object.
 
-## Execution flow in 30 seconds
+## Execution Flow
 
-- Write an `async function main()`; it is called on each request.
+- Write an `async function main()`; it is called for each request.
 - Use `req` to read method, headers, query, and body.
 - Build the response with `res.status()`, `res.header()`, `res.text()` or `res.json()`.
 - Optionally, authenticate with `await authenticate()` and apply rate limiting with `rate_limit()`.
@@ -15,245 +15,197 @@ Each request triggers the execution of your script, which reads data from the `r
 > [!IMPORTANT]
 > No function is authenticated by default. Protect your endpoints by implementing your own logic or using `await authenticate()`.
 
-## Supported global objects
+## API Reference
 
-Below is the reference of objects and methods available in the environment, as implemented by the engine.
+### Global Functions
 
-### console
+Methods available globally in the function scope.
 
-- `log(...args)`/ `error(...args)` / `warn(...args)` / `info(...args)`
-    - Writes to the debug console.
-    - Strings/objects are serialized (objects via `JSON.stringify`).
+- `async authenticate(): Promise<boolean>`
+  - Validates the request by checking the account's API Key. Returns `true` if authenticated, `false` otherwise.
+- `sleep(ms: number): void`
+  - Pauses execution for the specified time in milliseconds.
+  - Limits: Maximum of 3 minutes (180,000 ms). Throws an error if negative or above the limit.
+- `rate_limit(threshold: number, seconds: number): void`
+  - Applies rate limiting per function and IP.
+  - If the limit is exceeded, execution is halted and a 429 error is returned.
+
+### `console` Object
+
+Used for debugging. Messages are displayed in the function's debug terminal.
+
+- `log(...args)` / `info(...args)` / `debug(...args)` / `trace(...args)` / `warn(...args)` / `error(...args)`
+  - Writes messages to the log. Objects are automatically serialized.
 - `table(data, columns?)`
-    - Arrays: prints a header row with `(index)` + columns. If `columns` is not provided, columns are inferred from the union of object keys in the array. Empty arrays print `(empty array)`.
-    - Objects: lists `key: value` per line.
-    - Other types: prints directly with `log`.
+  - Displays data in a tabular format. Useful for arrays of objects.
 
-Notes
+### `req` Object (Request)
 
-- For multiple arguments, `log` concatenates with a space. Objects are serialized with `JSON.stringify`.
+Provides access to the received HTTP request data.
 
-### fetch(url, options?) -> Promise<Response>
+**Properties (Getters):**
+- `headers: object` - Dictionary of request headers.
+- `query: object` - Dictionary of query string parameters.
+- `cookies: object` - Dictionary of cookies.
+- `method: string` - HTTP method (GET, POST, etc.).
+- `path: string` - URL path (e.g., `/my-function`).
+- `fullPath: string` - Full path including query string.
+- `url: string` - Full request URL.
 
-- `options.body`: `string`, `FormData` or `null`.
-- `options.method`: HTTP method.
-- `options.headers`: object with headers.
-- `options.timeout`: integer (ms) request timeout.
-- `options.redirect`: `follow` | `manual`.
+**Methods:**
+- `json(): any` - Reads the request body and parses it as JSON.
+- `text(): string` - Reads the request body as text.
+- `blob(): any` - Reads the request body as binary data (raw).
+- `form(): object` - Reads the body as `application/x-www-form-urlencoded`.
+- `multipartForm(): object` - Reads the body as `multipart/form-data`.
 
-Response object:
+### `res` Object (Response)
 
-- `async text(): Promise<string>`
-- `async json(): Promise<object>`
-- `ok: boolean`
-- `status: number`
-- `statusText: string | null`
-- `headers: object`
-- `url: string`
+Used to construct and send the HTTP response.
 
-Errors and notes
+**Methods:**
+- `status(code: number): void`
+  - Sets the HTTP status code (e.g., 200, 404).
+- `header(name: string, value: string): void`
+  - Adds a header to the response.
+- `text(body: string): void`
+  - Sets the response body as plain text.
+- `json(data: any): void`
+  - Sets the response body as JSON (automatically serialized).
+- `send(args: any[], contentType: string): void`
+  - Sends a formatted response with the specified Content-Type.
+- `echo(...args): void`
+  - Sends the arguments as plain text (`text/plain`).
+- `sendEvent(content: string, arg?: string): void`
+  - Sends an event to streams (`text/event-stream`). The default for `arg` is 'data'.
+- `error(message: string, status?: number): never`
+  - Sets the status (default 400), returns a JSON `{ error: message }` and terminates execution immediately.
 
-- `Response.json()` throws if the body is not valid JSON.
-- The body is not a stream; read it with `text()` or `json()`.
+### `fetch` Object
 
-### req (request reading)
+Implementation of the Fetch API to make external HTTP requests.
 
-- `headers: object` - request headers.
-- `query: object` - query string parameters.
-- `cookies: object` - present cookies.
-- `method: string` - HTTP method.
-- `path: string` - path without query.
-- `fullPath: string` - path with query.
-- `url: string` - full URL.
-- `json(): any` - body as JSON.
-- `text(): string` - body as text.
-- `blob(): ArrayBuffer` - binary body.
-- `form(): object` - simple form-data.
-- `multipartForm(): object` - multipart form-data.
+`fetch(url: string, options?: RequestInit): Promise<Response>`
 
-Errors and notes
+**Options (`RequestInit`):**
+- `method`: HTTP method (default 'GET').
+- `headers`: Object with headers.
+- `body`: Request body (`string` or `FormData`).
+- `timeout`: Timeout in seconds (default 30s, max 300s).
+- `redirect`: 'follow' (default) or 'manual'.
 
-- `req.json()` throws if the body is not valid JSON.
+**Return (`Response`):**
+- `ok`: boolean (status 200-299).
+- `status`: number.
+- `statusText`: string.
+- `url`: string.
+- `headers`: object.
+- `text()`: Promise<string>.
+- `json()`: Promise<any>.
 
-### res (response writing)
+### `FormData` Object
 
-- `status(code: number): void` - sets HTTP status.
-- `header(name: string, value: string): void` - adds a header.
-- `text(body: string): void` - sets the response body as text.
-- `json(data: any): void` - sets the response body as JSON.
-- `error(message: string, status = 400): never` - sets status and body `{ error: message }` and immediately terminates script execution.
+Available for building `multipart/form-data` request bodies.
 
-Notes
+- `append(name, value)`
+- `set(name, value)`
+- `delete(name)`
+- `get(name)`
+- `getAll(name)`
+- `has(name)`
+- `keys()`
+- `values()`
+- `entries()`
 
-- Only `res.error(...)` interrupts execution. After `res.text(...)` or `res.json(...)`, return from the function (`return`) if you want to avoid further processing.
+### `api` Object (Internal)
 
-### ai (inference)
-
-- `async complete(model, prompt, options?)`
-    - Input
-        - `model: string` - name/slug/ID of the model or account gateway.
-        - `prompt: string | any[]` - text or array of messages (forwarded as `prompt`).
-        - `options?: object` - additional properties forwarded to the endpoint, merged into the body with `stream: false`.
-    - Return: JSON object of the response from the chat/completions endpoint.
-- `async completeText(model, prompt, options?)`
-    - Return: `string` with the content of `choices[0].message.content` from the result of `complete`.
-
-### api (authenticated internal HTTP)
+Optimized and authenticated HTTP client for calling AIVAX internal endpoints.
 
 - `async get(path)`
-    - Return: response object with `text` (string) and `.json` property (getter) that parses `text` via `JSON.parse`.
 - `async post(path, body)`
-    - Body is serialized with `JSON.stringify(body)`.
-    - Return: same as `get`, with `.text` and getter `.json`.
-- `put(path, body)` / `patch(path, body)` / `delete(path)`
-    - Return: promise for the raw internal result (without the `.json` getter).
+- `put(path, body)`
+- `patch(path, body)`
+- `delete(path)`
 
-Notes
+**Notes:**
+- `path` must be relative (e.g., `/api/v1/...`).
+- `get` and `post` return an extended object with a `.json` getter for convenience.
+- Calls automatically inject authentication and tracing headers.
 
-- `path` is relative to AIVAX's internal API.
-- The `.json` getter throws if `text` does not contain valid JSON.
+### `ai` Object (Inference)
 
-### Helpers
+Helpers for using the platform's AI models.
 
-- `async authenticate(): Promise<boolean>` - validates the request with your account's API key.
-- `sleep(ms: number): void` - waits the specified time in milliseconds (limited to 3 minutes).
-- `rate_limit(threshold: number, seconds: number): void` - applies rate limiting per function and IP over the indicated period.
+- `async complete(model, prompt, options?)`
+  - Calls the chat completions endpoint. Returns the full JSON response object.
+- `async completeText(model, prompt, options?)`
+  - Calls the endpoint and returns only the text of the first choice (`choices[0].message.content`).
 
 ---
 
-## Practical examples
+## Limits and Restrictions
 
-### 1) Hello World
+The execution environment has the following restrictions to ensure stability and security:
 
-```js
-async function main() {
-    if (req.method !== 'GET') {
-        res.status(405);
-        return;
-    }
-    res.text('hello world');
-}
-```
-
-### 2) Authentication + rate limit + query param
-
-```js
-async function main() {
-    if (!await authenticate()) {
-        res.status(403);
-        return;
-    }
-
-    rate_limit(10, 60); // up to 10 requests per IP every 60s
-
-    if (req.method !== 'GET') {
-        res.status(405);
-        return;
-    }
-
-    const city = req.query.q || res.error("'q' is required");
-    res.json({ city });
-}
-```
-
-### 3) JSON body with error handling
-
-```js
-async function main() {
-    let data;
-    try {
-        data = req.json();
-    } catch {
-        res.error('Invalid JSON', 400);
-    }
-
-    // use the payload
-    res.json({ received: data });
-}
-```
-
-### 4) AI call (direct text)
-
-```js
-async function main() {
-    if (!await authenticate()) {
-        res.status(403);
-        return;
-    }
-
-    const prompt = req.query.p || 'Say hello briefly.';
-    const text = await ai.completeText('@metaai/llama-4-scout-17b-16e', prompt, { temperature: 0.7 });
-    res.text(text);
-}
-```
-
-### 5) Full example (JSON function)
-
-```js
-async function main() {
-    if (!await authenticate()) {
-        res.status(403);
-        return;
-    }
-
-    rate_limit(10, 60);
-
-    if (req.method !== 'GET') {
-        res.status(405);
-        return;
-    }
-
-    const cityName = req.query.q || res.error("'q' is required");
-
-    const weather = await api.post('/api/v1/functions/json', {
-        modelName: '@x-ai/grok-4-fast',
-        prompt: 'Search weather data for the given city.',
-        responseSchema: {
-            type: 'object',
-            properties: {
-                temperature: { type: 'number', description: 'Temperature in °C' },
-                forecast: { type: 'string', enum: ['rainy', 'thunder', 'clear'] }
-            },
-            required: ['temperature', 'forecast']
-        },
-        inputData: { cityName }
-    });
-
-    res.json(weather.json.data.result);
-}
-```
-
-### 6) Sleep (controlled wait)
-
-```js
-async function main() {
-    // wait 200 ms
-    sleep(200);
-    res.text('ok');
-}
-```
-
-## Engine limitations
-
-Functions run in an isolated JavaScript container with the following restrictions:
-
-- Maximum memory per execution: 32 MB.
-- Maximum execution time per script: 5 minutes.
-- Maximum evaluation time for RegExp expressions: 10 seconds.
-- Maximum response size read by `fetch`: 10 MB (except internal AIVAX calls).
-
-> [!TIP]
-> Handle user input, validate methods/headers and use `res.error()` for consistent error responses. Prefer `rate_limit()` on public endpoints.
+- **Memory:** 32 MB per execution.
+- **Script Timeout:** Varies by account plan (30 seconds to 20 minutes).
+- **Regex Timeout:** 10 seconds.
+- **Execution Stack:** Maximum of 256 calls (stack/recursion depth).
+- **Fetch:** Responses limited to 10 MB.
 
 ## Pricing
 
-Billing is done per execution hour. Each call accumulates milliseconds only from the script's execution time (does not include compilation). E.g., if the script takes 20 seconds, 20,000 ms will be counted. The minimum charge per execution is 20 ms.
+Billing is based on execution time (CPU time).
 
-The serverless processing cost is **$1/hour**.
+- **Cost:** $1.00 per hour (billed per millisecond).
+- **Minimum:** 20 ms per execution.
+- **Free tier:** 10 free minutes per day for all accounts.
 
 > [!NOTE]
-> All accounts have **10 minutes** free per day. Once exceeded, billing starts. If the account goes negative, function execution is halted.
+> Discounted execution time (e.g., internal inference network calls or API calls to AIVAX) is not billed, but there is a minimum floor of 20ms per invocation.
 
-## Rate limits
+## Examples
 
-The global rate limits for serverless functions are described in [rate limits](/docs/en/limits).
+### Hello World
+
+```javascript
+async function main() {
+    res.text("Hello, world!");
+}
+```
+
+### Respond JSON with Validation
+
+```javascript
+async function main() {
+    if (req.method !== 'POST') {
+        return res.error("Method not allowed", 405);
+    }
+
+    try {
+        const body = req.json();
+        if (!body.nome) throw new Error("Field 'name' required");
+        
+        res.json({ 
+            mensagem: `Olá, ${body.nome}`,
+            timestamp: new Date()
+        });
+    } catch (e) {
+        res.error(e.message);
+    }
+}
+```
+
+### Call AI and Return Text
+
+```javascript
+async function main() {
+    if (!await authenticate())
+        return res.error("Unauthorized", 401);
+
+    const prompt = req.query.p || "Tell a short joke";
+    const resposta = await ai.completeText('@metaai/llama-3-8b', prompt);
+    
+    res.text(resposta);
+}
+```

@@ -129,13 +129,17 @@
 <p>Note que cada modelo decide qual função chamar e seus parâmetros. Nem todos os modelos podem obedecer as regras de chamadas.</p>
 <h2 id="pesquisa-na-internet">Pesquisa na internet</h2>
 <p>Essa função habilita a pesquisa na internet no seu modelo. Com isso, o modelo pode consultar por informações específicas ou em tempo real, como dados meteorológicos, notícias, resultados de jogos, etc.</p>
-<p>A pesquisa na internet é feita por vários provedores, escolhido conforme disponibilidade de rede e latência. Os provedores atuais usados pela AIVAX é <a href="https://www.linkup.so/">linkup</a> e <a href="https://exa.ai/">Exa</a>.</p>
+<p>A pesquisa na internet é feita por vários provedores, escolhido conforme disponibilidade de rede e latência. A AIVAX utiliza uma mistura de provedores para realizar pesquisas na internet.</p>
 <p>A AIVAX fornece dois tipos de pesquisa configuráveis pelo seu dashboard:</p>
 <ul>
 <li><strong>Full</strong>: a pesquisa realizada é completa, inserindo no contexto da conversa o conteúdo inteiro de cada resultado encontrado.</li>
 <li><strong>Summarized</strong>: a pesquisa realizada é resumida, inserindo no contexto da conversa um resumo feito por IA pelo próprio provedor de pesquisa.</li>
 </ul>
 <p>O custo dos dois modos é de <strong>$5</strong> à cada <strong>1.000</strong> pesquisas realizadas. O modo <code>Full</code> pode consumir mais tokens de entrada da conversa, mas pode proporcionar resultados mais precisos.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p><strong>Importante:</strong> nem sempre a pesquisa <code>Full</code> está disponível.</p>
+</div>
 <h2 id="pesquisa-avançada-na-internet">Pesquisa avançada na internet</h2>
 <p>Essa função permite que o modelo tenha um navegador da internet e consiga realizar automação, como pesquisas, navegar em sites, preencher formulários e clicar em botões.</p>
 <p>No momento não há parametrização dessa função.</p>

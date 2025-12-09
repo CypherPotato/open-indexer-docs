@@ -231,6 +231,60 @@ Todos os preços estão em dólares dos Estados Unidos.
 <tr>
     <td>
         <code>
+            @anthropic/claude-4.5-opus
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 5.00 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.50 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 25.00 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Claude Opus 4.5 is Anthropic’s latest reasoning model, developed for advanced software engineering, complex agent workflows, and extended computer tasks.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Raciocínio
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
             @anthropic/claude-4.5-sonnet
         </code>
     </td>
@@ -316,53 +370,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     </td>
     <td>
         Anthropic's mid-size model with superior intelligence for high-volume uses in coding, in-depth research, agents, & more.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Raciocínio
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @anthropic/claude-4.5-sonnet:discounted
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 1.80 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 9.00 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        Claude Sonnet 4.5 is the newest model in the Sonnet series, offering improvements and updates over Sonnet 4.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -717,6 +724,52 @@ Todos os preços estão em dólares dos Estados Unidos.
 <tr>
     <td>
         <code>
+            @deepseekai/v3.2-speciale
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.28 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.03 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.42 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        DeepSeek-V3.2-Speciale is a high-compute version of DeepSeek-V3.2, designed for maximum reasoning and agentic performance.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Raciocínio
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
             @deepseekai/v3.2
         </code>
     </td>
@@ -726,21 +779,28 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada:
             </small>
             <div>
-                $ 0.27 <small>/1m tokens</small>
+                $ 0.28 <small>/1m tokens</small>
             </div>
         </div>
-        
+        <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.03 <small>/1m tokens</small>
+    </div>
+</div>
         <div class="item-pricing">
             <small>
                 Saída:
             </small>
             <div>
-                $ 0.40 <small>/1m tokens</small>
+                $ 0.42 <small>/1m tokens</small>
             </div>
         </div>
     </td>
     <td>
-        DeepSeek-V3.2-Exp is an intermediate step toward the next-generation architecture of the DeepSeek models by introducing DeepSeek Sparse Attention—a sparse attention mechanism designed to explore and validate optimizations for training and inference efficiency in long-context scenarios.
+        DeepSeek-V3.2 is a large language model optimized for high computational efficiency and strong tool-use reasoning.
         <div class="model-capabilities">
 <div>
     <i class="ri-instance-line"></i>
@@ -779,6 +839,53 @@ Todos os preços estão em dólares dos Estados Unidos.
 <tr>
     <td>
         <code>
+            @google/gemini-3-pro
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 2.00 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 12.00 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Gemini 3 Pro Preview is Google’s most advanced AI model, setting new records on leading benchmarks like LMArena (1501 Elo), GPQA Diamond (91.9%), and MathArena Apex (23.4%).
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens, vídeos, áudios
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Raciocínio
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
             @google/gemini-2.5-pro
         </code>
     </td>
@@ -805,53 +912,6 @@ Todos os preços estão em dólares dos Estados Unidos.
             </small>
             <div>
                 $ 10.00 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        One of the most powerful models today.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens, vídeos, áudios
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Raciocínio
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @google/gemini-2.5-pro:discounted
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 1.00 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 8.00 <small>/1m tokens</small>
             </div>
         </div>
     </td>
@@ -1532,6 +1592,45 @@ Todos os preços estão em dólares dos Estados Unidos.
 <tr>
     <td>
         <code>
+            @mistral/large-2512
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.50 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 1.50 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Mistral Large 3 2512 is Mistral’s most capable model to date, featuring a sparse mixture-of-experts architecture with 41B active parameters (675B total).
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
             @mistral/magistral-small
         </code>
     </td>
@@ -1672,7 +1771,7 @@ Todos os preços estão em dólares dos Estados Unidos.
 <tr>
     <td>
         <code>
-            @model-router/gemini
+            @model-router/complexity
         </code>
     </td>
     <td>
@@ -1702,297 +1801,7 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
     </td>
     <td>
-        Model router for Google Gemini. The routing is made between:
-- Gemini 2.0 Flash
-- Gemini 2.5 Flash (no thinking)
-- Gemini 2.5 Flash (thinking)
-        <div class="model-capabilities">
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @model-router/gemini-high
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.20 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-    <small>
-        Entrada (em cache):
-    </small>
-    <div>
-        $ 0.05 <small>/1m tokens</small>
-    </div>
-</div>
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 0.50 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        Model router for Google Gemini. The routing is made between:
-- Gemini 2.5 Flash
-- Gemini 2.5 Pro
-- Gemini 2.5 Pro (high)
-        <div class="model-capabilities">
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @model-router/openai
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.20 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-    <small>
-        Entrada (em cache):
-    </small>
-    <div>
-        $ 0.05 <small>/1m tokens</small>
-    </div>
-</div>
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 0.50 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        Model router for OpenAI. The routing is made between:
-- GPT-5-nano
-- GPT 5-mini-low
-- GPT-5-mini-medium.
-        <div class="model-capabilities">
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @model-router/openai-high
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.20 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-    <small>
-        Entrada (em cache):
-    </small>
-    <div>
-        $ 0.05 <small>/1m tokens</small>
-    </div>
-</div>
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 0.50 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        Model router for OpenAI. The routing is made between:
-- GPT-5-mini
-- GPT-5
--GPT-5-high
-        <div class="model-capabilities">
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @model-router/claude
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.20 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-    <small>
-        Entrada (em cache):
-    </small>
-    <div>
-        $ 0.05 <small>/1m tokens</small>
-    </div>
-</div>
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 0.50 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        Model router for Claude. The routing is made between:
-- Claude 3 Haiku
-- Claude 4.5 Haiku
-- Claude 4.5 Sonnet
-        <div class="model-capabilities">
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @model-router/claude-high
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.20 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-    <small>
-        Entrada (em cache):
-    </small>
-    <div>
-        $ 0.05 <small>/1m tokens</small>
-    </div>
-</div>
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 0.50 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        Model router for Claude. The routing is made between:
-- Claude 4.5 Haiku
-- Claude 4.5 Sonnet
-- Claude 4.1 Opus
-        <div class="model-capabilities">
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @model-router/llama
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.20 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-    <small>
-        Entrada (em cache):
-    </small>
-    <div>
-        $ 0.05 <small>/1m tokens</small>
-    </div>
-</div>
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 0.50 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        Model router for Meta Llama. The routing is made between:
-- Llama 4 Scout
-- Llama 4 Maverick
-- Llama 3.3 70b.
-        <div class="model-capabilities">
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @model-router/grok
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.20 <small>/1m tokens</small>
-            </div>
-        </div>
-        <div class="item-pricing">
-    <small>
-        Entrada (em cache):
-    </small>
-    <div>
-        $ 0.05 <small>/1m tokens</small>
-    </div>
-</div>
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 0.50 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        Model router for X-AI Grok. The routing is made between:
-- Grok 4 Fast (non reasoning)
-- Grok 4 Fast (reasoning)
-- Grok 4
+        Model Router: chooses the best models according to the complexity of the conversation.
         <div class="model-capabilities">
         </div>
     </td>
@@ -2062,6 +1871,56 @@ Todos os preços estão em dólares dos Estados Unidos.
         </div>
     </td>
 </tr>
+<tr>
+    <td>
+        <code>
+            @moonshotai/kimi-k2-thinking
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.60 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.15 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 2.50 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Kimi K2 Thinking is Moonshot AI’s most advanced open reasoning model to date, extending the K2 series into agentic, long-horizon reasoning.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Raciocínio
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
     </tbody>
 </table>
 
@@ -2123,6 +1982,222 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @openai/gpt-5.1
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 1.25 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.13 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 10.00 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        GPT-5.1 is the newest top-tier model in the GPT-5 series, featuring enhanced general reasoning, better instruction following, and a more natural conversational tone compared to GPT-5.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Raciocínio
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @openai/gpt-5.1-chat
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 1.25 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.13 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 10.00 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        GPT-5.1 Chat (also known as Instant) is the fast, lightweight member of the 5.1 family, optimized for low-latency chat while retaining strong general intelligence.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Raciocínio
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @openai/gpt-5.1-codex
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 1.25 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.13 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 10.00 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        GPT-5.1-Codex is a specialized version of GPT-5.1 optimized for software engineering and coding workflows.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Raciocínio
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @openai/gpt-5.1-codex-max
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 1.25 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.13 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 10.00 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        GPT-5.1-Codex-Max is OpenAI’s latest agentic coding model, designed for long-running, high-context software development tasks.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Raciocínio
 </div>
 <div>
     <i class="ri-braces-line"></i>
@@ -2392,53 +2467,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <tr>
     <td>
         <code>
-            @openai/gpt-5:discounted
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 1.00 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 7.50 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        OpenAI's newest flagship model for coding, reasoning, and agentic tasks across domains.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Raciocínio
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
             @openai/o4-mini
         </code>
     </td>
@@ -2543,7 +2571,7 @@ Todos os preços estão em dólares dos Estados Unidos.
 <tr>
     <td>
         <code>
-            @openai/o4-mini:discounted
+            @openai/gpt-5.1-codex-mini
         </code>
     </td>
     <td>
@@ -2552,21 +2580,28 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada:
             </small>
             <div>
-                $ 0.70 <small>/1m tokens</small>
+                $ 0.25 <small>/1m tokens</small>
             </div>
         </div>
-        
+        <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.03 <small>/1m tokens</small>
+    </div>
+</div>
         <div class="item-pricing">
             <small>
                 Saída:
             </small>
             <div>
-                $ 2.20 <small>/1m tokens</small>
+                $ 2.00 <small>/1m tokens</small>
             </div>
         </div>
     </td>
     <td>
-        Optimized for fast, effective reasoning with exceptionally efficient performance in coding and visual tasks.
+        GPT-5.1-Codex-Mini is a more compact and faster variant of GPT-5.1-Codex.
         <div class="model-capabilities">
 <div>
     <i class="ri-image-circle-line"></i>
@@ -3361,6 +3396,52 @@ Todos os preços estão em dólares dos Estados Unidos.
 <tr>
     <td>
         <code>
+            @x-ai/grok-code-fast
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.20 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.02 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 1.50 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Grok Code Fast 1 is a speedy and economical reasoning model that excels at agentic coding.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
             @x-ai/grok-3-mini
         </code>
     </td>
@@ -3397,6 +3478,110 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-lightbulb-line"></i>
     Raciocínio
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @x-ai/grok-4.1-fast-reasoning
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.20 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.05 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.50 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Grok 4.1 Fast Reasoning is xAI's most capable tool-calling model, engineered for production-grade agentic applications with a 2M token context window.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Raciocínio
+</div>
+<div>
+    <i class="ri-braces-line"></i>
+    Funções JSON
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @x-ai/grok-4.1-fast
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.20 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.05 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.50 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Grok 4.1 Fast Non-Reasoning is xAI's high-speed variant optimized for instant responses and straightforward queries, featuring a 2M token context window.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
 </div>
 <div>
     <i class="ri-braces-line"></i>

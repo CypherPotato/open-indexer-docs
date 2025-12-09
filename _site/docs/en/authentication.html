@@ -124,8 +124,8 @@
                 <article data-uid="">
 <h1 id="authentication">Authentication</h1>
 
-<p>When you have your account ready, use your unique authentication key to authenticate to our API via the <code>Authorization</code> header:</p>
-<pre><code class="lang-bash">curl https://inference.aivax.net/api/v1/information/models.txt \
+<p>When you have your account, use your unique authentication key to authenticate with our API via the <code>Authorization</code> header:</p>
+<pre><code class="lang-bash">curl https://inference.aivax.net/api/v1/information/models.json \
     -H 'Authorization: Bearer oky_gr5uepj...'
 </code></pre>
 <p>You can also send your authorization token via the query parameter <code>?api-key</code>, for example:</p>
@@ -133,10 +133,10 @@
 </code></pre>
 <p>There is no need to send the <code>Bearer</code> authentication scheme in both headers, but it is possible for compatibility reasons.</p>
 <h2 id="authenticating-hooks">Authenticating hooks</h2>
-<p>AIVAX requests to your services, whether AI gateway workers or server‑side function calls, include a <code>X-Request-Nonce</code> header in all requests containing a BCrypt hash that is a derived value of the <a href="https://console.aivax.net/dashboard/account">hook key</a> defined in your account.</p>
-<p>The validation is simple: check that the hash in <code>X-Request-Nonce</code> is a product of the hook key defined in your account.</p>
-<p>In this way, you can authenticate whether the AIVAX requests to your services are genuine using this token. If your account has not defined a hook key, this header will not be sent.</p>
-<p>See the examples below for validating the hook key:</p>
+<p>AIVAX requests to your services, whether AI gateway workers or server‑side function calls, include an <code>X-Request-Nonce</code> header in every request containing a BCrypt hash that is a derived value of the <a href="https://console.aivax.net/dashboard/account">hook key</a> set in your account.</p>
+<p>Validation is simple: verify that the hash in <code>X-Request-Nonce</code> is a product of the derived key set in your account.</p>
+<p>In this way, you can authenticate whether AIVAX requests to your services are genuine using this token. If your account has not defined a hook key, this header will not be sent.</p>
+<p>See the examples below for hook key validation:</p>
 <div class="tabGroup" id="tabgroup_1">
 <ul role="tablist">
 <li role="presentation">
@@ -161,20 +161,20 @@ internal class MyController : Controller
         this.HasRequestHandler(RequestHandler.Create(
             execute: (req, ctx) =&gt;
             {
-                // Retrieves the nonce sent from the request
-                var hash = this.Request.Headers[&quot;X-Request-Nonce&quot;];
+                // Get the nonce sent from the request
+                var hash = this.Request.Headers [&quot;X-Request-Nonce&quot;];
                 if (hash == null)
                 {
                     return new HttpResponse(HttpStatusInformation.Unauthorized);
                 }
-
-                // Validates the hook using the BCrypt.Net library
-                var secretWord = Environment.GetEnvironmentVariable(&quot;AIVAX_HOOK_SECRET&quot;);
+                
+                // Validate the hook using the BCrypt.Net library
+                var secretWord = Environment.GetEnvironmentVariable (&quot;AIVAX_HOOK_SECRET&quot;);
                 if (!BCrypt.Net.BCrypt.Verify(secretWord, hash, enhancedEntropy: false))
                 {
                     return new HttpResponse(HttpStatusInformation.Forbidden);
                 }
-
+                
                 // Continue the request after hook validated
                 return null;
             }));
@@ -192,13 +192,13 @@ import bcrypt
 app = Flask(__name__)
 
 @app.before_request
-def authenticate_token():
+def autenticar_token():
     # 1. Read the header containing the token hash
     token_hash = request.headers.get(&quot;X-Request-Nonce&quot;)
     if not token_hash:
         abort(401)
 
-    # 2. Load the plain‑text secret from environment variables
+    # 2. Load the plain-text secret from environment variables
     secret = os.getenv(&quot;AIVAX_HOOK_SECRET&quot;)
     if secret is None:
         abort(500)
@@ -230,7 +230,7 @@ app.use(async (req, res, next) =&gt; {
     return res.sendStatus(401)
   }
 
-  // 2. Load the plain‑text secret from environment variables
+  // 2. Load the plain-text secret from environment variables
   const secret = process.env.AIVAX_HOOK_SECRET
   if (!secret) {
     return res.sendStatus(500)
@@ -242,7 +242,7 @@ app.use(async (req, res, next) =&gt; {
     if (!match) {
       return res.sendStatus(403)
     }
-
+    
     next()
   } catch (err) {
     return res.sendStatus(500)

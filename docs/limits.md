@@ -1,4 +1,3 @@
-
 # Limites da API
 
 Os limites de taxa regulam o número de requisições que você pode enviar em uma janela de tempo. Eles ajudam a prevenir abuso e garantir estabilidade para todos os usuários.
