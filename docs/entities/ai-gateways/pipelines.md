@@ -45,6 +45,18 @@ Esses parâmetros podem ser muito úteis para prompt engineering, no entanto, po
 
 Atenção: prefixando instruções, templates e inicializações podem remover a capacidade de raciocínio, interpretação multi-modalidades e chamadas de ferramentas do modelo.
 
+## Instruções remotas
+
+Você também pode fornecer instruções **remotas** no contexto. Instruções remotas fazem uma chamada GET para o recurso fornecido e cacheia ele internamente por 10 minutos. Esses recursos são lidos como texto, limitado à 10 MB por recurso.
+
+Estes recursos são inseridos nas instruções de sistema do LLM.
+
+## Skills (habilidades)
+
+Habilidades são instruções fornecidas sob-demanda para o modelo, o que pode obter instruções refinadas e aprimoradas para diferentes tarefas especializadas.
+
+Leia mais sobre [habilidades](/docs/skills).
+
 ## Processamento multi-modal
 
 O pré-processamento de conteúdo multi-modal permite processar áudios, imagens, vídeos e documentos usando modelos com essas capacidades para modelos que não possuem essa capacidade.
@@ -53,7 +65,7 @@ O conteúdo gerado é armazenado em um cache de longo prazo em nossos servidores
 
 Cada conteúdo multi-modal é convertido para uma representação textual do mesmo através de um modelo auxiliar.
 
-O custo desse processamento é de **$ 0,10** por milhão de tokens de entrada e **$ 0,40** por milhão de tokens de saída.
+O custo desse processamento é de `$ 0,30` por milhão de tokens de entrada e `$ 2,50` por milhão de tokens de saída.
 
 ## Parametrização
 
@@ -87,7 +99,7 @@ Leia mais sobre esse pipeline [aqui](/docs/protocol-functions).
 
 Você pode adicionar ferramentas providas pela AIVAX em seu gateway, como pesquisa na internet, geração de imagens e acesso de links. Consulte todas as ferramentas disponíveis [aqui](/docs/builtin-tools).
 
-## Interpretador de funções
+## Interpretador de funções (tool handler)
 
 É possível alterar o interpretador de funções usado pelo modelo. Isso traz a possibilidade de adicionar a capacidade de **chamar funções** para modelos que não suportam esse recurso.
 

@@ -124,38 +124,15 @@
                 <article data-uid="">
 <h1 id="welcome">Welcome</h1>
 
-<p>Welcome to AIVAX. Our service makes it easier to develop intelligent AI models that use a knowledge base provided by you to converse with the user, answer questions, provide real-time information, and more.</p>
-<p>To get started, all endpoints must be made to the AIVAX production URL:</p>
+<p>Welcome to AIVAX. Our service makes it easier to develop intelligent AI models that use a knowledge base provided by you to converse with the user, answer questions, provide real-time information and more.</p>
+<p>To get started, all endpoints should be made on AIVAX's production URL:</p>
 <pre><code class="lang-text">https://inference.aivax.net/
 </code></pre>
-<h2 id="concepts-and-definitions">Concepts and definitions</h2>
-<p>Understand the concepts used by the API below:</p>
-<ul>
-<li><strong>Account:</strong> represents a user account, which has an authentication token.
-<ul>
-<li><strong>Collection:</strong> represents a collection of knowledge documents. A user can have multiple document collections.
-<ul>
-<li><strong>Document:</strong> represents a fact, a single piece of knowledge, and an item in a collection. A collection can have multiple documents.</li>
-</ul>
-</li>
-<li><strong>AI Gateway:</strong> represents an AI gateway that benefits from or does not use a knowledge collection, such as a plug-and-play knowledge middleware for a model.
-<ul>
-<li><strong>Embedded model:</strong> represents an AI model that AIVAX provides to the user.</li>
-<li><strong>Chat client:</strong> represents a user interface that makes the AI gateway available through an interactive online chat.
-<ul>
-<li><strong>Chat session</strong>: hosts a conversation and context of a chat client.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
 <h2 id="handling-errors">Handling errors</h2>
 <p>All API errors return an HTTP response with a non-OK status (never 2xx or 3xx), and always follow the JSON format:</p>
 <pre><code class="lang-json">{
-    &quot;error&quot;: &quot;An explanatory error message&quot;,
-    &quot;details&quot;: {} // an object containing relevant error information. Most of the time it is null
+    &quot;error&quot;: &quot;A message explaining the error&quot;,
+    &quot;details&quot;: {} // an object containing relevant information about the error. Most of the time it is null
 }
 </code></pre>
 

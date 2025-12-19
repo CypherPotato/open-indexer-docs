@@ -914,6 +914,16 @@
       "version": ""
     },
     {
+      "type": "Conceptual",
+      "source_relative_path": "docs/en/skills.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/en/skills.html"
+        }
+      },
+      "version": ""
+    },
+    {
       "type": "Toc",
       "source_relative_path": "docs/en/toc.yml",
       "output": {
@@ -1105,6 +1115,16 @@
       "output": {
         ".html": {
           "relative_path": "docs/serverless.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/skills.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/skills.html"
         }
       },
       "version": ""

@@ -23,6 +23,8 @@ items:
   href: protocol-functions.md
 - name: Serverless
   href: serverless.md
+- name: Skills
+  href: skills.md
 
 - name: Usando a API
 
