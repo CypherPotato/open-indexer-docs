@@ -352,6 +352,16 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "assets/icon/xiaomi.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/icon/xiaomi.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "assets/icon/z-ai.svg",
       "output": {
         "resource": {
