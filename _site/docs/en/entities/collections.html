@@ -124,13 +124,17 @@
                 <article data-uid="">
 <h1 id="collections">Collections</h1>
 
-<p>A collection is a knowledge library: it houses several knowledge documents.</p>
+<p>A collection is a knowledge library: it houses multiple knowledge documents.</p>
 <ul>
-<li>Use collections to group documents by purpose, such as documenting a product, a company, a service or flow.</li>
-<li>Collections do not incur costs. There is no limit to the number of collections per account.</li>
+<li>Use collections to group documents by purpose, such as documenting a product, a company, a service, or a workflow.</li>
+<li>Collections do not incur cost. There is no limit to the number of collections per account.</li>
 </ul>
+<div class="TIP">
+<h5>Tip</h5>
+<p>Collections implement the <strong>RAG (Retrieval-Augmented Generation)</strong> technique. To understand when to use RAG compared to Skills and System Prompt, see our <a href="/docs/en/concepts-comparison">complete comparison guide</a>.</p>
+</div>
 <h2 id="create-a-collection">Create a collection</h2>
-<p>To create an empty collection, simply provide its name:</p>
+<p>To create an empty collection, provide only its name:</p>
 <h4 id="request">Request</h4>
 <div class="request-item post">
     <span>POST</span>
@@ -184,8 +188,8 @@
     }
 }
 </code></pre>
-<h2 id="view-a-collection">View a collection</h2>
-<p>Obtains details of a collection, such as its indexing progress and information like creation date.</p>
+<h2 id="get-a-collection">Get a collection</h2>
+<p>Retrieves details of a collection, such as its indexing progress and information like creation date.</p>
 <h4 id="request-2">Request</h4>
 <div class="request-item get">
     <span>GET</span>
@@ -201,10 +205,10 @@
         &quot;createdAt&quot;: &quot;2025-04-22T02:29:46&quot;,
         &quot;state&quot;: {
             
-            // Returns the number of documents waiting for indexing
+            // number of documents waiting to be indexed
             &quot;queuedDocuments&quot;: 0,
             
-            // Number of documents ready for query
+            // number of documents ready for query
             &quot;indexedDocuments&quot;: 227
         },
         &quot;tags&quot;: [
@@ -231,8 +235,8 @@
     &quot;data&quot;: null
 }
 </code></pre>
-<h2 id="clear-a-collection">Clear a collection</h2>
-<p>Unlike collection deletion, this operation removes all documents from the collection, including indexed and queued ones.</p>
+<h2 id="clean-a-collection">Clean a collection</h2>
+<p>Unlike deleting a collection, this operation removes all documents from the collection, including indexed and queued ones.</p>
 <h4 id="request-4">Request</h4>
 <div class="request-item delete">
     <span>DELETE</span>

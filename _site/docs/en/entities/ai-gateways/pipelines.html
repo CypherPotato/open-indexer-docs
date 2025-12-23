@@ -127,8 +127,8 @@
 <p>AIVAX provides several pipelines to use in your AI gateway.</p>
 <p>You can use multiple pipelines to run in the context of your gateway.</p>
 <h2 id="rag">RAG</h2>
-<p>Through <a href="/docs/en/entities/collections">collections</a>, you can link a collection of documents to your AI gateway. You can set embedding parameters, such as number of documents, minimum score, and embedding strategy.</p>
-<p>Each embedding strategy is more refined than the other. Some produce better results than others, but it is important to perform practical tests with various strategies to understand which fits best with the model, conversation, and user tone.</p>
+<p>Through <a href="/docs/en/entities/collections">collections</a>, you can link document collections to your AI gateway. You can set embedding parameters, such as number of documents, minimum score, and embedding strategy.</p>
+<p>Each embedding strategy is more refined than the other. Some produce better results than others, but it is important to conduct practical tests with various strategies to understand which fits best with the model, conversation, and user tone.</p>
 <p>You may need to adjust the system prompt to better inform how the AI should consider the attached documents in the conversation. The documents are attached as a user message, limited to the parameters you define in the retrieval strategy.</p>
 <p>Rewrite strategies usually generate the best results at a low latency and cost. The rewrite model used is always the cheapest one, typically chosen by an internal pool that selects the model with the lowest latency at the moment.</p>
 <h3 id="strategies-without-rewrite-cost">Strategies without rewrite cost:</h3>
@@ -138,7 +138,7 @@
 </ul>
 <h3 id="strategies-with-rewrite-cost-inference-tokens-are-charged">Strategies with rewrite cost (inference tokens are charged):</h3>
 <ul>
-<li><code>UserRewrite</code>: rewrites the last N user messages using a smaller model, creating a question contextualized to what the user means.</li>
+<li><code>UserRewrite</code>: rewrites the last N user messages using a smaller model, creating a contextualized question of what the user means.</li>
 <li><code>FullRewrite</code>: rewrites the last N*2 chat messages using a smaller model. Similar to <code>UserRewrite</code>, but also considers the assistant's messages when formulating the new question. Generally creates the best questions, with a slightly higher cost. It is the most stable and consistent strategy. Works with any model.</li>
 </ul>
 <h3 id="function-strategies">Function strategies:</h3>
@@ -147,7 +147,7 @@
 </ul>
 <p>When defining a RAG collection in your gateway's pipeline, the first message in the conversation context will be the result of the RAG embedding as a user message (except when used as tools where the embedding result is attached as a tool response).</p>
 <p>Defining many RAG response documents increases input token consumption and can raise the final inference cost.</p>
-<h2 id="pinning-instructions">Pinning Instructions</h2>
+<h2 id="fixing-instructions">Fixing Instructions</h2>
 <p>The instructions pipeline allows prefixing instructions in various places of the model, guiding and restricting the model's response format.</p>
 <p>The current ways to define instructions are:</p>
 <ul>
@@ -164,20 +164,20 @@
 <p>Skills are on-demand instructions for the model, which can obtain refined and enhanced instructions for different specialized tasks.</p>
 <p>Read more about <a href="/docs/en/skills">skills</a>.</p>
 <h2 id="multimodal-processing">Multimodal Processing</h2>
-<p>Multimodal content pre-processing allows processing audio, images, video, and documents using models with those capabilities for models that lack this capability.</p>
-<p>The generated content is stored in a long-term cache on our servers and is evicted after a period of inactivity. After that period, the content tends to be re-processed if inserted into the conversation again.</p>
+<p>Multimodal content pre-processing allows processing audio, images, video, and documents using models with these capabilities for models that lack them.</p>
+<p>The generated content is stored in a long-term cache on our servers and is evicted after a certain period of inactivity. After that period, the content tends to be re-processed if inserted into the conversation again.</p>
 <p>Each multimodal content is converted to a textual representation of it via an auxiliary model.</p>
 <p>The cost of this processing is <code>$0.30</code> per million input tokens and <code>$2.50</code> per million output tokens.</p>
 <h2 id="parameterization">Parameterization</h2>
 <p>The parameterization pipeline sets the initial inference hyperparameters, such as temperature, nucleus sampling, presence penalty, and other inference hyperparameters.</p>
 <h2 id="truncating">Truncating</h2>
 <p>The truncating pipeline allows setting the size of a conversation in tokens before it is trimmed.</p>
-<p>When this pipeline is enabled, before each inference, it checks whether <code>num_of_chars / 4</code> is greater than the conversation's maximum input tokens. If the context is larger, the pipeline starts removing messages from the beginning of the conversation until the messages fit within the specified context.</p>
+<p>When this pipeline is enabled, before each inference, it checks whether <code>num_of_chars / 4</code> exceeds the maximum input tokens for the conversation. If the context is larger, the pipeline starts removing messages from the beginning of the conversation until the messages fit within the specified context.</p>
 <p>At least one user message (usually the last message) is kept in the conversation. All other messages are removed, except system instructions.</p>
 <p>Alternatively, you can set it so that reaching the limit triggers an error in the API instead of trimming the context.</p>
 <h2 id="tool-message-truncating">Tool Message Truncating</h2>
 <p>The tool message counting pipeline is similar to truncating: it removes older tool responses and preserves only the newest ones.</p>
-<p>This can be useful when previous tool responses are no longer useful in newer messages and take up context space, but it can be detrimental when used with agentic models that call tools in a chain.</p>
+<p>This can be useful when earlier tool responses are no longer useful in newer messages and take up context space, but it can be detrimental when used with agentic models that call tools in a chain.</p>
 <p>This pipeline is configured by the number of tool messages to preserve instead of tokens. When a tool message is considered old, it is not removed, but its content is cleared.</p>
 <h2 id="server-side-tools">Server-side Tools</h2>
 <p>This pipeline enables execution of AIVAX server-side tools, similar to the MCP protocol.</p>
@@ -188,12 +188,12 @@
 <p>It is possible to change the function interpreter used by the model. This adds the ability to <strong>call functions</strong> for models that do not support this feature.</p>
 <p>Currently, there are two types of interpreters:</p>
 <ul>
-<li>ReAct: an interpreter based on the technique <a href="https://www.promptingguide.ai/techniques/react">ReAct prompting</a> using an auxiliary model. The <code>react.v1.selfcall</code> interpreter uses the inference model itself to call functions before generating a response.</li>
-<li>NtvCall: uses another model to call functions for the main model. The flow resumes when the alternative model does not call any function and starts generating a response.</li>
+<li>ReAct: an interpreter based on the <a href="https://www.promptingguide.ai/techniques/react">ReAct prompting</a> technique using an auxiliary model. The <code>react.v1.selfcall</code> interpreter uses the inference model itself to call functions before generating a response.</li>
+<li>NtvCall: uses another model to call functions for the main model. The flow resumes when the alternate model does not call any function and starts generating a response.</li>
 </ul>
 <h2 id="moderation">Moderation</h2>
 <p>You can add a moderation layer to your AI gateway. An auxiliary model will analyze the entire conversation context and classify it as safe or unsafe according to your moderation preferences.</p>
-<p>Conversations classified as unsafe are removed from inference and the model tends to generate a response indicating it cannot generate content about that subject.</p>
+<p>Conversations classified as unsafe are removed from inference and the model tends to generate a response indicating it cannot generate content about that topic.</p>
 <p>The moderation cost is <strong>$0.20</strong> per million processed tokens.</p>
 <h2 id="workers">Workers</h2>
 <p>Workers define the behavior of your gateway remotely, used to control when certain events should be aborted or continued.</p>

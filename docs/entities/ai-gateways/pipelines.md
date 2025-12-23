@@ -6,7 +6,7 @@ Você pode usar vários pipelines para executarem no contexto do seu gateway.
 
 ## RAG
 
-Através de [coleções](/docs/entities/collections), você pode vincular uma coleção de documentos para seu gateway de IA. Você pode definir os parâmetros de incorporação, como quantidade de documentos, pontuação mínima e estratégia de incorporação.
+Através de [coleções](/docs/entities/collections), você pode vincular coleções de documentos para seu gateway de IA. Você pode definir os parâmetros de incorporação, como quantidade de documentos, pontuação mínima e estratégia de incorporação.
 
 Cada estratégia de incorporação é mais refinada que a outra. Algumas criam resultados melhores que as demais, mas é importante realizar testes práticos com várias estratégias para entender qual se ajusta melhor no modelo, conversa e tom do usuário.
 

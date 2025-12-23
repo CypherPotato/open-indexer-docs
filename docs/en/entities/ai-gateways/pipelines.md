@@ -6,9 +6,9 @@ You can use multiple pipelines to run in the context of your gateway.
 
 ## RAG
 
-Through [collections](/docs/en/entities/collections), you can link a collection of documents to your AI gateway. You can set embedding parameters, such as number of documents, minimum score, and embedding strategy.
+Through [collections](/docs/en/entities/collections), you can link document collections to your AI gateway. You can set embedding parameters, such as number of documents, minimum score, and embedding strategy.
 
-Each embedding strategy is more refined than the other. Some produce better results than others, but it is important to perform practical tests with various strategies to understand which fits best with the model, conversation, and user tone.
+Each embedding strategy is more refined than the other. Some produce better results than others, but it is important to conduct practical tests with various strategies to understand which fits best with the model, conversation, and user tone.
 
 You may need to adjust the system prompt to better inform how the AI should consider the attached documents in the conversation. The documents are attached as a user message, limited to the parameters you define in the retrieval strategy.
 
@@ -21,7 +21,7 @@ Rewrite strategies usually generate the best results at a low latency and cost. 
 
 ### Strategies with rewrite cost (inference tokens are charged):
 
-- `UserRewrite`: rewrites the last N user messages using a smaller model, creating a question contextualized to what the user means.
+- `UserRewrite`: rewrites the last N user messages using a smaller model, creating a contextualized question of what the user means.
 - `FullRewrite`: rewrites the last N*2 chat messages using a smaller model. Similar to `UserRewrite`, but also considers the assistant's messages when formulating the new question. Generally creates the best questions, with a slightly higher cost. It is the most stable and consistent strategy. Works with any model.
 
 ### Function strategies:
@@ -32,7 +32,7 @@ When defining a RAG collection in your gateway's pipeline, the first message in 
 
 Defining many RAG response documents increases input token consumption and can raise the final inference cost.
 
-## Pinning Instructions
+## Fixing Instructions
 
 The instructions pipeline allows prefixing instructions in various places of the model, guiding and restricting the model's response format.
 
@@ -59,9 +59,9 @@ Read more about [skills](/docs/en/skills).
 
 ## Multimodal Processing
 
-Multimodal content pre-processing allows processing audio, images, video, and documents using models with those capabilities for models that lack this capability.
+Multimodal content pre-processing allows processing audio, images, video, and documents using models with these capabilities for models that lack them.
 
-The generated content is stored in a long-term cache on our servers and is evicted after a period of inactivity. After that period, the content tends to be re-processed if inserted into the conversation again.
+The generated content is stored in a long-term cache on our servers and is evicted after a certain period of inactivity. After that period, the content tends to be re-processed if inserted into the conversation again.
 
 Each multimodal content is converted to a textual representation of it via an auxiliary model.
 
@@ -75,7 +75,7 @@ The parameterization pipeline sets the initial inference hyperparameters, such a
 
 The truncating pipeline allows setting the size of a conversation in tokens before it is trimmed.
 
-When this pipeline is enabled, before each inference, it checks whether `num_of_chars / 4` is greater than the conversation's maximum input tokens. If the context is larger, the pipeline starts removing messages from the beginning of the conversation until the messages fit within the specified context.
+When this pipeline is enabled, before each inference, it checks whether `num_of_chars / 4` exceeds the maximum input tokens for the conversation. If the context is larger, the pipeline starts removing messages from the beginning of the conversation until the messages fit within the specified context.
 
 At least one user message (usually the last message) is kept in the conversation. All other messages are removed, except system instructions.
 
@@ -85,7 +85,7 @@ Alternatively, you can set it so that reaching the limit triggers an error in th
 
 The tool message counting pipeline is similar to truncating: it removes older tool responses and preserves only the newest ones.
 
-This can be useful when previous tool responses are no longer useful in newer messages and take up context space, but it can be detrimental when used with agentic models that call tools in a chain.
+This can be useful when earlier tool responses are no longer useful in newer messages and take up context space, but it can be detrimental when used with agentic models that call tools in a chain.
 
 This pipeline is configured by the number of tool messages to preserve instead of tokens. When a tool message is considered old, it is not removed, but its content is cleared.
 
@@ -104,14 +104,14 @@ You can add tools provided by AIVAX to your gateway, such as internet search, im
 It is possible to change the function interpreter used by the model. This adds the ability to **call functions** for models that do not support this feature.
 
 Currently, there are two types of interpreters:
-- ReAct: an interpreter based on the technique [ReAct prompting](https://www.promptingguide.ai/techniques/react) using an auxiliary model. The `react.v1.selfcall` interpreter uses the inference model itself to call functions before generating a response.
-- NtvCall: uses another model to call functions for the main model. The flow resumes when the alternative model does not call any function and starts generating a response.
+- ReAct: an interpreter based on the [ReAct prompting](https://www.promptingguide.ai/techniques/react) technique using an auxiliary model. The `react.v1.selfcall` interpreter uses the inference model itself to call functions before generating a response.
+- NtvCall: uses another model to call functions for the main model. The flow resumes when the alternate model does not call any function and starts generating a response.
 
 ## Moderation
 
 You can add a moderation layer to your AI gateway. An auxiliary model will analyze the entire conversation context and classify it as safe or unsafe according to your moderation preferences.
 
-Conversations classified as unsafe are removed from inference and the model tends to generate a response indicating it cannot generate content about that subject.
+Conversations classified as unsafe are removed from inference and the model tends to generate a response indicating it cannot generate content about that topic.
 
 The moderation cost is **$0.20** per million processed tokens.
 

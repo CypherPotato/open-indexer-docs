@@ -124,39 +124,37 @@
                 <article data-uid="">
 <h1 id="skills">Skills</h1>
 
-<p>Skills (also known as skills) can be used to improve how your agent performs on specific tasks. Skills are special instructions that are retrieved on demand, and your agent loads these skills as needed.</p>
+<p>Skills (also known as abilities) can be used to improve how your agent performs on specific tasks. Skills are special instructions that are retrieved on demand, and your agent loads these skills as needed.</p>
 <p>Ideally, your agent should use a skill only when it is relevant to the task it is performing. It is embedded in the conversation through a special tool, and skill instructions are added to the context, indicating that the agent has skills provided in the context that can be used in the conversation.</p>
 <h2 id="how-do-skills-work">How do skills work?</h2>
-<p>Skills are primarily provided through a name and a brief description of what that skill is and when it should be used. You can have multiple skills in your account, but use only some of them in your <a href="/docs/en/entities/ai-gateways/ai-gateway">AI gateway</a>. The skills enabled in the AI gateway are injected into the system instructions of your model, and an additional function is added to the context.</p>
-<p>When the model calls the skill‑reading tool, the instructions for that skill are inserted into the system instructions of the context dynamically. Only one skill can be active per context, and the LLM can change the active skill as needed.</p>
+<p>Skills are primarily provided through a name and a brief description of what the skill is and when it should be used. You can have multiple skills in your account, but use only some of them in your <a href="/docs/en/entities/ai-gateways/ai-gateway">AI gateway</a>. Skills activated in the AI gateway are injected into your model's system instructions and an additional function is added to the context.</p>
+<p>When the model calls the skill-reading tool, the instructions of that skill are inserted into the context's system instructions dynamically. Only one skill can be active per context, and the LLM can change the active skill as needed.</p>
 <p>For this to work, the chosen base model must support <strong>function calls</strong> and <strong>system instructions</strong>.</p>
 <ul>
 <li>If your model does not support function calls, consider using a <a href="/docs/en/entities/ai-gateways/pipelines">tool handler</a> to handle function calls.</li>
 <li>If your model does not support system instructions, consider using the <code>No system instructions</code> flag, which provides system instructions as a user message.</li>
 </ul>
-<p>Larger models tend to follow instructions and function calls strictly. Run tests to see if your model is changing its skills as required.</p>
+<p>Larger models tend to follow instructions and function calls strictly. Conduct tests to determine if your model is modifying its skills as needed.</p>
 <h2 id="how-to-write-skills">How to write skills?</h2>
 <p>Writing effective skills requires clarity and specificity in the instructions. Here are the main guidelines:</p>
-<h3 id="skill-structure">Skill structure</h3>
-<p>A well‑written skill should contain:</p>
+<h3 id="structure-of-a-skill">Structure of a skill</h3>
+<p>A well-written skill should contain:</p>
 <ol>
-<li><p><strong>Clear, descriptive name</strong>: Use names that immediately identify the purpose of the skill (e.g., &quot;Python Code Analysis&quot;, &quot;Customer Support&quot;, &quot;Technical Translation&quot;).</p>
-</li>
-<li><p><strong>Concise description</strong>: Provide a brief description (1–2 sentences) that explains when the skill should be activated. This description is crucial, as the model uses it to decide whether to load the skill.</p>
-</li>
-<li><p><strong>Detailed instructions</strong>: The instructions themselves should include:</p>
+<li><strong>Clear and descriptive name</strong>: Use names that immediately identify the purpose of the skill (e.g., &quot;Python Code Analysis&quot;, &quot;Customer Service&quot;, &quot;Technical Translation&quot;).</li>
+<li><strong>Concise description</strong>: Provide a brief description (1-2 sentences) that explains when the skill should be activated. This description is crucial, as the model uses it to decide whether to load the skill.</li>
+<li><strong>Detailed instructions</strong>: The instructions themselves should include:
 <ul>
 <li>Clear task objectives</li>
 <li>Expected response format</li>
 <li>Specific rules to follow</li>
-<li>Examples where appropriate</li>
+<li>Examples when appropriate</li>
 <li>Important constraints or limitations</li>
 </ul>
 </li>
 </ol>
 <h3 id="best-practices">Best practices</h3>
 <ul>
-<li><strong>Be specific</strong>: Avoid vague instructions. Instead of “be helpful,” say “provide step‑by‑step explanations with code examples.”</li>
+<li><strong>Be specific</strong>: Avoid vague instructions. Instead of &quot;be helpful&quot;, say &quot;provide step-by-step explanations with code examples&quot;.</li>
 <li><strong>Use imperative language</strong>: Start sentences with action verbs (analyze, explain, compare, list).</li>
 <li><strong>Keep the scope limited</strong>: Each skill should focus on a specific area of knowledge or type of task.</li>
 <li><strong>Test iteratively</strong>: Refine your skills based on how the model responds in practice.</li>
@@ -168,7 +166,7 @@
 <li>Description: Use when the user requests performance analysis, optimization, or bottleneck identification in code.</li>
 </ul>
 <pre><code class="lang-markdown">- Analyze the provided code, identifying possible performance bottlenecks
-- Consider time complexity (Big O) and memory usage
+- Consider temporal complexity (Big O) and memory usage
 - Suggest specific optimizations with code examples
 - Explain the impact of each proposed optimization
 - Prioritize readability and maintainability alongside performance
@@ -176,23 +174,23 @@
 <h2 id="when-to-use-skills">When to use skills?</h2>
 <p>Skills are most useful in specific scenarios where you need specialized behavior:</p>
 <h3 id="ideal-scenarios">Ideal scenarios</h3>
-<p><strong>1. Specialized domain knowledge</strong></p>
+<p><strong>1. Domain-specific specialized knowledge</strong></p>
 <ul>
-<li>Industry‑specific technical terminology</li>
+<li>Industry-specific technical terminology</li>
 <li>Compliance with regulations or standards</li>
-<li>Specific methodologies (Scrum, ITIL, SOC 2, etc.)</li>
+<li>Specific methodologies (Scrum, ITIL, SOC 2, etc.)</li>
 </ul>
 <p><strong>2. Tone or style change</strong></p>
 <ul>
-<li>Formal vs. casual service</li>
+<li>Formal vs. casual interaction</li>
 <li>Technical vs. simplified communication</li>
 <li>Different personas or roles</li>
 </ul>
-<p><strong>3. Complex, structured processes</strong></p>
+<p><strong>3. Complex and structured processes</strong></p>
 <ul>
-<li>Multi‑step workflows</li>
+<li>Multi-step workflows</li>
 <li>Analyses that follow specific frameworks</li>
-<li>Document generation with rigorous formats</li>
+<li>Document generation with strict formats</li>
 </ul>
 <p><strong>4. Tasks that require extensive context</strong></p>
 <ul>
@@ -204,8 +202,8 @@
 <ul>
 <li><strong>Permanent instructions</strong>: If the instructions should always be active, place them in the base system instructions.</li>
 <li><strong>Simple tasks</strong>: For direct answers that do not require special context.</li>
-<li><strong>General knowledge</strong>: Information the model already knows well does not need reinforcement via skills.</li>
-<li><strong>Too few or too many skills</strong>: Ideally have 3–10 skills. Fewer than that, consider using base instructions. More than that can confuse the model.</li>
+<li><strong>General knowledge</strong>: Information the model already knows well does not need to be reinforced via skills.</li>
+<li><strong>Too few or too many skills</strong>: Ideally have between 3-10 skills. Fewer than that, consider using base instructions. More than that can confuse the model.</li>
 </ul>
 <h3 id="comparison-skills-vs-system-instructions">Comparison: Skills vs. System Instructions</h3>
 <table>
@@ -228,8 +226,8 @@
 <td>Should be concise</td>
 </tr>
 <tr>
-<td>Context change</td>
-<td>Yes, can switch</td>
+<td>Context switching</td>
+<td>Yes, can alternate</td>
 <td>No, fixed</td>
 </tr>
 <tr>
@@ -246,10 +244,27 @@
 </table>
 <h3 id="implementation-tips">Implementation tips</h3>
 <ul>
-<li><strong>Start small</strong>: Implement 2–3 skills initially and expand as needed.</li>
-<li><strong>Monitor usage</strong>: Check whether the model is activating skills correctly.</li>
+<li><strong>Start small</strong>: Implement 2-3 skills initially and expand as needed.</li>
+<li><strong>Monitor usage</strong>: Check if the model is activating the skills correctly.</li>
 <li><strong>Avoid overlap</strong>: Skills with similar descriptions can confuse the model.</li>
-<li><strong>Test transitions</strong>: Ensure the model switches skills when appropriate.</li>
+<li><strong>Test the transition</strong>: Ensure the model switches skills when appropriate.</li>
+</ul>
+<h2 id="comparing-skills-rag-and-system-prompt">Comparing Skills, RAG, and System Prompt</h2>
+<p>To better understand when and how to use skills compared to other techniques such as <strong>RAG (Retrieval-Augmented Generation)</strong> and <strong>System Prompt (System Instructions)</strong>, refer to our comprehensive guide:</p>
+<p><strong><a href="/docs/en/concepts-comparison">Click to access the comparison guide.</a></strong></p>
+<p>This guide details:</p>
+<ul>
+<li>The fundamental differences between each approach</li>
+<li>When to use each technique</li>
+<li>Practical examples and use cases</li>
+<li>How to combine the three techniques for robust systems</li>
+<li>Decision tree to choose the right approach</li>
+</ul>
+<p>See also:</p>
+<ul>
+<li><a href="https://www.promptingguide.ai/">Prompt Engineering Guide</a></li>
+<li><a href="https://www.anthropic.com/index/building-effective-agents">Building Production-Ready RAG Applications</a></li>
+<li><a href="/docs/en/entities/ai-gateways/ai-gateway">AI Gateway Documentation</a></li>
 </ul>
 
 </article>

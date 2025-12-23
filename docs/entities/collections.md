@@ -5,6 +5,10 @@ Uma coleção é uma biblioteca de conhecimento: ela abriga vários documentos d
 - Use coleções para agrupar documentos por finalidade, como documentar um produto, uma empresa, um serviço ou fluxo.
 - Coleções não produzem custo. Não há limite de coleções por conta.
 
+> [!TIP]
+>
+> Coleções implementam a técnica **RAG (Retrieval-Augmented Generation)**. Para entender quando usar RAG em comparação com Skills e System Prompt, consulte nosso [guia completo de comparação](/docs/concepts-comparison).
+
 ## Criar uma coleção
 
 Para criar uma coleção vazia, informe apenas o nome dela:

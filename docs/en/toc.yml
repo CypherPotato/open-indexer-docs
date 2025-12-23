@@ -26,6 +26,11 @@ items:
 - name: Skills
   href: skills.md
 
+- name: Advanced Concepts
+
+- name: Skills vs. RAG vs. System Prompt
+  href: concepts-comparison.md
+
 - name: Using the API
 
 - name: Collections

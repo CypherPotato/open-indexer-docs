@@ -23,6 +23,10 @@ A AIVAX provê um endpoint compatível com a interface OpenAI através de um AI-
 
 Em um gateway de IA, você já configura os parâmetros do modelo, como System Prompt, temperatura e nome do modelo. Ao usar esse endpoint, alguns valores do gateway podem ser sobrescritos pela requisição.
 
+> [!TIP]
+>
+> Para entender melhor como usar System Prompt em comparação com Skills e RAG, consulte nosso [guia completo de comparação](/docs/concepts-comparison).
+
 #### Requisição
 
 <div class="request-item post">

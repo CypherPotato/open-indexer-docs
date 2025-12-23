@@ -105,3 +105,21 @@ Habilidades são mais úteis em cenários específicos onde você precisa de com
 - **Monitore o uso**: Verifique se o modelo está ativando as habilidades corretamente.
 - **Evite sobreposição**: Habilidades com descrições similares podem confundir o modelo.
 - **Teste a transição**: Certifique-se de que o modelo muda de habilidade quando apropriado.
+
+## Comparando Skills, RAG e System Prompt
+
+Para entender melhor quando e como usar habilidades em comparação com outras técnicas como **RAG (Retrieval-Augmented Generation)** e **System Prompt (Instruções de Sistema)**, consulte nosso guia completo:
+
+**[Clique para acessar o guia de comparação.](/docs/concepts-comparison)**
+
+Este guia detalha:
+- As diferenças fundamentais entre cada abordagem
+- Quando usar cada técnica
+- Exemplos práticos e casos de uso
+- Como combinar as três técnicas para sistemas robustos
+- Árvore de decisão para escolher a abordagem certa
+
+Veja também:
+- [Prompt Engineering Guide](https://www.promptingguide.ai/)
+- [Building Production-Ready RAG Applications](https://www.anthropic.com/index/building-effective-agents)
+- [AI Gateway Documentation](/docs/entities/ai-gateways/ai-gateway)

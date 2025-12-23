@@ -722,6 +722,16 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "docs/concepts-comparison.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/concepts-comparison.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "docs/en/authentication.md",
       "output": {
         ".html": {
@@ -736,6 +746,16 @@
       "output": {
         ".html": {
           "relative_path": "docs/en/builtin-tools.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/en/concepts-comparison.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/en/concepts-comparison.html"
         }
       },
       "version": ""

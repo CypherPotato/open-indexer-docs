@@ -1,13 +1,17 @@
 # Collections
 
-A collection is a knowledge library: it houses several knowledge documents.
+A collection is a knowledge library: it houses multiple knowledge documents.
 
-- Use collections to group documents by purpose, such as documenting a product, a company, a service or flow.
-- Collections do not incur costs. There is no limit to the number of collections per account.
+- Use collections to group documents by purpose, such as documenting a product, a company, a service, or a workflow.
+- Collections do not incur cost. There is no limit to the number of collections per account.
+
+> [!TIP]
+>
+> Collections implement the **RAG (Retrieval-Augmented Generation)** technique. To understand when to use RAG compared to Skills and System Prompt, see our [complete comparison guide](/docs/en/concepts-comparison).
 
 ## Create a collection
 
-To create an empty collection, simply provide its name:
+To create an empty collection, provide only its name:
 
 #### Request
 
@@ -76,9 +80,9 @@ Lists the collections available in your account.
 }
 ```
 
-## View a collection
+## Get a collection
 
-Obtains details of a collection, such as its indexing progress and information like creation date.
+Retrieves details of a collection, such as its indexing progress and information like creation date.
 
 #### Request
 
@@ -99,10 +103,10 @@ Obtains details of a collection, such as its indexing progress and information l
         "createdAt": "2025-04-22T02:29:46",
         "state": {
             
-            // Returns the number of documents waiting for indexing
+            // number of documents waiting to be indexed
             "queuedDocuments": 0,
             
-            // Number of documents ready for query
+            // number of documents ready for query
             "indexedDocuments": 227
         },
         "tags": [
@@ -138,9 +142,9 @@ Deletes a collection and all documents within it. This action is irreversible.
 ```
 
 
-## Clear a collection
+## Clean a collection
 
-Unlike collection deletion, this operation removes all documents from the collection, including indexed and queued ones.
+Unlike deleting a collection, this operation removes all documents from the collection, including indexed and queued ones.
 
 #### Request
 

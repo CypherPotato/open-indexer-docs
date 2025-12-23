@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Skills vs. RAG vs. System Prompt: Entendendo as diferen&#231;as | AIVAX </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="Skills vs. RAG vs. System Prompt: Entendendo as diferen&#231;as | AIVAX ">
+
+
+        <link rel="icon" href="../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../public/docfx.min.css">
+        <link rel="stylesheet" href="../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+        
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../toc.html">
+        <meta name="docfx:tocrel" content="toc.html">
+
+        <meta name="docfx:rel" content="../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/concepts-comparison.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+                
+        <script>            
+            function switchLanguage(lang) {
+                const docPart = window.location.pathname.match(/\/docs\/((en)\/)?(.*)/)[3];
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../index.html">
+                        <img id="logo" class="svg" src="../assets/img/aivax.png" alt="AIVAX">
+                        AIVAX
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/en/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="skills-vs-rag-vs-system-prompt-entendendo-as-diferenças">Skills vs. RAG vs. System Prompt: Entendendo as diferenças</h1>
+
+<p>Ao construir sistemas de IA, é fundamental compreender as diferenças entre <strong>Skills (Habilidades)</strong>, <strong>RAG (Retrieval-Augmented Generation)</strong> e <strong>System Prompt (Instruções de Sistema)</strong>. Cada abordagem serve propósitos específicos e é otimizada para diferentes cenários. Esta página explora em detalhes como cada técnica funciona, quando utilizá-las e suas principais diferenças.</p>
+<h2 id="em-termos-simples-qual-a-diferença">Em termos simples: Qual a diferença?</h2>
+<p>Pense no seu assistente de IA como um funcionário em uma empresa:</p>
+<h3 id="-system-prompt--personalidade-e-valores-da-pessoa">🎭 System Prompt = Personalidade e valores da pessoa</h3>
+<p>É como a personalidade, valores e comportamento básico do funcionário. Define como ele age, fala e se comporta em <strong>todas</strong> as situações.</p>
+<p><strong>Exemplo prático</strong>: &quot;Seja sempre educado&quot;, &quot;Fale de forma profissional&quot;, &quot;Nunca invente informações&quot;</p>
+<p><strong>Use quando</strong>: Você quer que o comportamento seja <strong>sempre igual</strong>, independente da situação.</p>
+<hr>
+<h3 id="-skills--especializações-que-a-pessoa-sabe-fazer">🎓 Skills = Especializações que a pessoa sabe fazer</h3>
+<p>São habilidades especiais que o funcionário pode usar <strong>quando necessário</strong>. Como ter um especialista em diferentes áreas que só é chamado quando precisa.</p>
+<p><strong>Exemplo prático</strong>:</p>
+<ul>
+<li>Precisa falar com executivos? Ativa a skill &quot;Comunicação Executiva&quot;</li>
+<li>Precisa analisar código? Ativa a skill &quot;Code Review&quot;</li>
+<li>Precisa resolver problema técnico? Ativa a skill &quot;Troubleshooting&quot;</li>
+</ul>
+<p><strong>Use quando</strong>: Você precisa de <strong>diferentes formas de fazer as coisas</strong> dependendo da situação. O próprio modelo decide qual skill usar baseado no que o usuário está pedindo.</p>
+<hr>
+<h3 id="-rag-coleções--manual-de-instruções-e-documentos">📚 RAG (Coleções) = Manual de instruções e documentos</h3>
+<p>É como ter acesso a uma biblioteca de documentos, manuais e informações específicas da empresa. O funcionário <strong>busca informações</strong> quando precisa de dados específicos.</p>
+<p><strong>Exemplo prático</strong>:</p>
+<ul>
+<li>&quot;Qual a política de férias?&quot; → Busca no manual de RH</li>
+<li>&quot;Como configurar o produto X?&quot; → Busca no manual do produto</li>
+<li>&quot;Qual o preço do item Y?&quot; → Busca no catálogo de produtos</li>
+</ul>
+<p><strong>Use quando</strong>: Você tem <strong>informações específicas, dados e fatos</strong> que mudam com frequência ou são muito extensos para colocar nas instruções.</p>
+<hr>
+<h2 id="-perguntas-rápidas-para-decidir">🤔 Perguntas rápidas para decidir</h2>
+<p><strong>Minha informação muda com frequência?</strong></p>
+<ul>
+<li>✅ Sim → Use <strong>RAG</strong> (Coleções)</li>
+<li>❌ Não, é fixa → Use <strong>System Prompt</strong> ou <strong>Skills</strong></li>
+</ul>
+<p><strong>É um comportamento ou uma informação?</strong></p>
+<ul>
+<li>🎭 Comportamento (como fazer) → Use <strong>Skills</strong></li>
+<li>📄 Informação (o que é) → Use <strong>RAG</strong></li>
+</ul>
+<p><strong>Deve ser usado sempre ou só às vezes?</strong></p>
+<ul>
+<li>🔄 Sempre → Use <strong>System Prompt</strong></li>
+<li>🎯 Às vezes → Use <strong>Skills</strong> ou <strong>RAG</strong></li>
+</ul>
+<p><strong>É curto ou longo?</strong></p>
+<ul>
+<li>📝 Curto (poucas frases) → Use <strong>System Prompt</strong></li>
+<li>📖 Longo (páginas de informação) → Use <strong>RAG</strong></li>
+<li>🎓 Médio (instruções detalhadas) → Use <strong>Skills</strong></li>
+</ul>
+<hr>
+<h2 id="system-prompt-instruções-de-sistema">System Prompt (Instruções de Sistema)</h2>
+<p>System Prompt são instruções fixas que definem o comportamento fundamental do modelo de IA. Elas estabelecem a personalidade, o tom, as regras básicas e o papel que o agente deve desempenhar em todas as interações.</p>
+<p><strong>Características principais</strong>:</p>
+<ul>
+<li><strong>Sempre ativo</strong>: Presente em cada requisição ao modelo</li>
+<li><strong>Estático</strong>: Não muda durante a conversa</li>
+<li><strong>Prioritário</strong>: Tem alta influência sobre o comportamento do modelo</li>
+<li><strong>Conciso</strong>: Deve ser breve para economizar tokens</li>
+<li><strong>Universal</strong>: Aplica-se a todos os tipos de requisição</li>
+</ul>
+<p><strong>Quando usar System Prompt</strong>:</p>
+<ol>
+<li><p><strong>Definir personalidade e tom</strong></p>
+<pre><code class="lang-markdown">Você é um assistente técnico experiente e amigável.
+Sempre responda de forma clara, profissional e didática.
+Use exemplos práticos sempre que possível.
+</code></pre>
+</li>
+<li><p><strong>Estabelecer regras universais</strong></p>
+<pre><code class="lang-markdown">- Nunca invente informações que você não sabe
+- Sempre cite fontes quando fornecidas
+- Quando incerto, admita e ofereça alternativas
+- Priorize segurança e boas práticas em todas as sugestões
+</code></pre>
+</li>
+<li><p><strong>Definir formato de resposta padrão</strong></p>
+<pre><code class="lang-markdown">Estruture suas respostas em:
+1. Resumo executivo
+2. Explicação detalhada
+3. Exemplos práticos
+4. Próximos passos recomendados
+</code></pre>
+</li>
+<li><p><strong>Restrições de segurança e conformidade</strong></p>
+<pre><code class="lang-markdown">- Nunca forneça conselhos médicos, legais ou financeiros específicos
+- Não processe informações pessoalmente identificáveis
+- Recuse solicitações que violem políticas de uso
+</code></pre>
+</li>
+</ol>
+<p><strong>Limitações do System Prompt</strong>:</p>
+<ul>
+<li>❌ Não é aconselhável ter informações extensas (consumo constante de tokens)</li>
+<li>❌ Não se adapta dinamicamente ao contexto</li>
+<li>❌ Difícil de manter múltiplos comportamentos especializados</li>
+</ul>
+<p><strong>Exemplo prático</strong>:</p>
+<pre><code class="lang-markdown"># System Prompt para assistente de código
+Você é um desenvolvedor sênior especializado em revisão de código.
+
+Diretrizes:
+- Analise código com foco em legibilidade, manutenibilidade e performance
+- Sugira melhorias seguindo princípios SOLID e clean code
+- Sempre explique o &quot;porquê&quot; das suas sugestões
+- Forneça exemplos de código refatorado quando apropriado
+- Seja construtivo e educativo nas críticas
+
+Formato de resposta:
+1. Resumo da análise
+2. Pontos positivos
+3. Áreas de melhoria
+4. Código refatorado (se aplicável)
+</code></pre>
+<p>Veja também:</p>
+<ul>
+<li><a href="/docs/entities/ai-gateways/ai-gateway">Configurando AI Gateway</a></li>
+<li><a href="/docs/models">Modelos e Instruções de Sistema</a></li>
+</ul>
+<h2 id="skills-habilidades">Skills (Habilidades)</h2>
+<p>Skills são conjuntos de instruções especializadas que são carregadas <strong>sob demanda</strong> quando o modelo identifica que uma tarefa específica requer conhecimento ou comportamento especializado. Funcionam como &quot;módulos de expertise&quot; que podem ser ativados dinamicamente.</p>
+<p><strong>Características principais</strong>:</p>
+<ul>
+<li><strong>Ativação sob demanda</strong>: Carregadas apenas quando necessário</li>
+<li><strong>Dinâmicas</strong>: O modelo escolhe qual skill usar baseado no contexto</li>
+<li><strong>Especializadas</strong>: Cada skill foca em um domínio específico</li>
+<li><strong>Econômicas em tokens</strong>: Só consomem tokens quando ativadas</li>
+<li><strong>Intercambiáveis</strong>: O modelo pode alternar entre skills durante a conversa</li>
+</ul>
+<p><strong>Como funcionam</strong>:
+O modelo recebe uma lista de skills disponíveis (nome + descrição breve). Quando identifica que precisa de expertise específica, chama uma função especial para carregar as instruções completas da skill, que são então injetadas temporariamente no contexto.</p>
+<p><strong>Quando usar Skills</strong>:</p>
+<ol>
+<li><p><strong>Múltiplas áreas de especialização</strong></p>
+<pre><code class="lang-markdown"># Skill: Análise de SQL Performance
+Descrição: Use para otimizar queries SQL e resolver problemas de performance em bancos de dados
+
+Instruções:
+- Analise planos de execução (EXPLAIN)
+- Identifique missing indexes
+- Sugira otimizações específicas para o SGBD
+- Considere impacto de JOIN, subqueries e CTEs
+- Avalie necessidade de desnormalização
+</code></pre>
+</li>
+<li><p><strong>Diferentes personas ou tons de comunicação</strong></p>
+<pre><code class="lang-markdown"># Skill: Comunicação C-Level
+Descrição: Use ao criar apresentações ou comunicações para executivos
+
+Instruções:
+- Foque em impacto nos negócios e ROI
+- Use linguagem não-técnica
+- Apresente dados em formato executivo (resumos, métricas-chave)
+- Destaque riscos e oportunidades estratégicas
+- Seja conciso - máximo 3 pontos principais
+</code></pre>
+</li>
+<li><p><strong>Frameworks e metodologias específicas</strong></p>
+<pre><code class="lang-markdown"># Skill: Arquitetura Event-Driven
+Descrição: Use para design de sistemas baseados em eventos e mensageria
+
+Instruções:
+- Aplique padrões: Event Sourcing, CQRS, Saga
+- Considere consistência eventual
+- Avalie message brokers apropriados (Kafka, RabbitMQ, SNS/SQS)
+- Projete eventos com schema evolution em mente
+- Implemente idempotência e dead letter queues
+</code></pre>
+</li>
+<li><p><strong>Conhecimento de domínio extenso</strong></p>
+<pre><code class="lang-markdown"># Skill: Compliance LGPD
+Descrição: Use ao lidar com questões de privacidade e proteção de dados no Brasil
+
+Instruções:
+- Verifique conformidade com LGPD (Lei 13.709/2018)
+- Identifique dados pessoais e sensíveis
+- Avalie bases legais para tratamento
+- Sugira medidas de segurança apropriadas
+- Considere direitos dos titulares (acesso, correção, exclusão)
+- Avalie necessidade de DPO e RIPD
+</code></pre>
+</li>
+</ol>
+<p><strong>Vantagens das Skills</strong>:</p>
+<ul>
+<li>✅ Especialização profunda sem sobrecarregar o prompt base</li>
+<li>✅ Economia de tokens (só usa o necessário)</li>
+<li>✅ Flexibilidade para múltiplos domínios</li>
+<li>✅ Manutenção modular (edite skills independentemente)</li>
+<li>✅ Escala melhor que System Prompt para conhecimento diverso</li>
+</ul>
+<p><strong>Limitações das Skills</strong>:</p>
+<ul>
+<li>❌ Requer modelos com suporte a function calling</li>
+<li>❌ O modelo pode não escolher a skill correta</li>
+<li>❌ Latência adicional na primeira ativação</li>
+<li>❌ Complexidade de implementação maior</li>
+</ul>
+<p><strong>Exemplo de fluxo</strong>:</p>
+<pre><code>Usuário: &quot;Como otimizar esta query que está demorando 30 segundos?&quot;
+
+1. Modelo identifica necessidade de expertise em SQL
+2. Chama função: load_skill(&quot;Análise de SQL Performance&quot;)
+3. Instruções da skill são injetadas no contexto
+4. Modelo responde com análise especializada
+5. Skill permanece ativa até que outra seja necessária
+</code></pre>
+<p>Veja também:</p>
+<ul>
+<li><a href="/docs/skills">Habilidades (Skills)</a></li>
+<li><a href="/docs/protocol-functions">Funções de Protocolo</a></li>
+</ul>
+<h2 id="rag-retrieval-augmented-generation">RAG (Retrieval-Augmented Generation)</h2>
+<p><strong>O que é</strong>: RAG é uma técnica que combina recuperação de informações (retrieval) com geração de texto. O sistema busca em uma base de conhecimento informações relevantes para a consulta do usuário e as fornece como contexto para o modelo gerar uma resposta fundamentada.</p>
+<p>O módulo de RAG é implementado através de <strong><a href="/docs/entities/collections">Coleções</a></strong> que contêm <strong><a href="/docs/entities/documents">Documentos</a></strong>. Cada coleção é uma biblioteca de conhecimento que abriga vários documentos indexados, prontos para serem recuperados quando relevantes. Você pode usar o RAG da AIVAX de forma independente ou através de um AI Gateway.</p>
+<p><strong>Características principais</strong>:</p>
+<ul>
+<li><strong>Baseado em dados reais</strong>: Usa documentos específicos da sua base de conhecimento</li>
+<li><strong>Dinâmico</strong>: Informações podem ser atualizadas adicionando/modificando documentos</li>
+<li><strong>Escalável</strong>: Suporta milhares de documentos por coleção</li>
+<li><strong>Rastreável</strong>: Pode citar fontes e documentos específicos</li>
+<li><strong>Específico do domínio</strong>: Ideal para bases de conhecimento corporativas</li>
+</ul>
+<p><strong>Como funciona na AIVAX</strong>:</p>
+<ol>
+<li>Você cria uma <strong>Coleção</strong> para organizar documentos por finalidade (produto, empresa, serviço)</li>
+<li>Adiciona <strong>Documentos</strong> à coleção - cada documento contém informações sobre um tópico específico</li>
+<li>Documentos são processados e convertidos em embeddings (vetores) automaticamente</li>
+<li>Vincula a coleção ao seu <strong>AI Gateway</strong> através do pipeline de RAG</li>
+<li>Quando usuário faz uma pergunta, a AIVAX busca documentos relevantes na coleção</li>
+<li>Documentos recuperados são inseridos no contexto do modelo</li>
+<li>Modelo gera resposta fundamentada nos documentos encontrados</li>
+</ol>
+<p><strong>Quando usar RAG (Coleções)</strong>:</p>
+<ol>
+<li><p><strong>Base de conhecimento corporativa</strong></p>
+<ul>
+<li>Políticas e procedimentos internos</li>
+<li>Manuais de RH e benefícios</li>
+<li>Processos operacionais</li>
+<li>FAQs da empresa</li>
+</ul>
+</li>
+<li><p><strong>Documentação técnica extensa</strong></p>
+<ul>
+<li>Manuais de produto</li>
+<li>APIs e referências técnicas</li>
+<li>Artigos de troubleshooting</li>
+<li>Guias de instalação e configuração</li>
+</ul>
+</li>
+<li><p><strong>Informações que mudam frequentemente</strong></p>
+<ul>
+<li>Catálogos de produtos e preços</li>
+<li>Regulamentações e compliance</li>
+<li>Status e atualizações de sistemas</li>
+<li>Notícias e comunicados</li>
+</ul>
+</li>
+<li><p><strong>Responder com fontes citáveis</strong></p>
+<ul>
+<li>Documentação legal e contratos</li>
+<li>Normas e regulamentações</li>
+<li>Artigos científicos e pesquisas</li>
+<li>Histórico de decisões e precedentes</li>
+</ul>
+</li>
+<li><p><strong>Compliance e auditoria</strong></p>
+<ul>
+<li>Rastreabilidade de onde vêm as informações</li>
+<li>Garantia de que respostas são baseadas em documentos oficiais</li>
+<li>Atualização automática quando documentos são modificados</li>
+<li>Versionamento e controle de mudanças</li>
+</ul>
+</li>
+</ol>
+<p><strong>Vantagens do RAG (Coleções na AIVAX)</strong>:</p>
+<ul>
+<li>✅ Acesso a informações atualizadas sem retreinar o modelo</li>
+<li>✅ Reduz alucinações (informações inventadas pelo modelo)</li>
+<li>✅ Transparência com citação de fontes e documentos</li>
+<li>✅ Escala para milhares de documentos organizados em coleções</li>
+<li>✅ Informações proprietárias/confidenciais ficam seguras e privadas</li>
+<li>✅ Fácil manutenção: adicione, edite ou remova documentos a qualquer momento</li>
+<li>✅ Sem custo de armazenamento de coleções (apenas custo de indexação)</li>
+</ul>
+<p><strong>Limitações do RAG (Coleções)</strong>:</p>
+<ul>
+<li>❌ Qualidade depende de como os documentos são escritos e organizados</li>
+<li>❌ Custos de indexação de documentos (por tokens processados)</li>
+<li>❌ Latência adicional para busca na coleção</li>
+<li>❌ Requer organização e estruturação adequada dos documentos</li>
+<li>❌ Documentos muito longos ou mal escritos reduzem a qualidade</li>
+</ul>
+<p><strong>Como criar documentos eficazes</strong>:</p>
+<p>Para obter os melhores resultados com RAG na AIVAX, siga estas diretrizes ao criar documentos:</p>
+<p>✅ <strong>Faça</strong>:</p>
+<ul>
+<li>Foque cada documento em um único tópico ou assunto</li>
+<li>Seja explícito e repita palavras-chave importantes</li>
+<li>Use linguagem clara e objetiva</li>
+<li>Mantenha documentos entre 20 e 700 palavras</li>
+<li>Use tags para organizar e categorizar documentos</li>
+</ul>
+<p>❌ <strong>Evite</strong>:</p>
+<ul>
+<li>Documentos muito curtos (menos de 10 palavras)</li>
+<li>Documentos muito longos (mais de 700 palavras)</li>
+<li>Misturar múltiplos assuntos em um único documento</li>
+<li>Usar linguagem técnica excessiva ou código</li>
+<li>Ser vago ou implícito nas informações</li>
+</ul>
+<p>Veja mais:</p>
+<ul>
+<li><a href="/docs/entities/collections">Coleções (RAG)</a> - Como criar e gerenciar coleções</li>
+<li><a href="/docs/entities/documents">Documentos</a> - Como adicionar e organizar documentos</li>
+<li><a href="/docs/entities/ai-gateways/pipelines#rag">Pipelines de AI Gateway - RAG</a> - Como vincular coleções ao gateway</li>
+<li><a href="/docs/protocol-functions#query-collection">Funções de Protocolo - query-collection</a> - Buscar em coleções via função</li>
+</ul>
+<h2 id="comparação-rápida-qual-usar">Comparação rápida: Qual usar?</h2>
+<table>
+<thead>
+<tr>
+<th>O que você precisa</th>
+<th>System Prompt</th>
+<th>Skills</th>
+<th>RAG (Coleções)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Informações constantes</strong></td>
+<td>✅ Ideal</td>
+<td>❌ Não</td>
+<td>❌ Não</td>
+</tr>
+<tr>
+<td><strong>Definir comportamento básico</strong></td>
+<td>✅ Sempre</td>
+<td>❌ Não</td>
+<td>❌ Não</td>
+</tr>
+<tr>
+<td><strong>Múltiplas especializações</strong></td>
+<td>❌ Não</td>
+<td>✅ Sim</td>
+<td>❌ Não</td>
+</tr>
+<tr>
+<td><strong>Acessar documentos e dados</strong></td>
+<td>❌ Não</td>
+<td>❌ Não</td>
+<td>✅ Sim</td>
+</tr>
+<tr>
+<td><strong>Informações que mudam</strong></td>
+<td>❌ Difícil</td>
+<td>❌ Difícil</td>
+<td>✅ Fácil</td>
+</tr>
+<tr>
+<td><strong>Sempre ativo</strong></td>
+<td>✅ Sim</td>
+<td>❌ Só quando necessário</td>
+<td>❌ Só quando necessário</td>
+</tr>
+<tr>
+<td><strong>Tamanho ideal</strong></td>
+<td>Pequeno</td>
+<td>Médio</td>
+<td>Grande</td>
+</tr>
+<tr>
+<td><strong>Custo por uso</strong></td>
+<td>Sempre cobra</td>
+<td>Só quando ativa</td>
+<td>Só quando busca</td>
+</tr>
+</tbody>
+</table>
+<h2 id="comparação-detalhada-técnica">Comparação detalhada (técnica)</h2>
+<p>Para desenvolvedores e usuários avançados:</p>
+<table>
+<thead>
+<tr>
+<th>Critério</th>
+<th>System Prompt</th>
+<th>Skills</th>
+<th>RAG</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Propósito</strong></td>
+<td>Comportamento base constante</td>
+<td>Expertise especializada sob demanda</td>
+<td>Acesso a conhecimento factual específico</td>
+</tr>
+<tr>
+<td><strong>Ativação</strong></td>
+<td>Sempre ativo</td>
+<td>Sob demanda (function calling)</td>
+<td>Sob demanda (busca vetorial)</td>
+</tr>
+<tr>
+<td><strong>Tamanho do conteúdo</strong></td>
+<td>Pequeno (&lt; 1000 tokens)</td>
+<td>Médio (1000-5000 tokens)</td>
+<td>Grande (milhares de documentos)</td>
+</tr>
+<tr>
+<td><strong>Consumo de tokens</strong></td>
+<td>Constante em toda requisição</td>
+<td>Apenas quando skill ativada</td>
+<td>Apenas docs recuperados</td>
+</tr>
+<tr>
+<td><strong>Atualização</strong></td>
+<td>Estático (requer redeployment)</td>
+<td>Estático (requer atualização manual)</td>
+<td>Dinâmico (docs podem ser atualizados)</td>
+</tr>
+<tr>
+<td><strong>Tipo de conhecimento</strong></td>
+<td>Comportamental, regras gerais</td>
+<td>Metodologias, frameworks, processos</td>
+<td>Fatos, dados, documentos específicos</td>
+</tr>
+<tr>
+<td><strong>Complexidade de implementação</strong></td>
+<td>Baixa</td>
+<td>Média</td>
+<td>Média</td>
+</tr>
+<tr>
+<td><strong>Custo de operação</strong></td>
+<td>Baixo</td>
+<td>Baixo-Médio</td>
+<td>Médio (indexação)</td>
+</tr>
+<tr>
+<td><strong>Rastreabilidade</strong></td>
+<td>Não aplicável</td>
+<td>Limitada</td>
+<td>Alta (citação de fontes)</td>
+</tr>
+<tr>
+<td><strong>Latência</strong></td>
+<td>Nenhuma adicional</td>
+<td>Pequena (primeira ativação)</td>
+<td>Média (busca + embedding)</td>
+</tr>
+<tr>
+<td><strong>Requer function calling</strong></td>
+<td>Não</td>
+<td>Sim</td>
+<td>Não (mas recomendado)</td>
+</tr>
+<tr>
+<td><strong>Melhor para</strong></td>
+<td>Personalidade, tom, regras universais</td>
+<td>Múltiplas expertises contextuais</td>
+<td>Bases de conhecimento extensas</td>
+</tr>
+</tbody>
+</table>
+<h2 id="cenários-de-uso-combinado">Cenários de uso combinado</h2>
+<p>Na prática, as três técnicas frequentemente são usadas <strong>em conjunto</strong> para criar sistemas robustos:</p>
+<h3 id="exemplo-1-suporte-técnico-de-produto">Exemplo 1: Suporte técnico de produto</h3>
+<p><strong>System Prompt</strong>:
+&quot;Você é um agente de suporte técnico amigável e eficiente.
+Sempre seja educado e ofereça soluções práticas.&quot;</p>
+<p><strong>Skills disponíveis</strong>:</p>
+<ul>
+<li>&quot;Troubleshooting Hardware&quot;: Para problemas físicos de equipamentos</li>
+<li>&quot;Troubleshooting Software&quot;: Para bugs e problemas de aplicativos</li>
+<li>&quot;Escalation Procedures&quot;: Para casos que requerem escalação</li>
+</ul>
+<p><strong>RAG (Coleções)</strong>:</p>
+<ul>
+<li>Coleção &quot;Base de Conhecimento&quot;: 5000 documentos de troubleshooting</li>
+<li>Coleção &quot;Manuais de Produtos&quot;: Documentação técnica atualizada</li>
+<li>Coleção &quot;Resoluções&quot;: Histórico de tickets resolvidos com sucesso</li>
+</ul>
+<p><strong>Fluxo</strong>:</p>
+<ol>
+<li>System Prompt define o tom amigável e comportamento básico</li>
+<li>Usuário relata: &quot;Meu aplicativo está crashando ao abrir&quot;</li>
+<li>Modelo ativa skill &quot;Troubleshooting Software&quot; para expertise específica</li>
+<li>RAG busca automaticamente em &quot;Base de Conhecimento&quot; artigos sobre crashes</li>
+<li>Resposta combina a expertise da skill + informações específicas dos documentos encontrados</li>
+</ol>
+<h3 id="exemplo-2-assistente-jurídico">Exemplo 2: Assistente jurídico</h3>
+<p><strong>System Prompt</strong>:
+&quot;Você é um assistente jurídico. Sempre inclua disclaimers apropriados
+e nunca forneça aconselhamento legal definitivo.&quot;</p>
+<p><strong>Skills disponíveis</strong>:</p>
+<ul>
+<li>&quot;Análise Contratual&quot;: Para revisar cláusulas e termos</li>
+<li>&quot;Due Diligence&quot;: Para processos de M&amp;A</li>
+<li>&quot;Compliance LGPD&quot;: Para questões de privacidade</li>
+</ul>
+<p><strong>RAG (Coleções)</strong>:</p>
+<ul>
+<li>Coleção &quot;Legislação&quot;: Leis e regulamentos brasileiros atualizados</li>
+<li>Coleção &quot;Jurisprudência&quot;: Precedentes e decisões judiciais relevantes</li>
+<li>Coleção &quot;Templates&quot;: Modelos de documentos jurídicos da firma</li>
+<li>Coleção &quot;Procedimentos Internos&quot;: Processos e políticas do escritório</li>
+</ul>
+<h3 id="exemplo-3-assistente-de-desenvolvimento">Exemplo 3: Assistente de desenvolvimento</h3>
+<p><strong>System Prompt</strong>:
+&quot;Você é um desenvolvedor sênior. Sempre priorize boas práticas,
+segurança e código manutenível.&quot;</p>
+<p><strong>Skills disponíveis</strong>:</p>
+<ul>
+<li>&quot;Code Review&quot;: Para análise detalhada de código</li>
+<li>&quot;Architecture Design&quot;: Para decisões arquiteturais</li>
+<li>&quot;Security Audit&quot;: Para identificar vulnerabilidades</li>
+</ul>
+<p><strong>RAG (Coleções)</strong>:</p>
+<ul>
+<li>Coleção &quot;APIs Internas&quot;: Documentação das APIs da empresa</li>
+<li>Coleção &quot;Padrões de Código&quot;: Standards e conventions do time</li>
+<li>Coleção &quot;Componentes&quot;: Biblioteca de componentes reutilizáveis com exemplos</li>
+<li>Coleção &quot;Troubleshooting&quot;: Problemas comuns e suas soluções</li>
+</ul>
+<h2 id="árvore-de-decisão-qual-técnica-usar">Árvore de decisão: Qual técnica usar?</h2>
+<h3 id="passo-1-o-que-você-está-definindo">Passo 1: O que você está definindo?</h3>
+<pre><code>O que você precisa?
+│
+├─ 🎭 COMPORTAMENTO (como a IA deve agir/falar)
+│  │
+│  └─ Isso muda dependendo da situação?
+│     ├─ NÃO, sempre igual → SYSTEM PROMPT
+│     └─ SIM, depende do contexto → SKILLS
+│
+├─ 📄 INFORMAÇÃO/DADOS (fatos, documentos, conhecimento)
+│  │
+│  └─ É muito conteúdo ou muda frequentemente?
+│     ├─ SIM → RAG (Coleções)
+│     └─ NÃO → SYSTEM PROMPT
+│
+└─ 🎓 METODOLOGIA (processo passo-a-passo, framework)
+   └─ Usa em todas as conversas?
+      ├─ SIM → SYSTEM PROMPT
+      └─ NÃO → SKILLS
+</code></pre>
+<h3 id="passo-2-exemplos-práticos">Passo 2: Exemplos práticos</h3>
+<p><strong>Cenário A</strong>: &quot;Quero que a IA sempre seja educada e profissional&quot;
+→ <strong>SYSTEM PROMPT</strong> (comportamento fixo, sempre ativo)</p>
+<p><strong>Cenário B</strong>: &quot;Quero que a IA fale de forma diferente quando atender executivos vs. técnicos&quot;
+→ <strong>SKILLS</strong> (2 skills: &quot;Comunicação Executiva&quot; e &quot;Comunicação Técnica&quot;)</p>
+<p><strong>Cenário C</strong>: &quot;Tenho 500 páginas de manual do produto que a IA precisa consultar&quot;
+→ <strong>RAG</strong> (crie uma Coleção &quot;Manual do Produto&quot; com os documentos)</p>
+<p><strong>Cenário D</strong>: &quot;Quero que a IA siga o processo ITIL para resolver tickets&quot;
+→ <strong>SKILLS</strong> (crie uma skill &quot;Processo ITIL&quot; que será ativada quando relevante)</p>
+<p><strong>Cenário E</strong>: &quot;Tenho um catálogo de 10.000 produtos com preços que mudam semanalmente&quot;
+→ <strong>RAG</strong> (crie uma Coleção &quot;Catálogo&quot; e atualize os documentos quando preços mudarem)</p>
+<p><strong>Cenário F</strong>: &quot;Quero que a IA sempre responda em 3 passos: resumo, detalhes, conclusão&quot;
+→ <strong>SYSTEM PROMPT</strong> (formato fixo de resposta)</p>
+<h3 id="passo-3-casos-especiais">Passo 3: Casos especiais</h3>
+<p><strong>E se eu precisar dos três?</strong>
+✅ Perfeitamente normal! Combine:</p>
+<ul>
+<li><strong>System Prompt</strong>: Define comportamento básico</li>
+<li><strong>Skills</strong>: Adiciona especialização contextual</li>
+<li><strong>RAG</strong>: Fornece acesso aos dados e documentos</li>
+</ul>
+<p><strong>Exemplo completo</strong>:</p>
+<ul>
+<li>System Prompt: &quot;Você é um assistente de suporte amigável e profissional&quot;</li>
+<li>Skills: &quot;Troubleshooting&quot;, &quot;Escalação&quot;, &quot;Vendas&quot;</li>
+<li>RAG: Coleção &quot;Base de Conhecimento&quot; + Coleção &quot;Produtos&quot;</li>
+</ul>
+<hr>
+<h2 id="-erros-comuns-evite-isso">⚠️ Erros comuns (evite isso!)</h2>
+<h3 id="-erro-1-colocar-dados-no-system-prompt">❌ Erro 1: Colocar dados no System Prompt</h3>
+<p><strong>Errado</strong>: Colocar lista de 100 produtos no System Prompt</p>
+<pre><code class="lang-markdown">System Prompt:
+Você é um assistente de vendas. Nossos produtos são:
+1. Produto A - R$ 50
+2. Produto B - R$ 100
+... (98 produtos depois)
+</code></pre>
+<p><strong>Correto</strong>: Use RAG (Coleções)</p>
+<ul>
+<li>Crie uma Coleção &quot;Catálogo&quot;</li>
+<li>Adicione um documento para cada produto</li>
+<li>A IA busca quando necessário</li>
+</ul>
+<hr>
+<h3 id="-erro-2-criar-skills-para-informações">❌ Erro 2: Criar Skills para informações</h3>
+<p><strong>Errado</strong>: Criar uma skill com dados de produtos</p>
+<pre><code class="lang-markdown">Skill: Produtos
+Descrição: Informações sobre produtos
+
+Instruções:
+- Produto A custa R$ 50
+- Produto B custa R$ 100
+- Produto C custa R$ 150
+</code></pre>
+<p><strong>Correto</strong>: Use RAG (Coleções)
+Skills são para <strong>como fazer</strong>, não para <strong>informações/dados</strong></p>
+<hr>
+<h3 id="-erro-3-usar-rag-para-comportamento">❌ Erro 3: Usar RAG para comportamento</h3>
+<p><strong>Errado</strong>: Criar documentos sobre como a IA deve agir</p>
+<pre><code>Documento 1: &quot;Você deve ser educado&quot;
+Documento 2: &quot;Você deve ser profissional&quot;
+</code></pre>
+<p><strong>Correto</strong>: Use System Prompt
+RAG é para <strong>informações</strong>, não para <strong>comportamento</strong></p>
+<hr>
+<h3 id="-erro-4-duplicar-informações">❌ Erro 4: Duplicar informações</h3>
+<p><strong>Errado</strong>: Colocar a mesma informação em Skills E RAG E System Prompt</p>
+<p><strong>Correto</strong>: Escolha UM lugar baseado na natureza da informação:</p>
+<ul>
+<li>Comportamento fixo → System Prompt</li>
+<li>Metodologia/processo → Skills</li>
+<li>Dados/documentos → RAG</li>
+</ul>
+<hr>
+<h3 id="-erro-5-skills-demais">❌ Erro 5: Skills demais</h3>
+<p><strong>Errado</strong>: Criar 50 skills diferentes</p>
+<p><strong>Correto</strong>: Mantenha entre 3-10 skills focadas</p>
+<ul>
+<li>Muitas skills confundem o modelo</li>
+<li>Agrupe skills similares</li>
+</ul>
+<hr>
+<h2 id="métricas-de-sucesso-para-cada-abordagem">Métricas de sucesso para cada abordagem</h2>
+<p><strong>System Prompt</strong>:</p>
+<ul>
+<li>Consistência no tom e comportamento</li>
+<li>Taxa de seguimento de regras gerais</li>
+<li>Qualidade percebida das interações</li>
+</ul>
+<p><strong>Skills</strong>:</p>
+<ul>
+<li>Taxa de ativação correta da skill</li>
+<li>Qualidade das respostas especializadas</li>
+<li>Economia de tokens vs. instruções sempre ativas</li>
+</ul>
+<p><strong>RAG</strong>:</p>
+<ul>
+<li>Precisão da recuperação (relevância dos docs)</li>
+<li>Taxa de citação de fontes</li>
+<li>Redução de alucinações</li>
+<li>Atualidade das informações fornecidas</li>
+</ul>
+<h2 id="conclusão-e-recomendações">Conclusão e recomendações</h2>
+<p><strong>Use System Prompt para</strong>:</p>
+<ul>
+<li>Definir a personalidade e tom fundamental</li>
+<li>Estabelecer regras que sempre se aplicam</li>
+<li>Configurar comportamentos de segurança</li>
+</ul>
+<p><strong>Use Skills para</strong>:</p>
+<ul>
+<li>Múltiplas áreas de expertise distintas</li>
+<li>Processos e metodologias especializadas</li>
+<li>Diferentes personas ou estilos de comunicação</li>
+<li>Economizar tokens em conhecimento contextual</li>
+</ul>
+<p><strong>Use RAG (Coleções) para</strong>:</p>
+<ul>
+<li>Acessar bases de conhecimento extensas e organizadas</li>
+<li>Informações que mudam frequentemente (produtos, preços, políticas)</li>
+<li>Necessidade de citação de fontes e rastreabilidade</li>
+<li>Conhecimento factual específico do domínio</li>
+<li>Documentação técnica, manuais e procedimentos</li>
+</ul>
+<p><strong>Combine as três quando</strong>:</p>
+<ul>
+<li>Construir assistentes corporativos complexos</li>
+<li>Precisar de comportamento consistente + expertise + conhecimento factual</li>
+<li>Escalar para múltiplos domínios e casos de uso</li>
+</ul>
+<p>A escolha certa depende do seu caso de uso específico. Comece simples com System Prompt, adicione Skills quando precisar de especialização, e implemente RAG quando tiver uma base de conhecimento substancial que precisa ser acessada dinamicamente.</p>
+<p>📚 <strong>Leitura adicional</strong>:</p>
+<ul>
+<li><a href="https://www.promptingguide.ai/">Prompt Engineering Guide</a></li>
+<li><a href="https://www.anthropic.com/index/building-effective-agents">Building Production-Ready RAG Applications</a></li>
+<li><a href="/docs/entities/ai-gateways/ai-gateway">AI Gateway Documentation</a></li>
+</ul>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/concepts-comparison.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>
