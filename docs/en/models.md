@@ -1,6 +1,6 @@
 # Models
 
-AIVAX provides models from different providers to make development even faster, eliminating the need to configure an account for each provider to access their latest models.
+AIVAX provides models from different providers to make development even faster, eliminating the need to set up an account for each provider to access their latest models.
 
 See the list below of available models and their pricing. All prices consider the total input and output tokens, with or without cache.
 
@@ -62,10 +62,6 @@ All prices are in United States dollars.
     <i class="ri-lightbulb-line"></i>
     Reasoning
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
-</div>
         </div>
     </td>
 </tr>
@@ -109,10 +105,6 @@ All prices are in United States dollars.
     <i class="ri-lightbulb-line"></i>
     Reasoning
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
-</div>
         </div>
     </td>
 </tr>
@@ -147,10 +139,6 @@ All prices are in United States dollars.
 <div>
     <i class="ri-instance-line"></i>
     Function calls
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
 </div>
         </div>
     </td>
@@ -221,10 +209,6 @@ All prices are in United States dollars.
     <i class="ri-lightbulb-line"></i>
     Reasoning
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
-</div>
         </div>
     </td>
 </tr>
@@ -274,10 +258,6 @@ All prices are in United States dollars.
 <div>
     <i class="ri-lightbulb-line"></i>
     Reasoning
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
 </div>
         </div>
     </td>
@@ -329,10 +309,6 @@ All prices are in United States dollars.
     <i class="ri-lightbulb-line"></i>
     Reasoning
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
-</div>
         </div>
     </td>
 </tr>
@@ -383,10 +359,6 @@ All prices are in United States dollars.
     <i class="ri-lightbulb-line"></i>
     Reasoning
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
-</div>
         </div>
     </td>
 </tr>
@@ -432,10 +404,6 @@ All prices are in United States dollars.
 <div>
     <i class="ri-instance-line"></i>
     Function calls
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
 </div>
         </div>
     </td>
@@ -483,10 +451,6 @@ All prices are in United States dollars.
     <i class="ri-instance-line"></i>
     Function calls
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
-</div>
         </div>
     </td>
 </tr>
@@ -532,10 +496,6 @@ All prices are in United States dollars.
 <div>
     <i class="ri-instance-line"></i>
     Function calls
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    JSON functions
 </div>
         </div>
     </td>
@@ -593,4 +553,714 @@ All prices are in United States dollars.
 </div>
 <div>
     <i class="ri-instance-line"></i>
-   
+    Function calls
+</div>
+        </div>
+    </td>
+</tr>
+    </tbody>
+</table>
+
+## <img src="/assets/icon/deepseekai.svg" class="inline-icon"> deepseekai
+
+<table>
+    <thead>
+        <colgroup>
+            <col style="width: 30%" />
+            <col style="width: 20%" />
+            <col style="width: 50%" />
+        </colgroup>
+        <tr>
+            <th>Model name</th>
+            <th>Pricing</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+<tr>
+    <td>
+        <code>
+            @deepseekai/r1
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 0.50 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Input (cached):
+    </small>
+    <div>
+        $ 0.40 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 2.15 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        The DeepSeek R1 model has undergone a minor version upgrade, with the current version being DeepSeek‑R1‑0528.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Reasoning
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @deepseekai/v3.1-terminus
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 0.27 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Input (cached):
+    </small>
+    <div>
+        $ 0.22 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 1.00 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        DeepSeek‑V3.1 is post‑trained on the top of DeepSeek‑V3.1‑Base, which is built upon the original V3 base checkpoint through a two‑phase long context extension approach, following the methodology outlined in the original DeepSeek‑V3 report.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Reasoning
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @deepseekai/v3.2-speciale
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 0.28 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Input (cached):
+    </small>
+    <div>
+        $ 0.03 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 0.42 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        DeepSeek‑V3.2‑Speciale is a high‑compute version of DeepSeek‑V3.2, designed for maximum reasoning and agentic performance.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Reasoning
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @deepseekai/v3.2
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 0.28 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Input (cached):
+    </small>
+    <div>
+        $ 0.03 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 0.42 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        DeepSeek‑V3.2 is a large language model optimized for high computational efficiency and strong tool‑use reasoning.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Reasoning
+</div>
+        </div>
+    </td>
+</tr>
+    </tbody>
+</table>
+
+## <img src="/assets/icon/google.svg" class="inline-icon"> google
+
+<table>
+    <thead>
+        <colgroup>
+            <col style="width: 30%" />
+            <col style="width: 20%" />
+            <col style="width: 50%" />
+        </colgroup>
+        <tr>
+            <th>Model name</th>
+            <th>Pricing</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+<tr>
+    <td>
+        <code>
+            @google/gemini-3-pro
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 2.00 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 12.00 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Gemini 3 Pro Preview is Google’s most advanced AI model, setting new records on leading benchmarks like LMArena (1501 Elo), GPQA Diamond (91.9%), and MathArena Apex (23.4%).
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images, videos, audio
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Reasoning
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @google/gemini-2.5-pro
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 1.25 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Input (cached):
+    </small>
+    <div>
+        $ 0.31 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 10.00 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        One of the most powerful models today.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images, videos, audio
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Reasoning
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @google/gemini-3-flash
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 0.50 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Input (cached):
+    </small>
+    <div>
+        $ 0.05 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 3.00 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Gemini 3 Flash Preview is a high speed, high value thinking model designed for agentic workflows, multi turn chat, and coding assistance.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images, videos, audio
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Reasoning
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @google/gemini-2.5-flash
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 0.30 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Input (cached):
+    </small>
+    <div>
+        $ 0.08 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 2.50 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Google's best model in terms of price‑performance, offering well‑rounded capabilities. 2.5 Flash is best for large scale processing, low‑latency, high volume tasks that require thinking, and agentic use cases.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images, videos, audio
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Reasoning
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @google/gemini-2.5-flash-lite
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 0.10 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Input (cached):
+    </small>
+    <div>
+        $ 0.03 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 0.40 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        A Gemini 2.5 Flash model optimized for cost efficiency and low latency.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images, videos, audio
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Reasoning
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @google/gemini-2.0-flash
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 0.10 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Input (cached):
+    </small>
+    <div>
+        $ 0.03 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 0.40 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Gemini 2.0 Flash delivers next‑gen features and improved capabilities, including superior speed, native tool use, and a 1M token context window.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images, videos, audio
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @google/gemini-2.0-flash-lite
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 0.08 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 0.30 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        General‑purpose model, with image recognition, smart and fast. Great for an economical chat.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images, videos, audio
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+        </div>
+    </td>
+</tr>
+    </tbody>
+</table>
+
+## <img src="/assets/icon/inception.svg" class="inline-icon"> inception
+
+<table>
+    <thead>
+        <colgroup>
+            <col style="width: 30%" />
+            <col style="width: 20%" />
+            <col style="width: 50%" />
+        </colgroup>
+        <tr>
+            <th>Model name</th>
+            <th>Pricing</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+<tr>
+    <td>
+        <code>
+            @inception/mercury
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 0.25 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 1.00 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Extremely fast model by generative diffusion.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+        </div>
+    </td>
+</tr>
+    </tbody>
+</table>
+
+## <img src="/assets/icon/metaai.svg" class="inline-icon"> metaai
+
+<table>
+    <thead>
+        <colgroup>
+            <col style="width: 30%" />
+            <col style="width: 20%" />
+            <col style="width: 50%" />
+        </colgroup>
+        <tr>
+            <th>Model name</th>
+            <th>Pricing</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+<tr>
+    <td>
+        <code>
+            @metaai/llama-3.3-70b
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 0.59 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 0.79 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Previous generation model with many parameters and surprisingly fast speed.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @metaai/llama-4-maverick-17b-128e
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 0.20 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+        <div class="item-pricing">
+            <small>
+                Output:
+            </small>
+            <div>
+                $ 0.60 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Fast model, with 17 billion activated parameters and 128 experts.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Input: accepts images
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Function calls
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @metaai/llama-4-scout-17b-16e
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Input:
+            </small>
+            <div>
+                $ 0

@@ -132,46 +132,7 @@
 <p>Quando uma sessão é encontrada no cliente de chat através da <code>tag</code> informada, a sessão é renovada pelo período informado e o contexto é atualizado.</p>
 <p>Uma sessão de chat também restaura todas as mensagens da conversa da mesma sessão após desconexão. O usuário pode limpar a conversa ao clicar no botão de limpar conversa no canto superior direito do cliente de chat. Essa sessão usa os limites definidos pelo cliente de chat, como máximo de mensagens e tokens na conversa.</p>
 <p>Se uma sessão estiver próxima de expirar, ela é renovada por mais 20 minutos na próxima mensagem do usuário.</p>
-<div class="request-item post">
-    <span>POST</span>
-    <span>
-        /api/v1/web-chat-client/<span>{chat-client-id}</span>/sessions
-    </span>
-</div>
-<pre><code class="lang-json">{
-    // Tempo em segundos para o chat expirar. O mínimo é 10 minutos. O máximo é 90 dias.
-    &quot;expires&quot;: 3600,
-    
-    // Opcional. Contexto adicional para a IA sobre o chat.
-    &quot;extraContext&quot;: &quot;# Contexto adicional\r\n\r\nVocê está falando com Eduardo.&quot;,
-    
-    // Opcional. Fornece um endpoint para a sessão obter contexto adicional. Esse endpoint é chamado em toda mensagem enviada pelo usuário, atualizada em tempo real sem qualquer cache.
-    &quot;contextLocation&quot;: &quot;https://example.com/context.txt&quot;,
-    
-    // Opcional (recomendado). Um id externo para identificar a sessão posteriormente e reaproveitá-la sempre que chamar o mesmo endpoint. Pode ser o ID do usuário do seu banco de dados ou uma string que facilite a identificação desse chat posteriormente.
-    &quot;tag&quot;: &quot;my-user-tag&quot;,
-    
-    // Opcional. Metadata chave-valor adicional para armazenar no cliente. Não visível para a assistente.
-    &quot;metadata&quot;: {
-        &quot;foo&quot;: &quot;bar&quot;
-    }
-}
-</code></pre>
-<h4 id="resposta">Resposta</h4>
-<pre><code class="lang-json">{
-    &quot;message&quot;: null,
-    &quot;data&quot;: {
-        // ID da sessão de chat criada
-        &quot;sessionId&quot;: &quot;01966f0b-172d-7bbc-9393-4273b86667d2&quot;,
-        
-        // Chave pública de acesso do chat
-        &quot;accessKey&quot;: &quot;wky_gr5uepjsgrhuqcj3aaat1iagrsmozwr9gghusnnu6zjhrsyures5xoe&quot;,
-        
-        // A URL pública para conversar com o chat
-        &quot;talkUrl&quot;: &quot;https://console.aivax.net/chat/wky_gr5uepjsgrhuqcj3aaat1iagrsmozwr9gghusnnu6zjhrsyures5xoe&quot;
-    }
-}
-</code></pre>
+<p>Para detalhes sobre como criar uma sessão de chat, consulte o endpoint <a href="https://inference.aivax.net/apidocs#CreateWebChatSession">Create Web Chat Session</a>.</p>
 <h2 id="sessões-de-integrações">Sessões de integrações</h2>
 <p>A AIVAX fornece duas integrações para clientes de chat: Telegram e WhatsApp (através do <a href="https://www.z-api.io/">Z-Api</a>). Cada conversa em um aplicativo é uma sessão individual, identificada pelo ID da conversa ou número de telefone do usuário.</p>
 <p>Essas sessões obedecem as regras do chat client original. Além disso, sessões de chat nessas integrações possuem dois comandos especiais:</p>

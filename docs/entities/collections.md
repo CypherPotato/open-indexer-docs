@@ -11,155 +11,31 @@ Uma coleção é uma biblioteca de conhecimento: ela abriga vários documentos d
 
 ## Criar uma coleção
 
-Para criar uma coleção vazia, informe apenas o nome dela:
+Para criar uma coleção vazia, informe apenas o nome dela.
 
-#### Requisição
-
-<div class="request-item post">
-    <span>POST</span>
-    <span>
-        /api/v1/collections
-    </span>
-</div>
-
-```json
-{
-    // O nome da coleção não pode ser vazio.
-    "collectionName": "Minha primeira coleção"
-}
-```
-
-#### Resposta
-
-```json
-{
-    "message": null,
-    "data": {
-        // ID único da coleção criada.
-        "collectionId": "01965b62-17c4-7258-9aa8-af5139799527"
-    }
-}
-```
+Para detalhes sobre como criar uma coleção, consulte o endpoint [Create Collection](https://inference.aivax.net/apidocs#CreateCollection).
 
 ## Listar coleções
 
 Lista as coleções disponíveis na sua conta.
 
-#### Requisição
-
-<div class="request-item get">
-    <span>GET</span>
-    <span>
-        /api/v1/collections
-    </span>
-</div>
-
-#### Resposta
-
-```json
-{
-    "message": null,
-    "data": {
-        "pageInfo": {
-            "currentPage": 1,
-            "hasMoreItems": true
-        },
-        "items": [
-            {
-                "id": "01965b62-17c4-7258-9aa8-af5139799527",
-                "createdAt": "2025-04-22T02:44:37",
-                "name": "Minha coleção"
-            },
-            {
-                "id": "01965b54-7fbd-70cd-982b-604de002ac0a",
-                "createdAt": "2025-04-22T02:29:46",
-                "name": "Outra coleção"
-            }
-        ]
-    }
-}
-```
+Para detalhes sobre como listar coleções, consulte o endpoint [List Collections](https://inference.aivax.net/apidocs#ListCollections).
 
 ## Ver uma coleção
 
 Obtém detalhes de uma coleção, como seu progresso de indexação e informações como data de criação.
 
-#### Requisição
-
-<div class="request-item get">
-    <span>GET</span>
-    <span>
-        /api/v1/collections/<span>{collection-id}</span>/
-    </span>
-</div>
-
-#### Resposta
-
-```json
-{
-    "message": null,
-    "data": {
-        "name": "Minha coleção",
-        "createdAt": "2025-04-22T02:29:46",
-        "state": {
-            
-            // traz a quantidade de documentos aguardando indexação
-            "queuedDocuments": 0,
-            
-            // quantidade de documentos pronto para consulta
-            "indexedDocuments": 227
-        },
-        "tags": [
-            "tag1",
-            "tag2",
-            "tag3",
-            ...
-        ]
-    }
-}
-```
+Para detalhes sobre como visualizar uma coleção, consulte o endpoint [Get Collection Details](https://inference.aivax.net/apidocs#GetCollectionDetails).
 
 ## Excluir uma coleção
 
 Exclui uma coleção e todos os documentos nela. Essa ação é irreversível.
 
-#### Requisição
-
-<div class="request-item delete">
-    <span>DELETE</span>
-    <span>
-        /api/v1/collections/<span>{collection-id}</span>/
-    </span>
-</div>
-
-#### Resposta
-
-```json
-{
-    "message": "Collection deleted successfully.",
-    "data": null
-}
-```
+Para detalhes sobre como excluir uma coleção, consulte o endpoint [Delete Collection](https://inference.aivax.net/apidocs#DeleteCollection).
 
 
 ## Limpar uma coleção
 
 Diferente da exclusão de coleção, essa operação remove todos os documentos da coleção, incluindo os indexados e os em fila.
 
-#### Requisição
-
-<div class="request-item delete">
-    <span>DELETE</span>
-    <span>
-        /api/v1/collections/<span>{collection-id}</span>/reset-only
-    </span>
-</div>
-
-#### Resposta
-
-```json
-{
-    "message": "Collection cleaned successfully.",
-    "data": null
-}
-```
+Para detalhes sobre como limpar uma coleção, consulte o endpoint [Reset Collection](https://inference.aivax.net/apidocs#ResetCollection).

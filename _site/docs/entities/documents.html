@@ -146,15 +146,10 @@
 <li>Use uma linguagem humana, simples e fácil de entender.</li>
 </ul>
 <h2 id="uso-da-api">Uso da API</h2>
-<p>Como todos os documentos são entidades que pertencem à uma <a href="/entities/collections">coleção</a>, sempre tenha em mãos a coleção de onde o documento está/será localizado.</p>
+<p>Como todos os documentos são entidades que pertencem à uma <a href="collections.html">coleção</a>, sempre tenha em mãos a coleção de onde o documento está/será localizado.</p>
+<p>Para informações detalhadas sobre os endpoints da API de documentos, consulte a <a href="https://inference.aivax.net/apidocs#Documents">documentação oficial da API</a>.</p>
 <h2 id="enviar-documentos-em-lote">Enviar documentos em lote</h2>
-<p>Para enviar uma lista em massa de documentos para uma coleção, estruture-os seguindo o formato <a href="https://jsonlines.org/">JSONL</a>. A estrutura do arquivo de indexação é:</p>
-<pre><code class="lang-json">{&quot;docid&quot;:&quot;Carros/HondaCivic2015.rmd:1&quot;,&quot;text&quot;:&quot;O Honda Civic 2015 está disponível em [...]&quot;,&quot;__ref&quot;:null,&quot;__tags&quot;:[&quot;Carros&quot;,&quot;Honda-Civic-2015&quot;]}
-{&quot;docid&quot;:&quot;Carros/HondaCivic2015.rmd:2&quot;,&quot;text&quot;:&quot;O motor do Honda Civic 2015 é [...]&quot;,&quot;__ref&quot;:null,&quot;__tags&quot;:[&quot;Carros&quot;,&quot;Honda-Civic-2015&quot;]}
-{&quot;docid&quot;:&quot;Carros/HondaCivic2015.rmd:3&quot;,&quot;text&quot;:&quot;A cor do Honda Civic 2015 é Amarela [...]&quot;,&quot;__ref&quot;:null,&quot;__tags&quot;:[&quot;Carros&quot;,&quot;Honda-Civic-2015&quot;]}
-...
-</code></pre>
-<p>A estrutura é compsta pelas propriedades:</p>
+<p>Para enviar uma lista em massa de documentos para uma coleção, estruture-os seguindo o formato <a href="https://jsonlines.org/">JSONL</a>. A estrutura é composta pelas propriedades:</p>
 <table>
 <thead>
 <tr>
@@ -194,40 +189,7 @@
 <h5>Warning</h5>
 <p>Atenção: esse endpoint gera custo. O custo é calculado em cima dos tokens do conteúdo de cada documento. O conteúdo de cada documento é tokenizado de acordo com o modelo usado na indexação dos documentos.</p>
 </div>
-<h4 id="requisição">Requisição</h4>
-<p>O envio deve ser feito usando <strong>multipart form data</strong>.</p>
-<div class="request-item get">
-    <span>POST</span>
-    <span>
-        /api/v1/collections/<span>{collection-id}</span>/documents
-    </span>
-</div>
-<pre><code class="lang-text">documents=[documents.jsonl]
-</code></pre>
-<h4 id="resposta">Resposta</h4>
-<pre><code class="lang-json">{
-    &quot;message&quot;: null,
-    &quot;data&quot;: [
-        {
-            &quot;name&quot;: &quot;Institucional/Empresa.rmd:1&quot;,
-            &quot;documentId&quot;: &quot;01965f93-a36b-7fc2-9e6a-c733f4955927&quot;
-        },
-        {
-            &quot;name&quot;: &quot;Institucional/Empresa.rmd:2&quot;,
-            &quot;documentId&quot;: &quot;01965f93-a390-79d3-9b3d-338d407f6b64&quot;
-        },
-        {
-            &quot;name&quot;: &quot;Institucional/Empresa.rmd:3&quot;,
-            &quot;documentId&quot;: &quot;01965f93-a391-79ef-adcf-737d98303a78&quot;
-        },
-        {
-            &quot;name&quot;: &quot;Produtos/Agendamentos.rmd:1&quot;,
-            &quot;documentId&quot;: &quot;01965f93-a391-712e-9292-c4d8e010bf42&quot;
-        },
-        ...
-    ]
-}
-</code></pre>
+<p>Para detalhes sobre como enviar documentos em lote, consulte o endpoint <a href="https://inference.aivax.net/apidocs#IndexDocumentsJSONL">Index Documents (JSONL)</a>.</p>
 <h2 id="criar-ou-modificar-documento">Criar ou modificar documento</h2>
 <p>Esse endpoint cria ou modifica um documento a partir do seu nome. Quando um documento é modificado, seus vetores de indexação são resetados, isto é, o documento entrará em fila novamente para ser indexado pelo motor de indexação.</p>
 <p>Essa indexação não é isenta de custo. O custo é relativo à quantidade de tokens do conteúdo enviado. O custo somente é gerado quando o documento é de fato alterado. Chamar essa rota com o mesmo conteúdo do documento não gera modificação, portanto, não gera custo.</p>
@@ -235,39 +197,7 @@
 <h5>Warning</h5>
 <p>Atenção: esse endpoint gera custo. O custo é calculado em cima dos tokens do conteúdo do arquivo. O conteúdo do arquivo é tokenizado de acordo com o modelo usado na indexação dos documentos.</p>
 </div>
-<h4 id="requisição-1">Requisição</h4>
-<div class="request-item put">
-    <span>PUT</span>
-    <span>
-        /api/v1/collections/<span>{collection-id}</span>/documents
-    </span>
-</div>
-<pre><code class="lang-json">{
-    // o nome do documento que será modificado
-    &quot;name&quot;: &quot;document-name&quot;,
-
-    // o conteúdo do documento que será criado ou sobreposto caso o nome já exista
-    &quot;contents&quot;: &quot;Conteúdo do meu documento&quot;,
-    
-    // parâmetros explicados anteriormente
-    &quot;reference&quot;: null,
-    &quot;tags&quot;: [&quot;products&quot;, &quot;my-product&quot;]
-}
-</code></pre>
-<h4 id="resposta-1">Resposta</h4>
-<pre><code class="lang-json">{
-    &quot;message&quot;: null,
-    &quot;data&quot;: {
-        &quot;documentId&quot;: &quot;0196663c-3a15-72c7-98e6-b496f8e8bb8c&quot;,
-        
-        // o estado da operação indicando o resultado da operação:
-        // NotModified - não foi modificado (sem alterações)
-        // Modified - houve alterações e o documento foi agendado para indexação
-        // Created - documento não existia e foi agendado para indexação
-        &quot;state&quot;: [&quot;Modified&quot;]
-    }
-}
-</code></pre>
+<p>Para detalhes sobre como criar ou modificar documentos, consulte o endpoint <a href="https://inference.aivax.net/apidocs#CreateorUpdateDocument">Create or Update Document</a>.</p>
 <h2 id="listar-documentos">Listar documentos</h2>
 <p>Esse endpoint lista todos os documentos disponíveis em uma coleção. Você pode passar um parâmetro da query adicional <code>filter</code> para filtrar documentos por nome, tag ou conteúdo.</p>
 <p>Esse filtro suporta expressões que auxiliam a filtrar o que você está procurando:</p>
@@ -278,92 +208,13 @@
 <li><code>-n &quot;name&quot;</code> - filtra documentos que possuem esse trecho em seu nome.</li>
 <li><code>in &quot;id&quot;</code> - filtra documentos por ID.</li>
 </ul>
-<h4 id="requisição-2">Requisição</h4>
-<div class="request-item get">
-    <span>GET</span>
-    <span>
-        /api/v1/collections/<span>{collection-id}</span>/documents
-    </span>
-</div>
-<h4 id="resposta-2">Resposta</h4>
-<pre><code class="lang-json">{
-    &quot;message&quot;: null,
-    &quot;data&quot;: {
-        &quot;pageInfo&quot;: {
-            &quot;currentPage&quot;: 1,
-            &quot;hasMoreItems&quot;: true
-        },
-        &quot;items&quot;: [
-            {
-                &quot;id&quot;: &quot;01968452-69f6-7f00-a497-d14c5b906b79&quot;,
-                &quot;name&quot;: &quot;Ajuda/Clientes.rmd:1&quot;,
-                &quot;reference&quot;: null,
-                &quot;tags&quot;: [
-                    &quot;Ajuda&quot;,
-                    &quot;Clientes&quot;
-                ],
-                &quot;contentsPreview&quot;: &quot;Um cliente é um cadastro na sua platafor...&quot;,
-                &quot;indexState&quot;: [&quot;Indexed&quot;]
-            },
-            {
-                &quot;id&quot;: &quot;01968452-6a53-7ce3-adad-fad32d508856&quot;,
-                &quot;name&quot;: &quot;Ajuda/Clientes.rmd:2&quot;,
-                &quot;reference&quot;: null,
-                &quot;tags&quot;: [
-                    &quot;Ajuda&quot;,
-                    &quot;Clientes&quot;
-                ],
-                &quot;contentsPreview&quot;: &quot;No cadastro do cliente, é possível modif...&quot;,
-                &quot;indexState&quot;: [&quot;Indexed&quot;]
-            },
-            ...
-        ]
-    }
-}
-</code></pre>
+<p>Para detalhes sobre como listar documentos, consulte o endpoint <a href="https://inference.aivax.net/apidocs#BrowseDocuments">Browse Documents</a>.</p>
 <h2 id="ver-documento">Ver documento</h2>
 <p>Vê detalhes sobre um documento específico.</p>
-<h4 id="requisição-3">Requisição</h4>
-<div class="request-item get">
-    <span>GET</span>
-    <span>
-        /api/v1/collections/<span>{collection-id}</span>/documents/<span>{document-id}</span>
-    </span>
-</div>
-<h4 id="resposta-3">Resposta</h4>
-<pre><code class="lang-json">{
-    &quot;message&quot;: null,
-    &quot;data&quot;: {
-        &quot;id&quot;: &quot;01965f93-a36b-7fc2-9e6a-c733f4955927&quot;,
-        &quot;name&quot;: &quot;Institucional/Empresa.rmd:1&quot;,
-        
-        // representa a situação de indexação do documento.
-        // valores válidos: Queud, Indexed, Cancelled
-        &quot;state&quot;: [&quot;Indexed&quot;],
-
-        // conteúdo do documento indexado
-        &quot;contents&quot;: &quot;...&quot;,
-
-        // id da referência do documento
-        &quot;reference&quot;: &quot;institucional-empresa&quot;
-    }
-}
-</code></pre>
+<p>Para detalhes sobre como visualizar um documento, consulte o endpoint <a href="https://inference.aivax.net/apidocs#GetDocument">Get Document</a>.</p>
 <h2 id="excluir-documento">Excluir documento</h2>
 <p>Permanentemente exclui um documento através do seu ID.</p>
-<h4 id="requisição-4">Requisição</h4>
-<div class="request-item delete">
-    <span>DELETE</span>
-    <span>
-        /api/v1/collections/<span>{collection-id}</span>/documents/<span>{document-id}</span>
-    </span>
-</div>
-<h4 id="resposta-4">Resposta</h4>
-<pre><code class="lang-json">{
-    &quot;message&quot;: &quot;Document removed.&quot;,
-    &quot;data&quot;: null
-}
-</code></pre>
+<p>Para detalhes sobre como excluir um documento, consulte o endpoint <a href="https://inference.aivax.net/apidocs#DeleteDocument">Delete Document</a>.</p>
 
 </article>
 

@@ -18,49 +18,6 @@ Esse endpoint espera uma requisição GET com os parâmetros:
 >
 > Atenção: esse endpoint gera custo. O custo é calculado em cima dos tokens do termo de busca. O termo de busca é tokenizado de acordo com o modelo usado na indexação dos documentos.
 
-#### Requisição
-
-<div class="request-item post">
-    <span>GET</span>
-    <span>
-        /api/v1/collections/<span>{collection-id}</span>/query
-    </span>
-</div>
-
-```text
-term=Qual a cor do honda CIVIC?
-```
-
-#### Resposta
-
-```json
-{
-    "message": null,
-    "data": [
-        {
-            "documentId": "01965f93-a391-71a8-968a-47ccd4949de0",
-            "documentName": "Produtos/Honda Civic 2015.rmd:1",
-            "documentContent": "[...]",
-            "score": 0.7972834229469299,
-            "referencedDocuments": []
-        },
-        {
-            "documentId": "01965f93-a391-76b3-bbf5-3fb74d10d412",
-            "documentName": "Produtos/Honda Civic 2015.rmd:2",
-            "documentContent": "[...]",
-            "score": 0.5693517327308655,
-            "referencedDocuments": []
-        },
-        {
-            "documentId": "01965f93-a391-7026-b7aa-1cc6c63cd7d1",
-            "documentName": "Produtos/Honda Civic 2015.rmd:5",
-            "documentContent": "[...]",
-            "score": 0.5475733876228333,
-            "referencedDocuments": []
-        },
-        ...
-    ]
-}
-```
+Veja a [referência](https://inference.aivax.net/apidocs#QueryCollection) do endpoint da API de consultas nas coleções.
 
 Para o resultado da busca, quanto maior o score, mais semelhante é o documento para o termo da busca. O AIVAX utiliza modelos de embedding que permitem a orientação da tarefa. Para a busca, o termo é vetorizado com uma orientação `DOCUMENT_QUERY`. Para indexação dos documentos, a orientação é `DOCUMENT_RETRIEVAL`, o que fornece uma busca mais otimizada e não para averiguar a similaridade entre documentos.

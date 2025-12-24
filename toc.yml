@@ -2,3 +2,5 @@
   href: /
 - name: Documentação
   href: docs/
+- name: API Reference
+  href: https://inference.aivax.net/apidocs

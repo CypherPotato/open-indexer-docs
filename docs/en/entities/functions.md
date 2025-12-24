@@ -1,174 +1,53 @@
-# Functions
+# Functions (structured responses)
 
-Functions are a way to force your model to process information using JSON as an intermediary of communication. With functions, you can make any model respond in the JSON format you want.
+Functions are an implementation of structured responses that works with **any LLM**, even those that do not natively support structured outputs. AIVAX analyzes the provided `responseSchema` and manually validates whether the model responded as expected. When the model fails, AIVAX automatically notifies the errors until it generates a valid JSON.
 
-It can be useful for categorizing comments, applying moderation on reviews, or processing information with AI assistance.
+This process continues until the `maxAttempts` parameter is reached or a valid JSON is generated. AIVAX interprets JSONs in markdown blocks, preceded or followed by text, and automatically extracts the final response.
 
-Currently, functions can only be used with [models provided by AIVAX](/docs/en/models).
+You can use JSON functions with models that have reasoning without breaking the reasoning phase to generate the JSON. Additionally, you can use [built‑in tools](/docs/en/builtin-tools) during generation, such as web search, document generation, and opening links.
 
-## Serverless code
+> **Note:** Functions (JSON) are different from [Hosted Functions](/docs/en/serverless), which are serverless JavaScript code executed on AIVAX infrastructure for agentic tasks.
 
-It is possible to host JavaScript code on AIVAX that performs agentic tasks, such as functions, inference, and communication with other services.
+## How it works
 
-Read more about [serverless here](/docs/en/serverless).
+When calling a function, you define **what the model should do** via instructions and **how it should respond** via a JSON Schema.
 
-## Calling a function
+AIVAX validates the model's response in real time. If the generated JSON is invalid or does not follow the schema, the model receives automatic feedback about the errors and tries again. This cycle continues until:
+- A valid JSON is generated (success on the first try or after corrections)
+- The `maxAttempts` limit is reached
 
-To call an AI function, you will need to specify what the AI should respond with and provide a JSON Schema that it must follow.
+**Billing:** You are charged for each generation attempt. Smarter models usually get it right on the first try, while smaller models may need multiple attempts.
 
-Less intelligent models tend to fail JSON generation, producing an invalid or problematic document. To address this, adjust your model, the instruction, and the attempts parameter if necessary.
+**Performance tip:** Use caching on your application side for data that does not change frequently (weather, daily statistics, etc). AIVAX does not perform automatic caching.
 
-You are charged for each attempt the AI makes to generate. Slightly smarter models tend to produce correct results on the first attempt. It is guaranteed that a valid JSON will be generated and that this JSON will follow the same schema provided in the request.
+See the [API reference](https://inference.aivax.net/apidocs#ExecuteJSONFunction) to learn more about the functions/output schemas API.
 
-Consider using a cache on your application side for data that does not need to be constantly updated, such as weather data, daily statistics, etc. AIVAX does not perform any caching on our side.
+## Supported JSON Schema
 
-#### Request
+AIVAX guides the model to generate a response according to the provided JSON Schema. When the model generates something invalid, it receives feedback about the errors and tries again until the output conforms to the specification.
 
-<div class="request-item post">
-    <span>POST</span>
-    <span>
-        /api/v1/functions/json
-    </span>
-</div>
+### Supported types and validations
 
-```json
-{
-    // Required. Specify the name of the integrated model that will be used to perform the action.
-    "modelName": "@metaai/llama-3.1-8b",
-    
-    // Required. Explain what your model should do with the input and how it should produce the response.
-    "instructions": "Classify the user's comment, indicating whether it is positive or negative, and whether it contains any relevant information (a number between 0 (not relevant) and 10 (very relevant))",
-    
-    // Required. The JSON Schema that the model must follow to generate the response. You can provide generation examples in the instructions field.
-    "responseSchema": {
-        "type": "object",
-        "properties": {
-            "feedbackType": {
-                "type": "string",
-                "enum": ["neutral", "positive", "negative"]
-            },
-            "informationScore": {
-                "type": "integer",
-                "minimum": 0,
-                "maximum": 10
-            }
-        },
-        "required": ["feedbackType", "informationScore"]
-    },
-    
-    // Optional. Define a JSON input for the model. It can be any type of JSON value.
-    "inputData": {
-        "userComment": "Pessimo mercado. Tem guarda dentro te vigiando pra vc nao roubar e os acougueiros te ignoram e atendem mocinhas bonitinhas na tua frente.  Mas graças a Deus tem outros mercados chegando e o fim dessa palhaçada vai chegar"
-    },
-    
-    // Optional. Define how many attempts the model should try before the API returns an error. Must be a number between 1 and 30.
-    "maxAttempts": 10,
-    
-    // Optional. Define the timeout in seconds to obtain a valid JSON before the API returns an error. Must be a number between 1 and 3600 (one hour).
-    "timeout": 300,
-    
-    // Optional. Define the temperature for JSON generation. Higher values tend to be more creative, while lower values are more deterministic. Number from 0 to 2.
-    "temperature": 0.4,
-    
-    // Optional. Provides additional context for generation via messages in chat/completions format. You can also provide multimodal content for compatible models.
-    "context": [
-        {
-            "role": "user",
-            "content": "Additional context"
-        }
-    ],
-    
-    // Optional. Provides built-in AIVAX functions for tool generation.
-    "tools": [
-        "WebSearch",
-        "Code",
-        "OpenUrl",
-        "ImageGeneration",
-        "XPostsSearch"
-    ],
-    
-    // Optional. Define tool generation parameters.
-    "toolsOptions": {
-        "webSearchMode": "Full" | "Summarized",
-        "webSearchMaxResults": 10,
-        "imageGenerationMaxResults": 2,
-        "imageGenerationQuality": "Low" | "Medium" | "High" | "Highest",
-        "imageGenerationAllowMatureContent": false
-    },
-    
-    // Optional. Additional function metadata. Not visible to the assistant.
-    "metadata": {
-        "foo": "bar"
-    }
-}
-```
-
-#### Response
-
-```json
-{
-  "result": {
-    "requiresAttention": true,
-    "shortSummary": "Customer threatens cancellation and bad publicity if not contacted today."
-  },
-  "attempt": 0,
-  "elapsedMilliseconds": 1235,
-  "warnings": [],
-  "context": {
-    "generatedUsage": [
-      {
-        "sku": "inference.functions.json.in",
-        "amount": 0.0000123,
-        "unitPrice": 1e-7,
-        "quantity": 123,
-        "description": "JSON function rendering (@google/gemini-2.0-flash)"
-      },
-      {
-        "sku": "inference.functions.json.out",
-        "amount": 0.0000116,
-        "unitPrice": 4e-7,
-        "quantity": 29,
-        "description": "JSON function rendering (@google/gemini-2.0-flash)"
-      }
-    ],
-    "runnedFunctions": []
-  }
-}
-```
-
-## JSON Schema Guidelines
-
-The response format must be provided by a JSON Schema.
-
-Behind the scenes, AIVAX guides the model to generate a response with the provided JSON schema. When the model generates something invalid, we tell it to try again and correct the errors until the output conforms to the supplied specification.
-
-The supported JSON Schema guidelines of AIVAX are:
-
-- `string`:
-    - `minLength`
-    - `maxLength`
-    - `pattern`
-    - `format`
-        - Can be `date-time`, `email`, `time`, `duration`, `uri`, `url`, `ipv4`, `ipv6`, `uuid` or `guid`.
+- **string**:
+    - `minLength`, `maxLength`
+    - `pattern` (regex)
+    - `format`: `date-time`, `email`, `time`, `duration`, `uri`, `url`, `ipv4`, `ipv6`, `uuid`, `guid`
     - `enum`
-- `number` and `integer`:
-    - `minimum`
-    - `maximum`
-    - `exclusiveMinimum`
-    - `exclusiveMaximum`
+- **number** and **integer**:
+    - `minimum`, `maximum`
+    - `exclusiveMinimum`, `exclusiveMaximum`
     - `multipleOf`
-- `array`
+- **array**:
     - `items`
     - `uniqueItems`
-    - `minItems`
-    - `maxItems`
-- `object`
+    - `minItems`, `maxItems`
+- **object**:
     - `properties`
     - `required`
-- `bool` and `boolean`
-- `null`
+- **bool**, **boolean**
+- **null**
 
-Additionally, you can specify one or more values in the object's `type`, for example:
+**Multiple types:** You can specify multiple types in a field:
 
 ```json
 {
@@ -176,11 +55,18 @@ Additionally, you can specify one or more values in the object's `type`, for exa
 }
 ```
 
-> Note: `number` and `integer` are synonyms and `integer` does not guarantee that the number will be an integer.
+> **Note:** `number` and `integer` are synonyms. The `integer` type does not guarantee that the value will be an integer.
 
-## Functions in tools
+## Built‑in tools
 
-It is possible to use [built-in tools](/docs/en/builtin-tools) as JSON functions. This will allow the model to call functions to obtain the necessary context to generate the final JSON.
+You can use [built‑in tools](/docs/en/builtin-tools) during JSON generation, allowing the model to:
+- Search the internet for up‑to‑date information
+- Execute code for complex calculations
+- Open and analyze URLs
+- Generate images
+- Fetch social media posts
+
+These tools are especially useful for functions that need real‑time data or additional processing before generating the structured response.
 
 ## Examples
 
@@ -198,22 +84,22 @@ Check out examples of AI functions for various everyday tasks:
 ```json
 {
     "modelName": "@google/gemini-2.0-flash",
-    "instructions": "Classify the user's comment by providing a rating for the comment.",
+    "instructions": "Classify the user's comment by providing a rating for their comment.",
     "inputData": {
-        "inputText": "A comida é boa, mas o ambiente é muito barulhento e um pouco sujo também."
+        "inputText": "The food is good, but the environment is very noisy and also a bit dirty."
     },
     "responseSchema": {
         "type": "object",
         "properties": {
             "commentSummary": {
                 "type": "string",
-                "description": "Resumo do que o usuário quis dizer."
+                "description": "Summary of what the user meant."
             },
             "score": {
                 "type": "integer",
                 "min": 1,
                 "max": 5,
-                "description": "A nota extraída da avaliação, sendo 1 muito ruim e 5 muito bom."
+                "description": "The rating extracted from the evaluation, where 1 is very bad and 5 is very good."
             }
         },
         "required": [
@@ -579,7 +465,7 @@ Check out examples of AI functions for various everyday tasks:
 ```json
 {
             "modelName": "@openai/gpt-4.1-mini",
-            "instructions": "The function should search, using the latest X posts, musical streaming platforms (such as Spotify, Apple Music, etc.) and identify the top 10 most-played artists in the genre specified by the user. Then, it should format an object containing an ordered list of 10 artists, including rank (1–10), name, and estimated number of streams.",
+            "instructions": "The function should search, using the latest X posts, music streaming platforms (like Spotify, Apple Music etc.) and identify the 10 most played artists in the genre provided by the user. Then, it should format an object containing an ordered list of 10 artists, including position (1–10), name and estimated number of streams.",
             "inputData": {
                 "genre": "dubstep"
             },
@@ -588,7 +474,7 @@ Check out examples of AI functions for various everyday tasks:
                 "properties": {
                     "artists": {
                         "type": "array",
-                        "description": "List of the top 10 artists most played in the specified genre",
+                        "description": "List of the 10 most played artists in the specified genre",
                         "items": {
                             "type": "object",
                             "properties": {
@@ -758,4 +644,44 @@ Check out examples of AI functions for various everyday tasks:
             },
             {
               "url": "https://x.com/yobrxxzy/status/1856816512524587343",
-              "text": "MOST STREAMED ARTISTS ON THESE DSP:\n\nApple Music — WIZKID\nSpotify — WIZKID\nYouTube — BURNA BOY\nPandora — WIZKID\nTidal  — WIZKID\nLine Music — WIZKID\nAudiomack — ASAKE\nDeezer — WIZKID\nBoomplay — BURNA BO
+              "text": "MOST STREAMED ARTISTS ON THESE DSP:\n\nApple Music — WIZKID\nSpotify — WIZKID\nYouTube — BURNA BOY\nPandora — WIZKID\nTidal  — WIZKID\nLine Music — WIZKID\nAudiomack — ASAKE\nDeezer — WIZKID\nBoomplay — BURNA BOY\nDeezer — WIZKID\nAnghami — REMA\nSoundCloud — BURNA BOY\nShazam — WIZKID\n\n🐐 https://t.co/yL2tmJJpHM",
+              "authorUserName": "yobrxxzy",
+              "createdAt": "2024-11-13T21:48:49"
+            },
+            {
+              "url": "https://x.com/hourjinnie/status/1858756269902881208",
+              "text": "PLAYLISTS! Let’s get to streaming and utilize all our tools! More pl coming tomorrow!!!\n\nSPOTIFY\n\nhttps://t.co/L0HRMpYEQG\n\nhttps://t.co/HmhdB859e5\n\nhttps://t.co/FA4eDmvvkS\n\nhttps://t.co/ZOedbxiKmO\n\nhttps://t.co/DyPs0qpOMQ\n\nDeezer\n\nhttps://t.co/36PY8aXkV7\n\nApple Music \n\nhttps://t.co/wk5MXtzDYC\n\nhttps://t.co/OgovuVtoDq\n\nPandora \n\nhttps://t.co/idkimHTTjp\n\nhttps://t.co/WQ83YKeUOK",
+              "authorUserName": "hourjinnie",
+              "createdAt": "2024-11-19T06:16:43"
+            },
+            {
+              "url": "https://x.com/yobrxxzy/status/1653723618944090112",
+              "text": "MOST STREAMED ARTISTS ON THESE STREAMING PLATFORMS:\n\nApple Music — WIZKID\nSpotify — WIZKID\nYouTube — BURNA BOY\nPandora — WIZKID\nTidal  — WIZKID\nAudiomack — BURNA BOY\nDeezer — WIZKID\nBoomplay — BURNA BOY\nSoundCloud — WIZKID\nShazam — WIZKID\n\nWhere is @davido ? https://t.co/JOcwJZ2HUU",
+              "authorUserName": "yobrxxzy",
+              "createdAt": "2023-05-03T11:30:10"
+            },
+            {
+              "url": "https://x.com/EyelanderMusic/status/1882525103482872115",
+              "text": "YO IF YOU THINK DUBSTEP IS GETTING “STALE” \n\nGET THE HELL OFF OF SPOTIFY AND ON TO SOUNDCLOUD \n\nTHERE IS SOOO MUCH INSANE UNDERGROUND TALENT THAT RELEASE MOSTLY JUST TO SOUNDCLOUD. \n\n(Plus that’s usually where all showcases, remixes and flips are for copyright purposes)",
+              "authorUserName": "EyelanderMusic",
+              "createdAt": "2025-01-23T20:25:34"
+            },
+            {
+              "url": "https://x.com/thisiscyclops/status/1815084003050791422",
+              "text": "i like that more dubstep artists are doing albums this year. like i know it’s not the best release move in 2024 but that kinda lets you know that they’re doing it out of love for the music rather than like the Best Spotify Strategy 👍",
+              "authorUserName": "thisiscyclops",
+              "createdAt": "2024-07-21T17:58:43"
+            },
+            {
+              "url": "https://x.com/mewaolix/status/1886435921895235989",
+              "text": "Stays, we can easily reach #3 if we push a little 🥹\n\n(DSP counts Spotify, Apple Music, Amazon Music, Deezer, YT Music, Anghami, Gaana, Joox, Melon, JioSaavn, Boomplay, etc) https://t.co/P2hFoSmbtT",
+              "authorUserName": "mewaolix",
+              "createdAt": "2025-02-03T15:25:46"
+            },
+            {
+              "url": "https://x.com/bhadext/status/1951588819561546145",
+              "text": "Listen to my songs on Apple music, 🙏\nBhadext \n\nHere: https://t.co/3u79BQvHAZ https://t.co/lmMjN7m2oR",
+              "authorUserName": "bhadext",
+              "createdAt": "2025-08-02T10:20:08"
+            },
+            {

@@ -134,122 +134,20 @@
 <p>Coleções implementam a técnica <strong>RAG (Retrieval-Augmented Generation)</strong>. Para entender quando usar RAG em comparação com Skills e System Prompt, consulte nosso <a href="/docs/concepts-comparison">guia completo de comparação</a>.</p>
 </div>
 <h2 id="criar-uma-coleção">Criar uma coleção</h2>
-<p>Para criar uma coleção vazia, informe apenas o nome dela:</p>
-<h4 id="requisição">Requisição</h4>
-<div class="request-item post">
-    <span>POST</span>
-    <span>
-        /api/v1/collections
-    </span>
-</div>
-<pre><code class="lang-json">{
-    // O nome da coleção não pode ser vazio.
-    &quot;collectionName&quot;: &quot;Minha primeira coleção&quot;
-}
-</code></pre>
-<h4 id="resposta">Resposta</h4>
-<pre><code class="lang-json">{
-    &quot;message&quot;: null,
-    &quot;data&quot;: {
-        // ID único da coleção criada.
-        &quot;collectionId&quot;: &quot;01965b62-17c4-7258-9aa8-af5139799527&quot;
-    }
-}
-</code></pre>
+<p>Para criar uma coleção vazia, informe apenas o nome dela.</p>
+<p>Para detalhes sobre como criar uma coleção, consulte o endpoint <a href="https://inference.aivax.net/apidocs#CreateCollection">Create Collection</a>.</p>
 <h2 id="listar-coleções">Listar coleções</h2>
 <p>Lista as coleções disponíveis na sua conta.</p>
-<h4 id="requisição-1">Requisição</h4>
-<div class="request-item get">
-    <span>GET</span>
-    <span>
-        /api/v1/collections
-    </span>
-</div>
-<h4 id="resposta-1">Resposta</h4>
-<pre><code class="lang-json">{
-    &quot;message&quot;: null,
-    &quot;data&quot;: {
-        &quot;pageInfo&quot;: {
-            &quot;currentPage&quot;: 1,
-            &quot;hasMoreItems&quot;: true
-        },
-        &quot;items&quot;: [
-            {
-                &quot;id&quot;: &quot;01965b62-17c4-7258-9aa8-af5139799527&quot;,
-                &quot;createdAt&quot;: &quot;2025-04-22T02:44:37&quot;,
-                &quot;name&quot;: &quot;Minha coleção&quot;
-            },
-            {
-                &quot;id&quot;: &quot;01965b54-7fbd-70cd-982b-604de002ac0a&quot;,
-                &quot;createdAt&quot;: &quot;2025-04-22T02:29:46&quot;,
-                &quot;name&quot;: &quot;Outra coleção&quot;
-            }
-        ]
-    }
-}
-</code></pre>
+<p>Para detalhes sobre como listar coleções, consulte o endpoint <a href="https://inference.aivax.net/apidocs#ListCollections">List Collections</a>.</p>
 <h2 id="ver-uma-coleção">Ver uma coleção</h2>
 <p>Obtém detalhes de uma coleção, como seu progresso de indexação e informações como data de criação.</p>
-<h4 id="requisição-2">Requisição</h4>
-<div class="request-item get">
-    <span>GET</span>
-    <span>
-        /api/v1/collections/<span>{collection-id}</span>/
-    </span>
-</div>
-<h4 id="resposta-2">Resposta</h4>
-<pre><code class="lang-json">{
-    &quot;message&quot;: null,
-    &quot;data&quot;: {
-        &quot;name&quot;: &quot;Minha coleção&quot;,
-        &quot;createdAt&quot;: &quot;2025-04-22T02:29:46&quot;,
-        &quot;state&quot;: {
-            
-            // traz a quantidade de documentos aguardando indexação
-            &quot;queuedDocuments&quot;: 0,
-            
-            // quantidade de documentos pronto para consulta
-            &quot;indexedDocuments&quot;: 227
-        },
-        &quot;tags&quot;: [
-            &quot;tag1&quot;,
-            &quot;tag2&quot;,
-            &quot;tag3&quot;,
-            ...
-        ]
-    }
-}
-</code></pre>
+<p>Para detalhes sobre como visualizar uma coleção, consulte o endpoint <a href="https://inference.aivax.net/apidocs#GetCollectionDetails">Get Collection Details</a>.</p>
 <h2 id="excluir-uma-coleção">Excluir uma coleção</h2>
 <p>Exclui uma coleção e todos os documentos nela. Essa ação é irreversível.</p>
-<h4 id="requisição-3">Requisição</h4>
-<div class="request-item delete">
-    <span>DELETE</span>
-    <span>
-        /api/v1/collections/<span>{collection-id}</span>/
-    </span>
-</div>
-<h4 id="resposta-3">Resposta</h4>
-<pre><code class="lang-json">{
-    &quot;message&quot;: &quot;Collection deleted successfully.&quot;,
-    &quot;data&quot;: null
-}
-</code></pre>
+<p>Para detalhes sobre como excluir uma coleção, consulte o endpoint <a href="https://inference.aivax.net/apidocs#DeleteCollection">Delete Collection</a>.</p>
 <h2 id="limpar-uma-coleção">Limpar uma coleção</h2>
 <p>Diferente da exclusão de coleção, essa operação remove todos os documentos da coleção, incluindo os indexados e os em fila.</p>
-<h4 id="requisição-4">Requisição</h4>
-<div class="request-item delete">
-    <span>DELETE</span>
-    <span>
-        /api/v1/collections/<span>{collection-id}</span>/reset-only
-    </span>
-</div>
-<h4 id="resposta-4">Resposta</h4>
-<pre><code class="lang-json">{
-    &quot;message&quot;: &quot;Collection cleaned successfully.&quot;,
-    &quot;data&quot;: null
-}
-</code></pre>
+<p>Para detalhes sobre como limpar uma coleção, consulte o endpoint <a href="https://inference.aivax.net/apidocs#ResetCollection">Reset Collection</a>.</p>
 
 </article>
 

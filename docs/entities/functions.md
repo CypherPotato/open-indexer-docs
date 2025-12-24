@@ -1,174 +1,53 @@
-# Funções
+# Funções (respostas estruturadas)
 
-Funções é uma forma de forçar seu modelo ao processamento de informações usando JSON como intermédio de comunicação. Com as funções, você consegue fazer qualquer modelo responder no formato JSON que você quiser.
+Funções são uma implementação de respostas estruturadas que funciona com **qualquer LLM**, mesmo aqueles que não suportam nativamente structured outputs. A AIVAX analisa o `responseSchema` fornecido e valida manualmente se o modelo respondeu conforme esperado. Quando o modelo falha, a AIVAX notifica os erros automaticamente até que ele gere um JSON válido.
 
-Pode ser útil para categorizar comentários, aplicar moderação em avaliações ou processar informações com auxílio da IA.
+Esse processo continua até que o parâmetro `maxAttempts` seja atingido ou um JSON válido seja gerado. A AIVAX interpreta JSONs em blocos markdown, precedidos ou antecedidos por texto, e extrai a resposta final automaticamente.
 
-No momento, só é possível usar funções com [modelos providos pela AIVAX](/docs/models).
+Você pode usar funções JSON com modelos que possuem raciocínio (reasoning) sem quebrar a fase de raciocínio para gerar o JSON. Além disso, é possível usar [ferramentas embutidas](/docs/builtin-tools) durante a geração, como pesquisa na internet, geração de documentos e abertura de links.
 
-## Código serverless
+> **Nota:** Funções (JSON) são diferentes de [Hosted Functions](/docs/serverless), que são códigos JavaScript serverless executados na infraestrutura da AIVAX para tarefas agênticas.
 
-É possível hospedar códigos JavaScript na AIVAX que executam tarefas agênticas, como funções, inferência e comunicação com outros serviços.
+## Como funciona
 
-Leia mais sobre [serverless aqui](/docs/serverless).
+Ao chamar uma função, você define **o que o modelo deve fazer** através de instruções e **como ele deve responder** através de um JSON Schema.
 
-## Chamar uma função
+A AIVAX valida a resposta do modelo em tempo real. Se o JSON gerado for inválido ou não seguir o schema, o modelo recebe feedback automático sobre os erros e tenta novamente. Esse ciclo continua até que:
+- Um JSON válido seja gerado (sucesso na primeira tentativa ou após correções)
+- O limite de `maxAttempts` seja atingido
 
-Para chamar uma função de IA, você precisará informar o que a IA deverá responder e fornecer um JSON Schema que ela deverá seguir.
+**Cobrança:** Você é cobrado por cada tentativa de geração. Modelos mais inteligentes geralmente acertam na primeira tentativa, enquanto modelos menores podem precisar de múltiplas tentativas.
 
-Modelos menos inteligentes tendem a falhar a geração de JSON, gerando um documento inválido ou problemático. Para isso, ajuste seu modelo, a instrução e o parâmetro de tentativas se for necessário.
+**Dica de performance:** Use cache no lado da sua aplicação para dados que não mudam frequentemente (clima, estatísticas diárias, etc). A AIVAX não realiza cache automático.
 
-Você é cobrado por cada tentativa que a IA tentar gerar. Modelos um pouco mais inteligentes tendem a gerar resultados corretos na primeira tentativa. É garantido que um JSON válido será gerado e que esse JSON seguirá o mesmo esquema fornecido na requisição.
+Consulte a [referência da API](https://inference.aivax.net/apidocs#ExecuteJSONFunction) para saber mais sobre a API de funções/output schemas.
 
-Considere usar um cache do lado da sua aplicação para dados que não precisam ser constantementes atualizados, como dados meteorológicos, estatísticas diárias, etc. A AIVAX não realiza nenhum cache pelo nosso lado.
+## JSON Schema suportado
 
-#### Requisição
+A AIVAX guia o modelo para gerar uma resposta conforme o JSON Schema fornecido. Quando o modelo gera algo inválido, ele recebe feedback sobre os erros e tenta novamente até que a saída esteja conforme a especificação.
 
-<div class="request-item post">
-    <span>POST</span>
-    <span>
-        /api/v1/functions/json
-    </span>
-</div>
+### Tipos e validações suportadas
 
-```json
-{
-    // Obrigatório. Especifique o nome do modelo integrado que será usado para realizar a ação.
-    "modelName": "@metaai/llama-3.1-8b",
-    
-    // Obrigatório. Explique o que seu modelo deverá fazer com a entrada e como ele deve trazer a resposta.
-    "instructions": "Classifique o comentário do usuário, indicando se é positivo ou negativo, e se possui alguma informação relevante (número entre 0 (pouco relevante) e 10 (muito relevante))",
-    
-    // Obrigatório. O JSON Schema que o modelo deverá seguir para gerar a resposta. Você pode fornecer exemplos de geração no campo de instruções.
-    "responseSchema": {
-        "type": "object",
-        "properties": {
-            "feedbackType": {
-                "type": "string",
-                "enum": ["neutral", "positive", "negative"]
-            },
-            "informationScore": {
-                "type": "integer",
-                "minimum": 0,
-                "maximum": 10
-            }
-        },
-        "required": ["feedbackType", "informationScore"]
-    },
-    
-    // Opcional. Define uma entrada JSON para o modelo. Pode ser qualquer tipo de valor JSON.
-    "inputData": {
-        "userComment": "Pessimo mercado. Tem guarda dentro te vigiando pra vc nao roubar e os acougueiros te ignoram e atendem mocinhas bonitinhas na tua frente.  Mas graças a Deus tem outros mercados chegando e o fim dessa palhaçada vai chegar"
-    },
-    
-    // Opcional. Define quantas tentativas o modelo deve tentar antes da API retornar um erro. Deve ser um número entre 1 e 30.
-    "maxAttempts": 10,
-    
-    // Opcional. Define o tempo limite em segundos para obter um JSON válido antes da API retornar um erro. Deve ser um número entre 1 e 3600 (uma hora).
-    "timeout": 300,
-    
-    // Opcional. Define a temperatura de geração do JSON. Valores maiores tendem a serem mais criativos, enquanto menores mais determinísticos. Número de 0 à 2.
-    "temperature": 0.4,
-    
-    // Opcional. Fornece contexto adicional para a geração através de mensagens no formato chat/completions. Você pode fornecer conteúdo multi-modalidades também para modelos compatíveis.
-    "context": [
-        {
-            "role": "user",
-            "content": "Additional context"
-        }
-    ],
-    
-    // Opcional. Fornece funções embutidas da AIVAX para a geração da ferramenta.
-    "tools": [
-        "WebSearch",
-        "Code",
-        "OpenUrl",
-        "ImageGeneration",
-        "XPostsSearch"
-    ],
-    
-    // Opcional. Define parâmetros de geração de ferramentas.
-    "toolsOptions": {
-        "webSearchMode": "Full" | "Summarized",
-        "webSearchMaxResults": 10,
-        "imageGenerationMaxResults": 2,
-        "imageGenerationQuality": "Low" | "Medium" | "High" | "Highest",
-        "imageGenerationAllowMatureContent": false
-    },
-    
-    // Opcional. Metadata adicional da função. Não visível para a assistente.
-    "metadata": {
-        "foo": "bar"
-    }
-}
-```
-
-#### Resposta
-
-```json
-{
-  "result": {
-    "requiresAttention": true,
-    "shortSummary": "Customer threatens cancellation and bad publicity if not contacted today."
-  },
-  "attempt": 0,
-  "elapsedMilliseconds": 1235,
-  "warnings": [],
-  "context": {
-    "generatedUsage": [
-      {
-        "sku": "inference.functions.json.in",
-        "amount": 0.0000123,
-        "unitPrice": 1e-7,
-        "quantity": 123,
-        "description": "JSON function rendering (@google/gemini-2.0-flash)"
-      },
-      {
-        "sku": "inference.functions.json.out",
-        "amount": 0.0000116,
-        "unitPrice": 4e-7,
-        "quantity": 29,
-        "description": "JSON function rendering (@google/gemini-2.0-flash)"
-      }
-    ],
-    "runnedFunctions": []
-  }
-}
-```
-
-## Diretrizes do JSON Schema
-
-O formato de resposta deve ser fornecido por um JSON Schema.
-
-Por trás dos panos, a AIVAX guia o modelo para gerar uma resposta com o esquema JSON fornecido. Quando o modelo gera algo inválido, indicamos à ele tentar novamente e corrigir os erros até que a saída esteja conforme a especificação fornecida.
-
-As diretrizes suportadas do JSON Schema da AIVAX são:
-
-- `string`:
-    - `minLength`
-    - `maxLength`
-    - `pattern`
-    - `format`
-        - Pode ser `date-time`, `email`, `time`, `duration`, `uri`, `url`, `ipv4`, `ipv6`, `uuid` ou `guid`.
+- **string**:
+    - `minLength`, `maxLength`
+    - `pattern` (regex)
+    - `format`: `date-time`, `email`, `time`, `duration`, `uri`, `url`, `ipv4`, `ipv6`, `uuid`, `guid`
     - `enum`
-- `number` e `integer`:
-    - `minimum`
-    - `maximum`
-    - `exclusiveMinimum`
-    - `exclusiveMaximum`
+- **number** e **integer**:
+    - `minimum`, `maximum`
+    - `exclusiveMinimum`, `exclusiveMaximum`
     - `multipleOf`
-- `array`
+- **array**:
     - `items`
     - `uniqueItems`
-    - `minItems`
-    - `maxItems`
-- `object`
+    - `minItems`, `maxItems`
+- **object**:
     - `properties`
     - `required`
-- `bool` e `boolean`
-- `null`
+- **bool**, **boolean**
+- **null**
 
-Além disso, é possível informar um ou mais valores no `type` do objeto, exemplo:
+**Tipos múltiplos:** Você pode especificar múltiplos tipos em um campo:
 
 ```json
 {
@@ -176,11 +55,18 @@ Além disso, é possível informar um ou mais valores no `type` do objeto, exemp
 }
 ```
 
-> Nota: `number` e `integer` são sinônimos e `integer` não garante que o número será um inteiro.
+> **Nota:** `number` e `integer` são sinônimos. O tipo `integer` não garante que o valor será um número inteiro.
 
-## Funções em ferramentas
+## Ferramentas embutidas
 
-É possível usar [ferramentas embutidas](/docs/builtin-tools) as funções JSON. Isso irá permitir que o modelo chame funções para obter contexto necessário para gerar o JSON final.
+Você pode usar [ferramentas embutidas](/docs/builtin-tools) durante a geração de JSON, permitindo que o modelo:
+- Pesquise na internet para obter informações atualizadas
+- Execute código para cálculos complexos
+- Abra e analise URLs
+- Gere imagens
+- Busque posts em redes sociais
+
+Essas ferramentas são especialmente úteis para funções que precisam de dados em tempo real ou processamento adicional antes de gerar a resposta estruturada.
 
 ## Exemplos
 

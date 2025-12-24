@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Fun&#231;&#245;es | AIVAX </title>
+        <title>Fun&#231;&#245;es (respostas estruturadas) | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="Fun&#231;&#245;es | AIVAX ">
+        <meta name="title" content="Fun&#231;&#245;es (respostas estruturadas) | AIVAX ">
 
 
         <link rel="icon" href="../../assets/img/favicon.ico">
@@ -122,180 +122,77 @@
                 </div>
 
                 <article data-uid="">
-<h1 id="funções">Funções</h1>
+<h1 id="funções-respostas-estruturadas">Funções (respostas estruturadas)</h1>
 
-<p>Funções é uma forma de forçar seu modelo ao processamento de informações usando JSON como intermédio de comunicação. Com as funções, você consegue fazer qualquer modelo responder no formato JSON que você quiser.</p>
-<p>Pode ser útil para categorizar comentários, aplicar moderação em avaliações ou processar informações com auxílio da IA.</p>
-<p>No momento, só é possível usar funções com <a href="/docs/models">modelos providos pela AIVAX</a>.</p>
-<h2 id="código-serverless">Código serverless</h2>
-<p>É possível hospedar códigos JavaScript na AIVAX que executam tarefas agênticas, como funções, inferência e comunicação com outros serviços.</p>
-<p>Leia mais sobre <a href="/docs/serverless">serverless aqui</a>.</p>
-<h2 id="chamar-uma-função">Chamar uma função</h2>
-<p>Para chamar uma função de IA, você precisará informar o que a IA deverá responder e fornecer um JSON Schema que ela deverá seguir.</p>
-<p>Modelos menos inteligentes tendem a falhar a geração de JSON, gerando um documento inválido ou problemático. Para isso, ajuste seu modelo, a instrução e o parâmetro de tentativas se for necessário.</p>
-<p>Você é cobrado por cada tentativa que a IA tentar gerar. Modelos um pouco mais inteligentes tendem a gerar resultados corretos na primeira tentativa. É garantido que um JSON válido será gerado e que esse JSON seguirá o mesmo esquema fornecido na requisição.</p>
-<p>Considere usar um cache do lado da sua aplicação para dados que não precisam ser constantementes atualizados, como dados meteorológicos, estatísticas diárias, etc. A AIVAX não realiza nenhum cache pelo nosso lado.</p>
-<h4 id="requisição">Requisição</h4>
-<div class="request-item post">
-    <span>POST</span>
-    <span>
-        /api/v1/functions/json
-    </span>
-</div>
-<pre><code class="lang-json">{
-    // Obrigatório. Especifique o nome do modelo integrado que será usado para realizar a ação.
-    &quot;modelName&quot;: &quot;@metaai/llama-3.1-8b&quot;,
-    
-    // Obrigatório. Explique o que seu modelo deverá fazer com a entrada e como ele deve trazer a resposta.
-    &quot;instructions&quot;: &quot;Classifique o comentário do usuário, indicando se é positivo ou negativo, e se possui alguma informação relevante (número entre 0 (pouco relevante) e 10 (muito relevante))&quot;,
-    
-    // Obrigatório. O JSON Schema que o modelo deverá seguir para gerar a resposta. Você pode fornecer exemplos de geração no campo de instruções.
-    &quot;responseSchema&quot;: {
-        &quot;type&quot;: &quot;object&quot;,
-        &quot;properties&quot;: {
-            &quot;feedbackType&quot;: {
-                &quot;type&quot;: &quot;string&quot;,
-                &quot;enum&quot;: [&quot;neutral&quot;, &quot;positive&quot;, &quot;negative&quot;]
-            },
-            &quot;informationScore&quot;: {
-                &quot;type&quot;: &quot;integer&quot;,
-                &quot;minimum&quot;: 0,
-                &quot;maximum&quot;: 10
-            }
-        },
-        &quot;required&quot;: [&quot;feedbackType&quot;, &quot;informationScore&quot;]
-    },
-    
-    // Opcional. Define uma entrada JSON para o modelo. Pode ser qualquer tipo de valor JSON.
-    &quot;inputData&quot;: {
-        &quot;userComment&quot;: &quot;Pessimo mercado. Tem guarda dentro te vigiando pra vc nao roubar e os acougueiros te ignoram e atendem mocinhas bonitinhas na tua frente.  Mas graças a Deus tem outros mercados chegando e o fim dessa palhaçada vai chegar&quot;
-    },
-    
-    // Opcional. Define quantas tentativas o modelo deve tentar antes da API retornar um erro. Deve ser um número entre 1 e 30.
-    &quot;maxAttempts&quot;: 10,
-    
-    // Opcional. Define o tempo limite em segundos para obter um JSON válido antes da API retornar um erro. Deve ser um número entre 1 e 3600 (uma hora).
-    &quot;timeout&quot;: 300,
-    
-    // Opcional. Define a temperatura de geração do JSON. Valores maiores tendem a serem mais criativos, enquanto menores mais determinísticos. Número de 0 à 2.
-    &quot;temperature&quot;: 0.4,
-    
-    // Opcional. Fornece contexto adicional para a geração através de mensagens no formato chat/completions. Você pode fornecer conteúdo multi-modalidades também para modelos compatíveis.
-    &quot;context&quot;: [
-        {
-            &quot;role&quot;: &quot;user&quot;,
-            &quot;content&quot;: &quot;Additional context&quot;
-        }
-    ],
-    
-    // Opcional. Fornece funções embutidas da AIVAX para a geração da ferramenta.
-    &quot;tools&quot;: [
-        &quot;WebSearch&quot;,
-        &quot;Code&quot;,
-        &quot;OpenUrl&quot;,
-        &quot;ImageGeneration&quot;,
-        &quot;XPostsSearch&quot;
-    ],
-    
-    // Opcional. Define parâmetros de geração de ferramentas.
-    &quot;toolsOptions&quot;: {
-        &quot;webSearchMode&quot;: &quot;Full&quot; | &quot;Summarized&quot;,
-        &quot;webSearchMaxResults&quot;: 10,
-        &quot;imageGenerationMaxResults&quot;: 2,
-        &quot;imageGenerationQuality&quot;: &quot;Low&quot; | &quot;Medium&quot; | &quot;High&quot; | &quot;Highest&quot;,
-        &quot;imageGenerationAllowMatureContent&quot;: false
-    },
-    
-    // Opcional. Metadata adicional da função. Não visível para a assistente.
-    &quot;metadata&quot;: {
-        &quot;foo&quot;: &quot;bar&quot;
-    }
-}
-</code></pre>
-<h4 id="resposta">Resposta</h4>
-<pre><code class="lang-json">{
-  &quot;result&quot;: {
-    &quot;requiresAttention&quot;: true,
-    &quot;shortSummary&quot;: &quot;Customer threatens cancellation and bad publicity if not contacted today.&quot;
-  },
-  &quot;attempt&quot;: 0,
-  &quot;elapsedMilliseconds&quot;: 1235,
-  &quot;warnings&quot;: [],
-  &quot;context&quot;: {
-    &quot;generatedUsage&quot;: [
-      {
-        &quot;sku&quot;: &quot;inference.functions.json.in&quot;,
-        &quot;amount&quot;: 0.0000123,
-        &quot;unitPrice&quot;: 1e-7,
-        &quot;quantity&quot;: 123,
-        &quot;description&quot;: &quot;JSON function rendering (@google/gemini-2.0-flash)&quot;
-      },
-      {
-        &quot;sku&quot;: &quot;inference.functions.json.out&quot;,
-        &quot;amount&quot;: 0.0000116,
-        &quot;unitPrice&quot;: 4e-7,
-        &quot;quantity&quot;: 29,
-        &quot;description&quot;: &quot;JSON function rendering (@google/gemini-2.0-flash)&quot;
-      }
-    ],
-    &quot;runnedFunctions&quot;: []
-  }
-}
-</code></pre>
-<h2 id="diretrizes-do-json-schema">Diretrizes do JSON Schema</h2>
-<p>O formato de resposta deve ser fornecido por um JSON Schema.</p>
-<p>Por trás dos panos, a AIVAX guia o modelo para gerar uma resposta com o esquema JSON fornecido. Quando o modelo gera algo inválido, indicamos à ele tentar novamente e corrigir os erros até que a saída esteja conforme a especificação fornecida.</p>
-<p>As diretrizes suportadas do JSON Schema da AIVAX são:</p>
+<p>Funções são uma implementação de respostas estruturadas que funciona com <strong>qualquer LLM</strong>, mesmo aqueles que não suportam nativamente structured outputs. A AIVAX analisa o <code>responseSchema</code> fornecido e valida manualmente se o modelo respondeu conforme esperado. Quando o modelo falha, a AIVAX notifica os erros automaticamente até que ele gere um JSON válido.</p>
+<p>Esse processo continua até que o parâmetro <code>maxAttempts</code> seja atingido ou um JSON válido seja gerado. A AIVAX interpreta JSONs em blocos markdown, precedidos ou antecedidos por texto, e extrai a resposta final automaticamente.</p>
+<p>Você pode usar funções JSON com modelos que possuem raciocínio (reasoning) sem quebrar a fase de raciocínio para gerar o JSON. Além disso, é possível usar <a href="/docs/builtin-tools">ferramentas embutidas</a> durante a geração, como pesquisa na internet, geração de documentos e abertura de links.</p>
+<blockquote>
+<p><strong>Nota:</strong> Funções (JSON) são diferentes de <a href="/docs/serverless">Hosted Functions</a>, que são códigos JavaScript serverless executados na infraestrutura da AIVAX para tarefas agênticas.</p>
+</blockquote>
+<h2 id="como-funciona">Como funciona</h2>
+<p>Ao chamar uma função, você define <strong>o que o modelo deve fazer</strong> através de instruções e <strong>como ele deve responder</strong> através de um JSON Schema.</p>
+<p>A AIVAX valida a resposta do modelo em tempo real. Se o JSON gerado for inválido ou não seguir o schema, o modelo recebe feedback automático sobre os erros e tenta novamente. Esse ciclo continua até que:</p>
 <ul>
-<li><code>string</code>:
-<ul>
-<li><code>minLength</code></li>
-<li><code>maxLength</code></li>
-<li><code>pattern</code></li>
-<li><code>format</code>
-<ul>
-<li>Pode ser <code>date-time</code>, <code>email</code>, <code>time</code>, <code>duration</code>, <code>uri</code>, <code>url</code>, <code>ipv4</code>, <code>ipv6</code>, <code>uuid</code> ou <code>guid</code>.</li>
+<li>Um JSON válido seja gerado (sucesso na primeira tentativa ou após correções)</li>
+<li>O limite de <code>maxAttempts</code> seja atingido</li>
 </ul>
-</li>
+<p><strong>Cobrança:</strong> Você é cobrado por cada tentativa de geração. Modelos mais inteligentes geralmente acertam na primeira tentativa, enquanto modelos menores podem precisar de múltiplas tentativas.</p>
+<p><strong>Dica de performance:</strong> Use cache no lado da sua aplicação para dados que não mudam frequentemente (clima, estatísticas diárias, etc). A AIVAX não realiza cache automático.</p>
+<p>Consulte a <a href="https://inference.aivax.net/apidocs#ExecuteJSONFunction">referência da API</a> para saber mais sobre a API de funções/output schemas.</p>
+<h2 id="json-schema-suportado">JSON Schema suportado</h2>
+<p>A AIVAX guia o modelo para gerar uma resposta conforme o JSON Schema fornecido. Quando o modelo gera algo inválido, ele recebe feedback sobre os erros e tenta novamente até que a saída esteja conforme a especificação.</p>
+<h3 id="tipos-e-validações-suportadas">Tipos e validações suportadas</h3>
+<ul>
+<li><strong>string</strong>:
+<ul>
+<li><code>minLength</code>, <code>maxLength</code></li>
+<li><code>pattern</code> (regex)</li>
+<li><code>format</code>: <code>date-time</code>, <code>email</code>, <code>time</code>, <code>duration</code>, <code>uri</code>, <code>url</code>, <code>ipv4</code>, <code>ipv6</code>, <code>uuid</code>, <code>guid</code></li>
 <li><code>enum</code></li>
 </ul>
 </li>
-<li><code>number</code> e <code>integer</code>:
+<li><strong>number</strong> e <strong>integer</strong>:
 <ul>
-<li><code>minimum</code></li>
-<li><code>maximum</code></li>
-<li><code>exclusiveMinimum</code></li>
-<li><code>exclusiveMaximum</code></li>
+<li><code>minimum</code>, <code>maximum</code></li>
+<li><code>exclusiveMinimum</code>, <code>exclusiveMaximum</code></li>
 <li><code>multipleOf</code></li>
 </ul>
 </li>
-<li><code>array</code>
+<li><strong>array</strong>:
 <ul>
 <li><code>items</code></li>
 <li><code>uniqueItems</code></li>
-<li><code>minItems</code></li>
-<li><code>maxItems</code></li>
+<li><code>minItems</code>, <code>maxItems</code></li>
 </ul>
 </li>
-<li><code>object</code>
+<li><strong>object</strong>:
 <ul>
 <li><code>properties</code></li>
 <li><code>required</code></li>
 </ul>
 </li>
-<li><code>bool</code> e <code>boolean</code></li>
-<li><code>null</code></li>
+<li><strong>bool</strong>, <strong>boolean</strong></li>
+<li><strong>null</strong></li>
 </ul>
-<p>Além disso, é possível informar um ou mais valores no <code>type</code> do objeto, exemplo:</p>
+<p><strong>Tipos múltiplos:</strong> Você pode especificar múltiplos tipos em um campo:</p>
 <pre><code class="lang-json">{
     &quot;type&quot;: [&quot;string&quot;, &quot;number&quot;]
 }
 </code></pre>
 <blockquote>
-<p>Nota: <code>number</code> e <code>integer</code> são sinônimos e <code>integer</code> não garante que o número será um inteiro.</p>
+<p><strong>Nota:</strong> <code>number</code> e <code>integer</code> são sinônimos. O tipo <code>integer</code> não garante que o valor será um número inteiro.</p>
 </blockquote>
-<h2 id="funções-em-ferramentas">Funções em ferramentas</h2>
-<p>É possível usar <a href="/docs/builtin-tools">ferramentas embutidas</a> as funções JSON. Isso irá permitir que o modelo chame funções para obter contexto necessário para gerar o JSON final.</p>
+<h2 id="ferramentas-embutidas">Ferramentas embutidas</h2>
+<p>Você pode usar <a href="/docs/builtin-tools">ferramentas embutidas</a> durante a geração de JSON, permitindo que o modelo:</p>
+<ul>
+<li>Pesquise na internet para obter informações atualizadas</li>
+<li>Execute código para cálculos complexos</li>
+<li>Abra e analise URLs</li>
+<li>Gere imagens</li>
+<li>Busque posts em redes sociais</li>
+</ul>
+<p>Essas ferramentas são especialmente úteis para funções que precisam de dados em tempo real ou processamento adicional antes de gerar a resposta estruturada.</p>
 <h2 id="exemplos">Exemplos</h2>
 <p>Confira exemplos de funções de IA para várias tarefas cotidianas:</p>
 <h4 id="classificar-comentários-bons-ou-ruins">Classificar comentários bons ou ruins</h4>

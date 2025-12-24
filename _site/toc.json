@@ -1,2 +1,2 @@
 
-{"items":[{"name":"Introdução","href":"/","topicHref":"/"},{"name":"Documentação","href":"docs/getting-started.html","tocHref":"docs/toc.html","topicHref":"docs/getting-started.html"}],"pdf":false}
+{"items":[{"name":"Introdução","href":"/","topicHref":"/"},{"name":"Documentação","href":"docs/getting-started.html","tocHref":"docs/toc.html","topicHref":"docs/getting-started.html"},{"name":"API Reference","href":"https://inference.aivax.net/apidocs","topicHref":"https://inference.aivax.net/apidocs"}],"pdf":false}

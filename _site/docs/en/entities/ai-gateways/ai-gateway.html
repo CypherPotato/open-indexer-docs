@@ -128,20 +128,20 @@
 <ul>
 <li>Create a model with custom instructions</li>
 <li>Use a model provided by you through a compatible OpenAI endpoint, or use a model made available by AIVAX</li>
-<li>Customize inference parameters, such as temperature, top_p, prefill</li>
+<li>Customize inference parameters such as temperature, top_p, prefill</li>
 <li>Use a knowledge collection as the foundation for AI responses</li>
 </ul>
 <p>Among other features. With the AI Gateway, you create a ready‑to‑use model, parametrized and grounded in the instructions you define.</p>
 <h2 id="models">Models</h2>
 <p>You can bring an AI model compatible with the OpenAI interface to the AI gateway. If you bring your own AI model, we will charge only for the document search attached to the AI. You can also use one of the models below that are already ready to start with AIVAX.</p>
-<p>When using a model, you will notice that some are smarter than others for certain tasks. Some models are better with certain data‑retrieval strategies than others. Run tests to find the best model.</p>
+<p>When using a model, you will notice that some are smarter than others for specific tasks. Some models perform better with certain data‑retrieval strategies than others. Run tests to find the best model.</p>
 <p>You can see the available models on the <a href="/docs/en/models">models page</a>.</p>
 <h2 id="using-an-ai-gateway">Using an AI gateway</h2>
 <p>AIVAX provides an endpoint compatible with the OpenAI interface through an AI‑gateway, which makes it easy to integrate the model created by AIVAX with existing applications and SDKs. Note that only a few properties are supported.</p>
-<p>In an AI gateway, you already configure the model parameters, such as System Prompt, temperature, and model name. When using this endpoint, some gateway values can be overridden by the request.</p>
+<p>In an AI gateway you already configure model parameters such as System Prompt, temperature, and model name. When using this endpoint, some gateway values can be overridden by the request.</p>
 <div class="TIP">
 <h5>Tip</h5>
-<p>To better understand how to use System Prompt compared to Skills and RAG, see our <a href="/docs/en/concepts-comparison">complete comparison guide</a>.</p>
+<p>To better understand how to use System Prompt compared to Skills and RAG, see our <a href="/docs/en/concepts-comparison">full comparison guide</a>.</p>
 </div>
 <h4 id="request">Request</h4>
 <div class="request-item post">
@@ -164,88 +164,7 @@
     }
 }
 </code></pre>
-<h4 id="response-for-nonstreaming">Response for non‑streaming</h4>
-<pre><code class="lang-json">{
-    &quot;id&quot;: &quot;0198d24c-c9ce-70fe-9cf3-00644ef5f2e2&quot;,
-    &quot;object&quot;: &quot;chat.completion&quot;,
-    &quot;created&quot;: 1755874904,
-    &quot;model&quot;: &quot;@openai/gpt-5-mini&quot;,
-    &quot;choices&quot;: [
-        {
-            &quot;index&quot;: 0,
-            &quot;message&quot;: {
-                &quot;role&quot;: &quot;assistant&quot;,
-                &quot;content&quot;: &quot;A capital da França é Paris.&quot;,
-                &quot;refusal&quot;: null,
-                &quot;annotations&quot;: [],
-                &quot;tool_calls&quot;: []
-            },
-            &quot;logprobs&quot;: null,
-            &quot;finish_reason&quot;: &quot;stop&quot;
-        }
-    ],
-    &quot;usage&quot;: {
-        &quot;prompt_tokens&quot;: 84,
-        &quot;completion_tokens&quot;: 16,
-        &quot;total_tokens&quot;: 1892,
-        &quot;prompt_tokens_details&quot;: {
-            &quot;cached_tokens&quot;: 1792
-        }
-    },
-    &quot;service_tier&quot;: &quot;default&quot;,
-    &quot;generation_context&quot;: {
-        &quot;generated_usage&quot;: [
-            {
-                &quot;sku&quot;: &quot;inference.resolving.routing_complexity.in&quot;,
-                &quot;amount&quot;: 0.0000207,
-                &quot;unit_price&quot;: 7.5e-8,
-                &quot;quantity&quot;: 276,
-                &quot;description&quot;: &quot;Inference for model routing&quot;
-            },
-            {
-                &quot;sku&quot;: &quot;inference.resolving.routing_complexity.out&quot;,
-                &quot;amount&quot;: 3e-7,
-                &quot;unit_price&quot;: 3e-7,
-                &quot;quantity&quot;: 1,
-                &quot;description&quot;: &quot;Inference for model routing&quot;
-            },
-            {
-                &quot;sku&quot;: &quot;inference.chat_completions.in&quot;,
-                &quot;amount&quot;: 0.000021,
-                &quot;unit_price&quot;: 2.5e-7,
-                &quot;quantity&quot;: 84,
-                &quot;description&quot;: &quot;Inference for AI model '@openai/gpt-5-mini'&quot;
-            },
-            {
-                &quot;sku&quot;: &quot;inference.chat_completions.out&quot;,
-                &quot;amount&quot;: 0.000032,
-                &quot;unit_price&quot;: 0.000002,
-                &quot;quantity&quot;: 16,
-                &quot;description&quot;: &quot;Inference for AI model '@openai/gpt-5-mini'&quot;
-            },
-            {
-                &quot;sku&quot;: &quot;inference.chat_completions.in.cached&quot;,
-                &quot;amount&quot;: 0.0000448,
-                &quot;unit_price&quot;: 2.5e-8,
-                &quot;quantity&quot;: 1792,
-                &quot;description&quot;: &quot;Inference for AI model '@openai/gpt-5-mini'&quot;
-            }
-        ],
-        &quot;runned_functions&quot;: []
-    }
-}
-</code></pre>
-<h4 id="streaming-response">Streaming response</h4>
-<pre><code class="lang-text">data: {&quot;id&quot;:&quot;chatcmpl-0198d263-fd80-7645-98b0-3966004e11df&quot;,&quot;object&quot;:&quot;chat.completion.chunk&quot;,&quot;created&quot;:1755876425,&quot;model&quot;:&quot;@openai\/gpt-5-mini&quot;,&quot;system_fingerprint&quot;:&quot;fp_2su4hm&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;finish_reason&quot;:&quot;stop&quot;,&quot;logprobs&quot;:null,&quot;delta&quot;:{&quot;role&quot;:&quot;assistant&quot;,&quot;content&quot;:&quot;&quot;}}],&quot;usage&quot;:null}
-
-...
-
-data: {&quot;id&quot;:&quot;chatcmpl-0198d263-ff5a-7f53-99e2-b59d5cdae470&quot;,&quot;object&quot;:&quot;chat.completion.chunk&quot;,&quot;created&quot;:1755876425,&quot;model&quot;:&quot;@openai\/gpt-5-mini&quot;,&quot;system_fingerprint&quot;:&quot;fp_7ibly5&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;finish_reason&quot;:&quot;stop&quot;,&quot;logprobs&quot;:null,&quot;delta&quot;:{&quot;content&quot;:&quot;&quot;}}],&quot;usage&quot;:null}
-
-data: {&quot;id&quot;:&quot;chatcmpl-0198d263-ff80-7d8f-91e7-c61ac2a9e870&quot;,&quot;object&quot;:&quot;chat.completion.chunk&quot;,&quot;created&quot;:1755876425,&quot;model&quot;:&quot;@openai\/gpt-5-mini&quot;,&quot;system_fingerprint&quot;:&quot;fp_552km8&quot;,&quot;choices&quot;:[{&quot;index&quot;:0,&quot;finish_reason&quot;:&quot;stop&quot;,&quot;logprobs&quot;:null,&quot;delta&quot;:{}}],&quot;usage&quot;:{&quot;prompt_tokens&quot;:1873,&quot;completion_tokens&quot;:41,&quot;total_tokens&quot;:1914}}
-
-data: [END]
-</code></pre>
+<p>For more detailed API reference, see the <a href="https://inference.aivax.net/apidocs#ChatCompletions">API reference</a>.</p>
 <h2 id="usage-with-sdks">Usage with SDKs</h2>
 <p>By providing endpoints compatible with the OpenAI interface, AIVAX is fully compatible with existing SDKs, making plug‑and‑play integration easy.</p>
 <p>See the example below:</p>

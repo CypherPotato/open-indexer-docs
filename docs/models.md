@@ -62,10 +62,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-lightbulb-line"></i>
     Raciocínio
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -109,10 +105,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-lightbulb-line"></i>
     Raciocínio
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -147,10 +139,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
 </div>
         </div>
     </td>
@@ -221,10 +209,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-lightbulb-line"></i>
     Raciocínio
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -274,10 +258,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-lightbulb-line"></i>
     Raciocínio
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
 </div>
         </div>
     </td>
@@ -329,10 +309,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-lightbulb-line"></i>
     Raciocínio
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -383,10 +359,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-lightbulb-line"></i>
     Raciocínio
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -432,10 +404,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
 </div>
         </div>
     </td>
@@ -483,10 +451,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-instance-line"></i>
     Chamadas de função
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -532,10 +496,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
 </div>
         </div>
     </td>
@@ -594,10 +554,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
 </div>
         </div>
     </td>
@@ -664,10 +620,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-lightbulb-line"></i>
     Raciocínio
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -714,10 +666,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-lightbulb-line"></i>
     Raciocínio
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -759,10 +707,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-lightbulb-line"></i>
     Raciocínio
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
 </div>
         </div>
     </td>
@@ -809,10 +753,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-lightbulb-line"></i>
     Raciocínio
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
 </div>
         </div>
     </td>
@@ -876,10 +816,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-lightbulb-line"></i>
     Raciocínio
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -930,9 +866,55 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-lightbulb-line"></i>
     Raciocínio
 </div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @google/gemini-3-flash
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.50 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.05 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 3.00 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Gemini 3 Flash Preview is a high speed, high value thinking model designed for agentic workflows, multi turn chat, and coding assistance.
+        <div class="model-capabilities">
 <div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens, vídeos, áudios
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Raciocínio
 </div>
         </div>
     </td>
@@ -984,10 +966,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-lightbulb-line"></i>
     Raciocínio
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -1038,10 +1016,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-lightbulb-line"></i>
     Raciocínio
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -1088,10 +1062,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-instance-line"></i>
     Chamadas de função
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -1130,10 +1100,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
 </div>
         </div>
     </td>
@@ -1189,10 +1155,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-instance-line"></i>
     Chamadas de função
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -1247,10 +1209,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-instance-line"></i>
     Chamadas de função
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -1289,10 +1247,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
 </div>
         </div>
     </td>
@@ -1333,10 +1287,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-instance-line"></i>
     Chamadas de função
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -1372,10 +1322,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-instance-line"></i>
     Chamadas de função
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -1398,6 +1344,45 @@ Todos os preços estão em dólares dos Estados Unidos.
         </tr>
     </thead>
     <tbody>
+<tr>
+    <td>
+        <code>
+            @minimax/m2.1
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.30 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 1.20 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        MiniMax-M2.1 is a cutting-edge, lightweight large language model designed for coding, agentic workflows, and modern application development.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Raciocínio
+</div>
+        </div>
+    </td>
+</tr>
 <tr>
     <td>
         <code>
@@ -1433,10 +1418,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-lightbulb-line"></i>
     Raciocínio
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
 </div>
         </div>
     </td>
@@ -1496,96 +1477,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-instance-line"></i>
     Chamadas de função
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @mistral/magistral-medium
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 2.00 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 5.00 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        Mistral's frontier-class reasoning model update released September 2025 with vision support.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens
-</div>
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Raciocínio
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @mistral/medium
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.40 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 2.00 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        Mistral Medium 3 delivers frontier performance while being an order of magnitude less expensive. For instance, the model performs at or above 90% of Claude Sonnet 3.7 on benchmarks across the board at a significantly lower cost.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -1620,92 +1511,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @mistral/magistral-small
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.50 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 1.50 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        Complex thinking, backed by deep understanding, with transparent reasoning you can follow and verify. The model excels in maintaining high-fidelity reasoning across numerous languages, even when switching between languages mid-task.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-lightbulb-line"></i>
-    Raciocínio
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <code>
-            @mistral/small
-        </code>
-    </td>
-    <td>
-        <div class="item-pricing">
-            <small>
-                Entrada:
-            </small>
-            <div>
-                $ 0.10 <small>/1m tokens</small>
-            </div>
-        </div>
-        
-        <div class="item-pricing">
-            <small>
-                Saída:
-            </small>
-            <div>
-                $ 0.30 <small>/1m tokens</small>
-            </div>
-        </div>
-    </td>
-    <td>
-        Mistral Small is the ideal choice for simple tasks that one can do in bulk - like Classification, Customer Support, or Text Generation. It offers excellent performance at an affordable price point.
-        <div class="model-capabilities">
-<div>
-    <i class="ri-image-circle-line"></i>
-    Entrada: aceita imagens
-</div>
-<div>
-    <i class="ri-instance-line"></i>
-    Chamadas de função
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
 </div>
         </div>
     </td>
@@ -1742,10 +1547,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-instance-line"></i>
     Chamadas de função
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -1780,17 +1581,10 @@ Todos os preços estão em dólares dos Estados Unidos.
                 Entrada:
             </small>
             <div>
-                $ 0.20 <small>/1m tokens</small>
+                $ 0.10 <small>/1m tokens</small>
             </div>
         </div>
-        <div class="item-pricing">
-    <small>
-        Entrada (em cache):
-    </small>
-    <div>
-        $ 0.05 <small>/1m tokens</small>
-    </div>
-</div>
+        
         <div class="item-pricing">
             <small>
                 Saída:
@@ -1825,6 +1619,56 @@ Todos os preços estão em dólares dos Estados Unidos.
         </tr>
     </thead>
     <tbody>
+<tr>
+    <td>
+        <code>
+            @moonshotai/kimi-k2-dynamic
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 1.00 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.50 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 3.00 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        Kimi K2 optimized for chat, where thinking is dynamic and applied only in necessary and demanding situations.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens, áudios
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Raciocínio
+</div>
+        </div>
+    </td>
+</tr>
 <tr>
     <td>
         <code>
@@ -1863,10 +1707,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
 </div>
         </div>
     </td>
@@ -1914,10 +1754,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-lightbulb-line"></i>
     Raciocínio
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -1940,6 +1776,149 @@ Todos os preços estão em dólares dos Estados Unidos.
         </tr>
     </thead>
     <tbody>
+<tr>
+    <td>
+        <code>
+            @openai/gpt-5.2-pro
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 21.00 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 168.00 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        GPT-5.2 Pro is OpenAI's most advanced model, featuring significant upgrades in agentic coding and long-context capabilities compared to GPT-5 Pro.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Raciocínio
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @openai/gpt-5.2-chat
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 1.75 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.18 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 14.00 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        GPT-5.2 Chat (also known as Instant) is the fast and lightweight version of the 5.2 family, built for low-latency chatting while maintaining strong general intelligence.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Raciocínio
+</div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <code>
+            @openai/gpt-5.2
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 1.75 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.18 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 14.00 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        GPT-5.2 is the newest frontier-level model in the GPT-5 line, providing enhanced agentic abilities and better long-context performance than GPT-5.1.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-image-circle-line"></i>
+    Entrada: aceita imagens
+</div>
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Raciocínio
+</div>
+        </div>
+    </td>
+</tr>
 <tr>
     <td>
         <code>
@@ -1982,10 +1961,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
 </div>
         </div>
     </td>
@@ -2037,10 +2012,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-lightbulb-line"></i>
     Raciocínio
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -2090,10 +2061,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-lightbulb-line"></i>
     Raciocínio
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
 </div>
         </div>
     </td>
@@ -2145,10 +2112,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-lightbulb-line"></i>
     Raciocínio
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -2198,10 +2161,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-lightbulb-line"></i>
     Raciocínio
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
 </div>
         </div>
     </td>
@@ -2299,10 +2258,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-lightbulb-line"></i>
     Raciocínio
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -2353,10 +2308,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-lightbulb-line"></i>
     Raciocínio
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -2402,10 +2353,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
 </div>
         </div>
     </td>
@@ -2457,10 +2404,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-lightbulb-line"></i>
     Raciocínio
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -2511,10 +2454,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-lightbulb-line"></i>
     Raciocínio
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -2560,10 +2499,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-lightbulb-line"></i>
     Raciocínio
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
 </div>
         </div>
     </td>
@@ -2615,10 +2550,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-lightbulb-line"></i>
     Raciocínio
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -2664,10 +2595,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
 </div>
         </div>
     </td>
@@ -2715,10 +2642,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-instance-line"></i>
     Chamadas de função
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -2757,10 +2680,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-lightbulb-line"></i>
     Raciocínio
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
 </div>
         </div>
     </td>
@@ -2808,10 +2727,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-instance-line"></i>
     Chamadas de função
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -2850,10 +2765,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-lightbulb-line"></i>
     Raciocínio
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
 </div>
         </div>
     </td>
@@ -2901,10 +2812,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-instance-line"></i>
     Chamadas de função
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -2950,10 +2857,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
 </div>
         </div>
     </td>
@@ -3020,10 +2923,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-lightbulb-line"></i>
     Raciocínio
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -3059,10 +2958,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-instance-line"></i>
     Chamadas de função
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -3097,10 +2992,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
 </div>
         </div>
     </td>
@@ -3141,10 +3032,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-lightbulb-line"></i>
     Raciocínio
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -3179,10 +3066,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
 </div>
         </div>
     </td>
@@ -3222,10 +3105,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-lightbulb-line"></i>
     Raciocínio
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
 </div>
         </div>
     </td>
@@ -3277,10 +3156,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <td>
         Venice Uncensored is a fine-tuned version of Mistral-Small-24B-Instruct-2501, created by dphn.ai in partnership with Venice.ai.
         <div class="model-capabilities">
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -3343,10 +3218,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-lightbulb-line"></i>
     Raciocínio
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -3385,10 +3256,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
 </div>
         </div>
     </td>
@@ -3433,8 +3300,8 @@ Todos os preços estão em dólares dos Estados Unidos.
     Chamadas de função
 </div>
 <div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
+    <i class="ri-lightbulb-line"></i>
+    Raciocínio
 </div>
         </div>
     </td>
@@ -3478,10 +3345,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-lightbulb-line"></i>
     Raciocínio
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
 </div>
         </div>
     </td>
@@ -3533,10 +3396,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-lightbulb-line"></i>
     Raciocínio
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -3582,10 +3441,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-instance-line"></i>
     Chamadas de função
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
 </div>
         </div>
     </td>
@@ -3637,10 +3492,6 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-lightbulb-line"></i>
     Raciocínio
 </div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
-</div>
         </div>
     </td>
 </tr>
@@ -3687,9 +3538,63 @@ Todos os preços estão em dólares dos Estados Unidos.
     <i class="ri-instance-line"></i>
     Chamadas de função
 </div>
+        </div>
+    </td>
+</tr>
+    </tbody>
+</table>
+
+## <img src="/assets/icon/xiaomi.svg" class="inline-icon"> xiaomi
+
+<table>
+    <thead>
+        <colgroup>
+            <col style="width: 30%" />
+            <col style="width: 20%" />
+            <col style="width: 50%" />
+        </colgroup>
+        <tr>
+            <th>Nome do modelo</th>
+            <th>Preços</th>
+            <th>Descrição</th>
+        </tr>
+    </thead>
+    <tbody>
+<tr>
+    <td>
+        <code>
+            @xiaomi/mimo-v2-flash
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.10 <small>/1m tokens</small>
+            </div>
+        </div>
+        
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 0.30 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        MiMo-V2-Flash is an open-source foundation language model developed by Xiaomi.
+        <div class="model-capabilities">
 <div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Raciocínio
 </div>
         </div>
     </td>
@@ -3713,6 +3618,52 @@ Todos os preços estão em dólares dos Estados Unidos.
         </tr>
     </thead>
     <tbody>
+<tr>
+    <td>
+        <code>
+            @z-ai/glm-4.7
+        </code>
+    </td>
+    <td>
+        <div class="item-pricing">
+            <small>
+                Entrada:
+            </small>
+            <div>
+                $ 0.60 <small>/1m tokens</small>
+            </div>
+        </div>
+        <div class="item-pricing">
+    <small>
+        Entrada (em cache):
+    </small>
+    <div>
+        $ 0.11 <small>/1m tokens</small>
+    </div>
+</div>
+        <div class="item-pricing">
+            <small>
+                Saída:
+            </small>
+            <div>
+                $ 2.20 <small>/1m tokens</small>
+            </div>
+        </div>
+    </td>
+    <td>
+        GLM-4.7 is Z.AI’s latest flagship model, featuring upgrades in two key areas: enhanced programming capabilities and more stable multi-step reasoning/execution.
+        <div class="model-capabilities">
+<div>
+    <i class="ri-instance-line"></i>
+    Chamadas de função
+</div>
+<div>
+    <i class="ri-lightbulb-line"></i>
+    Raciocínio
+</div>
+        </div>
+    </td>
+</tr>
 <tr>
     <td>
         <code>
@@ -3748,10 +3699,6 @@ Todos os preços estão em dólares dos Estados Unidos.
 <div>
     <i class="ri-lightbulb-line"></i>
     Raciocínio
-</div>
-<div>
-    <i class="ri-braces-line"></i>
-    Funções JSON
 </div>
         </div>
     </td>

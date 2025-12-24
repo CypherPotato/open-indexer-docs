@@ -1,66 +1,23 @@
 # Search
 
-The search API, through the query key obtained from the collections, performs a semantic search on it, performing an intelligent comparison for each indexed document in a collection.
+The search API, using the query key obtained from collections, performs a semantic search on it, performing an intelligent comparison for each document indexed in a collection.
 
-After creating a collection, you will get its ID. Use the ID of your collection to perform the search on the indexed documents of the same.
+After creating a collection, you will receive its ID. Use your collection's ID to search the indexed documents of it.
 
-Use the endpoints of this API to embed the semantic search of documents in your AI model or chatbot.
+Use the endpoints of this API to embed semantic document search into your AI model or chatbot.
 
 ## Searching documents
 
-This endpoint expects a GET request with the following parameters:
+This endpoint expects a GET request with the parameters:
 
 - `term`: **required.** Specifies the search term that will be searched in the documents.
-- `top`: Specifies the maximum number of documents that should be returned in the search.
-- `min`: Specifies the minimum score for obtaining the documents.
+- `top`: Specifies the maximum number of documents to be returned in the search.
+- `min`: Specifies the minimum score for retrieving documents.
 
 > [!WARNING]
 >
-> Warning: this endpoint generates cost. The cost is calculated based on the tokens of the search term. The search term is tokenized according to the model used in the indexing of the documents.
+> Attention: this endpoint incurs cost. The cost is calculated based on the tokens of the search term. The search term is tokenized according to the model used for indexing the documents.
 
-#### Request
+See the [reference](https://inference.aivax.net/apidocs#QueryCollection) for the collection query API endpoint.
 
-<div class="request-item post">
-    <span>GET</span>
-    <span>
-        /api/v1/collections/<span>{collection-id}</span>/query
-    </span>
-</div>
-
-```text
-term=What is the color of the Honda CIVIC?
-```
-
-#### Response
-
-```json
-{
-    "message": null,
-    "data": [
-        {
-            "documentId": "01965f93-a391-71a8-968a-47ccd4949de0",
-            "documentName": "Products/Honda Civic 2015.rmd:1",
-            "documentContent": "[...]",
-            "score": 0.7972834229469299,
-            "referencedDocuments": []
-        },
-        {
-            "documentId": "01965f93-a391-76b3-bbf5-3fb74d10d412",
-            "documentName": "Products/Honda Civic 2015.rmd:2",
-            "documentContent": "[...]",
-            "score": 0.5693517327308655,
-            "referencedDocuments": []
-        },
-        {
-            "documentId": "01965f93-a391-7026-b7aa-1cc6c63cd7d1",
-            "documentName": "Products/Honda Civic 2015.rmd:5",
-            "documentContent": "[...]",
-            "score": 0.5475733876228333,
-            "referencedDocuments": []
-        },
-        ...
-    ]
-}
-```
-
-For the search result, the higher the score, the more similar the document is to the search term. AIVAX uses embedding models that allow task orientation. For the search, the term is vectorized with a `DOCUMENT_QUERY` orientation. For document indexing, the orientation is `DOCUMENT_RETRIEVAL`, which provides a more optimized search and not to verify the similarity between documents.
+For the search results, the higher the score, the more similar the document is to the search term. AIVAX uses embedding models that allow task orientation. For searching, the term is vectorized with an orientation `DOCUMENT_QUERY`. For document indexing, the orientation is `DOCUMENT_RETRIEVAL`, which provides a more optimized search and is not intended to assess similarity between documents.

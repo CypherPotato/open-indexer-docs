@@ -16,51 +16,7 @@ Uma sessão de chat também restaura todas as mensagens da conversa da mesma ses
 
 Se uma sessão estiver próxima de expirar, ela é renovada por mais 20 minutos na próxima mensagem do usuário.
 
-<div class="request-item post">
-    <span>POST</span>
-    <span>
-        /api/v1/web-chat-client/<span>{chat-client-id}</span>/sessions
-    </span>
-</div>
-
-```json
-{
-    // Tempo em segundos para o chat expirar. O mínimo é 10 minutos. O máximo é 90 dias.
-    "expires": 3600,
-    
-    // Opcional. Contexto adicional para a IA sobre o chat.
-    "extraContext": "# Contexto adicional\r\n\r\nVocê está falando com Eduardo.",
-    
-    // Opcional. Fornece um endpoint para a sessão obter contexto adicional. Esse endpoint é chamado em toda mensagem enviada pelo usuário, atualizada em tempo real sem qualquer cache.
-    "contextLocation": "https://example.com/context.txt",
-    
-    // Opcional (recomendado). Um id externo para identificar a sessão posteriormente e reaproveitá-la sempre que chamar o mesmo endpoint. Pode ser o ID do usuário do seu banco de dados ou uma string que facilite a identificação desse chat posteriormente.
-    "tag": "my-user-tag",
-    
-    // Opcional. Metadata chave-valor adicional para armazenar no cliente. Não visível para a assistente.
-    "metadata": {
-        "foo": "bar"
-    }
-}
-```
-
-#### Resposta
-
-```json
-{
-    "message": null,
-    "data": {
-        // ID da sessão de chat criada
-        "sessionId": "01966f0b-172d-7bbc-9393-4273b86667d2",
-        
-        // Chave pública de acesso do chat
-        "accessKey": "wky_gr5uepjsgrhuqcj3aaat1iagrsmozwr9gghusnnu6zjhrsyures5xoe",
-        
-        // A URL pública para conversar com o chat
-        "talkUrl": "https://console.aivax.net/chat/wky_gr5uepjsgrhuqcj3aaat1iagrsmozwr9gghusnnu6zjhrsyures5xoe"
-    }
-}
-```
+Para detalhes sobre como criar uma sessão de chat, consulte o endpoint [Create Web Chat Session](https://inference.aivax.net/apidocs#CreateWebChatSession).
 
 ## Sessões de integrações
 

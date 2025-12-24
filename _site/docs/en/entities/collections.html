@@ -127,129 +127,27 @@
 <p>A collection is a knowledge library: it houses multiple knowledge documents.</p>
 <ul>
 <li>Use collections to group documents by purpose, such as documenting a product, a company, a service, or a workflow.</li>
-<li>Collections do not incur cost. There is no limit to the number of collections per account.</li>
+<li>Collections incur no cost. There is no limit to the number of collections per account.</li>
 </ul>
 <div class="TIP">
 <h5>Tip</h5>
 <p>Collections implement the <strong>RAG (Retrieval-Augmented Generation)</strong> technique. To understand when to use RAG compared to Skills and System Prompt, see our <a href="/docs/en/concepts-comparison">complete comparison guide</a>.</p>
 </div>
 <h2 id="create-a-collection">Create a collection</h2>
-<p>To create an empty collection, provide only its name:</p>
-<h4 id="request">Request</h4>
-<div class="request-item post">
-    <span>POST</span>
-    <span>
-        /api/v1/collections
-    </span>
-</div>
-<pre><code class="lang-json">{
-    // The collection name cannot be empty.
-    &quot;collectionName&quot;: &quot;My first collection&quot;
-}
-</code></pre>
-<h4 id="response">Response</h4>
-<pre><code class="lang-json">{
-    &quot;message&quot;: null,
-    &quot;data&quot;: {
-        // Unique ID of the created collection.
-        &quot;collectionId&quot;: &quot;01965b62-17c4-7258-9aa8-af5139799527&quot;
-    }
-}
-</code></pre>
+<p>To create an empty collection, provide only its name.</p>
+<p>For details on how to create a collection, refer to the <a href="https://inference.aivax.net/apidocs#CreateCollection">Create Collection</a> endpoint.</p>
 <h2 id="list-collections">List collections</h2>
 <p>Lists the collections available in your account.</p>
-<h4 id="request-1">Request</h4>
-<div class="request-item get">
-    <span>GET</span>
-    <span>
-        /api/v1/collections
-    </span>
-</div>
-<h4 id="response-1">Response</h4>
-<pre><code class="lang-json">{
-    &quot;message&quot;: null,
-    &quot;data&quot;: {
-        &quot;pageInfo&quot;: {
-            &quot;currentPage&quot;: 1,
-            &quot;hasMoreItems&quot;: true
-        },
-        &quot;items&quot;: [
-            {
-                &quot;id&quot;: &quot;01965b62-17c4-7258-9aa8-af5139799527&quot;,
-                &quot;createdAt&quot;: &quot;2025-04-22T02:44:37&quot;,
-                &quot;name&quot;: &quot;My collection&quot;
-            },
-            {
-                &quot;id&quot;: &quot;01965b54-7fbd-70cd-982b-604de002ac0a&quot;,
-                &quot;createdAt&quot;: &quot;2025-04-22T02:29:46&quot;,
-                &quot;name&quot;: &quot;Another collection&quot;
-            }
-        ]
-    }
-}
-</code></pre>
-<h2 id="get-a-collection">Get a collection</h2>
+<p>For details on how to list collections, refer to the <a href="https://inference.aivax.net/apidocs#ListCollections">List Collections</a> endpoint.</p>
+<h2 id="view-a-collection">View a collection</h2>
 <p>Retrieves details of a collection, such as its indexing progress and information like creation date.</p>
-<h4 id="request-2">Request</h4>
-<div class="request-item get">
-    <span>GET</span>
-    <span>
-        /api/v1/collections/<span>{collection-id}</span>/
-    </span>
-</div>
-<h4 id="response-2">Response</h4>
-<pre><code class="lang-json">{
-    &quot;message&quot;: null,
-    &quot;data&quot;: {
-        &quot;name&quot;: &quot;My collection&quot;,
-        &quot;createdAt&quot;: &quot;2025-04-22T02:29:46&quot;,
-        &quot;state&quot;: {
-            
-            // number of documents waiting to be indexed
-            &quot;queuedDocuments&quot;: 0,
-            
-            // number of documents ready for query
-            &quot;indexedDocuments&quot;: 227
-        },
-        &quot;tags&quot;: [
-            &quot;tag1&quot;,
-            &quot;tag2&quot;,
-            &quot;tag3&quot;,
-            ...
-        ]
-    }
-}
-</code></pre>
+<p>For details on how to view a collection, refer to the <a href="https://inference.aivax.net/apidocs#GetCollectionDetails">Get Collection Details</a> endpoint.</p>
 <h2 id="delete-a-collection">Delete a collection</h2>
 <p>Deletes a collection and all documents within it. This action is irreversible.</p>
-<h4 id="request-3">Request</h4>
-<div class="request-item delete">
-    <span>DELETE</span>
-    <span>
-        /api/v1/collections/<span>{collection-id}</span>/
-    </span>
-</div>
-<h4 id="response-3">Response</h4>
-<pre><code class="lang-json">{
-    &quot;message&quot;: &quot;Collection deleted successfully.&quot;,
-    &quot;data&quot;: null
-}
-</code></pre>
-<h2 id="clean-a-collection">Clean a collection</h2>
-<p>Unlike deleting a collection, this operation removes all documents from the collection, including indexed and queued ones.</p>
-<h4 id="request-4">Request</h4>
-<div class="request-item delete">
-    <span>DELETE</span>
-    <span>
-        /api/v1/collections/<span>{collection-id}</span>/reset-only
-    </span>
-</div>
-<h4 id="response-4">Response</h4>
-<pre><code class="lang-json">{
-    &quot;message&quot;: &quot;Collection cleaned successfully.&quot;,
-    &quot;data&quot;: null
-}
-</code></pre>
+<p>For details on how to delete a collection, refer to the <a href="https://inference.aivax.net/apidocs#DeleteCollection">Delete Collection</a> endpoint.</p>
+<h2 id="reset-a-collection">Reset a collection</h2>
+<p>Unlike deleting a collection, this operation removes all documents from the collection, including indexed ones and those in the queue.</p>
+<p>For details on how to reset a collection, refer to the <a href="https://inference.aivax.net/apidocs#ResetCollection">Reset Collection</a> endpoint.</p>
 
 </article>
 
