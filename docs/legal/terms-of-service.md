@@ -1,8 +1,8 @@
 # Termos de Uso
 
-Versão: 1.1  
-Data de vigência: 05 de outubro de 2025
-Última atualização anterior: 30 de julho de 2025
+Versão: 1.2  
+Data de vigência: 26 de dezembro de 2025
+Última atualização anterior: 05 de outubro de 2025
 
 ---
 
@@ -60,8 +60,15 @@ Para usar a maioria dos serviços da AIVAX é necessária a adição de saldo ("
 - Nossos provedores de pagamentos podem coletar e armazenar dados determinísticos à você, como endereços físicos, dados de pagamentos (como cartões de créditos) e quaisquer informações que justifique a cobrança para adição de saldo. Essas informações não são vinculadas ou usadas à AIVAX e é de responsabilidade de nossos parceiros de pagamentos.
 - Antes de pagar por créditos, você pode visualizar com antecedência as taxas de serviço cobradas pela AIVAX e se recusar à pagá-las, impossibilitando a adição de saldo.
 - Créditos adicionados expiram após um ano de sua adição. Após esse período, o crédito expirado passará a não contabilizar mais o balanço da sua conta.
-- Reembolso é permitido somente se as duas condições forem cumpridas no ato da solicitação do reembolso: o reembolso foi solicitado em até 24 horas do momento da adição do saldo e que o balanço total da conta seja superior ou igual ao valor do reembolso solicitado.
-- A taxa de serviço não é reembolsável. Do valor pago, somente o crédito final será reembolsado pelo provedor de pagamento.
+
+**Política de Reembolso:** Em conformidade com o Art. 49 do Código de Defesa do Consumidor (Lei nº 8.078/1990), você pode exercer o direito de arrependimento em até **7 (sete) dias corridos** a contar da data da adição de saldo, solicitando o reembolso via legal@aivax.net. Do valor a ser reembolsado, serão descontados:
+
+- Os custos correspondentes aos serviços de computação (inferências, processamento) e armazenamento (dados RAG, vetores, memórias) efetivamente consumidos até o momento da solicitação;
+- As taxas de serviço do provedor de pagamento, que não são reembolsáveis.
+
+O reembolso será processado no mesmo meio de pagamento utilizado, em até 15 (quinze) dias úteis após a aprovação da solicitação. O saldo restante na conta será deduzido ou zerado.
+
+**Exclusão de Dados por Inadimplência:** O armazenamento de dados (Coleções RAG, Vetores Embeddings e Memórias de Usuário) gera custos contínuos para a AIVAX. Caso o saldo da sua conta permaneça **negativo ou zerado por período superior a 30 (trinta) dias consecutivos**, a AIVAX se reserva o direito de **excluir permanentemente e de forma irreversível todos os dados armazenados** associados à sua conta, incluindo documentos de RAG, vetores e memória de usuários, a fim de cessar os custos operacionais. A própria conta (credenciais de login e histórico de transações) será mantida ativa para permitir futura recarga de créditos, mas os dados mencionados **não poderão ser recuperados após a exclusão**. Recomendamos fortemente que você exporte seus dados regularmente e mantenha saldo positivo para evitar perda de informações. A AIVAX notificará o e-mail cadastrado **com no mínimo 7 (sete) dias de antecedência** antes de proceder com a exclusão de dados.
 
 ---
 
@@ -92,7 +99,18 @@ A AIVAX não endossa esse tipo de conteúdo e se reserva o direito de investigar
 
 ---
 
-### 4. Provedores de Modelos de Terceiros
+### 4. Provedores de Modelos de Terceiros e BYOK
+
+#### 4.1. Bring Your Own Key (BYOK) – Uso de Chaves Próprias
+
+A AIVAX oferece a funcionalidade opcional de **BYOK (Bring Your Own Key)**, permitindo que você utilize suas próprias chaves de API de provedores externos (como OpenAI, Anthropic, Google, entre outros) para realizar inferências. Ao optar por essa funcionalidade, você concorda e reconhece que:
+
+- **Responsabilidade Integral:** Você é o único e exclusivo responsável pela obtenção, custódia, gerenciamento e conformidade de uso das chaves de API próprias. A AIVAX não tem controle sobre as políticas, limites de uso ou termos estabelecidos pelos provedores originais dessas chaves.
+- **Banimentos e Restrições:** A AIVAX **não se responsabiliza** por suspensões, banimentos, limitações de taxa (rate limits), interrupções de serviço ou quaisquer outras penalidades aplicadas pelo provedor original sobre sua chave. Caso sua chave seja bloqueada ou revogada, os serviços que dependem dela não poderão ser executados.
+- **Cobrança de Serviços Periféricos:** Ainda que você utilize chaves próprias para inferências, os **serviços periféricos da AIVAX** — incluindo, mas não se limitando a, armazenamento de dados, processamento RAG, gerenciamento de vetores, memórias de usuário, orquestração de agentes e ferramentas auxiliares (tools) — continuam sendo cobrados do saldo de créditos da sua conta AIVAX, conforme os preços vigentes.
+- **Uso Ético e Legal:** O uso de chaves próprias não isenta você das obrigações estabelecidas nestes Termos, incluindo conformidade legal, proibição de abuso e respeito às políticas de uso aceitável.
+
+#### 4.2. Modelos de Terceiros Fornecidos pela AIVAX
 
 Os Serviços da AIVAX podem rotear seu Conteúdo de Entrada para modelos de IA operados por terceiros. Ao usar um modelo específico, você também pode estar sujeito aos termos de uso do provedor daquele modelo. É sua responsabilidade revisar e cumprir tais termos. A AIVAX não se responsabiliza pelas políticas ou práticas de provedores terceiros.
 
@@ -128,7 +146,13 @@ Nenhuma parte será responsável por falhas ou atrasos de desempenho causados po
 
 ### 10. Controles de Exportação e Sanções
 
-Você declara que não está localizado em, nem atua em nome de entidade ou pessoa sujeita a sanções ou restrições comerciais impostas por autoridades brasileiras ou internacionais (incluindo listas de restrição de comércio ou sanções econômicas). Você não usará os serviços para fins proibidos por leis de exportação, anticorrupção ou antiterrorismo.
+Você declara que não está localizado em, nem atua em nome de entidade ou pessoa sujeita a sanções ou restrições comerciais impostas por autoridades brasileiras ou internacionais, incluindo, mas não se limitando a:
+
+- Listas de restrição de comércio mantidas pelo Governo Brasileiro;
+- Sanções econômicas da ONU (Organização das Nações Unidas);
+- **Lista de Nacionais Especialmente Designados (SDN List) e outras listas de sanções mantidas pela OFAC (Office of Foreign Assets Control) do Departamento do Tesouro dos Estados Unidos**, considerando que a AIVAX utiliza infraestrutura e provedores sediados nos EUA.
+
+Você não usará os Serviços para fins proibidos por leis de exportação, anticorrupção ou antiterrorismo. O descumprimento desta cláusula pode resultar na suspensão ou encerramento imediato da sua conta, sem direito a reembolso.
 
 ### 11. Confidencialidade e Segurança de Credenciais
 

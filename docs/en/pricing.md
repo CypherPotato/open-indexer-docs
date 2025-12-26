@@ -1,47 +1,64 @@
 # Pricing
 
-The AIVAX payment model is **pre‑paid**, meaning you use our services with the balance you add to your account. We do not send invoices at the beginning of the month for your usage. This makes it predictable to know how much you will spend using our inference and agent‑creation services.
+The AIVAX payment model is **pre‑paid**: you add balance to your account and use our services by consuming that credit. We don’t send surprise invoices at the end of the month. This guarantees full predictability of your inference and agent spending.
 
-AIVAX charges a small fee (varying by payment method) at the time credits are added to cover taxes, payment‑provider fees, and our service fee. Model and inference pricing is provided directly by the inference providers and their models, such as Google and OpenAI. There is no additional fee or markup on these prices. You pay the same amount you would pay those providers directly.
+When adding credits, AIVAX charges a small fee (varying by payment method) to cover taxes (invoices), bank fees, and operational costs.
 
-We use different [services](/docs/en/builtin-tools) to help you create agentic assistants. Some tools and services have a cost, and these costs are passed on to your account with no extra fee.
+Inference pricing (text generation) is passed through directly from providers (such as Google and OpenAI) **without markup**. You pay AIVAX exactly the same list price you would pay using those providers directly.
 
-Inference is billed in United States dollars (USD), so there may be currency fluctuation when converting from your local currency to USD.
+We use different [services](/docs/en/builtin-tools) to help you create agentic assistants. Some tools have specific costs that are debited from your balance with no additional fees.
 
-## Expiration
+> **Note:** Inference is calculated in US dollars (USD). Currency fluctuations may occur when converting from your local currency to dollars at the time of recharge or usage.
 
-Some providers have an expiration period for added credits. Since we do not know which model or service you will use with the added balance, we must consider the shortest expiration period to also define our expiration period for the added credits.
+## Credit Expiration
 
-Currently, credits expire after **12 months** from the time they are added. Read more about refunds, expiration, and balance in the [terms of use](/docs/en/legal/terms-of-service).
+Since we cannot predict which model you will use, we need to align credit validity with the most restrictive policies of our suppliers. Currently, credits expire **12 months** after the date they are added. See the details in our [terms of service](/docs/en/legal/terms-of-service).
 
 ## Bring‑your‑own‑key (BYOK)
 
-You can bring your own OpenAI‑compatible API key to use directly with AIVAX. Because we do not know which model you will be using, we do not charge anything on the inference you run with your models. In addition, when using your own model with AIVAX, rate limits are increased to **1,500 requests per minute**, with no token‑weight limitation, which is equivalent to 60 requests per second.
+You can connect your own API key (compatible with OpenAI) to use AIVAX’s infrastructure.
 
-Note that you are still charged for services you use with your own models, such as [RAG](/docs/en/entities/collections.md), web search, image generation, etc. If your account balance becomes negative, you will not be able to use any service, including inference for your own API keys, until you add balance again.
+* **Inference Cost:** $0.00 (charged directly by the key owner).  
+* **Limits:** Rate limits are increased to **1,500 requests per minute** (≈ 25 req/s), with no token limits.
 
-## RAG (collections)
+**Important:** Even when using your own key, peripheral AIVAX services (such as storage of [RAG](/docs/en/entities/collections.md), web search, image generation, etc.) are still charged against your AIVAX balance. If your balance goes negative, the service will be halted, including BYOK calls.
 
-Currently, the default model used for collection embedding is the [Gemini Embedding](https://ai.google.dev/gemini-api/docs/en/pricing#gemini-embedding), which is priced at **$0.15** per 1 million input tokens.
+## RAG (Collections and Vectors)
 
-Other documents can be vectorized using other embedding models that are deprecated in the system but kept for compatibility:
+Indexing cost depends on the embedding model you choose.
 
-- `@google/gemini-embedding-001`, $0.15 per million tokens. (default)  
-- `@google/text-embedding-004`, $0.10 per million tokens. (deprecated)  
-- `@baai/bge-m3`, $0.012 per million tokens. (deprecated)
+**Default Model:**  
+* `@google/gemini-embedding-001`: **$0.15** / 1 million tokens.
 
-At the moment, we do not charge any compute and/or storage fees for vectors.
+**Legacy/Compatibility Models:**  
+* `@google/text-embedding-004`: $0.10 / 1 million tokens.  
+* `@baai/bge-m3`: $0.012 / 1 million tokens.
 
-For billing to occur, we need to calculate how many tokens were processed from the input, and not all embedding providers return the number of indexed tokens. Therefore, we use an approximation to calculate the number of processed tokens:
+*At the moment, we do not charge computational fees for processing the indexing, only for the resulting storage.*
 
-```csharp
-tokens = ceil(utf8_bytes_count / 4)
-```
+**Token Calculation**  
+Since not all providers return the exact token count in the response, we use the industry‑standard approximation for billing:  
+`tokens = ceil(utf8_bytes_count / 4)`
 
-The result of this approximation is what we charge you.
+## Storage
+
+To maintain the integrity and availability of your data, we charge a storage fee per hour.
+
+* **Price:** **$0.0015** per GB / hour.  
+* **Free Tier:** The first **100 MB are free**.
+
+**How billing works:**  
+You pay only for the **excess** beyond the free tier.  
+* *Example:* If you use 120 MB for one hour, you pay only for the 20 MB excess.  
+* *Example:* If you use 80 MB, the cost is zero.
+
+**What consumes storage:**  
+1. Long‑term memory of users (chats and saved inferences);  
+2. Cache of image descriptions (multimodal processing);  
+3. RAG document content and its vectors.
+
+System logs are temporary and do not generate storage costs.
 
 ## Tools
 
-Tools provided by AIVAX ([built‑in tools](/docs/en/builtin-tools)) have distinct pricing and limits from one another.
-
-For functions you define for your API, there is no charge.
+The [native tools](/docs/en/builtin-tools) of AIVAX have specific prices and limits. See the documentation for each tool.

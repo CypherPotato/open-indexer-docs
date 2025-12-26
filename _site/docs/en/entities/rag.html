@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Pipelines de IA | AIVAX </title>
+        <title>RAG | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="Pipelines de IA | AIVAX ">
+        <meta name="title" content="RAG | AIVAX ">
 
 
         <link rel="icon" href="../../../assets/img/favicon.ico">
@@ -18,12 +18,12 @@
         <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
 
         <meta name="docfx:navrel" content="../../../toc.html">
-        <meta name="docfx:tocrel" content="../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
 
         <meta name="docfx:rel" content="../../../">
 
 
-        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/entities/ai-gateways/pipelines.md/#L1">
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/en/entities/rag.md/#L1">
         <meta name="loc:inThisArticle" content="In this article">
         <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
         <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -122,86 +122,20 @@
                 </div>
 
                 <article data-uid="">
-<h1 id="pipelines-de-ia">Pipelines de IA</h1>
+<h1 id="rag">RAG</h1>
 
-<p>A AIVAX fornece vários pipelines para usar em seu gateway de IA.</p>
-<p>Você pode usar vários pipelines para executarem no contexto do seu gateway.</p>
-<h2 id="rag">RAG</h2>
-<p>Através de <a href="/docs/entities/collections">coleções</a>, você pode vincular coleções de documentos para seu gateway de IA. Você pode definir os parâmetros de incorporação, como quantidade de documentos, pontuação mínima e estratégia de incorporação.</p>
-<p>Cada estratégia de incorporação é mais refinada que a outra. Algumas criam resultados melhores que as demais, mas é importante realizar testes práticos com várias estratégias para entender qual se ajusta melhor no modelo, conversa e tom do usuário.</p>
-<p>Talvez seja necessário realizar ajustes no prompt do sistema para informar melhor como a IA deverá considerar os documentos anexados na conversa. Os documentos são anexados como uma mensagem do usuário, limitados aos parâmetros que você define na estratégia de obtenção.</p>
-<p>Estratégias com reescrita normalmente geram os melhores resultados à um baixo custo de latência e custo. O modelo de reescrita usado sempre o com menor custo, escolhido normalmente por um pool interno que decide o modelo que está com menor latência no momento.</p>
-<p>Estratégias sem custo de reescrita:</p>
-<ul>
-<li><code>Plain</code>: a estratégia padrão. É a menos otimizada e não possui custo de reescrita: a última mensagem do usuário é usada como termo de busca para pesquisar na coleção anexada do gateway.</li>
-<li><code>Concatenate</code>: Concatena em linhas as últimas N mensagens do usuário, e então o resultado da concatenação é usada como termo de busca.</li>
-</ul>
-<p>Estratégias com custo de reescrita (os tokens de inferência são cobrados):</p>
-<ul>
-<li><code>UserRewrite</code>: reescreve as últimas N mensagens do usuário usando um modelo menor, criando uma pergunta contextualizada no que o usuário quer dizer.</li>
-<li><code>FullRewrite</code>: reescreve as últimas N*2 mensagens do chat usando um modelo menor. Similar ao <code>UserRewrite</code>, mas considera também as mensagens da assistente na formulação da nova pergunta. Geralmente cria as melhores perguntas, com um custo um pouco maior. É a estratégia mais estável e consistente. Funciona com qualquer modelo.</li>
-</ul>
-<p>Estratégias de função:</p>
-<ul>
-<li><code>QueryFunction</code>: fornece uma função de pesquisa na coleção integrada para o modelo de IA. Você deverá ajustar nas instruções do sistema os cenários ideais para o modelo chamar essa função quando necessário. Pode não funcionar tão bem em modelos menores.</li>
-</ul>
-<p>Ao definir uma coleção de RAG no pipeline de seu gateway, a primeira mensagem do contexto da conversa será o resultado da incorporação do RAG como uma mensagem do usuário (exceto para quando usado como ferramentas onde o resultado da incorporação é anexado como uma resposta de ferramenta).</p>
-<p>Definir muitos documentos de resposta do RAG aumenta o consumo de tokens de entrada e pode aumentar o preço final da inferência.</p>
-<h2 id="fixando-instruções">Fixando instruções</h2>
-<p>O pipeline de instruções permite prefixar instruções em diversos lugares do modelo, guiando e restrigindo o formato de resposta do modelo.</p>
-<p>As formas atuais de definir instruções são:</p>
-<ul>
-<li><strong>Instruções do sistema</strong>: insire um texto fixo no prompt de sistema do contexto.</li>
-<li><strong>Template de prompt do usuário</strong>: reformata a pergunta do usuário para seguir um formato específico de pergunta.</li>
-<li><strong>Inicialização de assistente (prefill)</strong>: inicializa a mensagem da assistente com tokens iniciais de geração.</li>
-</ul>
-<p>Esses parâmetros podem ser muito úteis para prompt engineering, no entanto, podem não ser compatível com todos os modelos.</p>
-<p>Atenção: prefixando instruções, templates e inicializações podem remover a capacidade de raciocínio, interpretação multi-modalidades e chamadas de ferramentas do modelo.</p>
-<h2 id="instruções-remotas">Instruções remotas</h2>
-<p>Você também pode fornecer instruções <strong>remotas</strong> no contexto. Instruções remotas fazem uma chamada GET para o recurso fornecido e cacheia ele internamente por 10 minutos. Esses recursos são lidos como texto, limitado à 10 MB por recurso.</p>
-<p>Estes recursos são inseridos nas instruções de sistema do LLM.</p>
-<h2 id="skills-habilidades">Skills (habilidades)</h2>
-<p>Habilidades são instruções fornecidas sob-demanda para o modelo, o que pode obter instruções refinadas e aprimoradas para diferentes tarefas especializadas.</p>
-<p>Leia mais sobre <a href="/docs/skills">habilidades</a>.</p>
-<h2 id="processamento-multi-modal">Processamento multi-modal</h2>
-<p>O pré-processamento de conteúdo multi-modal permite processar áudios, imagens, vídeos e documentos usando modelos com essas capacidades para modelos que não possuem essa capacidade.</p>
-<p>Cada conteúdo multi-modal é convertido para uma representação textual do mesmo através de um modelo auxiliar.</p>
-<p>Esse processamento é feito por um modelo multi-modal, o que infere custo de processamento diretamente do provider. O conteúdo gerado é armazenado em um cache de longo prazo em nossos servidores e são evitados após um certo período que não foi acessado. Após esse período, o conteúdo tende a ser re-processado se novamente inserido na conversa.</p>
-<h2 id="parametrização">Parametrização</h2>
-<p>O pipeline de parametrização configura os hiper-parâmetros iniciais da inferência, como temperatura, nucleus sampling, presence penalty e demais hiperparâmetros de inferência.</p>
-<h2 id="truncating">Truncating</h2>
-<p>O pipeline de truncating permite definir o tamanho de uma conversa em tokens antes dela ser recortada.</p>
-<p>Quando esse pipeline está ativado, antes de toda inferência, é calculado se <code>num_of_chars / 4</code> é maior que o máximo de tokens de entrada da conversa. Se o contexto for maior, o pipeline começa a remover mensagens do começo da conversa até que as mensagens caibam no contexto especificado.</p>
-<p>Ao menos uma mensagem do usuário (comumente a última mensagem) é mantida na conversa. Todas as demais mensagens são removidas, exceto as instruções do sistema.</p>
-<p>Alternativamente, você pode definir que ao atingir o limite um erro é disparado na API ao invés de recortar o contexto.</p>
-<h2 id="tool-message-truncating">Tool message truncating</h2>
-<p>O pipeline de contagem de mensagens de ferramentas é similar ao de truncating: ele remove a resposta de ferramentas mais antigas e preserva somente as mais novas.</p>
-<p>Isso pode ser útil para quando respostas de ferramentas anteriores não sejam mais úteis em mensagens mais recentes e ocupam espaço no contexto, mas pode ser prejudicial ao usar com modelos agênticos que chamam ferramentas em cadeia.</p>
-<p>Esse pipeline é configurado em quantidade de mensagens de ferramentas à serem preservadas ao invés de tokens. Quando uma mensagem de ferramenta é considerada antiga, ela não é removida, mas tem seu conteúdo removido.</p>
-<h2 id="ferramentas-do-lado-do-servidor">Ferramentas do lado do servidor</h2>
-<p>Esse pipeline permite a execução de ferramentas do lado do servidor da AIVAX, similar ao protocolo MCP.</p>
-<p>Leia mais sobre esse pipeline <a href="/docs/protocol-functions">aqui</a>.</p>
-<h2 id="ferramentas-embutidas">Ferramentas embutidas</h2>
-<p>Você pode adicionar ferramentas providas pela AIVAX em seu gateway, como pesquisa na internet, geração de imagens e acesso de links. Consulte todas as ferramentas disponíveis <a href="/docs/builtin-tools">aqui</a>.</p>
-<h2 id="interpretador-de-funções-tool-handler">Interpretador de funções (tool handler)</h2>
-<p>É possível alterar o interpretador de funções usado pelo modelo. Isso traz a possibilidade de adicionar a capacidade de <strong>chamar funções</strong> para modelos que não suportam esse recurso.</p>
-<p>Atualmente, existem dois tipos de interpretadores:</p>
-<ul>
-<li>ReAct: um interpretador baseado na técnica <a href="https://www.promptingguide.ai/techniques/react">ReAct prompting</a> usando um modelo auxiliar. O interpretador <code>react.v1.selfcall</code> usa o próprio modelo de inferência para chamar funções antes de gerar uma resposta.</li>
-<li>NtvCall: utiliza outro modelo para chamar funções para o modelo principal. O fluxo é retomado quando o modelo alternativo não chama nenhuma função e começa a criar uma resposta.</li>
-</ul>
-<h2 id="moderação">Moderação</h2>
-<p>Você pode adicionar uma camada de moderação no seu gateway de IA. Um modelo auxiliar irá analisar o contexto inteiro da conversa e irá classificá-la como segura ou insegura de acordo com suas preferências de moderação.</p>
-<p>Conversas classificadas como inseguras são removidas da inferência e o modelo tende a gerar uma resposta indicando que não pode gerar conteúdo sobre aquele assunto.</p>
-<p>O custo da moderação é de <strong>$0,20</strong> por milhão de tokens processados.</p>
-<h2 id="workers">Workers</h2>
-<p>Workers definem o comportamento do seu gateway remotamente, usado para controlar quando certos eventos devem ser abortados ou continuados.</p>
-<p>Leia mais sobre esse pipeline <a href="/docs/entities/ai-gateways/workers">aqui</a>.</p>
+<p>AIVAX provides an autonomous RAG (Retrieval-Augmented Generation) service and allows you to use these documents in chat conversations with your <a href="/docs/en/entities/ai-gateways/ai-gateway">AI gateways</a>. When the user asks a domain‑specific or specific question, an AI gateway automatically incorporates relevant documents to answer that question.</p>
+<p>You can use RAG directly, without associating it to an AI gateway, through a collection. Collections are groups of <a href="/docs/en/entities/documents">documents</a> that contain information that will be retrieved later. These documents are persistently stored in a similarity database.</p>
+<h2 id="collections">Collections</h2>
+<p>Collections allow you to upload, save, manage, and semantically query documents stored in them. You can associate a collection with an AI gateway or query it directly via the API.</p>
+<p>Through the AIVAX interface, you can upload batches of documents and create documents with chunking, and associate them as a single document in the embedding result.</p>
+<h2 id="costs-and-limits">Costs and limits</h2>
+<p>There is no storage limit on collections, only the existing <a href="/docs/en/limits">rate limits</a> on the account. Collections</p>
 
 </article>
 
                 <div class="contribution d-print-none">
-                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/entities/ai-gateways/pipelines.md/#L1" class="edit-link">Edit this page</a>
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/en/entities/rag.md/#L1" class="edit-link">Edit this page</a>
                 </div>
 
                 <div class="next-article d-print-none border-top" id="nextArticle"></div>

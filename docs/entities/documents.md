@@ -27,7 +27,7 @@ Exemplos de criação de documentos:
 
 ## Uso da API
 
-Como todos os documentos são entidades que pertencem à uma [coleção](collections.md), sempre tenha em mãos a coleção de onde o documento está/será localizado.
+Como todos os documentos são entidades que pertencem à uma [coleção](/docs/entities/rag), sempre tenha em mãos a coleção de onde o documento está/será localizado.
 
 Para informações detalhadas sobre os endpoints da API de documentos, consulte a [documentação oficial da API](https://inference.aivax.net/apidocs#Documents).
 
@@ -42,7 +42,7 @@ Para enviar uma lista em massa de documentos para uma coleção, estruture-os se
 | `__ref` | `string` | Opcional. Especifica um ID de referência do documento. |
 | `__tags` | `string[]` | Opcional. Especifica um array de tags do documento. Útil para gestão de documentos. |
 
-A referência de um documento é um ID que pode ser especificado em vários documentos que precisam estar vinculados em uma busca quando um dos mesmos for correspondido em uma busca de similaridade. Por exemplo, se uma busca encontrar um documento que possui um ID de referência, todos os outros documentos da mesma coleção que compartilham o mesmo ID de referência do documento correspondido também serão incluídos na resposta da busca.
+A **referência** de um documento é um ID que pode ser especificado em vários documentos que precisam estar vinculados em uma busca quando um dos mesmos for correspondido em uma busca de similaridade. Por exemplo, se uma busca encontrar um documento que possui um ID de referência, todos os outros documentos da mesma coleção que compartilham o mesmo ID de referência do documento correspondido também serão incluídos na resposta da busca.
 
 O uso de referências pode ser útil para quando um documento depende de outro ou mais documentos para fazer sentido. Não há exigência de formato para o ID de referência: qualquer formato é aceito.
 

@@ -61,11 +61,9 @@ Leia mais sobre [habilidades](/docs/skills).
 
 O pré-processamento de conteúdo multi-modal permite processar áudios, imagens, vídeos e documentos usando modelos com essas capacidades para modelos que não possuem essa capacidade.
 
-O conteúdo gerado é armazenado em um cache de longo prazo em nossos servidores e são evitados após um certo período que não foi acessado. Após esse período, o conteúdo tende a ser re-processado se novamente inserido na conversa.
-
 Cada conteúdo multi-modal é convertido para uma representação textual do mesmo através de um modelo auxiliar.
 
-O custo desse processamento é de `$ 0,30` por milhão de tokens de entrada e `$ 2,50` por milhão de tokens de saída.
+Esse processamento é feito por um modelo multi-modal, o que infere custo de processamento diretamente do provider. O conteúdo gerado é armazenado em um cache de longo prazo em nossos servidores e são evitados após um certo período que não foi acessado. Após esse período, o conteúdo tende a ser re-processado se novamente inserido na conversa.
 
 ## Parametrização
 

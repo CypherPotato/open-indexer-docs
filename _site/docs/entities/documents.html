@@ -146,7 +146,7 @@
 <li>Use uma linguagem humana, simples e fácil de entender.</li>
 </ul>
 <h2 id="uso-da-api">Uso da API</h2>
-<p>Como todos os documentos são entidades que pertencem à uma <a href="collections.html">coleção</a>, sempre tenha em mãos a coleção de onde o documento está/será localizado.</p>
+<p>Como todos os documentos são entidades que pertencem à uma <a href="/docs/entities/rag">coleção</a>, sempre tenha em mãos a coleção de onde o documento está/será localizado.</p>
 <p>Para informações detalhadas sobre os endpoints da API de documentos, consulte a <a href="https://inference.aivax.net/apidocs#Documents">documentação oficial da API</a>.</p>
 <h2 id="enviar-documentos-em-lote">Enviar documentos em lote</h2>
 <p>Para enviar uma lista em massa de documentos para uma coleção, estruture-os seguindo o formato <a href="https://jsonlines.org/">JSONL</a>. A estrutura é composta pelas propriedades:</p>
@@ -181,7 +181,7 @@
 </tr>
 </tbody>
 </table>
-<p>A referência de um documento é um ID que pode ser especificado em vários documentos que precisam estar vinculados em uma busca quando um dos mesmos for correspondido em uma busca de similaridade. Por exemplo, se uma busca encontrar um documento que possui um ID de referência, todos os outros documentos da mesma coleção que compartilham o mesmo ID de referência do documento correspondido também serão incluídos na resposta da busca.</p>
+<p>A <strong>referência</strong> de um documento é um ID que pode ser especificado em vários documentos que precisam estar vinculados em uma busca quando um dos mesmos for correspondido em uma busca de similaridade. Por exemplo, se uma busca encontrar um documento que possui um ID de referência, todos os outros documentos da mesma coleção que compartilham o mesmo ID de referência do documento correspondido também serão incluídos na resposta da busca.</p>
 <p>O uso de referências pode ser útil para quando um documento depende de outro ou mais documentos para fazer sentido. Não há exigência de formato para o ID de referência: qualquer formato é aceito.</p>
 <p>Você pode enviar até <strong>10.000</strong> linhas de documentos por requisição. Se precisar enviar mais documentos, separe o envio em mais requisições. Se você enviar um documento com mais de 1.000 linhas, as linhas seguintes serão ignoradas.</p>
 <p>Vale notar que documentos muito longos, que excede a quantidade de tokens permitida no modelo de embedding interno, terão seu conteúdo <strong>truncado</strong> e a qualidade de indexação poderá ser gravemente afetada. Para evitar esse problema, envie documentos que contenham entre 20 e 700 palavras.</p>

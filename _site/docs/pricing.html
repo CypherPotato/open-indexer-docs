@@ -124,32 +124,59 @@
                 <article data-uid="">
 <h1 id="precificação">Precificação</h1>
 
-<p>O modelo de pagamento da AIVAX é <strong>pré-pago</strong>, ou seja, você usa nossos serviços com o saldo que adiciona em sua conta. Não enviamos faturas no começo do mês pelo seu uso. Dessa forma, fica previsível saber quanto você irá gastar usando nossos serviços de inferência e criação de agentes.</p>
-<p>A AIVAX cobra uma pequena taxa (variável por método de pagamento) no momento da adição de créditos para encobrir impostos, taxas do provedor de pagamentos e nossa taxa de serviço. A precificação dos modelos e de inferência é fornecida diretamente pelos provedores de inferência e de seus modelos, como a Google e a OpenAI. Não há nenhuma taxa ou adição em cima destes preços. Você paga o mesmo valor que pagaria para esses provedores diretamente.</p>
-<p>Usamos diferentes <a href="/docs/builtin-tools">serviços</a> para ajudar você à criar assistentes agênticos. Algumas ferramentas e serviços possuem custo, e estes custos são repassados para sua conta sem nenhuma taxa adicional.</p>
-<p>A inferência é cobrada em dólares americanos (USD), portanto, pode existir flutuação de moeda ao converter da sua moeda local para o dólar americano.</p>
-<h2 id="expiração">Expiração</h2>
-<p>Alguns providers possuem prazo de validade para créditos adicionados. Como não sabemos qual modelo ou serviço você irá usar com o saldo adicionado, temos que considerar o menor prazo de validade para também definir o nosso prazo de validade para os créditos adicionados.</p>
-<p>Atualmente, créditos expiram após <strong>12 meses</strong> de sua adição. Leia mais sobre reembolsos, expiração e saldo nos <a href="/docs/legal/terms-of-service">termos de uso</a>.</p>
+<p>O modelo de pagamento da AIVAX é <strong>pré-pago</strong>: você adiciona saldo à sua conta e utiliza nossos serviços consumindo esse crédito. Não enviamos faturas surpresas no final do mês. Isso garante total previsibilidade sobre seus gastos com inferência e agentes.</p>
+<p>Ao adicionar créditos, a AIVAX cobra uma pequena taxa (variável por método de pagamento) para cobrir impostos (notas fiscais), tarifas bancárias e custos operacionais.</p>
+<p>A precificação de inferência (geração de texto) é repassada diretamente dos provedores (como Google e OpenAI) <strong>sem markup</strong>. Você paga na AIVAX exatamente o mesmo preço de tabela que pagaria utilizando esses provedores diretamente.</p>
+<p>Usamos diferentes <a href="/docs/builtin-tools">serviços</a> para ajudar você a criar assistentes agênticos. Algumas ferramentas possuem custos específicos que são debitados do seu saldo sem taxas adicionais.</p>
+<blockquote>
+<p><strong>Nota:</strong> A inferência é calculada em dólares americanos (USD). Pode haver flutuação cambial ao converter da sua moeda local para o dólar no momento da recarga ou do uso.</p>
+</blockquote>
+<h2 id="expiração-de-créditos">Expiração de Créditos</h2>
+<p>Como não podemos prever qual modelo você utilizará, precisamos alinhar a validade dos créditos com as políticas mais restritivas dos nossos fornecedores.
+Atualmente, os créditos expiram <strong>12 meses</strong> após a data de adição. Consulte os detalhes em nossos <a href="/docs/legal/terms-of-service">termos de uso</a>.</p>
 <h2 id="bring-your-own-key-byok">Bring-your-own-key (BYOK)</h2>
-<p>Você pode trazer sua própria chave de API compatível com OpenAI para usar diretamente na AIVAX. Como não sabemos qual modelo você estará usando, não cobramos nada em cima da inferência que você usar em seus modelos. Além disso, ao usar seu próprio modelo com a AIVAX, os limites de taxa são aumentados para <strong>1.500 requisições por minuto</strong>, sem limitação ao peso de tokens, que é o equivalente à 60 requisições por segundo.</p>
-<p>Note que, você ainda é cobrado para serviços que usar com seus próprios modelos, como <a href="/docs/entities/collections.md">RAG</a>, pesquisa na internet, geração de imagens, etc. Se sua conta ficar com saldo negativo, você não conseguirá usar nenhum serviço, incluindo inferência para suas próprias API-keys, até que adicione saldo novamente.</p>
-<h2 id="rag-coleções">RAG (coleções)</h2>
-<p>Atualmente, o modelo padrão usado para incorporação de coleções é o <a href="https://ai.google.dev/gemini-api/docs/pricing#gemini-embedding">Gemini Embedding</a>, o qual é precificado em <strong>$ 0,15</strong> para 1 milhão de tokens de entrada.</p>
-<p>Outros documentos podem ser vetorizados usando outros modelos de incorporação depreciados no sistema, mas ativos por compatibilidade:</p>
+<p>Você pode conectar sua própria chave de API (compatível com OpenAI) para usar a infraestrutura da AIVAX.</p>
 <ul>
-<li><code>@google/gemini-embedding-001</code>, $ 0,15 por milhão de tokens. (padrão)</li>
-<li><code>@google/text-embedding-004</code>, $ 0,10 por milhão de tokens. (depreciado)</li>
-<li><code>@baai/bge-m3</code>, $0,012 por milhão de tokens. (depreciado)</li>
+<li><strong>Custo de Inferência:</strong> $0,00 (cobrado diretamente pelo dono da chave).</li>
+<li><strong>Limites:</strong> Os limites de taxa são aumentados para <strong>1.500 requisições por minuto</strong> (aprox. 25 req/s), sem limitação de tokens.</li>
 </ul>
-<p>No momento, não cobramos taxa de computação e/ou armazenamento de vetores.</p>
-<p>Para a cobrança ocorrer, precisamos calcular quantos tokens foram processados da entrada, e nem todos os provedores de incorporação retornam a quantia de tokens indexados. Portanto, usamos uma aproximação para calcular a quantia de tokens processados:</p>
-<pre><code>tokens = ceil(utf8_bytes_count / 4)
-</code></pre>
-<p>O resultado dessa aproximação é o que cobramos de você.</p>
-<h2 id="ferramentas">Ferramentas</h2>
-<p>Ferramentas fornecidas pela AIVAX (<a href="/docs/builtin-tools">ferramentas embutidas</a>) possuem precificações e limites distintos de uma para outra.</p>
-<p>Para funções que você define para sua API, não há nenhuma cobrança.</p>
+<p><strong>Importante:</strong> Mesmo usando sua própria chave, serviços periféricos da AIVAX (como armazenamento de <a href="/docs/entities/collections.md">RAG</a>, pesquisa na web, geração de imagem, etc.) continuam sendo cobrados do seu saldo AIVAX. Se seu saldo ficar negativo, o serviço será interrompido, inclusive para chamadas BYOK.</p>
+<h2 id="rag-coleções-e-vetores">RAG (Coleções e Vetores)</h2>
+<p>O custo de indexação depende do modelo de incorporação (embedding) escolhido.</p>
+<p><strong>Modelo Padrão:</strong></p>
+<ul>
+<li><code>@google/gemini-embedding-001</code>: <strong>$ 0,15</strong> / 1 milhão de tokens.</li>
+</ul>
+<p><strong>Modelos Legados/Compatibilidade:</strong></p>
+<ul>
+<li><code>@google/text-embedding-004</code>: $ 0,10 / 1 milhão de tokens.</li>
+<li><code>@baai/bge-m3</code>: $ 0,012 / 1 milhão de tokens.</li>
+</ul>
+<p><em>No momento, não cobramos taxa computacional para processar a indexação, apenas pelo armazenamento resultante.</em></p>
+<p><strong>Cálculo de Tokens</strong>
+Como nem todos os provedores retornam a contagem exata de tokens na resposta, utilizamos uma aproximação padrão da indústria para faturamento:
+<code>tokens = ceil(utf8_bytes_count / 4)</code></p>
+<h2 id="armazenamento">Armazenamento</h2>
+<p>Para manter a integridade e disponibilidade dos seus dados, cobramos uma taxa de armazenamento por hora.</p>
+<ul>
+<li><strong>Preço:</strong> <strong>$0,0015</strong> por GB / hora.</li>
+<li><strong>Franquia Gratuita:</strong> Os primeiros <strong>100 MB são grátis</strong>.</li>
+</ul>
+<p><strong>Como funciona a cobrança:</strong>
+Você paga apenas pelo <strong>excedente</strong> da franquia.</p>
+<ul>
+<li><em>Exemplo:</em> Se você usar 120 MB por uma hora, pagará apenas sobre os 20 MB excedentes.</li>
+<li><em>Exemplo:</em> Se usar 80 MB, o custo é zero.</li>
+</ul>
+<p><strong>O que consome armazenamento:</strong></p>
+<ol>
+<li>Memória de longo prazo dos usuários (chats e inferências salvas);</li>
+<li>Cache de descrições de imagens (processamento multi-modal);</li>
+<li>Conteúdo de documentos RAG e seus vetores.</li>
+</ol>
+<p>Logs de sistema são temporários e não geram custos de armazenamento.</p>
+<h2 id="ferramentas-tools">Ferramentas (Tools)</h2>
+<p>As <a href="/docs/builtin-tools">ferramentas nativas</a> da AIVAX possuem preços e limites específicos. Consulte a documentação de cada ferramenta.</p>
 
 </article>
 

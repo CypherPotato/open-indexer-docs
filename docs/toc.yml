@@ -13,7 +13,7 @@ items:
 - name: Modelos
   href: models.md
 
-- name: Ferramentas e funções
+- name: Recursos principais
 
 - name: Ferramentas de fábrica
   href: builtin-tools.md
@@ -26,15 +26,10 @@ items:
 - name: Skills
   href: skills.md
 
-- name: Conceitos avançados
+- name: Guias
 
-- name: Skills vs. RAG vs. System Prompt
-  href: concepts-comparison.md
-
-- name: Usando a API
-
-- name: Coleções
-  href: entities/collections.md
+- name: RAG
+  href: entities/rag.md
 - name: Documentos
   href: entities/documents.md
 - name: Pesquisas
@@ -45,6 +40,11 @@ items:
   href: entities/chat-clients.md
 - name: Funções (respostas estruturadas)
   href: entities/functions.md
+
+- name: Recursos informativos
+
+- name: Skills vs. RAG vs. System Prompt
+  href: concepts-comparison.md
 
 - name: Documentos legais
 
