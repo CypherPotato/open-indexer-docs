@@ -8,95 +8,236 @@ Quando um evento é acionado no lado da AIVAX, uma requisição POST é disparad
 
 O tempo de processamento da resposta acrescenta uma latência entre toda ação do gateway, no entanto, adiciona uma camada de controle e moderação que você pode controlar à qualquer momento.
 
-## Criando um worker de IA
+## Funcionamento
 
 Quando um evento é acionado, uma requisição POST é disparada ao seu worker seguindo o formato abaixo:
 
 ```json
 {
-  "gatewayId": "0197dda5-985f-7d76-96e5-0d0451c539f6",
-  "moment": "2025-08-09T00:21:40",
-  "event": {
-    "name": "message.received",
-    "data": {
-      "message": {
-        "role": "user",
-        "content": "Bom dia!"
-      },
-      "origin": [
-        "SessionsApi"
-      ],
-      "externalUserId": "mini-app-session@lot1xc9k03g2my3j4w2y1"
+    "gatewayId": "019a6afb-5a03-7b83-a1a2-760bd1ecd11c",
+    "moment": "2025-12-29T17:04:39",
+    "event": {
+        "name": "message.received",
+        "data": {
+            "messages": [
+                {
+                    "role": "system",
+                    "content": "User local date is Monday, December 29, 2025 (timezone is America/Sao_Paulo)"
+                },
+                {
+                    "role": "user",
+                    "content": "bom dia"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Bom dia! 😊 Como posso te ajudar hoje?"
+                },
+                {
+                    "role": "user",
+                    "content": "tudo bem?"
+                }
+            ],
+            "origin": [
+                "SessionsApi"
+            ],
+            "externalUserId": "mini-app-session@hse075q0q5gftm6jmitvi5",
+            "metadata": {}
+        }
     }
-  }
 }
 ```
 
 O exemplo acima ilustra uma mensagem do evento `message.received` com os seus argumentos do evento.
 
-Após o envio da requisição, a AIVAX aguarda a resposta do seu worker, e com ela:
-- Resposta OK (2xx): **continua** e prossegue com a execução normal do evento.
-- Outras respostas: **aborta** e interrompe a execução do evento.
+## Tipos de resposta
 
-## Lista de eventos
+Após o envio da requisição, a AIVAX aguarda a resposta do seu worker. Existem três tipos de resposta possíveis:
+
+| Resposta | Comportamento |
+|----------|---------------|
+| **Resposta OK (2xx)** | Continua e prossegue com a execução normal do evento. |
+| **Outras respostas** | Aborta e interrompe a execução do evento. |
+| **Content-Type `application/json+worker-action`** | Executa as ações especificadas na resposta e continua com a execução. |
+
+## Eventos
 
 Atualmente, os eventos que podem ser enviados para seu worker são:
 
-- `message.received` - enviado quando uma mensagem é recebida pelo gateway. Esse evento é acionado com a última mensagem recebida no contexto, o que pode ser do usuário ou não.
+### `message.received`
 
-```js
+Enviado quando uma mensagem é recebida pelo gateway. Esse evento é acionado com todo o histórico de mensagens da conversa.
+
+```json
 {
     "name": "message.received",
     "data": {
-      "message": {}, // chat/completions message entity
-      "origin": [
-        "SessionsApi" // message origin
-      ],
-      "externalUserId": "mini-app-session@lot1xc9k03g2my3j4w2y1"
+        "messages": [],
+        "origin": ["SessionsApi"],
+        "externalUserId": "mini-app-session@lot1xc9k03g2my3j4w2y1",
+        "metadata": {}
     }
-  }
+}
 ```
 
-## Exemplo
+#### Ações disponíveis
 
-O exemplo abaixo ilustra um [Cloudflare Worker](https://workers.cloudflare.com/) que autentica uma conversa no Telegram com base no nome de usuário da converça:
+Para executar ações no evento `message.received`, retorne uma resposta com o header `Content-Type: application/json+worker-action` e o corpo no formato:
+
+```json
+{
+    "type": "message.received.response",
+    "data": {
+        "rewrites": [
+            // lista de ações
+        ]
+    }
+}
+```
+
+As ações disponíveis para o campo `rewrites` são:
+
+| Ação | Descrição | Parâmetros |
+|------|-----------|------------|
+| `clear` | Remove todas as mensagens do contexto. | Nenhum |
+| `add-message` | Adiciona uma mensagem ao contexto. | `message`: objeto de mensagem OpenAI-compatível (ex: `role` e `content`) |
+| `remove-message` | Remove uma mensagem do contexto pelo índice. | `index`: índice da mensagem a ser removida |
+| `add-system` | Adiciona uma instrução de sistema. | `message`: texto da instrução |
+| `add-tool` | Adiciona uma ferramenta ao contexto. | `tool`: objeto JSON da ferramenta |
+| `add-protocol-tool` | Adiciona uma definição de [protocol function](/docs/protocol-functions) ao contexto. | `tool`: objeto definição da protocol function|
+
+##### Exemplos de ações
+
+**Limpar e adicionar mensagem:**
+
+```json
+{
+    "type": "message.received.response",
+    "data": {
+        "rewrites": [
+            {
+                "type": "clear"
+            },
+            {
+                "type": "add-message",
+                "message": {
+                    "role": "user",
+                    "content": "Mensagem substituída pelo worker."
+                }
+            }
+        ]
+    }
+}
+```
+
+**Adicionar instrução de sistema:**
+
+```json
+{
+    "type": "message.received.response",
+    "data": {
+        "rewrites": [
+            {
+                "type": "add-system",
+                "message": "Responda sempre em português formal."
+            }
+        ]
+    }
+}
+```
+
+**Remover mensagem por índice:**
+
+```json
+{
+    "type": "message.received.response",
+    "data": {
+        "rewrites": [
+            {
+                "type": "remove-message",
+                "index": 0
+            }
+        ]
+    }
+}
+```
+
+## Exemplos
+
+### Bloqueando usuários não autorizados
+
+O exemplo abaixo ilustra um [Cloudflare Worker](https://workers.cloudflare.com/) que autentica uma conversa no Telegram com base no nome de usuário:
 
 ```js
 export default {
-  
   async fetch(request, env, ctx) {
-    
-    // O ID do gateway que estamos esperando lidar
     const CHECKING_GATEWAY_ID = "0197dda5-985f-7c76-96e5-0d0451c596e5";
-    const ALLOWED_USERNAMES = [
-      "myusername"
-    ];
+    const ALLOWED_USERNAMES = ["myusername"];
 
     if (request.method == "POST") {
       const requestData = await request.json();
       const { event, gatewayId } = requestData;
 
-      // Verifica se é um evento de mensagem recebida, se é o gateway que estamos
-      // gerenciando no worker e se essa mensagem vem de um chat do Telegram
       if (gatewayId === CHECKING_GATEWAY_ID &&
         event.name == "message.received" &&
         event.data.externalUserId?.startsWith("zp_telegram:")) {
         
-        // obtém o username do telegram, que está entre o ':' e o '@' do externalUserId
         const telegramUsername = event.data.externalUserId.split(':')[0].split('@')[0];
 
-        // verifica se o usuário é permitido na integração
         if (!ALLOWED_USERNAMES.includes(telegramUsername)) {
-
-          // o usuário não existe na lista de usernames permitidos, logo, retorna uma resposta não-ok
-          // indicando que a mensagem não deve ser enviada
           return new Response("User is not authed", { status: 400 });
         }
       }
     }
 
-    // continua com a execução
     return new Response();
   }
 };
+```
+
+### Interceptando e modificando mensagens
+
+O exemplo abaixo demonstra como interceptar uma mensagem e substituí-la por outra quando o usuário não está autorizado:
+
+```js
+export default {
+  async fetch(request, env, ctx) {
+    const CHECKING_GATEWAY_ID = "0197dda5-985f-7c76-96e5-0d0451c596e5";
+
+    if (request.method == "POST") {
+      const requestData = await request.json();
+      const { event, gatewayId } = requestData;
+
+      if (gatewayId === CHECKING_GATEWAY_ID && event.name == "message.received") {
+        const userIsPaid = await checkUserSubscription(event.data.externalUserId);
+
+        if (!userIsPaid) {
+          return new Response(JSON.stringify({
+            type: "message.received.response",
+            data: {
+              rewrites: [
+                { type: "clear" },
+                {
+                  type: "add-message",
+                  message: {
+                    role: "user",
+                    content: "O usuário enviou uma mensagem mas ela foi excluída pelo sistema. Informe ao usuário que ele não pagou sua assinatura mensal para continuar."
+                  }
+                }
+              ]
+            }
+          }), {
+            headers: { "Content-Type": "application/json+worker-action" }
+          });
+        }
+      }
+    }
+
+    return new Response();
+  }
+};
+
+async function checkUserSubscription(externalUserId) {
+  // Implemente sua lógica de verificação de assinatura aqui
+  return true;
+}
 ```

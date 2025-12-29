@@ -3,7 +3,6 @@
     inputDirectories: [
         "template/style/"
     ],
-    merge: "All",
     outputFile: "template/style/public/main.css",
     filenameTag: "relative"
 }

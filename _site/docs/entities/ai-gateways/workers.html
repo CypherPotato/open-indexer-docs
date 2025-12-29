@@ -128,87 +128,250 @@
 <p>Com um controlador externo configurado, eventos são enviados para ele, e a resposta do seu controlador define se aquela ação deve continuar, ser abortada ou configurada.</p>
 <p>Quando um evento é acionado no lado da AIVAX, uma requisição POST é disparada ao worker configurado com informações do evento disparado. Com base em sua resposta, a ação pode ser anulada ou configurada. Não há nenhum cache - a requisição é feita em todos os eventos que ocorrem no seu gateway de IA.</p>
 <p>O tempo de processamento da resposta acrescenta uma latência entre toda ação do gateway, no entanto, adiciona uma camada de controle e moderação que você pode controlar à qualquer momento.</p>
-<h2 id="criando-um-worker-de-ia">Criando um worker de IA</h2>
+<h2 id="funcionamento">Funcionamento</h2>
 <p>Quando um evento é acionado, uma requisição POST é disparada ao seu worker seguindo o formato abaixo:</p>
 <pre><code class="lang-json">{
-  &quot;gatewayId&quot;: &quot;0197dda5-985f-7d76-96e5-0d0451c539f6&quot;,
-  &quot;moment&quot;: &quot;2025-08-09T00:21:40&quot;,
-  &quot;event&quot;: {
-    &quot;name&quot;: &quot;message.received&quot;,
-    &quot;data&quot;: {
-      &quot;message&quot;: {
-        &quot;role&quot;: &quot;user&quot;,
-        &quot;content&quot;: &quot;Bom dia!&quot;
-      },
-      &quot;origin&quot;: [
-        &quot;SessionsApi&quot;
-      ],
-      &quot;externalUserId&quot;: &quot;mini-app-session@lot1xc9k03g2my3j4w2y1&quot;
+    &quot;gatewayId&quot;: &quot;019a6afb-5a03-7b83-a1a2-760bd1ecd11c&quot;,
+    &quot;moment&quot;: &quot;2025-12-29T17:04:39&quot;,
+    &quot;event&quot;: {
+        &quot;name&quot;: &quot;message.received&quot;,
+        &quot;data&quot;: {
+            &quot;messages&quot;: [
+                {
+                    &quot;role&quot;: &quot;system&quot;,
+                    &quot;content&quot;: &quot;User local date is Monday, December 29, 2025 (timezone is America/Sao_Paulo)&quot;
+                },
+                {
+                    &quot;role&quot;: &quot;user&quot;,
+                    &quot;content&quot;: &quot;bom dia&quot;
+                },
+                {
+                    &quot;role&quot;: &quot;assistant&quot;,
+                    &quot;content&quot;: &quot;Bom dia! 😊 Como posso te ajudar hoje?&quot;
+                },
+                {
+                    &quot;role&quot;: &quot;user&quot;,
+                    &quot;content&quot;: &quot;tudo bem?&quot;
+                }
+            ],
+            &quot;origin&quot;: [
+                &quot;SessionsApi&quot;
+            ],
+            &quot;externalUserId&quot;: &quot;mini-app-session@hse075q0q5gftm6jmitvi5&quot;,
+            &quot;metadata&quot;: {}
+        }
     }
-  }
 }
 </code></pre>
 <p>O exemplo acima ilustra uma mensagem do evento <code>message.received</code> com os seus argumentos do evento.</p>
-<p>Após o envio da requisição, a AIVAX aguarda a resposta do seu worker, e com ela:</p>
-<ul>
-<li>Resposta OK (2xx): <strong>continua</strong> e prossegue com a execução normal do evento.</li>
-<li>Outras respostas: <strong>aborta</strong> e interrompe a execução do evento.</li>
-</ul>
-<h2 id="lista-de-eventos">Lista de eventos</h2>
+<h2 id="tipos-de-resposta">Tipos de resposta</h2>
+<p>Após o envio da requisição, a AIVAX aguarda a resposta do seu worker. Existem três tipos de resposta possíveis:</p>
+<table>
+<thead>
+<tr>
+<th>Resposta</th>
+<th>Comportamento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Resposta OK (2xx)</strong></td>
+<td>Continua e prossegue com a execução normal do evento.</td>
+</tr>
+<tr>
+<td><strong>Outras respostas</strong></td>
+<td>Aborta e interrompe a execução do evento.</td>
+</tr>
+<tr>
+<td><strong>Content-Type <code>application/json+worker-action</code></strong></td>
+<td>Executa as ações especificadas na resposta e continua com a execução.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="eventos">Eventos</h2>
 <p>Atualmente, os eventos que podem ser enviados para seu worker são:</p>
-<ul>
-<li><code>message.received</code> - enviado quando uma mensagem é recebida pelo gateway. Esse evento é acionado com a última mensagem recebida no contexto, o que pode ser do usuário ou não.</li>
-</ul>
-<pre><code class="lang-js">{
+<h3 id="messagereceived"><code>message.received</code></h3>
+<p>Enviado quando uma mensagem é recebida pelo gateway. Esse evento é acionado com todo o histórico de mensagens da conversa.</p>
+<pre><code class="lang-json">{
     &quot;name&quot;: &quot;message.received&quot;,
     &quot;data&quot;: {
-      &quot;message&quot;: {}, // chat/completions message entity
-      &quot;origin&quot;: [
-        &quot;SessionsApi&quot; // message origin
-      ],
-      &quot;externalUserId&quot;: &quot;mini-app-session@lot1xc9k03g2my3j4w2y1&quot;
+        &quot;messages&quot;: [],
+        &quot;origin&quot;: [&quot;SessionsApi&quot;],
+        &quot;externalUserId&quot;: &quot;mini-app-session@lot1xc9k03g2my3j4w2y1&quot;,
+        &quot;metadata&quot;: {}
     }
-  }
+}
 </code></pre>
-<h2 id="exemplo">Exemplo</h2>
-<p>O exemplo abaixo ilustra um <a href="https://workers.cloudflare.com/">Cloudflare Worker</a> que autentica uma conversa no Telegram com base no nome de usuário da converça:</p>
+<h4 id="ações-disponíveis">Ações disponíveis</h4>
+<p>Para executar ações no evento <code>message.received</code>, retorne uma resposta com o header <code>Content-Type: application/json+worker-action</code> e o corpo no formato:</p>
+<pre><code class="lang-json">{
+    &quot;type&quot;: &quot;message.received.response&quot;,
+    &quot;data&quot;: {
+        &quot;rewrites&quot;: [
+            // lista de ações
+        ]
+    }
+}
+</code></pre>
+<p>As ações disponíveis para o campo <code>rewrites</code> são:</p>
+<table>
+<thead>
+<tr>
+<th>Ação</th>
+<th>Descrição</th>
+<th>Parâmetros</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>clear</code></td>
+<td>Remove todas as mensagens do contexto.</td>
+<td>Nenhum</td>
+</tr>
+<tr>
+<td><code>add-message</code></td>
+<td>Adiciona uma mensagem ao contexto.</td>
+<td><code>message</code>: objeto de mensagem OpenAI-compatível (ex: <code>role</code> e <code>content</code>)</td>
+</tr>
+<tr>
+<td><code>remove-message</code></td>
+<td>Remove uma mensagem do contexto pelo índice.</td>
+<td><code>index</code>: índice da mensagem a ser removida</td>
+</tr>
+<tr>
+<td><code>add-system</code></td>
+<td>Adiciona uma instrução de sistema.</td>
+<td><code>message</code>: texto da instrução</td>
+</tr>
+<tr>
+<td><code>add-tool</code></td>
+<td>Adiciona uma ferramenta ao contexto.</td>
+<td><code>tool</code>: objeto JSON da ferramenta</td>
+</tr>
+<tr>
+<td><code>add-protocol-tool</code></td>
+<td>Adiciona uma definição de <a href="/docs/protocol-functions">protocol function</a> ao contexto.</td>
+<td><code>tool</code>: objeto definição da protocol function</td>
+</tr>
+</tbody>
+</table>
+<h5 id="exemplos-de-ações">Exemplos de ações</h5>
+<p><strong>Limpar e adicionar mensagem:</strong></p>
+<pre><code class="lang-json">{
+    &quot;type&quot;: &quot;message.received.response&quot;,
+    &quot;data&quot;: {
+        &quot;rewrites&quot;: [
+            {
+                &quot;type&quot;: &quot;clear&quot;
+            },
+            {
+                &quot;type&quot;: &quot;add-message&quot;,
+                &quot;message&quot;: {
+                    &quot;role&quot;: &quot;user&quot;,
+                    &quot;content&quot;: &quot;Mensagem substituída pelo worker.&quot;
+                }
+            }
+        ]
+    }
+}
+</code></pre>
+<p><strong>Adicionar instrução de sistema:</strong></p>
+<pre><code class="lang-json">{
+    &quot;type&quot;: &quot;message.received.response&quot;,
+    &quot;data&quot;: {
+        &quot;rewrites&quot;: [
+            {
+                &quot;type&quot;: &quot;add-system&quot;,
+                &quot;message&quot;: &quot;Responda sempre em português formal.&quot;
+            }
+        ]
+    }
+}
+</code></pre>
+<p><strong>Remover mensagem por índice:</strong></p>
+<pre><code class="lang-json">{
+    &quot;type&quot;: &quot;message.received.response&quot;,
+    &quot;data&quot;: {
+        &quot;rewrites&quot;: [
+            {
+                &quot;type&quot;: &quot;remove-message&quot;,
+                &quot;index&quot;: 0
+            }
+        ]
+    }
+}
+</code></pre>
+<h2 id="exemplos">Exemplos</h2>
+<h3 id="bloqueando-usuários-não-autorizados">Bloqueando usuários não autorizados</h3>
+<p>O exemplo abaixo ilustra um <a href="https://workers.cloudflare.com/">Cloudflare Worker</a> que autentica uma conversa no Telegram com base no nome de usuário:</p>
 <pre><code class="lang-js">export default {
-  
   async fetch(request, env, ctx) {
-    
-    // O ID do gateway que estamos esperando lidar
     const CHECKING_GATEWAY_ID = &quot;0197dda5-985f-7c76-96e5-0d0451c596e5&quot;;
-    const ALLOWED_USERNAMES = [
-      &quot;myusername&quot;
-    ];
+    const ALLOWED_USERNAMES = [&quot;myusername&quot;];
 
     if (request.method == &quot;POST&quot;) {
       const requestData = await request.json();
       const { event, gatewayId } = requestData;
 
-      // Verifica se é um evento de mensagem recebida, se é o gateway que estamos
-      // gerenciando no worker e se essa mensagem vem de um chat do Telegram
       if (gatewayId === CHECKING_GATEWAY_ID &amp;&amp;
         event.name == &quot;message.received&quot; &amp;&amp;
         event.data.externalUserId?.startsWith(&quot;zp_telegram:&quot;)) {
         
-        // obtém o username do telegram, que está entre o ':' e o '@' do externalUserId
         const telegramUsername = event.data.externalUserId.split(':')[0].split('@')[0];
 
-        // verifica se o usuário é permitido na integração
         if (!ALLOWED_USERNAMES.includes(telegramUsername)) {
-
-          // o usuário não existe na lista de usernames permitidos, logo, retorna uma resposta não-ok
-          // indicando que a mensagem não deve ser enviada
           return new Response(&quot;User is not authed&quot;, { status: 400 });
         }
       }
     }
 
-    // continua com a execução
     return new Response();
   }
 };
+</code></pre>
+<h3 id="interceptando-e-modificando-mensagens">Interceptando e modificando mensagens</h3>
+<p>O exemplo abaixo demonstra como interceptar uma mensagem e substituí-la por outra quando o usuário não está autorizado:</p>
+<pre><code class="lang-js">export default {
+  async fetch(request, env, ctx) {
+    const CHECKING_GATEWAY_ID = &quot;0197dda5-985f-7c76-96e5-0d0451c596e5&quot;;
+
+    if (request.method == &quot;POST&quot;) {
+      const requestData = await request.json();
+      const { event, gatewayId } = requestData;
+
+      if (gatewayId === CHECKING_GATEWAY_ID &amp;&amp; event.name == &quot;message.received&quot;) {
+        const userIsPaid = await checkUserSubscription(event.data.externalUserId);
+
+        if (!userIsPaid) {
+          return new Response(JSON.stringify({
+            type: &quot;message.received.response&quot;,
+            data: {
+              rewrites: [
+                { type: &quot;clear&quot; },
+                {
+                  type: &quot;add-message&quot;,
+                  message: {
+                    role: &quot;user&quot;,
+                    content: &quot;O usuário enviou uma mensagem mas ela foi excluída pelo sistema. Informe ao usuário que ele não pagou sua assinatura mensal para continuar.&quot;
+                  }
+                }
+              ]
+            }
+          }), {
+            headers: { &quot;Content-Type&quot;: &quot;application/json+worker-action&quot; }
+          });
+        }
+      }
+    }
+
+    return new Response();
+  }
+};
+
+async function checkUserSubscription(externalUserId) {
+  // Implemente sua lógica de verificação de assinatura aqui
+  return true;
+}
 </code></pre>
 
 </article>
