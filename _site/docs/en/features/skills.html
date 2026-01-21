@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Skills | AIVAX </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="Skills | AIVAX ">
+
+
+        <link rel="icon" href="../../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+        
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
+
+        <meta name="docfx:rel" content="../../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/en/features/skills.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+                
+        <script>            
+            function switchLanguage(lang) {
+                const docPart = window.location.pathname.match(/\/docs\/((en)\/)?(.*)/)[3];
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../../index.html">
+                        <img id="logo" class="svg" src="../../../assets/img/aivax.png" alt="AIVAX">
+                        AIVAX
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/en/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="skills">Skills</h1>
+
+<p>Skills (also known as skills) can be used to improve how your agent performs on specific tasks. Skills are special instructions that are retrieved on demand, and your agent loads these skills as needed.</p>
+<p>Ideally, your agent should use a skill only when it is relevant to the task it is performing. It is embedded in the conversation through a special tool and skill instructions are added to the context, indicating that the agent has skills provided in the context that can be used in the conversation.</p>
+<h2 id="how-do-skills-work">How do skills work?</h2>
+<p>Skills are primarily provided through a name and a brief description of what that skill is and when it should be used. You can have multiple skills in your account, but use only some of them in your <a href="/docs/en/entities/ai-gateways/ai-gateway">AI gateway</a>. The skills activated in the AI gateway are injected into the system instructions of your model and an additional function is added to the context.</p>
+<p>When the model calls the skill‑reading tool, the instructions of that skill are inserted into the system instructions of the context dynamically. Only one skill can be active per context, and the LLM can change the active skill as needed.</p>
+<p>For this to work, the chosen base model must support <strong>function calls</strong> and <strong>system instructions</strong>.</p>
+<ul>
+<li>If your model does not support function calls, consider using a <a href="/docs/en/entities/ai-gateways/pipelines">tool handler</a> to handle function calls.</li>
+<li>If your model does not support system instructions, consider using the <code>No system instructions</code> flag, which provides system instructions as a user message.</li>
+</ul>
+<p>Larger models tend to follow instructions and function calls strictly. Run tests to see if your model is changing its skills as required.</p>
+<h2 id="how-to-write-skills">How to write skills?</h2>
+<p>Writing effective skills requires clarity and specificity in the instructions. Here are the main guidelines:</p>
+<h3 id="skill-structure">Skill structure</h3>
+<p>A well‑written skill should contain:</p>
+<ol>
+<li><strong>Clear, descriptive name</strong>: Use names that immediately identify the purpose of the skill (e.g., &quot;Python Code Analysis&quot;, &quot;Customer Support&quot;, &quot;Technical Translation&quot;).</li>
+<li><strong>Concise description</strong>: Provide a brief description (1–2 sentences) that explains when the skill should be activated. This description is crucial, as the model uses it to decide whether to load the skill.</li>
+<li><strong>Detailed instructions</strong>: The instructions themselves should include:
+<ul>
+<li>Clear task objectives</li>
+<li>Expected response format</li>
+<li>Specific rules to follow</li>
+<li>Examples where appropriate</li>
+<li>Important constraints or limitations</li>
+</ul>
+</li>
+</ol>
+<h3 id="best-practices">Best practices</h3>
+<ul>
+<li><strong>Be specific</strong>: Avoid vague instructions. Instead of “be helpful,” say “provide step‑by‑step explanations with code examples.”</li>
+<li><strong>Use imperative language</strong>: Start sentences with action verbs (analyze, explain, compare, list).</li>
+<li><strong>Keep scope limited</strong>: Each skill should focus on a specific knowledge area or task type.</li>
+<li><strong>Test iteratively</strong>: Refine your skills based on how the model responds in practice.</li>
+<li><strong>Avoid redundancy</strong>: Do not repeat information already present in the base system instructions.</li>
+</ul>
+<h3 id="skill-example">Skill example</h3>
+<ul>
+<li>Name: Code Performance Analysis</li>
+<li>Description: Use when the user requests performance analysis, optimization, or bottleneck identification in code.</li>
+</ul>
+<pre><code class="lang-markdown">- Analyze the provided code, identifying possible performance bottlenecks
+- Consider time complexity (Big O) and memory usage
+- Suggest specific optimizations with code examples
+- Explain the impact of each proposed optimization
+- Prioritize readability and maintainability together with performance
+</code></pre>
+<h2 id="when-to-use-skills">When to use skills?</h2>
+<p>Skills are most useful in specific scenarios where you need specialized behavior:</p>
+<h3 id="ideal-scenarios">Ideal scenarios</h3>
+<p><strong>1. Domain‑specific expertise</strong></p>
+<ul>
+<li>Industry‑specific technical terminology</li>
+<li>Compliance with regulations or standards</li>
+<li>Specific methodologies (Scrum, ITIL, SOC 2, etc.)</li>
+</ul>
+<p><strong>2. Tone or style shift</strong></p>
+<ul>
+<li>Formal vs. casual service</li>
+<li>Technical vs. simplified communication</li>
+<li>Different personas or roles</li>
+</ul>
+<p><strong>3. Complex, structured processes</strong></p>
+<ul>
+<li>Multi‑step workflows</li>
+<li>Analyses that follow specific frameworks</li>
+<li>Document generation with rigorous formats</li>
+</ul>
+<p><strong>4. Tasks that require extensive context</strong></p>
+<ul>
+<li>When instructions are too long to include every time</li>
+<li>Knowledge that is only occasionally relevant</li>
+<li>Multiple mutually exclusive rule sets</li>
+</ul>
+<h3 id="when-not-to-use-skills">When NOT to use skills</h3>
+<ul>
+<li><strong>Permanent instructions</strong>: If instructions should always be active, place them in the base system instructions.</li>
+<li><strong>Simple tasks</strong>: For direct answers that do not require special context.</li>
+<li><strong>General knowledge</strong>: Information the model already knows well does not need reinforcement via skills.</li>
+<li><strong>Too few or too many skills</strong>: Aim for 3–10 skills. Fewer than that, consider using base instructions. More than that can confuse the model.</li>
+</ul>
+<h3 id="comparison-skills-vs-system-instructions">Comparison: Skills vs. System Instructions</h3>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Skills</th>
+<th>System Instructions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>When to apply</td>
+<td>On demand, when relevant</td>
+<td>Always active</td>
+</tr>
+<tr>
+<td>Ideal size</td>
+<td>Can be extensive</td>
+<td>Should be concise</td>
+</tr>
+<tr>
+<td>Context changeability</td>
+<td>Yes, can switch</td>
+<td>No, fixed</td>
+</tr>
+<tr>
+<td>Token usage</td>
+<td>Economical (only when needed)</td>
+<td>Constant</td>
+</tr>
+<tr>
+<td>Best for</td>
+<td>Specialized knowledge</td>
+<td>Base agent behavior</td>
+</tr>
+</tbody>
+</table>
+<h3 id="implementation-tips">Implementation tips</h3>
+<ul>
+<li><strong>Start small</strong>: Implement 2–3 skills initially and expand as needed.</li>
+<li><strong>Monitor usage</strong>: Verify that the model is activating skills correctly.</li>
+<li><strong>Avoid overlap</strong>: Skills with similar descriptions can confuse the model.</li>
+<li><strong>Test transitions</strong>: Ensure the model switches skills when appropriate.</li>
+</ul>
+<h2 id="comparing-skills-rag-and-system-prompt">Comparing Skills, RAG, and System Prompt</h2>
+<p>To better understand when and how to use skills compared to other techniques like <strong>RAG (Retrieval‑Augmented Generation)</strong> and <strong>System Prompt (System Instructions)</strong>, see our full guide:</p>
+<p><strong><a href="/docs/en/concepts-comparison">Click to access the comparison guide.</a></strong></p>
+<p>This guide details:</p>
+<ul>
+<li>The fundamental differences between each approach</li>
+<li>When to use each technique</li>
+<li>Practical examples and use cases</li>
+<li>How to combine the three techniques for robust systems</li>
+<li>Decision tree for choosing the right approach</li>
+</ul>
+<p>See also:</p>
+<ul>
+<li><a href="https://www.promptingguide.ai/">Prompt Engineering Guide</a></li>
+<li><a href="https://www.anthropic.com/index/building-effective-agents">Building Production‑Ready RAG Applications</a></li>
+<li><a href="/docs/en/entities/ai-gateways/ai-gateway">AI Gateway Documentation</a></li>
+</ul>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/en/features/skills.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Structured responses | AIVAX </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="Structured responses | AIVAX ">
+
+
+        <link rel="icon" href="../../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+        
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
+
+        <meta name="docfx:rel" content="../../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/en/inference/structured-responses.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+                
+        <script>            
+            function switchLanguage(lang) {
+                const docPart = window.location.pathname.match(/\/docs\/((en)\/)?(.*)/)[3];
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../../index.html">
+                        <img id="logo" class="svg" src="../../../assets/img/aivax.png" alt="AIVAX">
+                        AIVAX
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/en/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="structured-responses">Structured responses</h1>
+
+<p>AIVAX has a structured response mechanism that works with <strong>any LLM</strong>, even those that do not natively support structured outputs. AIVAX analyzes the provided JSON schema and manually validates whether the model responded as expected. When the model fails, AIVAX automatically notifies the errors until it generates a valid JSON. This mechanism is called <strong>JSON Healing</strong>.</p>
+<p>This process continues until the maximum attempts parameter is reached or a valid JSON is generated. AIVAX interprets JSONs in markdown blocks, preceded or followed by text, and automatically extracts the final response.</p>
+<p>You can use structured responses with models that have reasoning without breaking the reasoning phase to generate the JSON. Additionally, you can use <a href="/docs/en/builtin-tools">builtin tools</a> during generation, such as web search, document generation, and opening links.</p>
+<h2 id="how-it-works">How it works</h2>
+<p>When making an inference call, you define <strong>what the model should do</strong> via instructions and <strong>how it should respond</strong> via a JSON Schema.</p>
+<p>AIVAX validates the model's response in real time. If the generated JSON is invalid or does not follow the schema, the model receives automatic feedback about the errors and tries again. This cycle continues until:</p>
+<ul>
+<li>A valid JSON is generated (success on the first attempt or after corrections)</li>
+<li>The <code>maxAttempts</code> limit is reached</li>
+</ul>
+<p><strong>Billing:</strong> You are charged for each generation attempt. Smarter models usually get it right on the first try, while smaller models may need multiple attempts.</p>
+<p><strong>Performance tip:</strong> Use caching on your application side for data that does not change frequently (weather, daily statistics, etc). AIVAX does not perform automatic caching.</p>
+<h2 id="built-in-tools">Built-in tools</h2>
+<p>You can use <a href="/docs/en/builtin-tools">builtin tools</a> during JSON generation, allowing the model:</p>
+<ul>
+<li>Search the internet to obtain up-to-date information</li>
+<li>Execute code for complex calculations</li>
+<li>Open and analyze URLs</li>
+<li>Generate images</li>
+<li>Fetch posts on social networks</li>
+</ul>
+<p>These tools are especially useful for functions that need real-time data or additional processing before generating the structured response.</p>
+<h2 id="how-to-use">How to use</h2>
+<p>You use the structured response service on the same chat completions endpoint.</p>
+<div class="request-item post">
+    <span>POST</span>
+    <span>
+        /v1/chat-completions
+    </span>
+</div>
+<pre><code class="lang-json">{
+    &quot;model&quot;: &quot;@google/gemini-2.5-flash&quot;,
+    &quot;prompt&quot;: &quot;Pesquise por notícias em São José do Rio Preto.&quot;,
+    &quot;stream&quot;: true,
+    &quot;builtin_tools&quot;: {
+        &quot;tools&quot;: [
+            &quot;WebSearch&quot;
+        ],
+        &quot;options&quot;: {
+            &quot;web_search_mode&quot;: &quot;full&quot;
+        }
+    },
+    &quot;response_schema&quot;: {
+        &quot;type&quot;: &quot;object&quot;,
+        &quot;properties&quot;: {
+            &quot;news&quot;: {
+                &quot;type&quot;: &quot;array&quot;,
+                &quot;items&quot;: {
+                    &quot;type&quot;: &quot;object&quot;,
+                    &quot;properties&quot;: {
+                        &quot;title&quot;: {
+                            &quot;type&quot;: &quot;string&quot;,
+                            &quot;description&quot;: &quot;Título da notícia&quot;
+                        },
+                        &quot;content&quot;: {
+                            &quot;type&quot;: &quot;string&quot;,
+                            &quot;description&quot;: &quot;Resumo da notícia&quot;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+</code></pre>
+<p>Note that the <code>builtin_tools</code> parameter defines which built-in tools the model can use to generate the structured response. Note that the model used must be compatible with function calls.</p>
+<p>You can also use structured responses with your AI gateways by providing your gateway ID in the model name.</p>
+<h2 id="json-response-modes">JSON response modes</h2>
+<p>There are two ways to request structured responses: with or without JSON Healing.</p>
+<h3 id="with-json-healing-response_schema">With JSON Healing (<code>response_schema</code>)</h3>
+<p>Use <code>response_schema</code> to automatically enable JSON Healing with the provided schema. AIVAX validates the model's response and, if invalid, provides automatic feedback for correction:</p>
+<div class="request-item post">
+    <span>POST</span>
+    <span>
+        /v1/chat-completions
+    </span>
+</div>
+<pre><code class="lang-json">{
+    &quot;model&quot;: &quot;@google/gemini-2.5-flash&quot;,
+    &quot;messages&quot;: [{ &quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Liste 3 capitais europeias&quot; }],
+    &quot;response_schema&quot;: {
+        &quot;type&quot;: &quot;object&quot;,
+        &quot;properties&quot;: {
+            &quot;capitals&quot;: {
+                &quot;type&quot;: &quot;array&quot;,
+                &quot;items&quot;: {
+                    &quot;type&quot;: &quot;object&quot;,
+                    &quot;properties&quot;: {
+                        &quot;city&quot;: { &quot;type&quot;: &quot;string&quot; },
+                        &quot;country&quot;: { &quot;type&quot;: &quot;string&quot; }
+                    },
+                    &quot;required&quot;: [&quot;city&quot;, &quot;country&quot;]
+                }
+            }
+        },
+        &quot;required&quot;: [&quot;capitals&quot;]
+    }
+}
+</code></pre>
+<p><strong>Advantages of JSON Healing:</strong></p>
+<ul>
+<li><strong>Format guarantee:</strong> The model will always respond in the specified JSON format</li>
+<li><strong>Reasoning compatible:</strong> The model can reason freely before generating the JSON</li>
+<li><strong>Tool compatible:</strong> Works together with <a href="/docs/en/builtin-tools">builtin tools</a> and function calling</li>
+</ul>
+<p>AIVAX automatically extracts the JSON from the response, even if it is in a markdown block or preceded by explanatory text.</p>
+<h3 id="without-json-healing-response_format">Without JSON Healing (<code>response_format</code>)</h3>
+<p>Use <code>response_format</code> when the native model already supports structured outputs (like GPT-4o or Gemini) and you do not need additional validation:</p>
+<div class="request-item post">
+    <span>POST</span>
+    <span>
+        /v1/chat-completions
+    </span>
+</div>
+<pre><code class="lang-json">{
+    &quot;model&quot;: &quot;@openai/gpt-4o&quot;,
+    &quot;messages&quot;: [{ &quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Liste 3 capitais europeias&quot; }],
+    &quot;response_format&quot;: {
+        &quot;type&quot;: &quot;json_schema&quot;,
+        &quot;json_schema&quot;: {
+            &quot;schema&quot;: {
+                &quot;type&quot;: &quot;object&quot;,
+                &quot;properties&quot;: {
+                    &quot;capitals&quot;: { &quot;type&quot;: &quot;array&quot; }
+                }
+            }
+        }
+    }
+}
+</code></pre>
+<p>In this mode, the schema is passed directly to the model without additional validation from AIVAX.</p>
+<h3 id="enabling-json-healing-in-response_format">Enabling JSON Healing in <code>response_format</code></h3>
+<p>You can explicitly enable JSON Healing by passing an <code>options</code> object inside <code>response_format</code> when <code>type</code> is <code>json_schema</code>:</p>
+<div class="request-item post">
+    <span>POST</span>
+    <span>
+        /v1/chat-completions
+    </span>
+</div>
+<pre><code class="lang-json">{
+    &quot;response_format&quot;: {
+        &quot;type&quot;: &quot;json_schema&quot;,
+        &quot;json_schema&quot;: {
+            &quot;schema&quot;: {
+                &quot;type&quot;: &quot;object&quot;,
+                &quot;properties&quot;: {
+                    &quot;answer&quot;: { &quot;type&quot;: &quot;string&quot; }
+                }
+            }
+        },
+        &quot;options&quot;: {
+            &quot;max_attempts&quot;: 5
+        }
+    }
+}
+</code></pre>
+<p>The <code>max_attempts</code> parameter defines the maximum number of correction attempts. You are charged for each failed attempt. Note that smarter models tend to get it right on the first try.</p>
+<h2 id="supported-json-schema">Supported JSON Schema</h2>
+<p>AIVAX guides the model to generate a response according to the provided JSON Schema. When the model generates something invalid, it receives feedback on the errors and tries again until the output conforms to the specification.</p>
+<h3 id="supported-types-and-validations">Supported types and validations</h3>
+<ul>
+<li><strong>string</strong>:
+<ul>
+<li><code>minLength</code>, <code>maxLength</code></li>
+<li><code>pattern</code> (regex)</li>
+<li><code>format</code>: <code>date-time</code>, <code>email</code>, <code>time</code>, <code>duration</code>, <code>uri</code>, <code>url</code>, <code>ipv4</code>, <code>ipv6</code>, <code>uuid</code>, <code>guid</code></li>
+<li><code>enum</code></li>
+</ul>
+</li>
+<li><strong>number</strong> and <strong>integer</strong>:
+<ul>
+<li><code>minimum</code>, <code>maximum</code></li>
+<li><code>exclusiveMinimum</code>, <code>exclusiveMaximum</code></li>
+<li><code>multipleOf</code></li>
+</ul>
+</li>
+<li><strong>array</strong>:
+<ul>
+<li><code>items</code></li>
+<li><code>uniqueItems</code></li>
+<li><code>minItems</code>, <code>maxItems</code></li>
+</ul>
+</li>
+<li><strong>object</strong>:
+<ul>
+<li><code>properties</code></li>
+<li><code>required</code></li>
+</ul>
+</li>
+<li><strong>bool</strong>, <strong>boolean</strong></li>
+<li><strong>null</strong></li>
+</ul>
+<p><strong>Multiple types:</strong> You can specify multiple types in a field:</p>
+<pre><code class="lang-json">{
+    &quot;type&quot;: [&quot;string&quot;, &quot;number&quot;]
+}
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong> <code>number</code> and <code>integer</code> are synonyms. The <code>integer</code> type does not guarantee that the value will be an integer.</p>
+</blockquote>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/en/inference/structured-responses.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>

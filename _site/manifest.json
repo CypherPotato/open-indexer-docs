@@ -712,26 +712,6 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "docs/builtin-tools.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/builtin-tools.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/concepts-comparison.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/concepts-comparison.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
       "source_relative_path": "docs/en/authentication.md",
       "output": {
         ".html": {
@@ -742,113 +722,20 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "docs/en/builtin-tools.md",
+      "source_relative_path": "docs/en/features/chat-clients.md",
       "output": {
         ".html": {
-          "relative_path": "docs/en/builtin-tools.html"
+          "relative_path": "docs/en/features/chat-clients.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "docs/en/concepts-comparison.md",
+      "source_relative_path": "docs/en/features/skills.md",
       "output": {
         ".html": {
-          "relative_path": "docs/en/concepts-comparison.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/en/entities/ai-gateways/ai-gateway.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/entities/ai-gateways/ai-gateway.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/en/entities/ai-gateways/pipelines.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/entities/ai-gateways/pipelines.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Toc",
-      "source_relative_path": "docs/en/entities/ai-gateways/toc.yml",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/entities/ai-gateways/toc.html"
-        },
-        ".json": {
-          "relative_path": "docs/en/entities/ai-gateways/toc.json"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/en/entities/ai-gateways/workers.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/entities/ai-gateways/workers.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/en/entities/chat-clients.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/entities/chat-clients.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/en/entities/documents.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/entities/documents.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/en/entities/functions.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/entities/functions.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/en/entities/rag.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/entities/rag.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/en/entities/search.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/entities/search.html"
+          "relative_path": "docs/en/features/skills.html"
         }
       },
       "version": ""
@@ -859,6 +746,46 @@
       "output": {
         ".html": {
           "relative_path": "docs/en/getting-started.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/en/inference/ai-gateway.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/en/inference/ai-gateway.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/en/inference/pipelines.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/en/inference/pipelines.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/en/inference/structured-responses.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/en/inference/structured-responses.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/en/inference/workers.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/en/inference/workers.html"
         }
       },
       "version": ""
@@ -895,26 +822,6 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "docs/en/mcp.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/mcp.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/en/models.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/models.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
       "source_relative_path": "docs/en/pricing.md",
       "output": {
         ".html": {
@@ -925,30 +832,30 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "docs/en/protocol-functions.md",
+      "source_relative_path": "docs/en/rag/best-practices.md",
       "output": {
         ".html": {
-          "relative_path": "docs/en/protocol-functions.html"
+          "relative_path": "docs/en/rag/best-practices.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "docs/en/serverless.md",
+      "source_relative_path": "docs/en/rag/collections.md",
       "output": {
         ".html": {
-          "relative_path": "docs/en/serverless.html"
+          "relative_path": "docs/en/rag/collections.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "docs/en/skills.md",
+      "source_relative_path": "docs/en/rag/semantic-search.md",
       "output": {
         ".html": {
-          "relative_path": "docs/en/skills.html"
+          "relative_path": "docs/en/rag/semantic-search.html"
         }
       },
       "version": ""
@@ -968,93 +875,50 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "docs/entities/ai-gateways/ai-gateway.md",
+      "source_relative_path": "docs/en/tools/builtin-tools.md",
       "output": {
         ".html": {
-          "relative_path": "docs/entities/ai-gateways/ai-gateway.html"
+          "relative_path": "docs/en/tools/builtin-tools.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "docs/entities/ai-gateways/pipelines.md",
+      "source_relative_path": "docs/en/tools/mcp.md",
       "output": {
         ".html": {
-          "relative_path": "docs/entities/ai-gateways/pipelines.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Toc",
-      "source_relative_path": "docs/entities/ai-gateways/toc.yml",
-      "output": {
-        ".html": {
-          "relative_path": "docs/entities/ai-gateways/toc.html"
-        },
-        ".json": {
-          "relative_path": "docs/entities/ai-gateways/toc.json"
+          "relative_path": "docs/en/tools/mcp.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "docs/entities/ai-gateways/workers.md",
+      "source_relative_path": "docs/en/tools/protocol-functions.md",
       "output": {
         ".html": {
-          "relative_path": "docs/entities/ai-gateways/workers.html"
+          "relative_path": "docs/en/tools/protocol-functions.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "docs/entities/chat-clients.md",
+      "source_relative_path": "docs/features/chat-clients.md",
       "output": {
         ".html": {
-          "relative_path": "docs/entities/chat-clients.html"
+          "relative_path": "docs/features/chat-clients.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "docs/entities/documents.md",
+      "source_relative_path": "docs/features/skills.md",
       "output": {
         ".html": {
-          "relative_path": "docs/entities/documents.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/entities/functions.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/entities/functions.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/entities/rag.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/entities/rag.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/entities/search.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/entities/search.html"
+          "relative_path": "docs/features/skills.html"
         }
       },
       "version": ""
@@ -1065,6 +929,46 @@
       "output": {
         ".html": {
           "relative_path": "docs/getting-started.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/inference/ai-gateway.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/inference/ai-gateway.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/inference/pipelines.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/inference/pipelines.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/inference/structured-responses.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/inference/structured-responses.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/inference/workers.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/inference/workers.html"
         }
       },
       "version": ""
@@ -1101,26 +1005,6 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "docs/mcp.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/mcp.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/models.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/models.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
       "source_relative_path": "docs/pricing.md",
       "output": {
         ".html": {
@@ -1131,30 +1015,30 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "docs/protocol-functions.md",
+      "source_relative_path": "docs/rag/best-practices.md",
       "output": {
         ".html": {
-          "relative_path": "docs/protocol-functions.html"
+          "relative_path": "docs/rag/best-practices.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "docs/serverless.md",
+      "source_relative_path": "docs/rag/collections.md",
       "output": {
         ".html": {
-          "relative_path": "docs/serverless.html"
+          "relative_path": "docs/rag/collections.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "docs/skills.md",
+      "source_relative_path": "docs/rag/semantic-search.md",
       "output": {
         ".html": {
-          "relative_path": "docs/skills.html"
+          "relative_path": "docs/rag/semantic-search.html"
         }
       },
       "version": ""
@@ -1168,6 +1052,36 @@
         },
         ".json": {
           "relative_path": "docs/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/tools/builtin-tools.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/tools/builtin-tools.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/tools/mcp.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/tools/mcp.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/tools/protocol-functions.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/tools/protocol-functions.html"
         }
       },
       "version": ""

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Collections and Documents | AIVAX </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="Collections and Documents | AIVAX ">
+
+
+        <link rel="icon" href="../../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+        
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
+
+        <meta name="docfx:rel" content="../../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/en/rag/collections.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+                
+        <script>            
+            function switchLanguage(lang) {
+                const docPart = window.location.pathname.match(/\/docs\/((en)\/)?(.*)/)[3];
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../../index.html">
+                        <img id="logo" class="svg" src="../../../assets/img/aivax.png" alt="AIVAX">
+                        AIVAX
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/en/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="collections-and-documents">Collections and Documents</h1>
+
+<p>A AIVAX provides an autonomous RAG (Retrieval-Augmented Generation) service that allows using documents in chat conversations. Collections are groups of documents that contain information that will be retrieved later, stored persistently in a similarity database.</p>
+<h2 id="collections">Collections</h2>
+<p>Collections let you upload, save, manage, and semantically query documents stored in them. You can associate a collection with an AI gateway or query it directly via the API.</p>
+<p>Through the AIVAX interface, you can upload batches of documents and create documents with chunking, and associate them as a single document in the embedding result.</p>
+<h3 id="costs-and-limits">Costs and limits</h3>
+<p>There is no limit to how many documents can be indexed in collections. Query and <a href="/docs/en/pricing">storage</a> charges may apply to the account.</p>
+<p>The cost of search and indexing is calculated based on the tokens of each document’s content when it is indexed or modified. The content is tokenized according to the model used for indexing.</p>
+<h2 id="documents">Documents</h2>
+<p>A document represents a piece of knowledge. It is a limited, self‑contained excerpt that makes sense on its own. A document is the component that is indexed by the internal model to be retrieved later via a semantic search term.</p>
+<p>Consider a car manual: it is not a single document but several documents. Each of these documents talks, in isolation, about a specific topic regarding that car, so that the document does not depend on external context or information to make sense.</p>
+<h3 id="upload-documents-in-batch">Upload documents in batch</h3>
+<p>To upload a large list of documents to a collection, structure them following the <a href="https://jsonlines.org/">JSONL</a> format. The structure consists of the following properties:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>docid</code></td>
+<td><code>string</code></td>
+<td>Specifies the document’s name. Useful for debugging and identification.</td>
+</tr>
+<tr>
+<td><code>text</code></td>
+<td><code>string</code></td>
+<td>The raw content of the document that will be indexed.</td>
+</tr>
+<tr>
+<td><code>__ref</code></td>
+<td><code>string</code></td>
+<td>Optional. Specifies a reference ID for the document.</td>
+</tr>
+<tr>
+<td><code>__tags</code></td>
+<td><code>string[]</code></td>
+<td>Optional. Specifies an array of tags for the document. Useful for document management.</td>
+</tr>
+</tbody>
+</table>
+<p>The <strong>reference</strong> of a document is an ID that can be specified in multiple documents that need to be linked in a search when one of them is matched in a similarity search. For example, if a search finds a document that has a reference ID, all other documents in the same collection that share that reference ID will also be included in the search response.</p>
+<p>You can upload up to <strong>50,000</strong> document lines per request. If you need to send more documents, split the upload into multiple requests.</p>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>This endpoint incurs cost calculated based on the tokens of each document’s content.</p>
+</div>
+<script src="https://inference.aivax.net/apidocs?embed-target=Index%20Documents%20(JSONL)&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<h3 id="document-management">Document Management</h3>
+<h4 id="create-or-update-document">Create or update document</h4>
+<p>This endpoint creates or updates a document by its name. When a document is updated, its indexing vectors are reset and the document is queued for re‑indexing. The cost is incurred only when the document is actually changed.</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=Create%20or%20Update%20Document&r=https%3A%2F%2Finference.aivax.net%2Fapidocs%23CreateorUpdateDocument"></script>
+<h4 id="list-documents">List documents</h4>
+<p>Lists all documents available in a collection. Supports filtering by name, tag, reference, or content.</p>
+<p>Supported filters:</p>
+<ul>
+<li><code>-t &quot;tag&quot;</code>: filters documents that have this tag.</li>
+<li><code>-r &quot;reference&quot;</code>: filters documents that have this reference ID.</li>
+<li><code>-c &quot;content&quot;</code>: filters documents that contain this snippet in their content.</li>
+<li><code>-n &quot;name&quot;</code>: filters documents that contain this snippet in their name.</li>
+<li><code>in &quot;id&quot;</code>: filters documents by ID.</li>
+</ul>
+<script src="https://inference.aivax.net/apidocs?embed-target=Browse%20Documents&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/en/rag/collections.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>

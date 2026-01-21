@@ -13,13 +13,13 @@ You can also send your authorization token via the query parameter `?api-key`, f
 curl https://inference.aivax.net/api/v1/information/models.txt?api-key=oky_gr5uepj...
 ```
 
-There is no need to send the `Bearer` authentication scheme in both headers, but it is possible for compatibility reasons.
+There is no need to include the `Bearer` authentication scheme in both headers, but it is possible for compatibility reasons.
 
 ## Authenticating hooks
 
 AIVAX requests to your services, whether AI gateway workers or server‑side function calls, include an `X-Request-Nonce` header in every request containing a BCrypt hash that is a derived value of the [hook key](https://console.aivax.net/dashboard/account) set in your account.
 
-Validation is simple: verify that the hash in `X-Request-Nonce` is a product of the derived key set in your account.
+The validation is simple: verify that the hash in `X-Request-Nonce` is a product of the derived key set in your account.
 
 In this way, you can authenticate whether AIVAX requests to your services are genuine using this token. If your account has not defined a hook key, this header will not be sent.
 

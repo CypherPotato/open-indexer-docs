@@ -10,41 +10,42 @@ items:
   href: pricing.md
 - name: Limites de taxa
   href: limits.md 
-- name: Modelos
-  href: models.md
 
-- name: Recursos principais
+- name: RAG e coleções
+
+- name: Coleções
+  href: rag/collections.md
+- name: Pesquisa semântica
+  href: rag/semantic-search.md
+- name: Boas práticas
+  href: rag/best-practices.md
+
+- name: Inferência
+
+- name: Gateways de IA
+  href: inference/ai-gateway.md
+- name: Pipeline de processamento
+  href: inference/pipelines.md
+- name: Respostas estruturadas
+  href: inference/structured-responses.md
+- name: Workers de IA
+  href: inference/workers.md
+
+- name: Ferramentas
 
 - name: Ferramentas de fábrica
-  href: builtin-tools.md
+  href: tools/builtin-tools.md
 - name: Funções MCP
-  href: mcp.md
+  href: tools/mcp.md
 - name: Funções de protocolo
-  href: protocol-functions.md
-- name: Funções Serverless
-  href: serverless.md
+  href: tools/protocol-functions.md
+
+- name: Recursos
+
 - name: Skills
-  href: skills.md
-
-- name: Guias
-
-- name: RAG
-  href: entities/rag.md
-- name: Documentos
-  href: entities/documents.md
-- name: Pesquisas
-  href: entities/search.md
-- name: Gateways de IA
-  href: entities/ai-gateways/toc.yml
+  href: features/skills.md
 - name: Chat clients
-  href: entities/chat-clients.md
-- name: Funções (respostas estruturadas)
-  href: entities/functions.md
-
-- name: Recursos informativos
-
-- name: Skills vs. RAG vs. System Prompt
-  href: concepts-comparison.md
+  href: features/chat-clients.md
 
 - name: Documentos legais
 

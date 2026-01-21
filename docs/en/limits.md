@@ -5,9 +5,9 @@ Rate limits regulate the number of requests you can send within a time window. T
 The limits below are applied according to your account tier:
 
 - **Tier zero:** new account that has never added credits or that has test credits.
-- **Tier 1:** account created at least 48 hours ago and has already added any amount of credits.
-- **Tier 2:** account created at least 1 month ago and has already added at least $100 in credits.
-- **Tier 3:** account created at least 3 months ago and has already added at least $1,000 in credits.
+- **Tier 1:** account created at least 48 hours ago and that has already added any amount of credits.
+- **Tier 2:** account created at least 1 month ago and that has already added at least $100 in credits.
+- **Tier 3:** account created at least 3 months ago and that has already added at least $1,000 in credits.
 
 Measurement is based on **credit addition** rather than consumption. Example: you do not need to spend $100 to move to Tier 2, just add that amount.
 
@@ -78,12 +78,12 @@ Measurement is based on **credit addition** rather than consumption. Example: yo
 
 ---
 
-**Description of operations:**
+**Operation descriptions:**
 - **Document search:** includes semantic search of documents in a collection.
 - **Document insertion:** creation and modification of documents in a collection.
 - **Inference (requests):** number of inference or function calls (API or chat client).
 - **Inference (input tokens):** input tokens used in inference.
-- **Inference (input tokens - high-end):** input tokens for high-end models (Tier 1+).
+- **Inference (input tokens - high-end):** input tokens for high‑end models (Tier 1+).
 - **Serverless execution:** calls to [serverless function](/docs/en/serverless).
 - **Tools (shared):** use of [built‑in tools](/docs/en/builtin-tools) provided by AIVAX (does not include custom tools).
 - **Tool (name):** individual use of each integrated tool.

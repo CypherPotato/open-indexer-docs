@@ -4,7 +4,7 @@ The AIVAX payment model is **pre‑paid**: you add balance to your account and u
 
 When adding credits, AIVAX charges a small fee (varying by payment method) to cover taxes (invoices), bank fees, and operational costs.
 
-Inference pricing (text generation) is passed through directly from providers (such as Google and OpenAI) **without markup**. You pay AIVAX exactly the same list price you would pay using those providers directly.
+Inference pricing (text generation) is passed through directly from providers (such as Google and OpenAI) **without markup**. You pay AIVAX exactly the same list price you would pay when using those providers directly.
 
 We use different [services](/docs/en/builtin-tools) to help you create agentic assistants. Some tools have specific costs that are debited from your balance with no additional fees.
 
@@ -12,7 +12,7 @@ We use different [services](/docs/en/builtin-tools) to help you create agentic a
 
 ## Credit Expiration
 
-Since we cannot predict which model you will use, we need to align credit validity with the most restrictive policies of our suppliers. Currently, credits expire **12 months** after the date they are added. See the details in our [terms of service](/docs/en/legal/terms-of-service).
+Since we cannot predict which model you will use, we need to align credit validity with the most restrictive policies of our suppliers. Currently, credits expire **12 months** after the addition date. See the details in our [terms of service](/docs/en/legal/terms-of-service).
 
 ## Bring‑your‑own‑key (BYOK)
 
@@ -53,7 +53,7 @@ You pay only for the **excess** beyond the free tier.
 * *Example:* If you use 80 MB, the cost is zero.
 
 **What consumes storage:**  
-1. Long‑term memory of users (chats and saved inferences);  
+1. Long‑term user memory (saved chats and inferences);  
 2. Cache of image descriptions (multimodal processing);  
 3. RAG document content and its vectors.
 

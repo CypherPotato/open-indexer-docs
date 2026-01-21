@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Habilidades | AIVAX </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="Habilidades | AIVAX ">
+
+
+        <link rel="icon" href="../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+        
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
+
+        <meta name="docfx:rel" content="../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/features/skills.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+                
+        <script>            
+            function switchLanguage(lang) {
+                const docPart = window.location.pathname.match(/\/docs\/((en)\/)?(.*)/)[3];
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../index.html">
+                        <img id="logo" class="svg" src="../../assets/img/aivax.png" alt="AIVAX">
+                        AIVAX
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/en/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="habilidades">Habilidades</h1>
+
+<p>Habilidades (também conhecido como skills) podem ser usadas para melhorar como seu agente performa em tarefas específicas. Habilidades são instruções especiais que são recuperadas por demanda, e o seu agente carrega essas habilidades conforme necessita.</p>
+<p>O ideal é que seu agente só use uma habilidade quando relevante para a tarefa que está desempenhando. Ela é embutida na conversa através de uma ferramenta especial e instruções sobre habilidades são adicionadas no contexto, indicando que o agente possui habilidades fornecidas no contexto e que podem ser usadas na conversa.</p>
+<h2 id="como-funcionam-as-habilidades">Como funcionam as habilidades?</h2>
+<p>As habilidades são primariamente fornecidas através de nome e uma breve descrição do que aquela habilidade é e quando ela deve ser usada. Você pode ter várias habilidades em sua conta, mas usar somente parte delas em seu <a href="/docs/entities/ai-gateways/ai-gateway">AI gateway</a>. As habilidades ativadas no AI gateway são injetadas nas instruções de sistema do seu modelo e uma função adicional é adicionada no contexto.</p>
+<p>Quando o modelo chama a ferramenta de leitura de habilidades, as instruções daquela habilidade é inserida nas instruções do sistema do contexto de forma dinâmica. Somente uma habilidade pode ser ativada por contexto, e o LLM pode alterar a habilidade ativa conforme necessita.</p>
+<p>Para que isso funcione, o modelo base escolhido deve suportar <strong>chamadas de função</strong> e <strong>instruções de sistema</strong>.</p>
+<ul>
+<li>Caso seu modelo não suporte chamadas de função, considere usar um <a href="/docs/entities/ai-gateways/pipelines">tool handler</a> para manipular chamadas de função.</li>
+<li>Caso seu modelo não suporte instruções de sistema, considere usar a flag <code>No system instructions</code>, que fornece instruções de sistema como uma mensagem de usuário.</li>
+</ul>
+<p>Modelos maiores tendem à seguir estritamente instruções e chamadas de função. Realize testes para saber se seu modelo está alterando suas habilidades conforme necessário.</p>
+<h2 id="como-escrever-habilidades">Como escrever habilidades?</h2>
+<p>Escrever habilidades eficazes requer clareza e especificidade nas instruções. Aqui estão as principais diretrizes:</p>
+<h3 id="estrutura-de-uma-habilidade">Estrutura de uma habilidade</h3>
+<p>Uma habilidade bem escrita deve conter:</p>
+<ol>
+<li><p><strong>Nome claro e descritivo</strong>: Use nomes que identifiquem imediatamente o propósito da habilidade (ex: &quot;Análise de Código Python&quot;, &quot;Atendimento ao Cliente&quot;, &quot;Tradução Técnica&quot;).</p>
+</li>
+<li><p><strong>Descrição concisa</strong>: Forneça uma descrição breve (1-2 frases) que explique quando a habilidade deve ser ativada. Esta descrição é crucial, pois o modelo usa ela para decidir se deve carregar a habilidade.</p>
+</li>
+<li><p><strong>Instruções detalhadas</strong>: As instruções propriamente ditas devem incluir:</p>
+<ul>
+<li>Objetivos claros da tarefa</li>
+<li>Formato esperado de resposta</li>
+<li>Regras específicas a seguir</li>
+<li>Exemplos quando apropriado</li>
+<li>Restrições ou limitações importantes</li>
+</ul>
+</li>
+</ol>
+<h3 id="boas-práticas">Boas práticas</h3>
+<ul>
+<li><strong>Seja específico</strong>: Evite instruções vagas. Em vez de &quot;seja útil&quot;, diga &quot;forneça explicações passo a passo com exemplos de código&quot;.</li>
+<li><strong>Use linguagem imperativa</strong>: Comece frases com verbos de ação (analise, explique, compare, liste).</li>
+<li><strong>Mantenha o escopo limitado</strong>: Cada habilidade deve focar em uma área específica de conhecimento ou tipo de tarefa.</li>
+<li><strong>Teste iterativamente</strong>: Refine suas habilidades baseado em como o modelo responde na prática.</li>
+<li><strong>Evite redundância</strong>: Não repita informações já presentes nas instruções base do sistema.</li>
+</ul>
+<h3 id="exemplo-de-habilidade">Exemplo de habilidade</h3>
+<ul>
+<li>Nome: Análise de Performance de Código</li>
+<li>Descrição: Use quando o usuário pedir análise de performance, otimização ou identificação de gargalos em código.</li>
+</ul>
+<pre><code class="lang-markdown">- Analise o código fornecido identificando possíveis gargalos de performance
+- Considere complexidade temporal (Big O) e uso de memória
+- Sugira otimizações específicas com exemplos de código
+- Explique o impacto de cada otimização proposta
+- Priorize legibilidade e manutenibilidade junto com performance
+</code></pre>
+<h2 id="quando-usar-habilidades">Quando usar habilidades?</h2>
+<p>Habilidades são mais úteis em cenários específicos onde você precisa de comportamento especializado:</p>
+<h3 id="cenários-ideais">Cenários ideais</h3>
+<p><strong>1. Conhecimento especializado de domínio</strong></p>
+<ul>
+<li>Terminologia técnica específica de uma indústria</li>
+<li>Conformidade com regulamentações ou padrões</li>
+<li>Metodologias específicas (Scrum, ITIL, SOC 2, etc.)</li>
+</ul>
+<p><strong>2. Mudança de tom ou estilo</strong></p>
+<ul>
+<li>Atendimento formal vs. casual</li>
+<li>Comunicação técnica vs. simplificada</li>
+<li>Diferentes personas ou papéis</li>
+</ul>
+<p><strong>3. Processos complexos e estruturados</strong></p>
+<ul>
+<li>Fluxos de trabalho multi-etapa</li>
+<li>Análises que seguem frameworks específicos</li>
+<li>Geração de documentos com formatos rigorosos</li>
+</ul>
+<p><strong>4. Tarefas que exigem contexto extenso</strong></p>
+<ul>
+<li>Quando as instruções são muito longas para incluir sempre</li>
+<li>Conhecimento que só é relevante ocasionalmente</li>
+<li>Múltiplos conjuntos de regras mutuamente exclusivos</li>
+</ul>
+<h3 id="quando-não-usar-habilidades">Quando NÃO usar habilidades</h3>
+<ul>
+<li><strong>Instruções permanentes</strong>: Se as instruções devem estar sempre ativas, coloque-as nas instruções de sistema base.</li>
+<li><strong>Tarefas simples</strong>: Para respostas diretas que não exigem contexto especial.</li>
+<li><strong>Conhecimento geral</strong>: Informações que o modelo já conhece bem não precisam ser reforçadas via habilidades.</li>
+<li><strong>Muito poucas ou muitas habilidades</strong>: O ideal é ter entre 3-10 habilidades. Menos que isso, considere usar instruções base. Mais que isso, pode confundir o modelo.</li>
+</ul>
+<h3 id="comparação-habilidades-vs-instruções-de-sistema">Comparação: Habilidades vs. Instruções de Sistema</h3>
+<table>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>Habilidades</th>
+<th>Instruções de Sistema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Quando aplicar</td>
+<td>Sob demanda, quando relevante</td>
+<td>Sempre ativas</td>
+</tr>
+<tr>
+<td>Tamanho ideal</td>
+<td>Podem ser extensas</td>
+<td>Devem ser concisas</td>
+</tr>
+<tr>
+<td>Mudança de contexto</td>
+<td>Sim, podem alternar</td>
+<td>Não, são fixas</td>
+</tr>
+<tr>
+<td>Uso de tokens</td>
+<td>Econômico (só quando necessário)</td>
+<td>Constante</td>
+</tr>
+<tr>
+<td>Melhor para</td>
+<td>Conhecimento especializado</td>
+<td>Comportamento base do agente</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dicas-de-implementação">Dicas de implementação</h3>
+<ul>
+<li><strong>Comece pequeno</strong>: Implemente 2-3 habilidades inicialmente e expanda conforme necessário.</li>
+<li><strong>Monitore o uso</strong>: Verifique se o modelo está ativando as habilidades corretamente.</li>
+<li><strong>Evite sobreposição</strong>: Habilidades com descrições similares podem confundir o modelo.</li>
+<li><strong>Teste a transição</strong>: Certifique-se de que o modelo muda de habilidade quando apropriado.</li>
+</ul>
+<h2 id="comparando-skills-rag-e-system-prompt">Comparando Skills, RAG e System Prompt</h2>
+<p>Para entender melhor quando e como usar habilidades em comparação com outras técnicas como <strong>RAG (Retrieval-Augmented Generation)</strong> e <strong>System Prompt (Instruções de Sistema)</strong>, consulte nosso guia completo:</p>
+<p><strong><a href="/docs/concepts-comparison">Clique para acessar o guia de comparação.</a></strong></p>
+<p>Este guia detalha:</p>
+<ul>
+<li>As diferenças fundamentais entre cada abordagem</li>
+<li>Quando usar cada técnica</li>
+<li>Exemplos práticos e casos de uso</li>
+<li>Como combinar as três técnicas para sistemas robustos</li>
+<li>Árvore de decisão para escolher a abordagem certa</li>
+</ul>
+<p>Veja também:</p>
+<ul>
+<li><a href="https://www.promptingguide.ai/">Prompt Engineering Guide</a></li>
+<li><a href="https://www.anthropic.com/index/building-effective-agents">Building Production-Ready RAG Applications</a></li>
+<li><a href="/docs/entities/ai-gateways/ai-gateway">AI Gateway Documentation</a></li>
+</ul>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/features/skills.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>

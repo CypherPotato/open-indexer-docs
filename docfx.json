@@ -1,19 +1,4 @@
 {
-    "metadata": [
-        {
-            "src": [
-                {
-                    "files": [
-                        "**/*.dll"
-                    ],
-                    "src": "ref/"
-                }
-            ],
-            "dest": "api",
-            "namespaceLayout": "nested",
-            "memberLayout": "separatePages"
-        }
-    ],
     "build": {
         "content": [
             {

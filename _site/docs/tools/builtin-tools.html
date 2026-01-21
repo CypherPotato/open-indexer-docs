@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Ferramentas embutidas | AIVAX </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="Ferramentas embutidas | AIVAX ">
+
+
+        <link rel="icon" href="../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+        
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
+
+        <meta name="docfx:rel" content="../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/tools/builtin-tools.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+                
+        <script>            
+            function switchLanguage(lang) {
+                const docPart = window.location.pathname.match(/\/docs\/((en)\/)?(.*)/)[3];
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../index.html">
+                        <img id="logo" class="svg" src="../../assets/img/aivax.png" alt="AIVAX">
+                        AIVAX
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/en/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="ferramentas-embutidas">Ferramentas embutidas</h1>
+
+<p>A AIVAX fornece uma lista de ferramentas embutidas para você habilitar em seu modelo. Essas ferramentas podem ser usadas em conjunto com as <a href="/docs/protocol-functions">funções do lado do servidor</a>.</p>
+<p>Algumas funções possuem custo. Esse custo é aplicado em modelos usados pela AIVAX e os que você fornece através do BYOK (bring-your-own-key), portanto, é importante adicionar saldo se você pretende usar essas ferramentas.</p>
+<p>Note que cada modelo decide qual função chamar e seus parâmetros. Nem todos os modelos podem obedecer as regras de chamadas.</p>
+<h2 id="pesquisa-na-internet">Pesquisa na internet</h2>
+<p>Essa função habilita a pesquisa na internet no seu modelo. Com isso, o modelo pode consultar por informações específicas ou em tempo real, como dados meteorológicos, notícias, resultados de jogos, etc.</p>
+<p>A pesquisa na internet é feita por vários provedores, escolhido conforme disponibilidade de rede e latência. A AIVAX utiliza uma mistura de provedores para realizar pesquisas na internet.</p>
+<p>A AIVAX fornece dois tipos de pesquisa configuráveis pelo seu dashboard:</p>
+<ul>
+<li><strong>Full</strong>: a pesquisa realizada é completa, inserindo no contexto da conversa o conteúdo inteiro de cada resultado encontrado.</li>
+<li><strong>Summarized</strong>: a pesquisa realizada é resumida, inserindo no contexto da conversa um resumo feito por IA pelo próprio provedor de pesquisa.</li>
+</ul>
+<p>O custo dos dois modos é de <strong>$5</strong> à cada <strong>1.000</strong> pesquisas realizadas. O modo <code>Full</code> pode consumir mais tokens de entrada da conversa, mas pode proporcionar resultados mais precisos.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p><strong>Importante:</strong> nem sempre a pesquisa <code>Full</code> está disponível.</p>
+</div>
+<h2 id="pesquisa-avançada-na-internet">Pesquisa avançada na internet</h2>
+<p>Essa função permite que o modelo tenha um navegador da internet e consiga realizar automação, como pesquisas, navegar em sites, preencher formulários e clicar em botões.</p>
+<p>No momento não há parametrização dessa função.</p>
+<p>O custo dessa função é de <strong>$2</strong> por hora de automação, tendo também uma quantia fixa de <strong>$11,10</strong> à cada <strong>1.000</strong> chamadas dessa função.</p>
+<h2 id="execução-de-código">Execução de código</h2>
+<p>Essa função permite que o modelo execute código JavaScript e inspecione o resultado da execução. Com isso, o modelo consegue avaliar através de algoritmos resultados de expressões matemáticas e outras situações que são melhores representadas através de código.</p>
+<p>O código é executado em um ambiente protegido com pouquíssimas funções disponíveis. O modelo não conseguirá acessar I/O, acesso à internet ou importar scripts por essa ferramenta.</p>
+<p>Essa função não tem custo.</p>
+<h2 id="contexto-de-url">Contexto de URL</h2>
+<p>Essa função permite que o modelo acesse conteúdo externo em URLs e links providos pelo usuário. Com essa função, o modelo consegue acessar links e avaliar seu conteúdo.</p>
+<p>Note que, alguns destinos podem identificar o acesso como bot e barrar o acesso, desde que essa função não é um crawling e sim um simples GET feito no destino.</p>
+<p>O modelo consegue acessar até 5 links de uma vez. Somente os primeiros 10MB dos links são lidos. Ao obter o conteúdo do link, o sistema verifica o conteúdo de retorno e lida com eles de acordo com cada tipo:</p>
+<ul>
+<li>Conteúdos de HTML são renderizados: as tags HTML, scripts, CSS e &quot;ruídos&quot; são removidos do resultado do acesso, mantendo somente o texto puro do link.</li>
+<li>Outros conteúdos textuais: o conteúdo é lido diretamente e nenhuma transformação é realizada.</li>
+<li>Conteúdos não textuais: quando o link responde com um conteúdo não textual e a resposta indica um nome de arquivo (seja pelo caminho ou pelo cabeçalho <code>Content-Disposition</code>), o sistema tenta converter o arquivo baixado para uma versão textual.</li>
+</ul>
+<p>Essa função não tem custo.</p>
+<h2 id="memória">Memória</h2>
+<p>Essa função permite que o modelo armazene conteúdo relevante para ser usado por várias conversas.</p>
+<blockquote>
+<p>No momento, essa função só está disponível quando usada em <a href="/docs/entities/chat-clients">chat clients</a> e quando a sessão está identificada por uma <code>tag</code>.</p>
+</blockquote>
+<p>Através da <code>tag</code> da sessão, o modelo armazena um dado relevante da conversa, como preferência de nomes, lembretes ou ações que a assistente deve realizar.</p>
+<p>A instrução dessa memória instrui o modelo à não salvar dados sensíveis ou pessoais, no entanto, não é garantido que o modelo sempre irá seguir essa regra.</p>
+<p>Os dados são armazenados por um ano nos bancos de dados da AIVAX e podem ser excluídos à qualquer momento pela plataforma. Para toda conversa por um chat client, esses dados são obtidos e anexados na conversa.</p>
+<p>Essa função não tem custo.</p>
+<h2 id="geração-de-imagens">Geração de imagens</h2>
+<p>Essa função permite que o modelo crie imagens de IA.</p>
+<p>As imagens geradas por IA são anexadas no contexto da conversa, mas não são visíveis diretamente para a assistente.</p>
+<p>Atualmente, existem quatro categorias de imagens geradas:</p>
+<p><img src="/assets/img/imgquality.png" alt="Image quality"></p>
+<ul>
+<li><strong>Qualidade baixa</strong>: gera imagens rapidamente com um custo baixo, no entanto, pode gerar bastante artefato, como dedos à mais, olhos distorcidos, braços fora do lugar.</li>
+<li><strong>Qualidade média</strong>: equilíbrio entre boa qualidade e velocidade, mas ainda pode gerar artefatos.</li>
+<li><strong>Qualidade alta</strong>: maior qualidade nas imagens e menor chance de existir artefatos na imagem.</li>
+<li><strong>Qualidade altíssima</strong>: a maior qualidade na geração de imagens. Após a geração, um modelo de upscaling realiza o reajuste na imagem criada.</li>
+</ul>
+<p>Essa função possui custo. O custo varia do tempo de processamento de cada imagem, o que é interferido com o consumo do processamento, tamanho da fila de processamento, modelos usados, etc. A geração de imagens ocorre em um provedor externo, o que o custo pode mudar conforme vários fatores.</p>
+<p>A imagem de exemplo acima mostra uma previsão do preço de cada qualidade de imagem.</p>
+<p>Você também pode ativar a geração de imagens explícitas e adultas na geração de imagem. Ao ativar esse recurso, o modelo será permitido gerar material adulto. Para isso ocorrer, o modelo também deve &quot;concordar&quot; em gerar esse conteúdo. Certos modelos possuem um filtro de segurança menor que outros. Por exemplo, os modelos Gemini são os com o menor filtro de segurança, sendo uma opção viável para role-play e geração desse tipo de material.</p>
+<p>Você é sempre responsável pelo <a href="/docs/legal/terms-of-service.md">material que gera</a> e o material gerado deve ser compatível com nossos termos de serviço.</p>
+<p>Imagens geradas são armazenadas nos servidores da AIVAX por alguns meses antes de serem permanentemente removidas.</p>
+<h2 id="pesquisa-de-posts-no-x">Pesquisa de posts no X</h2>
+<p>Essa função permite o modelo pesquisar por posts no X (antigo Twitter).</p>
+<p>É uma alternativa direta ao <code>web_search</code>, pois pode ser usada para procurar por informações atualizadas em tempo real, como notícias, informações, resultados de jogos, etc. Essa ferramenta traz resultados muito mais recentes que a ferramenta de pesquisa na internet convencional.</p>
+<p>Não é recomendado usar as duas funções em conjunto pois elas possuem o mesmo objetivo.</p>
+<p>No momento, os últimos 20 posts de um determinado assunto é inserido no contexto da conversa, contendo link e autor.</p>
+<p>No momento, não é possível acessar posts de perfis específicos.</p>
+<p>O custo dessa função é de <strong>$5</strong> à cada <strong>1.000</strong> pesquisas realizadas.</p>
+<h2 id="geração-de-documentos">Geração de documentos</h2>
+<p>Essa função permite que o modelo possa criar PDFs a partir de textos em HTML.</p>
+<p>Os arquivos criados são hospedados nos servidores da AIVAX e disponibilizados pelo assistente.</p>
+<p>O conteúdo é hospedado por alguns meses antes de ser permanentemente excluído.</p>
+<p>Essa função não tem custo.</p>
+<h2 id="geração-de-páginas-da-web">Geração de páginas da web</h2>
+<p>Essa função permite que o modelo possa hospedar páginas HTML em servidores da AIVAX.</p>
+<p>Isso permite que o modelo possa hospedar relatórios, landing-pages e outros infográficos em HTML.</p>
+<p>O conteúdo é hospedado por alguns meses antes de ser permanentemente excluído.</p>
+<p>Essa função não tem custo.</p>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/tools/builtin-tools.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>

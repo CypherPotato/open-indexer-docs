@@ -1,7 +1,5 @@
 items:
-
 - name: Introduction
-
 - name: Getting Started
   href: getting-started.md
 - name: Authentication
@@ -10,44 +8,35 @@ items:
   href: pricing.md
 - name: Rate Limits
   href: limits.md 
-- name: Models
-  href: models.md
-
-- name: Core Resources
-
-- name: Built-in Tools
-  href: builtin-tools.md
-- name: MCP Functions
-  href: mcp.md
-- name: Protocol Functions
-  href: protocol-functions.md
-- name: Serverless Functions
-  href: serverless.md
-- name: Skills
-  href: skills.md
-
-- name: Guides
-
-- name: RAG
-  href: entities/rag.md
-- name: Documents
-  href: entities/documents.md
-- name: Searches
-  href: entities/search.md
+- name: RAG and Collections
+- name: Collections
+  href: rag/collections.md
+- name: Semantic Search
+  href: rag/semantic-search.md
+- name: Best Practices
+  href: rag/best-practices.md
+- name: Inference
 - name: AI Gateways
-  href: entities/ai-gateways/toc.yml
+  href: inference/ai-gateway.md
+- name: Processing Pipelines
+  href: inference/pipelines.md
+- name: Structured Responses
+  href: inference/structured-responses.md
+- name: AI Workers
+  href: inference/workers.md
+- name: Tools
+- name: Builtin Tools
+  href: tools/builtin-tools.md
+- name: MCP Functions
+  href: tools/mcp.md
+- name: Protocol Functions
+  href: tools/protocol-functions.md
+- name: Resources
+- name: Skills
+  href: features/skills.md
 - name: Chat clients
-  href: entities/chat-clients.md
-- name: Functions (structured responses)
-  href: entities/functions.md
-
-- name: Informative Resources
-
-- name: Skills vs. RAG vs. System Prompt
-  href: concepts-comparison.md
-
+  href: features/chat-clients.md
 - name: Legal Documents
-
 - name: Privacy Policy
   href: legal/privacy-policy.md
 - name: Terms of Service
