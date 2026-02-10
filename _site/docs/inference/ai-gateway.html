@@ -160,6 +160,97 @@ response = client.chat.completions.create(
 print(response.choices[0].message.content)
 </code></pre>
 <p>No momento, a AIVAX só suporta o formato <code>chat/completions</code>. No futuro, pretendemos criar suporte para a API Responses.</p>
+<h2 id="uso-com-mcp">Uso com MCP</h2>
+<p>É possível expor seus AI Gateways através de funções MCP (Model Context Protocol). Isso permite que modelos de IA invoquem outros modelos (sub-agentes) de forma nativa através do protocolo MCP.</p>
+<p>Para configurar um AI Gateway como servidor MCP, utilize o endpoint <code>https://inference.aivax.net/v1/mcp/inference</code> e configure os seguintes cabeçalhos HTTP:</p>
+<table>
+<thead>
+<tr>
+<th>Cabeçalho</th>
+<th>Descrição</th>
+<th>Obrigatório</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Authorization</code></td>
+<td>Bearer token da sua API key</td>
+<td>Sim</td>
+</tr>
+<tr>
+<td><code>X-Mcp-Model-Name</code></td>
+<td>Tag do modelo ou ID do gateway. Pode ser o ID completo do gateway ou o formato slug <code>nome:id-parcial</code></td>
+<td>Sim</td>
+</tr>
+<tr>
+<td><code>X-Mcp-Tool-Name</code></td>
+<td>Nome da ferramenta MCP. Será convertido para formato de identificador</td>
+<td>Não (padrão: <code>ai_model</code>)</td>
+</tr>
+<tr>
+<td><code>X-Mcp-Tool-Description</code></td>
+<td>Descrição da ferramenta para o modelo entender quando usá-la</td>
+<td>Não</td>
+</tr>
+<tr>
+<td><code>X-Mcp-Tool-Title</code></td>
+<td>Título amigável da ferramenta</td>
+<td>Não</td>
+</tr>
+<tr>
+<td><code>X-Mcp-User</code></td>
+<td>ID do usuário externo para rastreamento</td>
+<td>Não</td>
+</tr>
+</tbody>
+</table>
+<h3 id="identificação-do-gateway">Identificação do Gateway</h3>
+<p>Existem três formas de identificar o gateway através do cabeçalho <code>X-Mcp-Model-Name</code>:</p>
+<ol>
+<li><strong>ID completo do gateway</strong>: <code>550e8400-e29b-41d4-a716-446655440000</code></li>
+<li><strong>Formato slug</strong>: <code>meugateway:50c3</code> (nome do gateway + parte final do ID)</li>
+<li><strong>Tag de modelo integrado</strong>: Nome direto de um modelo disponível na AIVAX</li>
+</ol>
+<h3 id="exemplo-de-configuração">Exemplo de configuração</h3>
+<p>Visual Studio Code:</p>
+<pre><code class="lang-json">{
+    &quot;servers&quot;: {
+        &quot;my-ai-gateway-mcp&quot;: {
+            &quot;type&quot;: &quot;http&quot;,
+            &quot;url&quot;: &quot;https://inference.aivax.net/v1/mcp/inference&quot;,
+            &quot;headers&quot;: {
+                &quot;Authorization&quot;: &quot;Bearer {your_api_key}&quot;,
+                &quot;X-Mcp-Model-Name&quot;: &quot;meugateway:50c3&quot;,
+                &quot;X-Mcp-Tool-Name&quot;: &quot;my_assistant&quot;,
+                &quot;X-Mcp-Tool-Description&quot;: &quot;Use this tool to invoke the specialized assistant for data analysis&quot;,
+                &quot;X-Mcp-Tool-Title&quot;: &quot;Data Analysis Assistant&quot;
+            }
+        }
+    }
+}
+</code></pre>
+<p>AIVAX Gateway MCP:</p>
+<pre><code class="lang-json">[
+    {
+        &quot;name&quot;: &quot;Search sub agent&quot;,
+        &quot;url&quot;: &quot;https://inference.aivax.net/v1/mcp/inference&quot;,
+        &quot;headers&quot;: {
+            &quot;Authorization&quot;: &quot;Bearer {your_api_key}&quot;,
+            &quot;X-Mcp-Model-Name&quot;: &quot;meugateway:50c3&quot;,
+            &quot;X-Mcp-Tool-Name&quot;: &quot;my_assistant&quot;,
+            &quot;X-Mcp-Tool-Description&quot;: &quot;Use this tool to invoke the specialized assistant for data analysis&quot;,
+            &quot;X-Mcp-Tool-Title&quot;: &quot;Data Analysis Assistant&quot;
+        }
+    }
+]
+</code></pre>
+<h3 id="ferramenta-gerada">Ferramenta gerada</h3>
+<p>O servidor MCP criará automaticamente uma ferramenta com o nome <code>invoke_{tool_name}</code> que aceita o parâmetro:</p>
+<ul>
+<li><strong>prompt</strong> (string): O prompt a ser enviado ao modelo</li>
+</ul>
+<p>A ferramenta executará uma inferência no AI Gateway configurado e retornará a resposta do modelo.</p>
+<p>Este MCP compartilha os <a href="/docs/limits">limites de taxa de inferência</a> para evitar abusos e garantir a estabilidade do serviço. Se os limites de taxa forem excedidos, a ferramenta retornará um erro indicando que o limite foi atingido.</p>
 
 </article>
 

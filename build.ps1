@@ -1,8 +1,6 @@
 # reset modified files
 bun ".\clean-translations.js";
-
-# translate missing files
-.\translate-all.ps1;
+bun translate.js "English" "en"
 
 # build css
 cascadium build;

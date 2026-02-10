@@ -124,14 +124,85 @@
                 <article data-uid="">
 <h1 id="semantic-search">Semantic Search</h1>
 
-<p>The search API, using the query key obtained from collections, performs a semantic search on it, performing an intelligent comparison for each document indexed in a collection.</p>
-<p>After creating a collection, you will receive its ID. Use your collection's ID to search the indexed documents of that collection.</p>
-<p>AIVAX uses embedding models that allow task orientation. For searching, the term is vectorized with an orientation <code>DOCUMENT_QUERY</code>. For document indexing, the orientation is <code>DOCUMENT_RETRIEVAL</code>, which provides a more optimized search.</p>
+<p>The search API, through the query key obtained from the collections, performs a semantic search on it, performing an intelligent comparison for each document indexed in a collection.</p>
+<p>After creating a collection, you will get its ID. Use your collection's ID to search the indexed documents of it.</p>
+<p>AIVAX uses embedding models that allow task orientation. For search, the term is vectorized with an orientation <code>DOCUMENT_QUERY</code>. For document indexing, the orientation is <code>DOCUMENT_RETRIEVAL</code>, which provides a more optimized search.</p>
 <div class="WARNING">
 <h5>Warning</h5>
 <p>This endpoint incurs cost. The cost is calculated based on the tokens of the search term.</p>
 </div>
 <script src="https://inference.aivax.net/apidocs?embed-target=Semantic%20search&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<h2 id="mcp">MCP</h2>
+<p>It is possible to provide your RAG collections via MCP functions (Model Context Protocol). This allows AI models to access and search your collections natively through the MCP protocol.</p>
+<p>To configure a collection as an MCP server, use the endpoint <code>https://inference.aivax.net/v1/mcp/collections</code> and set the following HTTP headers:</p>
+<table>
+<thead>
+<tr>
+<th>Header</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Authorization</code></td>
+<td>Bearer token of your API key</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>X-Mcp-Collection-Id</code></td>
+<td>IDs of the collections to be exposed (comma‑separated for multiple collections)</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>X-Mcp-Collection-Name</code></td>
+<td>Name of the collection for identification in the MCP tool</td>
+<td><code>collection</code></td>
+</tr>
+<tr>
+<td><code>X-Mcp-Top-K</code></td>
+<td>Maximum number of results to return</td>
+<td><code>5</code></td>
+</tr>
+<tr>
+<td><code>X-Mcp-Min-Score</code></td>
+<td>Minimum relevance score (0.0 to 1.0)</td>
+<td><code>0.4</code></td>
+</tr>
+<tr>
+<td><code>X-Mcp-Use-References</code></td>
+<td>Determines whether to include references of the chunks. Use <code>none</code> to disable</td>
+<td>enabled</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example-configuration">Example configuration</h3>
+<p>Visual Studio Code:</p>
+<pre><code class="lang-json">{
+  &quot;servers&quot;: {
+    &quot;my-rag-collection-mcp&quot;: {
+      &quot;type&quot;: &quot;http&quot;,
+      &quot;url&quot;: &quot;https://inference.aivax.net/v1/mcp/collections&quot;,
+      &quot;headers&quot;: {
+        &quot;Authorization&quot;: &quot;Bearer {your_api_key}&quot;,
+        &quot;X-Mcp-Collection-Id&quot;: &quot;019b80d5-cee2-7010-ab22-f676271af866&quot;,
+        &quot;X-Mcp-Collection-Name&quot;: &quot;my_collection&quot;,
+        &quot;X-Mcp-Top-K&quot;: &quot;5&quot;,
+        &quot;X-Mcp-Min-Score&quot;: &quot;0.4&quot;,
+        &quot;X-Mcp-Use-References&quot;: &quot;enabled&quot; // or &quot;none&quot;
+      }
+    }
+  }
+}
+</code></pre>
+<h3 id="generated-tool">Generated tool</h3>
+<p>The MCP server will automatically create a tool named <code>search_{collection_name}</code> that accepts the parameter:</p>
+<ul>
+<li><strong>search_terms</strong> (string): Search terms to retrieve information from the collection</li>
+</ul>
+<p>The tool will perform a semantic search on the configured collection(s) and return the most relevant documents based on the defined parameters.</p>
+<p>This search limits the amount of queries that <code>search_terms</code> can perform to at most 5 terms per call and a maximum of 500 characters (sum of all terms). If the limits are exceeded, the tool will return an error. This limit ensures the tool is used for specific and relevant searches, avoiding overly broad queries that could impact model performance and generate high costs.</p>
+<p>This MCP shares the <a href="/docs/en/limits">semantic search rate limits</a> to prevent abuse and ensure service stability. If the rate limits are exceeded, the tool will return an error indicating the limit has been reached.</p>
 
 </article>
 

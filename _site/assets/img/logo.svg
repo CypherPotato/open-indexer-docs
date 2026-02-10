@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+  <defs>
+    <linearGradient id="bg0" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="bg1" x1="93%" y1="25%" x2="7%" y2="75%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#9333ea"/>
+    </linearGradient>
+    <linearGradient id="bg2" x1="93%" y1="75%" x2="7%" y2="25%">
+      <stop offset="0%" stop-color="#0ea5e9"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+    <linearGradient id="bg3" x1="50%" y1="100%" x2="50%" y2="0%">
+      <stop offset="0%" stop-color="#4f46e5"/>
+      <stop offset="100%" stop-color="#c026d3"/>
+    </linearGradient>
+    <linearGradient id="bg4" x1="7%" y1="75%" x2="93%" y2="25%">
+      <stop offset="0%" stop-color="#6d28d9"/>
+      <stop offset="100%" stop-color="#d946ef"/>
+    </linearGradient>
+    <linearGradient id="bg5" x1="7%" y1="25%" x2="93%" y2="75%">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#e879f9"/>
+    </linearGradient>
+    
+    <radialGradient id="hl" cx="30%" cy="25%" r="50%">
+      <stop offset="0%" stop-color="white" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Hexágono central: r=70, centro (300,300) -->
+  <!-- Vértices: (300,230), (361,265), (361,335), (300,370), (239,335), (239,265) -->
+  
+  <!-- Lâmina 0 (topo-direita) -->
+  <path d="M300,80 
+           A220,220 0 0,1 490.5,190 
+           Q420,250 361,265 
+           L300,230 
+           Q300,150 300,80 Z" 
+        fill="url(#bg0)" stroke="#0d0d1a" stroke-width="1.5"/>
+  
+  <!-- Lâmina 1 (direita) -->
+  <path d="M490.5,190 
+           A220,220 0 0,1 490.5,410 
+           Q420,350 361,335 
+           L361,265 
+           Q420,250 490.5,190 Z" 
+        fill="url(#bg1)" stroke="#0d0d1a" stroke-width="1.5"/>
+  
+  <!-- Lâmina 2 (baixo-direita) -->
+  <path d="M490.5,410 
+           A220,220 0 0,1 300,520 
+           Q300,450 300,370 
+           L361,335 
+           Q420,350 490.5,410 Z" 
+        fill="url(#bg2)" stroke="#0d0d1a" stroke-width="1.5"/>
+  
+  <!-- Lâmina 3 (baixo-esquerda) -->
+  <path d="M300,520 
+           A220,220 0 0,1 109.5,410 
+           Q180,350 239,335 
+           L300,370 
+           Q300,450 300,520 Z" 
+        fill="url(#bg3)" stroke="#0d0d1a" stroke-width="1.5"/>
+  
+  <!-- Lâmina 4 (esquerda) -->
+  <path d="M109.5,410 
+           A220,220 0 0,1 109.5,190 
+           Q180,250 239,265 
+           L239,335 
+           Q180,350 109.5,410 Z" 
+        fill="url(#bg4)" stroke="#0d0d1a" stroke-width="1.5"/>
+  
+  <!-- Lâmina 5 (topo-esquerda) -->
+  <path d="M109.5,190 
+           A220,220 0 0,1 300,80 
+           Q300,150 300,230 
+           L239,265 
+           Q180,250 109.5,190 Z" 
+        fill="url(#bg5)" stroke="#0d0d1a" stroke-width="1.5"/>
+
+  <circle cx="300" cy="300" r="220" fill="url(#hl)" pointer-events="none"/>
+</svg>

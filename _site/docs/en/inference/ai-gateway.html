@@ -124,23 +124,23 @@
                 <article data-uid="">
 <h1 id="ai-gateway">AI Gateway</h1>
 
-<p>AI gateways are a service that AIVAX provides to create an inference tunnel between an LLM model and a knowledge base. With it you can:</p>
+<p>The AI gateways are a service that AIVAX provides to create an inference tunnel between an LLM model and a knowledge base. With it you can:</p>
 <ul>
 <li>Create a model with custom instructions</li>
-<li>Use a model provided by you through a compatible OpenAI endpoint, or use a model made available by AIVAX</li>
+<li>Use a model provided by you via a compatible OpenAI endpoint, or use a model offered by AIVAX</li>
 <li>Customize inference parameters such as temperature, top_p, prefill</li>
 <li>Use a knowledge collection as the foundation for AI responses</li>
 </ul>
-<p>Among other features. With the AI Gateway, you create a ready‑to‑use model, parametrized and grounded in the instructions you define.</p>
+<p>Among other features. With the AI Gateway, you create a ready‑to‑use model, parameterized and grounded in the instructions you define.</p>
 <h2 id="models">Models</h2>
-<p>You can bring an AI model compatible with the OpenAI interface to the AI gateway. If you bring your own AI model, we will charge only for the document search attached to the AI. You can also use one of the models below that are already ready to start with AIVAX.</p>
-<p>When using a model, you will notice that some are smarter than others for certain tasks. Some models are better with certain data‑retrieval strategies than others. Run tests to find the best model.</p>
+<p>You can bring an AI model compatible with the OpenAI interface to the AI gateway. If you bring your own AI model, we will only charge for the document search attached to the AI. You can also use one of the models below that are already ready to start with AIVAX.</p>
+<p>When using a model, you will notice that some are smarter than others for certain tasks. Some models perform better with certain data retrieval strategies than others. Conduct tests to find the best model.</p>
 <p>You can see the available models on the <a href="/docs/en/models">models page</a>.</p>
-<h2 id="using-an-ai-gateway">Using an AI gateway</h2>
-<p>AIVAX provides an endpoint compatible with the OpenAI interface through an AI‑gateway, which makes it easier to integrate the model created by AIVAX with existing applications and SDKs. Note that only some properties are supported.</p>
-<p>In an AI gateway you already configure the model parameters, such as System Prompt, temperature, and model name. When using this endpoint, some gateway values may be overridden by the request.</p>
+<h2 id="using-an-ai-gateway">Using an AI Gateway</h2>
+<p>AIVAX provides an endpoint compatible with the OpenAI interface through an AI‑gateway, which simplifies integration of the model created by AIVAX with existing applications and SDKs. Note that only some properties are supported.</p>
+<p>In an AI gateway, you already configure model parameters such as System Prompt, temperature, and model name. When using this endpoint, some gateway values may be overridden by the request.</p>
 <script src="https://inference.aivax.net/apidocs?embed-target=Inference%20(chat%20completions)&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
-<h2 id="use-with-sdks">Use with SDKs</h2>
+<h2 id="usage-with-sdks">Usage with SDKs</h2>
 <p>By providing endpoints compatible with the OpenAI interface, AIVAX is fully compatible with existing SDKs, facilitating plug‑and‑play integration.</p>
 <p>See the example below:</p>
 <pre><code class="lang-python">from openai import OpenAI
@@ -159,7 +159,98 @@ response = client.chat.completions.create(
  
 print(response.choices[0].message.content)
 </code></pre>
-<p>At the moment, AIVAX only supports the <code>chat/completions</code> format. In the future, we intend to add support for API Responses.</p>
+<p>Currently, AIVAX only supports the <code>chat/completions</code> format. In the future, we plan to add support for the API Responses.</p>
+<h2 id="usage-with-mcp">Usage with MCP</h2>
+<p>You can expose your AI Gateways via MCP functions (Model Context Protocol). This allows AI models to invoke other models (sub‑agents) natively through the MCP protocol.</p>
+<p>To configure an AI Gateway as an MCP server, use the endpoint <code>https://inference.aivax.net/v1/mcp/inference</code> and set the following HTTP headers:</p>
+<table>
+<thead>
+<tr>
+<th>Header</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Authorization</code></td>
+<td>Bearer token of your API key</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>X-Mcp-Model-Name</code></td>
+<td>Model tag or gateway ID. Can be the full gateway ID or the slug format <code>name:partial-id</code></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>X-Mcp-Tool-Name</code></td>
+<td>MCP tool name. Will be converted to identifier format</td>
+<td>No (default: <code>ai_model</code>)</td>
+</tr>
+<tr>
+<td><code>X-Mcp-Tool-Description</code></td>
+<td>Description of the tool for the model to understand when to use it</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>X-Mcp-Tool-Title</code></td>
+<td>Friendly title of the tool</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>X-Mcp-User</code></td>
+<td>External user ID for tracking</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<h3 id="gateway-identification">Gateway Identification</h3>
+<p>There are three ways to identify the gateway via the <code>X-Mcp-Model-Name</code> header:</p>
+<ol>
+<li><strong>Full gateway ID</strong>: <code>550e8400-e29b-41d4-a716-446655440000</code></li>
+<li><strong>Slug format</strong>: <code>meugateway:50c3</code> (gateway name + final part of the ID)</li>
+<li><strong>Integrated model tag</strong>: Direct name of a model available on AIVAX</li>
+</ol>
+<h3 id="configuration-example">Configuration Example</h3>
+<p>Visual Studio Code:</p>
+<pre><code class="lang-json">{
+    &quot;servers&quot;: {
+        &quot;my-ai-gateway-mcp&quot;: {
+            &quot;type&quot;: &quot;http&quot;,
+            &quot;url&quot;: &quot;https://inference.aivax.net/v1/mcp/inference&quot;,
+            &quot;headers&quot;: {
+                &quot;Authorization&quot;: &quot;Bearer {your_api_key}&quot;,
+                &quot;X-Mcp-Model-Name&quot;: &quot;meugateway:50c3&quot;,
+                &quot;X-Mcp-Tool-Name&quot;: &quot;my_assistant&quot;,
+                &quot;X-Mcp-Tool-Description&quot;: &quot;Use this tool to invoke the specialized assistant for data analysis&quot;,
+                &quot;X-Mcp-Tool-Title&quot;: &quot;Data Analysis Assistant&quot;
+            }
+        }
+    }
+}
+</code></pre>
+<p>AIVAX Gateway MCP:</p>
+<pre><code class="lang-json">[
+    {
+        &quot;name&quot;: &quot;Search sub agent&quot;,
+        &quot;url&quot;: &quot;https://inference.aivax.net/v1/mcp/inference&quot;,
+        &quot;headers&quot;: {
+            &quot;Authorization&quot;: &quot;Bearer {your_api_key}&quot;,
+            &quot;X-Mcp-Model-Name&quot;: &quot;meugateway:50c3&quot;,
+            &quot;X-Mcp-Tool-Name&quot;: &quot;my_assistant&quot;,
+            &quot;X-Mcp-Tool-Description&quot;: &quot;Use this tool to invoke the specialized assistant for data analysis&quot;,
+            &quot;X-Mcp-Tool-Title&quot;: &quot;Data Analysis Assistant&quot;
+        }
+    }
+]
+</code></pre>
+<h3 id="generated-tool">Generated Tool</h3>
+<p>The MCP server will automatically create a tool named <code>invoke_{tool_name}</code> that accepts the parameter:</p>
+<ul>
+<li><strong>prompt</strong> (string): The prompt to be sent to the model</li>
+</ul>
+<p>The tool will perform an inference on the configured AI Gateway and return the model's response.</p>
+<p>This MCP shares the <a href="/docs/en/limits">inference rate limits</a> to prevent abuse and ensure service stability. If the rate limits are exceeded, the tool will return an error indicating that the limit has been reached.</p>
 
 </article>
 

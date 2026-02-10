@@ -132,6 +132,77 @@
 <p>Esse endpoint gera custo. O custo é calculado em cima dos tokens do termo de busca.</p>
 </div>
 <script src="https://inference.aivax.net/apidocs?embed-target=Semantic%20search&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<h2 id="mcp">MCP</h2>
+<p>É possível fornecer suas coleções de RAG através de funções MCP (Model Context Protocol). Isso permite que modelos de IA acessem e pesquisem suas coleções de forma nativa através do protocolo MCP.</p>
+<p>Para configurar uma coleção como servidor MCP, utilize o endpoint <code>https://inference.aivax.net/v1/mcp/collections</code> e configure os seguintes cabeçalhos HTTP:</p>
+<table>
+<thead>
+<tr>
+<th>Cabeçalho</th>
+<th>Descrição</th>
+<th>Padrão</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Authorization</code></td>
+<td>Bearer token da sua API key</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>X-Mcp-Collection-Id</code></td>
+<td>IDs das coleções a serem expostas (separados por vírgula para múltiplas coleções)</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>X-Mcp-Collection-Name</code></td>
+<td>Nome da coleção para identificação na ferramenta MCP</td>
+<td><code>collection</code></td>
+</tr>
+<tr>
+<td><code>X-Mcp-Top-K</code></td>
+<td>Número máximo de resultados a retornar</td>
+<td><code>5</code></td>
+</tr>
+<tr>
+<td><code>X-Mcp-Min-Score</code></td>
+<td>Score mínimo de relevância (0.0 a 1.0)</td>
+<td><code>0.4</code></td>
+</tr>
+<tr>
+<td><code>X-Mcp-Use-References</code></td>
+<td>Define se deve incluir referências dos chunks. Use <code>none</code> para desabilitar</td>
+<td>habilitado</td>
+</tr>
+</tbody>
+</table>
+<h3 id="exemplo-de-configuração">Exemplo de configuração</h3>
+<p>Visual Studio Code:</p>
+<pre><code class="lang-json">{
+  &quot;servers&quot;: {
+    &quot;my-rag-collection-mcp&quot;: {
+      &quot;type&quot;: &quot;http&quot;,
+      &quot;url&quot;: &quot;https://inference.aivax.net/v1/mcp/collections&quot;,
+      &quot;headers&quot;: {
+        &quot;Authorization&quot;: &quot;Bearer {your_api_key}&quot;,
+        &quot;X-Mcp-Collection-Id&quot;: &quot;019b80d5-cee2-7010-ab22-f676271af866&quot;,
+        &quot;X-Mcp-Collection-Name&quot;: &quot;my_collection&quot;,
+        &quot;X-Mcp-Top-K&quot;: &quot;5&quot;,
+        &quot;X-Mcp-Min-Score&quot;: &quot;0.4&quot;,
+        &quot;X-Mcp-Use-References&quot;: &quot;enabled&quot; // or &quot;none&quot;
+      }
+    }
+  }
+}
+</code></pre>
+<h3 id="ferramenta-gerada">Ferramenta gerada</h3>
+<p>O servidor MCP criará automaticamente uma ferramenta com o nome <code>search_{collection_name}</code> que aceita o parâmetro:</p>
+<ul>
+<li><strong>search_terms</strong> (string): Termos de busca para obter informações da coleção</li>
+</ul>
+<p>A ferramenta executará uma pesquisa semântica na(s) coleção(ões) configurada(s) e retornará os documentos mais relevantes baseados nos parâmetros definidos.</p>
+<p>Essa pesquisa limita a quantia de pesquisas que <code>search_terms</code> pode realizar para no máximo 5 termos por chamada e ter no máximo 500 caracteres (soma de todos os termos). Se os limites forem excedidos, a ferramenta retornará um erro. Este limite garante que a ferramenta seja utilizada para buscas específicas e relevantes, evitando consultas excessivamente amplas que possam impactar a performance do modelo e gerar custos elevados.</p>
+<p>Este MCP compartilha os <a href="/docs/limits">limites de taxa de pesquisa semântica</a> para evitar abusos e garantir a estabilidade do serviço. Se os limites de taxa forem excedidos, a ferramenta retornará um erro indicando que o limite foi atingido.</p>
 
 </article>
 
