@@ -161,6 +161,48 @@ As ações disponíveis para o campo `rewrites` são:
 }
 ```
 
+### `tool.called`
+
+Enviado quando uma ferramenta interna do servidor está prestes a ser executada.
+
+```json
+{
+  "name": "tool.called",
+  "data": {
+    "toolName": "memory_search",
+    "toolArguments": {
+      "query": "preferências do usuário"
+    },
+    "origin": "SessionsApi",
+    "externalUserId": "mini-app-session@lot1xc9k03g2my3j4w2y1",
+    "metadata": {}
+  }
+}
+```
+
+#### Ações disponíveis
+
+Para executar ações no evento `tool.called`, retorne uma resposta com o header `Content-Type: application/json+worker-action` e o corpo no formato:
+
+```json
+{
+  "type": "tool.called.response",
+  "data": {
+    "result": "Resultado textual da ferramenta.",
+    "messages": []
+  }
+}
+```
+
+Campos de `data`:
+
+| Campo | Descrição |
+|-------|-----------|
+| `result` | Conteúdo textual injetado como resultado da ferramenta. |
+| `messages` | Lista opcional de mensagens adicionais no formato OpenAI anexadas ao contexto da conversa. |
+
+Quando `tool.called.response` é retornado, o resultado fornecido pelo worker é usado no lugar da execução padrão da ferramenta.
+
 ## Exemplos
 
 ### Bloqueando usuários não autorizados

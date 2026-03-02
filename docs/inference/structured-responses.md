@@ -225,3 +225,34 @@ A AIVAX guia o modelo para gerar uma resposta conforme o JSON Schema fornecido. 
 ```
 
 > **Nota:** `number` e `integer` são sinônimos. O tipo `integer` não garante que o valor será um número inteiro.
+
+## Suporte de respostas
+
+O JSON healing da AIVAX é compatível com qualquer modelo e qualquer tipo de resposta através do endpoint de [chat completions](https://inference.aivax.net/apidocs#Inferencechatcompletions). Quando usado com `stream = false`, o conteúdo JSON completo virá no conteúdo delta gerado pelo modelo. 
+
+Quando usado com `stream = true` (SSE), o JSON virá em um único chunk completo, mesmo que o modelo gere o contéudo em múltiplos chunks. Isso torna possível o uso de respostas estruturadas com streaming, o que possibilita uma maneira de **contornar timeouts do gateway** para respostas muito demoradas.
+
+## Modo `json_only`
+
+Ao usar o parâmetro especial `json_only` no corpo da requisição:
+
+```json
+{
+    "model": "@openai/gpt-4o",
+    "messages": [{ "role": "user", "content": "Liste 3 capitais europeias" }],
+    "response_format": {
+        "type": "json_schema",
+        "json_schema": {
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "capitals": { "type": "array" }
+                }
+            }
+        }
+    },
+    "json_only": true
+}
+```
+
+A resposta é exatamente o JSON gerado pelo modelo, sem os metadados de geração, deltas, etc. Essa função é compatível com respostas `stream = false` e `stream = true`. No caso de `stream = true`, o JSON completo virá em um único chunk do SSE, sem nenhuma outra marcação ou conteúdo adicional. Após gerar o JSON, uma linha `[DONE]` é enviada para indicar o fim da resposta.

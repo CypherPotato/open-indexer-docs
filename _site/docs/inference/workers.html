@@ -301,6 +301,51 @@
     }
 }
 </code></pre>
+<h3 id="toolcalled"><code>tool.called</code></h3>
+<p>Enviado quando uma ferramenta interna do servidor está prestes a ser executada.</p>
+<pre><code class="lang-json">{
+  &quot;name&quot;: &quot;tool.called&quot;,
+  &quot;data&quot;: {
+    &quot;toolName&quot;: &quot;memory_search&quot;,
+    &quot;toolArguments&quot;: {
+      &quot;query&quot;: &quot;preferências do usuário&quot;
+    },
+    &quot;origin&quot;: &quot;SessionsApi&quot;,
+    &quot;externalUserId&quot;: &quot;mini-app-session@lot1xc9k03g2my3j4w2y1&quot;,
+    &quot;metadata&quot;: {}
+  }
+}
+</code></pre>
+<h4 id="ações-disponíveis-1">Ações disponíveis</h4>
+<p>Para executar ações no evento <code>tool.called</code>, retorne uma resposta com o header <code>Content-Type: application/json+worker-action</code> e o corpo no formato:</p>
+<pre><code class="lang-json">{
+  &quot;type&quot;: &quot;tool.called.response&quot;,
+  &quot;data&quot;: {
+    &quot;result&quot;: &quot;Resultado textual da ferramenta.&quot;,
+    &quot;messages&quot;: []
+  }
+}
+</code></pre>
+<p>Campos de <code>data</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>result</code></td>
+<td>Conteúdo textual injetado como resultado da ferramenta.</td>
+</tr>
+<tr>
+<td><code>messages</code></td>
+<td>Lista opcional de mensagens adicionais no formato OpenAI anexadas ao contexto da conversa.</td>
+</tr>
+</tbody>
+</table>
+<p>Quando <code>tool.called.response</code> é retornado, o resultado fornecido pelo worker é usado no lugar da execução padrão da ferramenta.</p>
 <h2 id="exemplos">Exemplos</h2>
 <h3 id="bloqueando-usuários-não-autorizados">Bloqueando usuários não autorizados</h3>
 <p>O exemplo abaixo ilustra um <a href="https://workers.cloudflare.com/">Cloudflare Worker</a> que autentica uma conversa no Telegram com base no nome de usuário:</p>

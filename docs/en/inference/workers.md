@@ -4,9 +4,9 @@ The AI gateway workers are hooks that allow you to control the behavior of your 
 
 With an external controller configured, events are sent to it, and the response from your controller determines whether that action should continue, be aborted, or be configured.
 
-When an event is triggered on the AIVAX side, a POST request is sent to the configured worker with information about the fired event. Based on its response, the action can be cancelled or configured. There is no caching – the request is made for every event that occurs in your AI gateway.
+When an event is triggered on the AIVAX side, a POST request is fired to the configured worker with information about the triggered event. Based on its response, the action can be cancelled or configured. There is no caching – the request is made on every event that occurs in your AI gateway.
 
-The processing time of the response adds latency to every gateway action; however, it adds a layer of control and moderation that you can manage at any time.
+The processing time of the response adds latency to every gateway action, however, it adds a layer of control and moderation that you can manage at any time.
 
 ## How it works
 
@@ -55,7 +55,7 @@ After sending the request, AIVAX waits for your worker's response. There are thr
 
 | Response | Behavior |
 |----------|----------|
-| **OK Response (2xx)** | Continues and proceeds with the normal execution of the event. |
+| **OK response (2xx)** | Continues and proceeds with the normal execution of the event. |
 | **Other responses** | Aborts and stops the execution of the event. |
 | **Content-Type `application/json+worker-action`** | Executes the actions specified in the response and continues execution. |
 
@@ -161,6 +161,48 @@ The actions available for the `rewrites` field are:
 }
 ```
 
+### `tool.called`
+
+Sent when an internal server tool is about to be executed.
+
+```json
+{
+  "name": "tool.called",
+  "data": {
+    "toolName": "memory_search",
+    "toolArguments": {
+      "query": "preferências do usuário"
+    },
+    "origin": "SessionsApi",
+    "externalUserId": "mini-app-session@lot1xc9k03g2my3j4w2y1",
+    "metadata": {}
+  }
+}
+```
+
+#### Available actions
+
+To perform actions on the `tool.called` event, return a response with the header `Content-Type: application/json+worker-action` and a body in the format:
+
+```json
+{
+  "type": "tool.called.response",
+  "data": {
+    "result": "Resultado textual da ferramenta.",
+    "messages": []
+  }
+}
+```
+
+`data` fields:
+
+| Field | Description |
+|-------|-------------|
+| `result` | Textual content injected as the tool's result. |
+| `messages` | Optional list of additional OpenAI‑format messages attached to the conversation context. |
+
+When `tool.called.response` is returned, the result provided by the worker is used instead of the tool's default execution.
+
 ## Examples
 
 ### Blocking unauthorized users
@@ -196,7 +238,7 @@ export default {
 
 ### Intercepting and modifying messages
 
-The example below demonstrates how to intercept a message and replace it with another when the user is not authorized:
+The example below shows how to intercept a message and replace it with another when the user is not authorized:
 
 ```js
 export default {
@@ -237,7 +279,7 @@ export default {
 };
 
 async function checkUserSubscription(externalUserId) {
-  // Implement your subscription verification logic here
+  // Implement your subscription‑checking logic here
   return true;
 }
 ```

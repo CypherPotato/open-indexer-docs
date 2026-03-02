@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Structured responses | AIVAX </title>
+        <title>Structured Responses | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="Structured responses | AIVAX ">
+        <meta name="title" content="Structured Responses | AIVAX ">
 
 
         <link rel="icon" href="../../../assets/img/favicon.ico">
@@ -122,30 +122,30 @@
                 </div>
 
                 <article data-uid="">
-<h1 id="structured-responses">Structured responses</h1>
+<h1 id="structured-responses">Structured Responses</h1>
 
 <p>AIVAX has a structured response mechanism that works with <strong>any LLM</strong>, even those that do not natively support structured outputs. AIVAX analyzes the provided JSON schema and manually validates whether the model responded as expected. When the model fails, AIVAX automatically notifies the errors until it generates a valid JSON. This mechanism is called <strong>JSON Healing</strong>.</p>
 <p>This process continues until the maximum attempts parameter is reached or a valid JSON is generated. AIVAX interprets JSONs in markdown blocks, preceded or followed by text, and automatically extracts the final response.</p>
-<p>You can use structured responses with models that have reasoning without breaking the reasoning phase to generate the JSON. Additionally, you can use <a href="/docs/en/builtin-tools">builtin tools</a> during generation, such as web search, document generation, and opening links.</p>
+<p>You can use structured responses with models that have reasoning without breaking the reasoning phase to generate the JSON. In addition, you can use <a href="/docs/en/builtin-tools">built‑in tools</a> during generation, such as web search, document generation, and opening links.</p>
 <h2 id="how-it-works">How it works</h2>
-<p>When making an inference call, you define <strong>what the model should do</strong> via instructions and <strong>how it should respond</strong> via a JSON Schema.</p>
+<p>When making an inference call, you define <strong>what the model should do</strong> through instructions and <strong>how it should respond</strong> through a JSON Schema.</p>
 <p>AIVAX validates the model's response in real time. If the generated JSON is invalid or does not follow the schema, the model receives automatic feedback about the errors and tries again. This cycle continues until:</p>
 <ul>
-<li>A valid JSON is generated (success on the first attempt or after corrections)</li>
+<li>A valid JSON is generated (success on the first try or after corrections)</li>
 <li>The <code>maxAttempts</code> limit is reached</li>
 </ul>
-<p><strong>Billing:</strong> You are charged for each generation attempt. Smarter models usually get it right on the first try, while smaller models may need multiple attempts.</p>
-<p><strong>Performance tip:</strong> Use caching on your application side for data that does not change frequently (weather, daily statistics, etc). AIVAX does not perform automatic caching.</p>
-<h2 id="built-in-tools">Built-in tools</h2>
-<p>You can use <a href="/docs/en/builtin-tools">builtin tools</a> during JSON generation, allowing the model:</p>
+<p><strong>Billing:</strong> You are charged for each generation attempt. Smarter models usually succeed on the first try, while smaller models may need multiple attempts.</p>
+<p><strong>Performance tip:</strong> Cache data that does not change frequently (weather, daily statistics, etc.) on your application side. AIVAX does not perform automatic caching.</p>
+<h2 id="builtin-tools">Built‑in tools</h2>
+<p>You can use <a href="/docs/en/builtin-tools">built‑in tools</a> during JSON generation, allowing the model to:</p>
 <ul>
-<li>Search the internet to obtain up-to-date information</li>
+<li>Search the web for up‑to‑date information</li>
 <li>Execute code for complex calculations</li>
 <li>Open and analyze URLs</li>
 <li>Generate images</li>
 <li>Fetch posts on social networks</li>
 </ul>
-<p>These tools are especially useful for functions that need real-time data or additional processing before generating the structured response.</p>
+<p>These tools are especially useful for functions that need real‑time data or additional processing before generating the structured response.</p>
 <h2 id="how-to-use">How to use</h2>
 <p>You use the structured response service on the same chat completions endpoint.</p>
 <div class="request-item post">
@@ -156,7 +156,7 @@
 </div>
 <pre><code class="lang-json">{
     &quot;model&quot;: &quot;@google/gemini-2.5-flash&quot;,
-    &quot;prompt&quot;: &quot;Pesquise por notícias em São José do Rio Preto.&quot;,
+    &quot;prompt&quot;: &quot;Search for news in São José do Rio Preto.&quot;,
     &quot;stream&quot;: true,
     &quot;builtin_tools&quot;: {
         &quot;tools&quot;: [
@@ -176,11 +176,11 @@
                     &quot;properties&quot;: {
                         &quot;title&quot;: {
                             &quot;type&quot;: &quot;string&quot;,
-                            &quot;description&quot;: &quot;Título da notícia&quot;
+                            &quot;description&quot;: &quot;News title&quot;
                         },
                         &quot;content&quot;: {
                             &quot;type&quot;: &quot;string&quot;,
-                            &quot;description&quot;: &quot;Resumo da notícia&quot;
+                            &quot;description&quot;: &quot;News summary&quot;
                         }
                     }
                 }
@@ -189,8 +189,8 @@
     }
 }
 </code></pre>
-<p>Note that the <code>builtin_tools</code> parameter defines which built-in tools the model can use to generate the structured response. Note that the model used must be compatible with function calls.</p>
-<p>You can also use structured responses with your AI gateways by providing your gateway ID in the model name.</p>
+<p>Note that the <code>builtin_tools</code> parameter defines which built‑in tools the model may use to generate the structured response. Also, the model used must be compatible with function calling.</p>
+<p>You can also use structured responses with your AI gateways by providing the gateway ID in the model name.</p>
 <h2 id="json-response-modes">JSON response modes</h2>
 <p>There are two ways to request structured responses: with or without JSON Healing.</p>
 <h3 id="with-json-healing-response_schema">With JSON Healing (<code>response_schema</code>)</h3>
@@ -203,7 +203,7 @@
 </div>
 <pre><code class="lang-json">{
     &quot;model&quot;: &quot;@google/gemini-2.5-flash&quot;,
-    &quot;messages&quot;: [{ &quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Liste 3 capitais europeias&quot; }],
+    &quot;messages&quot;: [{ &quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;List 3 European capitals&quot; }],
     &quot;response_schema&quot;: {
         &quot;type&quot;: &quot;object&quot;,
         &quot;properties&quot;: {
@@ -227,11 +227,11 @@
 <ul>
 <li><strong>Format guarantee:</strong> The model will always respond in the specified JSON format</li>
 <li><strong>Reasoning compatible:</strong> The model can reason freely before generating the JSON</li>
-<li><strong>Tool compatible:</strong> Works together with <a href="/docs/en/builtin-tools">builtin tools</a> and function calling</li>
+<li><strong>Tool compatible:</strong> Works together with <a href="/docs/en/builtin-tools">built‑in tools</a> and function calling</li>
 </ul>
 <p>AIVAX automatically extracts the JSON from the response, even if it is in a markdown block or preceded by explanatory text.</p>
 <h3 id="without-json-healing-response_format">Without JSON Healing (<code>response_format</code>)</h3>
-<p>Use <code>response_format</code> when the native model already supports structured outputs (like GPT-4o or Gemini) and you do not need additional validation:</p>
+<p>Use <code>response_format</code> when the native model already supports structured outputs (like GPT‑4o or Gemini) and you do not need additional validation:</p>
 <div class="request-item post">
     <span>POST</span>
     <span>
@@ -240,7 +240,7 @@
 </div>
 <pre><code class="lang-json">{
     &quot;model&quot;: &quot;@openai/gpt-4o&quot;,
-    &quot;messages&quot;: [{ &quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Liste 3 capitais europeias&quot; }],
+    &quot;messages&quot;: [{ &quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;List 3 European capitals&quot; }],
     &quot;response_format&quot;: {
         &quot;type&quot;: &quot;json_schema&quot;,
         &quot;json_schema&quot;: {
@@ -254,7 +254,7 @@
     }
 }
 </code></pre>
-<p>In this mode, the schema is passed directly to the model without additional validation from AIVAX.</p>
+<p>In this mode, the schema is passed directly to the model without additional validation by AIVAX.</p>
 <h3 id="enabling-json-healing-in-response_format">Enabling JSON Healing in <code>response_format</code></h3>
 <p>You can explicitly enable JSON Healing by passing an <code>options</code> object inside <code>response_format</code> when <code>type</code> is <code>json_schema</code>:</p>
 <div class="request-item post">
@@ -280,9 +280,9 @@
     }
 }
 </code></pre>
-<p>The <code>max_attempts</code> parameter defines the maximum number of correction attempts. You are charged for each failed attempt. Note that smarter models tend to get it right on the first try.</p>
+<p>The <code>max_attempts</code> parameter defines the maximum number of correction attempts. You are charged for each failed attempt. Note that smarter models tend to succeed on the first try.</p>
 <h2 id="supported-json-schema">Supported JSON Schema</h2>
-<p>AIVAX guides the model to generate a response according to the provided JSON Schema. When the model generates something invalid, it receives feedback on the errors and tries again until the output conforms to the specification.</p>
+<p>AIVAX guides the model to generate a response according to the provided JSON Schema. When the model generates something invalid, it receives feedback about the errors and tries again until the output conforms to the specification.</p>
 <h3 id="supported-types-and-validations">Supported types and validations</h3>
 <ul>
 <li><strong>string</strong>:
@@ -316,7 +316,7 @@
 <li><strong>bool</strong>, <strong>boolean</strong></li>
 <li><strong>null</strong></li>
 </ul>
-<p><strong>Multiple types:</strong> You can specify multiple types in a field:</p>
+<p><strong>Multiple types:</strong> You can specify multiple types for a field:</p>
 <pre><code class="lang-json">{
     &quot;type&quot;: [&quot;string&quot;, &quot;number&quot;]
 }
@@ -324,6 +324,29 @@
 <blockquote>
 <p><strong>Note:</strong> <code>number</code> and <code>integer</code> are synonyms. The <code>integer</code> type does not guarantee that the value will be an integer.</p>
 </blockquote>
+<h2 id="response-support">Response support</h2>
+<p>AIVAX's JSON healing is compatible with any model and any type of response via the [chat completions] endpoint (<a href="https://inference.aivax.net/apidocs#Inferencechatcompletions">https://inference.aivax.net/apidocs#Inferencechatcompletions</a>). When used with <code>stream = false</code>, the full JSON content will appear in the delta content generated by the model.</p>
+<p>When used with <code>stream = true</code> (SSE), the JSON will come in a single complete chunk, even if the model generates the content in multiple chunks. This makes it possible to use structured responses with streaming, providing a way to <strong>bypass gateway timeouts</strong> for very long responses.</p>
+<h2 id="json_only-mode"><code>json_only</code> mode</h2>
+<p>When using the special <code>json_only</code> parameter in the request body:</p>
+<pre><code class="lang-json">{
+    &quot;model&quot;: &quot;@openai/gpt-4o&quot;,
+    &quot;messages&quot;: [{ &quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;List 3 European capitals&quot; }],
+    &quot;response_format&quot;: {
+        &quot;type&quot;: &quot;json_schema&quot;,
+        &quot;json_schema&quot;: {
+            &quot;schema&quot;: {
+                &quot;type&quot;: &quot;object&quot;,
+                &quot;properties&quot;: {
+                    &quot;capitals&quot;: { &quot;type&quot;: &quot;array&quot; }
+                }
+            }
+        }
+    },
+    &quot;json_only&quot;: true
+}
+</code></pre>
+<p>The response is exactly the JSON generated by the model, without generation metadata, deltas, etc. This function works with <code>stream = false</code> and <code>stream = true</code> responses. In the case of <code>stream = true</code>, the full JSON will come in a single SSE chunk, with no other markup or additional content. After generating the JSON, a <code>[DONE]</code> line is sent to indicate the end of the response.</p>
 
 </article>
 

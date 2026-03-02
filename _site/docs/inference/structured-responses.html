@@ -324,6 +324,29 @@
 <blockquote>
 <p><strong>Nota:</strong> <code>number</code> e <code>integer</code> são sinônimos. O tipo <code>integer</code> não garante que o valor será um número inteiro.</p>
 </blockquote>
+<h2 id="suporte-de-respostas">Suporte de respostas</h2>
+<p>O JSON healing da AIVAX é compatível com qualquer modelo e qualquer tipo de resposta através do endpoint de <a href="https://inference.aivax.net/apidocs#Inferencechatcompletions">chat completions</a>. Quando usado com <code>stream = false</code>, o conteúdo JSON completo virá no conteúdo delta gerado pelo modelo.</p>
+<p>Quando usado com <code>stream = true</code> (SSE), o JSON virá em um único chunk completo, mesmo que o modelo gere o contéudo em múltiplos chunks. Isso torna possível o uso de respostas estruturadas com streaming, o que possibilita uma maneira de <strong>contornar timeouts do gateway</strong> para respostas muito demoradas.</p>
+<h2 id="modo-json_only">Modo <code>json_only</code></h2>
+<p>Ao usar o parâmetro especial <code>json_only</code> no corpo da requisição:</p>
+<pre><code class="lang-json">{
+    &quot;model&quot;: &quot;@openai/gpt-4o&quot;,
+    &quot;messages&quot;: [{ &quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Liste 3 capitais europeias&quot; }],
+    &quot;response_format&quot;: {
+        &quot;type&quot;: &quot;json_schema&quot;,
+        &quot;json_schema&quot;: {
+            &quot;schema&quot;: {
+                &quot;type&quot;: &quot;object&quot;,
+                &quot;properties&quot;: {
+                    &quot;capitals&quot;: { &quot;type&quot;: &quot;array&quot; }
+                }
+            }
+        }
+    },
+    &quot;json_only&quot;: true
+}
+</code></pre>
+<p>A resposta é exatamente o JSON gerado pelo modelo, sem os metadados de geração, deltas, etc. Essa função é compatível com respostas <code>stream = false</code> e <code>stream = true</code>. No caso de <code>stream = true</code>, o JSON completo virá em um único chunk do SSE, sem nenhuma outra marcação ou conteúdo adicional. Após gerar o JSON, uma linha <code>[DONE]</code> é enviada para indicar o fim da resposta.</p>
 
 </article>
 

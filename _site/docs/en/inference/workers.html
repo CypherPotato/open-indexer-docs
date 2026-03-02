@@ -126,8 +126,8 @@
 
 <p>The AI gateway workers are hooks that allow you to control the behavior of your resources remotely through events.</p>
 <p>With an external controller configured, events are sent to it, and the response from your controller determines whether that action should continue, be aborted, or be configured.</p>
-<p>When an event is triggered on the AIVAX side, a POST request is sent to the configured worker with information about the fired event. Based on its response, the action can be cancelled or configured. There is no caching – the request is made for every event that occurs in your AI gateway.</p>
-<p>The processing time of the response adds latency to every gateway action; however, it adds a layer of control and moderation that you can manage at any time.</p>
+<p>When an event is triggered on the AIVAX side, a POST request is fired to the configured worker with information about the triggered event. Based on its response, the action can be cancelled or configured. There is no caching – the request is made on every event that occurs in your AI gateway.</p>
+<p>The processing time of the response adds latency to every gateway action, however, it adds a layer of control and moderation that you can manage at any time.</p>
 <h2 id="how-it-works">How it works</h2>
 <p>When an event is triggered, a POST request is sent to your worker following the format below:</p>
 <pre><code class="lang-json">{
@@ -175,7 +175,7 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>OK Response (2xx)</strong></td>
+<td><strong>OK response (2xx)</strong></td>
 <td>Continues and proceeds with the normal execution of the event.</td>
 </tr>
 <tr>
@@ -301,6 +301,51 @@
     }
 }
 </code></pre>
+<h3 id="toolcalled"><code>tool.called</code></h3>
+<p>Sent when an internal server tool is about to be executed.</p>
+<pre><code class="lang-json">{
+  &quot;name&quot;: &quot;tool.called&quot;,
+  &quot;data&quot;: {
+    &quot;toolName&quot;: &quot;memory_search&quot;,
+    &quot;toolArguments&quot;: {
+      &quot;query&quot;: &quot;preferências do usuário&quot;
+    },
+    &quot;origin&quot;: &quot;SessionsApi&quot;,
+    &quot;externalUserId&quot;: &quot;mini-app-session@lot1xc9k03g2my3j4w2y1&quot;,
+    &quot;metadata&quot;: {}
+  }
+}
+</code></pre>
+<h4 id="available-actions-1">Available actions</h4>
+<p>To perform actions on the <code>tool.called</code> event, return a response with the header <code>Content-Type: application/json+worker-action</code> and a body in the format:</p>
+<pre><code class="lang-json">{
+  &quot;type&quot;: &quot;tool.called.response&quot;,
+  &quot;data&quot;: {
+    &quot;result&quot;: &quot;Resultado textual da ferramenta.&quot;,
+    &quot;messages&quot;: []
+  }
+}
+</code></pre>
+<p><code>data</code> fields:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>result</code></td>
+<td>Textual content injected as the tool's result.</td>
+</tr>
+<tr>
+<td><code>messages</code></td>
+<td>Optional list of additional OpenAI‑format messages attached to the conversation context.</td>
+</tr>
+</tbody>
+</table>
+<p>When <code>tool.called.response</code> is returned, the result provided by the worker is used instead of the tool's default execution.</p>
 <h2 id="examples">Examples</h2>
 <h3 id="blocking-unauthorized-users">Blocking unauthorized users</h3>
 <p>The example below illustrates a <a href="https://workers.cloudflare.com/">Cloudflare Worker</a> that authenticates a Telegram conversation based on the username:</p>
@@ -330,7 +375,7 @@
 };
 </code></pre>
 <h3 id="intercepting-and-modifying-messages">Intercepting and modifying messages</h3>
-<p>The example below demonstrates how to intercept a message and replace it with another when the user is not authorized:</p>
+<p>The example below shows how to intercept a message and replace it with another when the user is not authorized:</p>
 <pre><code class="lang-js">export default {
   async fetch(request, env, ctx) {
     const CHECKING_GATEWAY_ID = &quot;0197dda5-985f-7c76-96e5-0d0451c596e5&quot;;
@@ -369,7 +414,7 @@
 };
 
 async function checkUserSubscription(externalUserId) {
-  // Implement your subscription verification logic here
+  // Implement your subscription‑checking logic here
   return true;
 }
 </code></pre>
