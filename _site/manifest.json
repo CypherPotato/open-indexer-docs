@@ -142,6 +142,16 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "assets/icon/bytedance.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/icon/bytedance.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "assets/icon/cognitivecomputations.svg",
       "output": {
         "resource": {
@@ -306,6 +316,16 @@
       "output": {
         "resource": {
           "relative_path": "assets/icon/openai.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/icon/perplexity.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/icon/perplexity.svg"
         }
       },
       "version": ""

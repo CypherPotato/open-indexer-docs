@@ -23,9 +23,8 @@ A medição é pela **adição de créditos** e não pelo consumo. Exemplo: não
 | Pesquisa de documentos | 10 | - | - |
 | Inserção de documentos | - | 30 | - |
 | Inferência (requisições) | 5 | 30 | - |
-| Inferência (tokens de entrada) | - | - | 50.000 |
-| Inferência (tokens de entrada - high-end) | 0 | - | 0 |
-| Execução serverless | 5 | 100 | - |
+| Inferência (tokens de entrada) | - | - | 100.000 |
+| Inferência (tokens de entrada - high-end) | - | - | 0 |
 | Ferramentas (compartilhado) | - | 100 | - |
 | Ferramenta `web_search` | - | 15 | - |
 | Ferramenta `x_posts_search` | - | 10 | - |
@@ -36,26 +35,24 @@ A medição é pela **adição de créditos** e não pelo consumo. Exemplo: não
 | Operação | RPM | RPD | TPM |
 | --- | ---: | ---: | ---: |
 | Pesquisa de documentos | 150 | - | - |
-| Inserção de documentos | - | 3.000 | - |
-| Inferência (requisições) | 75 | 10.000 | - |
-| Inferência (tokens de entrada) | - | - | 1.000.000 |
+| Inserção de documentos | - | 10.000 | - |
+| Inferência (requisições) | 50 | 10.000 | - |
+| Inferência (tokens de entrada) | - | - | 5.000.000 |
 | Inferência (tokens de entrada - high-end) | - | - | 200.000 |
-| Execução serverless | 30 | - | - |
 | Ferramentas (compartilhado) | - | 1.000 | - |
 | Ferramenta `web_search` | - | 300 | - |
 | Ferramenta `x_posts_search` | - | 100 | - |
-| Ferramenta `generate_image` | - | 30 | - |
+| Ferramenta `generate_image` | - | 50 | - |
 
 ## [Tier 2](#tab/tier2)
 
 | Operação | RPM | RPD | TPM |
 | --- | ---: | ---: | ---: |
-| Pesquisa de documentos | 300 | - | - |
-| Inserção de documentos | - | 10.000 | - |
-| Inferência (requisições) | 200 | - | - |
-| Inferência (tokens de entrada) | - | - | 4.000.000 |
-| Inferência (tokens de entrada - high-end) | - | - | 1.000.000 |
-| Execução serverless | 100 | - | - |
+| Pesquisa de documentos | 1.000 | - | - |
+| Inserção de documentos | - | 100.000 | - |
+| Inferência (requisições) | 500 | - | - |
+| Inferência (tokens de entrada) | - | - | 20.000.000 |
+| Inferência (tokens de entrada - high-end) | - | - | 2.000.000 |
 | Ferramentas (compartilhado) | - | 10.000 | - |
 | Ferramenta `web_search` | - | 1.000 | - |
 | Ferramenta `x_posts_search` | - | 500 | - |
@@ -65,12 +62,11 @@ A medição é pela **adição de créditos** e não pelo consumo. Exemplo: não
 
 | Operação | RPM | RPD | TPM |
 | --- | ---: | ---: | ---: |
-| Pesquisa de documentos | 1.000 | - | - |
-| Inserção de documentos | - | 30.000 | - |
-| Inferência (requisições) | 1.000 | - | - |
-| Inferência (tokens de entrada) | - | - | 10.000.000 |
-| Inferência (tokens de entrada - high-end) | - | - | 4.000.000 |
-| Execução serverless | 500 | - | - |
+| Pesquisa de documentos | - | - | - |
+| Inserção de documentos | - | - | - |
+| Inferência (requisições) | - | - | - |
+| Inferência (tokens de entrada) | - | - | 100.000.000 |
+| Inferência (tokens de entrada - high-end) | - | - | 30.000.000 |
 | Ferramentas (compartilhado) | - | 50.000 | - |
 | Ferramenta `web_search` | - | 10.000 | - |
 | Ferramenta `x_posts_search` | - | 5.000 | - |
@@ -81,10 +77,9 @@ A medição é pela **adição de créditos** e não pelo consumo. Exemplo: não
 **Descrição das operações:**
 - **Pesquisa de documentos:** inclui pesquisa semântica de documentos em uma coleção.
 - **Inserção de documentos:** criação e modificação de documentos em uma coleção.
-- **Inferência (requisições):** número de chamadas de inferência ou função (API ou chat client).
+- **Inferência (requisições):** número de chamadas de inferência (API ou chat client).
 - **Inferência (tokens de entrada):** tokens de entrada usados em inferência.
-- **Inferência (tokens de entrada - high-end):** tokens de entrada para modelos high-end (Tier 1+).
-- **Execução serverless:** chamadas de [função serverless](/docs/serverless).
+- **Inferência (tokens de entrada - high-end):** tokens de entrada para modelos high-end (bloqueado no Tier zero).
 - **Ferramentas (compartilhado):** uso de [ferramentas integradas](/docs/builtin-tools) providas pela AIVAX (não inclui ferramentas customizadas).
 - **Ferramenta (nome):** uso individual de cada ferramenta integrada.
 
