@@ -2,14 +2,14 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Plans and Limits | AIVAX </title>
+        <title>Shell | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="Plans and Limits | AIVAX ">
+        <meta name="title" content="Shell | AIVAX ">
 
 
-        <link rel="icon" href="../../assets/img/favicon.ico">
-        <link rel="stylesheet" href="../../public/docfx.min.css">
-        <link rel="stylesheet" href="../../public/main.css">
+        <link rel="icon" href="../../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../../public/main.css">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,13 +17,13 @@
         
         <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
 
-        <meta name="docfx:navrel" content="../../toc.html">
-        <meta name="docfx:tocrel" content="toc.html">
+        <meta name="docfx:navrel" content="../../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
 
-        <meta name="docfx:rel" content="../../">
+        <meta name="docfx:rel" content="../../../">
 
 
-        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/en/limits.md/#L1">
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/en/tools/shell.md/#L1">
         <meta name="loc:inThisArticle" content="In this article">
         <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
         <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -37,7 +37,7 @@
         <meta name="loc:copy" content="Copy">
         <meta name="loc:downloadPdf" content="Download PDF">
         
-        <script type="module" src="./../../public/docfx.min.js"></script>
+        <script type="module" src="./../../../public/docfx.min.js"></script>
         <script>
             const theme = localStorage.getItem('theme') || 'auto';
             document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
@@ -60,8 +60,8 @@
         <header class="bg-body border-bottom">
             <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
                 <div class="container-xxl flex-nowrap">
-                    <a class="navbar-brand" href="../../index.html">
-                        <img id="logo" class="svg" src="../../assets/img/aivax.png" alt="AIVAX">
+                    <a class="navbar-brand" href="../../../index.html">
+                        <img id="logo" class="svg" src="../../../assets/img/aivax.png" alt="AIVAX">
                         AIVAX
                     </a>
                     <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
@@ -122,390 +122,34 @@
                 </div>
 
                 <article data-uid="">
-<h1 id="plans-and-limits">Plans and Limits</h1>
+<h1 id="shell">Shell</h1>
 
-<h2 id="plans">Plans</h2>
-<p>AIVAX offers three subscription plans: <strong>Free</strong>, <strong>Pro</strong>, and <strong>Max</strong>. Each plan has specific usage limits, resource access, and support, suited for different needs and usage levels.</p>
-<p>The plans fit best for each situation and moment of use for each user:</p>
+<p>AIVAX provides a virtual shell environment that can be used by agent assistants to execute terminal commands. This feature is especially useful for tasks such as automation, system management, script execution, and other operations that require interaction with the operating system.</p>
+<p>The shell environment allows moving tools used by the agent to the shell side, turning them into a CLI tool. This is advantageous when you have hundreds of tools and don't want to overload the model's context, or when the tools have a more complex command-line interface that would be difficult to call directly from the model.</p>
+<h2 id="adapting-tools-for-shell">Adapting tools for shell</h2>
+<p>In the virtual shell interface, standard operating system manipulation tools are available, such as <code>grep</code>, <code>awk</code>, <code>sed</code>, <code>curl</code>, <code>wget</code>, among others. This way, you can adapt your tools to return raw or long outputs, and the model can use the shell's text manipulation tools to extract the relevant information, for example:</p>
+<pre><code class="lang-bash">get-users --filter active --format csv | grep &quot;John Doe&quot; | awk -F, '{print $1, $2}'
+</code></pre>
+<p>In the line above, <code>get-users</code> is a custom tool that returns a list of users in CSV format. The <code>grep</code> command filters the results to find &quot;John Doe&quot;, and <code>awk</code> extracts and formats the desired columns. This tool may have been defined by <a href="/docs/en/tools/mcp">MCP</a>, <a href="/docs/en/builtin-tools">builtin tools</a> or be a <a href="/docs/en/protocol-functions">protocol tool</a>.</p>
+<p>It is not possible to virtualize tools that run on the client side in the bash environment. Attempting to do so will result in an error returned by the API. Define tools in the shell's white-list or black-list to control which tools are available to be used in the shell environment.</p>
+<h2 id="data-persistence">Data persistence</h2>
+<p>Data persistence can be defined for the shell environment. When enabled, the inference user (via the <code>$.user</code> or <code>$.tag</code> parameter of the chat client) will have an exclusive virtual shell environment that can be accessed across different conversations and sessions. This is useful when the agent needs to maintain state between sessions, such as temporary files, logs, or other data that needs to be persisted.</p>
+<p>If this persistence is disabled, the shell environment is discarded after an inference iteration.</p>
+<h2 id="emulation">Emulation</h2>
+<p>The shell environment is emulated in a sandbox environment and is not connected to the real operating system. This means that certain tools such as <code>apt-get</code> will not be available to the model. The environment is designed to be safe and isolated, avoiding any impact on the real system. It is ideal for text processing tasks, data manipulation, and other operations that do not require direct access to the operating system.</p>
+<p>The shell environment is capable of:</p>
 <ul>
-<li><strong>Free:</strong> $0/month: ideal for those just starting, testing the platform, or with basic needs. Provides access to basic models and limited resources, with a reasonable number of requests and built‑in tools.</li>
-<li><strong>Pro:</strong> $39/month: perfect for users who need more resources, access to advanced models, and higher limits. Includes priority support and additional storage options.</li>
-<li><strong>Max:</strong> $399/month: intended for advanced users and companies that require maximum performance, access to all models, high limits, and dedicated support. Offers the best experience and resources available on the platform.</li>
+<li>Executing basic I/O commands, such as reading and writing files, text manipulation, and script execution.</li>
+<li>Accessing the internet to make HTTP requests using tools like <code>curl</code> or <code>wget</code>.</li>
+<li>Compressing and decompressing files using tools like <code>tar</code> and <code>zip</code>.</li>
+<li>Reading content from various file formats into markdown.</li>
+<li>Executing bash scripts.</li>
 </ul>
-<p>Support is an important differentiator between the plans, with Pro offering priority support and Max offering dedicated support to ensure users' needs are met efficiently. The difference between priority and dedicated support is that priority support provides faster response times and access to specialists, while dedicated support gives an exclusive contact for personalized assistance and problem resolution.</p>
-<p>All plans are renewed monthly and do not require a long‑term commitment, allowing users to choose the plan that best fits their needs and change as necessary. When subscribing to a plan, the subscription fee is automatically deducted from the account balance. On the 1st of every month, the subscription fee is renewed again if there is sufficient balance in the account for the current monthly fee. When subscribing to a plan after the first day of the month, a proportional amount is charged for the remaining period of the month, and the full renewal will occur in the next monthly cycle.</p>
-<p>No plan includes usage credits, and usage limits are applied regardless of the account balance, regardless of the available balance. The plans imply better plans and resources that are provided in AIVAX, as well as the convenience of consolidating the balance for several different services into a single wallet.</p>
-<p>It is important to note that the use of cost‑incurring resources is immediately halted when the account balance is zero or negative, regardless of the subscription plan. Therefore, it is essential to maintain a positive balance to ensure continued access to resources and avoid service interruptions.</p>
-<h2 id="limits">Limits</h2>
-<p>Usage limits regulate the number of requests and resources available according to your account's subscription plan.</p>
-<div class="tabGroup" id="tabgroup_1">
-<ul role="tablist">
-<li role="presentation">
-<a href="#tabpanel_1_free" role="tab" aria-controls="tabpanel_1_free" data-tab="free" tabindex="0" aria-selected="true">Free</a>
-</li>
-<li role="presentation">
-<a href="#tabpanel_1_pro" role="tab" aria-controls="tabpanel_1_pro" data-tab="pro" tabindex="-1">Pro</a>
-</li>
-<li role="presentation">
-<a href="#tabpanel_1_max" role="tab" aria-controls="tabpanel_1_max" data-tab="max" tabindex="-1">Max</a>
-</li>
-</ul>
-<section id="tabpanel_1_free" role="tabpanel" data-tab="free">
-
-<table>
-<thead>
-<tr>
-<th>Resource</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Model access</td>
-<td>Basic models</td>
-</tr>
-<tr>
-<td>Inference commission</td>
-<td>25%</td>
-</tr>
-<tr>
-<td>BYOK (Bring your own key)</td>
-<td>Limited</td>
-</tr>
-<tr>
-<td>JSON Healing</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Stability routing</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Complexity routing</td>
-<td>No</td>
-</tr>
-<tr>
-<td>Rate limits</td>
-<td>Considerable</td>
-</tr>
-<tr>
-<td>Maximum context</td>
-<td>64K tokens</td>
-</tr>
-<tr>
-<td><strong>RAG</strong></td>
-<td></td>
-</tr>
-<tr>
-<td>Collections</td>
-<td>Up to 2 collections</td>
-</tr>
-<tr>
-<td>Searches</td>
-<td>Low limit — 10 searches/minute</td>
-</tr>
-<tr>
-<td>Insertions</td>
-<td>Low limit — 100 insertions/day</td>
-</tr>
-<tr>
-<td>Composite processing</td>
-<td>Not available</td>
-</tr>
-<tr>
-<td><strong>Built‑in tools</strong></td>
-<td></td>
-</tr>
-<tr>
-<td>Internet search</td>
-<td>15/day</td>
-</tr>
-<tr>
-<td>Twitter/X search</td>
-<td>Not available</td>
-</tr>
-<tr>
-<td>Deep search</td>
-<td>Not available</td>
-</tr>
-<tr>
-<td>Document and web page generation</td>
-<td>5/day</td>
-</tr>
-<tr>
-<td>Image generation and editing</td>
-<td>5/day</td>
-</tr>
-<tr>
-<td>Code execution and advanced requests</td>
-<td>30/day</td>
-</tr>
-<tr>
-<td>Memory and calendar</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td><strong>Account</strong></td>
-<td></td>
-</tr>
-<tr>
-<td>Included storage</td>
-<td>30 MB (fixed limit)</td>
-</tr>
-<tr>
-<td>Conversation retention</td>
-<td>Not available</td>
-</tr>
-<tr>
-<td>Support</td>
-<td>By email</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="tabpanel_1_pro" role="tabpanel" data-tab="pro" aria-hidden="true" hidden="hidden">
-
-<table>
-<thead>
-<tr>
-<th>Resource</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Model access</td>
-<td>Advanced models</td>
-</tr>
-<tr>
-<td>Inference commission</td>
-<td>5%</td>
-</tr>
-<tr>
-<td>BYOK (Bring your own key)</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>JSON Healing</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Stability routing</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Complexity routing</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Rate limits</td>
-<td>High</td>
-</tr>
-<tr>
-<td>Maximum context</td>
-<td>Unlimited</td>
-</tr>
-<tr>
-<td><strong>RAG</strong></td>
-<td></td>
-</tr>
-<tr>
-<td>Collections</td>
-<td>Unlimited</td>
-</tr>
-<tr>
-<td>Searches</td>
-<td>High limit — 100 searches/minute</td>
-</tr>
-<tr>
-<td>Insertions</td>
-<td>High limit — 10,000 insertions/day</td>
-</tr>
-<tr>
-<td>Composite processing</td>
-<td>Up to 3 files/day</td>
-</tr>
-<tr>
-<td><strong>Built‑in tools</strong></td>
-<td></td>
-</tr>
-<tr>
-<td>Internet search</td>
-<td>1,000/day</td>
-</tr>
-<tr>
-<td>Twitter/X search</td>
-<td>1,000/day</td>
-</tr>
-<tr>
-<td>Deep search</td>
-<td>100/day</td>
-</tr>
-<tr>
-<td>Document and web page generation</td>
-<td>1,000/day</td>
-</tr>
-<tr>
-<td>Image generation and editing</td>
-<td>500/day</td>
-</tr>
-<tr>
-<td>Code execution and advanced requests</td>
-<td>5,000/day</td>
-</tr>
-<tr>
-<td>Memory and calendar</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td><strong>Account</strong></td>
-<td></td>
-</tr>
-<tr>
-<td>Included storage</td>
-<td>2 GB (excess: $0.90/GB/month)</td>
-</tr>
-<tr>
-<td>Conversation retention</td>
-<td>2 days</td>
-</tr>
-<tr>
-<td>Support</td>
-<td>Priority</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="tabpanel_1_max" role="tabpanel" data-tab="max" aria-hidden="true" hidden="hidden">
-
-<table>
-<thead>
-<tr>
-<th>Resource</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Model access</td>
-<td>All models</td>
-</tr>
-<tr>
-<td>Inference commission</td>
-<td>None</td>
-</tr>
-<tr>
-<td>BYOK (Bring your own key)</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>JSON Healing</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Stability routing</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Complexity routing</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Rate limits</td>
-<td>Highest</td>
-</tr>
-<tr>
-<td>Maximum context</td>
-<td>Unlimited</td>
-</tr>
-<tr>
-<td><strong>RAG</strong></td>
-<td></td>
-</tr>
-<tr>
-<td>Collections</td>
-<td>Unlimited</td>
-</tr>
-<tr>
-<td>Searches</td>
-<td>High limit — 3,000 searches/minute</td>
-</tr>
-<tr>
-<td>Insertions</td>
-<td>Unlimited</td>
-</tr>
-<tr>
-<td>Composite processing</td>
-<td>Up to 10 files/day</td>
-</tr>
-<tr>
-<td><strong>Built‑in tools</strong></td>
-<td></td>
-</tr>
-<tr>
-<td>Internet search</td>
-<td>10,000/day</td>
-</tr>
-<tr>
-<td>Twitter/X search</td>
-<td>10,000/day</td>
-</tr>
-<tr>
-<td>Deep search</td>
-<td>1,000/day</td>
-</tr>
-<tr>
-<td>Document and web page generation</td>
-<td>50,000/day</td>
-</tr>
-<tr>
-<td>Image generation and editing</td>
-<td>5,000/day</td>
-</tr>
-<tr>
-<td>Code execution and advanced requests</td>
-<td>100,000/day</td>
-</tr>
-<tr>
-<td>Memory and calendar</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td><strong>Account</strong></td>
-<td></td>
-</tr>
-<tr>
-<td>Included storage</td>
-<td>20 GB (excess: $2.20/GB/month)</td>
-</tr>
-<tr>
-<td>Conversation retention</td>
-<td>30 days</td>
-</tr>
-<tr>
-<td>Support</td>
-<td>Dedicated</td>
-</tr>
-</tbody>
-</table>
-</section>
-</div>
-<h2 id="model-groups">Model groups</h2>
-<p>Certain models have rate multipliers:</p>
-<ul>
-<li><strong>Standard:</strong> 1x</li>
-<li><strong>Discounted:</strong> 0.5x</li>
-<li><strong>Low‑latency:</strong> 0.3x</li>
-<li><strong>Free:</strong> 0.1x</li>
-</ul>
-<p>Example: if you use a “discounted” model, the rate limits will be 50 % lower (e.g., 75 req/min → 37 req/min).</p>
-<h2 id="limits-for-byok-bringyourownkey">Limits for BYOK (Bring‑your‑own‑key)</h2>
-<p>There is no cost to use your own API key; however, for the free plan the limits are more restrictive. For the Pro and Max plans there are no limits on BYOK usage.</p>
 
 </article>
 
                 <div class="contribution d-print-none">
-                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/en/limits.md/#L1" class="edit-link">Edit this page</a>
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/en/tools/shell.md/#L1" class="edit-link">Edit this page</a>
                 </div>
 
                 <div class="next-article d-print-none border-top" id="nextArticle"></div>

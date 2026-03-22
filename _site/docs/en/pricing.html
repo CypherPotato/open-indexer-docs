@@ -124,58 +124,53 @@
                 <article data-uid="">
 <h1 id="pricing">Pricing</h1>
 
-<p>The AIVAX payment model is <strong>pre‑paid</strong>: you add balance to your account and use our services by consuming that credit. We don’t send surprise invoices at the end of the month. This guarantees full predictability of your inference and agent spending.</p>
+<p>AIVAX's payment model is <strong>prepaid</strong>: you add balance to your account and use our services by consuming that credit. AIVAX uses a <a href="/docs/en/limits">monthly subscription</a> model together with the service usage balance. The subscription plans (Free, Pro, and Max) offer different levels of access to features, usage limits, and support, but service consumption is always deducted from the account balance.</p>
 <p>When adding credits, AIVAX charges a small fee (varying by payment method) to cover taxes (invoices), bank fees, and operational costs.</p>
-<p>Inference pricing (text generation) is passed through directly from providers (such as Google and OpenAI) <strong>without markup</strong>. You pay AIVAX exactly the same list price you would pay when using those providers directly.</p>
-<p>We use different <a href="/docs/en/builtin-tools">services</a> to help you create agentic assistants. Some tools have specific costs that are debited from your balance with no additional fees.</p>
+<p>Some plans include a <strong>commission fee</strong> for using balance, which is a percentage applied to the amount spent on inference (text generation). The commissions are currently:</p>
+<ul>
+<li>Free plan: 25% commission on the amount spent on inference.</li>
+<li>Pro plan: 5% commission on the amount spent on inference.</li>
+<li>Max plan: no commission.</li>
+</ul>
+<p>Inference pricing (text generation) is passed through directly from the providers (such as Google and OpenAI). You pay at AIVAX exactly the same list price you would pay using those providers directly.</p>
+<p>We use various <a href="/docs/en/builtin-tools">services</a> to help you create agentic assistants. Some tools have specific costs that are deducted from your balance without additional fees.</p>
 <blockquote>
-<p><strong>Note:</strong> Inference is calculated in US dollars (USD). Currency fluctuations may occur when converting from your local currency to dollars at the time of recharge or usage.</p>
+<p><strong>Note:</strong> All costs are calculated in United States dollars (USD). There may be currency fluctuations when converting from your local currency to dollars at the time of recharge or usage.</p>
 </blockquote>
 <h2 id="credit-expiration">Credit Expiration</h2>
-<p>Since we cannot predict which model you will use, we need to align credit validity with the most restrictive policies of our suppliers. Currently, credits expire <strong>12 months</strong> after the addition date. See the details in our <a href="/docs/en/legal/terms-of-service">terms of service</a>.</p>
-<h2 id="bringyourownkey-byok">Bring‑your‑own‑key (BYOK)</h2>
-<p>You can connect your own API key (compatible with OpenAI) to use AIVAX’s infrastructure.</p>
-<ul>
-<li><strong>Inference Cost:</strong> $0.00 (charged directly by the key owner).</li>
-<li><strong>Limits:</strong> Rate limits are increased to <strong>1,500 requests per minute</strong> (≈ 25 req/s), with no token limits.</li>
-</ul>
-<p><strong>Important:</strong> Even when using your own key, peripheral AIVAX services (such as storage of <a href="/docs/en/entities/collections.md">RAG</a>, web search, image generation, etc.) are still charged against your AIVAX balance. If your balance goes negative, the service will be halted, including BYOK calls.</p>
+<p>Since we cannot predict which model you will use, we need to align the credit validity with the most restrictive policies of our providers.</p>
+<p>Currently, credits expire <strong>12 months</strong> after the addition date. See the details in our <a href="/docs/en/legal/terms-of-service">terms of service</a>.</p>
 <h2 id="rag-collections-and-vectors">RAG (Collections and Vectors)</h2>
-<p>Indexing cost depends on the embedding model you choose.</p>
+<p>The indexing cost depends on the chosen embedding model.</p>
 <p><strong>Default Model:</strong></p>
 <ul>
-<li><code>@google/gemini-embedding-001</code>: <strong>$0.15</strong> / 1 million tokens.</li>
+<li><code>@google/gemini-embedding-001</code>: <strong>$0.15</strong> / 1 million tokens.</li>
 </ul>
 <p><strong>Legacy/Compatibility Models:</strong></p>
 <ul>
-<li><code>@google/text-embedding-004</code>: $0.10 / 1 million tokens.</li>
-<li><code>@baai/bge-m3</code>: $0.012 / 1 million tokens.</li>
+<li><code>@google/text-embedding-004</code>: $0.10 / 1 million tokens.</li>
+<li><code>@baai/bge-m3</code>: $0.012 / 1 million tokens.</li>
 </ul>
-<p><em>At the moment, we do not charge computational fees for processing the indexing, only for the resulting storage.</em></p>
-<p><strong>Token Calculation</strong><br>
-Since not all providers return the exact token count in the response, we use the industry‑standard approximation for billing:<br>
-<code>tokens = ceil(utf8_bytes_count / 4)</code></p>
 <h2 id="storage">Storage</h2>
-<p>To maintain the integrity and availability of your data, we charge a storage fee per hour.</p>
+<p>To maintain the integrity and availability of your data, we charge a storage fee per hour. The price varies according to the subscription plan:</p>
 <ul>
-<li><strong>Price:</strong> <strong>$0.0015</strong> per GB / hour.</li>
-<li><strong>Free Tier:</strong> The first <strong>100 MB are free</strong>.</li>
+<li><strong>Free plan</strong>: 30 MB quota, no additional storage option.</li>
+<li><strong>Pro plan</strong>: 2 GB quota, $0.50 per additional GB per month, billed hourly.</li>
+<li><strong>Max plan</strong>: 20 GB quota, $0.20 per additional GB per month, billed hourly.</li>
 </ul>
-<p><strong>How billing works:</strong><br>
-You pay only for the <strong>excess</strong> beyond the free tier.</p>
-<ul>
-<li><em>Example:</em> If you use 120 MB for one hour, you pay only for the 20 MB excess.</li>
-<li><em>Example:</em> If you use 80 MB, the cost is zero.</li>
-</ul>
+<p><strong>How billing works:</strong>
+You only pay for the <strong>excess</strong> over the quota.
+<em>Example:</em> If you are on the Pro plan and use 2.20 GB for one hour, you will only be charged for the 0.20 GB excess. If you use 250 MB, the cost is zero.</p>
 <p><strong>What consumes storage:</strong></p>
 <ol>
-<li>Long‑term user memory (saved chats and inferences);</li>
-<li>Cache of image descriptions (multimodal processing);</li>
-<li>RAG document content and its vectors.</li>
+<li>Long-term user memory (saved chats and inferences);</li>
+<li>Image description cache (multi-modal processing);</li>
+<li>RAG document content and its vectors;</li>
+<li>Virtual bash/shell storage.</li>
 </ol>
-<p>System logs are temporary and do not generate storage costs.</p>
+<p>System logs are temporary and do not incur storage costs.</p>
 <h2 id="tools">Tools</h2>
-<p>The <a href="/docs/en/builtin-tools">native tools</a> of AIVAX have specific prices and limits. See the documentation for each tool.</p>
+<p>The <a href="/docs/en/builtin-tools">native tools</a> of AIVAX have specific pricing and limits. See the documentation for each tool.</p>
 
 </article>
 

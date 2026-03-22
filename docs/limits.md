@@ -1,87 +1,117 @@
-# Limites da API
+# Planos e limites
 
-Os limites de taxa regulam o número de requisições que você pode enviar em uma janela de tempo. Eles ajudam a prevenir abuso e garantir estabilidade para todos os usuários.
+## Planos
 
-Os limites abaixo são aplicados conforme o tier da sua conta:
+A AIVAX oferece três planos de assinatura: **Free**, **Pro** e **Max**. Cada plano tem limites específicos de uso, acesso a recursos e suporte, adequados para diferentes necessidades e níveis de uso.
 
-- **Tier zero:** conta nova que nunca adicionou créditos ou que possui créditos de teste.
-- **Tier 1:** conta criada há pelo menos 48 horas e que já adicionou qualquer valor em créditos.
-- **Tier 2:** conta criada há pelo menos 1 mês e que já adicionou pelo menos $100 em créditos.
-- **Tier 3:** conta criada há pelo menos 3 meses e que já adicionou pelo menos $1.000 em créditos.
+Os planos se adequam melhor à cada situação e momento de uso de cada utilizador:
+- **Free:** $0/mês: ideal para quem está começando, testando a plataforma ou tem necessidades básicas. Oferece acesso a modelos básicos e recursos limitados, com um número razoável de requisições e ferramentas embutidas.
+- **Pro:** $39/mês: perfeito para usuários que precisam de mais recursos, acesso a modelos avançados e limites mais altos. Inclui suporte prioritário e opções de armazenamento adicionais.
+- **Max:** $399/mês: destinado a usuários avançados e empresas que exigem o máximo desempenho, acesso a todos os modelos, limites elevados e suporte dedicado. Oferece a melhor experiência e recursos disponíveis na plataforma.
 
-A medição é pela **adição de créditos** e não pelo consumo. Exemplo: não é necessário consumir $100 para avançar ao Tier 2, basta adicionar esse valor.
+O suporte é um diferencial importante entre os planos, com o Pro oferecendo suporte prioritário e o Max oferecendo suporte dedicado para garantir que as necessidades dos usuários sejam atendidas de forma eficiente. A diferença entre o suporte prioritário e dedicado é que o suporte prioritário oferece atendimento mais rápido e acesso a especialistas, enquanto o suporte dedicado fornece um contato exclusivo para assistência personalizada e resolução de problemas.
 
-**Legendas:**
-- **RPM**: requisições por minuto
-- **RPD**: requisições por dia (24h)
-- **TPM**: tokens de entrada por minuto
+Todos os planos são renovados mensalmente e não exigem compromisso de longo prazo, permitindo que os usuários escolham o plano que melhor se adapta às suas necessidades e mudem conforme necessário. Ao assinar um plano, o valor da assinatura é deduzido automaticamente do saldo da conta. No dia 1 de todo mês, o valor da assinatura é renovado novamente se existir saldo suficiente em conta para a mensalidade atual. Ao assinar um plano após o primeiro dia do mês, o valor proporcial é cobrado para o período restante do mês, e a renovação completa ocorrerá no próximo ciclo mensal.
 
-## [Conta nova](#tab/free)
+Nenhum plano inclui créditos de uso, e os limites de uso são aplicados independentemente do saldo da conta, independente do saldo disponível em conta. Os planos implicam melhor em planos e recursos que são fornecidos no AIVAX, além da facilidade em concentrar o saldo para vários serviços diferentes em uma única carteira.
 
-| Operação | RPM | RPD | TPM |
-| --- | ---: | ---: | ---: |
-| Pesquisa de documentos | 10 | - | - |
-| Inserção de documentos | - | 30 | - |
-| Inferência (requisições) | 5 | 30 | - |
-| Inferência (tokens de entrada) | - | - | 100.000 |
-| Inferência (tokens de entrada - high-end) | - | - | 0 |
-| Ferramentas (compartilhado) | - | 100 | - |
-| Ferramenta `web_search` | - | 15 | - |
-| Ferramenta `x_posts_search` | - | 10 | - |
-| Ferramenta `generate_image` | - | 3 | - |
+É importante ressaltar que a utilização de recursos que envolvem custos é imediatamente interrompida quando o saldo da conta é zero ou negativo, independentemente do plano de assinatura. Portanto, é fundamental manter um saldo positivo para garantir a continuidade do acesso aos recursos e evitar interrupções no serviço.
 
-## [Tier 1](#tab/tier1)
+## Limites
 
-| Operação | RPM | RPD | TPM |
-| --- | ---: | ---: | ---: |
-| Pesquisa de documentos | 150 | - | - |
-| Inserção de documentos | - | 10.000 | - |
-| Inferência (requisições) | 50 | 10.000 | - |
-| Inferência (tokens de entrada) | - | - | 5.000.000 |
-| Inferência (tokens de entrada - high-end) | - | - | 200.000 |
-| Ferramentas (compartilhado) | - | 1.000 | - |
-| Ferramenta `web_search` | - | 300 | - |
-| Ferramenta `x_posts_search` | - | 100 | - |
-| Ferramenta `generate_image` | - | 50 | - |
+Os limites de uso regulam o número de requisições e recursos disponíveis conforme o plano de assinatura da sua conta.
 
-## [Tier 2](#tab/tier2)
+## [Free](#tab/free)
 
-| Operação | RPM | RPD | TPM |
-| --- | ---: | ---: | ---: |
-| Pesquisa de documentos | 1.000 | - | - |
-| Inserção de documentos | - | 100.000 | - |
-| Inferência (requisições) | 500 | - | - |
-| Inferência (tokens de entrada) | - | - | 20.000.000 |
-| Inferência (tokens de entrada - high-end) | - | - | 2.000.000 |
-| Ferramentas (compartilhado) | - | 10.000 | - |
-| Ferramenta `web_search` | - | 1.000 | - |
-| Ferramenta `x_posts_search` | - | 500 | - |
-| Ferramenta `generate_image` | - | 300 | - |
+| Recurso | Valor |
+| --- | --- |
+| Acesso a modelos | Modelos básicos |
+| Comissão sobre inferência | 25% |
+| BYOK (Bring your own key) | Limitado |
+| JSON Healing | Sim |
+| Stability routing | Sim |
+| Complexity routing | Não |
+| Rate limits | Considerável |
+| Contexto máximo | 64K tokens |
+| **RAG** |  |
+| Coleções | Até 2 coleções |
+| Pesquisas | Baixo limite — 10 pesquisas/minuto |
+| Inserções | Baixo limite — 100 inserções/dia |
+| Processamento composto | Não disponível |
+| **Ferramentas embutidas** |  |
+| Pesquisa na internet | 15/dia |
+| Pesquisa no Twitter/X | Não disponível |
+| Deep search | Não disponível |
+| Geração de documentos e páginas web | 5/dia |
+| Geração e edição de imagens | 5/dia |
+| Execução de código e requisições avançadas | 30/dia |
+| Memória e calendário | Sim |
+| **Conta** |  |
+| Armazenamento incluso | 30 MB (limite fixo) |
+| Retenção de conversas | Não disponível |
+| Suporte | Por e-mail |
 
-## [Tier 3](#tab/tier3)
+## [Pro](#tab/pro)
 
-| Operação | RPM | RPD | TPM |
-| --- | ---: | ---: | ---: |
-| Pesquisa de documentos | - | - | - |
-| Inserção de documentos | - | - | - |
-| Inferência (requisições) | - | - | - |
-| Inferência (tokens de entrada) | - | - | 100.000.000 |
-| Inferência (tokens de entrada - high-end) | - | - | 30.000.000 |
-| Ferramentas (compartilhado) | - | 50.000 | - |
-| Ferramenta `web_search` | - | 10.000 | - |
-| Ferramenta `x_posts_search` | - | 5.000 | - |
-| Ferramenta `generate_image` | - | 1.000 | - |
+| Recurso | Valor |
+| --- | --- |
+| Acesso a modelos | Modelos avançados |
+| Comissão sobre inferência | 5% |
+| BYOK (Bring your own key) | Sim |
+| JSON Healing | Sim |
+| Stability routing | Sim |
+| Complexity routing | Sim |
+| Rate limits | Alto |
+| Contexto máximo | Ilimitado |
+| **RAG** |  |
+| Coleções | Ilimitado |
+| Pesquisas | Alto limite — 100 pesquisas/minuto |
+| Inserções | Alto limite — 10.000 inserções/dia |
+| Processamento composto | Até 3 arquivos/dia |
+| **Ferramentas embutidas** |  |
+| Pesquisa na internet | 1.000/dia |
+| Pesquisa no Twitter/X | 1.000/dia |
+| Deep search | 100/dia |
+| Geração de documentos e páginas web | 1.000/dia |
+| Geração e edição de imagens | 500/dia |
+| Execução de código e requisições avançadas | 5.000/dia |
+| Memória e calendário | Sim |
+| **Conta** |  |
+| Armazenamento incluso | 2 GB (excedente: $0,90/GB/mês) |
+| Retenção de conversas | 2 dias |
+| Suporte | Prioritário |
+
+## [Max](#tab/max)
+
+| Recurso | Valor |
+| --- | --- |
+| Acesso a modelos | Todos os modelos |
+| Comissão sobre inferência | Nenhuma |
+| BYOK (Bring your own key) | Sim |
+| JSON Healing | Sim |
+| Stability routing | Sim |
+| Complexity routing | Sim |
+| Rate limits | Mais alto |
+| Contexto máximo | Ilimitado |
+| **RAG** |  |
+| Coleções | Ilimitado |
+| Pesquisas | Limite elevado — 3.000 pesquisas/minuto |
+| Inserções | Ilimitado |
+| Processamento composto | Até 10 arquivos/dia |
+| **Ferramentas embutidas** |  |
+| Pesquisa na internet | 10.000/dia |
+| Pesquisa no Twitter/X | 10.000/dia |
+| Deep search | 1.000/dia |
+| Geração de documentos e páginas web | 50.000/dia |
+| Geração e edição de imagens | 5.000/dia |
+| Execução de código e requisições avançadas | 100.000/dia |
+| Memória e calendário | Sim |
+| **Conta** |  |
+| Armazenamento incluso | 20 GB (excedente: $2,20/GB/mês) |
+| Retenção de conversas | 30 dias |
+| Suporte | Dedicado |
 
 ---
-
-**Descrição das operações:**
-- **Pesquisa de documentos:** inclui pesquisa semântica de documentos em uma coleção.
-- **Inserção de documentos:** criação e modificação de documentos em uma coleção.
-- **Inferência (requisições):** número de chamadas de inferência (API ou chat client).
-- **Inferência (tokens de entrada):** tokens de entrada usados em inferência.
-- **Inferência (tokens de entrada - high-end):** tokens de entrada para modelos high-end (bloqueado no Tier zero).
-- **Ferramentas (compartilhado):** uso de [ferramentas integradas](/docs/builtin-tools) providas pela AIVAX (não inclui ferramentas customizadas).
-- **Ferramenta (nome):** uso individual de cada ferramenta integrada.
 
 ## Grupos de modelos
 
@@ -95,4 +125,4 @@ Exemplo: se usar um modelo "descontado", os limites de taxa serão 50% menores (
 
 ## Limites para BYOK (Bring-your-own-key)
 
-Para modelos providos por você, o limite é **1.500 requisições por minuto** (separado do limite de inferência integrada).
+Não há custo para utilizar sua própria api-key, no entanto, para o plano grátis os limites são mais restritos. Para os planos Pro e Max não há nenhum limite para uso de BYOK.

@@ -8,7 +8,7 @@ items:
   href: authentication.md
 - name: Precificação
   href: pricing.md
-- name: Limites de taxa
+- name: Planos e limites
   href: limits.md 
 
 - name: RAG e coleções
@@ -39,6 +39,8 @@ items:
   href: tools/mcp.md
 - name: Funções de protocolo
   href: tools/protocol-functions.md
+- name: Shell
+  href: tools/shell.md
 
 - name: Recursos
 

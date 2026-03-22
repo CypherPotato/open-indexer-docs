@@ -935,6 +935,16 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "docs/en/tools/shell.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/en/tools/shell.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "docs/features/chat-clients.md",
       "output": {
         ".html": {
@@ -1112,6 +1122,16 @@
       "output": {
         ".html": {
           "relative_path": "docs/tools/protocol-functions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/tools/shell.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/tools/shell.html"
         }
       },
       "version": ""

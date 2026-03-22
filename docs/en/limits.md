@@ -1,92 +1,117 @@
-# API Limits
+# Plans and Limits
 
-Rate limits regulate the number of requests you can send within a time window. They help prevent abuse and ensure stability for all users.
+## Plans
 
-The limits below are applied according to your account tier:
+AIVAX offers three subscription plans: **Free**, **Pro**, and **Max**. Each plan has specific usage limits, resource access, and support, suited for different needs and usage levels.
 
-- **Tier zero:** new account that has never added credits or that has test credits.
-- **Tier 1:** account created at least 48 hours ago and that has already added any amount of credits.
-- **Tier 2:** account created at least 1 month ago and that has already added at least $100 in credits.
-- **Tier 3:** account created at least 3 months ago and that has already added at least $1,000 in credits.
+The plans fit best for each situation and moment of use for each user:
+- **Free:** $0/month: ideal for those just starting, testing the platform, or with basic needs. Provides access to basic models and limited resources, with a reasonable number of requests and built‑in tools.
+- **Pro:** $39/month: perfect for users who need more resources, access to advanced models, and higher limits. Includes priority support and additional storage options.
+- **Max:** $399/month: intended for advanced users and companies that require maximum performance, access to all models, high limits, and dedicated support. Offers the best experience and resources available on the platform.
 
-Measurement is based on **credit addition** rather than consumption. Example: you do not need to spend $100 to move to Tier 2, just add that amount.
+Support is an important differentiator between the plans, with Pro offering priority support and Max offering dedicated support to ensure users' needs are met efficiently. The difference between priority and dedicated support is that priority support provides faster response times and access to specialists, while dedicated support gives an exclusive contact for personalized assistance and problem resolution.
 
-**Legends:**
-- **RPM**: requests per minute
-- **RPD**: requests per day (24h)
-- **TPM**: input tokens per minute
+All plans are renewed monthly and do not require a long‑term commitment, allowing users to choose the plan that best fits their needs and change as necessary. When subscribing to a plan, the subscription fee is automatically deducted from the account balance. On the 1st of every month, the subscription fee is renewed again if there is sufficient balance in the account for the current monthly fee. When subscribing to a plan after the first day of the month, a proportional amount is charged for the remaining period of the month, and the full renewal will occur in the next monthly cycle.
 
-## [New account](#tab/free)
+No plan includes usage credits, and usage limits are applied regardless of the account balance, regardless of the available balance. The plans imply better plans and resources that are provided in AIVAX, as well as the convenience of consolidating the balance for several different services into a single wallet.
 
-| Operation | RPM | RPD | TPM |
-| --- | ---: | ---: | ---: |
-| Document search | 10 | - | - |
-| Document insertion | - | 30 | - |
-| Inference (requests) | 5 | 30 | - |
-| Inference (input tokens) | - | - | 50.000 |
-| Inference (input tokens - high-end) | 0 | - | 0 |
-| Serverless execution | 5 | 100 | - |
-| Tools (shared) | - | 100 | - |
-| Tool `web_search` | - | 15 | - |
-| Tool `x_posts_search` | - | 10 | - |
-| Tool `generate_image` | - | 3 | - |
+It is important to note that the use of cost‑incurring resources is immediately halted when the account balance is zero or negative, regardless of the subscription plan. Therefore, it is essential to maintain a positive balance to ensure continued access to resources and avoid service interruptions.
 
-## [Tier 1](#tab/tier1)
+## Limits
 
-| Operation | RPM | RPD | TPM |
-| --- | ---: | ---: | ---: |
-| Document search | 150 | - | - |
-| Document insertion | - | 3.000 | - |
-| Inference (requests) | 75 | 10.000 | - |
-| Inference (input tokens) | - | - | 1.000.000 |
-| Inference (input tokens - high-end) | - | - | 200.000 |
-| Serverless execution | 30 | - | - |
-| Tools (shared) | - | 1.000 | - |
-| Tool `web_search` | - | 300 | - |
-| Tool `x_posts_search` | - | 100 | - |
-| Tool `generate_image` | - | 30 | - |
+Usage limits regulate the number of requests and resources available according to your account's subscription plan.
 
-## [Tier 2](#tab/tier2)
+## [Free](#tab/free)
 
-| Operation | RPM | RPD | TPM |
-| --- | ---: | ---: | ---: |
-| Document search | 300 | - | - |
-| Document insertion | - | 10.000 | - |
-| Inference (requests) | 200 | - | - |
-| Inference (input tokens) | - | - | 4.000.000 |
-| Inference (input tokens - high-end) | - | - | 1.000.000 |
-| Serverless execution | 100 | - | - |
-| Tools (shared) | - | 10.000 | - |
-| Tool `web_search` | - | 1.000 | - |
-| Tool `x_posts_search` | - | 500 | - |
-| Tool `generate_image` | - | 300 | - |
+| Resource | Value |
+| --- | --- |
+| Model access | Basic models |
+| Inference commission | 25% |
+| BYOK (Bring your own key) | Limited |
+| JSON Healing | Yes |
+| Stability routing | Yes |
+| Complexity routing | No |
+| Rate limits | Considerable |
+| Maximum context | 64K tokens |
+| **RAG** |  |
+| Collections | Up to 2 collections |
+| Searches | Low limit — 10 searches/minute |
+| Insertions | Low limit — 100 insertions/day |
+| Composite processing | Not available |
+| **Built‑in tools** |  |
+| Internet search | 15/day |
+| Twitter/X search | Not available |
+| Deep search | Not available |
+| Document and web page generation | 5/day |
+| Image generation and editing | 5/day |
+| Code execution and advanced requests | 30/day |
+| Memory and calendar | Yes |
+| **Account** |  |
+| Included storage | 30 MB (fixed limit) |
+| Conversation retention | Not available |
+| Support | By email |
 
-## [Tier 3](#tab/tier3)
+## [Pro](#tab/pro)
 
-| Operation | RPM | RPD | TPM |
-| --- | ---: | ---: | ---: |
-| Document search | 1.000 | - | - |
-| Document insertion | - | 30.000 | - |
-| Inference (requests) | 1.000 | - | - |
-| Inference (input tokens) | - | - | 10.000.000 |
-| Inference (input tokens - high-end) | - | - | 4.000.000 |
-| Serverless execution | 500 | - | - |
-| Tools (shared) | - | 50.000 | - |
-| Tool `web_search` | - | 10.000 | - |
-| Tool `x_posts_search` | - | 5.000 | - |
-| Tool `generate_image` | - | 1.000 | - |
+| Resource | Value |
+| --- | --- |
+| Model access | Advanced models |
+| Inference commission | 5% |
+| BYOK (Bring your own key) | Yes |
+| JSON Healing | Yes |
+| Stability routing | Yes |
+| Complexity routing | Yes |
+| Rate limits | High |
+| Maximum context | Unlimited |
+| **RAG** |  |
+| Collections | Unlimited |
+| Searches | High limit — 100 searches/minute |
+| Insertions | High limit — 10,000 insertions/day |
+| Composite processing | Up to 3 files/day |
+| **Built‑in tools** |  |
+| Internet search | 1,000/day |
+| Twitter/X search | 1,000/day |
+| Deep search | 100/day |
+| Document and web page generation | 1,000/day |
+| Image generation and editing | 500/day |
+| Code execution and advanced requests | 5,000/day |
+| Memory and calendar | Yes |
+| **Account** |  |
+| Included storage | 2 GB (excess: $0.90/GB/month) |
+| Conversation retention | 2 days |
+| Support | Priority |
+
+## [Max](#tab/max)
+
+| Resource | Value |
+| --- | --- |
+| Model access | All models |
+| Inference commission | None |
+| BYOK (Bring your own key) | Yes |
+| JSON Healing | Yes |
+| Stability routing | Yes |
+| Complexity routing | Yes |
+| Rate limits | Highest |
+| Maximum context | Unlimited |
+| **RAG** |  |
+| Collections | Unlimited |
+| Searches | High limit — 3,000 searches/minute |
+| Insertions | Unlimited |
+| Composite processing | Up to 10 files/day |
+| **Built‑in tools** |  |
+| Internet search | 10,000/day |
+| Twitter/X search | 10,000/day |
+| Deep search | 1,000/day |
+| Document and web page generation | 50,000/day |
+| Image generation and editing | 5,000/day |
+| Code execution and advanced requests | 100,000/day |
+| Memory and calendar | Yes |
+| **Account** |  |
+| Included storage | 20 GB (excess: $2.20/GB/month) |
+| Conversation retention | 30 days |
+| Support | Dedicated |
 
 ---
-
-**Operation descriptions:**
-- **Document search:** includes semantic search of documents in a collection.
-- **Document insertion:** creation and modification of documents in a collection.
-- **Inference (requests):** number of inference or function calls (API or chat client).
-- **Inference (input tokens):** input tokens used in inference.
-- **Inference (input tokens - high-end):** input tokens for high‑end models (Tier 1+).
-- **Serverless execution:** calls to [serverless function](/docs/en/serverless).
-- **Tools (shared):** use of [built‑in tools](/docs/en/builtin-tools) provided by AIVAX (does not include custom tools).
-- **Tool (name):** individual use of each integrated tool.
 
 ## Model groups
 
@@ -96,8 +121,8 @@ Certain models have rate multipliers:
 - **Low‑latency:** 0.3x
 - **Free:** 0.1x
 
-Example: if you use a "discounted" model, the rate limits will be 50% lower (e.g., 75 req/min → 37 req/min).
+Example: if you use a “discounted” model, the rate limits will be 50 % lower (e.g., 75 req/min → 37 req/min).
 
-## Limits for BYOK (Bring-your-own-key)
+## Limits for BYOK (Bring‑your‑own‑key)
 
-For models provided by you, the limit is **1,500 requests per minute** (separate from the integrated inference limit).
+There is no cost to use your own API key; however, for the free plan the limits are more restrictive. For the Pro and Max plans there are no limits on BYOK usage.

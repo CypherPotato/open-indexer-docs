@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Limites da API | AIVAX </title>
+        <title>Planos e limites | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="Limites da API | AIVAX ">
+        <meta name="title" content="Planos e limites | AIVAX ">
 
 
         <link rel="icon" href="../assets/img/favicon.ico">
@@ -122,36 +122,32 @@
                 </div>
 
                 <article data-uid="">
-<h1 id="limites-da-api">Limites da API</h1>
+<h1 id="planos-e-limites">Planos e limites</h1>
 
-<p>Os limites de taxa regulam o número de requisições que você pode enviar em uma janela de tempo. Eles ajudam a prevenir abuso e garantir estabilidade para todos os usuários.</p>
-<p>Os limites abaixo são aplicados conforme o tier da sua conta:</p>
+<h2 id="planos">Planos</h2>
+<p>A AIVAX oferece três planos de assinatura: <strong>Free</strong>, <strong>Pro</strong> e <strong>Max</strong>. Cada plano tem limites específicos de uso, acesso a recursos e suporte, adequados para diferentes necessidades e níveis de uso.</p>
+<p>Os planos se adequam melhor à cada situação e momento de uso de cada utilizador:</p>
 <ul>
-<li><strong>Tier zero:</strong> conta nova que nunca adicionou créditos ou que possui créditos de teste.</li>
-<li><strong>Tier 1:</strong> conta criada há pelo menos 48 horas e que já adicionou qualquer valor em créditos.</li>
-<li><strong>Tier 2:</strong> conta criada há pelo menos 1 mês e que já adicionou pelo menos $100 em créditos.</li>
-<li><strong>Tier 3:</strong> conta criada há pelo menos 3 meses e que já adicionou pelo menos $1.000 em créditos.</li>
+<li><strong>Free:</strong> $0/mês: ideal para quem está começando, testando a plataforma ou tem necessidades básicas. Oferece acesso a modelos básicos e recursos limitados, com um número razoável de requisições e ferramentas embutidas.</li>
+<li><strong>Pro:</strong> $39/mês: perfeito para usuários que precisam de mais recursos, acesso a modelos avançados e limites mais altos. Inclui suporte prioritário e opções de armazenamento adicionais.</li>
+<li><strong>Max:</strong> $399/mês: destinado a usuários avançados e empresas que exigem o máximo desempenho, acesso a todos os modelos, limites elevados e suporte dedicado. Oferece a melhor experiência e recursos disponíveis na plataforma.</li>
 </ul>
-<p>A medição é pela <strong>adição de créditos</strong> e não pelo consumo. Exemplo: não é necessário consumir $100 para avançar ao Tier 2, basta adicionar esse valor.</p>
-<p><strong>Legendas:</strong></p>
-<ul>
-<li><strong>RPM</strong>: requisições por minuto</li>
-<li><strong>RPD</strong>: requisições por dia (24h)</li>
-<li><strong>TPM</strong>: tokens de entrada por minuto</li>
-</ul>
+<p>O suporte é um diferencial importante entre os planos, com o Pro oferecendo suporte prioritário e o Max oferecendo suporte dedicado para garantir que as necessidades dos usuários sejam atendidas de forma eficiente. A diferença entre o suporte prioritário e dedicado é que o suporte prioritário oferece atendimento mais rápido e acesso a especialistas, enquanto o suporte dedicado fornece um contato exclusivo para assistência personalizada e resolução de problemas.</p>
+<p>Todos os planos são renovados mensalmente e não exigem compromisso de longo prazo, permitindo que os usuários escolham o plano que melhor se adapta às suas necessidades e mudem conforme necessário. Ao assinar um plano, o valor da assinatura é deduzido automaticamente do saldo da conta. No dia 1 de todo mês, o valor da assinatura é renovado novamente se existir saldo suficiente em conta para a mensalidade atual. Ao assinar um plano após o primeiro dia do mês, o valor proporcial é cobrado para o período restante do mês, e a renovação completa ocorrerá no próximo ciclo mensal.</p>
+<p>Nenhum plano inclui créditos de uso, e os limites de uso são aplicados independentemente do saldo da conta, independente do saldo disponível em conta. Os planos implicam melhor em planos e recursos que são fornecidos no AIVAX, além da facilidade em concentrar o saldo para vários serviços diferentes em uma única carteira.</p>
+<p>É importante ressaltar que a utilização de recursos que envolvem custos é imediatamente interrompida quando o saldo da conta é zero ou negativo, independentemente do plano de assinatura. Portanto, é fundamental manter um saldo positivo para garantir a continuidade do acesso aos recursos e evitar interrupções no serviço.</p>
+<h2 id="limites">Limites</h2>
+<p>Os limites de uso regulam o número de requisições e recursos disponíveis conforme o plano de assinatura da sua conta.</p>
 <div class="tabGroup" id="tabgroup_1">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_1_free" role="tab" aria-controls="tabpanel_1_free" data-tab="free" tabindex="0" aria-selected="true">Conta nova</a>
+<a href="#tabpanel_1_free" role="tab" aria-controls="tabpanel_1_free" data-tab="free" tabindex="0" aria-selected="true">Free</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_1_tier1" role="tab" aria-controls="tabpanel_1_tier1" data-tab="tier1" tabindex="-1">Tier 1</a>
+<a href="#tabpanel_1_pro" role="tab" aria-controls="tabpanel_1_pro" data-tab="pro" tabindex="-1">Pro</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_1_tier2" role="tab" aria-controls="tabpanel_1_tier2" data-tab="tier2" tabindex="-1">Tier 2</a>
-</li>
-<li role="presentation">
-<a href="#tabpanel_1_tier3" role="tab" aria-controls="tabpanel_1_tier3" data-tab="tier3" tabindex="-1">Tier 3</a>
+<a href="#tabpanel_1_max" role="tab" aria-controls="tabpanel_1_max" data-tab="max" tabindex="-1">Max</a>
 </li>
 </ul>
 <section id="tabpanel_1_free" role="tabpanel" data-tab="free">
@@ -159,289 +155,341 @@
 <table>
 <thead>
 <tr>
-<th>Operação</th>
-<th style="text-align: right;">RPM</th>
-<th style="text-align: right;">RPD</th>
-<th style="text-align: right;">TPM</th>
+<th>Recurso</th>
+<th>Valor</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Pesquisa de documentos</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
+<td>Acesso a modelos</td>
+<td>Modelos básicos</td>
 </tr>
 <tr>
-<td>Inserção de documentos</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">30</td>
-<td style="text-align: right;">-</td>
+<td>Comissão sobre inferência</td>
+<td>25%</td>
 </tr>
 <tr>
-<td>Inferência (requisições)</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">30</td>
-<td style="text-align: right;">-</td>
+<td>BYOK (Bring your own key)</td>
+<td>Limitado</td>
 </tr>
 <tr>
-<td>Inferência (tokens de entrada)</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">100.000</td>
+<td>JSON Healing</td>
+<td>Sim</td>
 </tr>
 <tr>
-<td>Inferência (tokens de entrada - high-end)</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">0</td>
+<td>Stability routing</td>
+<td>Sim</td>
 </tr>
 <tr>
-<td>Ferramentas (compartilhado)</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">100</td>
-<td style="text-align: right;">-</td>
+<td>Complexity routing</td>
+<td>Não</td>
 </tr>
 <tr>
-<td>Ferramenta <code>web_search</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">15</td>
-<td style="text-align: right;">-</td>
+<td>Rate limits</td>
+<td>Considerável</td>
 </tr>
 <tr>
-<td>Ferramenta <code>x_posts_search</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">-</td>
+<td>Contexto máximo</td>
+<td>64K tokens</td>
 </tr>
 <tr>
-<td>Ferramenta <code>generate_image</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">-</td>
+<td><strong>RAG</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>Coleções</td>
+<td>Até 2 coleções</td>
+</tr>
+<tr>
+<td>Pesquisas</td>
+<td>Baixo limite — 10 pesquisas/minuto</td>
+</tr>
+<tr>
+<td>Inserções</td>
+<td>Baixo limite — 100 inserções/dia</td>
+</tr>
+<tr>
+<td>Processamento composto</td>
+<td>Não disponível</td>
+</tr>
+<tr>
+<td><strong>Ferramentas embutidas</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>Pesquisa na internet</td>
+<td>15/dia</td>
+</tr>
+<tr>
+<td>Pesquisa no Twitter/X</td>
+<td>Não disponível</td>
+</tr>
+<tr>
+<td>Deep search</td>
+<td>Não disponível</td>
+</tr>
+<tr>
+<td>Geração de documentos e páginas web</td>
+<td>5/dia</td>
+</tr>
+<tr>
+<td>Geração e edição de imagens</td>
+<td>5/dia</td>
+</tr>
+<tr>
+<td>Execução de código e requisições avançadas</td>
+<td>30/dia</td>
+</tr>
+<tr>
+<td>Memória e calendário</td>
+<td>Sim</td>
+</tr>
+<tr>
+<td><strong>Conta</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>Armazenamento incluso</td>
+<td>30 MB (limite fixo)</td>
+</tr>
+<tr>
+<td>Retenção de conversas</td>
+<td>Não disponível</td>
+</tr>
+<tr>
+<td>Suporte</td>
+<td>Por e-mail</td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="tabpanel_1_tier1" role="tabpanel" data-tab="tier1" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_1_pro" role="tabpanel" data-tab="pro" aria-hidden="true" hidden="hidden">
 
 <table>
 <thead>
 <tr>
-<th>Operação</th>
-<th style="text-align: right;">RPM</th>
-<th style="text-align: right;">RPD</th>
-<th style="text-align: right;">TPM</th>
+<th>Recurso</th>
+<th>Valor</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Pesquisa de documentos</td>
-<td style="text-align: right;">150</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
+<td>Acesso a modelos</td>
+<td>Modelos avançados</td>
 </tr>
 <tr>
-<td>Inserção de documentos</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">10.000</td>
-<td style="text-align: right;">-</td>
+<td>Comissão sobre inferência</td>
+<td>5%</td>
 </tr>
 <tr>
-<td>Inferência (requisições)</td>
-<td style="text-align: right;">50</td>
-<td style="text-align: right;">10.000</td>
-<td style="text-align: right;">-</td>
+<td>BYOK (Bring your own key)</td>
+<td>Sim</td>
 </tr>
 <tr>
-<td>Inferência (tokens de entrada)</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">5.000.000</td>
+<td>JSON Healing</td>
+<td>Sim</td>
 </tr>
 <tr>
-<td>Inferência (tokens de entrada - high-end)</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">200.000</td>
+<td>Stability routing</td>
+<td>Sim</td>
 </tr>
 <tr>
-<td>Ferramentas (compartilhado)</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">1.000</td>
-<td style="text-align: right;">-</td>
+<td>Complexity routing</td>
+<td>Sim</td>
 </tr>
 <tr>
-<td>Ferramenta <code>web_search</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">300</td>
-<td style="text-align: right;">-</td>
+<td>Rate limits</td>
+<td>Alto</td>
 </tr>
 <tr>
-<td>Ferramenta <code>x_posts_search</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">100</td>
-<td style="text-align: right;">-</td>
+<td>Contexto máximo</td>
+<td>Ilimitado</td>
 </tr>
 <tr>
-<td>Ferramenta <code>generate_image</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">50</td>
-<td style="text-align: right;">-</td>
+<td><strong>RAG</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>Coleções</td>
+<td>Ilimitado</td>
+</tr>
+<tr>
+<td>Pesquisas</td>
+<td>Alto limite — 100 pesquisas/minuto</td>
+</tr>
+<tr>
+<td>Inserções</td>
+<td>Alto limite — 10.000 inserções/dia</td>
+</tr>
+<tr>
+<td>Processamento composto</td>
+<td>Até 3 arquivos/dia</td>
+</tr>
+<tr>
+<td><strong>Ferramentas embutidas</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>Pesquisa na internet</td>
+<td>1.000/dia</td>
+</tr>
+<tr>
+<td>Pesquisa no Twitter/X</td>
+<td>1.000/dia</td>
+</tr>
+<tr>
+<td>Deep search</td>
+<td>100/dia</td>
+</tr>
+<tr>
+<td>Geração de documentos e páginas web</td>
+<td>1.000/dia</td>
+</tr>
+<tr>
+<td>Geração e edição de imagens</td>
+<td>500/dia</td>
+</tr>
+<tr>
+<td>Execução de código e requisições avançadas</td>
+<td>5.000/dia</td>
+</tr>
+<tr>
+<td>Memória e calendário</td>
+<td>Sim</td>
+</tr>
+<tr>
+<td><strong>Conta</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>Armazenamento incluso</td>
+<td>2 GB (excedente: $0,90/GB/mês)</td>
+</tr>
+<tr>
+<td>Retenção de conversas</td>
+<td>2 dias</td>
+</tr>
+<tr>
+<td>Suporte</td>
+<td>Prioritário</td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="tabpanel_1_tier2" role="tabpanel" data-tab="tier2" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_1_max" role="tabpanel" data-tab="max" aria-hidden="true" hidden="hidden">
 
 <table>
 <thead>
 <tr>
-<th>Operação</th>
-<th style="text-align: right;">RPM</th>
-<th style="text-align: right;">RPD</th>
-<th style="text-align: right;">TPM</th>
+<th>Recurso</th>
+<th>Valor</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Pesquisa de documentos</td>
-<td style="text-align: right;">1.000</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
+<td>Acesso a modelos</td>
+<td>Todos os modelos</td>
 </tr>
 <tr>
-<td>Inserção de documentos</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">100.000</td>
-<td style="text-align: right;">-</td>
+<td>Comissão sobre inferência</td>
+<td>Nenhuma</td>
 </tr>
 <tr>
-<td>Inferência (requisições)</td>
-<td style="text-align: right;">500</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
+<td>BYOK (Bring your own key)</td>
+<td>Sim</td>
 </tr>
 <tr>
-<td>Inferência (tokens de entrada)</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">20.000.000</td>
+<td>JSON Healing</td>
+<td>Sim</td>
 </tr>
 <tr>
-<td>Inferência (tokens de entrada - high-end)</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">2.000.000</td>
+<td>Stability routing</td>
+<td>Sim</td>
 </tr>
 <tr>
-<td>Ferramentas (compartilhado)</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">10.000</td>
-<td style="text-align: right;">-</td>
+<td>Complexity routing</td>
+<td>Sim</td>
 </tr>
 <tr>
-<td>Ferramenta <code>web_search</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">1.000</td>
-<td style="text-align: right;">-</td>
+<td>Rate limits</td>
+<td>Mais alto</td>
 </tr>
 <tr>
-<td>Ferramenta <code>x_posts_search</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">500</td>
-<td style="text-align: right;">-</td>
+<td>Contexto máximo</td>
+<td>Ilimitado</td>
 </tr>
 <tr>
-<td>Ferramenta <code>generate_image</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">300</td>
-<td style="text-align: right;">-</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="tabpanel_1_tier3" role="tabpanel" data-tab="tier3" aria-hidden="true" hidden="hidden">
-
-<table>
-<thead>
-<tr>
-<th>Operação</th>
-<th style="text-align: right;">RPM</th>
-<th style="text-align: right;">RPD</th>
-<th style="text-align: right;">TPM</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Pesquisa de documentos</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
+<td><strong>RAG</strong></td>
+<td></td>
 </tr>
 <tr>
-<td>Inserção de documentos</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
+<td>Coleções</td>
+<td>Ilimitado</td>
 </tr>
 <tr>
-<td>Inferência (requisições)</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
+<td>Pesquisas</td>
+<td>Limite elevado — 3.000 pesquisas/minuto</td>
 </tr>
 <tr>
-<td>Inferência (tokens de entrada)</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">100.000.000</td>
+<td>Inserções</td>
+<td>Ilimitado</td>
 </tr>
 <tr>
-<td>Inferência (tokens de entrada - high-end)</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">30.000.000</td>
+<td>Processamento composto</td>
+<td>Até 10 arquivos/dia</td>
 </tr>
 <tr>
-<td>Ferramentas (compartilhado)</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">50.000</td>
-<td style="text-align: right;">-</td>
+<td><strong>Ferramentas embutidas</strong></td>
+<td></td>
 </tr>
 <tr>
-<td>Ferramenta <code>web_search</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">10.000</td>
-<td style="text-align: right;">-</td>
+<td>Pesquisa na internet</td>
+<td>10.000/dia</td>
 </tr>
 <tr>
-<td>Ferramenta <code>x_posts_search</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">5.000</td>
-<td style="text-align: right;">-</td>
+<td>Pesquisa no Twitter/X</td>
+<td>10.000/dia</td>
 </tr>
 <tr>
-<td>Ferramenta <code>generate_image</code></td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">1.000</td>
-<td style="text-align: right;">-</td>
+<td>Deep search</td>
+<td>1.000/dia</td>
+</tr>
+<tr>
+<td>Geração de documentos e páginas web</td>
+<td>50.000/dia</td>
+</tr>
+<tr>
+<td>Geração e edição de imagens</td>
+<td>5.000/dia</td>
+</tr>
+<tr>
+<td>Execução de código e requisições avançadas</td>
+<td>100.000/dia</td>
+</tr>
+<tr>
+<td>Memória e calendário</td>
+<td>Sim</td>
+</tr>
+<tr>
+<td><strong>Conta</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>Armazenamento incluso</td>
+<td>20 GB (excedente: $2,20/GB/mês)</td>
+</tr>
+<tr>
+<td>Retenção de conversas</td>
+<td>30 dias</td>
+</tr>
+<tr>
+<td>Suporte</td>
+<td>Dedicado</td>
 </tr>
 </tbody>
 </table>
 </section>
 </div>
-
-<p><strong>Descrição das operações:</strong></p>
-<ul>
-<li><strong>Pesquisa de documentos:</strong> inclui pesquisa semântica de documentos em uma coleção.</li>
-<li><strong>Inserção de documentos:</strong> criação e modificação de documentos em uma coleção.</li>
-<li><strong>Inferência (requisições):</strong> número de chamadas de inferência (API ou chat client).</li>
-<li><strong>Inferência (tokens de entrada):</strong> tokens de entrada usados em inferência.</li>
-<li><strong>Inferência (tokens de entrada - high-end):</strong> tokens de entrada para modelos high-end (bloqueado no Tier zero).</li>
-<li><strong>Ferramentas (compartilhado):</strong> uso de <a href="/docs/builtin-tools">ferramentas integradas</a> providas pela AIVAX (não inclui ferramentas customizadas).</li>
-<li><strong>Ferramenta (nome):</strong> uso individual de cada ferramenta integrada.</li>
-</ul>
 <h2 id="grupos-de-modelos">Grupos de modelos</h2>
 <p>Certos modelos possuem multiplicadores de taxa:</p>
 <ul>
@@ -452,7 +500,7 @@
 </ul>
 <p>Exemplo: se usar um modelo &quot;descontado&quot;, os limites de taxa serão 50% menores (ex: 75 req/min → 37 req/min).</p>
 <h2 id="limites-para-byok-bring-your-own-key">Limites para BYOK (Bring-your-own-key)</h2>
-<p>Para modelos providos por você, o limite é <strong>1.500 requisições por minuto</strong> (separado do limite de inferência integrada).</p>
+<p>Não há custo para utilizar sua própria api-key, no entanto, para o plano grátis os limites são mais restritos. Para os planos Pro e Max não há nenhum limite para uso de BYOK.</p>
 
 </article>
 

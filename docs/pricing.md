@@ -1,28 +1,25 @@
 # Precificação
 
-O modelo de pagamento da AIVAX é **pré-pago**: você adiciona saldo à sua conta e utiliza nossos serviços consumindo esse crédito. Não enviamos faturas surpresas no final do mês. Isso garante total previsibilidade sobre seus gastos com inferência e agentes.
+O modelo de pagamento da AIVAX é **pré-pago**: você adiciona saldo à sua conta e utiliza nossos serviços consumindo esse crédito. A AIVAX utiliza um modelo de [assinatura mensal](/docs/limits) em conjunto com o saldo de utilização dos serviços. Os planos de assinatura (Free, Pro e Max) oferecem diferentes níveis de acesso a recursos, limites de uso e suporte, mas o consumo dos serviços é sempre debitado do saldo da conta.
 
 Ao adicionar créditos, a AIVAX cobra uma pequena taxa (variável por método de pagamento) para cobrir impostos (notas fiscais), tarifas bancárias e custos operacionais.
 
-A precificação de inferência (geração de texto) é repassada diretamente dos provedores (como Google e OpenAI) **sem markup**. Você paga na AIVAX exatamente o mesmo preço de tabela que pagaria utilizando esses provedores diretamente.
+Alguns planos incluem uma **taxa de comissão** para o uso de saldo, que é uma porcentagem aplicada sobre o valor gasto em inferência (geração de texto). As comissões são atualmente:
+- Plano Free: 25% de comissão sobre o valor gasto em inferência.
+- Plano Pro: 5% de comissão sobre o valor gasto em inferência.
+- Plano Max: sem comissão.
+
+A precificação de inferência (geração de texto) é repassada diretamente dos provedores (como Google e OpenAI). Você paga na AIVAX exatamente o mesmo preço de tabela que pagaria utilizando esses provedores diretamente.
 
 Usamos diferentes [serviços](/docs/builtin-tools) para ajudar você a criar assistentes agênticos. Algumas ferramentas possuem custos específicos que são debitados do seu saldo sem taxas adicionais.
 
-> **Nota:** A inferência é calculada em dólares americanos (USD). Pode haver flutuação cambial ao converter da sua moeda local para o dólar no momento da recarga ou do uso.
+> **Nota:** Todos os custos são calculados em dólares americanos (USD). Pode haver flutuação cambial ao converter da sua moeda local para o dólar no momento da recarga ou do uso.
 
 ## Expiração de Créditos
 
 Como não podemos prever qual modelo você utilizará, precisamos alinhar a validade dos créditos com as políticas mais restritivas dos nossos fornecedores.
+
 Atualmente, os créditos expiram **12 meses** após a data de adição. Consulte os detalhes em nossos [termos de uso](/docs/legal/terms-of-service).
-
-## Bring-your-own-key (BYOK)
-
-Você pode conectar sua própria chave de API (compatível com OpenAI) para usar a infraestrutura da AIVAX.
-
-* **Custo de Inferência:** $0,00 (cobrado diretamente pelo dono da chave).
-* **Limites:** Os limites de taxa são aumentados para **1.500 requisições por minuto** (aprox. 25 req/s), sem limitação de tokens.
-
-**Importante:** Mesmo usando sua própria chave, serviços periféricos da AIVAX (como armazenamento de [RAG](/docs/entities/collections.md), pesquisa na web, geração de imagem, etc.) continuam sendo cobrados do seu saldo AIVAX. Se seu saldo ficar negativo, o serviço será interrompido, inclusive para chamadas BYOK.
 
 ## RAG (Coleções e Vetores)
 
@@ -35,28 +32,23 @@ O custo de indexação depende do modelo de incorporação (embedding) escolhido
 * `@google/text-embedding-004`: $ 0,10 / 1 milhão de tokens.
 * `@baai/bge-m3`: $ 0,012 / 1 milhão de tokens.
 
-*No momento, não cobramos taxa computacional para processar a indexação, apenas pelo armazenamento resultante.*
-
-**Cálculo de Tokens**
-Como nem todos os provedores retornam a contagem exata de tokens na resposta, utilizamos uma aproximação padrão da indústria para faturamento:
-`tokens = ceil(utf8_bytes_count / 4)`
-
 ## Armazenamento
 
-Para manter a integridade e disponibilidade dos seus dados, cobramos uma taxa de armazenamento por hora.
+Para manter a integridade e disponibilidade dos seus dados, cobramos uma taxa de armazenamento por hora. O preço varia conforme o plano de assinatura:
 
-* **Preço:** **$0,0015** por GB / hora.
-* **Franquia Gratuita:** Os primeiros **100 MB são grátis**.
+- **Plano free**: 30 MB franquia, sem opção de armazenamento adicional.
+- **Plano Pro**: 2 GB franquia, $0,50 por GB adicional por mês, cobrado por hora.
+- **Plano Max**: 20 GB franquia, $0,20 por GB adicional por mês, cobrado por hora.
 
 **Como funciona a cobrança:**
 Você paga apenas pelo **excedente** da franquia.
-* *Exemplo:* Se você usar 120 MB por uma hora, pagará apenas sobre os 20 MB excedentes.
-* *Exemplo:* Se usar 80 MB, o custo é zero.
+* *Exemplo:* Se estiver no plano Pro você usar 2,20 GB por uma hora, pagará apenas sobre os 0,20 GB excedentes. Se usar 250 MB, o custo é zero.
 
 **O que consome armazenamento:**
 1.  Memória de longo prazo dos usuários (chats e inferências salvas);
 2.  Cache de descrições de imagens (processamento multi-modal);
-3.  Conteúdo de documentos RAG e seus vetores.
+3.  Conteúdo de documentos RAG e seus vetores;
+4.  Armazenamento do bash/shell virtual.
 
 Logs de sistema são temporários e não geram custos de armazenamento.
 
