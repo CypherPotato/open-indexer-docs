@@ -21,14 +21,3 @@ Não é possível virtualizar ferramentas que executam no lado do cliente no amb
 É possível definir persistência de dados para o ambiente da shell. Quando ativado, o usuário de inferência (através do parâmetro `$.user` ou `$.tag` do cliente de chat) terá um ambiente de shell virtual exclusivo, o que pode ser acessado em diferentes conversas e sessões. Isso é útil para quando o agente precisa manter um estado entre sessões, como arquivos temporários, logs ou outros dados que precisam ser persistidos.
 
 Se essa persistência estiver desativada, o ambiente de shell é descartado após uma iteração de inferência.
-
-## Emulação
-
-O ambiente de shell é emulado em um ambiente sandbox e não é conectado ao sistema operacional real. Isso significa que certas ferramentas como `apt-get` não estarão disponíveis para o modelo. O ambiente é projetado para ser seguro e isolado, evitando qualquer impacto no sistema real. Ele é ideal para tarefas de processamento de texto, manipulação de dados e outras operações que não exigem acesso direto ao sistema operacional.
-
-O ambiente de shell é capaz de:
-- Executar comandos de I/O básicos, como leitura e escrita de arquivos, manipulação de texto e execução de scripts.
-- Acessar à internet para fazer requisições HTTP usando ferramentas como `curl` ou `wget`.
-- Compactar e descompactar arquivos usando ferramentas como `tar` e `zip`.
-- Ler conteúdo de diversos formatos de arquivo para markdown.
-- Executar scripts bash.

@@ -124,27 +124,17 @@
                 <article data-uid="">
 <h1 id="shell">Shell</h1>
 
-<p>AIVAX provides a virtual shell environment that can be used by agent assistants to execute terminal commands. This feature is especially useful for tasks such as automation, system management, script execution, and other operations that require interaction with the operating system.</p>
-<p>The shell environment allows moving tools used by the agent to the shell side, turning them into a CLI tool. This is advantageous when you have hundreds of tools and don't want to overload the model's context, or when the tools have a more complex command-line interface that would be difficult to call directly from the model.</p>
+<p>A AIVAX offers a virtual shell environment that can be used by agent assistants to execute terminal commands. This feature is especially useful for tasks such as automation, system management, script execution, and other operations that require interaction with the operating system.</p>
+<p>The shell environment enables moving tools used by the agent to the shell side, turning them into a CLI tool. This is advantageous when you have hundreds of tools and don’t want to overload the model’s context, or when the tools have a more complex command‑line interface that would be difficult to call directly from the model.</p>
 <h2 id="adapting-tools-for-shell">Adapting tools for shell</h2>
-<p>In the virtual shell interface, standard operating system manipulation tools are available, such as <code>grep</code>, <code>awk</code>, <code>sed</code>, <code>curl</code>, <code>wget</code>, among others. This way, you can adapt your tools to return raw or long outputs, and the model can use the shell's text manipulation tools to extract the relevant information, for example:</p>
+<p>In the virtual shell interface, standard operating‑system manipulation tools are available, such as <code>grep</code>, <code>awk</code>, <code>sed</code>, <code>curl</code>, <code>wget</code>, among others. Thus, you can adapt your tools to return raw or long outputs, and the model can use the shell’s text‑manipulation tools to extract the relevant information, example:</p>
 <pre><code class="lang-bash">get-users --filter active --format csv | grep &quot;John Doe&quot; | awk -F, '{print $1, $2}'
 </code></pre>
-<p>In the line above, <code>get-users</code> is a custom tool that returns a list of users in CSV format. The <code>grep</code> command filters the results to find &quot;John Doe&quot;, and <code>awk</code> extracts and formats the desired columns. This tool may have been defined by <a href="/docs/en/tools/mcp">MCP</a>, <a href="/docs/en/builtin-tools">builtin tools</a> or be a <a href="/docs/en/protocol-functions">protocol tool</a>.</p>
-<p>It is not possible to virtualize tools that run on the client side in the bash environment. Attempting to do so will result in an error returned by the API. Define tools in the shell's white-list or black-list to control which tools are available to be used in the shell environment.</p>
+<p>In the line above, <code>get-users</code> is a custom tool that returns a list of users in CSV format. The <code>grep</code> command filters the results to find &quot;John Doe&quot;, and <code>awk</code> extracts and formats the desired columns. This tool may have been defined by <a href="/docs/en/tools/mcp">MCP</a>, <a href="/docs/en/builtin-tools">built‑in tools</a> or be a <a href="/docs/en/protocol-functions">protocol tool</a>.</p>
+<p>It is not possible to virtualize tools that run on the client side in the bash environment. Attempting to do so will result in an error returned by the API. Define white‑list or black‑list tools for the shell to control which tools are available to be used in the shell environment.</p>
 <h2 id="data-persistence">Data persistence</h2>
-<p>Data persistence can be defined for the shell environment. When enabled, the inference user (via the <code>$.user</code> or <code>$.tag</code> parameter of the chat client) will have an exclusive virtual shell environment that can be accessed across different conversations and sessions. This is useful when the agent needs to maintain state between sessions, such as temporary files, logs, or other data that needs to be persisted.</p>
+<p>It is possible to define data persistence for the shell environment. When enabled, the inference user (through the <code>$.user</code> or <code>$.tag</code> parameter of the chat client) will have an exclusive virtual shell environment, which can be accessed across different conversations and sessions. This is useful when the agent needs to maintain state between sessions, such as temporary files, logs, or other data that need to be persisted.</p>
 <p>If this persistence is disabled, the shell environment is discarded after an inference iteration.</p>
-<h2 id="emulation">Emulation</h2>
-<p>The shell environment is emulated in a sandbox environment and is not connected to the real operating system. This means that certain tools such as <code>apt-get</code> will not be available to the model. The environment is designed to be safe and isolated, avoiding any impact on the real system. It is ideal for text processing tasks, data manipulation, and other operations that do not require direct access to the operating system.</p>
-<p>The shell environment is capable of:</p>
-<ul>
-<li>Executing basic I/O commands, such as reading and writing files, text manipulation, and script execution.</li>
-<li>Accessing the internet to make HTTP requests using tools like <code>curl</code> or <code>wget</code>.</li>
-<li>Compressing and decompressing files using tools like <code>tar</code> and <code>zip</code>.</li>
-<li>Reading content from various file formats into markdown.</li>
-<li>Executing bash scripts.</li>
-</ul>
 
 </article>
 

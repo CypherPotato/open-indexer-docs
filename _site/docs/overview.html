@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Planos e limites | AIVAX </title>
+        <title>Vis&#227;o geral | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="Planos e limites | AIVAX ">
+        <meta name="title" content="Vis&#227;o geral | AIVAX ">
 
 
         <link rel="icon" href="../assets/img/favicon.ico">
@@ -23,7 +23,7 @@
         <meta name="docfx:rel" content="../">
 
 
-        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/limits.md/#L1">
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/overview.md/#L1">
         <meta name="loc:inThisArticle" content="In this article">
         <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
         <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -122,441 +122,217 @@
                 </div>
 
                 <article data-uid="">
-<h1 id="planos-e-limites">Planos e limites</h1>
+<h1 id="visão-geral">Visão geral</h1>
 
-<h2 id="planos">Planos</h2>
-<p>A AIVAX oferece três planos de assinatura: <strong>Free</strong>, <strong>Pro</strong> e <strong>Max</strong>. Cada plano tem limites específicos de uso, acesso a recursos e suporte, adequados para diferentes necessidades e níveis de uso.</p>
-<p>Os planos se adequam melhor à cada situação e momento de uso de cada utilizador:</p>
+<p>A AIVAX é uma plataforma de orquestração de IA que unifica inferência, recuperação de conhecimento e ferramentas agênticas em uma única API. Com ela, você cria assistentes inteligentes fundamentados na sua base de conhecimento, conectados a ferramentas externas e prontos para operar em múltiplos canais — tudo sem gerenciar infraestrutura de modelos.</p>
+<h2 id="o-que-a-aivax-resolve">O que a AIVAX resolve?</h2>
+<p>Construir assistentes de IA que vão além de respostas genéricas exige integrar múltiplos serviços: hospedagem de modelos, busca semântica, chamada de ferramentas, moderação, memória conversacional e canais de atendimento. Cada peça adiciona complexidade, custo e pontos de falha.</p>
+<p>A AIVAX consolida tudo isso em uma camada única. Você configura um <strong>AI Gateway</strong>, conecta sua base de conhecimento, ativa ferramentas e publica — sem provisionar servidores, treinar modelos ou manter pipelines de embedding separados.</p>
+<h2 id="serviços-da-plataforma">Serviços da plataforma</h2>
+<h3 id="ai-gateways">AI Gateways</h3>
+<p>O AI Gateway é o núcleo da AIVAX. Ele funciona como um túnel de inferência configurável entre um modelo de linguagem e todos os recursos da plataforma.</p>
+<p>Com um gateway você define:</p>
 <ul>
-<li><strong>Free:</strong> $0/mês: ideal para quem está começando, testando a plataforma ou tem necessidades básicas. Oferece acesso a modelos básicos e recursos limitados, com um número razoável de requisições e ferramentas embutidas.</li>
-<li><strong>Pro:</strong> $39/mês: perfeito para usuários que precisam de mais recursos, acesso a modelos avançados e limites mais altos. Inclui suporte prioritário e opções de armazenamento adicionais.</li>
-<li><strong>Max:</strong> $399/mês: destinado a usuários avançados e empresas que exigem o máximo desempenho, acesso a todos os modelos, limites elevados e suporte dedicado. Oferece a melhor experiência e recursos disponíveis na plataforma.</li>
+<li><strong>Instruções de sistema</strong> que direcionam o comportamento do agente</li>
+<li><strong>Modelo de linguagem</strong> — use um dos modelos hospedados pela AIVAX ou traga o seu próprio (BYOK) via endpoint OpenAI-compatível</li>
+<li><strong>Parâmetros de inferência</strong> como temperatura, top_p e prefill</li>
+<li><strong>Pipelines de processamento</strong> que encadeiam RAG, moderação, truncamento de contexto e pós-processamento</li>
 </ul>
-<p>O suporte é um diferencial importante entre os planos, com o Pro oferecendo suporte prioritário e o Max oferecendo suporte dedicado para garantir que as necessidades dos usuários sejam atendidas de forma eficiente. A diferença entre o suporte prioritário e dedicado é que o suporte prioritário oferece atendimento mais rápido e acesso a especialistas, enquanto o suporte dedicado fornece um contato exclusivo para assistência personalizada e resolução de problemas.</p>
-<p>Todos os planos são renovados mensalmente e não exigem compromisso de longo prazo, permitindo que os usuários escolham o plano que melhor se adapta às suas necessidades e mudem conforme necessário. Ao assinar um plano, o valor da assinatura é deduzido automaticamente do saldo da conta. No dia 1 de todo mês, o valor da assinatura é renovado novamente se existir saldo suficiente em conta para a mensalidade atual. Ao assinar um plano após o primeiro dia do mês, o valor proporcial é cobrado para o período restante do mês, e a renovação completa ocorrerá no próximo ciclo mensal.</p>
-<p>Nenhum plano inclui créditos de uso, e os limites de uso são aplicados independentemente do saldo da conta, independente do saldo disponível em conta. Os planos implicam melhor em planos e recursos que são fornecidos no AIVAX, além da facilidade em concentrar o saldo para vários serviços diferentes em uma única carteira.</p>
-<p>É importante ressaltar que a utilização de recursos que envolvem custos é imediatamente interrompida quando o saldo da conta é zero ou negativo, independentemente do plano de assinatura. Portanto, é fundamental manter um saldo positivo para garantir a continuidade do acesso aos recursos e evitar interrupções no serviço.</p>
-<h2 id="limites">Limites</h2>
-<p>Os limites de uso regulam o número de requisições e recursos disponíveis conforme o plano de assinatura da sua conta.</p>
-<div class="tabGroup" id="tabgroup_1">
-<ul role="tablist">
-<li role="presentation">
-<a href="#tabpanel_1_free" role="tab" aria-controls="tabpanel_1_free" data-tab="free" tabindex="0" aria-selected="true">Free</a>
-</li>
-<li role="presentation">
-<a href="#tabpanel_1_pro" role="tab" aria-controls="tabpanel_1_pro" data-tab="pro" tabindex="-1">Pro</a>
-</li>
-<li role="presentation">
-<a href="#tabpanel_1_max" role="tab" aria-controls="tabpanel_1_max" data-tab="max" tabindex="-1">Max</a>
-</li>
+<p>O gateway expõe um endpoint compatível com a API do OpenAI (<code>chat/completions</code>), o que significa integração imediata com SDKs existentes em Python, Node.js, C# e qualquer linguagem que suporte a interface OpenAI.</p>
+<p><strong>Casos de uso:</strong> assistentes de suporte ao cliente, copilots internos, agentes de vendas, tutores educacionais e qualquer aplicação que precise de um modelo de IA parametrizado e fundamentado.</p>
+<h3 id="rag-retrieval-augmented-generation">RAG (Retrieval-Augmented Generation)</h3>
+<p>O serviço de RAG permite que seu agente responda com base em documentos reais em vez de depender apenas do conhecimento pré-treinado do modelo.</p>
+<ul>
+<li><strong>Coleções</strong>: armazene até dezenas de milhares de documentos por coleção, indexados automaticamente com embeddings semânticos</li>
+<li><strong>Pesquisa semântica</strong>: recupere os trechos mais relevantes para cada pergunta do usuário, com controle de relevância mínima e número de resultados</li>
+<li><strong>Múltiplas estratégias de embedding</strong>: desde reescrita completa da query até concatenação com contexto conversacional, permitindo ajustar precisão vs. custo</li>
+<li><strong>Integração nativa</strong>: o pipeline de RAG injeta os documentos recuperados diretamente no contexto do modelo, sem código adicional</li>
 </ul>
-<section id="tabpanel_1_free" role="tabpanel" data-tab="free">
-
+<p><strong>Casos de uso:</strong> FAQs inteligentes, busca em manuais técnicos, bases de conhecimento corporativas, catálogos de produtos, documentação jurídica e regulatória.</p>
+<h3 id="ferramentas-e-function-calling">Ferramentas e Function Calling</h3>
+<p>A AIVAX oferece um ecossistema completo de ferramentas que transformam seu agente de um modelo conversacional em um sistema agêntico capaz de executar ações.</p>
+<h4 id="ferramentas-nativas">Ferramentas nativas</h4>
+<p>Ferramentas prontas para uso, sem configuração adicional:</p>
 <table>
 <thead>
 <tr>
-<th>Recurso</th>
-<th>Valor</th>
+<th>Ferramenta</th>
+<th>O que faz</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Acesso a modelos</td>
-<td>Modelos básicos</td>
+<td><strong>Pesquisa web</strong></td>
+<td>Busca informações atualizadas na internet</td>
 </tr>
 <tr>
-<td>Comissão sobre inferência</td>
+<td><strong>Pesquisa avançada</strong></td>
+<td>Navegação automatizada com browser para pesquisas profundas</td>
+</tr>
+<tr>
+<td><strong>Execução de código</strong></td>
+<td>Roda JavaScript em ambiente sandboxed para cálculos e processamento</td>
+</tr>
+<tr>
+<td><strong>Contexto de URL</strong></td>
+<td>Analisa até 5 URLs simultaneamente, extraindo conteúdo relevante</td>
+</tr>
+<tr>
+<td><strong>Geração de imagens</strong></td>
+<td>Cria imagens em diferentes níveis de qualidade</td>
+</tr>
+<tr>
+<td><strong>Pesquisa no X/Twitter</strong></td>
+<td>Busca posts em tempo real</td>
+</tr>
+<tr>
+<td><strong>Geração de documentos</strong></td>
+<td>Cria PDFs a partir de HTML</td>
+</tr>
+<tr>
+<td><strong>Hospedagem de páginas</strong></td>
+<td>Publica páginas HTML para relatórios e landing pages</td>
+</tr>
+<tr>
+<td><strong>Memória</strong></td>
+<td>Armazena contexto entre conversas para experiências personalizadas</td>
+</tr>
+</tbody>
+</table>
+<h4 id="integrações-externas">Integrações externas</h4>
+<ul>
+<li><strong>MCP (Model Context Protocol)</strong>: conecte servidores MCP externos para expandir as capacidades do agente com suas próprias ferramentas</li>
+<li><strong>Funções de protocolo</strong>: defina funções personalizadas com callback via webhook, com autenticação por nonce criptografado</li>
+<li><strong>Shell</strong>: ambiente bash virtual com ferramentas Unix padrão para agentes que precisam manipular dados</li>
+</ul>
+<p><strong>Casos de uso:</strong> agentes de pesquisa que consultam a web, assistentes que geram relatórios em PDF, bots que executam cálculos financeiros, sistemas que integram com APIs internas via webhooks.</p>
+<h3 id="skills-habilidades">Skills (Habilidades)</h3>
+<p>Skills são conjuntos de instruções especializadas carregadas sob demanda. Diferente das instruções de sistema (que estão sempre ativas), as skills são ativadas apenas quando o modelo identifica que são relevantes para a conversa atual.</p>
+<p>Isso permite criar agentes versáteis com conhecimento profundo em múltiplas áreas sem consumir tokens desnecessariamente.</p>
+<p><strong>Casos de uso:</strong> agente de suporte que alterna entre tom técnico e comercial conforme o perfil do cliente, assistente jurídico que carrega regras específicas por área do direito, tutor que adapta a didática por disciplina.</p>
+<h3 id="respostas-estruturadas-json-healing">Respostas estruturadas (JSON Healing)</h3>
+<p>O serviço de respostas estruturadas garante que a saída do modelo esteja em conformidade com um JSON Schema definido — mesmo em modelos que não suportam nativamente structured outputs.</p>
+<p>Quando a resposta do modelo não está válida, a AIVAX executa ciclos automáticos de validação e correção, fornecendo feedback ao modelo até que o JSON esteja em conformidade. Funciona com qualquer LLM e preserva a fase de raciocínio em modelos de reasoning.</p>
+<p><strong>Casos de uso:</strong> extração de dados de textos livres, formulários conversacionais, pipelines de dados que consomem saída do modelo, integrações com sistemas que exigem formato estrito.</p>
+<h3 id="chat-clients">Chat Clients</h3>
+<p>A AIVAX oferece clientes de chat prontos para conectar seu agente a usuários finais:</p>
+<ul>
+<li><strong>Chat web</strong>: widget embarcável com personalização visual, gerenciamento de sessão e persistência de conversas</li>
+<li><strong>Telegram</strong>: integração nativa com comandos especiais e identificação de usuários</li>
+<li><strong>WhatsApp</strong>: integração via Z-Api com sessões por conversa</li>
+</ul>
+<p><strong>Casos de uso:</strong> atendimento ao cliente em site, suporte via WhatsApp, bots informativos no Telegram, interfaces de consulta embarcadas em aplicações web.</p>
+<h3 id="workers">Workers</h3>
+<p>Workers são hooks remotos acionados por eventos do pipeline de inferência. Eles permitem interceptar e controlar o fluxo de processamento em pontos específicos, como ao receber uma mensagem ou antes de enviar a resposta.</p>
+<p><strong>Casos de uso:</strong> validação de dados antes do processamento, enriquecimento de contexto com informações de sistemas externos, logging customizado, controle de fluxo condicional.</p>
+<h3 id="moderação">Moderação</h3>
+<p>Camada de segurança que analisa as respostas do modelo com um modelo auxiliar antes de entregá-las ao usuário, garantindo conformidade com políticas de conteúdo.</p>
+<p><strong>Casos de uso:</strong> aplicações voltadas ao público, ambientes regulados, produtos infantis ou educacionais.</p>
+<h2 id="como-os-serviços-se-integram">Como os serviços se integram</h2>
+<p>Os serviços da AIVAX não são peças isoladas — eles formam um pipeline coeso onde cada componente potencializa os demais:</p>
+<pre><code>Usuário → Chat Client → AI Gateway
+                            │
+                ┌───────────┼───────────┐
+                ▼           ▼           ▼
+              RAG      Ferramentas   Skills
+          (documentos)  (ações)    (instruções)
+                └───────────┼───────────┘
+                            ▼
+                    Resposta processada
+                  (moderação, JSON healing)
+                            ▼
+                         Usuário
+</code></pre>
+<ol>
+<li>A mensagem do usuário chega pelo <strong>chat client</strong> ou via <strong>API</strong> direta</li>
+<li>O <strong>AI Gateway</strong> orquestra o processamento: carrega instruções, consulta a base de conhecimento via <strong>RAG</strong>, disponibiliza <strong>ferramentas</strong> e ativa <strong>skills</strong> conforme necessário</li>
+<li>O modelo gera a resposta, que passa por validação (<strong>JSON healing</strong> se configurado) e <strong>moderação</strong></li>
+<li>A resposta é entregue ao usuário pelo mesmo canal de origem</li>
+</ol>
+<p>Esse fluxo é totalmente configurável. Você pode usar só o gateway com RAG para um FAQ simples, ou combinar todos os serviços para um agente complexo com múltiplas ferramentas e sub-agentes via MCP.</p>
+<h2 id="começando-em-minutos">Começando em minutos</h2>
+<p>Criar um agente na AIVAX envolve três passos:</p>
+<ol>
+<li><strong>Crie um AI Gateway</strong> com as instruções e o modelo desejado</li>
+<li><strong>Conecte uma coleção</strong> de documentos (opcional, para RAG)</li>
+<li><strong>Integre</strong> via API OpenAI-compatível, chat widget ou canal de mensagens</li>
+</ol>
+<pre><code class="lang-python">from openai import OpenAI
+
+client = OpenAI(
+    base_url=&quot;https://inference.aivax.net/v1&quot;,
+    api_key=&quot;sua_api_key&quot;
+)
+
+response = client.chat.completions.create(
+    model=&quot;meu-agente:50c3&quot;,
+    messages=[
+        {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Quais são as políticas de devolução?&quot;}
+    ]
+)
+
+print(response.choices[0].message.content)
+</code></pre>
+<p>Sem SDKs proprietários, sem lock-in. A mesma integração que funciona com OpenAI funciona com AIVAX.</p>
+<h2 id="modelo-de-custos">Modelo de custos</h2>
+<p>A AIVAX opera com um modelo <strong>pré-pago</strong> combinado com planos de assinatura:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Free</th>
+<th>Pro</th>
+<th>Max</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Custo mensal</strong></td>
+<td>$0</td>
+<td>$39</td>
+<td>$399</td>
+</tr>
+<tr>
+<td><strong>Comissão</strong></td>
 <td>25%</td>
-</tr>
-<tr>
-<td>BYOK (Bring your own key)</td>
-<td>Limitado</td>
-</tr>
-<tr>
-<td>JSON Healing</td>
-<td>Sim</td>
-</tr>
-<tr>
-<td>Stability routing</td>
-<td>Sim</td>
-</tr>
-<tr>
-<td>Complexity routing</td>
-<td>Não</td>
-</tr>
-<tr>
-<td>Rate limits</td>
-<td>Considerável</td>
-</tr>
-<tr>
-<td>Contexto máximo</td>
-<td>64K tokens</td>
-</tr>
-<tr>
-<td><strong>RAG</strong></td>
-<td></td>
-</tr>
-<tr>
-<td>Coleções</td>
-<td>Até 2 coleções</td>
-</tr>
-<tr>
-<td>Pesquisas</td>
-<td>Baixo limite — 10 pesquisas/minuto</td>
-</tr>
-<tr>
-<td>Inserções</td>
-<td>Baixo limite — 100 inserções/dia</td>
-</tr>
-<tr>
-<td>Processamento composto</td>
-<td>Não disponível</td>
-</tr>
-<tr>
-<td><strong>Ferramentas embutidas</strong></td>
-<td></td>
-</tr>
-<tr>
-<td>Pesquisa na internet</td>
-<td>15/dia</td>
-</tr>
-<tr>
-<td>Pesquisa no Twitter/X</td>
-<td>Não disponível</td>
-</tr>
-<tr>
-<td>Deep search</td>
-<td>Não disponível</td>
-</tr>
-<tr>
-<td>Geração de documentos e páginas web</td>
-<td>5/dia</td>
-</tr>
-<tr>
-<td>Geração e edição de imagens</td>
-<td>5/dia</td>
-</tr>
-<tr>
-<td>Execução de código e requisições avançadas</td>
-<td>30/dia</td>
-</tr>
-<tr>
-<td>Memória e calendário</td>
-<td>Sim</td>
-</tr>
-<tr>
-<td><strong>Conta</strong></td>
-<td></td>
-</tr>
-<tr>
-<td>Armazenamento incluso</td>
-<td>30 MB (limite fixo)</td>
-</tr>
-<tr>
-<td>Retenção de conversas</td>
-<td>Não disponível</td>
-</tr>
-<tr>
-<td>Suporte</td>
-<td>Por e-mail</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="tabpanel_1_pro" role="tabpanel" data-tab="pro" aria-hidden="true" hidden="hidden">
-
-<table>
-<thead>
-<tr>
-<th>Recurso</th>
-<th>Valor</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Acesso a modelos</td>
-<td>Modelos avançados</td>
-</tr>
-<tr>
-<td>Comissão sobre inferência</td>
 <td>5%</td>
+<td>0%</td>
 </tr>
 <tr>
-<td>BYOK (Bring your own key)</td>
-<td>Sim</td>
+<td><strong>Armazenamento</strong></td>
+<td>30 MB</td>
+<td>2 GB</td>
+<td>20 GB</td>
 </tr>
 <tr>
-<td>JSON Healing</td>
-<td>Sim</td>
+<td><strong>Pesquisas web/dia</strong></td>
+<td>15</td>
+<td>1.000</td>
+<td>10.000</td>
 </tr>
 <tr>
-<td>Stability routing</td>
-<td>Sim</td>
-</tr>
-<tr>
-<td>Complexity routing</td>
-<td>Sim</td>
-</tr>
-<tr>
-<td>Rate limits</td>
-<td>Alto</td>
-</tr>
-<tr>
-<td>Contexto máximo</td>
-<td>Ilimitado</td>
-</tr>
-<tr>
-<td><strong>RAG</strong></td>
-<td></td>
-</tr>
-<tr>
-<td>Coleções</td>
-<td>Ilimitado</td>
-</tr>
-<tr>
-<td>Pesquisas</td>
-<td>Alto limite — 500 pesquisas/minuto</td>
-</tr>
-<tr>
-<td>Inserções</td>
-<td>Alto limite — 10.000 inserções/dia</td>
-</tr>
-<tr>
-<td>Processamento composto</td>
-<td>Até 3 arquivos/dia</td>
-</tr>
-<tr>
-<td><strong>Ferramentas embutidas</strong></td>
-<td></td>
-</tr>
-<tr>
-<td>Pesquisa na internet</td>
-<td>1.000/dia</td>
-</tr>
-<tr>
-<td>Pesquisa no Twitter/X</td>
-<td>1.000/dia</td>
-</tr>
-<tr>
-<td>Deep search</td>
-<td>100/dia</td>
-</tr>
-<tr>
-<td>Geração de documentos e páginas web</td>
-<td>1.000/dia</td>
-</tr>
-<tr>
-<td>Geração e edição de imagens</td>
-<td>500/dia</td>
-</tr>
-<tr>
-<td>Execução de código e requisições avançadas</td>
-<td>5.000/dia</td>
-</tr>
-<tr>
-<td>Memória e calendário</td>
-<td>Sim</td>
-</tr>
-<tr>
-<td><strong>Conta</strong></td>
-<td></td>
-</tr>
-<tr>
-<td>Armazenamento incluso</td>
-<td>2 GB (excedente: $0,50/GB/mês)</td>
-</tr>
-<tr>
-<td>Retenção de conversas</td>
-<td>2 dias</td>
-</tr>
-<tr>
-<td>Suporte</td>
-<td>Prioritário</td>
+<td><strong>Coleções</strong></td>
+<td>2</td>
+<td>Ilimitadas</td>
+<td>Ilimitadas</td>
 </tr>
 </tbody>
 </table>
-</section>
-<section id="tabpanel_1_max" role="tabpanel" data-tab="max" aria-hidden="true" hidden="hidden">
-
-<table>
-<thead>
-<tr>
-<th>Recurso</th>
-<th>Valor</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Acesso a modelos</td>
-<td>Todos os modelos</td>
-</tr>
-<tr>
-<td>Comissão sobre inferência</td>
-<td>Nenhuma</td>
-</tr>
-<tr>
-<td>BYOK (Bring your own key)</td>
-<td>Sim</td>
-</tr>
-<tr>
-<td>JSON Healing</td>
-<td>Sim</td>
-</tr>
-<tr>
-<td>Stability routing</td>
-<td>Sim</td>
-</tr>
-<tr>
-<td>Complexity routing</td>
-<td>Sim</td>
-</tr>
-<tr>
-<td>Rate limits</td>
-<td>Mais alto</td>
-</tr>
-<tr>
-<td>Contexto máximo</td>
-<td>Ilimitado</td>
-</tr>
-<tr>
-<td><strong>RAG</strong></td>
-<td></td>
-</tr>
-<tr>
-<td>Coleções</td>
-<td>Ilimitado</td>
-</tr>
-<tr>
-<td>Pesquisas</td>
-<td>Limite elevado — 3.000 pesquisas/minuto</td>
-</tr>
-<tr>
-<td>Inserções</td>
-<td>Ilimitado</td>
-</tr>
-<tr>
-<td>Processamento composto</td>
-<td>Até 10 arquivos/dia</td>
-</tr>
-<tr>
-<td><strong>Ferramentas embutidas</strong></td>
-<td></td>
-</tr>
-<tr>
-<td>Pesquisa na internet</td>
-<td>10.000/dia</td>
-</tr>
-<tr>
-<td>Pesquisa no Twitter/X</td>
-<td>10.000/dia</td>
-</tr>
-<tr>
-<td>Deep search</td>
-<td>1.000/dia</td>
-</tr>
-<tr>
-<td>Geração de documentos e páginas web</td>
-<td>50.000/dia</td>
-</tr>
-<tr>
-<td>Geração e edição de imagens</td>
-<td>5.000/dia</td>
-</tr>
-<tr>
-<td>Execução de código e requisições avançadas</td>
-<td>100.000/dia</td>
-</tr>
-<tr>
-<td>Memória e calendário</td>
-<td>Sim</td>
-</tr>
-<tr>
-<td><strong>Conta</strong></td>
-<td></td>
-</tr>
-<tr>
-<td>Armazenamento incluso</td>
-<td>20 GB (excedente: $0,20/GB/mês)</td>
-</tr>
-<tr>
-<td>Retenção de conversas</td>
-<td>30 dias</td>
-</tr>
-<tr>
-<td>Suporte</td>
-<td>Dedicado</td>
-</tr>
-</tbody>
-</table>
-</section>
-</div>
-<h2 id="grupos-de-modelos">Grupos de modelos</h2>
-<p>Certos modelos possuem multiplicadores de taxa:</p>
+<p>Os custos de inferência são repassados diretamente dos provedores sem markup — você paga o mesmo valor de tabela que pagaria usando Google ou OpenAI diretamente.</p>
+<p>Para detalhes completos, consulte a <a href="/docs/pricing">página de precificação</a>.</p>
+<h2 id="próximos-passos">Próximos passos</h2>
 <ul>
-<li><strong>Comum:</strong> 1x</li>
-<li><strong>Descontados:</strong> 0,5x</li>
-<li><strong>Baixa-latência:</strong> 0,3x</li>
-<li><strong>Grátis:</strong> 0,1x</li>
-</ul>
-<p>Exemplo: se usar um modelo &quot;descontado&quot;, os limites de taxa serão 50% menores (ex: 75 req/min → 37 req/min).</p>
-<h2 id="limites-para-byok-bring-your-own-key">Limites para BYOK (Bring-your-own-key)</h2>
-<p>Não há custo para utilizar sua própria api-key, no entanto, para o plano grátis os limites são mais restritos. Para os planos Pro e Max não há nenhum limite para uso de BYOK.</p>
-<h2 id="detalhes-de-rate-limits">Detalhes de rate limits</h2>
-<p>Esta seção detalha os limites aplicados por operação para cada plano.</p>
-<h3 id="inferência-integrada">Inferência integrada</h3>
-<ul>
-<li><strong>Free:</strong> 20 req/min, 500 req/dia, 1.000.000 tokens/min</li>
-<li><strong>Pro:</strong> 200 req/min, 20.000.000 tokens/min</li>
-<li><strong>Max:</strong> Ilimitado</li>
-</ul>
-<h3 id="byok-bring-your-own-key">BYOK (Bring your own key)</h3>
-<ul>
-<li><strong>Free:</strong> 20 req/min, sem limite de input tokens</li>
-<li><strong>Pro:</strong> 200 req/min, sem limite de input tokens</li>
-<li><strong>Max:</strong> Ilimitado</li>
-</ul>
-<h3 id="bash-execução-de-código">Bash (execução de código)</h3>
-<p>Os limites de Bash referem-se ao número de comandos executados por hora dentro de containers.</p>
-<ul>
-<li><strong>Free:</strong>
-<ul>
-<li>30 comandos por hora</li>
-<li>2 instâncias concorrentes</li>
-<li>timeout de comando de 15 segundos</li>
-<li>limite de 32 MB de memória por instância</li>
-<li>1 processador virtual por instância</li>
-<li>expira imediatamente após fim do loop agêntico</li>
-<li>permite armazenamento persistente</li>
-</ul>
-</li>
-<li><strong>Pro:</strong>
-<ul>
-<li>1.500 comandos por hora</li>
-<li>10 instâncias concorrentes</li>
-<li>timeout de comando de 30 segundos</li>
-<li>limite de 128 MB de memória por instância</li>
-<li>2 processadores virtuais por instância</li>
-<li>sessões persistentes expiram após 15 minutos</li>
-<li>permite armazenamento persistente</li>
-</ul>
-</li>
-<li><strong>Max:</strong>
-<ul>
-<li>10.000 comandos por hora</li>
-<li>50 instâncias concorrentes</li>
-<li>timeout de comando de 60 segundos</li>
-<li>limite de 256 MB de memória por instância</li>
-<li>4 processadores virtuais por instância</li>
-<li>sessões persistentes expiram após 30 minutos</li>
-<li>permite armazenamento persistente</li>
-</ul>
-</li>
+<li><a href="/docs/getting-started">Começando</a> — configure sua conta e faça sua primeira chamada</li>
+<li><a href="/docs/authentication">Autenticação</a> — obtenha e use sua API key</li>
+<li><a href="/docs/inference/ai-gateway">AI Gateways</a> — configure seu primeiro agente</li>
+<li><a href="/docs/rag/collections">Coleções</a> — importe documentos para RAG</li>
+<li><a href="/docs/tools/builtin-tools">Ferramentas</a> — explore as ferramentas disponíveis</li>
 </ul>
 
 </article>
 
                 <div class="contribution d-print-none">
-                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/limits.md/#L1" class="edit-link">Edit this page</a>
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/overview.md/#L1" class="edit-link">Edit this page</a>
                 </div>
 
                 <div class="next-article d-print-none border-top" id="nextArticle"></div>

@@ -65,7 +65,7 @@ Os limites de uso regulam o número de requisições e recursos disponíveis con
 | Contexto máximo | Ilimitado |
 | **RAG** |  |
 | Coleções | Ilimitado |
-| Pesquisas | Alto limite — 100 pesquisas/minuto |
+| Pesquisas | Alto limite — 500 pesquisas/minuto |
 | Inserções | Alto limite — 10.000 inserções/dia |
 | Processamento composto | Até 3 arquivos/dia |
 | **Ferramentas embutidas** |  |
@@ -77,7 +77,7 @@ Os limites de uso regulam o número de requisições e recursos disponíveis con
 | Execução de código e requisições avançadas | 5.000/dia |
 | Memória e calendário | Sim |
 | **Conta** |  |
-| Armazenamento incluso | 2 GB (excedente: $0,90/GB/mês) |
+| Armazenamento incluso | 2 GB (excedente: $0,50/GB/mês) |
 | Retenção de conversas | 2 dias |
 | Suporte | Prioritário |
 
@@ -107,7 +107,7 @@ Os limites de uso regulam o número de requisições e recursos disponíveis con
 | Execução de código e requisições avançadas | 100.000/dia |
 | Memória e calendário | Sim |
 | **Conta** |  |
-| Armazenamento incluso | 20 GB (excedente: $2,20/GB/mês) |
+| Armazenamento incluso | 20 GB (excedente: $0,20/GB/mês) |
 | Retenção de conversas | 30 dias |
 | Suporte | Dedicado |
 
@@ -126,3 +126,48 @@ Exemplo: se usar um modelo "descontado", os limites de taxa serão 50% menores (
 ## Limites para BYOK (Bring-your-own-key)
 
 Não há custo para utilizar sua própria api-key, no entanto, para o plano grátis os limites são mais restritos. Para os planos Pro e Max não há nenhum limite para uso de BYOK.
+
+## Detalhes de rate limits
+
+Esta seção detalha os limites aplicados por operação para cada plano.
+
+### Inferência integrada
+
+- **Free:** 20 req/min, 500 req/dia, 1.000.000 tokens/min
+- **Pro:** 200 req/min, 20.000.000 tokens/min
+- **Max:** Ilimitado
+
+### BYOK (Bring your own key)
+
+- **Free:** 20 req/min, sem limite de input tokens
+- **Pro:** 200 req/min, sem limite de input tokens
+- **Max:** Ilimitado
+
+### Bash (execução de código)
+
+Os limites de Bash referem-se ao número de comandos executados por hora dentro de containers.
+
+- **Free:** 
+    - 30 comandos por hora
+    - 2 instâncias concorrentes
+    - timeout de comando de 15 segundos
+    - limite de 32 MB de memória por instância
+    - 1 processador virtual por instância
+    - expira imediatamente após fim do loop agêntico
+    - permite armazenamento persistente
+- **Pro:**
+    - 1.500 comandos por hora
+    - 10 instâncias concorrentes
+    - timeout de comando de 30 segundos
+    - limite de 128 MB de memória por instância
+    - 2 processadores virtuais por instância
+    - sessões persistentes expiram após 15 minutos
+    - permite armazenamento persistente
+- **Max:**
+    - 10.000 comandos por hora
+    - 50 instâncias concorrentes
+    - timeout de comando de 60 segundos
+    - limite de 256 MB de memória por instância
+    - 4 processadores virtuais por instância
+    - sessões persistentes expiram após 30 minutos
+    - permite armazenamento persistente

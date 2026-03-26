@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Shell | AIVAX </title>
+        <title>Overview | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="Shell | AIVAX ">
+        <meta name="title" content="Overview | AIVAX ">
 
 
         <link rel="icon" href="../../assets/img/favicon.ico">
@@ -18,12 +18,12 @@
         <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
 
         <meta name="docfx:navrel" content="../../toc.html">
-        <meta name="docfx:tocrel" content="../toc.html">
+        <meta name="docfx:tocrel" content="toc.html">
 
         <meta name="docfx:rel" content="../../">
 
 
-        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/tools/shell.md/#L1">
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/en/overview.md/#L1">
         <meta name="loc:inThisArticle" content="In this article">
         <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
         <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -122,24 +122,217 @@
                 </div>
 
                 <article data-uid="">
-<h1 id="shell">Shell</h1>
+<h1 id="overview">Overview</h1>
 
-<p>A AIVAX oferece um ambiente de shell virtual que pode ser utilizado por assistentes agênticos para executar comandos de terminal. Este recurso é especialmente útil para tarefas como automação, gerenciamento de sistemas, execução de scripts e outras operações que exigem interação com o sistema operacional.</p>
-<p>O ambiente de shell possibilita mover ferramentas usadas pelo agente para o lado do shell, transformando-as em uma ferramenta de CLI. Isso é vantajoso para quando você possui centenas de ferramentas e não quer sobrecarregar o contexto do modelo, ou para quando as ferramentas possuem uma interface de linha de comando mais complexa que seria difícil de ser chamada diretamente pelo modelo.</p>
-<h2 id="adaptando-ferramentas-para-shell">Adaptando ferramentas para shell</h2>
-<p>Na interface virtual do shell, ferramentas de manipulação padrão do sistema operacional estão disponíveis, como <code>grep</code>, <code>awk</code>, <code>sed</code>, <code>curl</code>, <code>wget</code>, entre outras. Dessa forma, você pode adaptar suas ferramentas para retornarem saídas brutas ou longas, e o modelo usar as ferramentas de manipulação de texto do shell para extrair as informações relevantes, exemplo:</p>
-<pre><code class="lang-bash">get-users --filter active --format csv | grep &quot;John Doe&quot; | awk -F, '{print $1, $2}'
+<p>AIVAX is an AI orchestration platform that unifies inference, knowledge retrieval, and agentic tools into a single API. With it, you build intelligent assistants grounded in your knowledge base, connected to external tools, and ready to operate across multiple channels — all without managing model infrastructure.</p>
+<h2 id="what-does-aivax-solve">What does AIVAX solve?</h2>
+<p>Building AI assistants that go beyond generic answers requires integrating multiple services: model hosting, semantic search, tool calling, moderation, conversational memory, and communication channels. Each piece adds complexity, cost, and points of failure.</p>
+<p>AIVAX consolidates all of this into a single layer. You configure an <strong>AI Gateway</strong>, connect your knowledge base, enable tools, and publish — without provisioning servers, training models, or maintaining separate embedding pipelines.</p>
+<h2 id="platform-services">Platform services</h2>
+<h3 id="ai-gateways">AI Gateways</h3>
+<p>The AI Gateway is the core of AIVAX. It works as a configurable inference tunnel between a language model and all platform resources.</p>
+<p>With a gateway you define:</p>
+<ul>
+<li><strong>System instructions</strong> that steer the agent’s behavior</li>
+<li><strong>Language model</strong> — use one of the models hosted by AIVAX or bring your own (BYOK) via an OpenAI‑compatible endpoint</li>
+<li><strong>Inference parameters</strong> such as temperature, top_p, and prefill</li>
+<li><strong>Processing pipelines</strong> that chain RAG, moderation, context truncation, and post‑processing</li>
+</ul>
+<p>The gateway exposes an endpoint compatible with the OpenAI API (<code>chat/completions</code>), which means immediate integration with existing SDKs in Python, Node.js, C# and any language that supports the OpenAI interface.</p>
+<p><strong>Use cases:</strong> customer‑support assistants, internal copilots, sales agents, educational tutors, and any application that needs a parametrized, knowledge‑grounded AI model.</p>
+<h3 id="rag-retrievalaugmented-generation">RAG (Retrieval‑Augmented Generation)</h3>
+<p>The RAG service lets your agent answer based on real documents instead of relying solely on the model’s pre‑trained knowledge.</p>
+<ul>
+<li><strong>Collections</strong>: store up to tens of thousands of documents per collection, automatically indexed with semantic embeddings</li>
+<li><strong>Semantic search</strong>: retrieve the most relevant passages for each user query, with minimum relevance control and result count limits</li>
+<li><strong>Multiple embedding strategies</strong>: from full query rewriting to concatenation with conversational context, allowing you to balance precision vs. cost</li>
+<li><strong>Native integration</strong>: the RAG pipeline injects the retrieved documents directly into the model’s context, with no additional code</li>
+</ul>
+<p><strong>Use cases:</strong> intelligent FAQs, technical manual search, corporate knowledge bases, product catalogs, legal and regulatory documentation.</p>
+<h3 id="tools-and-function-calling">Tools and Function Calling</h3>
+<p>AIVAX provides a complete ecosystem of tools that turn your agent from a conversational model into an agentic system capable of performing actions.</p>
+<h4 id="native-tools">Native tools</h4>
+<p>Ready‑to‑use tools, no additional configuration required:</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Web search</strong></td>
+<td>Retrieves up‑to‑date information from the internet</td>
+</tr>
+<tr>
+<td><strong>Advanced search</strong></td>
+<td>Automated browser navigation for deep research</td>
+</tr>
+<tr>
+<td><strong>Code execution</strong></td>
+<td>Runs JavaScript in a sandboxed environment for calculations and processing</td>
+</tr>
+<tr>
+<td><strong>URL context</strong></td>
+<td>Analyzes up to 5 URLs simultaneously, extracting relevant content</td>
+</tr>
+<tr>
+<td><strong>Image generation</strong></td>
+<td>Creates images at various quality levels</td>
+</tr>
+<tr>
+<td><strong>X/Twitter search</strong></td>
+<td>Searches real‑time posts</td>
+</tr>
+<tr>
+<td><strong>Document generation</strong></td>
+<td>Creates PDFs from HTML</td>
+</tr>
+<tr>
+<td><strong>Page hosting</strong></td>
+<td>Publishes HTML pages for reports and landing pages</td>
+</tr>
+<tr>
+<td><strong>Memory</strong></td>
+<td>Stores context between conversations for personalized experiences</td>
+</tr>
+</tbody>
+</table>
+<h4 id="external-integrations">External integrations</h4>
+<ul>
+<li><strong>MCP (Model Context Protocol)</strong>: connect external MCP servers to extend the agent’s capabilities with your own tools</li>
+<li><strong>Protocol functions</strong>: define custom functions with webhook callbacks, authenticated via encrypted nonce</li>
+<li><strong>Shell</strong>: virtual bash environment with standard Unix tools for agents that need to manipulate data</li>
+</ul>
+<p><strong>Use cases:</strong> research agents that browse the web, assistants that generate PDF reports, bots that perform financial calculations, systems that integrate with internal APIs via webhooks.</p>
+<h3 id="skills">Skills</h3>
+<p>Skills are sets of specialized instructions loaded on demand. Unlike system instructions (which are always active), skills are activated only when the model identifies them as relevant to the current conversation.</p>
+<p>This allows you to create versatile agents with deep knowledge in multiple domains without consuming unnecessary tokens.</p>
+<p><strong>Use cases:</strong> support agent that switches between technical and commercial tone based on the customer profile, legal assistant that loads area‑specific rules, tutor that adapts teaching style per subject.</p>
+<h3 id="structured-responses-json-healing">Structured responses (JSON Healing)</h3>
+<p>The structured‑response service ensures the model’s output conforms to a defined JSON Schema — even for models that do not natively support structured outputs.</p>
+<p>When the model’s response is invalid, AIVAX runs automatic validation and correction cycles, providing feedback to the model until the JSON complies. It works with any LLM and preserves the reasoning phase in reasoning models.</p>
+<p><strong>Use cases:</strong> extracting data from free‑form text, conversational forms, data pipelines that consume model output, integrations with systems that require strict formatting.</p>
+<h3 id="chat-clients">Chat Clients</h3>
+<p>AIVAX offers ready‑to‑use chat clients to connect your agent to end users:</p>
+<ul>
+<li><strong>Web chat</strong>: embeddable widget with visual customization, session management, and conversation persistence</li>
+<li><strong>Telegram</strong>: native integration with special commands and user identification</li>
+<li><strong>WhatsApp</strong>: integration via Z‑Api with conversation‑based sessions</li>
+</ul>
+<p><strong>Use cases:</strong> website customer service, WhatsApp support, informational bots on Telegram, query interfaces embedded in web applications.</p>
+<h3 id="workers">Workers</h3>
+<p>Workers are remote hooks triggered by inference‑pipeline events. They allow you to intercept and control processing flow at specific points, such as when a message is received or before a response is sent.</p>
+<p><strong>Use cases:</strong> data validation before processing, context enrichment with information from external systems, custom logging, conditional flow control.</p>
+<h3 id="moderation">Moderation</h3>
+<p>Security layer that analyzes model responses with an auxiliary model before delivering them to the user, ensuring compliance with content policies.</p>
+<p><strong>Use cases:</strong> consumer‑facing applications, regulated environments, children’s or educational products.</p>
+<h2 id="how-the-services-integrate">How the services integrate</h2>
+<p>AIVAX services are not isolated pieces — they form a cohesive pipeline where each component amplifies the others:</p>
+<pre><code>User → Chat Client → AI Gateway
+                            │
+                ┌───────────┼───────────┐
+                ▼           ▼           ▼
+              RAG      Tools   Skills
+          (documents)  (actions) (instructions)
+                └───────────┼───────────┘
+                            ▼
+                    Processed response
+                  (moderation, JSON healing)
+                            ▼
+                         User
 </code></pre>
-<p>Na linha acima, <code>get-users</code> é uma ferramenta personalizada que retorna uma lista de usuários em formato CSV. O comando <code>grep</code> filtra os resultados para encontrar &quot;John Doe&quot;, e o <code>awk</code> extrai e formata as colunas desejadas. Essa ferramenta pode ter sido definida por <a href="/docs/tools/mcp">MCP</a>, <a href="/docs/builtin-tools">ferramentas embutidas</a> ou ser uma <a href="/docs/protocol-functions">ferramenta de protocolo</a>.</p>
-<p>Não é possível virtualizar ferramentas que executam no lado do cliente no ambiente bash. Ao tentar fazer isso, um erro será retornado na API. Defina ferramentas em white-list ou black-list da shell para controlar quais ferramentas estão disponíveis para serem usadas no ambiente de shell.</p>
-<h2 id="persistência-de-dados">Persistência de dados</h2>
-<p>É possível definir persistência de dados para o ambiente da shell. Quando ativado, o usuário de inferência (através do parâmetro <code>$.user</code> ou <code>$.tag</code> do cliente de chat) terá um ambiente de shell virtual exclusivo, o que pode ser acessado em diferentes conversas e sessões. Isso é útil para quando o agente precisa manter um estado entre sessões, como arquivos temporários, logs ou outros dados que precisam ser persistidos.</p>
-<p>Se essa persistência estiver desativada, o ambiente de shell é descartado após uma iteração de inferência.</p>
+<ol>
+<li>The user’s message arrives via the <strong>chat client</strong> or directly through the <strong>API</strong></li>
+<li>The <strong>AI Gateway</strong> orchestrates processing: loads instructions, queries the knowledge base via <strong>RAG</strong>, makes <strong>tools</strong> available, and activates <strong>skills</strong> as needed</li>
+<li>The model generates a response, which passes through validation (<strong>JSON healing</strong> if configured) and <strong>moderation</strong></li>
+<li>The response is delivered to the user through the same originating channel</li>
+</ol>
+<p>This flow is fully configurable. You can use only the gateway with RAG for a simple FAQ, or combine all services for a complex agent with multiple tools and sub‑agents via MCP.</p>
+<h2 id="getting-started-in-minutes">Getting started in minutes</h2>
+<p>Creating an agent in AIVAX involves three steps:</p>
+<ol>
+<li><strong>Create an AI Gateway</strong> with the desired instructions and model</li>
+<li><strong>Connect a collection</strong> of documents (optional, for RAG)</li>
+<li><strong>Integrate</strong> via the OpenAI‑compatible API, chat widget, or messaging channel</li>
+</ol>
+<pre><code class="lang-python">from openai import OpenAI
+
+client = OpenAI(
+    base_url=&quot;https://inference.aivax.net/v1&quot;,
+    api_key=&quot;your_api_key&quot;
+)
+
+response = client.chat.completions.create(
+    model=&quot;my-agent:50c3&quot;,
+    messages=[
+        {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;What are the return policies?&quot;}
+    ]
+)
+
+print(response.choices[0].message.content)
+</code></pre>
+<p>No proprietary SDKs, no lock‑in. The same integration that works with OpenAI works with AIVAX.</p>
+<h2 id="pricing-model">Pricing model</h2>
+<p>AIVAX operates on a <strong>pre‑paid</strong> model combined with subscription plans:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Free</th>
+<th>Pro</th>
+<th>Max</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Monthly cost</strong></td>
+<td>$0</td>
+<td>$39</td>
+<td>$399</td>
+</tr>
+<tr>
+<td><strong>Commission</strong></td>
+<td>25%</td>
+<td>5%</td>
+<td>0%</td>
+</tr>
+<tr>
+<td><strong>Storage</strong></td>
+<td>30 MB</td>
+<td>2 GB</td>
+<td>20 GB</td>
+</tr>
+<tr>
+<td><strong>Web searches/day</strong></td>
+<td>15</td>
+<td>1,000</td>
+<td>10,000</td>
+</tr>
+<tr>
+<td><strong>Collections</strong></td>
+<td>2</td>
+<td>Unlimited</td>
+<td>Unlimited</td>
+</tr>
+</tbody>
+</table>
+<p>Inference costs are passed through directly from providers without markup — you pay the same list price you would when using Google or OpenAI directly.</p>
+<p>For full details, see the <a href="/docs/en/pricing">pricing page</a>.</p>
+<h2 id="next-steps">Next steps</h2>
+<ul>
+<li><a href="/docs/en/getting-started">Getting started</a> — set up your account and make your first call</li>
+<li><a href="/docs/en/authentication">Authentication</a> — obtain and use your API key</li>
+<li><a href="/docs/en/inference/ai-gateway">AI Gateways</a> — configure your first agent</li>
+<li><a href="/docs/en/rag/collections">Collections</a> — import documents for RAG</li>
+<li><a href="/docs/en/tools/builtin-tools">Tools</a> — explore the available tools</li>
+</ul>
 
 </article>
 
                 <div class="contribution d-print-none">
-                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/tools/shell.md/#L1" class="edit-link">Edit this page</a>
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/en/overview.md/#L1" class="edit-link">Edit this page</a>
                 </div>
 
                 <div class="next-article d-print-none border-top" id="nextArticle"></div>

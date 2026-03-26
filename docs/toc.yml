@@ -2,6 +2,8 @@ items:
 
 - name: Introdução
 
+- name: Visão geral
+  href: overview.md
 - name: Começando
   href: getting-started.md
 - name: Autenticação
