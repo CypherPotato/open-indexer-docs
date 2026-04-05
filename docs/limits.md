@@ -34,9 +34,9 @@ Os limites de uso regulam o número de requisições e recursos disponíveis con
 | Rate limits | Considerável |
 | Contexto máximo | 64K tokens |
 | **RAG** |  |
-| Coleções | Até 2 coleções |
-| Pesquisas | Baixo limite — 10 pesquisas/minuto |
-| Inserções | Baixo limite — 100 inserções/dia |
+| Coleções | Até 5 coleções de RAG |
+| Pesquisas | Baixo limite — 30 pesquisas/minuto |
+| Inserções | Baixo limite — 500 inserções/dia |
 | Processamento composto | Não disponível |
 | **Ferramentas embutidas** |  |
 | Pesquisa na internet | 15/dia |
@@ -48,7 +48,7 @@ Os limites de uso regulam o número de requisições e recursos disponíveis con
 | Memória e calendário | Sim |
 | **Conta** |  |
 | Armazenamento incluso | 30 MB (limite fixo) |
-| Retenção de conversas | Não disponível |
+| Retenção de conversas | 2 horas |
 | Suporte | Por e-mail |
 
 ## [Pro](#tab/pro)
@@ -139,7 +139,7 @@ Esta seção detalha os limites aplicados por operação para cada plano.
 
 ### BYOK (Bring your own key)
 
-- **Free:** 20 req/min, sem limite de input tokens
+- **Free:** 30 req/min, sem limite de input tokens
 - **Pro:** 200 req/min, sem limite de input tokens
 - **Max:** Ilimitado
 

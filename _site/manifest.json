@@ -842,6 +842,16 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "docs/en/legal/third-party-processors.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/en/legal/third-party-processors.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "docs/en/limits.md",
       "output": {
         ".html": {
@@ -1039,6 +1049,16 @@
       "output": {
         ".html": {
           "relative_path": "docs/legal/terms-of-service.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/legal/third-party-processors.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/legal/third-party-processors.html"
         }
       },
       "version": ""

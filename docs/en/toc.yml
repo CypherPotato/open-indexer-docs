@@ -1,7 +1,5 @@
 items:
-
 - name: Introduction
-
 - name: Overview
   href: overview.md
 - name: Getting Started
@@ -12,18 +10,14 @@ items:
   href: pricing.md
 - name: Plans and Limits
   href: limits.md 
-
 - name: RAG and Collections
-
 - name: Collections
   href: rag/collections.md
 - name: Semantic Search
   href: rag/semantic-search.md
 - name: Best Practices
   href: rag/best-practices.md
-
 - name: Inference
-
 - name: AI Gateways
   href: inference/ai-gateway.md
 - name: Processing Pipeline
@@ -32,9 +26,7 @@ items:
   href: inference/structured-responses.md
 - name: AI Workers
   href: inference/workers.md
-
 - name: Tools
-
 - name: Builtin Tools
   href: tools/builtin-tools.md
 - name: MCP Functions
@@ -43,17 +35,15 @@ items:
   href: tools/protocol-functions.md
 - name: Shell
   href: tools/shell.md
-
 - name: Resources
-
 - name: Skills
   href: features/skills.md
 - name: Chat Clients
   href: features/chat-clients.md
-
 - name: Legal Documents
-
 - name: Privacy Policy
   href: legal/privacy-policy.md
 - name: Terms of Service
   href: legal/terms-of-service.md
+- name: Data Processors
+  href: legal/third-party-processors.md

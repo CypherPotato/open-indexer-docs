@@ -2,18 +2,18 @@
 
 ## Plans
 
-The AIVAX offers three subscription plans: **Free**, **Pro**, and **Max**. Each plan has specific usage limits, resource access, and support, suitable for different needs and usage levels.
+AIVAX offers three subscription plans: **Free**, **Pro** and **Max**. Each plan has specific usage limits, resource access and support, suitable for different needs and usage levels.
 
 The plans fit best to each situation and usage moment of each user:
-- **Free:** $0/month: ideal for those who are starting, testing the platform, or have basic needs. Provides access to basic models and limited resources, with a reasonable number of requests and built‑in tools.
+- **Free:** $0/month: ideal for those starting out, testing the platform, or with basic needs. Provides access to basic models and limited resources, with a reasonable number of requests and built‑in tools.
 - **Pro:** $39/month: perfect for users who need more resources, access to advanced models, and higher limits. Includes priority support and additional storage options.
-- **Max:** $399/month: intended for advanced users and companies that require maximum performance, access to all models, high limits, and dedicated support. Offers the best experience and resources available on the platform.
+- **Max:** $399/month: intended for advanced users and enterprises that require maximum performance, access to all models, high limits and dedicated support. Offers the best experience and resources available on the platform.
 
 Support is an important differentiator between the plans, with Pro offering priority support and Max offering dedicated support to ensure users' needs are met efficiently. The difference between priority and dedicated support is that priority support provides faster response and access to specialists, while dedicated support offers an exclusive contact for personalized assistance and problem resolution.
 
-All plans are renewed monthly and do not require a long‑term commitment, allowing users to choose the plan that best fits their needs and change as necessary. When subscribing to a plan, the subscription fee is automatically deducted from the account balance. On the 1st of each month, the subscription fee is renewed again if there is sufficient balance in the account for the current monthly fee. When subscribing to a plan after the first day of the month, a proportional amount is charged for the remaining period of the month, and the full renewal will occur in the next monthly cycle.
+All plans are renewed monthly and do not require a long‑term commitment, allowing users to choose the plan that best fits their needs and change as needed. When subscribing to a plan, the subscription fee is automatically deducted from the account balance. On the 1st of each month, the subscription fee is renewed again if there is sufficient balance in the account for the current monthly fee. When subscribing to a plan after the first day of the month, a proportional amount is charged for the remaining period of the month, and the full renewal will occur in the next monthly cycle.
 
-No plan includes usage credits, and usage limits are applied regardless of the account balance, independent of the available balance. The plans provide better plans and resources that are offered in AIVAX, as well as the convenience of consolidating the balance for multiple different services into a single wallet.
+No plan includes usage credits, and usage limits are applied regardless of the account balance, independent of the available balance. The plans provide better access to plans and resources that are offered in AIVAX, as well as the convenience of consolidating balance for multiple different services into a single wallet.
 
 It is important to note that the use of cost‑incurring resources is immediately halted when the account balance is zero or negative, regardless of the subscription plan. Therefore, it is essential to maintain a positive balance to ensure continued access to resources and avoid service interruptions.
 
@@ -23,9 +23,9 @@ Usage limits regulate the number of requests and resources available according t
 
 ## [Free](#tab/free)
 
-| Resource | Value |
+| Feature | Value |
 | --- | --- |
-| Access to models | Basic models |
+| Model access | Basic models |
 | Inference commission | 25% |
 | BYOK (Bring your own key) | Limited |
 | JSON Healing | Yes |
@@ -34,11 +34,11 @@ Usage limits regulate the number of requests and resources available according t
 | Rate limits | Considerable |
 | Maximum context | 64K tokens |
 | **RAG** |  |
-| Collections | Up to 2 collections |
-| Searches | Low limit — 10 searches/minute |
-| Insertions | Low limit — 100 insertions/day |
+| Collections | Up to 5 RAG collections |
+| Searches | Low limit — 30 searches/minute |
+| Insertions | Low limit — 500 insertions/day |
 | Composite processing | Not available |
-| **Built‑in Tools** |  |
+| **Built‑in tools** |  |
 | Internet search | 15/day |
 | Twitter/X search | Not available |
 | Deep search | Not available |
@@ -48,14 +48,14 @@ Usage limits regulate the number of requests and resources available according t
 | Memory and calendar | Yes |
 | **Account** |  |
 | Included storage | 30 MB (fixed limit) |
-| Conversation retention | Not available |
+| Conversation retention | 2 hours |
 | Support | By email |
 
 ## [Pro](#tab/pro)
 
-| Resource | Value |
+| Feature | Value |
 | --- | --- |
-| Access to models | Advanced models |
+| Model access | Advanced models |
 | Inference commission | 5% |
 | BYOK (Bring your own key) | Yes |
 | JSON Healing | Yes |
@@ -68,7 +68,7 @@ Usage limits regulate the number of requests and resources available according t
 | Searches | High limit — 500 searches/minute |
 | Insertions | High limit — 10,000 insertions/day |
 | Composite processing | Up to 3 files/day |
-| **Built‑in Tools** |  |
+| **Built‑in tools** |  |
 | Internet search | 1,000/day |
 | Twitter/X search | 1,000/day |
 | Deep search | 100/day |
@@ -83,9 +83,9 @@ Usage limits regulate the number of requests and resources available according t
 
 ## [Max](#tab/max)
 
-| Resource | Value |
+| Feature | Value |
 | --- | --- |
-| Access to models | All models |
+| Model access | All models |
 | Inference commission | None |
 | BYOK (Bring your own key) | Yes |
 | JSON Healing | Yes |
@@ -95,10 +95,10 @@ Usage limits regulate the number of requests and resources available according t
 | Maximum context | Unlimited |
 | **RAG** |  |
 | Collections | Unlimited |
-| Searches | Elevated limit — 3,000 searches/minute |
+| Searches | High limit — 3,000 searches/minute |
 | Insertions | Unlimited |
 | Composite processing | Up to 10 files/day |
-| **Built‑in Tools** |  |
+| **Built‑in tools** |  |
 | Internet search | 10,000/day |
 | Twitter/X search | 10,000/day |
 | Deep search | 1,000/day |
@@ -113,10 +113,10 @@ Usage limits regulate the number of requests and resources available according t
 
 ---
 
-## Model Groups
+## Model groups
 
 Certain models have rate multipliers:
-- **Common:** 1x
+- **Standard:** 1x
 - **Discounted:** 0.5x
 - **Low‑latency:** 0.3x
 - **Free:** 0.1x
@@ -125,9 +125,9 @@ Example: if you use a “discounted” model, the rate limits will be 50% lower 
 
 ## Limits for BYOK (Bring‑your‑own‑key)
 
-There is no cost to use your own API key; however, for the free plan the limits are more restrictive. For the Pro and Max plans there is no limit for BYOK usage.
+There is no cost to use your own API key, however, for the free plan the limits are more restrictive. For the Pro and Max plans there are no limits for BYOK usage.
 
-## Rate Limits Details
+## Rate limits details
 
 This section details the limits applied per operation for each plan.
 
@@ -139,8 +139,8 @@ This section details the limits applied per operation for each plan.
 
 ### BYOK (Bring your own key)
 
-- **Free:** 20 req/min, no limit on input tokens
-- **Pro:** 200 req/min, no limit on input tokens
+- **Free:** 30 req/min, no input token limit
+- **Pro:** 200 req/min, no input token limit
 - **Max:** Unlimited
 
 ### Bash (code execution)
