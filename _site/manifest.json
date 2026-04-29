@@ -792,6 +792,16 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "docs/en/inference/chat-handling.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/en/inference/chat-handling.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "docs/en/inference/pipelines.md",
       "output": {
         ".html": {
@@ -999,6 +1009,16 @@
       "output": {
         ".html": {
           "relative_path": "docs/inference/ai-gateway.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/inference/chat-handling.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/inference/chat-handling.html"
         }
       },
       "version": ""

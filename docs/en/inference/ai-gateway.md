@@ -1,33 +1,35 @@
 # AI Gateway
 
-The AI gateways are a service that AIVAX provides to create an inference tunnel between an LLM model and a knowledge base. With it you can:
+AI gateways are a service that AIVAX provides to create an inference tunnel between an LLM model and a knowledge base. With it you can:
 
 - Create a model with custom instructions
-- Use a model provided by you via a compatible OpenAI endpoint, or use a model offered by AIVAX
+- Use a model provided by you through a compatible OpenAI endpoint, or use a model made available by AIVAX
 - Customize inference parameters such as temperature, top_p, prefill
 - Use a knowledge collection as the foundation for AI responses
 
-Among other features. With the AI Gateway, you create a ready‑to‑use model, parameterized and grounded in the instructions you define.
+Among other features. With the AI Gateway, you create a ready‑to‑use model, parametrized and grounded in the instructions you define.
 
 ## Models
 
-You can bring an AI model compatible with the OpenAI interface to the AI gateway. If you bring your own AI model, we will only charge for the document search attached to the AI. You can also use one of the models below that are already ready to start with AIVAX.
+You can bring an AI model compatible with the OpenAI interface to the AI gateway. If you bring your own AI model, we will charge only for the document search attached to the AI. You can also use one of the models below that are already ready to start with AIVAX.
 
-When using a model, you will notice that some are smarter than others for certain tasks. Some models perform better with certain data retrieval strategies than others. Conduct tests to find the best model.
+When using a model, you will notice that some are smarter than others for certain tasks. Some models are better with certain data‑retrieval strategies than others. Run tests to find the best model.
 
 You can see the available models on the [models page](/docs/en/models).
 
-## Using an AI Gateway
+## Using an AI gateway
 
-AIVAX provides an endpoint compatible with the OpenAI interface through an AI‑gateway, which simplifies integration of the model created by AIVAX with existing applications and SDKs. Note that only some properties are supported.
+AIVAX provides an endpoint compatible with the OpenAI interface through an AI‑gateway, which makes it easy to integrate the model created by AIVAX with existing applications and SDKs. Note that only a few properties are supported.
 
-In an AI gateway, you already configure model parameters such as System Prompt, temperature, and model name. When using this endpoint, some gateway values may be overridden by the request.
+In an AI gateway, you already configure model parameters such as System Prompt, temperature, and model name. When using this endpoint, some gateway values can be overridden by the request.
 
 <script src="https://inference.aivax.net/apidocs?embed-target=Inference%20(chat%20completions)&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
 
-## Usage with SDKs
+For guidance on streaming rendering, reasoning, tools, and continuous responses, see [Chat handling](/docs/en/inference/chat-handling).
 
-By providing endpoints compatible with the OpenAI interface, AIVAX is fully compatible with existing SDKs, facilitating plug‑and‑play integration.
+## Use with SDKs
+
+By providing OpenAI‑compatible endpoints, AIVAX is fully compatible with existing SDKs, making plug‑and‑play integration easy.
 
 See the example below:
 
@@ -49,11 +51,11 @@ response = client.chat.completions.create(
 print(response.choices[0].message.content)
 ```
 
-Currently, AIVAX only supports the `chat/completions` format. In the future, we plan to add support for the API Responses.
+At the moment, AIVAX only supports the `chat/completions` format. In the future, we plan to add support for the API Responses.
 
-## Usage with MCP
+## Use with MCP
 
-You can expose your AI Gateways via MCP functions (Model Context Protocol). This allows AI models to invoke other models (sub‑agents) natively through the MCP protocol.
+You can expose your AI Gateways through MCP (Model Context Protocol) functions. This allows AI models to invoke other models (sub‑agents) natively via the MCP protocol.
 
 To configure an AI Gateway as an MCP server, use the endpoint `https://inference.aivax.net/v1/mcp/inference` and set the following HTTP headers:
 
@@ -66,15 +68,15 @@ To configure an AI Gateway as an MCP server, use the endpoint `https://inference
 | `X-Mcp-Tool-Title` | Friendly title of the tool | No |
 | `X-Mcp-User` | External user ID for tracking | No |
 
-### Gateway Identification
+### Identifying the Gateway
 
 There are three ways to identify the gateway via the `X-Mcp-Model-Name` header:
 
 1. **Full gateway ID**: `550e8400-e29b-41d4-a716-446655440000`
-2. **Slug format**: `meugateway:50c3` (gateway name + final part of the ID)
+2. **Slug format**: `mygateway:50c3` (gateway name + final part of the ID)
 3. **Integrated model tag**: Direct name of a model available on AIVAX
 
-### Configuration Example
+### Configuration example
 
 Visual Studio Code:
 
@@ -86,7 +88,7 @@ Visual Studio Code:
             "url": "https://inference.aivax.net/v1/mcp/inference",
             "headers": {
                 "Authorization": "Bearer {your_api_key}",
-                "X-Mcp-Model-Name": "meugateway:50c3",
+                "X-Mcp-Model-Name": "mygateway:50c3",
                 "X-Mcp-Tool-Name": "my_assistant",
                 "X-Mcp-Tool-Description": "Use this tool to invoke the specialized assistant for data analysis",
                 "X-Mcp-Tool-Title": "Data Analysis Assistant"
@@ -105,7 +107,7 @@ AIVAX Gateway MCP:
         "url": "https://inference.aivax.net/v1/mcp/inference",
         "headers": {
             "Authorization": "Bearer {your_api_key}",
-            "X-Mcp-Model-Name": "meugateway:50c3",
+            "X-Mcp-Model-Name": "mygateway:50c3",
             "X-Mcp-Tool-Name": "my_assistant",
             "X-Mcp-Tool-Description": "Use this tool to invoke the specialized assistant for data analysis",
             "X-Mcp-Tool-Title": "Data Analysis Assistant"
@@ -114,12 +116,12 @@ AIVAX Gateway MCP:
 ]
 ```
 
-### Generated Tool
+### Generated tool
 
 The MCP server will automatically create a tool named `invoke_{tool_name}` that accepts the parameter:
 
-- **prompt** (string): The prompt to be sent to the model
+- **prompt** (string): The prompt to send to the model
 
-The tool will perform an inference on the configured AI Gateway and return the model's response.
+The tool will perform an inference on the configured AI Gateway and return the model’s response.
 
 This MCP shares the [inference rate limits](/docs/en/limits) to prevent abuse and ensure service stability. If the rate limits are exceeded, the tool will return an error indicating that the limit has been reached.

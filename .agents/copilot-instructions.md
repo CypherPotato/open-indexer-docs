@@ -15,7 +15,6 @@
 - `_site/` is generated output and should not be manually edited.
 
 ## Build and Test
-- Required DocFX version: `2.76.0` (avoid `2.78.0+` due known layout issue).
 - Full build (includes translation pipeline): run `build.ps1`.
 - Fast rebuild (CSS + DocFX only): run `comp.ps1`.
 - Manual equivalents:

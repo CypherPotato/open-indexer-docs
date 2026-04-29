@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>AI Gateway | AIVAX </title>
+        <title>Chat handling | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="AI Gateway | AIVAX ">
+        <meta name="title" content="Chat handling | AIVAX ">
 
 
         <link rel="icon" href="../../../assets/img/favicon.ico">
@@ -23,7 +23,7 @@
         <meta name="docfx:rel" content="../../../">
 
 
-        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/en/inference/ai-gateway.md/#L1">
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/en/inference/chat-handling.md/#L1">
         <meta name="loc:inThisArticle" content="In this article">
         <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
         <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -122,141 +122,197 @@
                 </div>
 
                 <article data-uid="">
-<h1 id="ai-gateway">AI Gateway</h1>
+<h1 id="chat-handling">Chat handling</h1>
 
-<p>AI gateways are a service that AIVAX provides to create an inference tunnel between an LLM model and a knowledge base. With it you can:</p>
-<ul>
-<li>Create a model with custom instructions</li>
-<li>Use a model provided by you through a compatible OpenAI endpoint, or use a model made available by AIVAX</li>
-<li>Customize inference parameters such as temperature, top_p, prefill</li>
-<li>Use a knowledge collection as the foundation for AI responses</li>
-</ul>
-<p>Among other features. With the AI Gateway, you create a ready‑to‑use model, parametrized and grounded in the instructions you define.</p>
-<h2 id="models">Models</h2>
-<p>You can bring an AI model compatible with the OpenAI interface to the AI gateway. If you bring your own AI model, we will charge only for the document search attached to the AI. You can also use one of the models below that are already ready to start with AIVAX.</p>
-<p>When using a model, you will notice that some are smarter than others for certain tasks. Some models are better with certain data‑retrieval strategies than others. Run tests to find the best model.</p>
-<p>You can see the available models on the <a href="/docs/en/models">models page</a>.</p>
-<h2 id="using-an-ai-gateway">Using an AI gateway</h2>
-<p>AIVAX provides an endpoint compatible with the OpenAI interface through an AI‑gateway, which makes it easy to integrate the model created by AIVAX with existing applications and SDKs. Note that only a few properties are supported.</p>
-<p>In an AI gateway, you already configure model parameters such as System Prompt, temperature, and model name. When using this endpoint, some gateway values can be overridden by the request.</p>
-<script src="https://inference.aivax.net/apidocs?embed-target=Inference%20(chat%20completions)&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
-<p>For guidance on streaming rendering, reasoning, tools, and continuous responses, see <a href="/docs/en/inference/chat-handling">Chat handling</a>.</p>
-<h2 id="use-with-sdks">Use with SDKs</h2>
-<p>By providing OpenAI‑compatible endpoints, AIVAX is fully compatible with existing SDKs, making plug‑and‑play integration easy.</p>
-<p>See the example below:</p>
-<pre><code class="lang-python">from openai import OpenAI
- 
-client = OpenAI(
-    base_url=&quot;https://inference.aivax.net/v1&quot;,
-    api_key=&quot;oky_gr5u...oqbfd3d9y&quot;
-)
- 
-response = client.chat.completions.create(
-    model=&quot;my-gateway:50c3&quot;, # you can also provide your ai-gateway full ID here
-    messages=[
-        {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Explain why AI-gateways are useful.&quot;}
-    ]
-)
- 
-print(response.choices[0].message.content)
+<p>Chat clients that use streaming inference must treat the response as a timeline of events, not as blocks separated by type of information. In a single inference, the model can reason, call server‑side tools, respond partially, resume reasoning and continue the answer. This sequence must be preserved in the interface.</p>
+<p>The most important behavior is: each piece received via SSE represents the next step of the assistant’s response. The client must build the response in the order the events arrive.</p>
+<h2 id="why-keep-a-timeline">Why keep a timeline</h2>
+<p>Different models organize the response in different ways. The sequence diagram below represents two common behaviors within a single inference:</p>
+<pre><code class="lang-mermaid">sequenceDiagram
+    participant Usuario
+    participant Cliente
+    participant AIVAX
+    participant Modelo
+    participant Ferramentas
+
+    Usuario-&gt;&gt;Cliente: Sends message
+    Cliente-&gt;&gt;AIVAX: Creates streaming inference
+    AIVAX-&gt;&gt;Modelo: Starts inference
+
+    Note over AIVAX,Cliente: Common pattern in models like Gemini
+    AIVAX--&gt;&gt;Cliente: reasoning
+    AIVAX-&gt;&gt;Ferramentas: Tool call
+    Ferramentas--&gt;&gt;AIVAX: Result
+    AIVAX--&gt;&gt;Cliente: tool call or servertool
+    AIVAX--&gt;&gt;Cliente: answer
+    AIVAX--&gt;&gt;Cliente: reasoning
+    AIVAX--&gt;&gt;Cliente: answer
+
+    Note over AIVAX,Cliente: Common pattern in models that speak while thinking
+    AIVAX--&gt;&gt;Cliente: reasoning
+    AIVAX--&gt;&gt;Cliente: answer
+    AIVAX-&gt;&gt;Ferramentas: Tool calls
+    Ferramentas--&gt;&gt;AIVAX: Results
+    AIVAX--&gt;&gt;Cliente: tool calls or servertool
+    AIVAX--&gt;&gt;Cliente: reasoning
+    AIVAX--&gt;&gt;Cliente: answer
+
+    AIVAX--&gt;&gt;Cliente: stop and usage
+    AIVAX--&gt;&gt;Cliente: DONE
 </code></pre>
-<p>At the moment, AIVAX only supports the <code>chat/completions</code> format. In the future, we plan to add support for the API Responses.</p>
-<h2 id="use-with-mcp">Use with MCP</h2>
-<p>You can expose your AI Gateways through MCP (Model Context Protocol) functions. This allows AI models to invoke other models (sub‑agents) natively via the MCP protocol.</p>
-<p>To configure an AI Gateway as an MCP server, use the endpoint <code>https://inference.aivax.net/v1/mcp/inference</code> and set the following HTTP headers:</p>
-<table>
-<thead>
-<tr>
-<th>Header</th>
-<th>Description</th>
-<th>Required</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>Authorization</code></td>
-<td>Bearer token of your API key</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td><code>X-Mcp-Model-Name</code></td>
-<td>Model tag or gateway ID. Can be the full gateway ID or the slug format <code>name:partial-id</code></td>
-<td>Yes</td>
-</tr>
-<tr>
-<td><code>X-Mcp-Tool-Name</code></td>
-<td>MCP tool name. Will be converted to identifier format</td>
-<td>No (default: <code>ai_model</code>)</td>
-</tr>
-<tr>
-<td><code>X-Mcp-Tool-Description</code></td>
-<td>Description of the tool for the model to understand when to use it</td>
-<td>No</td>
-</tr>
-<tr>
-<td><code>X-Mcp-Tool-Title</code></td>
-<td>Friendly title of the tool</td>
-<td>No</td>
-</tr>
-<tr>
-<td><code>X-Mcp-User</code></td>
-<td>External user ID for tracking</td>
-<td>No</td>
-</tr>
-</tbody>
-</table>
-<h3 id="identifying-the-gateway">Identifying the Gateway</h3>
-<p>There are three ways to identify the gateway via the <code>X-Mcp-Model-Name</code> header:</p>
-<ol>
-<li><strong>Full gateway ID</strong>: <code>550e8400-e29b-41d4-a716-446655440000</code></li>
-<li><strong>Slug format</strong>: <code>mygateway:50c3</code> (gateway name + final part of the ID)</li>
-<li><strong>Integrated model tag</strong>: Direct name of a model available on AIVAX</li>
-</ol>
-<h3 id="configuration-example">Configuration example</h3>
-<p>Visual Studio Code:</p>
+<p>Therefore, it is not a good idea to render a fixed panel for reasoning and another for final content as if they were independent streams. With AIVAX, a single inference can also summarize several internal turns because of server‑executed tools such as MCP, search, and other built‑in functions. If the client separates everything by type, the user loses the real order of what happened.</p>
+<h2 id="streaming-sse">Streaming SSE</h2>
+<p>Use <code>stream: true</code> on the <code>POST /v1/chat/completions</code> endpoint to receive the response via Server‑Sent Events (SSE):</p>
 <pre><code class="lang-json">{
-    &quot;servers&quot;: {
-        &quot;my-ai-gateway-mcp&quot;: {
-            &quot;type&quot;: &quot;http&quot;,
-            &quot;url&quot;: &quot;https://inference.aivax.net/v1/mcp/inference&quot;,
-            &quot;headers&quot;: {
-                &quot;Authorization&quot;: &quot;Bearer {your_api_key}&quot;,
-                &quot;X-Mcp-Model-Name&quot;: &quot;mygateway:50c3&quot;,
-                &quot;X-Mcp-Tool-Name&quot;: &quot;my_assistant&quot;,
-                &quot;X-Mcp-Tool-Description&quot;: &quot;Use this tool to invoke the specialized assistant for data analysis&quot;,
-                &quot;X-Mcp-Tool-Title&quot;: &quot;Data Analysis Assistant&quot;
+    &quot;model&quot;: &quot;my-gateway:50c3&quot;,
+    &quot;messages&quot;: [
+        {
+            &quot;role&quot;: &quot;user&quot;,
+            &quot;content&quot;: &quot;Summarize the main points of this document.&quot;
+        }
+    ],
+    &quot;stream&quot;: true
+}
+</code></pre>
+<p>By default, the server sends periodic pings to keep the connection open. Send the header <code>Sse-Stream-Options: no-ping</code> when your client or proxy does not accept keep‑alive messages on SSE.</p>
+<p>Each content event follows the <code>chat.completion.chunk</code> format:</p>
+<pre><code class="lang-json">{
+    &quot;id&quot;: &quot;chatcmpl-...&quot;,
+    &quot;object&quot;: &quot;chat.completion.chunk&quot;,
+    &quot;created&quot;: 1755874904,
+    &quot;model&quot;: &quot;@openai/gpt-5-mini&quot;,
+    &quot;system_fingerprint&quot;: &quot;fp_abc123&quot;,
+    &quot;choices&quot;: [
+        {
+            &quot;index&quot;: 0,
+            &quot;finish_reason&quot;: null,
+            &quot;logprobs&quot;: null,
+            &quot;delta&quot;: {
+                &quot;role&quot;: &quot;assistant&quot;,
+                &quot;content&quot;: &quot;The answer starts here&quot;
             }
+        }
+    ],
+    &quot;usage&quot;: null
+}
+</code></pre>
+<p>The first useful chunk includes <code>delta.role: &quot;assistant&quot;</code>. Subsequent chunks may contain <code>delta.content</code>, <code>delta.reasoning</code>, <code>delta.tool_calls</code> or a combination of these fields. Chunks without content, reasoning, tools, or usage are ignored by the server and never reach the client.</p>
+<h2 id="how-to-render">How to render</h2>
+<p>Within an in‑progress response, render each piece of information in the order received:</p>
+<ul>
+<li><code>delta.content</code>: adds visible text to the assistant’s speech;</li>
+<li><code>delta.reasoning</code>: adds a reasoning event at the current point in the response;</li>
+<li><code>delta.tool_calls</code>: adds or updates a tool call at the current point in the response;</li>
+<li><code>servertool</code>: adds or updates a server‑executed tool event;</li>
+<li><code>finish_reason: &quot;stop&quot;</code>: ends the response normally;</li>
+<li><code>finish_reason: &quot;error&quot;</code>: ends the response with an error.</li>
+</ul>
+<p>The chat UI may style each event type differently, but the order must remain a single sequence. For example, a reasoning snippet may appear as a discrete or collapsible line within the assistant’s own response, followed by the tool call and then the subsequent text. The essential point is not to move all reasoning to a separate area and all text to another, because that breaks the inference sequence.</p>
+<h2 id="reasoning">Reasoning</h2>
+<p>When the model or gateway returns reasoning tokens, the chunk includes <code>delta.reasoning</code>:</p>
+<pre><code class="lang-json">{
+    &quot;choices&quot;: [
+        {
+            &quot;index&quot;: 0,
+            &quot;finish_reason&quot;: null,
+            &quot;logprobs&quot;: null,
+            &quot;delta&quot;: {
+                &quot;reasoning&quot;: &quot;Analyzing the relevant criteria...&quot;
+            }
+        }
+    ]
+}
+</code></pre>
+<p>This field does <strong>not</strong> replace <code>delta.content</code>. It represents its own event in the response stream. If the client chooses to show reasoning, display it at the position where it arrives. If the client chooses to hide reasoning, preserve the order of the remaining events and continue rendering content and tools normally.</p>
+<h2 id="tools">Tools</h2>
+<p>Model tool calls arrive in <code>delta.tool_calls</code> using the function‑calling format:</p>
+<pre><code class="lang-json">{
+    &quot;choices&quot;: [
+        {
+            &quot;index&quot;: 0,
+            &quot;finish_reason&quot;: null,
+            &quot;delta&quot;: {
+                &quot;tool_calls&quot;: [
+                    {
+                        &quot;index&quot;: 0,
+                        &quot;id&quot;: &quot;call_...&quot;,
+                        &quot;type&quot;: &quot;function&quot;,
+                        &quot;function&quot;: {
+                            &quot;name&quot;: &quot;search_documents&quot;,
+                            &quot;arguments&quot;: &quot;{\&quot;query\&quot;:\&quot;contract\&quot;}&quot;
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
+</code></pre>
+<p>The <code>function.arguments</code> field is delivered as text and may represent partial JSON while generation is still in progress. In continuous chats, update the tool call as new data arrives and only parse the arguments once they are complete.</p>
+<p>Internal gateway tools can send update events on the same stream. These events use <code>choices: []</code> and the <code>servertool</code> object:</p>
+<pre><code class="lang-json">{
+    &quot;id&quot;: &quot;chatcmpl-...&quot;,
+    &quot;object&quot;: &quot;chat.completion.chunk&quot;,
+    &quot;created&quot;: 1755874904,
+    &quot;model&quot;: &quot;@openai/gpt-5-mini&quot;,
+    &quot;system_fingerprint&quot;: &quot;fp_abc123&quot;,
+    &quot;choices&quot;: [],
+    &quot;servertool&quot;: {
+        &quot;name&quot;: &quot;WebSearch&quot;,
+        &quot;id&quot;: &quot;tool_...&quot;,
+        &quot;contents&quot;: &quot;{\&quot;query\&quot;:\&quot;recent news\&quot;}&quot;,
+        &quot;state&quot;: &quot;Running&quot;
+    },
+    &quot;usage&quot;: null
+}
+</code></pre>
+<p>Use <code>servertool</code> to show states such as “searching”, “opening link”, or “executing tool”. This event is also part of the response timeline, but it should not be concatenated as assistant text.</p>
+<h2 id="usage-completion-and-errors">Usage, completion and errors</h2>
+<p>Token usage is not attached to each chunk. When available, it appears in the last chunk before <code>[DONE]</code>, together with <code>finish_reason: &quot;stop&quot;</code>:</p>
+<pre><code class="lang-json">{
+    &quot;choices&quot;: [
+        {
+            &quot;index&quot;: 0,
+            &quot;finish_reason&quot;: &quot;stop&quot;,
+            &quot;logprobs&quot;: null,
+            &quot;delta&quot;: {}
+        }
+    ],
+    &quot;usage&quot;: {
+        &quot;prompt_tokens&quot;: 84,
+        &quot;completion_tokens&quot;: 16,
+        &quot;total_tokens&quot;: 1892,
+        &quot;prompt_tokens_details&quot;: {
+            &quot;cached_tokens&quot;: 1792,
+            &quot;audio_tokens&quot;: 0
         }
     }
 }
 </code></pre>
-<p>AIVAX Gateway MCP:</p>
-<pre><code class="lang-json">[
-    {
-        &quot;name&quot;: &quot;Search sub agent&quot;,
-        &quot;url&quot;: &quot;https://inference.aivax.net/v1/mcp/inference&quot;,
-        &quot;headers&quot;: {
-            &quot;Authorization&quot;: &quot;Bearer {your_api_key}&quot;,
-            &quot;X-Mcp-Model-Name&quot;: &quot;mygateway:50c3&quot;,
-            &quot;X-Mcp-Tool-Name&quot;: &quot;my_assistant&quot;,
-            &quot;X-Mcp-Tool-Description&quot;: &quot;Use this tool to invoke the specialized assistant for data analysis&quot;,
-            &quot;X-Mcp-Tool-Title&quot;: &quot;Data Analysis Assistant&quot;
+<p>After the final chunk, the server sends the line <code>[DONE]</code> and closes the SSE. If an error occurs during streaming, the server sends a chunk with <code>finish_reason: &quot;error&quot;</code>, an <code>error</code> object with a client‑safe message, and then <code>[DONE]</code>.</p>
+<pre><code class="lang-json">{
+    &quot;choices&quot;: [
+        {
+            &quot;index&quot;: 0,
+            &quot;finish_reason&quot;: &quot;error&quot;,
+            &quot;delta&quot;: {
+                &quot;content&quot;: &quot;&quot;
+            }
         }
+    ],
+    &quot;error&quot;: {
+        &quot;code&quot;: &quot;server_error&quot;,
+        &quot;message&quot;: &quot;Error message&quot;
     }
-]
+}
 </code></pre>
-<h3 id="generated-tool">Generated tool</h3>
-<p>The MCP server will automatically create a tool named <code>invoke_{tool_name}</code> that accepts the parameter:</p>
-<ul>
-<li><strong>prompt</strong> (string): The prompt to send to the model</li>
-</ul>
-<p>The tool will perform an inference on the configured AI Gateway and return the model’s response.</p>
-<p>This MCP shares the <a href="/docs/en/limits">inference rate limits</a> to prevent abuse and ensure service stability. If the rate limits are exceeded, the tool will return an error indicating that the limit has been reached.</p>
+<h2 id="streaming-json-responses">Streaming JSON responses</h2>
+<p>When <code>json_only: true</code> is used with <code>stream: true</code>, the behavior changes: the server sends the complete JSON generated by the model as a single event, then sends <code>[DONE]</code>. In this mode, there is no <code>chat.completion.chunk</code> envelope, no <code>delta</code>, no <code>usage</code>, and no generation metadata in the transmitted content.</p>
 
 </article>
 
                 <div class="contribution d-print-none">
-                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/en/inference/ai-gateway.md/#L1" class="edit-link">Edit this page</a>
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/en/inference/chat-handling.md/#L1" class="edit-link">Edit this page</a>
                 </div>
 
                 <div class="next-article d-print-none border-top" id="nextArticle"></div>

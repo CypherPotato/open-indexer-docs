@@ -25,6 +25,8 @@ Em um gateway de IA, você já configura os parâmetros do modelo, como System P
 
 <script src="https://inference.aivax.net/apidocs?embed-target=Inference%20(chat%20completions)&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
 
+Para orientações sobre renderização de streaming, raciocínio, ferramentas e respostas contínuas, consulte [Tratamento de chat](/docs/inference/chat-handling).
+
 ## Uso com SDKs
 
 Por prover endpoints compatíveis com a interface OpenAI, a AIVAX é totalmente compatível com SDKs existentes, facilitando a integração plug-and-play.
