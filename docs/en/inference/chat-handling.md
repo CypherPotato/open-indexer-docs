@@ -16,37 +16,37 @@ sequenceDiagram
     participant Modelo
     participant Ferramentas
 
-    Usuario->>Cliente: Sends message
-    Cliente->>AIVAX: Creates streaming inference
-    AIVAX->>Modelo: Starts inference
+    Usuario->>Cliente: Envia mensagem
+    Cliente->>AIVAX: Cria inferencia em streaming
+    AIVAX->>Modelo: Inicia inferencia
 
-    Note over AIVAX,Cliente: Common pattern in models like Gemini
+    Note over AIVAX,Cliente: Padrao comum em modelos como Gemini
     AIVAX-->>Cliente: reasoning
-    AIVAX->>Ferramentas: Tool call
-    Ferramentas-->>AIVAX: Result
-    AIVAX-->>Cliente: tool call or servertool
+    AIVAX->>Ferramentas: Chamada de ferramenta
+    Ferramentas-->>AIVAX: Resultado
+    AIVAX-->>Cliente: tool call ou servertool
     AIVAX-->>Cliente: answer
-    AIVAX-->>Cliente: reasoning
-    AIVAX-->>Cliente: answer
-
-    Note over AIVAX,Cliente: Common pattern in models that speak while thinking
-    AIVAX-->>Cliente: reasoning
-    AIVAX-->>Cliente: answer
-    AIVAX->>Ferramentas: Tool calls
-    Ferramentas-->>AIVAX: Results
-    AIVAX-->>Cliente: tool calls or servertool
     AIVAX-->>Cliente: reasoning
     AIVAX-->>Cliente: answer
 
-    AIVAX-->>Cliente: stop and usage
+    Note over AIVAX,Cliente: Padrao comum em modelos que falam enquanto pensam
+    AIVAX-->>Cliente: reasoning
+    AIVAX-->>Cliente: answer
+    AIVAX->>Ferramentas: Chamadas de ferramenta
+    Ferramentas-->>AIVAX: Resultados
+    AIVAX-->>Cliente: tool calls ou servertool
+    AIVAX-->>Cliente: reasoning
+    AIVAX-->>Cliente: answer
+
+    AIVAX-->>Cliente: stop e usage
     AIVAX-->>Cliente: DONE
 ```
 
-Therefore, it is not a good idea to render a fixed panel for reasoning and another for final content as if they were independent streams. With AIVAX, a single inference can also summarize several internal turns because of server‑executed tools such as MCP, search, and other built‑in functions. If the client separates everything by type, the user loses the real order of what happened.
+Therefore, it is not a good idea to render a fixed panel for reasoning and another for final content as if they were independent streams. With AIVAX, a single inference can also summarize multiple internal turns because of server‑executed tools such as MCP, search, and other built‑in functions. If the client separates everything by type, the user loses the real order of what happened.
 
 ## Streaming SSE
 
-Use `stream: true` on the `POST /v1/chat/completions` endpoint to receive the response via Server‑Sent Events (SSE):
+Use `stream: true` on the `POST /v1/chat/completions` endpoint to receive the response in Server‑Sent Events (SSE):
 
 ```json
 {
@@ -100,7 +100,7 @@ Within an in‑progress response, render each piece of information in the order 
 - `finish_reason: "stop"`: ends the response normally;
 - `finish_reason: "error"`: ends the response with an error.
 
-The chat UI may style each event type differently, but the order must remain a single sequence. For example, a reasoning snippet may appear as a discrete or collapsible line within the assistant’s own response, followed by the tool call and then the subsequent text. The essential point is not to move all reasoning to a separate area and all text to another, because that breaks the inference sequence.
+The chat UI can style each event type differently, but the order must remain a single sequence. For example, a reasoning snippet may appear as a discrete or collapsible line within the assistant’s own response, followed by the tool call and then the subsequent text. The essential point is not to move all reasoning to a separate area and all text to another, because that breaks the inference sequence.
 
 ## Reasoning
 
@@ -121,7 +121,7 @@ When the model or gateway returns reasoning tokens, the chunk includes `delta.re
 }
 ```
 
-This field does **not** replace `delta.content`. It represents its own event in the response stream. If the client chooses to show reasoning, display it at the position where it arrives. If the client chooses to hide reasoning, preserve the order of the remaining events and continue rendering content and tools normally.
+This field does not replace `delta.content`. It represents its own event in the response flow. If the client chooses to show reasoning, display it at the position where it arrives. If the client chooses to hide reasoning, preserve the order of the remaining events and continue rendering content and tools normally.
 
 ## Tools
 
@@ -151,7 +151,7 @@ Model tool calls arrive in `delta.tool_calls` using the function‑calling forma
 }
 ```
 
-The `function.arguments` field is delivered as text and may represent partial JSON while generation is still in progress. In continuous chats, update the tool call as new data arrives and only parse the arguments once they are complete.
+The `function.arguments` field is delivered as text and may represent partial JSON while generation is still in progress. In continuous chats, update the tool call as new data arrives and only parse the arguments when they are complete.
 
 Internal gateway tools can send update events on the same stream. These events use `choices: []` and the `servertool` object:
 
@@ -201,7 +201,7 @@ Token usage is not attached to each chunk. When available, it appears in the las
 }
 ```
 
-After the final chunk, the server sends the line `[DONE]` and closes the SSE. If an error occurs during streaming, the server sends a chunk with `finish_reason: "error"`, an `error` object with a client‑safe message, and then `[DONE]`.
+After the final chunk, the server sends the `[DONE]` line and closes the SSE. If an error occurs during streaming, the server sends a chunk with `finish_reason: "error"`, an `error` object with a client‑safe message, and then `[DONE]`.
 
 ```json
 {

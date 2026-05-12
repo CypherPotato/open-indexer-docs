@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Chat handling | AIVAX </title>
+        <title>Inference | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="Chat handling | AIVAX ">
+        <meta name="title" content="Inference | AIVAX ">
 
 
         <link rel="icon" href="../../../assets/img/favicon.ico">
@@ -23,7 +23,7 @@
         <meta name="docfx:rel" content="../../../">
 
 
-        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/en/inference/chat-handling.md/#L1">
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/en/inference/inference.md/#L1">
         <meta name="loc:inThisArticle" content="In this article">
         <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
         <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -122,197 +122,292 @@
                 </div>
 
                 <article data-uid="">
-<h1 id="chat-handling">Chat handling</h1>
+<h1 id="inference">Inference</h1>
 
-<p>Chat clients that use streaming inference must treat the response as a timeline of events, not as blocks separated by type of information. In a single inference, the model can reason, call server‑side tools, respond partially, resume reasoning and continue the answer. This sequence must be preserved in the interface.</p>
-<p>The most important behavior is: each piece received via SSE represents the next step of the assistant’s response. The client must build the response in the order the events arrive.</p>
-<h2 id="why-keep-a-timeline">Why keep a timeline</h2>
-<p>Different models organize the response in different ways. The sequence diagram below represents two common behaviors within a single inference:</p>
-<pre><code class="lang-mermaid">sequenceDiagram
-    participant Usuario
-    participant Cliente
-    participant AIVAX
-    participant Modelo
-    participant Ferramentas
-
-    Usuario-&gt;&gt;Cliente: Envia mensagem
-    Cliente-&gt;&gt;AIVAX: Cria inferencia em streaming
-    AIVAX-&gt;&gt;Modelo: Inicia inferencia
-
-    Note over AIVAX,Cliente: Padrao comum em modelos como Gemini
-    AIVAX--&gt;&gt;Cliente: reasoning
-    AIVAX-&gt;&gt;Ferramentas: Chamada de ferramenta
-    Ferramentas--&gt;&gt;AIVAX: Resultado
-    AIVAX--&gt;&gt;Cliente: tool call ou servertool
-    AIVAX--&gt;&gt;Cliente: answer
-    AIVAX--&gt;&gt;Cliente: reasoning
-    AIVAX--&gt;&gt;Cliente: answer
-
-    Note over AIVAX,Cliente: Padrao comum em modelos que falam enquanto pensam
-    AIVAX--&gt;&gt;Cliente: reasoning
-    AIVAX--&gt;&gt;Cliente: answer
-    AIVAX-&gt;&gt;Ferramentas: Chamadas de ferramenta
-    Ferramentas--&gt;&gt;AIVAX: Resultados
-    AIVAX--&gt;&gt;Cliente: tool calls ou servertool
-    AIVAX--&gt;&gt;Cliente: reasoning
-    AIVAX--&gt;&gt;Cliente: answer
-
-    AIVAX--&gt;&gt;Cliente: stop e usage
-    AIVAX--&gt;&gt;Cliente: DONE
-</code></pre>
-<p>Therefore, it is not a good idea to render a fixed panel for reasoning and another for final content as if they were independent streams. With AIVAX, a single inference can also summarize multiple internal turns because of server‑executed tools such as MCP, search, and other built‑in functions. If the client separates everything by type, the user loses the real order of what happened.</p>
-<h2 id="streaming-sse">Streaming SSE</h2>
-<p>Use <code>stream: true</code> on the <code>POST /v1/chat/completions</code> endpoint to receive the response in Server‑Sent Events (SSE):</p>
+<p>AIVAX uses a customized version of the old <code>chat/completions</code> protocol created by OpenAI. These customizations are additive: they do not change the expected behavior of the protocol and are fully compatible with OpenAI clients and SDKs.</p>
+<p>Some customizations were made to normalize communication with the model, make it compatible, and interact with the services that AIVAX provides.</p>
+<h2 id="input-and-multimodality">Input and multimodality</h2>
+<p>AIVAX is fully compatible with multimodality. It is possible to send audio, images, videos and documents to the model using the compatible API:</p>
+<div class="request-item post">
+    <span>POST</span>
+    <span>
+        /v1/chat-completions
+    </span>
+</div>
 <pre><code class="lang-json">{
-    &quot;model&quot;: &quot;my-gateway:50c3&quot;,
+    &quot;model&quot;: &quot;@google/gemini-3-flash&quot;,
     &quot;messages&quot;: [
         {
             &quot;role&quot;: &quot;user&quot;,
-            &quot;content&quot;: &quot;Summarize the main points of this document.&quot;
-        }
-    ],
-    &quot;stream&quot;: true
-}
-</code></pre>
-<p>By default, the server sends periodic pings to keep the connection open. Send the header <code>Sse-Stream-Options: no-ping</code> when your client or proxy does not accept keep‑alive messages on SSE.</p>
-<p>Each content event follows the <code>chat.completion.chunk</code> format:</p>
-<pre><code class="lang-json">{
-    &quot;id&quot;: &quot;chatcmpl-...&quot;,
-    &quot;object&quot;: &quot;chat.completion.chunk&quot;,
-    &quot;created&quot;: 1755874904,
-    &quot;model&quot;: &quot;@openai/gpt-5-mini&quot;,
-    &quot;system_fingerprint&quot;: &quot;fp_abc123&quot;,
-    &quot;choices&quot;: [
-        {
-            &quot;index&quot;: 0,
-            &quot;finish_reason&quot;: null,
-            &quot;logprobs&quot;: null,
-            &quot;delta&quot;: {
-                &quot;role&quot;: &quot;assistant&quot;,
-                &quot;content&quot;: &quot;The answer starts here&quot;
-            }
-        }
-    ],
-    &quot;usage&quot;: null
-}
-</code></pre>
-<p>The first useful chunk includes <code>delta.role: &quot;assistant&quot;</code>. Subsequent chunks may contain <code>delta.content</code>, <code>delta.reasoning</code>, <code>delta.tool_calls</code> or a combination of these fields. Chunks without content, reasoning, tools, or usage are ignored by the server and never reach the client.</p>
-<h2 id="how-to-render">How to render</h2>
-<p>Within an in‑progress response, render each piece of information in the order received:</p>
-<ul>
-<li><code>delta.content</code>: adds visible text to the assistant’s speech;</li>
-<li><code>delta.reasoning</code>: adds a reasoning event at the current point in the response;</li>
-<li><code>delta.tool_calls</code>: adds or updates a tool call at the current point in the response;</li>
-<li><code>servertool</code>: adds or updates a server‑executed tool event;</li>
-<li><code>finish_reason: &quot;stop&quot;</code>: ends the response normally;</li>
-<li><code>finish_reason: &quot;error&quot;</code>: ends the response with an error.</li>
-</ul>
-<p>The chat UI can style each event type differently, but the order must remain a single sequence. For example, a reasoning snippet may appear as a discrete or collapsible line within the assistant’s own response, followed by the tool call and then the subsequent text. The essential point is not to move all reasoning to a separate area and all text to another, because that breaks the inference sequence.</p>
-<h2 id="reasoning">Reasoning</h2>
-<p>When the model or gateway returns reasoning tokens, the chunk includes <code>delta.reasoning</code>:</p>
-<pre><code class="lang-json">{
-    &quot;choices&quot;: [
-        {
-            &quot;index&quot;: 0,
-            &quot;finish_reason&quot;: null,
-            &quot;logprobs&quot;: null,
-            &quot;delta&quot;: {
-                &quot;reasoning&quot;: &quot;Analyzing the relevant criteria...&quot;
-            }
+            &quot;content&quot;: [
+                { 
+                    &quot;type&quot;: &quot;text&quot;,
+                    &quot;text&quot;: &quot;Describe this image briefly.&quot;
+                },
+                {
+                    &quot;type&quot;: &quot;image_url&quot;,
+                    &quot;image_url&quot;: {
+                        &quot;url&quot;: &quot;https://example.com/receipt.png&quot;,
+                        &quot;detail&quot;: &quot;auto&quot;
+                    }
+                },
+                {
+                    &quot;type&quot;: &quot;input_audio&quot;,
+                    &quot;input_audio&quot;: {
+                        &quot;data&quot;: &quot;base64-encoded-audio&quot;,
+                        &quot;format&quot;: &quot;wav&quot;
+                    }
+                },
+                {
+                    &quot;type&quot;: &quot;file&quot;,
+                    &quot;file&quot;: {
+                        &quot;filename&quot;: &quot;document.pdf&quot;,
+                        &quot;file_data&quot;: &quot;https://bitcoin.org/bitcoin.pdf&quot;,
+                    },
+                },
+            ]
         }
     ]
 }
 </code></pre>
-<p>This field does not replace <code>delta.content</code>. It represents its own event in the response flow. If the client chooses to show reasoning, display it at the position where it arrives. If the client chooses to hide reasoning, preserve the order of the remaining events and continue rendering content and tools normally.</p>
-<h2 id="tools">Tools</h2>
-<p>Model tool calls arrive in <code>delta.tool_calls</code> using the function‑calling format:</p>
+<ul>
+<li>Image interpretation:
+<ul>
+<li>content type <code>image_url</code></li>
+<li><code>image_url.url</code> can be an external URL or a base64‑encoded data‑url (<code>data:image/png;base64,...</code>).</li>
+<li><code>image_url.detail</code> can be null, <code>low</code>, <code>high</code> or <code>auto</code>. Not all models support this parameter.</li>
+</ul>
+</li>
+<li>Video interpretation:
+<ul>
+<li>content type <code>video_url</code></li>
+<li><code>video_url.url</code> can be an external URL or a base64‑encoded data‑url (<code>data:video/mp4;base64,...</code>). Gemini models usually support YouTube links. It is highly recommended to provide a URL instead of inline content.</li>
+</ul>
+</li>
+<li>Audio interpretation:
+<ul>
+<li>content type <code>input_audio</code></li>
+<li><code>input_audio.data</code> base64‑encoded audio. External links are not accepted for audio.</li>
+<li><code>input_audio.format</code> audio format. Models generally prefer <code>wav</code> and <code>mp3</code>, but some may also accept <code>aiff</code>, <code>aac</code>, <code>ogg</code>, <code>flac</code>, <code>m4a</code> and <code>pcm16/24</code>.</li>
+</ul>
+</li>
+<li>File interpretation:
+<ul>
+<li>content type <code>file</code></li>
+<li><code>file.filename</code> file name. Useful to guide the model about what the file represents.</li>
+<li><code>file.file_data</code> can be an external URL or a base64‑encoded data‑url. Some models support more formats beyond PDFs.</li>
+</ul>
+</li>
+</ul>
+<p>It is necessary to know that the model you are using supports the input modality you are sending. For certain file types, models tend to reject them due to specific size and format rules.</p>
+<p>Make sure that links to external resources are accessible without authentication and without a firewall, as incorrect responses, redirects, or lazy rendering (JavaScript) may throw an exception during inference.</p>
+<p>You can also provide a simple textual input using the <code>prompt</code> parameter:</p>
+<div class="request-item post">
+    <span>POST</span>
+    <span>
+        /v1/chat-completions
+    </span>
+</div>
 <pre><code class="lang-json">{
-    &quot;choices&quot;: [
+    &quot;model&quot;: &quot;@google/gemini-3-flash&quot;,
+    &quot;prompt&quot;: &quot;Say hello&quot;
+}
+</code></pre>
+<p>It is also possible to enable server‑side multimodal processing in AIVAX, converting multimodal content to text for models that do not have multimodal reading capabilities:</p>
+<div class="request-item post">
+    <span>POST</span>
+    <span>
+        /v1/chat-completions
+    </span>
+</div>
+<pre><code class="lang-json">{
+    &quot;model&quot;: &quot;@meta/llama-3.3-70b&quot;,
+    &quot;messages&quot;: [
         {
-            &quot;index&quot;: 0,
-            &quot;finish_reason&quot;: null,
-            &quot;delta&quot;: {
-                &quot;tool_calls&quot;: [
-                    {
-                        &quot;index&quot;: 0,
-                        &quot;id&quot;: &quot;call_...&quot;,
-                        &quot;type&quot;: &quot;function&quot;,
-                        &quot;function&quot;: {
-                            &quot;name&quot;: &quot;search_documents&quot;,
-                            &quot;arguments&quot;: &quot;{\&quot;query\&quot;:\&quot;contract\&quot;}&quot;
+            &quot;role&quot;: &quot;user&quot;,
+            &quot;content&quot;: [
+                { 
+                    &quot;type&quot;: &quot;text&quot;,
+                    &quot;text&quot;: &quot;Describe this file briefly.&quot;
+                },
+                {
+                    &quot;type&quot;: &quot;file&quot;,
+                    &quot;file&quot;: {
+                        &quot;filename&quot;: &quot;document.pdf&quot;,
+                        &quot;file_data&quot;: &quot;https://bitcoin.org/bitcoin.pdf&quot;,
+                    },
+                },
+            ]
+        }
+    ],
+    &quot;multimodal_preprocess&quot;: [
+        &quot;File&quot;
+    ]
+}
+</code></pre>
+<p>Available multimodal pre‑processing options are:</p>
+<ul>
+<li><code>Image</code></li>
+<li><code>File</code></li>
+<li><code>Video</code></li>
+<li><code>Audio</code></li>
+<li><code>OtherFiles</code></li>
+</ul>
+<blockquote>
+<p>Tip: The <code>OtherFiles</code> modality processes various file types, such as PDFs, Excel spreadsheets, PowerPoint presentations, using an internal AIVAX engine and this modality has no cost.</p>
+</blockquote>
+<h2 id="structured-responses">Structured responses</h2>
+<p>AIVAX supports structured responses and JSON healing, which automatically corrects defective JSONs or those that do not follow the schema provided during inference.</p>
+<div class="request-item post">
+    <span>POST</span>
+    <span>
+        /v1/chat-completions
+    </span>
+</div>
+<pre><code class="lang-json">{
+    &quot;model&quot;: &quot;@google/gemini-2.5-flash&quot;,
+    &quot;prompt&quot;: &quot;Search for news in São José do Rio Preto.&quot;,
+    &quot;stream&quot;: true,
+    &quot;builtin_tools&quot;: {
+        &quot;tools&quot;: [
+            &quot;WebSearch&quot;
+        ],
+        &quot;options&quot;: {
+            &quot;web_search_mode&quot;: &quot;full&quot;
+        }
+    },
+    &quot;response_schema&quot;: {
+        &quot;type&quot;: &quot;object&quot;,
+        &quot;properties&quot;: {
+            &quot;news&quot;: {
+                &quot;type&quot;: &quot;array&quot;,
+                &quot;items&quot;: {
+                    &quot;type&quot;: &quot;object&quot;,
+                    &quot;properties&quot;: {
+                        &quot;title&quot;: {
+                            &quot;type&quot;: &quot;string&quot;,
+                            &quot;description&quot;: &quot;Title of the news&quot;
+                        },
+                        &quot;content&quot;: {
+                            &quot;type&quot;: &quot;string&quot;,
+                            &quot;description&quot;: &quot;Summary of the news&quot;
                         }
                     }
-                ]
+                }
             }
-        }
-    ]
-}
-</code></pre>
-<p>The <code>function.arguments</code> field is delivered as text and may represent partial JSON while generation is still in progress. In continuous chats, update the tool call as new data arrives and only parse the arguments when they are complete.</p>
-<p>Internal gateway tools can send update events on the same stream. These events use <code>choices: []</code> and the <code>servertool</code> object:</p>
-<pre><code class="lang-json">{
-    &quot;id&quot;: &quot;chatcmpl-...&quot;,
-    &quot;object&quot;: &quot;chat.completion.chunk&quot;,
-    &quot;created&quot;: 1755874904,
-    &quot;model&quot;: &quot;@openai/gpt-5-mini&quot;,
-    &quot;system_fingerprint&quot;: &quot;fp_abc123&quot;,
-    &quot;choices&quot;: [],
-    &quot;servertool&quot;: {
-        &quot;name&quot;: &quot;WebSearch&quot;,
-        &quot;id&quot;: &quot;tool_...&quot;,
-        &quot;contents&quot;: &quot;{\&quot;query\&quot;:\&quot;recent news\&quot;}&quot;,
-        &quot;state&quot;: &quot;Running&quot;
-    },
-    &quot;usage&quot;: null
-}
-</code></pre>
-<p>Use <code>servertool</code> to show states such as “searching”, “opening link”, or “executing tool”. This event is also part of the response timeline, but it should not be concatenated as assistant text.</p>
-<h2 id="usage-completion-and-errors">Usage, completion and errors</h2>
-<p>Token usage is not attached to each chunk. When available, it appears in the last chunk before <code>[DONE]</code>, together with <code>finish_reason: &quot;stop&quot;</code>:</p>
-<pre><code class="lang-json">{
-    &quot;choices&quot;: [
-        {
-            &quot;index&quot;: 0,
-            &quot;finish_reason&quot;: &quot;stop&quot;,
-            &quot;logprobs&quot;: null,
-            &quot;delta&quot;: {}
-        }
-    ],
-    &quot;usage&quot;: {
-        &quot;prompt_tokens&quot;: 84,
-        &quot;completion_tokens&quot;: 16,
-        &quot;total_tokens&quot;: 1892,
-        &quot;prompt_tokens_details&quot;: {
-            &quot;cached_tokens&quot;: 1792,
-            &quot;audio_tokens&quot;: 0
         }
     }
 }
 </code></pre>
-<p>After the final chunk, the server sends the <code>[DONE]</code> line and closes the SSE. If an error occurs during streaming, the server sends a chunk with <code>finish_reason: &quot;error&quot;</code>, an <code>error</code> object with a client‑safe message, and then <code>[DONE]</code>.</p>
+<p>Read more about structured responses on its <a href="/docs/en/inference/structured-responses">dedicated page</a>.</p>
+<h2 id="on-demand-functions">On-demand functions</h2>
+<p>You can use AIVAX's built‑in tools during inference without needing to define an AI gateway for it.</p>
+<div class="request-item post">
+    <span>POST</span>
+    <span>
+        /v1/chat-completions
+    </span>
+</div>
 <pre><code class="lang-json">{
-    &quot;choices&quot;: [
-        {
-            &quot;index&quot;: 0,
-            &quot;finish_reason&quot;: &quot;error&quot;,
-            &quot;delta&quot;: {
-                &quot;content&quot;: &quot;&quot;
-            }
+    &quot;model&quot;: &quot;@google/gemini-2.5-flash&quot;,
+    &quot;prompt&quot;: &quot;Search for news in São José do Rio Preto.&quot;,
+    &quot;stream&quot;: true,
+    &quot;builtin_tools&quot;: {
+        &quot;tools&quot;: [
+            &quot;WebSearch&quot;
+        ],
+        &quot;options&quot;: {
+            &quot;web_search_mode&quot;: &quot;full&quot;
         }
-    ],
-    &quot;error&quot;: {
-        &quot;code&quot;: &quot;server_error&quot;,
-        &quot;message&quot;: &quot;Error message&quot;
     }
 }
 </code></pre>
-<h2 id="streaming-json-responses">Streaming JSON responses</h2>
-<p>When <code>json_only: true</code> is used with <code>stream: true</code>, the behavior changes: the server sends the complete JSON generated by the model as a single event, then sends <code>[DONE]</code>. In this mode, there is no <code>chat.completion.chunk</code> envelope, no <code>delta</code>, no <code>usage</code>, and no generation metadata in the transmitted content.</p>
+<p>The list of available options and built‑in tools is available on the <a href="/docs/en/tools/builtin-tools">built‑in tools</a> page.</p>
+<h2 id="custom-response-body">Custom response body</h2>
+<p>When using AI gateways with a provided API key (BYOK), you can send a custom JSON in the request, replacing the standard AIVAX JSON:</p>
+<div class="request-item post">
+    <span>POST</span>
+    <span>
+        /v1/chat-completions
+    </span>
+</div>
+<pre><code class="lang-json">{
+    &quot;model&quot;: &quot;my-custom-model:abc4&quot;,
+    &quot;messages&quot;: [...],
+    &quot;extra_body&quot;: {
+        &quot;reasoning&quot;: {
+            &quot;enabled&quot;: true
+        }
+    }
+}
+</code></pre>
+<p>This property is not compatible with models routed by AIVAX.</p>
+<h2 id="tool-invocation-explanations">Tool invocation explanations</h2>
+<p>Models invoke tools during actions, whether local (client‑side) or server‑side (built‑in, MCP, or function protocol). By sending the <code>tool_invocation_explanations</code> property, you can include an additional parameter in the function body for the model to explain why it is calling that tool. This can be useful to display to the user in a pleasant and real‑time manner what the model is doing to answer the user.</p>
+<div class="request-item post">
+    <span>POST</span>
+    <span>
+        /v1/chat-completions
+    </span>
+</div>
+<pre><code class="lang-json">{
+    &quot;model&quot;: &quot;my-custom-model:abc4&quot;,
+    &quot;messages&quot;: [...],
+    &quot;tool_invocation_explanations&quot;: true
+}
+</code></pre>
+<p>In this case, server‑tool chunks <code>servertool</code> will have a tool explanation property:</p>
+<pre><code class="lang-json">{
+  &quot;id&quot;: &quot;chatcmpl-019e1d73-cf92-7f3f-bac7-d0869770cda8&quot;,
+  &quot;object&quot;: &quot;chat.completion.chunk&quot;,
+  &quot;created&quot;: 1778610589,
+  &quot;model&quot;: &quot;@x-ai/grok-4.3&quot;,
+  &quot;system_fingerprint&quot;: &quot;fp_uu72kl&quot;,
+  &quot;choices&quot;: [],
+  &quot;servertool&quot;: {
+    &quot;name&quot;: &quot;web_search&quot;,
+    &quot;id&quot;: &quot;call-70944e44-fbc5-4906-9f9f-99559c05db11-0&quot;,
+    &quot;contents&quot;: &quot;{\&quot;query\&quot;:\&quot;What's the weather forecast for today?\&quot;,\&quot;_tool_reason\&quot;:\&quot;Searching for today's weather forecast online\&quot;,\&quot;_tool_goal\&quot;:\&quot;I need current weather information to provide an accurate forecast for today, as the user's location isn't specified so I'll use a general search to retrieve relevant data.\&quot;}&quot;,
+    &quot;state&quot;: &quot;Created&quot;,
+    &quot;explanation&quot;: {
+      &quot;reason&quot;: &quot;Searching for today's weather forecast online&quot;,
+      &quot;goal&quot;: &quot;I need current weather information to provide an accurate forecast for today, as the user's location isn't specified so I'll use a general search to retrieve relevant data.&quot;
+    }
+  },
+  &quot;usage&quot;: null
+}
+</code></pre>
+<h2 id="response-rendering">Response rendering</h2>
+<p>It is possible to render reasoning and tool calls on the server side for a segmented, real‑time timeline display by normalizing reasoning into custom XML blocks.</p>
+<p>When enabling this feature, the model will respond by grouping its function calls and reasoning into <code>&lt;thinking_group&gt;</code> and <code>&lt;think&gt;</code> blocks:</p>
+<pre><code>&lt;thinking-group&gt;
+
+&lt;think&gt;We need current weather forecast for São Paulo. Must use web_search tool. Provide meta fields. Search term likely &quot;São Paulo weather forecast today&quot;.&lt;/think&gt;
+
+&lt;tool&gt;&lt;toolname&gt;web_search&lt;/toolname&gt;&lt;toolreason&gt;Searching today's weather forecast for São Paulo&lt;/toolreason&gt;&lt;/tool&gt;
+
+&lt;think&gt;The search results are messy. Need specific forecast. Could open one of the Brazilweather.org pages. Let's open the English? The result appears to be Portuguese/Catalan. Use open? There's no open tool, only web_search. We may need to extract info from snippet. The snippet for tradefairdates shows temperature 14°C 20°C today 10.05.2026 (future). Not relevant. We need today's forecast. Likely we can answer based on typical current data, but should provide up-to-date. Could try another search with &quot;São Paulo weather today&quot; maybe results better. Let's call again.&lt;/think&gt;
+
+&lt;tool&gt;&lt;toolname&gt;web_search&lt;/toolname&gt;&lt;toolreason&gt;Searching for São Paulo Brazil weather today forecast&lt;/toolreason&gt;&lt;/tool&gt;
+
+&lt;think&gt;We should answer in English (conversation language). Provide forecast, temperature highs, lows, chance of rain, maybe wind.&lt;/think&gt;
+&lt;/thinking-group&gt;
+
+Here’s the weather outlook for **São Paulo (Brazil) today, May 12 2026**:
+
+...
+
+**Current conditions (as of 15:30 local time)** – Sunny, 20 °C (68 °F), light east breeze (~4 km/h), humidity 40 %, no precipitation observed.
+
+Overall, today will be comfortably warm and dry, with clear skies and virtually no rain expected.
+</code></pre>
+<p>It is automatically grouped into reasoning groups, thought fragments emitted by the model, and consecutive server‑side tool calls, and automatically terminated when the model starts a response.</p>
+<p>This function is intended to render a pleasant and informative chat to the end user, treating the XML fragments as components or extended specifications of the application's markdown reader.</p>
 
 </article>
 
                 <div class="contribution d-print-none">
-                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/en/inference/chat-handling.md/#L1" class="edit-link">Edit this page</a>
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/en/inference/inference.md/#L1" class="edit-link">Edit this page</a>
                 </div>
 
                 <div class="next-article d-print-none border-top" id="nextArticle"></div>

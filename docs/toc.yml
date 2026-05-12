@@ -26,6 +26,8 @@ items:
 
 - name: Gateways de IA
   href: inference/ai-gateway.md
+- name: Inferência
+  href: inference/inference.md
 - name: Tratamento de chat
   href: inference/chat-handling.md
 - name: Pipeline de processamento

@@ -23,14 +23,7 @@ Atualmente, os créditos expiram **12 meses** após a data de adição. Consulte
 
 ## RAG (Coleções e Vetores)
 
-O custo de indexação depende do modelo de incorporação (embedding) escolhido.
-
-**Modelo Padrão:**
-* `@google/gemini-embedding-001`: **$ 0,15** / 1 milhão de tokens.
-
-**Modelos Legados/Compatibilidade:**
-* `@google/text-embedding-004`: $ 0,10 / 1 milhão de tokens.
-* `@baai/bge-m3`: $ 0,012 / 1 milhão de tokens.
+O custo de indexação e incorporação de documentos do RAG na AIVAX é de **$0,025** por milhão de tokens processados.
 
 ## Armazenamento
 
