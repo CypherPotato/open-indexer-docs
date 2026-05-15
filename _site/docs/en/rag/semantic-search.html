@@ -124,7 +124,7 @@
                 <article data-uid="">
 <h1 id="semantic-search">Semantic Search</h1>
 
-<p>The search API, through the query key obtained from the collections, performs a semantic search on it, performing an intelligent comparison for each document indexed in a collection.</p>
+<p>The search API, using the query key obtained from the collections, performs a semantic search on it, making an intelligent comparison for each document indexed in a collection.</p>
 <p>After creating a collection, you will get its ID. Use your collection's ID to search the indexed documents of it.</p>
 <p>AIVAX uses embedding models that allow task orientation. For search, the term is vectorized with an orientation <code>DOCUMENT_QUERY</code>. For document indexing, the orientation is <code>DOCUMENT_RETRIEVAL</code>, which provides a more optimized search.</p>
 <div class="WARNING">
@@ -132,8 +132,61 @@
 <p>This endpoint incurs cost. The cost is calculated based on the tokens of the search term.</p>
 </div>
 <script src="https://inference.aivax.net/apidocs?embed-target=Semantic%20search&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<h2 id="ranking">Ranking</h2>
+<p>AIVAX can apply reranking after the vector search. The first stage finds documents semantically close to the queried terms. Then, the reranker re-evaluates the found candidates and adjusts the final order of results.</p>
+<p>This process is useful when many documents are similar to each other. Semantic search may find the right set of candidates, but still place the most useful document below other related documents. Reranking works as a second precision step.</p>
+<p>For example: in a technical support collection, searching for &quot;how to cancel an annual subscription without penalty&quot; may return documents about &quot;subscription cancellation&quot;, &quot;contractual penalty&quot;, &quot;monthly subscription&quot; and &quot;refunds&quot;. The reranker reorders these candidates to favor the document that best answers the full query.</p>
+<p>Available rerankers:</p>
+<table>
+<thead>
+<tr>
+<th>Algorithm</th>
+<th>Cost</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>none</code></td>
+<td>No cost</td>
+<td>Disables reranking. The final results use only the semantic score from the vector search.</td>
+</tr>
+<tr>
+<td><code>lexical</code></td>
+<td>No cost</td>
+<td>Applies a small local score adjustment based on lexical matching, fuzzy matching, and term proximity in the document's name and content.</td>
+</tr>
+<tr>
+<td><code>smart</code></td>
+<td>$0,005/mtokens</td>
+<td>Uses a reranking model to re-evaluate candidate documents with the full query and replace the final score with the model's score.</td>
+</tr>
+</tbody>
+</table>
+<p>In the semantic search API, the default reranker is <code>lexical</code>. To disable reranking, send <code>none</code> in the <code>reranker</code> parameter. To use the model-based reranker, send <code>smart</code>.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Reranking does not expand the search to documents that were outside the initial candidates. It operates on the candidates returned by the vector search and improves the final ordering.</p>
+</div>
+<h2 id="search-by-terms">Search by terms</h2>
+<p>Search by multiple terms works as a union ranked by best match. It does not require mandatory intersection between terms and does not require each result to match all provided terms.</p>
+<p>For multiple terms, each document is compared with all provided terms. The document's semantic score uses the best match found among those terms. In practice, a document can be well positioned by matching very well with just one of the terms.</p>
+<p>For multiple collections, the search traverses the configured collections, aggregates the best candidates from each, and orders everything into a single final list. The result is not separated by collection and is also not an intersection across collections.</p>
+<p>Example: when searching the terms <code>cancelamento</code>, <code>multa</code> and <code>reembolso</code> in the collections <code>suporte</code> and <code>contratos</code>, the response will be equivalent to:</p>
+<blockquote>
+<p><em>best support or contract documents that match well with cancelamento or multa or reembolso</em></p>
+</blockquote>
+<p>It does not mean:</p>
+<blockquote>
+<p><em>documents that match cancelamento and multa and reembolso at the same time</em></p>
+</blockquote>
+<p>nor:</p>
+<blockquote>
+<p><em>documents present simultaneously in suporte and contratos</em></p>
+</blockquote>
+<p>If the intention is to search for a composite idea, prefer to send that idea as a single term, e.g., <code>cancelamento de assinatura anual sem multa</code>, instead of breaking the query into many isolated words. Use multiple terms when you want to cover different ways of expressing the same need or when you accept relevant results for any of the variations.</p>
 <h2 id="mcp">MCP</h2>
-<p>It is possible to provide your RAG collections via MCP functions (Model Context Protocol). This allows AI models to access and search your collections natively through the MCP protocol.</p>
+<p>You can provide your RAG collections via MCP (Model Context Protocol) functions. This allows AI models to access and search your collections natively through the MCP protocol.</p>
 <p>To configure a collection as an MCP server, use the endpoint <code>https://inference.aivax.net/v1/mcp/collections</code> and set the following HTTP headers:</p>
 <table>
 <thead>
@@ -151,13 +204,18 @@
 </tr>
 <tr>
 <td><code>X-Mcp-Collection-Id</code></td>
-<td>IDs of the collections to be exposed (comma‑separated for multiple collections)</td>
+<td>IDs of the collections to be exposed (comma-separated for multiple collections)</td>
 <td>-</td>
 </tr>
 <tr>
 <td><code>X-Mcp-Collection-Name</code></td>
 <td>Name of the collection for identification in the MCP tool</td>
 <td><code>collection</code></td>
+</tr>
+<tr>
+<td><code>X-Mcp-Reranker</code></td>
+<td>Reranker to be used (<code>lexical</code>, <code>smart</code> or <code>none</code>).</td>
+<td><code>lexical</code></td>
 </tr>
 <tr>
 <td><code>X-Mcp-Top-K</code></td>
@@ -171,12 +229,12 @@
 </tr>
 <tr>
 <td><code>X-Mcp-Use-References</code></td>
-<td>Determines whether to include references of the chunks. Use <code>none</code> to disable</td>
+<td>Defines whether to include chunk references. Use <code>none</code> to disable</td>
 <td>enabled</td>
 </tr>
 </tbody>
 </table>
-<h3 id="example-configuration">Example configuration</h3>
+<h3 id="configuration-example">Configuration Example</h3>
 <p>Visual Studio Code:</p>
 <pre><code class="lang-json">{
   &quot;servers&quot;: {
@@ -195,14 +253,14 @@
   }
 }
 </code></pre>
-<h3 id="generated-tool">Generated tool</h3>
+<h3 id="generated-tool">Generated Tool</h3>
 <p>The MCP server will automatically create a tool named <code>search_{collection_name}</code> that accepts the parameter:</p>
 <ul>
 <li><strong>search_terms</strong> (string): Search terms to retrieve information from the collection</li>
 </ul>
 <p>The tool will perform a semantic search on the configured collection(s) and return the most relevant documents based on the defined parameters.</p>
-<p>This search limits the amount of queries that <code>search_terms</code> can perform to at most 5 terms per call and a maximum of 500 characters (sum of all terms). If the limits are exceeded, the tool will return an error. This limit ensures the tool is used for specific and relevant searches, avoiding overly broad queries that could impact model performance and generate high costs.</p>
-<p>This MCP shares the <a href="/docs/en/limits">semantic search rate limits</a> to prevent abuse and ensure service stability. If the rate limits are exceeded, the tool will return an error indicating the limit has been reached.</p>
+<p>This search limits the number of queries that <code>search_terms</code> can perform to at most 5 terms per call and up to 500 characters (total of all terms). If the limits are exceeded, the tool will return an error. This limit ensures the tool is used for specific and relevant searches, avoiding overly broad queries that could impact model performance and generate high costs.</p>
+<p>This MCP shares the <a href="/docs/en/limits">semantic search rate limits</a> to prevent abuse and ensure service stability. If the rate limits are exceeded, the tool will return an error indicating that the limit has been reached.</p>
 
 </article>
 
