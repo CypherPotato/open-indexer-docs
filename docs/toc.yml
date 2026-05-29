@@ -54,6 +54,8 @@ items:
   href: features/skills.md
 - name: Chat clients
   href: features/chat-clients.md
+- name: Batch
+  href: features/batch.md
 
 - name: Documentos legais
 

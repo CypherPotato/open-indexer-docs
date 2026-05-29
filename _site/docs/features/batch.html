@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Batch | AIVAX </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="Batch | AIVAX ">
+
+
+        <link rel="icon" href="../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+        
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
+
+        <meta name="docfx:rel" content="../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/features/batch.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+                
+        <script>            
+            function switchLanguage(lang) {
+                const docPart = window.location.pathname.match(/\/docs\/((en)\/)?(.*)/)[3];
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../index.html">
+                        <img id="logo" class="svg" src="../../assets/img/aivax.png" alt="AIVAX">
+                        AIVAX
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/en/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="batch">Batch</h1>
+
+<p>Batch é o recurso da AIVAX para executar o mesmo fluxo de IA sobre muitos itens independentes. Ele transforma uma lista de entradas em uma fila processada em segundo plano, com instruções fixas, modelo definido, saída estruturada, validação opcional, métricas de progresso, custo por item, retentativas e exportação dos resultados.</p>
+<p>Use Batch quando você tem dezenas, centenas ou milhares de registros que precisam passar pelo mesmo raciocínio: classificar leads, extrair campos em textos, enriquecer cadastros, resumir documentos curtos, avaliar respostas, moderar conteúdo, gerar dados estruturados ou chamar ferramentas embutidas para cada linha de uma lista.</p>
+<h2 id="o-que-o-batch-resolve">O que o Batch resolve</h2>
+<p>Processar muitos itens com IA costuma exigir fila, controle de concorrência, pausa por saldo ou limite, tratamento de erros, retentativa, validação de JSON, rastreamento de custo e exportação do resultado. Batch concentra essas partes na AIVAX.</p>
+<p>Na prática, ele resolve principalmente:</p>
+<ul>
+<li><strong>Processamento repetível:</strong> a mesma instrução, modelo e schema são aplicados a todos os itens.</li>
+<li><strong>Execução assíncrona:</strong> o trabalho continua em segundo plano, sem manter uma requisição aberta.</li>
+<li><strong>Saída estruturada:</strong> cada item pode ser obrigado a retornar um objeto compatível com um JSON Schema.</li>
+<li><strong>Correção e validação:</strong> a AIVAX tenta reprocessar respostas inválidas e pode executar uma segunda etapa de validação.</li>
+<li><strong>Operação em escala:</strong> jobs podem ser iniciados, pausados, retomados, monitorados, filtrados, limpos, reenviados para retentativa e exportados.</li>
+<li><strong>Controle operacional:</strong> a tela mostra progresso, falhas, confiança, custo e eventos do job.</li>
+</ul>
+<h2 id="quando-usar">Quando usar</h2>
+<p>Use Batch quando os itens podem ser processados de forma independente e não precisam compartilhar memória entre si. Bons exemplos são uma linha por cliente, URL, produto, ticket, mensagem, documento curto, trecho de contrato ou registro bruto.</p>
+<p>Batch é uma boa escolha quando:</p>
+<ul>
+<li>o mesmo prompt vale para todos os itens;</li>
+<li>você precisa de resultado tabular ou JSON para consumir depois;</li>
+<li>o tempo de resposta pode ser assíncrono;</li>
+<li>você quer acompanhar erros e retentar apenas os itens problemáticos;</li>
+<li>você quer usar ferramentas embutidas, como pesquisa web, para cada item;</li>
+<li>você precisa medir custo, confiança e taxa de sucesso por execução.</li>
+</ul>
+<p>Não use Batch para conversas em tempo real, fluxos em que um item depende da resposta do item anterior, indexação de documentos para RAG ou tarefas puramente determinísticas que não precisam de um modelo de IA. Para indexar conhecimento pesquisável, use <a href="/docs/rag/collections">coleções de RAG</a>. Para uma única resposta imediata ao usuário, use <a href="/docs/inference/inference">inferência</a>.</p>
+<h2 id="conceitos">Conceitos</h2>
+<h3 id="workflow">Workflow</h3>
+<p>O workflow é a receita do processamento. Ele define como os itens futuros serão tratados:</p>
+<ul>
+<li>título;</li>
+<li>instruções de processamento;</li>
+<li>modelo;</li>
+<li>schema esperado do resultado;</li>
+<li>ferramentas embutidas habilitadas;</li>
+<li>esforço de raciocínio, quando o modelo suporta;</li>
+<li>instruções de validação;</li>
+<li>limite de erros consecutivos antes de pausar;</li>
+<li>número máximo de retentativas por item.</li>
+</ul>
+<p>Alterar um workflow afeta os próximos jobs e itens processados com aquela configuração. Use workflows separados quando a instrução, o schema, o modelo ou as regras de validação mudarem de forma relevante.</p>
+<h3 id="job">Job</h3>
+<p>O job é uma execução concreta criada a partir de um workflow. Ele agrupa os itens de uma carga de trabalho, mantém estado, eventos e métricas.</p>
+<p>Um job pode estar:</p>
+<ul>
+<li><code>Active</code>: processando itens pendentes;</li>
+<li><code>Paused</code>: parado manualmente ou pausado por limite, saldo, indisponibilidade temporária ou muitos erros consecutivos;</li>
+<li><code>Finished</code>: concluído porque todos os itens foram processados ou porque foi encerrado.</li>
+</ul>
+<h3 id="item">Item</h3>
+<p>O item é uma linha da lista importada. Cada linha vira uma entrada independente enviada ao modelo com as instruções do workflow.</p>
+<p>Um item pode terminar como:</p>
+<ul>
+<li><code>Finished</code>: processado com sucesso;</li>
+<li><code>Refused</code>: o modelo recusou a entrada;</li>
+<li><code>ExecutionError</code>: houve erro de execução ou inferência;</li>
+<li><code>ValidationError</code>: a resposta não passou no schema ou na validação;</li>
+<li><code>Cancelled</code>: o item foi cancelado/removido;</li>
+<li><code>Pending</code>: ainda aguarda processamento.</li>
+</ul>
+<p>Cada item também pode registrar prioridade, saída, confiança, custo e detalhes de validação.</p>
+<h2 id="como-usar-no-console">Como usar no console</h2>
+<p>No console da AIVAX, acesse <strong>Batch</strong>.</p>
+<h3 id="criar-um-workflow">Criar um workflow</h3>
+<p>Em <strong>Workflows</strong>, crie um workflow e configure:</p>
+<ol>
+<li><strong>Basic:</strong> defina um título, a instrução do processamento e o JSON Schema do resultado.</li>
+<li><strong>Model:</strong> escolha um modelo integrado disponível na conta, o esforço de raciocínio e as ferramentas embutidas que o modelo pode usar.</li>
+<li><strong>Validation:</strong> habilite uma segunda passagem de validação quando a resposta precisar ser conferida contra regras de negócio.</li>
+<li><strong>Handling:</strong> ajuste o limite de erros consecutivos e o máximo de retentativas por item.</li>
+</ol>
+<p>Escreva a instrução como uma regra geral, não como uma pergunta única. O item importado será a entrada variável.</p>
+<p>Exemplo de instrução:</p>
+<pre><code class="lang-text">Classifique a empresa informada na entrada. Retorne o setor provável, uma justificativa curta e sinais encontrados no texto. Se a entrada não tiver informação suficiente, use setor &quot;Indefinido&quot;.
+</code></pre>
+<p>Exemplo de schema:</p>
+<pre><code class="lang-json">{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;properties&quot;: {
+    &quot;sector&quot;: { &quot;type&quot;: &quot;string&quot; },
+    &quot;reason&quot;: { &quot;type&quot;: &quot;string&quot; },
+    &quot;signals&quot;: {
+      &quot;type&quot;: &quot;array&quot;,
+      &quot;items&quot;: { &quot;type&quot;: &quot;string&quot; }
+    }
+  },
+  &quot;required&quot;: [&quot;sector&quot;, &quot;reason&quot;, &quot;signals&quot;],
+  &quot;additionalProperties&quot;: false
+}
+</code></pre>
+<h3 id="criar-e-executar-um-job">Criar e executar um job</h3>
+<p>Depois de criar o workflow, crie um job para a carga que deseja processar. Importe uma lista em que cada linha é um item.</p>
+<p>As linhas podem ser texto simples, CSV delimitado, URLs, IDs, JSON compacto ou qualquer formato que a instrução saiba interpretar. Para entradas estruturadas, prefira JSONL: um objeto JSON por linha.</p>
+<p>Exemplo:</p>
+<pre><code class="lang-jsonl">{&quot;name&quot;:&quot;Empresa A&quot;,&quot;description&quot;:&quot;Marketplace B2B para autopeças&quot;}
+{&quot;name&quot;:&quot;Empresa B&quot;,&quot;description&quot;:&quot;Escritório especializado em contratos trabalhistas&quot;}
+{&quot;name&quot;:&quot;Empresa C&quot;,&quot;description&quot;:&quot;Rede regional de farmácias&quot;}
+</code></pre>
+<p>Com os itens importados, inicie o job. A tela do job permite acompanhar:</p>
+<ul>
+<li>visão geral de progresso;</li>
+<li>itens pendentes, concluídos e com falha;</li>
+<li>custo já cobrado e custo previsto;</li>
+<li>confiança média;</li>
+<li>eventos do job;</li>
+<li>últimos itens processados;</li>
+<li>lista completa de itens com filtros por estado e confiança.</li>
+</ul>
+<h3 id="operar-itens-com-falha">Operar itens com falha</h3>
+<p>Use os filtros da lista para encontrar itens com erro de execução, erro de validação, recusa ou baixa confiança. Depois, você pode:</p>
+<ul>
+<li>retentar todos os erros;</li>
+<li>retentar apenas erros de execução;</li>
+<li>retentar apenas erros de validação;</li>
+<li>retentar itens concluídos com baixa confiança;</li>
+<li>remover pendentes, concluídos, erros ou todos os itens não em execução;</li>
+<li>abrir um item individual para revisar entrada, saída, estado, confiança e custo.</li>
+</ul>
+<h3 id="exportar-resultados">Exportar resultados</h3>
+<p>Quando o job terminar, exporte os resultados em JSONL. Cada linha exportada contém metadados, entrada original e saída. Use essa exportação para importar em uma planilha, banco de dados, pipeline de dados ou etapa manual de revisão.</p>
+<h2 id="como-usar-pela-api">Como usar pela API</h2>
+<p>Use a API quando quiser integrar Batch ao seu sistema interno, pipeline de dados ou automação. A autenticação segue o mesmo padrão da API da AIVAX.</p>
+<h3 id="criar-workflow">Criar workflow</h3>
+<script src="https://inference.aivax.net/apidocs?embed-target=Create%20Batch%20Workflow&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<h3 id="criar-job">Criar job</h3>
+<script src="https://inference.aivax.net/apidocs?embed-target=Create%20Batch%20Job&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<p>Jobs são criados pausados. Importe os itens antes de iniciar.</p>
+<h3 id="importar-itens">Importar itens</h3>
+<script src="https://inference.aivax.net/apidocs?embed-target=Import%20Batch%20Job%20Items&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<p>Linhas vazias são ignoradas. Cada linha não vazia vira um item pendente.</p>
+<h3 id="iniciar-pausar-ou-finalizar">Iniciar, pausar ou finalizar</h3>
+<script src="https://inference.aivax.net/apidocs?embed-target=Edit%20Batch%20Job&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<p>Use <code>Paused</code> para pausar e <code>Finished</code> para encerrar.</p>
+<h3 id="monitorar">Monitorar</h3>
+<script src="https://inference.aivax.net/apidocs?embed-target=View%20Batch%20Job&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<p>Para listar itens:</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=List%20Batch%20Job%20Items&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<p>Filtros úteis:</p>
+<ul>
+<li><code>state=Pending</code>, <code>Finished</code>, <code>Refused</code>, <code>ExecutionError</code>, <code>ValidationError</code> ou <code>Cancelled</code>;</li>
+<li><code>confidence=high</code> para confiança maior ou igual a 80%;</li>
+<li><code>confidence=low</code> para confiança menor que 30%;</li>
+<li><code>filter=texto</code> para buscar no input;</li>
+<li><code>limit=100</code> para ajustar o tamanho da lista dentro do limite permitido.</li>
+</ul>
+<h3 id="retentar-e-limpar">Retentar e limpar</h3>
+<script src="https://inference.aivax.net/apidocs?embed-target=Retry%20Batch%20Job%20Items&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<p>Modos de retentativa:</p>
+<ul>
+<li><code>errors</code>;</li>
+<li><code>execution-error</code>;</li>
+<li><code>validation-error</code>;</li>
+<li><code>low-confidence</code>.</li>
+</ul>
+<p>Para remover itens não em execução:</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=Remove%20Batch%20Job%20Items&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<p>Modos de remoção:</p>
+<ul>
+<li><code>pending</code>;</li>
+<li><code>finished</code>;</li>
+<li><code>errors</code>;</li>
+<li><code>all</code>.</li>
+</ul>
+<h3 id="exportar">Exportar</h3>
+<script src="https://inference.aivax.net/apidocs?embed-target=Export%20Batch%20Job&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<p>Use <code>state=all</code>, <code>finished</code>, <code>errors</code> ou um estado específico. Também é possível combinar com <code>confidence=high</code> ou <code>confidence=low</code>.</p>
+<h2 id="custos-limites-e-pausas-automáticas">Custos, limites e pausas automáticas</h2>
+<p>Cada item processado gera custo de inferência de acordo com o modelo usado. Se a validação estiver habilitada, a validação executa uma segunda chamada de modelo e também pode gerar custo. Ferramentas embutidas habilitadas no workflow podem gerar custos ou consumir limites próprios.</p>
+<p>O job pode pausar automaticamente quando:</p>
+<ul>
+<li>a conta não tem saldo disponível;</li>
+<li>o limite de processamento do plano foi atingido;</li>
+<li>o provedor de inferência está temporariamente indisponível;</li>
+<li>o job acumula muitos erros consecutivos;</li>
+<li>o usuário pausa manualmente o job.</li>
+</ul>
+<p>Quando a pausa acontece por indisponibilidade temporária ou limite recuperável, a AIVAX pode retomar o job automaticamente depois. Quando a pausa acontece por falta de saldo, adicione saldo antes de retomar manualmente ou aguarde a retomada automática.</p>
+<h2 id="boas-práticas">Boas práticas</h2>
+<ul>
+<li>Teste o workflow com poucos itens antes de importar uma lista grande.</li>
+<li>Use schemas restritivos com <code>required</code> e <code>additionalProperties: false</code> quando a saída será consumida por sistema.</li>
+<li>Inclua exemplos de entrada e saída na instrução quando o formato for ambíguo.</li>
+<li>Prefira uma linha por item; se precisar enviar objetos complexos, use JSONL.</li>
+<li>Mantenha a validação habilitada para tarefas sensíveis, como extração jurídica, financeira ou dados que entram em automações.</li>
+<li>Use <code>maxRetries</code> para corrigir falhas ocasionais, mas investigue erros repetidos no prompt ou no schema.</li>
+<li>Use <code>errorStopThreshold</code> baixo em workflows novos para evitar gastar em lote com uma configuração errada.</li>
+<li>Retente itens de baixa confiança separadamente; confiança baixa não significa erro, mas indica que a resposta merece revisão.</li>
+<li>Exporte resultados por estado quando houver revisão manual, por exemplo primeiro <code>finished</code>, depois <code>errors</code>.</li>
+</ul>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/features/batch.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>

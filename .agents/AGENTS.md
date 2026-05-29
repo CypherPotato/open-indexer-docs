@@ -30,6 +30,7 @@
 - Do not edit generated site files under `_site/`.
 - Do not run translation generation for `docs/en/` unless explicitly requested by the user.
 - If changing styles, edit `template/style/src/*.xcss` and rebuild; do not hand-edit compiled CSS.
+- When referencing an AIVAX API endpoint in documentation, use the embedded API reference script instead of a `curl` example. Look up the correct endpoint name in `https://inference.aivax.net/apidocs/llms.txt`, then embed it as `<script src="https://inference.aivax.net/apidocs?embed-target=ENDPOINT%20NAME&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>`.
 
 ## Key References
 - `readme.md` for setup constraints and contribution notes.

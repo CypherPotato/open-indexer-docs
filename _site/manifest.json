@@ -752,6 +752,16 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "docs/en/features/batch.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/en/features/batch.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "docs/en/features/chat-clients.md",
       "output": {
         ".html": {
@@ -979,6 +989,16 @@
       "output": {
         ".html": {
           "relative_path": "docs/en/tools/shell.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/features/batch.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/features/batch.html"
         }
       },
       "version": ""
