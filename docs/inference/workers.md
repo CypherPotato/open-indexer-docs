@@ -8,6 +8,18 @@ Quando um evento é acionado no lado da AIVAX, uma requisição POST é disparad
 
 O tempo de processamento da resposta acrescenta uma latência entre toda ação do gateway, no entanto, adiciona uma camada de controle e moderação que você pode controlar à qualquer momento.
 
+Use workers quando uma regra precisa ser decidida fora do prompt. Exemplos comuns são validar se um usuário tem assinatura ativa, anexar dados de CRM antes da inferência, remover informações que não devem chegar ao modelo, trocar uma mensagem por uma versão normalizada, impedir ferramentas em certos horários, substituir o resultado de uma ferramenta por dados de um sistema interno ou registrar auditoria em um sistema próprio. Se a regra é estável e textual, prefira instrução de sistema; se ela depende de banco de dados, política dinâmica, identidade externa ou decisão determinística, use worker.
+
+O worker deve ser tratado como parte do caminho crítico da inferência. Cada evento enviado a ele adiciona uma requisição HTTP antes de a conversa continuar, então o endpoint precisa responder rápido, com timeout previsível e sem operações desnecessárias. Evite fazer pipelines longos, chamadas lentas ou dependências frágeis dentro do worker. Quando precisar consultar sistemas externos, prefira respostas objetivas e cache próprio no seu lado. Uma resposta 2xx deixa o fluxo continuar; uma resposta não OK interrompe o evento; uma resposta com `Content-Type: application/json+worker-action` permite alterar o contexto ou substituir resultados.
+
+## Segurança, autenticação e operação
+
+Quando a conta possui uma chave de hook configurada, a AIVAX envia `X-Request-Nonce` nas requisições ao worker. Esse cabeçalho contém um hash BCrypt derivado da chave de hook da conta. O worker deve validar esse hash antes de confiar no corpo recebido, principalmente se ele executa ações sensíveis, como consultar dados de clientes, alterar contexto com informações privadas ou liberar ferramentas. Consulte [Autenticação](/docs/authentication) para exemplos de validação em C#, Python e JavaScript.
+
+O corpo do evento inclui `gatewayId`, `moment`, `event.name` e `event.data`. Sempre confira o `gatewayId` quando o mesmo endpoint atende mais de um gateway, porque isso evita aplicar regras de um agente em outro. Use `externalUserId` para decisões por usuário ou por canal, mas não presuma que ele sempre existe; chamadas diretas por API podem não ter uma tag de usuário. Use `metadata` para dados auxiliares do canal ou da sessão, e trate qualquer dado vindo do usuário como não confiável.
+
+Para falhas, escolha um comportamento explícito. Se o worker não conseguir consultar seu sistema, ele pode responder 2xx e deixar a inferência continuar sem enriquecimento, ou pode responder não OK e bloquear a ação. A primeira opção é melhor para recursos auxiliares; a segunda é melhor para autorização, compliance e regras que não podem falhar abertas. Em ambos os casos, registre logs no seu endpoint com `gatewayId`, `event.name`, `externalUserId`, tempo de execução e decisão tomada.
+
 ## Funcionamento
 
 Quando um evento é acionado, uma requisição POST é disparada ao seu worker seguindo o formato abaixo:
@@ -103,7 +115,7 @@ As ações disponíveis para o campo `rewrites` são:
 | `remove-message` | Remove uma mensagem do contexto pelo índice. | `index`: índice da mensagem a ser removida |
 | `add-system` | Adiciona uma instrução de sistema. | `message`: texto da instrução |
 | `add-tool` | Adiciona uma ferramenta ao contexto. | `tool`: objeto JSON da ferramenta |
-| `add-protocol-tool` | Adiciona uma definição de [protocol function](/docs/protocol-functions) ao contexto. | `tool`: objeto definição da protocol function|
+| `add-protocol-tool` | Adiciona uma definição de [protocol function](/docs/tools/protocol-functions) ao contexto. | `tool`: objeto definição da protocol function|
 
 ##### Exemplos de ações
 
@@ -203,7 +215,9 @@ Campos de `data`:
 
 Quando `tool.called.response` é retornado, o resultado fornecido pelo worker é usado no lugar da execução padrão da ferramenta.
 
-## Exemplos
+## Exemplos de uso
+
+Os exemplos abaixo mostram padrões comuns. Eles devem ser adaptados para seu sistema de autenticação, sua estrutura de usuários e seu canal. O ponto mais importante é separar claramente a decisão: responder não OK quando a ação deve parar, responder 2xx vazio quando ela deve continuar sem alterações, ou responder `application/json+worker-action` quando o contexto deve ser modificado.
 
 ### Bloqueando usuários não autorizados
 
@@ -283,3 +297,54 @@ async function checkUserSubscription(externalUserId) {
   return true;
 }
 ```
+
+### Substituindo uma ferramenta por um sistema interno
+
+O evento `tool.called` é útil quando você quer que o modelo continue acreditando que chamou uma ferramenta, mas o resultado real venha de um sistema controlado por você. Por exemplo, um gateway pode ter uma ferramenta chamada `memory_search`, `check_order` ou `lookup_customer`; antes da AIVAX executar o comportamento padrão, seu worker pode reconhecer o nome da ferramenta, consultar sua API interna e devolver um resultado textual para ser anexado à conversa.
+
+```js
+export default {
+  async fetch(request, env) {
+    const body = await request.json();
+
+    if (body.event?.name !== "tool.called") {
+      return new Response();
+    }
+
+    const { toolName, toolArguments, externalUserId } = body.event.data;
+
+    if (toolName !== "check_order") {
+      return new Response();
+    }
+
+    const orderId = toolArguments?.order_id;
+    const order = await fetch(`${env.INTERNAL_API}/orders/${orderId}`, {
+      headers: { "Authorization": `Bearer ${env.INTERNAL_API_TOKEN}` }
+    });
+
+    if (!order.ok) {
+      return new Response(JSON.stringify({
+        type: "tool.called.response",
+        data: {
+          result: `Não foi possível consultar o pedido ${orderId} para o usuário ${externalUserId}. Oriente o usuário a conferir o número do pedido.`
+        }
+      }), {
+        headers: { "Content-Type": "application/json+worker-action" }
+      });
+    }
+
+    const orderJson = await order.json();
+
+    return new Response(JSON.stringify({
+      type: "tool.called.response",
+      data: {
+        result: `Pedido ${orderJson.id}: status ${orderJson.status}, previsão ${orderJson.eta}.`
+      }
+    }), {
+      headers: { "Content-Type": "application/json+worker-action" }
+    });
+  }
+};
+```
+
+Esse padrão evita expor diretamente a API interna ao modelo. O modelo vê apenas o nome da ferramenta, os parâmetros e o resultado textual. O worker continua sendo responsável por autenticar a requisição, validar o usuário, chamar o sistema interno e decidir quanto dado pode voltar para o contexto.

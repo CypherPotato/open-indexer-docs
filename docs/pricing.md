@@ -1,17 +1,14 @@
 # Precificação
 
-O modelo de pagamento da AIVAX é **pré-pago**: você adiciona saldo à sua conta e utiliza nossos serviços consumindo esse crédito. A AIVAX utiliza um modelo de [assinatura mensal](/docs/limits) em conjunto com o saldo de utilização dos serviços. Os planos de assinatura (Free, Pro e Max) oferecem diferentes níveis de acesso a recursos, limites de uso e suporte, mas o consumo dos serviços é sempre debitado do saldo da conta.
+O modelo de pagamento da AIVAX é **pré-pago**: você adiciona saldo à sua conta e utiliza nossos serviços consumindo esse crédito. A AIVAX utiliza um modelo de assinatura mensal em conjunto com o saldo de utilização dos serviços. Para comparar diferenças entre Free, Pro e Max, consulte a [página de preços da AIVAX](https://aivax.net/pricing), que é a fonte atualizada para planos. O consumo dos serviços é sempre debitado do saldo da conta.
 
 Ao adicionar créditos, a AIVAX cobra uma pequena taxa (variável por método de pagamento) para cobrir impostos (notas fiscais), tarifas bancárias e custos operacionais.
 
-Alguns planos incluem uma **taxa de comissão** para o uso de saldo, que é uma porcentagem aplicada sobre o valor gasto em inferência (geração de texto). As comissões são atualmente:
-- Plano Free: 25% de comissão sobre o valor gasto em inferência.
-- Plano Pro: 5% de comissão sobre o valor gasto em inferência.
-- Plano Max: sem comissão.
+Alguns planos incluem uma **taxa de comissão** para o uso de saldo, que é uma porcentagem aplicada sobre o valor gasto em inferência (geração de texto). Consulte a [página de preços da AIVAX](https://aivax.net/pricing) para ver a comissão atual de cada plano.
 
 A precificação de inferência (geração de texto) é repassada diretamente dos provedores (como Google e OpenAI). Você paga na AIVAX exatamente o mesmo preço de tabela que pagaria utilizando esses provedores diretamente.
 
-Usamos diferentes [serviços](/docs/builtin-tools) para ajudar você a criar assistentes agênticos. Algumas ferramentas possuem custos específicos que são debitados do seu saldo sem taxas adicionais.
+Usamos diferentes [serviços](/docs/tools/builtin-tools) para ajudar você a criar assistentes agênticos. Algumas ferramentas possuem custos específicos que são debitados do seu saldo sem taxas adicionais.
 
 > **Nota:** Todos os custos são calculados em dólares americanos (USD). Pode haver flutuação cambial ao converter da sua moeda local para o dólar no momento da recarga ou do uso.
 
@@ -47,4 +44,4 @@ Logs de sistema são temporários e não geram custos de armazenamento.
 
 ## Ferramentas (Tools)
 
-As [ferramentas nativas](/docs/builtin-tools) da AIVAX possuem preços e limites específicos. Consulte a documentação de cada ferramenta.
+As [ferramentas nativas](/docs/tools/builtin-tools) da AIVAX possuem preços e limites específicos. Consulte a documentação de cada ferramenta.

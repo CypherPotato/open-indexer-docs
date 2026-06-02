@@ -125,16 +125,26 @@
 <h1 id="welcome">Welcome</h1>
 
 <p>Welcome to AIVAX. Our service makes it easier to develop intelligent AI models that use a knowledge base provided by you to converse with the user, answer questions, provide real‑time information, and more.</p>
-<p>To get started, all endpoints should be made to the production URL of AIVAX:</p>
+<p>To get started, all endpoints should be made on the AIVAX production URL:</p>
 <pre><code class="lang-text">https://inference.aivax.net/
 </code></pre>
-<h2 id="handling-errors">Handling errors</h2>
+<h2 id="handling-errors">Handling Errors</h2>
 <p>All API errors return an HTTP response with a non‑OK status (never 2xx or 3xx), and always follow the JSON format:</p>
 <pre><code class="lang-json">{
-    &quot;error&quot;: &quot;A message explaining the error&quot;,
-    &quot;details&quot;: {} // an object containing relevant information about the error. Most of the time it is null
+    &quot;error&quot;: &quot;Uma mensagem explicando o erro&quot;,
+    &quot;details&quot;: {} // um objeto contendo informações relevantes sobre o erro. Na maioria das vezes é nulo
 }
 </code></pre>
+<h2 id="operational-diagnosis">Operational Diagnosis</h2>
+<p>When a call fails, start at the outermost level before investigating the prompt or model. Confirm that the base URL is correct, that the API key was sent with <code>Authorization: Bearer ...</code> or via the <code>?api-key</code> parameter, that the account has sufficient balance, and that the plan has a limit for the operation. Then, confirm that the called endpoint is the expected one: inference uses <code>/v1/chat/completions</code>, inference MCP uses <code>/v1/mcp/inference</code>, collection MCP uses <code>/v1/mcp/collections</code>, and administrative operations reside on the versioned AIVAX API. Only after that investigate model, tools, RAG, schema, or workers.</p>
+<p>Authentication errors usually indicate a missing key, an invalid key, a malformed header, or usage of a key that does not belong to the expected account. Balance errors appear when the account cannot pay for the operation, when multimodality requires a minimum balance, or when a costly tool is invoked. Limit errors appear when the operation exceeds rate limits, daily limits, number of collections, RAG insertions, or the plan's batch processing. To compare commercial differences between plans, always use the <a href="https://aivax.net/pricing">AIVAX pricing page</a>; this documentation describes the technical functioning.</p>
+<p>Inference errors can come from the model provider, the message format, context size, inaccessible attachments, invalid JSON Schema, or a misconfigured tool. If the same message works without tools, the problem is likely in the tools. If it works without RAG, review the collection, search strategy, and documents. If it works without multimodality, review format, URL, base64, minimum balance, and model support. If it works with <code>stream: false</code> but not in streaming, check the SSE client and whether it handles empty chunks, pings, <code>[DONE]</code>, <code>servertool</code>, and stream errors.</p>
+<p>Workers should be investigated separately because they can interrupt events. When a conversation stops before the model responds, temporarily test without a worker or make the worker respond with an empty 2xx. If that resolves it, review validation of <code>X-Request-Nonce</code>, <code>gatewayId</code>, response time, returned HTTP status, and the <code>application/json+worker-action</code> format. For protocol functions, remember that non‑OK responses indicate failure to the assistant; when the error is expected, respond with 2xx and a human message explaining the problem.</p>
+<h2 id="implementation-recipes">Implementation Recipes</h2>
+<p>To create a knowledge‑base support assistant, start by creating a RAG collection with short, self‑contained documents. Then create an AI Gateway with system instructions that explain the assistant's role, link the collection, choose a search strategy, and test direct questions via the API. When the quality is good, build a web chat client or WhatsApp/Telegram integration to expose the assistant to users. If you need external rules, such as blocking non‑subscribed users or enriching context with CRM data, add a worker to the gateway.</p>
+<p>To expose a collection to another agent via MCP, use the <code>/v1/mcp/collections</code> endpoint with <code>Authorization</code>, <code>X-Mcp-Collection-Id</code>, <code>X-Mcp-Collection-Name</code>, <code>X-Mcp-Top-K</code>, <code>X-Mcp-Min-Score</code>, and <code>X-Mcp-Reranker</code>. Start in read‑only mode. Enable <code>X-Mcp-Allow-Write: yes</code> only when the MCP client is trusted and when the agent can create or delete documents. Use descriptive collection names, as they become part of the tool name and influence when the model decides to call the search.</p>
+<p>To generate reliable JSON, use <code>response_schema</code> when you want validation and JSON Healing by AIVAX. Write a schema with <code>required</code>, clear types, and <code>additionalProperties: false</code> when the output will be consumed by another system. If the model has native structured outputs and you want to pass the schema directly to the provider, use <code>response_format</code> with <code>json_schema</code>. If the consumer needs only the final object, use <code>json_only</code>, but remember that this removes the chat completion envelope from the response.</p>
+<p>To process many records, use Batch instead of opening many manual calls. Create a workflow with instruction, model, schema, and tools; import items in text or JSONL; start the job; monitor states, costs, and confidence; retry only errors or low‑confidence items; export results in JSONL. Use Batch for independent jobs such as classification, extraction, enrichment, and evaluation. Do not use Batch for real‑time conversations or when each item depends on the previous item's result.</p>
 
 </article>
 

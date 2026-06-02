@@ -20,6 +20,12 @@ Um documento representa um pedaço de um conhecimento. É um trecho limitado, au
 
 Considere um manual sobre um carro: ele não é um documento mas sim vários documentos. Cada um destes documentos fala, de forma isolada, sobre um determinado assunto sobre esse carro, de forma que esse documento não dependa de um contexto ou informação externa para fazer sentido.
 
+Um bom documento de RAG deve ser pequeno o suficiente para ser recuperado com precisão e completo o suficiente para responder uma pergunta sem depender de páginas vizinhas. Evite transformar capítulos inteiros em um único documento, porque textos longos diluem a pontuação semântica e aumentam a chance de o modelo receber contexto demais. Também evite documentos curtos demais, como uma frase solta sem título, porque eles podem perder a informação necessária para o usuário entender a resposta. Como regra prática, escreva documentos com título claro, assunto único, linguagem parecida com a pergunta do usuário e conteúdo que possa ser citado diretamente na resposta.
+
+Use `docid` como identificador estável. Se você reenviar uma linha com o mesmo `docid` e texto diferente, o documento será atualizado e reindexado. Se alterar apenas `__meta`, os metadados podem ser atualizados sem reindexar o conteúdo. Use `__tags` para organização operacional, filtros e manutenção da base. Use `__ref` quando vários documentos representam partes do mesmo item lógico e devem ser recuperados juntos, como seções de uma política, trechos de um mesmo contrato ou fragmentos de um produto. Use `__meta` para dados auxiliares que sua aplicação precisa preservar, como origem, versão, categoria interna, autor, URL canônica ou data de publicação.
+
+Ao importar documentos gerados a partir de arquivos grandes, revise o resultado do chunking antes de considerar a coleção pronta. PDFs, planilhas e páginas web podem produzir trechos com cabeçalhos repetidos, rodapés, tabelas quebradas ou textos sem contexto. Esses ruídos prejudicam tanto a busca quanto a resposta final. Quando possível, normalize o conteúdo antes de indexar: remova menus, repetições e disclaimers irrelevantes; inclua título e subtítulo no início do documento; mantenha unidades de informação juntas; e use tags para separar produtos, idiomas, versões ou públicos.
+
 ### Enviar documentos em lote
 
 Para enviar uma lista em massa de documentos para uma coleção, estruture-os seguindo o formato [JSONL](https://jsonlines.org/). A estrutura é composta pelas propriedades:
@@ -30,10 +36,11 @@ Para enviar uma lista em massa de documentos para uma coleção, estruture-os se
 | `text`  | `string` | O conteúdo "cru" do documento que será indexado. |
 | `__ref` | `string` | Opcional. Especifica um ID de referência do documento. |
 | `__tags` | `string[]` | Opcional. Especifica um array de tags do documento. Útil para gestão de documentos. |
+| `__meta` | `object` | Opcional. Metadados adicionais do documento. Alterações apenas em `__meta` atualizam os metadados sem reindexar o conteúdo. |
 
 A **referência** de um documento é um ID que pode ser especificado em vários documentos que precisam estar vinculados em uma busca quando um dos mesmos for correspondido em uma busca de similaridade. Por exemplo, se uma busca encontrar um documento que possui um ID de referência, todos os outros documentos da mesma coleção que compartilham o mesmo ID de referência do documento correspondido também serão incluídos na resposta da busca.
 
-Você pode enviar até **50.000** linhas de documentos por requisição. Se precisar enviar mais documentos, separe o envio em mais requisições.
+O limite de linhas por requisição depende do plano da conta: Free aceita até 1.000 linhas, Pro até 10.000 linhas e Max até 1.000.000 linhas. Para comparar diferenças entre planos, consulte [a página de preços da AIVAX](https://aivax.net/pricing). Se precisar enviar mais documentos, separe o envio em mais requisições.
 
 > [!WARNING]
 > Esse endpoint gera custo calculado em cima dos tokens do conteúdo de cada documento.

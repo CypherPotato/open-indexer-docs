@@ -124,9 +124,14 @@
                 <article data-uid="">
 <h1 id="ferramentas-embutidas">Ferramentas embutidas</h1>
 
-<p>A AIVAX fornece uma lista de ferramentas embutidas para você habilitar em seu modelo. Essas ferramentas podem ser usadas em conjunto com as <a href="/docs/protocol-functions">funções do lado do servidor</a>.</p>
+<p>A AIVAX fornece uma lista de ferramentas embutidas para você habilitar em seu modelo. Essas ferramentas podem ser usadas em conjunto com as <a href="/docs/tools/protocol-functions">funções do lado do servidor</a>.</p>
 <p>Algumas funções possuem custo. Esse custo é aplicado em modelos usados pela AIVAX e os que você fornece através do BYOK (bring-your-own-key), portanto, é importante adicionar saldo se você pretende usar essas ferramentas.</p>
 <p>Note que cada modelo decide qual função chamar e seus parâmetros. Nem todos os modelos podem obedecer as regras de chamadas.</p>
+<h2 id="como-escolher-e-combinar-ferramentas">Como escolher e combinar ferramentas</h2>
+<p>Ferramentas embutidas devem ser habilitadas como capacidades de trabalho, não como decoração do agente. Cada ferramenta adiciona uma decisão ao modelo: ele precisa perceber que a ferramenta existe, entender quando deve usá-la, montar argumentos válidos, aguardar o resultado e continuar a resposta. Quanto mais ferramentas parecidas estiverem disponíveis ao mesmo tempo, maior a chance de uso redundante ou escolha ruim. Comece com o menor conjunto que resolve o caso de uso e escreva instruções claras sobre quando usar cada uma.</p>
+<p>Use <code>WebSearch</code> quando a resposta depende de informação pública, recente ou variável. Use <code>OpenUrl</code> quando o usuário já forneceu uma URL e quer que a assistente analise aquele conteúdo específico. Use <code>AdvancedWebUsage</code> quando a tarefa exige navegação, interação ou páginas que não podem ser resolvidas por uma simples busca. Use <code>Code</code> para cálculo, transformação de dados e raciocínio algorítmico pequeno. Use <code>Request</code> quando o modelo precisa chamar uma API HTTP com método, cabeçalhos ou corpo customizado. Use <code>Remember</code> e <code>Calendar</code> apenas em chat clients ou chamadas com usuário identificável, porque essas ferramentas dependem de contexto persistente por usuário.</p>
+<p>Ferramentas de geração, como imagem, documento e página web, devem ser tratadas como ações de saída. Elas não servem apenas para “responder melhor”; elas criam artefatos hospedados ou anexados à conversa. Por isso, instrua o modelo sobre quando gerar um artefato e quando responder em texto. Em atendimento, por exemplo, gerar documento pode ser útil para um orçamento, proposta ou resumo formal; gerar página web pode ser útil para relatório visual; gerar imagem pode ser útil para ideação criativa. Se o usuário só pediu uma explicação, normalmente texto é suficiente.</p>
+<p>Quando ferramentas estão disponíveis via <code>builtin_tools</code> em uma chamada direta, a aplicação que faz a requisição decide a lista a cada inferência. Quando estão configuradas no AI Gateway, a lista fica centralizada e pode ser combinada com skills, workers, MCP e funções de protocolo. Em produção, prefira gateway para políticas permanentes, porque isso evita que diferentes clientes habilitem ferramentas diferentes sem controle. Use chamada direta para testes, rotinas internas e fluxos em que a aplicação realmente precisa escolher ferramentas dinamicamente.</p>
 <h2 id="pesquisa-na-internet">Pesquisa na internet</h2>
 <p>Essa função habilita a pesquisa na internet no seu modelo. Com isso, o modelo pode consultar por informações específicas ou em tempo real, como dados meteorológicos, notícias, resultados de jogos, etc.</p>
 <p>A pesquisa na internet é feita por vários provedores, escolhido conforme disponibilidade de rede e latência. A AIVAX utiliza uma mistura de provedores para realizar pesquisas na internet.</p>
@@ -154,6 +159,10 @@
     }
 }
 </code></pre>
+<h2 id="diagnóstico-de-ferramentas">Diagnóstico de ferramentas</h2>
+<p>Quando uma ferramenta não é chamada, primeiro confirme se ela está habilitada no gateway ou no campo <code>builtin_tools</code> da requisição. Depois, verifique se o modelo escolhido suporta chamadas de função ou se existe um tool handler configurado para modelos sem suporte nativo. Em seguida, revise a instrução: se ela não diz quando pesquisar, abrir URL, gerar imagem ou consultar memória, o modelo pode responder apenas com conhecimento próprio. Por fim, teste uma pergunta direta que obviamente exige a ferramenta, como pedir uma notícia recente para <code>WebSearch</code> ou pedir para abrir uma URL específica para <code>OpenUrl</code>.</p>
+<p>Quando uma ferramenta é chamada demais, reduza ambiguidade. Ferramentas como <code>WebSearch</code> e <code>XPostsSearch</code> competem por informação recente; <code>OpenUrl</code> e <code>Request</code> podem parecer parecidas quando o usuário envia um link; <code>Remember</code> e <code>Calendar</code> podem se sobrepor quando o usuário fala de preferências e datas. Remova ferramentas que não são necessárias, deixe descrições mais restritivas nas instruções do gateway e, quando possível, use workers para bloquear ou substituir chamadas em cenários específicos.</p>
+<p>Quando uma ferramenta falha, trate como parte normal da experiência. Buscas podem retornar pouco conteúdo, URLs podem bloquear bots, APIs podem negar autorização, geração de imagem pode recusar conteúdo e execução de código pode receber entrada ambígua. Instrua o modelo a explicar a limitação de forma objetiva e oferecer o próximo passo, como pedir outro link, tentar uma consulta mais específica, solicitar autorização ou responder com base apenas no contexto disponível. Não dependa de uma ferramenta externa como única forma de concluir uma conversa crítica sem fallback de experiência.</p>
 <h2 id="pesquisa-avançada-na-internet">Pesquisa avançada na internet</h2>
 <p>Essa função permite que o modelo tenha um navegador da internet e consiga realizar automação, como pesquisas, navegar em sites, preencher formulários e clicar em botões.</p>
 <p>No momento não há parametrização dessa função.</p>
@@ -202,7 +211,7 @@
 <h2 id="memória">Memória</h2>
 <p>Essa função permite que o modelo armazene conteúdo relevante para ser usado por várias conversas.</p>
 <blockquote>
-<p>No momento, essa função só está disponível quando usada em <a href="/docs/entities/chat-clients">chat clients</a> e quando a sessão está identificada por uma <code>tag</code>.</p>
+<p>No momento, essa função só está disponível quando usada em <a href="/docs/features/chat-clients">chat clients</a> e quando a sessão está identificada por uma <code>tag</code>.</p>
 </blockquote>
 <p>Através da <code>tag</code> da sessão, o modelo armazena um dado relevante da conversa, como preferência de nomes, lembretes ou ações que a assistente deve realizar.</p>
 <p>A instrução dessa memória instrui o modelo à não salvar dados sensíveis ou pessoais, no entanto, não é garantido que o modelo sempre irá seguir essa regra.</p>

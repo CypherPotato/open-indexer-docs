@@ -11,7 +11,7 @@ AIVAX é totalmente compatível com multi-modalidade. É possível encaminhar á
 <div class="request-item post">
     <span>POST</span>
     <span>
-        /v1/chat-completions
+        /v1/chat/completions
     </span>
 </div>
 
@@ -78,7 +78,7 @@ Você também pode fornecer uma entrada textual simples usando o parâmetro `pro
 <div class="request-item post">
     <span>POST</span>
     <span>
-        /v1/chat-completions
+        /v1/chat/completions
     </span>
 </div>
 
@@ -94,7 +94,7 @@ Você também pode fornecer uma entrada textual simples usando o parâmetro `pro
 <div class="request-item post">
     <span>POST</span>
     <span>
-        /v1/chat-completions
+        /v1/chat/completions
     </span>
 </div>
 
@@ -131,8 +131,17 @@ Opções disponíveis de pre-processamento multi-modalidades são:
 - `Video`
 - `Audio`
 - `OtherFiles`
+- `All`
 
 > Dica: A modalidade `OtherFiles` processa vários tipos de arquivos, como PDFs, planilhas do excel, apresentações do powerpoint, usando um motor interno da AIVAX e essa modalidade não possui custo.
+
+Arquivos e vídeos exigem saldo mínimo de $0,50 na conta. Imagens e áudios exigem saldo mínimo de $0,10.
+
+Use multimodalidade direta quando o modelo escolhido já entende aquele tipo de entrada. Use `multimodal_preprocess` quando você precisa transformar a entrada em texto antes de enviá-la ao modelo principal, normalmente porque o modelo é barato, rápido ou especializado em texto, mas não entende imagem, áudio, vídeo ou arquivo. Essa escolha muda a forma como a conversa é construída: com entrada multimodal direta, o conteúdo original chega ao modelo; com pré-processamento, a AIVAX gera uma descrição textual e essa descrição entra no contexto. O pré-processamento é especialmente útil para PDFs, planilhas, apresentações e imagens simples que só precisam ser resumidas ou extraídas antes de uma resposta textual.
+
+Para arquivos, prefira URLs públicas quando o arquivo é grande ou quando você quer evitar payloads base64 muito longos. Para imagens pequenas, data URLs podem simplificar a integração. Para áudio, envie base64 no campo `input_audio.data` e informe `format`; links externos de áudio não são aceitos nesse campo. Para vídeo, prefira URL externa, principalmente quando o provedor do modelo consegue buscar o conteúdo diretamente. Em qualquer modalidade, o recurso precisa estar acessível sem autenticação, sem bloqueios por IP e sem depender de JavaScript para carregar o conteúdo principal.
+
+Quando uma inferência multimodal falhar, reduza o problema. Primeiro, teste uma mensagem textual simples com o mesmo modelo. Depois, teste um único anexo pequeno. Em seguida, teste o mesmo anexo com `multimodal_preprocess`. Se o modelo direto falha e o pré-processamento funciona, o problema provavelmente é suporte multimodal do modelo. Se ambos falham, revise URL, formato, tamanho, saldo mínimo e acessibilidade do recurso. Em produção, trate anexos como entradas que podem falhar e escreva a experiência do usuário para pedir reenvio, usar outro formato ou responder com uma limitação clara.
 
 ## Respostas estruturadas
 
@@ -141,7 +150,7 @@ AIVAX suporta respostas estruturas e JSON healing, que automaticamente corrije J
 <div class="request-item post">
     <span>POST</span>
     <span>
-        /v1/chat-completions
+        /v1/chat/completions
     </span>
 </div>
 
@@ -191,7 +200,7 @@ Você pode usar ferramentas embutidas da AIVAX durante inferência sem a necessi
 <div class="request-item post">
     <span>POST</span>
     <span>
-        /v1/chat-completions
+        /v1/chat/completions
     </span>
 </div>
 
@@ -213,6 +222,8 @@ Você pode usar ferramentas embutidas da AIVAX durante inferência sem a necessi
 
 A lista de opções e ferramentas embutidas disponíveis está disponível na página de [ferramentas embutidas](/docs/tools/builtin-tools).
 
+Ferramentas em demanda são adequadas para chamadas pontuais, protótipos e integrações que não precisam de um gateway persistente. Se a mesma aplicação sempre usa as mesmas ferramentas, prefira configurá-las no AI Gateway para manter a política centralizada. Em chamadas diretas, o cliente que faz a requisição controla a lista de ferramentas a cada chamada; em gateways, o administrador do agente controla o conjunto disponível. Essa diferença é importante para segurança: ferramentas como `Request`, `AdvancedWebUsage`, geração de documentos e pesquisa web podem acessar recursos externos ou gerar conteúdo hospedado, então devem ser habilitadas com intenção clara.
+
 ## Corpo customizado em resposta
 
 Ao usar gateways de IA com API key fornecida (BYOK), você pode encaminhar JSON customizado na requisição, substituindo o JSON comum da AIVAX:
@@ -220,7 +231,7 @@ Ao usar gateways de IA com API key fornecida (BYOK), você pode encaminhar JSON 
 <div class="request-item post">
     <span>POST</span>
     <span>
-        /v1/chat-completions
+        /v1/chat/completions
     </span>
 </div>
 
@@ -245,7 +256,7 @@ Modelos invocam ferramentas durante ações, seja ferramentas locais (client-sid
 <div class="request-item post">
     <span>POST</span>
     <span>
-        /v1/chat-completions
+        /v1/chat/completions
     </span>
 </div>
 
@@ -313,3 +324,9 @@ Overall, today will be comfortably warm and dry, with clear skies and virtually 
 É agrupado automaticamente em grupos de raciocínios trechos de pensamento emitidos pelo modelo e chamadas de ferramentas do lado do servidor consecutivos, e automaticamente terminado quando o modelo começa uma resposta.
 
 Essa função é indicada para renderizar um chat agradável e informativo ao usuário final, tratando os trechos XML como componentes ou especificações extendidas do leitor markdown da aplicação.
+
+## Quando usar chamada direta ou gateway
+
+Use chamada direta para tarefas simples, testes, rotinas internas e integrações em que a aplicação já controla prompt, modelo, ferramentas e contexto. Ela é o caminho mais curto para chamar um modelo, enviar uma entrada multimodal, pedir uma resposta estruturada ou habilitar ferramentas embutidas por requisição. A chamada direta também é útil quando você quer alternar modelos dinamicamente pela aplicação e não precisa de uma configuração persistente no console.
+
+Use um AI Gateway quando o comportamento precisa ser estável, auditável e reutilizável. Gateways são melhores para assistentes de atendimento, bots em chat clients, agentes com RAG, ferramentas permanentes, workers, skills e configurações que vários clientes vão compartilhar. O gateway reduz repetição na aplicação e permite alterar comportamento sem mudar código. Uma boa regra prática: se você está copiando o mesmo prompt, a mesma lista de ferramentas ou a mesma coleção de RAG em várias chamadas, essa configuração provavelmente deveria estar em um gateway.

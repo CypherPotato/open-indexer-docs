@@ -124,12 +124,16 @@
                 <article data-uid="">
 <h1 id="support-for-model-context-protocol-mcp">Support for Model Context Protocol (MCP)</h1>
 
-<p>It is possible to bind external MCP protocol tools in your <a href="/docs/en/entities/ai-gateways/ai-gateway">AI Gateway</a>. The protocol defines functions that run on the server side and enable the assistant to interact with real‑time services.</p>
-<p>MCP functions persist the server‑side action call of AIVAX, removing the need to implement the function on the client side.</p>
+<p>You can bind external MCP protocol tools to your <a href="/docs/en/inference/ai-gateway">AI Gateway</a>. The protocol defines functions that run on the server side and enable the assistant to interact with real‑time services.</p>
+<p>MCP functions persist the server‑side action call of AIVAX, removing the need to implement the client‑side function.</p>
 <img src="/assets/diagrams/mcp-1.drawio.svg">
+<h2 id="when-to-use-mcp">When to use MCP</h2>
+<p>Use MCP when you already have external tools that need to be discovered and called by models in a standardized way. An MCP server is suitable for tool catalogs, integrations with internal systems, stateful operations, tools shared among multiple agents, and environments where you want to keep logic outside of AIVAX. AIVAX acts as an MCP client: it connects the AI Gateway to the remote server, reads the available tools, and allows the model to call those tools during inference.</p>
+<p>Do not use MCP just to replace a single simple HTTP call. When you need to expose an isolated function with a specific callback and nonce authentication, <a href="/docs/en/tools/protocol-functions">protocol functions</a> are usually simpler. When the capability already exists in AIVAX, such as web search, URL opening, code execution, or image generation, <a href="/docs/en/tools/builtin-tools">built‑in tools</a> are usually the most direct path. MCP is better when there is a set of tools with their own schema, when another system already speaks MCP, or when you want the same server to be used by different clients.</p>
+<p>In production, treat the MCP server as an API exposed to an agent. Tool descriptions should be clear, schemas should be restrictive, and authentication should be configured in the server headers. The model should not receive overly generic tools such as <code>execute</code>, <code>request</code>, or <code>search</code> without strong descriptions and controlled parameters. Ambiguous tools increase wrong calls; specific tools like <code>lookup_customer_by_email</code> or <code>create_support_ticket</code> help the model decide better.</p>
 <h3 id="choosing-the-function-name">Choosing the function name</h3>
-<p>The function name should be simple and deterministic about what the function does. Avoid hard‑to‑guess names or names that do not reflect the function’s role, as the assistant may get confused and not call the function when appropriate.</p>
-<p>As an example, let's think of a function that queries a user in an external database. The following names are good examples to consider for the call:</p>
+<p>The function name should be simple and deterministic about what the function does. Avoid names that are hard to guess or that do not hint at the function’s role, as the assistant may get confused and not call the function when appropriate.</p>
+<p>As an example, let’s think of a function that queries a user in an external database. The following names are good examples to consider for the call:</p>
 <ul>
 <li><code>search_user</code></li>
 <li><code>query_user</code></li>
@@ -141,12 +145,12 @@
 </ul>
 <p>Having the function name, we can think about the function description.</p>
 <h3 id="choosing-the-function-description">Choosing the function description</h3>
-<p>The function description should conceptually explain two situations: what it does and when it should be called by the assistant. This description should include the scenarios the assistant should consider calling it and when it should not be called, providing a few one‑shot call examples and/or making the function rules explicit.</p>
+<p>The function description should conceptually explain two situations: what it does and when the assistant should call it. This description should include the scenarios the assistant should consider calling it and when it should not be called, providing a few one‑shot call examples and/or making the function rules explicit.</p>
 <h3 id="defining-mcp-servers">Defining MCP servers</h3>
 <p>You can define your MCP servers in the gateway through a JSON array:</p>
 <pre><code class="lang-json">[
     {
-        &quot;name&quot;: &quot;My MCP server&quot;,
+        &quot;name&quot;: &quot;Meu servidor MCP&quot;,
         &quot;url&quot;: &quot;https://example-server.io/mcp&quot;,
         &quot;headers&quot;: {
             &quot;Authorization&quot;: &quot;sk-pv-12nbo...&quot;
@@ -154,8 +158,8 @@
     }
 ]
 </code></pre>
-<p>Your MCP server must be enabled for <strong>SSE</strong> or <strong>Streamable HTTP</strong> to work with AIVAX. You can set custom headers in your MCP server configuration to configure authentication or other needs.</p>
-<p>AIVAX calls to the remote MCP server will normally send additional metadata information through the <code>_meta</code> field of the MCP:</p>
+<p>Your MCP server must be enabled for <strong>SSE</strong> or <strong>Streamable HTTP</strong> to work with AIVAX. You can define custom headers in your MCP server configuration to set up authentication or other needs.</p>
+<p>Calls from AIVAX to the remote MCP server will normally send additional metadata information via the <code>_meta</code> field of MCP:</p>
 <pre><code class="lang-json">{
     &quot;jsonrpc&quot;: &quot;2.0&quot;,
     &quot;id&quot;: 2,
@@ -178,6 +182,8 @@
 }
 </code></pre>
 <p>From the values defined in <code>_meta</code>, you have the inference, client, or function metadata parameters. Values prefixed with <code>_aiv</code> are reserved for AIVAX parameters.</p>
+<p>Use <code>_aiv_external_user_id</code> to apply user‑based authorization when the call comes from a chat client or identified session. Use <code>_aiv_call_source</code> to differentiate calls coming from API, web chat, or integrations. Use <code>_aiv_conversation_token</code> when the MCP server needs to maintain correlation with a specific conversation. Use <code>_aiv_moment</code> for decisions dependent on local date. When <code>_aiv_nonce</code> is present, validate it the same way as <code>X-Request-Nonce</code> in reverse hooks, comparing the hash with the hook key configured on the account.</p>
+<p>When an MCP tool does not appear for the model, verify that the remote server is reachable, that it uses SSE or Streamable HTTP, that the authentication headers are correct, and that the gateway is actually configured with the MCP source. When the tool appears but is not called, review the name, description, and schema. When it is called with bad arguments, restrict the JSON Schema and include property descriptions. When the call fails, make the MCP server return readable errors, because the model needs to understand whether to try another argument, ask the user for information, or terminate the action.</p>
 
 </article>
 

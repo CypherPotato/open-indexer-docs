@@ -127,7 +127,7 @@
 <p>A AIVAX fornece vários pipelines para usar em seu gateway de IA.</p>
 <p>Você pode usar vários pipelines para executarem no contexto do seu gateway.</p>
 <h2 id="rag">RAG</h2>
-<p>Através de <a href="/docs/entities/collections">coleções</a>, você pode vincular coleções de documentos para seu gateway de IA. Você pode definir os parâmetros de incorporação, como quantidade de documentos, pontuação mínima e estratégia de incorporação.</p>
+<p>Através de <a href="/docs/rag/collections">coleções</a>, você pode vincular coleções de documentos para seu gateway de IA. Você pode definir os parâmetros de incorporação, como quantidade de documentos, pontuação mínima e estratégia de incorporação.</p>
 <p>Cada estratégia de incorporação é mais refinada que a outra. Algumas criam resultados melhores que as demais, mas é importante realizar testes práticos com várias estratégias para entender qual se ajusta melhor no modelo, conversa e tom do usuário.</p>
 <p>Talvez seja necessário realizar ajustes no prompt do sistema para informar melhor como a IA deverá considerar os documentos anexados na conversa. Os documentos são anexados como uma mensagem do usuário, limitados aos parâmetros que você define na estratégia de obtenção.</p>
 <p>Estratégias com reescrita normalmente geram os melhores resultados à um baixo custo de latência e custo. O modelo de reescrita usado sempre o com menor custo, escolhido normalmente por um pool interno que decide o modelo que está com menor latência no momento.</p>
@@ -162,7 +162,7 @@
 <p>Estes recursos são inseridos nas instruções de sistema do LLM.</p>
 <h2 id="skills-habilidades">Skills (habilidades)</h2>
 <p>Habilidades são instruções fornecidas sob-demanda para o modelo, o que pode obter instruções refinadas e aprimoradas para diferentes tarefas especializadas.</p>
-<p>Leia mais sobre <a href="/docs/skills">habilidades</a>.</p>
+<p>Leia mais sobre <a href="/docs/features/skills">habilidades</a>.</p>
 <h2 id="processamento-multi-modal">Processamento multi-modal</h2>
 <p>O pré-processamento de conteúdo multi-modal permite processar áudios, imagens, vídeos e documentos usando modelos com essas capacidades para modelos que não possuem essa capacidade.</p>
 <p>Cada conteúdo multi-modal é convertido para uma representação textual do mesmo através de um modelo auxiliar.</p>
@@ -180,9 +180,9 @@
 <p>Esse pipeline é configurado em quantidade de mensagens de ferramentas à serem preservadas ao invés de tokens. Quando uma mensagem de ferramenta é considerada antiga, ela não é removida, mas tem seu conteúdo removido.</p>
 <h2 id="ferramentas-do-lado-do-servidor">Ferramentas do lado do servidor</h2>
 <p>Esse pipeline permite a execução de ferramentas do lado do servidor da AIVAX, similar ao protocolo MCP.</p>
-<p>Leia mais sobre esse pipeline <a href="/docs/protocol-functions">aqui</a>.</p>
+<p>Leia mais sobre esse pipeline <a href="/docs/tools/protocol-functions">aqui</a>.</p>
 <h2 id="ferramentas-embutidas">Ferramentas embutidas</h2>
-<p>Você pode adicionar ferramentas providas pela AIVAX em seu gateway, como pesquisa na internet, geração de imagens e acesso de links. Consulte todas as ferramentas disponíveis <a href="/docs/builtin-tools">aqui</a>.</p>
+<p>Você pode adicionar ferramentas providas pela AIVAX em seu gateway, como pesquisa na internet, geração de imagens e acesso de links. Consulte todas as ferramentas disponíveis <a href="/docs/tools/builtin-tools">aqui</a>.</p>
 <h2 id="interpretador-de-funções-tool-handler">Interpretador de funções (tool handler)</h2>
 <p>É possível alterar o interpretador de funções usado pelo modelo. Isso traz a possibilidade de adicionar a capacidade de <strong>chamar funções</strong> para modelos que não suportam esse recurso.</p>
 <p>Atualmente, existem dois tipos de interpretadores:</p>
@@ -196,7 +196,7 @@
 <p>O custo da moderação é de <strong>$0,20</strong> por milhão de tokens processados.</p>
 <h2 id="workers">Workers</h2>
 <p>Workers definem o comportamento do seu gateway remotamente, usado para controlar quando certos eventos devem ser abortados ou continuados.</p>
-<p>Leia mais sobre esse pipeline <a href="/docs/entities/ai-gateways/workers">aqui</a>.</p>
+<p>Leia mais sobre esse pipeline <a href="/docs/inference/workers">aqui</a>.</p>
 
 </article>
 

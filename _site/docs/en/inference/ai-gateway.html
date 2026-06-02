@@ -124,25 +124,31 @@
                 <article data-uid="">
 <h1 id="ai-gateway">AI Gateway</h1>
 
-<p>AI gateways are a service that AIVAX provides to create an inference tunnel between an LLM model and a knowledge base. With it you can:</p>
+<p>The AI gateways are a service that AIVAX provides to create an inference tunnel between an LLM model and a knowledge base. With it you can:</p>
 <ul>
 <li>Create a model with custom instructions</li>
-<li>Use a model provided by you through a compatible OpenAI endpoint, or use a model made available by AIVAX</li>
+<li>Use a model provided by you via a compatible OpenAI endpoint, or use a model provided by AIVAX</li>
 <li>Customize inference parameters such as temperature, top_p, prefill</li>
 <li>Use a knowledge collection as the foundation for AI responses</li>
 </ul>
-<p>Among other features. With the AI Gateway, you create a ready‑to‑use model, parametrized and grounded in the instructions you define.</p>
+<p>Among other features. With the AI Gateway, you create a ready‑to‑use model, parameterized and grounded in the instructions you define.</p>
+<h2 id="how-to-think-about-a-gateway">How to think about a gateway</h2>
+<p>Think of the AI Gateway as the permanent configuration of an agent. A direct call to <code>/v1/chat/completions</code> resolves an isolated inference, but a gateway stores the decisions you do not want to repeat for each request: which model to use, which base instructions define the assistant's personality and rules, which RAG collections enter the context, which tools are available, which skills can be activated, how the context will be truncated, how tools will be interpreted, and which external workers can intervene in the flow. This separation is useful because the client application then only needs to send the conversation and, optionally, some controlled overrides, while the agent's operational configuration remains centralized in the console or the AIVAX API.</p>
+<p>A gateway also functions as a responsibility boundary. The system that calls AIVAX does not need to know all the internal details of RAG, MCP, protocol functions, built‑in tools, or moderation; it only needs to call a model by the gateway name. Conversely, the gateway administrator can swap the model, adjust instructions, enable tools, and change strategies without republishing the client application. In production environments, this prevents business rules, integration keys, and prompt decisions from being scattered across multiple services.</p>
+<p>The main configuration decisions are grouped into several blocks. The <strong>model</strong> block defines whether the gateway uses an integrated AIVAX model or a BYOK model compatible with OpenAI, as well as parameters such as <code>temperature</code>, <code>top_p</code>, <code>reasoning_effort</code>, and the assistant's prefill. The <strong>context</strong> block defines system instructions, templates, skills, remote instructions, and truncation. The <strong>knowledge</strong> block defines RAG collections and the search strategy. The <strong>tools</strong> block includes directly provided OpenAI tools, built‑in AIVAX tools, external MCP, and protocol functions. The <strong>control</strong> block includes moderation, workers, and tool handlers for models that need help calling functions.</p>
+<p>In production, start with a conservative configuration: a clear system instruction, a model that supports the required modalities and tools, a single well‑prepared RAG collection, and a few truly useful tools. After observing real conversations, increase sophistication. Adding many tools, many skills, or many unfiltered documents increases input tokens, cost, and the chance of the model choosing the wrong path. A good gateway tends to resemble a well‑defined operation rather than a catalog of all possible capabilities.</p>
 <h2 id="models">Models</h2>
-<p>You can bring an AI model compatible with the OpenAI interface to the AI gateway. If you bring your own AI model, we will charge only for the document search attached to the AI. You can also use one of the models below that are already ready to start with AIVAX.</p>
-<p>When using a model, you will notice that some are smarter than others for certain tasks. Some models are better with certain data‑retrieval strategies than others. Run tests to find the best model.</p>
-<p>You can see the available models on the <a href="/docs/en/models">models page</a>.</p>
+<p>You can bring an AI model compatible with the OpenAI interface to the AI gateway. If you bring your own AI model, we will only charge for the document search attached to the AI. You can also use one of the models below that are already ready to start with AIVAX.</p>
+<p>When using a model, you will notice that some are smarter than others for certain tasks. Some models perform better with certain data acquisition strategies than others. Run tests to find the best model.</p>
+<p>You can identify a gateway by its full ID or by the format <code>name:final-id</code>, such as <code>support:50c3</code>. This format is useful because it allows swapping the full ID for a short reference, but still avoids ambiguity when there are gateways with similar names. Integrated AIVAX models use their own tags, usually starting with <code>@</code>, and can be called directly when you do not need a permanent gateway configuration.</p>
+<p>When choosing a model, validate three points before putting it into production. First, confirm that it supports the inputs you intend to send, such as image, audio, video, or files. Second, confirm that it supports function calls if the gateway uses tools, RAG via <code>QueryFunction</code>, MCP, protocol functions, or skills. Third, check that the model accepts the parameters you want to use; some models do not accept temperature, assistant prefill, or reasoning effort, and in those cases the gateway must be configured compatibly.</p>
 <h2 id="using-an-ai-gateway">Using an AI gateway</h2>
-<p>AIVAX provides an endpoint compatible with the OpenAI interface through an AI‑gateway, which makes it easy to integrate the model created by AIVAX with existing applications and SDKs. Note that only a few properties are supported.</p>
-<p>In an AI gateway, you already configure model parameters such as System Prompt, temperature, and model name. When using this endpoint, some gateway values can be overridden by the request.</p>
+<p>AIVAX provides an endpoint compatible with the OpenAI interface via an AI‑gateway, which simplifies integration of the model created by AIVAX with existing applications and SDKs. Note that only some properties are supported.</p>
+<p>In an AI gateway, you already configure the model parameters, such as System Prompt, temperature, and model name. When using this endpoint, some gateway values can be overridden by the request.</p>
 <script src="https://inference.aivax.net/apidocs?embed-target=Inference%20(chat%20completions)&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
 <p>For guidance on streaming rendering, reasoning, tools, and continuous responses, see <a href="/docs/en/inference/chat-handling">Chat handling</a>.</p>
-<h2 id="use-with-sdks">Use with SDKs</h2>
-<p>By providing OpenAI‑compatible endpoints, AIVAX is fully compatible with existing SDKs, making plug‑and‑play integration easy.</p>
+<h2 id="using-with-sdks">Using with SDKs</h2>
+<p>By providing endpoints compatible with the OpenAI interface, AIVAX is fully compatible with existing SDKs, facilitating plug‑and‑play integration.</p>
 <p>See the example below:</p>
 <pre><code class="lang-python">from openai import OpenAI
  
@@ -160,9 +166,14 @@ response = client.chat.completions.create(
  
 print(response.choices[0].message.content)
 </code></pre>
-<p>At the moment, AIVAX only supports the <code>chat/completions</code> format. In the future, we plan to add support for the API Responses.</p>
-<h2 id="use-with-mcp">Use with MCP</h2>
-<p>You can expose your AI Gateways through MCP (Model Context Protocol) functions. This allows AI models to invoke other models (sub‑agents) natively via the MCP protocol.</p>
+<p>Currently, AIVAX only supports the <code>chat/completions</code> format. In the future, we plan to add support for API Responses.</p>
+<h2 id="recommended-configuration-for-production">Recommended configuration for production</h2>
+<p>A production configuration should be written so that the model understands its purpose, its sources of truth, and its limits. In the system instructions, describe the assistant's role, the audience it serves, what it can or cannot promise, when to use RAG, when to use tools, and how to respond when information is unavailable. Avoid putting operational rules that already exist elsewhere in the gateway, such as truncation limits or tool lists, into the prompt, as this duplicates maintenance and increases the risk of contradiction.</p>
+<p>For RAG, prefer linking collections with short, self‑contained, well‑named documents. If the assistant needs to answer based on a specific base, state in the instructions that the collection is the preferred source and that the assistant should alert when insufficient information is found. Choose the search strategy based on the conversation type: <code>Plain</code> works well for direct questions; <code>Concatenate</code> helps when the question depends on the user's recent messages; <code>UserRewrite</code> and <code>FullRewrite</code> are better when the user asks fragmented or anaphoric questions, such as “and in this case?”; <code>QueryFunction</code> is useful when the model must decide whether to search or not before answering.</p>
+<p>For tools, enable only those that have a clear role. Built‑in tools handle common tasks such as web search, opening URLs, code execution, image generation, documents, and pages. External MCP is better when you already have an MCP server with business tools. Protocol functions are useful when you want to expose specific HTTP callbacks to the model without installing a full MCP server. When the model does not call tools reliably, configure a tool handler; when it calls tools excessively, make the descriptions more restrictive and remove redundant tools.</p>
+<p>For observability and control, use workers when you need an external decision at runtime. A worker can block a message, enrich context, replace a tool call, or log an action in a proprietary system. Since the worker is invoked during the inference flow, it must respond quickly and deterministically. Use workers for rules that need to query external systems or updated policies; use system instructions for stable rules that the model only needs to follow.</p>
+<h2 id="using-with-mcp">Using with MCP</h2>
+<p>It is possible to expose your AI Gateways via MCP functions (Model Context Protocol). This allows AI models to invoke other models (sub‑agents) natively through the MCP protocol.</p>
 <p>To configure an AI Gateway as an MCP server, use the endpoint <code>https://inference.aivax.net/v1/mcp/inference</code> and set the following HTTP headers:</p>
 <table>
 <thead>
@@ -205,12 +216,12 @@ print(response.choices[0].message.content)
 </tr>
 </tbody>
 </table>
-<h3 id="identifying-the-gateway">Identifying the Gateway</h3>
+<h3 id="gateway-identification">Gateway identification</h3>
 <p>There are three ways to identify the gateway via the <code>X-Mcp-Model-Name</code> header:</p>
 <ol>
 <li><strong>Full gateway ID</strong>: <code>550e8400-e29b-41d4-a716-446655440000</code></li>
-<li><strong>Slug format</strong>: <code>mygateway:50c3</code> (gateway name + final part of the ID)</li>
-<li><strong>Integrated model tag</strong>: Direct name of a model available on AIVAX</li>
+<li><strong>Slug format</strong>: <code>meugateway:50c3</code> (gateway name + final part of the ID)</li>
+<li><strong>Integrated model tag</strong>: Direct name of a model available in AIVAX</li>
 </ol>
 <h3 id="configuration-example">Configuration example</h3>
 <p>Visual Studio Code:</p>
@@ -221,7 +232,7 @@ print(response.choices[0].message.content)
             &quot;url&quot;: &quot;https://inference.aivax.net/v1/mcp/inference&quot;,
             &quot;headers&quot;: {
                 &quot;Authorization&quot;: &quot;Bearer {your_api_key}&quot;,
-                &quot;X-Mcp-Model-Name&quot;: &quot;mygateway:50c3&quot;,
+                &quot;X-Mcp-Model-Name&quot;: &quot;meugateway:50c3&quot;,
                 &quot;X-Mcp-Tool-Name&quot;: &quot;my_assistant&quot;,
                 &quot;X-Mcp-Tool-Description&quot;: &quot;Use this tool to invoke the specialized assistant for data analysis&quot;,
                 &quot;X-Mcp-Tool-Title&quot;: &quot;Data Analysis Assistant&quot;
@@ -237,7 +248,7 @@ print(response.choices[0].message.content)
         &quot;url&quot;: &quot;https://inference.aivax.net/v1/mcp/inference&quot;,
         &quot;headers&quot;: {
             &quot;Authorization&quot;: &quot;Bearer {your_api_key}&quot;,
-            &quot;X-Mcp-Model-Name&quot;: &quot;mygateway:50c3&quot;,
+            &quot;X-Mcp-Model-Name&quot;: &quot;meugateway:50c3&quot;,
             &quot;X-Mcp-Tool-Name&quot;: &quot;my_assistant&quot;,
             &quot;X-Mcp-Tool-Description&quot;: &quot;Use this tool to invoke the specialized assistant for data analysis&quot;,
             &quot;X-Mcp-Tool-Title&quot;: &quot;Data Analysis Assistant&quot;
@@ -248,9 +259,9 @@ print(response.choices[0].message.content)
 <h3 id="generated-tool">Generated tool</h3>
 <p>The MCP server will automatically create a tool named <code>invoke_{tool_name}</code> that accepts the parameter:</p>
 <ul>
-<li><strong>prompt</strong> (string): The prompt to send to the model</li>
+<li><strong>prompt</strong> (string): The prompt to be sent to the model</li>
 </ul>
-<p>The tool will perform an inference on the configured AI Gateway and return the model’s response.</p>
+<p>The tool will perform an inference on the configured AI Gateway and return the model's response.</p>
 <p>This MCP shares the <a href="/docs/en/limits">inference rate limits</a> to prevent abuse and ensure service stability. If the rate limits are exceeded, the tool will return an error indicating that the limit has been reached.</p>
 
 </article>

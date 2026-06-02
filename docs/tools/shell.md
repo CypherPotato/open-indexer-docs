@@ -12,7 +12,7 @@ Na interface virtual do shell, ferramentas de manipulação padrão do sistema o
 get-users --filter active --format csv | grep "John Doe" | awk -F, '{print $1, $2}'
 ```
 
-Na linha acima, `get-users` é uma ferramenta personalizada que retorna uma lista de usuários em formato CSV. O comando `grep` filtra os resultados para encontrar "John Doe", e o `awk` extrai e formata as colunas desejadas. Essa ferramenta pode ter sido definida por [MCP](/docs/tools/mcp), [ferramentas embutidas](/docs/builtin-tools) ou ser uma [ferramenta de protocolo](/docs/protocol-functions).
+Na linha acima, `get-users` é uma ferramenta personalizada que retorna uma lista de usuários em formato CSV. O comando `grep` filtra os resultados para encontrar "John Doe", e o `awk` extrai e formata as colunas desejadas. Essa ferramenta pode ter sido definida por [MCP](/docs/tools/mcp), [ferramentas embutidas](/docs/tools/builtin-tools) ou ser uma [ferramenta de protocolo](/docs/tools/protocol-functions).
 
 Não é possível virtualizar ferramentas que executam no lado do cliente no ambiente bash. Ao tentar fazer isso, um erro será retornado na API. Defina ferramentas em white-list ou black-list da shell para controlar quais ferramentas estão disponíveis para serem usadas no ambiente de shell.
 

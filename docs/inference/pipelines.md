@@ -6,7 +6,7 @@ Você pode usar vários pipelines para executarem no contexto do seu gateway.
 
 ## RAG
 
-Através de [coleções](/docs/entities/collections), você pode vincular coleções de documentos para seu gateway de IA. Você pode definir os parâmetros de incorporação, como quantidade de documentos, pontuação mínima e estratégia de incorporação.
+Através de [coleções](/docs/rag/collections), você pode vincular coleções de documentos para seu gateway de IA. Você pode definir os parâmetros de incorporação, como quantidade de documentos, pontuação mínima e estratégia de incorporação.
 
 Cada estratégia de incorporação é mais refinada que a outra. Algumas criam resultados melhores que as demais, mas é importante realizar testes práticos com várias estratégias para entender qual se ajusta melhor no modelo, conversa e tom do usuário.
 
@@ -55,7 +55,7 @@ Estes recursos são inseridos nas instruções de sistema do LLM.
 
 Habilidades são instruções fornecidas sob-demanda para o modelo, o que pode obter instruções refinadas e aprimoradas para diferentes tarefas especializadas.
 
-Leia mais sobre [habilidades](/docs/skills).
+Leia mais sobre [habilidades](/docs/features/skills).
 
 ## Processamento multi-modal
 
@@ -91,11 +91,11 @@ Esse pipeline é configurado em quantidade de mensagens de ferramentas à serem 
 
 Esse pipeline permite a execução de ferramentas do lado do servidor da AIVAX, similar ao protocolo MCP.
 
-Leia mais sobre esse pipeline [aqui](/docs/protocol-functions).
+Leia mais sobre esse pipeline [aqui](/docs/tools/protocol-functions).
 
 ## Ferramentas embutidas
 
-Você pode adicionar ferramentas providas pela AIVAX em seu gateway, como pesquisa na internet, geração de imagens e acesso de links. Consulte todas as ferramentas disponíveis [aqui](/docs/builtin-tools).
+Você pode adicionar ferramentas providas pela AIVAX em seu gateway, como pesquisa na internet, geração de imagens e acesso de links. Consulte todas as ferramentas disponíveis [aqui](/docs/tools/builtin-tools).
 
 ## Interpretador de funções (tool handler)
 
@@ -117,4 +117,4 @@ O custo da moderação é de **$0,20** por milhão de tokens processados.
 
 Workers definem o comportamento do seu gateway remotamente, usado para controlar quando certos eventos devem ser abortados ou continuados.
 
-Leia mais sobre esse pipeline [aqui](/docs/entities/ai-gateways/workers).
+Leia mais sobre esse pipeline [aqui](/docs/inference/workers).

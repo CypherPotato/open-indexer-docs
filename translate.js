@@ -33,28 +33,25 @@ function enumerateMdFiles(dir) {
 }
 
 async function runInference(text) {
-    const apiKey = process.env.GROQ_API_KEY;
+    const apiKey = process.env.AIVAX_API_KEY;
 
     if (!apiKey) {
         console.error("GROQ_API_KEY environment variable is not set.");
         process.exit(1);
     }
     
-    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    const response = await fetch('https://inference.aivax.net/v1/chat/completions', {
         method: 'POST',
         headers: {
             Authorization: `Bearer ${apiKey}`,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            model: 'openai/gpt-oss-120b',
+            model: '@inception/mercury-2',
             messages: [{
                 role: 'user',
                 content: text
-            }],
-            temperature: 0.1,
-            top_p: 0.75,
-            max_tokens: 8192
+            }]
         })
     });
 

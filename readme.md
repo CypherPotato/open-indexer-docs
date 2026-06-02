@@ -1,13 +1,14 @@
-# Sisk Documentation
+# AIVAX Documentation
 
-This repository contains the source code of the [Sisk Documentation website](https://docs.sisk-framework.org/).
+This repository contains the source code for the AIVAX documentation website.
 
 ## Building
 
-1. Firstly, make sure you have [docfx](https://dotnet.github.io/docfx/) installed in your machine. You'll need [.NET SDK](https://dotnet.microsoft.com/en-us/download) to install it.
-2. Clone this repository.
-3. Build the [Sisk Framework project](https://github.com/sisk-http/core) and put the .DLL binaries and XML documentation file at the `ref/` directory, on the repository root.
-4. Run `docfx`, then `docfx serve`.
+Use the project scripts when possible:
+
+1. Run `comp.ps1` for a fast rebuild of Cascadium styles and DocFX.
+2. Run `build.ps1` only when the translation pipeline is intentionally needed.
+3. Run `docfx serve` after a build to preview the generated site.
 
 > [!WARNING]
 > 
@@ -25,7 +26,7 @@ Then you're ready to go and you'll have the static website files at `/_site`.
 
 Contributions are always welcome. Contribute with spelling corrections, fixing broken links and more.
 
-Please, only edit **english** documentation files. Documentation files for another languages are AI-generated from english files through.
+Edit the Portuguese source files under `docs/`. Do not edit generated output under `_site/`, generated API artifacts under `ref/`, or translated files under `docs/en/` unless the translation pipeline is being intentionally updated.
 
 > [!NOTE]
-> Please do not edit API specification files (XML). These files are generated. If you want to edit any API documentation, edit it in the repository where the code is hosted.
+> Please do not edit API specification files. These files are generated. If you want to edit API documentation, update it in the repository where the API code is hosted.

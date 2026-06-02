@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Sisk Documentation | AIVAX </title>
+        <title>AIVAX Documentation | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="Sisk Documentation | AIVAX ">
+        <meta name="title" content="AIVAX Documentation | AIVAX ">
 
 
         <link rel="icon" href="assets/img/favicon.ico">
@@ -108,15 +108,15 @@
                 </div>
 
                 <article data-uid="">
-<h1 id="sisk-documentation">Sisk Documentation</h1>
+<h1 id="aivax-documentation">AIVAX Documentation</h1>
 
-<p>This repository contains the source code of the <a href="https://docs.sisk-framework.org/">Sisk Documentation website</a>.</p>
+<p>This repository contains the source code for the AIVAX documentation website.</p>
 <h2 id="building">Building</h2>
+<p>Use the project scripts when possible:</p>
 <ol>
-<li>Firstly, make sure you have <a href="https://dotnet.github.io/docfx/">docfx</a> installed in your machine. You'll need <a href="https://dotnet.microsoft.com/en-us/download">.NET SDK</a> to install it.</li>
-<li>Clone this repository.</li>
-<li>Build the <a href="https://github.com/sisk-http/core">Sisk Framework project</a> and put the .DLL binaries and XML documentation file at the <code>ref/</code> directory, on the repository root.</li>
-<li>Run <code>docfx</code>, then <code>docfx serve</code>.</li>
+<li>Run <code>comp.ps1</code> for a fast rebuild of Cascadium styles and DocFX.</li>
+<li>Run <code>build.ps1</code> only when the translation pipeline is intentionally needed.</li>
+<li>Run <code>docfx serve</code> after a build to preview the generated site.</li>
 </ol>
 <div class="WARNING">
 <h5>Warning</h5>
@@ -128,10 +128,10 @@
 <p>Then you're ready to go and you'll have the static website files at <code>/_site</code>.</p>
 <h2 id="contributing">Contributing</h2>
 <p>Contributions are always welcome. Contribute with spelling corrections, fixing broken links and more.</p>
-<p>Please, only edit <strong>english</strong> documentation files. Documentation files for another languages are AI-generated from english files through.</p>
+<p>Edit the Portuguese source files under <code>docs/</code>. Do not edit generated output under <code>_site/</code>, generated API artifacts under <code>ref/</code>, or translated files under <code>docs/en/</code> unless the translation pipeline is being intentionally updated.</p>
 <div class="NOTE">
 <h5>Note</h5>
-<p>Please do not edit API specification files (XML). These files are generated. If you want to edit any API documentation, edit it in the repository where the code is hosted.</p>
+<p>Please do not edit API specification files. These files are generated. If you want to edit API documentation, update it in the repository where the API code is hosted.</p>
 </div>
 
 </article>

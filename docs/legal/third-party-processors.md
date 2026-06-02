@@ -31,6 +31,14 @@ A AIVAX utiliza serviços de terceiros para operações específicas, como colet
 | [CrofAI](https://ai.nahcrof.com/) | Inferência de modelos de IA | Estados Unidos | [CCPA](https://ai.nahcrof.com/privacy) |
 | [Pollinations](https://pollinations.ai/) | Geração de imagens e vídeo | Estônia | [GDPR](https://pollinations.ai/privacy) |
 | [OpenRouter](https://openrouter.ai/) | Roteamento e fallback entre provedores de IA | Estados Unidos | [GDPR](https://openrouter.ai/privacy), [CCPA](https://openrouter.ai/privacy) |
+| [Anthropic](https://www.anthropic.com/) | Inferência de modelos Claude | Estados Unidos | [Política de privacidade](https://www.anthropic.com/privacy) |
+| [AWS](https://aws.amazon.com/) | Inferência e infraestrutura de IA | Estados Unidos | [GDPR](https://aws.amazon.com/compliance/gdpr-center/), [CCPA](https://aws.amazon.com/compliance/ccpa/) |
+| [Cohere](https://cohere.com/) | Inferência de modelos de IA | Canadá | [Política de privacidade](https://cohere.com/privacy) |
+| [xAI](https://x.ai/) | Inferência de modelos Grok | Estados Unidos | [Política de privacidade](https://x.ai/privacy) |
+| [Mistral AI](https://mistral.ai/) | Inferência de modelos de IA | França | [Política de privacidade](https://mistral.ai/terms/#privacy-policy) |
+| [DeepSeek](https://www.deepseek.com/) | Inferência de modelos de IA | China | [Política de privacidade](https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html) |
+| [Z.ai](https://z.ai/) | Inferência de modelos de IA | China | [Política de privacidade](https://z.ai/privacy) |
+| [Alibaba Cloud](https://www.alibabacloud.com/) | Inferência de modelos de IA | China | [Política de privacidade](https://www.alibabacloud.com/help/en/legal/latest/alibaba-cloud-international-website-privacy-policy) |
 
 ### Coleta de dados de provedores
 

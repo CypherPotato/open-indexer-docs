@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Plans and Limits | AIVAX </title>
+        <title>Plans and limits | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="Plans and Limits | AIVAX ">
+        <meta name="title" content="Plans and limits | AIVAX ">
 
 
         <link rel="icon" href="../../assets/img/favicon.ico">
@@ -122,22 +122,17 @@
                 </div>
 
                 <article data-uid="">
-<h1 id="plans-and-limits">Plans and Limits</h1>
+<h1 id="plans-and-limits">Plans and limits</h1>
 
 <h2 id="plans">Plans</h2>
-<p>AIVAX offers three subscription plans: <strong>Free</strong>, <strong>Pro</strong> and <strong>Max</strong>. Each plan has specific usage limits, resource access and support, suitable for different needs and usage levels.</p>
-<p>The plans fit best to each situation and usage moment of each user:</p>
-<ul>
-<li><strong>Free:</strong> $0/month: ideal for those starting out, testing the platform, or with basic needs. Provides access to basic models and limited resources, with a reasonable number of requests and built‑in tools.</li>
-<li><strong>Pro:</strong> $39/month: perfect for users who need more resources, access to advanced models, and higher limits. Includes priority support and additional storage options.</li>
-<li><strong>Max:</strong> $399/month: intended for advanced users and enterprises that require maximum performance, access to all models, high limits and dedicated support. Offers the best experience and resources available on the platform.</li>
-</ul>
-<p>Support is an important differentiator between the plans, with Pro offering priority support and Max offering dedicated support to ensure users' needs are met efficiently. The difference between priority and dedicated support is that priority support provides faster response and access to specialists, while dedicated support offers an exclusive contact for personalized assistance and problem resolution.</p>
-<p>All plans are renewed monthly and do not require a long‑term commitment, allowing users to choose the plan that best fits their needs and change as needed. When subscribing to a plan, the subscription fee is automatically deducted from the account balance. On the 1st of each month, the subscription fee is renewed again if there is sufficient balance in the account for the current monthly fee. When subscribing to a plan after the first day of the month, a proportional amount is charged for the remaining period of the month, and the full renewal will occur in the next monthly cycle.</p>
-<p>No plan includes usage credits, and usage limits are applied regardless of the account balance, independent of the available balance. The plans provide better access to plans and resources that are offered in AIVAX, as well as the convenience of consolidating balance for multiple different services into a single wallet.</p>
-<p>It is important to note that the use of cost‑incurring resources is immediately halted when the account balance is zero or negative, regardless of the subscription plan. Therefore, it is essential to maintain a positive balance to ensure continued access to resources and avoid service interruptions.</p>
+<p>AIVAX offers three subscription plans: <strong>Free</strong>, <strong>Pro</strong>, and <strong>Max</strong>. To compare commercial differences, included features and updated prices between the plans, see the <a href="https://aivax.net/pricing">AIVAX pricing page</a>. This page only maintains technical limits useful for integration and operation.</p>
+<p>All plans are renewed monthly and do not require a long‑term commitment. When you subscribe to a plan, the subscription amount is automatically deducted from the account balance. On the 1st of each month, the subscription amount is renewed again if there is sufficient balance in the account for the current monthly fee. When you subscribe to a plan after the first day of the month, a proportional amount is charged for the remaining period of the month, and the full renewal will occur in the next monthly cycle.</p>
+<p>No plan includes usage credits, and usage limits are applied regardless of the account balance, independent of the available balance. The plans imply better in plans and resources that are provided in AIVAX, in addition to the convenience of consolidating the balance for multiple different services into a single wallet.</p>
+<p>It is important to note that the use of cost‑incurring resources is immediately stopped when the account balance is zero or negative, regardless of the subscription plan. Therefore, it is essential to maintain a positive balance to ensure continued access to resources and avoid service interruptions.</p>
 <h2 id="limits">Limits</h2>
 <p>Usage limits regulate the number of requests and resources available according to your account's subscription plan.</p>
+<p>Limits appear in different forms depending on the resource. In inference, they may limit requests per minute, tokens per minute, or access to model groups. In BYOK, they limit the number of calls that go through the AIVAX infrastructure even when the external provider cost is yours. In RAG, they control the number of collections, searches per minute, insertions per day, and JSONL batch size. In embedded tools, they control how many times a service action can be executed per day or per period. In Batch, they control how many items can be processed in the background according to the plan.</p>
+<p>When a limit is reached, the expected behavior is to stop, pause, or return an error, depending on the resource. A direct inference call tends to return an error immediately. A Batch job can be paused and resumed later because it is asynchronous. An embedded tool may fail within the conversation and the model must explain the limitation to the user. A RAG insertion above the plan limit should be split into smaller batches or performed after a plan adjustment. For commercial differences, prices and included features, use the <a href="https://aivax.net/pricing">AIVAX pricing page</a>; this page serves to guide integration and operation.</p>
 <div class="tabGroup" id="tabgroup_1">
 <ul role="tablist">
 <li role="presentation">
@@ -202,7 +197,7 @@
 </tr>
 <tr>
 <td>Searches</td>
-<td>Low limit — 30 searches/minute</td>
+<td>Low limit — 20 searches/min</td>
 </tr>
 <tr>
 <td>Insertions</td>
@@ -213,7 +208,7 @@
 <td>Not available</td>
 </tr>
 <tr>
-<td><strong>Built‑in tools</strong></td>
+<td><strong>Embedded tools</strong></td>
 <td></td>
 </tr>
 <tr>
@@ -254,7 +249,7 @@
 </tr>
 <tr>
 <td>Conversation retention</td>
-<td>2 hours</td>
+<td>2 hours</td>
 </tr>
 <tr>
 <td>Support</td>
@@ -315,7 +310,7 @@
 </tr>
 <tr>
 <td>Searches</td>
-<td>High limit — 500 searches/minute</td>
+<td>High limit — 500 searches/min</td>
 </tr>
 <tr>
 <td>Insertions</td>
@@ -326,7 +321,7 @@
 <td>Up to 3 files/day</td>
 </tr>
 <tr>
-<td><strong>Built‑in tools</strong></td>
+<td><strong>Embedded tools</strong></td>
 <td></td>
 </tr>
 <tr>
@@ -363,11 +358,11 @@
 </tr>
 <tr>
 <td>Included storage</td>
-<td>2 GB (excess: $0.50/GB/month)</td>
+<td>2 GB (overage: $0.50/GB/month)</td>
 </tr>
 <tr>
 <td>Conversation retention</td>
-<td>2 days</td>
+<td>2 days</td>
 </tr>
 <tr>
 <td>Support</td>
@@ -428,7 +423,7 @@
 </tr>
 <tr>
 <td>Searches</td>
-<td>High limit — 3,000 searches/minute</td>
+<td>Elevated limit — 3,000 searches/min</td>
 </tr>
 <tr>
 <td>Insertions</td>
@@ -439,7 +434,7 @@
 <td>Up to 10 files/day</td>
 </tr>
 <tr>
-<td><strong>Built‑in tools</strong></td>
+<td><strong>Embedded tools</strong></td>
 <td></td>
 </tr>
 <tr>
@@ -476,11 +471,11 @@
 </tr>
 <tr>
 <td>Included storage</td>
-<td>20 GB (excess: $0.20/GB/month)</td>
+<td>20 GB (overage: $0.20/GB/month)</td>
 </tr>
 <tr>
 <td>Conversation retention</td>
-<td>30 days</td>
+<td>30 days</td>
 </tr>
 <tr>
 <td>Support</td>
@@ -498,10 +493,10 @@
 <li><strong>Low‑latency:</strong> 0.3x</li>
 <li><strong>Free:</strong> 0.1x</li>
 </ul>
-<p>Example: if you use a “discounted” model, the rate limits will be 50% lower (e.g., 75 req/min → 37 req/min).</p>
+<p>Example: if you use a &quot;discounted&quot; model, the rate limits will be 50 % lower (e.g., 75 req/min → 37 req/min).</p>
 <h2 id="limits-for-byok-bringyourownkey">Limits for BYOK (Bring‑your‑own‑key)</h2>
-<p>There is no cost to use your own API key, however, for the free plan the limits are more restrictive. For the Pro and Max plans there are no limits for BYOK usage.</p>
-<h2 id="rate-limits-details">Rate limits details</h2>
+<p>There is no cost to use your own API key. The Free plan has more restrictive limits, the Pro plan has a higher limit, and the Max plan has no BYOK request limit. To compare differences between plans, see the <a href="https://aivax.net/pricing">AIVAX pricing page</a>.</p>
+<h2 id="rate-limit-details">Rate limit details</h2>
 <p>This section details the limits applied per operation for each plan.</p>
 <h3 id="integrated-inference">Integrated inference</h3>
 <ul>
@@ -516,16 +511,16 @@
 <li><strong>Max:</strong> Unlimited</li>
 </ul>
 <h3 id="bash-code-execution">Bash (code execution)</h3>
-<p>Bash limits refer to the number of commands executed per hour within containers.</p>
+<p>Bash limits refer to the number of commands executed per hour inside containers.</p>
 <ul>
 <li><strong>Free:</strong>
 <ul>
 <li>30 commands per hour</li>
 <li>2 concurrent instances</li>
 <li>command timeout of 15 seconds</li>
-<li>memory limit of 32 MB per instance</li>
-<li>1 virtual processor per instance</li>
-<li>expires immediately after the agent loop ends</li>
+<li>32 MB memory limit per instance</li>
+<li>1 virtual CPU per instance</li>
+<li>expires immediately after the end of the synthetic loop</li>
 <li>allows persistent storage</li>
 </ul>
 </li>
@@ -534,8 +529,8 @@
 <li>1,500 commands per hour</li>
 <li>10 concurrent instances</li>
 <li>command timeout of 30 seconds</li>
-<li>memory limit of 128 MB per instance</li>
-<li>2 virtual processors per instance</li>
+<li>128 MB memory limit per instance</li>
+<li>2 virtual CPUs per instance</li>
 <li>persistent sessions expire after 15 minutes</li>
 <li>allows persistent storage</li>
 </ul>
@@ -545,8 +540,8 @@
 <li>10,000 commands per hour</li>
 <li>50 concurrent instances</li>
 <li>command timeout of 60 seconds</li>
-<li>memory limit of 256 MB per instance</li>
-<li>4 virtual processors per instance</li>
+<li>256 MB memory limit per instance</li>
+<li>4 virtual CPUs per instance</li>
 <li>persistent sessions expire after 30 minutes</li>
 <li>allows persistent storage</li>
 </ul>

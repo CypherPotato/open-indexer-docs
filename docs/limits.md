@@ -2,16 +2,9 @@
 
 ## Planos
 
-A AIVAX oferece três planos de assinatura: **Free**, **Pro** e **Max**. Cada plano tem limites específicos de uso, acesso a recursos e suporte, adequados para diferentes necessidades e níveis de uso.
+A AIVAX oferece três planos de assinatura: **Free**, **Pro** e **Max**. Para comparar diferenças comerciais, recursos inclusos e preços atualizados entre os planos, consulte a [página de preços da AIVAX](https://aivax.net/pricing). Esta página mantém apenas limites técnicos úteis para integração e operação.
 
-Os planos se adequam melhor à cada situação e momento de uso de cada utilizador:
-- **Free:** $0/mês: ideal para quem está começando, testando a plataforma ou tem necessidades básicas. Oferece acesso a modelos básicos e recursos limitados, com um número razoável de requisições e ferramentas embutidas.
-- **Pro:** $39/mês: perfeito para usuários que precisam de mais recursos, acesso a modelos avançados e limites mais altos. Inclui suporte prioritário e opções de armazenamento adicionais.
-- **Max:** $399/mês: destinado a usuários avançados e empresas que exigem o máximo desempenho, acesso a todos os modelos, limites elevados e suporte dedicado. Oferece a melhor experiência e recursos disponíveis na plataforma.
-
-O suporte é um diferencial importante entre os planos, com o Pro oferecendo suporte prioritário e o Max oferecendo suporte dedicado para garantir que as necessidades dos usuários sejam atendidas de forma eficiente. A diferença entre o suporte prioritário e dedicado é que o suporte prioritário oferece atendimento mais rápido e acesso a especialistas, enquanto o suporte dedicado fornece um contato exclusivo para assistência personalizada e resolução de problemas.
-
-Todos os planos são renovados mensalmente e não exigem compromisso de longo prazo, permitindo que os usuários escolham o plano que melhor se adapta às suas necessidades e mudem conforme necessário. Ao assinar um plano, o valor da assinatura é deduzido automaticamente do saldo da conta. No dia 1 de todo mês, o valor da assinatura é renovado novamente se existir saldo suficiente em conta para a mensalidade atual. Ao assinar um plano após o primeiro dia do mês, o valor proporcial é cobrado para o período restante do mês, e a renovação completa ocorrerá no próximo ciclo mensal.
+Todos os planos são renovados mensalmente e não exigem compromisso de longo prazo. Ao assinar um plano, o valor da assinatura é deduzido automaticamente do saldo da conta. No dia 1 de todo mês, o valor da assinatura é renovado novamente se existir saldo suficiente em conta para a mensalidade atual. Ao assinar um plano após o primeiro dia do mês, o valor proporcional é cobrado para o período restante do mês, e a renovação completa ocorrerá no próximo ciclo mensal.
 
 Nenhum plano inclui créditos de uso, e os limites de uso são aplicados independentemente do saldo da conta, independente do saldo disponível em conta. Os planos implicam melhor em planos e recursos que são fornecidos no AIVAX, além da facilidade em concentrar o saldo para vários serviços diferentes em uma única carteira.
 
@@ -20,6 +13,10 @@ Nenhum plano inclui créditos de uso, e os limites de uso são aplicados indepen
 ## Limites
 
 Os limites de uso regulam o número de requisições e recursos disponíveis conforme o plano de assinatura da sua conta.
+
+Limites aparecem de formas diferentes conforme o recurso. Em inferência, eles podem limitar requisições por minuto, tokens por minuto ou acesso a grupos de modelos. Em BYOK, eles limitam a quantidade de chamadas que passam pela infraestrutura da AIVAX mesmo quando o custo do provedor externo é seu. Em RAG, eles controlam quantidade de coleções, pesquisas por minuto, inserções por dia e tamanho de lotes JSONL. Em ferramentas embutidas, eles controlam quantas vezes uma ação de serviço pode ser executada por dia ou por período. Em Batch, eles controlam quantos itens podem ser processados em segundo plano conforme o plano.
+
+Quando um limite é atingido, o comportamento esperado é interromper, pausar ou retornar erro, dependendo do recurso. Uma chamada de inferência direta tende a retornar erro imediatamente. Um job de Batch pode ser pausado e retomado depois, porque ele é assíncrono. Uma ferramenta embutida pode falhar dentro da conversa e o modelo deve explicar a limitação ao usuário. Uma inserção de RAG acima do limite do plano deve ser dividida em lotes menores ou feita após ajuste de plano. Para diferenças comerciais, preços e recursos inclusos, use a [página de preços da AIVAX](https://aivax.net/pricing); esta página serve para orientar integração e operação.
 
 ## [Free](#tab/free)
 
@@ -35,7 +32,7 @@ Os limites de uso regulam o número de requisições e recursos disponíveis con
 | Contexto máximo | 64K tokens |
 | **RAG** |  |
 | Coleções | Até 5 coleções de RAG |
-| Pesquisas | Baixo limite — 30 pesquisas/minuto |
+| Pesquisas | Baixo limite — 20 pesquisas/minuto |
 | Inserções | Baixo limite — 500 inserções/dia |
 | Processamento composto | Não disponível |
 | **Ferramentas embutidas** |  |
@@ -125,7 +122,7 @@ Exemplo: se usar um modelo "descontado", os limites de taxa serão 50% menores (
 
 ## Limites para BYOK (Bring-your-own-key)
 
-Não há custo para utilizar sua própria api-key, no entanto, para o plano grátis os limites são mais restritos. Para os planos Pro e Max não há nenhum limite para uso de BYOK.
+Não há custo para utilizar sua própria api-key. O plano Free possui limites mais restritos, o plano Pro possui limite maior e o plano Max não possui limite de requisições BYOK. Para comparar diferenças entre planos, consulte a [página de preços da AIVAX](https://aivax.net/pricing).
 
 ## Detalhes de rate limits
 

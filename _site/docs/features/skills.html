@@ -127,14 +127,19 @@
 <p>Habilidades (também conhecido como skills) podem ser usadas para melhorar como seu agente performa em tarefas específicas. Habilidades são instruções especiais que são recuperadas por demanda, e o seu agente carrega essas habilidades conforme necessita.</p>
 <p>O ideal é que seu agente só use uma habilidade quando relevante para a tarefa que está desempenhando. Ela é embutida na conversa através de uma ferramenta especial e instruções sobre habilidades são adicionadas no contexto, indicando que o agente possui habilidades fornecidas no contexto e que podem ser usadas na conversa.</p>
 <h2 id="como-funcionam-as-habilidades">Como funcionam as habilidades?</h2>
-<p>As habilidades são primariamente fornecidas através de nome e uma breve descrição do que aquela habilidade é e quando ela deve ser usada. Você pode ter várias habilidades em sua conta, mas usar somente parte delas em seu <a href="/docs/entities/ai-gateways/ai-gateway">AI gateway</a>. As habilidades ativadas no AI gateway são injetadas nas instruções de sistema do seu modelo e uma função adicional é adicionada no contexto.</p>
+<p>As habilidades são primariamente fornecidas através de nome e uma breve descrição do que aquela habilidade é e quando ela deve ser usada. Você pode ter várias habilidades em sua conta, mas usar somente parte delas em seu <a href="/docs/inference/ai-gateway">AI Gateway</a>. As habilidades ativadas no AI Gateway são injetadas nas instruções de sistema do seu modelo e uma função adicional é adicionada no contexto.</p>
 <p>Quando o modelo chama a ferramenta de leitura de habilidades, as instruções daquela habilidade é inserida nas instruções do sistema do contexto de forma dinâmica. Somente uma habilidade pode ser ativada por contexto, e o LLM pode alterar a habilidade ativa conforme necessita.</p>
 <p>Para que isso funcione, o modelo base escolhido deve suportar <strong>chamadas de função</strong> e <strong>instruções de sistema</strong>.</p>
 <ul>
-<li>Caso seu modelo não suporte chamadas de função, considere usar um <a href="/docs/entities/ai-gateways/pipelines">tool handler</a> para manipular chamadas de função.</li>
+<li>Caso seu modelo não suporte chamadas de função, considere usar um <a href="/docs/inference/pipelines">tool handler</a> para manipular chamadas de função.</li>
 <li>Caso seu modelo não suporte instruções de sistema, considere usar a flag <code>No system instructions</code>, que fornece instruções de sistema como uma mensagem de usuário.</li>
 </ul>
 <p>Modelos maiores tendem à seguir estritamente instruções e chamadas de função. Realize testes para saber se seu modelo está alterando suas habilidades conforme necessário.</p>
+<h2 id="estrutura-e-operação">Estrutura e operação</h2>
+<p>Uma habilidade possui <code>slug</code>, <code>description</code>, <code>instructions</code> e <code>options</code>. O <code>slug</code> é o identificador técnico usado pela conta e deve ser curto, estável e legível. A <code>description</code> é o texto que ajuda o modelo a decidir quando aquela habilidade deve ser carregada; ela precisa explicar o cenário de uso, não apenas repetir o nome. As <code>instructions</code> são o conteúdo completo que será inserido quando a habilidade for ativada. Em <code>options</code>, é possível definir <code>instructionSources</code>, para carregar instruções adicionais de fontes remotas, e <code>allowedToolsNames</code>, para controlar quais ferramentas ficam associadas àquela habilidade.</p>
+<p>Escreva a descrição como uma regra de roteamento. Uma descrição como “habilidade jurídica” é fraca porque não diz quando usar. Uma descrição melhor seria “use quando o usuário pedir análise, revisão ou explicação de cláusulas contratuais em linguagem simples”. As instruções, por outro lado, devem ser operacionais: explique como responder, quais perguntas fazer quando faltam dados, quais ferramentas podem ser úteis, quais limites devem ser respeitados e qual formato final é esperado. O modelo lê a descrição para escolher a skill e lê as instruções para executar a tarefa.</p>
+<p><code>allowedToolsNames</code> é útil quando uma habilidade só deve expor parte das ferramentas do gateway. Por exemplo, uma skill de pesquisa pode permitir <code>web_search</code> e <code>open_url</code>, enquanto uma skill de geração visual pode permitir geração de imagem e página web. Se o gateway estiver configurado para esconder ferramentas sem skill, as ferramentas só ficam visíveis quando a habilidade relevante está ativa, reduzindo ruído no contexto e ajudando o modelo a escolher ações com mais precisão.</p>
+<p>Skills também podem ser importadas e exportadas em JSONL. Esse formato é útil para versionar habilidades, migrar configurações entre contas, manter um conjunto de skills em um repositório ou revisar mudanças antes de publicar. Cada linha deve representar uma skill com pelo menos <code>slug</code> e <code>instructions</code>; <code>description</code> e <code>options</code> podem complementar a configuração. Ao importar uma skill com <code>slug</code> já existente, a AIVAX atualiza a skill correspondente em vez de criar uma duplicata.</p>
 <h2 id="como-escrever-habilidades">Como escrever habilidades?</h2>
 <p>Escrever habilidades eficazes requer clareza e especificidade nas instruções. Aqui estão as principais diretrizes:</p>
 <h3 id="estrutura-de-uma-habilidade">Estrutura de uma habilidade</h3>
@@ -252,21 +257,12 @@
 <li><strong>Teste a transição</strong>: Certifique-se de que o modelo muda de habilidade quando apropriado.</li>
 </ul>
 <h2 id="comparando-skills-rag-e-system-prompt">Comparando Skills, RAG e System Prompt</h2>
-<p>Para entender melhor quando e como usar habilidades em comparação com outras técnicas como <strong>RAG (Retrieval-Augmented Generation)</strong> e <strong>System Prompt (Instruções de Sistema)</strong>, consulte nosso guia completo:</p>
-<p><strong><a href="/docs/concepts-comparison">Clique para acessar o guia de comparação.</a></strong></p>
-<p>Este guia detalha:</p>
-<ul>
-<li>As diferenças fundamentais entre cada abordagem</li>
-<li>Quando usar cada técnica</li>
-<li>Exemplos práticos e casos de uso</li>
-<li>Como combinar as três técnicas para sistemas robustos</li>
-<li>Árvore de decisão para escolher a abordagem certa</li>
-</ul>
+<p>Para entender melhor quando e como usar habilidades em comparação com outras técnicas como <strong>RAG (Retrieval-Augmented Generation)</strong> e <strong>System Prompt (Instruções de Sistema)</strong>, use as orientações desta página em conjunto com a documentação de <a href="/docs/rag/collections">coleções</a> e <a href="/docs/inference/pipelines">pipelines</a>.</p>
 <p>Veja também:</p>
 <ul>
 <li><a href="https://www.promptingguide.ai/">Prompt Engineering Guide</a></li>
 <li><a href="https://www.anthropic.com/index/building-effective-agents">Building Production-Ready RAG Applications</a></li>
-<li><a href="/docs/entities/ai-gateways/ai-gateway">AI Gateway Documentation</a></li>
+<li><a href="/docs/inference/ai-gateway">AI Gateway Documentation</a></li>
 </ul>
 
 </article>

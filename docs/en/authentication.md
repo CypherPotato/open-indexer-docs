@@ -1,6 +1,6 @@
 # Authentication
 
-When you have your account, use your unique authentication key to authenticate with our API via the `Authorization` header:
+When you have your account ready, use your unique authentication key to authenticate with our API via the `Authorization` header:
 
 ```bash
 curl https://inference.aivax.net/api/v1/information/models.json \
@@ -13,15 +13,15 @@ You can also send your authorization token via the query parameter `?api-key`, f
 curl https://inference.aivax.net/api/v1/information/models.txt?api-key=oky_gr5uepj...
 ```
 
-There is no need to include the `Bearer` authentication scheme in both headers, but it is possible for compatibility reasons.
+In the `Authorization` header, send the key with the `Bearer` or `Basic` scheme. When using the `?api-key` parameter, provide only the key, without an authentication scheme.
 
 ## Authenticating hooks
 
-AIVAX requests to your services, whether AI gateway workers or server‑side function calls, include an `X-Request-Nonce` header in every request containing a BCrypt hash that is a derived value of the [hook key](https://console.aivax.net/dashboard/account) set in your account.
+Requests from AIVAX to your services, whether AI gateway workers or server-side function calls, include an `X-Request-Nonce` header in every request containing a BCrypt hash that is a derivative of the [hook key](https://console.aivax.net/dashboard/account) defined in your account.
 
-The validation is simple: verify that the hash in `X-Request-Nonce` is a product of the derived key set in your account.
+Validation is simple: check that the hash in `X-Request-Nonce` is derived from the hook key defined in your account.
 
-In this way, you can authenticate whether AIVAX requests to your services are genuine using this token. If your account has not defined a hook key, this header will not be sent.
+This way, you can authenticate whether the requests from AIVAX to your services are genuine using this token. If your account has not defined a hook key, this header will not be sent.
 
 See the examples below for hook key validation:
 
@@ -71,7 +71,7 @@ app = Flask(__name__)
 
 @app.before_request
 def autenticar_token():
-    # 1. Read the header containing the token hash
+    # 1. Read the header that contains the token hash
     token_hash = request.headers.get("X-Request-Nonce")
     if not token_hash:
         abort(401)

@@ -125,19 +125,14 @@
 <h1 id="planos-e-limites">Planos e limites</h1>
 
 <h2 id="planos">Planos</h2>
-<p>A AIVAX oferece três planos de assinatura: <strong>Free</strong>, <strong>Pro</strong> e <strong>Max</strong>. Cada plano tem limites específicos de uso, acesso a recursos e suporte, adequados para diferentes necessidades e níveis de uso.</p>
-<p>Os planos se adequam melhor à cada situação e momento de uso de cada utilizador:</p>
-<ul>
-<li><strong>Free:</strong> $0/mês: ideal para quem está começando, testando a plataforma ou tem necessidades básicas. Oferece acesso a modelos básicos e recursos limitados, com um número razoável de requisições e ferramentas embutidas.</li>
-<li><strong>Pro:</strong> $39/mês: perfeito para usuários que precisam de mais recursos, acesso a modelos avançados e limites mais altos. Inclui suporte prioritário e opções de armazenamento adicionais.</li>
-<li><strong>Max:</strong> $399/mês: destinado a usuários avançados e empresas que exigem o máximo desempenho, acesso a todos os modelos, limites elevados e suporte dedicado. Oferece a melhor experiência e recursos disponíveis na plataforma.</li>
-</ul>
-<p>O suporte é um diferencial importante entre os planos, com o Pro oferecendo suporte prioritário e o Max oferecendo suporte dedicado para garantir que as necessidades dos usuários sejam atendidas de forma eficiente. A diferença entre o suporte prioritário e dedicado é que o suporte prioritário oferece atendimento mais rápido e acesso a especialistas, enquanto o suporte dedicado fornece um contato exclusivo para assistência personalizada e resolução de problemas.</p>
-<p>Todos os planos são renovados mensalmente e não exigem compromisso de longo prazo, permitindo que os usuários escolham o plano que melhor se adapta às suas necessidades e mudem conforme necessário. Ao assinar um plano, o valor da assinatura é deduzido automaticamente do saldo da conta. No dia 1 de todo mês, o valor da assinatura é renovado novamente se existir saldo suficiente em conta para a mensalidade atual. Ao assinar um plano após o primeiro dia do mês, o valor proporcial é cobrado para o período restante do mês, e a renovação completa ocorrerá no próximo ciclo mensal.</p>
+<p>A AIVAX oferece três planos de assinatura: <strong>Free</strong>, <strong>Pro</strong> e <strong>Max</strong>. Para comparar diferenças comerciais, recursos inclusos e preços atualizados entre os planos, consulte a <a href="https://aivax.net/pricing">página de preços da AIVAX</a>. Esta página mantém apenas limites técnicos úteis para integração e operação.</p>
+<p>Todos os planos são renovados mensalmente e não exigem compromisso de longo prazo. Ao assinar um plano, o valor da assinatura é deduzido automaticamente do saldo da conta. No dia 1 de todo mês, o valor da assinatura é renovado novamente se existir saldo suficiente em conta para a mensalidade atual. Ao assinar um plano após o primeiro dia do mês, o valor proporcional é cobrado para o período restante do mês, e a renovação completa ocorrerá no próximo ciclo mensal.</p>
 <p>Nenhum plano inclui créditos de uso, e os limites de uso são aplicados independentemente do saldo da conta, independente do saldo disponível em conta. Os planos implicam melhor em planos e recursos que são fornecidos no AIVAX, além da facilidade em concentrar o saldo para vários serviços diferentes em uma única carteira.</p>
 <p>É importante ressaltar que a utilização de recursos que envolvem custos é imediatamente interrompida quando o saldo da conta é zero ou negativo, independentemente do plano de assinatura. Portanto, é fundamental manter um saldo positivo para garantir a continuidade do acesso aos recursos e evitar interrupções no serviço.</p>
 <h2 id="limites">Limites</h2>
 <p>Os limites de uso regulam o número de requisições e recursos disponíveis conforme o plano de assinatura da sua conta.</p>
+<p>Limites aparecem de formas diferentes conforme o recurso. Em inferência, eles podem limitar requisições por minuto, tokens por minuto ou acesso a grupos de modelos. Em BYOK, eles limitam a quantidade de chamadas que passam pela infraestrutura da AIVAX mesmo quando o custo do provedor externo é seu. Em RAG, eles controlam quantidade de coleções, pesquisas por minuto, inserções por dia e tamanho de lotes JSONL. Em ferramentas embutidas, eles controlam quantas vezes uma ação de serviço pode ser executada por dia ou por período. Em Batch, eles controlam quantos itens podem ser processados em segundo plano conforme o plano.</p>
+<p>Quando um limite é atingido, o comportamento esperado é interromper, pausar ou retornar erro, dependendo do recurso. Uma chamada de inferência direta tende a retornar erro imediatamente. Um job de Batch pode ser pausado e retomado depois, porque ele é assíncrono. Uma ferramenta embutida pode falhar dentro da conversa e o modelo deve explicar a limitação ao usuário. Uma inserção de RAG acima do limite do plano deve ser dividida em lotes menores ou feita após ajuste de plano. Para diferenças comerciais, preços e recursos inclusos, use a <a href="https://aivax.net/pricing">página de preços da AIVAX</a>; esta página serve para orientar integração e operação.</p>
 <div class="tabGroup" id="tabgroup_1">
 <ul role="tablist">
 <li role="presentation">
@@ -202,7 +197,7 @@
 </tr>
 <tr>
 <td>Pesquisas</td>
-<td>Baixo limite — 30 pesquisas/minuto</td>
+<td>Baixo limite — 20 pesquisas/minuto</td>
 </tr>
 <tr>
 <td>Inserções</td>
@@ -500,7 +495,7 @@
 </ul>
 <p>Exemplo: se usar um modelo &quot;descontado&quot;, os limites de taxa serão 50% menores (ex: 75 req/min → 37 req/min).</p>
 <h2 id="limites-para-byok-bring-your-own-key">Limites para BYOK (Bring-your-own-key)</h2>
-<p>Não há custo para utilizar sua própria api-key, no entanto, para o plano grátis os limites são mais restritos. Para os planos Pro e Max não há nenhum limite para uso de BYOK.</p>
+<p>Não há custo para utilizar sua própria api-key. O plano Free possui limites mais restritos, o plano Pro possui limite maior e o plano Max não possui limite de requisições BYOK. Para comparar diferenças entre planos, consulte a <a href="https://aivax.net/pricing">página de preços da AIVAX</a>.</p>
 <h2 id="detalhes-de-rate-limits">Detalhes de rate limits</h2>
 <p>Esta seção detalha os limites aplicados por operação para cada plano.</p>
 <h3 id="inferência-integrada">Inferência integrada</h3>

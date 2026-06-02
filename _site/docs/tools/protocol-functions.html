@@ -128,6 +128,10 @@
 <p>As funções de protocolo permitem a tomada de ações no lado do servidor da AIVAX, removendo a necessidade de implementação da função no lado do cliente e integrando com aplicações e serviços existentes.</p>
 <img src="/assets/diagrams/protocol-functions-1.drawio.svg">
 <p>Essas funções esperam um <strong>callback</strong> através de uma URL, e quando o modelo decide chamar a função, o callback é acessado com os parâmetros informados pela própria assistente. A assistente não sabe qual URL ela está chamando, pois a mesma permanece invisível tanto para a assistente quanto para o usuário.</p>
+<h2 id="quando-usar-funções-de-protocolo">Quando usar funções de protocolo</h2>
+<p>Use funções de protocolo quando você quer expor uma ação HTTP específica para um AI Gateway sem criar um servidor MCP completo. Elas são boas para integrações pontuais, como consultar um pedido, abrir um ticket, buscar um usuário, validar um cupom, registrar um lead ou chamar uma automação interna. A AIVAX mantém a URL invisível para o modelo, envia a requisição do lado do servidor e adiciona o resultado textual ao contexto da conversa.</p>
+<p>Se você tem muitas ferramentas, ferramentas dinâmicas ou um sistema que já implementa Model Context Protocol, prefira <a href="/docs/tools/mcp">MCP</a>. Se você quer usar capacidades já mantidas pela AIVAX, prefira <a href="/docs/tools/builtin-tools">ferramentas embutidas</a>. Se você precisa tomar decisões antes ou depois de eventos da inferência, prefira <a href="/docs/inference/workers">workers</a>. Funções de protocolo ficam no meio: são mais simples que MCP e mais específicas que workers, mas ainda dão ao modelo uma ferramenta controlada para executar uma ação externa.</p>
+<p>Uma função de protocolo deve ter um nome de ferramenta, uma descrição e um schema de argumentos. O nome ajuda o modelo a reconhecer a ação; a descrição explica quando chamar; o schema limita o formato dos argumentos. A URL de callback e detalhes de autenticação não ficam visíveis para o modelo. Isso permite criar ferramentas especializadas sem expor endpoints internos, desde que seu serviço valide o <code>X-Request-Nonce</code>, valide argumentos recebidos e aplique autorização própria quando a chamada depende do usuário.</p>
 <h3 id="escolhendo-o-nome-da-função">Escolhendo o nome da função</h3>
 <p>O nome da função deve ser simples e determinístico ao que essa função faz. Evite nomes difíceis de advinhar ou que não remetam ao papel da função, pois a assistente pode se confundir e não chamar a função quando apropriado.</p>
 <p>Como um exemplo, vamos pensar em uma função de consultar um usuário em um banco de dados externo. Os nomes a seguir são bons exemplos para considerar para a chamada:</p>
@@ -146,7 +150,7 @@
 <h3 id="escolhendo-a-descrição-da-função">Escolhendo a descrição da função.</h3>
 <p>A descrição da função deve explicar conceitualmente duas situações: o que ela faz e quando deve ser chamada pela assistente. Essa descrição deve incluir os cenários que a assistente deve considerar chamar ela e quando não deve ser chamada, fornecendo poucos exemplos de chamadas (one-shot) e/ou tornando explícitas as regras da função.</p>
 <h2 id="definindo-funções-de-protocolo">Definindo funções de protocolo</h2>
-<p>Essas funções são definidas no <a href="/entities/ai-gateway.md">AI-gateway</a>, o que permite a criação de agentes inteligentes que realizam ações sem intervenção humana. Elas seguem uma sintaxe simples, esperam o nome da função, uma descrição do que ela faz e os parâmetros de invocação.</p>
+<p>Essas funções são definidas no <a href="/docs/inference/ai-gateway">AI Gateway</a>, o que permite a criação de agentes inteligentes que realizam ações sem intervenção humana. Elas seguem uma sintaxe simples, esperam o nome da função, uma descrição do que ela faz e os parâmetros de invocação.</p>
 <p>Funções de protocolo são definidas no AI gateway seguindo o JSON:</p>
 <div class="request-item post">
     <span>POST</span>
@@ -258,19 +262,20 @@
 <p>As respostas bem sucedidas devem ser textuais e serão anexadas como resposta da função do jeito que for respondida pelo endpoint. Não há formato JSON ou estrutura para essa resposta, mas é aconselhável que dê uma resposta simples, humanamente legível, para que a assistente consiga ler o resultado da ação.</p>
 <p>Erros podem ser comuns, como não encontrar um cliente pelo ID ou algum campo não estiver no formato desejado. Nestes casos, responda com um status OK e no corpo da resposta inclua uma descrição humana do erro e como a assistente pode contornar ele.</p>
 <p><strong>É garantido</strong> que a requisição irá seguir estritamente o JSON Schema do conteúdo fornecido pela definição da função. Funções que não esperam argumentos não devem especificar um formato de conteúdo para essa função.</p>
+<p>A resposta da função deve ser escrita para o modelo, não para o usuário final. Ela pode conter dados, avisos e instruções curtas sobre como usar o resultado. Por exemplo, se uma busca de pedido encontrar o status, responda com o status, data prevista e restrições relevantes. Se não encontrar, responda que o pedido não foi localizado e diga quais dados a assistente deve pedir ao usuário. Evite retornar objetos enormes, HTML, logs brutos ou mensagens internas, porque esse conteúdo entra no contexto e pode confundir a próxima resposta.</p>
 <div class="IMPORTANT">
 <h5>Important</h5>
 <p>Quanto mais funções você definir, mais de entrada tokens você irá consumir no processo de raciocínio. A definição da função, bem como o formato dela, consome tokens do processo de raciocínio.</p>
 </div>
 <h4 id="autenticação">Autenticação</h4>
-<p>A autenticação das requisições são feitas pelo cabeçalho <code>X-Aivax-Nonce</code> enviado em todas as requisições de protocolo das funções, até mesmo as de listagem.</p>
+<p>A autenticação das requisições é feita pelo cabeçalho <code>X-Request-Nonce</code> enviado nas requisições de protocolo das funções, incluindo as de listagem.</p>
 <p>Veja o manual de <a href="/docs/authentication">autenticação</a> para entender como autenticar requisições reversas do AIVAX.</p>
 <h4 id="autenticação-de-usuário">Autenticação de usuário</h4>
-<p>As chamadas de função enviam um campo <code>$.context.externalUserId</code> contendo a tag de usuário criada em uma <a href="/docs/entities/chat-clients">sessão de chat</a>. Essa tag pode ser usada para autenticar o usuário que chamou essa função.</p>
+<p>As chamadas de função enviam um campo <code>$.context.externalUserId</code> contendo a tag de usuário criada em uma <a href="/docs/features/chat-clients">sessão de chat</a>. Essa tag pode ser usada para autenticar o usuário que chamou essa função.</p>
 <h4 id="considerações-de-segurança">Considerações de segurança</h4>
-<p>Para o modelo de IA, somente é visível o nome, descrição e formato da função. Ela não é capaz de ver o endpoint para onde essa função aponta. Além disso, ela não possui acesso à tag do usuário que está autenticado em um <a href="/docs/entities/chat-clients">cliente de chat</a>.</p>
+<p>Para o modelo de IA, somente é visível o nome, descrição e formato da função. Ela não é capaz de ver o endpoint para onde essa função aponta. Além disso, ela não possui acesso à tag do usuário que está autenticado em um <a href="/docs/features/chat-clients">cliente de chat</a>.</p>
 <h2 id="funções-especialistas">Funções especialistas</h2>
-<p>Além das <a href="/docs/builtin-tools">funções embutidas</a>, você pode definir funções especialistas, que executam tarefas específicas na sua conta da AIVAX.</p>
+<p>Além das <a href="/docs/tools/builtin-tools">funções embutidas</a>, você pode definir funções especialistas, que executam tarefas específicas na sua conta da AIVAX.</p>
 <p>Você define funções especialistas pelo esquema de URL <code>aivax://</code>, seguindo o exemplo abaixo:</p>
 <pre><code class="lang-json">{
     &quot;name&quot;: &quot;my-ai-gateway&quot;,
@@ -298,7 +303,7 @@
     }
 }
 </code></pre>
-<p>A função acima cria uma ferramenta para IA consultar em uma <a href="/docs/entities/collections">coleção de documentos</a> específica, guiando a assistente do que ela deve pesquisar nessa coleção e o que esperar de uma resposta. Dessa forma, você pode vincular várias coleções de RAG para uma assistente poder buscar conteúdo especialista.</p>
+<p>A função acima cria uma ferramenta para IA consultar em uma <a href="/docs/rag/collections">coleção de documentos</a> específica, guiando a assistente do que ela deve pesquisar nessa coleção e o que esperar de uma resposta. Dessa forma, você pode vincular várias coleções de RAG para uma assistente poder buscar conteúdo especialista.</p>
 <p>Você pode personalizar a descrição das propriedades do JSON Schema de funções especialistas mas não sua estrutura, pois nosso backend espera um formato específico para chamar as funções. Os parâmetros de funções especialistas são fornecidos na URL através de parâmetros da query.</p>
 <p>Atualmente, apenas uma função especialista existe:</p>
 <ul>

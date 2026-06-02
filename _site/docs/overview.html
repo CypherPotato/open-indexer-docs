@@ -219,7 +219,7 @@
 <ul>
 <li><strong>Chat web</strong>: widget embarcável com personalização visual, gerenciamento de sessão e persistência de conversas</li>
 <li><strong>Telegram</strong>: integração nativa com comandos especiais e identificação de usuários</li>
-<li><strong>WhatsApp</strong>: integração via Z-Api com sessões por conversa</li>
+<li><strong>WhatsApp</strong>: integração via Z-Api, Evolution API ou Kapso com sessões por conversa</li>
 </ul>
 <p><strong>Casos de uso:</strong> atendimento ao cliente em site, suporte via WhatsApp, bots informativos no Telegram, interfaces de consulta embarcadas em aplicações web.</p>
 <h3 id="workers">Workers</h3>
@@ -275,51 +275,9 @@ print(response.choices[0].message.content)
 </code></pre>
 <p>Sem SDKs proprietários, sem lock-in. A mesma integração que funciona com OpenAI funciona com AIVAX.</p>
 <h2 id="modelo-de-custos">Modelo de custos</h2>
-<p>A AIVAX opera com um modelo <strong>pré-pago</strong> combinado com planos de assinatura:</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Free</th>
-<th>Pro</th>
-<th>Max</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Custo mensal</strong></td>
-<td>$0</td>
-<td>$39</td>
-<td>$399</td>
-</tr>
-<tr>
-<td><strong>Comissão</strong></td>
-<td>25%</td>
-<td>5%</td>
-<td>0%</td>
-</tr>
-<tr>
-<td><strong>Armazenamento</strong></td>
-<td>30 MB</td>
-<td>2 GB</td>
-<td>20 GB</td>
-</tr>
-<tr>
-<td><strong>Pesquisas web/dia</strong></td>
-<td>15</td>
-<td>1.000</td>
-<td>10.000</td>
-</tr>
-<tr>
-<td><strong>Coleções</strong></td>
-<td>2</td>
-<td>Ilimitadas</td>
-<td>Ilimitadas</td>
-</tr>
-</tbody>
-</table>
+<p>A AIVAX opera com um modelo <strong>pré-pago</strong> combinado com planos de assinatura. Para comparar diferenças entre Free, Pro e Max, consulte a <a href="https://aivax.net/pricing">página de preços da AIVAX</a>, que é mantida como fonte atualizada para planos.</p>
 <p>Os custos de inferência são repassados diretamente dos provedores sem markup — você paga o mesmo valor de tabela que pagaria usando Google ou OpenAI diretamente.</p>
-<p>Para detalhes completos, consulte a <a href="/docs/pricing">página de precificação</a>.</p>
+<p>Para detalhes sobre cobrança de saldo, armazenamento e ferramentas, consulte a <a href="/docs/pricing">página de precificação</a>.</p>
 <h2 id="próximos-passos">Próximos passos</h2>
 <ul>
 <li><a href="/docs/getting-started">Começando</a> — configure sua conta e faça sua primeira chamada</li>

@@ -6,16 +6,26 @@ O ideal é que seu agente só use uma habilidade quando relevante para a tarefa 
 
 ## Como funcionam as habilidades?
 
-As habilidades são primariamente fornecidas através de nome e uma breve descrição do que aquela habilidade é e quando ela deve ser usada. Você pode ter várias habilidades em sua conta, mas usar somente parte delas em seu [AI gateway](/docs/entities/ai-gateways/ai-gateway). As habilidades ativadas no AI gateway são injetadas nas instruções de sistema do seu modelo e uma função adicional é adicionada no contexto.
+As habilidades são primariamente fornecidas através de nome e uma breve descrição do que aquela habilidade é e quando ela deve ser usada. Você pode ter várias habilidades em sua conta, mas usar somente parte delas em seu [AI Gateway](/docs/inference/ai-gateway). As habilidades ativadas no AI Gateway são injetadas nas instruções de sistema do seu modelo e uma função adicional é adicionada no contexto.
 
 Quando o modelo chama a ferramenta de leitura de habilidades, as instruções daquela habilidade é inserida nas instruções do sistema do contexto de forma dinâmica. Somente uma habilidade pode ser ativada por contexto, e o LLM pode alterar a habilidade ativa conforme necessita.
 
 Para que isso funcione, o modelo base escolhido deve suportar **chamadas de função** e **instruções de sistema**.
 
-- Caso seu modelo não suporte chamadas de função, considere usar um [tool handler](/docs/entities/ai-gateways/pipelines) para manipular chamadas de função.
+- Caso seu modelo não suporte chamadas de função, considere usar um [tool handler](/docs/inference/pipelines) para manipular chamadas de função.
 - Caso seu modelo não suporte instruções de sistema, considere usar a flag `No system instructions`, que fornece instruções de sistema como uma mensagem de usuário.
 
 Modelos maiores tendem à seguir estritamente instruções e chamadas de função. Realize testes para saber se seu modelo está alterando suas habilidades conforme necessário.
+
+## Estrutura e operação
+
+Uma habilidade possui `slug`, `description`, `instructions` e `options`. O `slug` é o identificador técnico usado pela conta e deve ser curto, estável e legível. A `description` é o texto que ajuda o modelo a decidir quando aquela habilidade deve ser carregada; ela precisa explicar o cenário de uso, não apenas repetir o nome. As `instructions` são o conteúdo completo que será inserido quando a habilidade for ativada. Em `options`, é possível definir `instructionSources`, para carregar instruções adicionais de fontes remotas, e `allowedToolsNames`, para controlar quais ferramentas ficam associadas àquela habilidade.
+
+Escreva a descrição como uma regra de roteamento. Uma descrição como “habilidade jurídica” é fraca porque não diz quando usar. Uma descrição melhor seria “use quando o usuário pedir análise, revisão ou explicação de cláusulas contratuais em linguagem simples”. As instruções, por outro lado, devem ser operacionais: explique como responder, quais perguntas fazer quando faltam dados, quais ferramentas podem ser úteis, quais limites devem ser respeitados e qual formato final é esperado. O modelo lê a descrição para escolher a skill e lê as instruções para executar a tarefa.
+
+`allowedToolsNames` é útil quando uma habilidade só deve expor parte das ferramentas do gateway. Por exemplo, uma skill de pesquisa pode permitir `web_search` e `open_url`, enquanto uma skill de geração visual pode permitir geração de imagem e página web. Se o gateway estiver configurado para esconder ferramentas sem skill, as ferramentas só ficam visíveis quando a habilidade relevante está ativa, reduzindo ruído no contexto e ajudando o modelo a escolher ações com mais precisão.
+
+Skills também podem ser importadas e exportadas em JSONL. Esse formato é útil para versionar habilidades, migrar configurações entre contas, manter um conjunto de skills em um repositório ou revisar mudanças antes de publicar. Cada linha deve representar uma skill com pelo menos `slug` e `instructions`; `description` e `options` podem complementar a configuração. Ao importar uma skill com `slug` já existente, a AIVAX atualiza a skill correspondente em vez de criar uma duplicata.
 
 ## Como escrever habilidades?
 
@@ -108,18 +118,9 @@ Habilidades são mais úteis em cenários específicos onde você precisa de com
 
 ## Comparando Skills, RAG e System Prompt
 
-Para entender melhor quando e como usar habilidades em comparação com outras técnicas como **RAG (Retrieval-Augmented Generation)** e **System Prompt (Instruções de Sistema)**, consulte nosso guia completo:
-
-**[Clique para acessar o guia de comparação.](/docs/concepts-comparison)**
-
-Este guia detalha:
-- As diferenças fundamentais entre cada abordagem
-- Quando usar cada técnica
-- Exemplos práticos e casos de uso
-- Como combinar as três técnicas para sistemas robustos
-- Árvore de decisão para escolher a abordagem certa
+Para entender melhor quando e como usar habilidades em comparação com outras técnicas como **RAG (Retrieval-Augmented Generation)** e **System Prompt (Instruções de Sistema)**, use as orientações desta página em conjunto com a documentação de [coleções](/docs/rag/collections) e [pipelines](/docs/inference/pipelines).
 
 Veja também:
 - [Prompt Engineering Guide](https://www.promptingguide.ai/)
 - [Building Production-Ready RAG Applications](https://www.anthropic.com/index/building-effective-agents)
-- [AI Gateway Documentation](/docs/entities/ai-gateways/ai-gateway)
+- [AI Gateway Documentation](/docs/inference/ai-gateway)

@@ -86,7 +86,7 @@ A AIVAX oferece clientes de chat prontos para conectar seu agente a usuários fi
 
 - **Chat web**: widget embarcável com personalização visual, gerenciamento de sessão e persistência de conversas
 - **Telegram**: integração nativa com comandos especiais e identificação de usuários
-- **WhatsApp**: integração via Z-Api com sessões por conversa
+- **WhatsApp**: integração via Z-Api, Evolution API ou Kapso com sessões por conversa
 
 **Casos de uso:** atendimento ao cliente em site, suporte via WhatsApp, bots informativos no Telegram, interfaces de consulta embarcadas em aplicações web.
 
@@ -158,19 +158,11 @@ Sem SDKs proprietários, sem lock-in. A mesma integração que funciona com Open
 
 ## Modelo de custos
 
-A AIVAX opera com um modelo **pré-pago** combinado com planos de assinatura:
-
-| | Free | Pro | Max |
-|---|---|---|---|
-| **Custo mensal** | $0 | $39 | $399 |
-| **Comissão** | 25% | 5% | 0% |
-| **Armazenamento** | 30 MB | 2 GB | 20 GB |
-| **Pesquisas web/dia** | 15 | 1.000 | 10.000 |
-| **Coleções** | 2 | Ilimitadas | Ilimitadas |
+A AIVAX opera com um modelo **pré-pago** combinado com planos de assinatura. Para comparar diferenças entre Free, Pro e Max, consulte a [página de preços da AIVAX](https://aivax.net/pricing), que é mantida como fonte atualizada para planos.
 
 Os custos de inferência são repassados diretamente dos provedores sem markup — você paga o mesmo valor de tabela que pagaria usando Google ou OpenAI diretamente.
 
-Para detalhes completos, consulte a [página de precificação](/docs/pricing).
+Para detalhes sobre cobrança de saldo, armazenamento e ferramentas, consulte a [página de precificação](/docs/pricing).
 
 ## Próximos passos
 

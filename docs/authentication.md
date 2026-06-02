@@ -13,7 +13,7 @@ Você também pode enviar o seu token de autorização pelo parâmetro da query 
 curl https://inference.aivax.net/api/v1/information/models.txt?api-key=oky_gr5uepj...
 ```
 
-Não há necessidade de enviar o esquema de autenticação `Bearer` em ambos cabeçalhos, mas é possível por questões de compatibilidade.
+No cabeçalho `Authorization`, envie a chave com o esquema `Bearer` ou `Basic`. Quando usar o parâmetro `?api-key`, informe apenas a chave, sem esquema de autenticação.
 
 ## Autenticando hooks
 

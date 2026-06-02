@@ -1,10 +1,20 @@
 # Ferramentas embutidas
 
-A AIVAX fornece uma lista de ferramentas embutidas para você habilitar em seu modelo. Essas ferramentas podem ser usadas em conjunto com as [funções do lado do servidor](/docs/protocol-functions).
+A AIVAX fornece uma lista de ferramentas embutidas para você habilitar em seu modelo. Essas ferramentas podem ser usadas em conjunto com as [funções do lado do servidor](/docs/tools/protocol-functions).
 
 Algumas funções possuem custo. Esse custo é aplicado em modelos usados pela AIVAX e os que você fornece através do BYOK (bring-your-own-key), portanto, é importante adicionar saldo se você pretende usar essas ferramentas.
 
 Note que cada modelo decide qual função chamar e seus parâmetros. Nem todos os modelos podem obedecer as regras de chamadas.
+
+## Como escolher e combinar ferramentas
+
+Ferramentas embutidas devem ser habilitadas como capacidades de trabalho, não como decoração do agente. Cada ferramenta adiciona uma decisão ao modelo: ele precisa perceber que a ferramenta existe, entender quando deve usá-la, montar argumentos válidos, aguardar o resultado e continuar a resposta. Quanto mais ferramentas parecidas estiverem disponíveis ao mesmo tempo, maior a chance de uso redundante ou escolha ruim. Comece com o menor conjunto que resolve o caso de uso e escreva instruções claras sobre quando usar cada uma.
+
+Use `WebSearch` quando a resposta depende de informação pública, recente ou variável. Use `OpenUrl` quando o usuário já forneceu uma URL e quer que a assistente analise aquele conteúdo específico. Use `AdvancedWebUsage` quando a tarefa exige navegação, interação ou páginas que não podem ser resolvidas por uma simples busca. Use `Code` para cálculo, transformação de dados e raciocínio algorítmico pequeno. Use `Request` quando o modelo precisa chamar uma API HTTP com método, cabeçalhos ou corpo customizado. Use `Remember` e `Calendar` apenas em chat clients ou chamadas com usuário identificável, porque essas ferramentas dependem de contexto persistente por usuário.
+
+Ferramentas de geração, como imagem, documento e página web, devem ser tratadas como ações de saída. Elas não servem apenas para “responder melhor”; elas criam artefatos hospedados ou anexados à conversa. Por isso, instrua o modelo sobre quando gerar um artefato e quando responder em texto. Em atendimento, por exemplo, gerar documento pode ser útil para um orçamento, proposta ou resumo formal; gerar página web pode ser útil para relatório visual; gerar imagem pode ser útil para ideação criativa. Se o usuário só pediu uma explicação, normalmente texto é suficiente.
+
+Quando ferramentas estão disponíveis via `builtin_tools` em uma chamada direta, a aplicação que faz a requisição decide a lista a cada inferência. Quando estão configuradas no AI Gateway, a lista fica centralizada e pode ser combinada com skills, workers, MCP e funções de protocolo. Em produção, prefira gateway para políticas permanentes, porque isso evita que diferentes clientes habilitem ferramentas diferentes sem controle. Use chamada direta para testes, rotinas internas e fluxos em que a aplicação realmente precisa escolher ferramentas dinamicamente.
 
 ## Pesquisa na internet
 
@@ -39,6 +49,14 @@ Ativação por `builtin_tools`:
     }
 }
 ```
+
+## Diagnóstico de ferramentas
+
+Quando uma ferramenta não é chamada, primeiro confirme se ela está habilitada no gateway ou no campo `builtin_tools` da requisição. Depois, verifique se o modelo escolhido suporta chamadas de função ou se existe um tool handler configurado para modelos sem suporte nativo. Em seguida, revise a instrução: se ela não diz quando pesquisar, abrir URL, gerar imagem ou consultar memória, o modelo pode responder apenas com conhecimento próprio. Por fim, teste uma pergunta direta que obviamente exige a ferramenta, como pedir uma notícia recente para `WebSearch` ou pedir para abrir uma URL específica para `OpenUrl`.
+
+Quando uma ferramenta é chamada demais, reduza ambiguidade. Ferramentas como `WebSearch` e `XPostsSearch` competem por informação recente; `OpenUrl` e `Request` podem parecer parecidas quando o usuário envia um link; `Remember` e `Calendar` podem se sobrepor quando o usuário fala de preferências e datas. Remova ferramentas que não são necessárias, deixe descrições mais restritivas nas instruções do gateway e, quando possível, use workers para bloquear ou substituir chamadas em cenários específicos.
+
+Quando uma ferramenta falha, trate como parte normal da experiência. Buscas podem retornar pouco conteúdo, URLs podem bloquear bots, APIs podem negar autorização, geração de imagem pode recusar conteúdo e execução de código pode receber entrada ambígua. Instrua o modelo a explicar a limitação de forma objetiva e oferecer o próximo passo, como pedir outro link, tentar uma consulta mais específica, solicitar autorização ou responder com base apenas no contexto disponível. Não dependa de uma ferramenta externa como única forma de concluir uma conversa crítica sem fallback de experiência.
 
 ## Pesquisa avançada na internet
 
@@ -110,7 +128,7 @@ Ativação por `builtin_tools`:
 
 Essa função permite que o modelo armazene conteúdo relevante para ser usado por várias conversas.
 
-> No momento, essa função só está disponível quando usada em [chat clients](/docs/entities/chat-clients) e quando a sessão está identificada por uma `tag`.
+> No momento, essa função só está disponível quando usada em [chat clients](/docs/features/chat-clients) e quando a sessão está identificada por uma `tag`.
 
 Através da `tag` da sessão, o modelo armazena um dado relevante da conversa, como preferência de nomes, lembretes ou ações que a assistente deve realizar.
 
