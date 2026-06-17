@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Autentica&#231;&#227;o | AIVAX </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="Autentica&#231;&#227;o | AIVAX ">
+
+
+        <link rel="icon" href="../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+        
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../toc.html">
+        <meta name="docfx:tocrel" content="toc.html">
+
+        <meta name="docfx:rel" content="../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/pt-br/authentication.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+                
+        <script>            
+            function switchLanguage(lang) {
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../index.html">
+                        <img id="logo" class="svg" src="../../assets/img/aivax.png" alt="AIVAX">
+                        AIVAX
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="autenticação">Autenticação</h1>
+
+<p>Quando tiver sua conta em mãos, use sua chave de autenticação única para se autenticar na nossa API através do cabeçalho <code>Authorization</code>:</p>
+<pre><code class="lang-bash">curl https://inference.aivax.net/api/v1/information/models.json \
+    -H 'Authorization: Bearer oky_gr5uepj...'
+</code></pre>
+<p>Você também pode enviar o seu token de autorização pelo parâmetro da query <code>?api-key</code>, exemplo:</p>
+<pre><code class="lang-bash">curl https://inference.aivax.net/api/v1/information/models.txt?api-key=oky_gr5uepj...
+</code></pre>
+<p>No cabeçalho <code>Authorization</code>, envie a chave com o esquema <code>Bearer</code>. Quando usar o parâmetro <code>?api-key</code>, informe apenas a chave, sem esquema de autenticação.</p>
+<h2 id="autenticando-hooks">Autenticando hooks</h2>
+<p>Requisições da AIVAX para seus serviços, seja workers de gateways de IA ou chamadas de função server-side, recebem o cabeçalho <code>X-Request-Nonce</code> quando a conta possui uma <a href="https://console.aivax.net/dashboard/account">chave de hook</a> configurada. Esse cabeçalho contém um hash BCrypt derivado da chave de hook definida em sua conta.</p>
+<p>A validação é simples: verifique se o hash em <code>X-Request-Nonce</code> corresponde à chave de hook definida em sua conta.</p>
+<p>Dessa forma, você poderá autenticar se as requisições da AIVAX para seus serviços são genuínas através desse token. Se sua conta não tiver definido uma chave de hook, esse cabeçalho não será enviado.</p>
+<p>Veja os exemplos abaixo para validação da chave de hook:</p>
+<div class="tabGroup" id="tabgroup_1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_1_csharp-sisk" role="tab" aria-controls="tabpanel_1_csharp-sisk" data-tab="csharp-sisk" tabindex="0" aria-selected="true">C# (com Sisk)</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_1_python-flask" role="tab" aria-controls="tabpanel_1_python-flask" data-tab="python-flask" tabindex="-1">Python (com Flask)</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_1_js-express" role="tab" aria-controls="tabpanel_1_js-express" data-tab="js-express" tabindex="-1">JavaScript (com Express.js)</a>
+</li>
+</ul>
+<section id="tabpanel_1_csharp-sisk" role="tabpanel" data-tab="csharp-sisk">
+
+<pre><code class="lang-csharp">using BCrypt.Net;
+
+[RoutePrefix(&quot;/api/aivax-protocol-functions&quot;)]
+internal class MyController : Controller
+{
+    public MyController()
+    {
+        this.HasRequestHandler(RequestHandler.Create(
+            execute: (req, ctx) =&gt;
+            {
+                // Obtém o nonce enviado da requisição
+                var hash = this.Request.Headers [&quot;X-Request-Nonce&quot;];
+                if (hash == null)
+                {
+                    return new HttpResponse(HttpStatusInformation.Unauthorized);
+                }
+                
+                // Valida o hook usando a biblioteca BCrypt.Net
+                var secretWord = Environment.GetEnvironmentVariable (&quot;AIVAX_HOOK_SECRET&quot;);
+                if (!BCrypt.Net.BCrypt.Verify(secretWord, hash, enhancedEntropy: false))
+                {
+                    return new HttpResponse(HttpStatusInformation.Forbidden);
+                }
+                
+                // Continua a requisição após hook validado
+                return null;
+            }));
+    }
+    ...
+}
+</code></pre>
+</section>
+<section id="tabpanel_1_python-flask" role="tabpanel" data-tab="python-flask" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-python">from flask import Flask, request, abort
+import os
+import bcrypt
+
+app = Flask(__name__)
+
+@app.before_request
+def autenticar_token():
+    # 1. Lê o cabeçalho que contém o hash do token
+    token_hash = request.headers.get(&quot;X-Request-Nonce&quot;)
+    if not token_hash:
+        abort(401)
+
+    # 2. Carrega o segredo em texto puro das variáveis de ambiente
+    secret = os.getenv(&quot;AIVAX_HOOK_SECRET&quot;)
+    if secret is None:
+        abort(500)
+
+    # 3. Verifica se o hash recebido corresponde ao segredo
+    if not bcrypt.checkpw(secret.encode(&quot;utf-8&quot;),
+                          token_hash.encode(&quot;utf-8&quot;)):
+        abort(403)
+
+@app.route(&quot;/api/aivax-protocol-functions/some-action&quot;, methods=[&quot;POST&quot;])
+def some_action():
+    return &quot;&quot;, 204
+
+if __name__ == &quot;__main__&quot;:
+    app.run(host=&quot;0.0.0.0&quot;, port=5000)
+</code></pre>
+</section>
+<section id="tabpanel_1_js-express" role="tabpanel" data-tab="js-express" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-javascript">require('dotenv').config()
+const express = require('express')
+const bcrypt = require('bcrypt')
+
+const app = express()
+
+app.use(async (req, res, next) =&gt; {
+  const tokenHash = req.header('X-Request-Nonce')
+  if (!tokenHash) {
+    return res.sendStatus(401)
+  }
+
+  // 2. Carrega o segredo em texto puro das variáveis de ambiente
+  const secret = process.env.AIVAX_HOOK_SECRET
+  if (!secret) {
+    return res.sendStatus(500)
+  }
+
+  try {
+    // 3. Verifica se o hash recebido corresponde ao segredo
+    const match = await bcrypt.compare(secret, tokenHash)
+    if (!match) {
+      return res.sendStatus(403)
+    }
+    
+    next()
+  } catch (err) {
+    return res.sendStatus(500)
+  }
+})
+
+app.post(
+  '/api/aivax-protocol-functions/some-action',
+  (req, res) =&gt; {
+    res.sendStatus(204)
+  }
+)
+
+const PORT = process.env.PORT || 3000
+app.listen(PORT, () =&gt; {
+  console.log(`Server running on port ${PORT}`)
+})
+</code></pre>
+</section>
+</div>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/pt-br/authentication.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>

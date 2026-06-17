@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Ferramentas embutidas | AIVAX </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="Ferramentas embutidas | AIVAX ">
+
+
+        <link rel="icon" href="../../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+        
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
+
+        <meta name="docfx:rel" content="../../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/pt-br/tools/builtin-tools.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+                
+        <script>            
+            function switchLanguage(lang) {
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../../index.html">
+                        <img id="logo" class="svg" src="../../../assets/img/aivax.png" alt="AIVAX">
+                        AIVAX
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="ferramentas-embutidas">Ferramentas embutidas</h1>
+
+<p>A AIVAX fornece uma lista de ferramentas embutidas para você habilitar em seu modelo. Essas ferramentas podem ser usadas em conjunto com as <a href="/docs/pt-br/tools/protocol-functions">funções do lado do servidor</a>.</p>
+<p>Algumas funções possuem custo. Esse custo é aplicado em modelos usados pela AIVAX e os que você fornece através do BYOK (bring-your-own-key), portanto, é importante adicionar saldo se você pretende usar essas ferramentas.</p>
+<p>Note que cada modelo decide qual função chamar e seus parâmetros. Nem todos os modelos podem obedecer as regras de chamadas.</p>
+<h2 id="como-escolher-e-combinar-ferramentas">Como escolher e combinar ferramentas</h2>
+<p>Ferramentas embutidas devem ser habilitadas como capacidades de trabalho, não como decoração do agente. Cada ferramenta adiciona uma decisão ao modelo: ele precisa perceber que a ferramenta existe, entender quando deve usá-la, montar argumentos válidos, aguardar o resultado e continuar a resposta. Quanto mais ferramentas parecidas estiverem disponíveis ao mesmo tempo, maior a chance de uso redundante ou escolha ruim. Comece com o menor conjunto que resolve o caso de uso e escreva instruções claras sobre quando usar cada uma.</p>
+<p>Use <code>WebSearch</code> quando a resposta depende de informação pública, recente ou variável. Use <code>OpenUrl</code> quando o usuário já forneceu uma URL e quer que a assistente analise aquele conteúdo específico. Use <code>AdvancedWebUsage</code> quando a tarefa exige navegação, interação ou páginas que não podem ser resolvidas por uma simples busca. Use <code>Code</code> para cálculo, transformação de dados e raciocínio algorítmico pequeno. Use <code>Request</code> quando o modelo precisa chamar uma API HTTP com método, cabeçalhos ou corpo customizado. Use <code>Remember</code> e <code>Calendar</code> apenas em chat clients ou chamadas com usuário identificável, porque essas ferramentas dependem de contexto persistente por usuário.</p>
+<p>Ferramentas de geração, como imagem, documento e página web, devem ser tratadas como ações de saída. Elas não servem apenas para “responder melhor”; elas criam artefatos hospedados ou anexados à conversa. Por isso, instrua o modelo sobre quando gerar um artefato e quando responder em texto. Em atendimento, por exemplo, gerar documento pode ser útil para um orçamento, proposta ou resumo formal; gerar página web pode ser útil para relatório visual; gerar imagem pode ser útil para ideação criativa. Se o usuário só pediu uma explicação, normalmente texto é suficiente.</p>
+<p>Quando ferramentas estão disponíveis via <code>builtin_tools</code> em uma chamada direta, a aplicação que faz a requisição decide a lista a cada inferência. Quando estão configuradas no AI Gateway, a lista fica centralizada e pode ser combinada com skills, workers, MCP e funções de protocolo. Em produção, prefira gateway para políticas permanentes, porque isso evita que diferentes clientes habilitem ferramentas diferentes sem controle. Use chamada direta para testes, rotinas internas e fluxos em que a aplicação realmente precisa escolher ferramentas dinamicamente.</p>
+<h2 id="pesquisa-na-internet">Pesquisa na internet</h2>
+<p>Essa função habilita a pesquisa na internet no seu modelo. Com isso, o modelo pode consultar por informações específicas ou em tempo real, como dados meteorológicos, notícias, resultados de jogos, etc.</p>
+<p>A pesquisa na internet é feita por vários provedores, escolhido conforme disponibilidade de rede e latência. A AIVAX utiliza uma mistura de provedores para realizar pesquisas na internet.</p>
+<p>A AIVAX fornece dois tipos de pesquisa configuráveis pelo seu dashboard:</p>
+<ul>
+<li><strong>Full</strong>: a pesquisa realizada é completa, inserindo no contexto da conversa o conteúdo inteiro de cada resultado encontrado.</li>
+<li><strong>Summarized</strong>: a pesquisa realizada é resumida, inserindo no contexto da conversa um resumo feito por IA pelo próprio provedor de pesquisa.</li>
+</ul>
+<p>O custo dos dois modos é de <strong>$5</strong> à cada <strong>1.000</strong> pesquisas realizadas. O modo <code>Full</code> pode consumir mais tokens de entrada da conversa, mas pode proporcionar resultados mais precisos.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p><strong>Importante:</strong> nem sempre a pesquisa <code>Full</code> está disponível.</p>
+</div>
+<p>Ativação por <code>builtin_tools</code>:</p>
+<pre><code class="lang-json">{
+    &quot;tools&quot;: [
+        &quot;WebSearch&quot;
+    ],
+    &quot;options&quot;: {
+        // maximum number of results returned by web search operations.
+        &quot;web_search_max_results&quot;: 10, // between 1-25
+
+        // level of detail returned by web search operations.
+        &quot;web_search_mode&quot;: &quot;full&quot; // full, summarized
+    }
+}
+</code></pre>
+<h2 id="diagnóstico-de-ferramentas">Diagnóstico de ferramentas</h2>
+<p>Quando uma ferramenta não é chamada, primeiro confirme se ela está habilitada no gateway ou no campo <code>builtin_tools</code> da requisição. Depois, verifique se o modelo escolhido suporta chamadas de função ou se existe um tool handler configurado para modelos sem suporte nativo. Em seguida, revise a instrução: se ela não diz quando pesquisar, abrir URL, gerar imagem ou consultar memória, o modelo pode responder apenas com conhecimento próprio. Por fim, teste uma pergunta direta que obviamente exige a ferramenta, como pedir uma notícia recente para <code>WebSearch</code> ou pedir para abrir uma URL específica para <code>OpenUrl</code>.</p>
+<p>Quando uma ferramenta é chamada demais, reduza ambiguidade. Ferramentas como <code>WebSearch</code> e <code>XPostsSearch</code> competem por informação recente; <code>OpenUrl</code> e <code>Request</code> podem parecer parecidas quando o usuário envia um link; <code>Remember</code> e <code>Calendar</code> podem se sobrepor quando o usuário fala de preferências e datas. Remova ferramentas que não são necessárias, deixe descrições mais restritivas nas instruções do gateway e, quando possível, use workers para bloquear ou substituir chamadas em cenários específicos.</p>
+<p>Quando uma ferramenta falha, trate como parte normal da experiência. Buscas podem retornar pouco conteúdo, URLs podem bloquear bots, APIs podem negar autorização, geração de imagem pode recusar conteúdo e execução de código pode receber entrada ambígua. Instrua o modelo a explicar a limitação de forma objetiva e oferecer o próximo passo, como pedir outro link, tentar uma consulta mais específica, solicitar autorização ou responder com base apenas no contexto disponível. Não dependa de uma ferramenta externa como única forma de concluir uma conversa crítica sem fallback de experiência.</p>
+<h2 id="pesquisa-avançada-na-internet">Pesquisa avançada na internet</h2>
+<p>Essa função permite que o modelo tenha um navegador da internet e consiga realizar automação, como pesquisas, navegar em sites, preencher formulários e clicar em botões.</p>
+<p>No momento não há parametrização dessa função.</p>
+<p>O custo dessa função é de <strong>$2</strong> por hora de automação, tendo também uma quantia fixa de <strong>$11,10</strong> à cada <strong>1.000</strong> chamadas dessa função.</p>
+<p>Ativação por <code>builtin_tools</code>:</p>
+<pre><code class="lang-json">{
+    &quot;tools&quot;: [
+        &quot;AdvancedWebUsage&quot;
+    ],
+    &quot;options&quot;: {
+    }
+}
+</code></pre>
+<h2 id="execução-de-código">Execução de código</h2>
+<p>Essa função permite que o modelo execute código JavaScript e inspecione o resultado da execução. Com isso, o modelo consegue avaliar através de algoritmos resultados de expressões matemáticas e outras situações que são melhores representadas através de código.</p>
+<p>O código é executado em um ambiente protegido com pouquíssimas funções disponíveis. O modelo não conseguirá acessar I/O, acesso à internet ou importar scripts por essa ferramenta.</p>
+<p>Essa função não tem custo.</p>
+<p>Ativação por <code>builtin_tools</code>:</p>
+<pre><code class="lang-json">{
+    &quot;tools&quot;: [
+        &quot;Code&quot;
+    ],
+    &quot;options&quot;: {
+    }
+}
+</code></pre>
+<h2 id="contexto-de-url">Contexto de URL</h2>
+<p>Essa função permite que o modelo acesse conteúdo externo em URLs e links providos pelo usuário. Com essa função, o modelo consegue acessar links e avaliar seu conteúdo.</p>
+<p>Note que, alguns destinos podem identificar o acesso como bot e barrar o acesso, desde que essa função não é um crawling e sim um simples GET feito no destino.</p>
+<p>O modelo consegue acessar até 5 links de uma vez. Somente os primeiros 10MB dos links são lidos. Ao obter o conteúdo do link, o sistema verifica o conteúdo de retorno e lida com eles de acordo com cada tipo:</p>
+<ul>
+<li>Conteúdos de HTML são renderizados: as tags HTML, scripts, CSS e &quot;ruídos&quot; são removidos do resultado do acesso, mantendo somente o texto puro do link.</li>
+<li>Outros conteúdos textuais: o conteúdo é lido diretamente e nenhuma transformação é realizada.</li>
+<li>Conteúdos não textuais: quando o link responde com um conteúdo não textual e a resposta indica um nome de arquivo (seja pelo caminho ou pelo cabeçalho <code>Content-Disposition</code>), o sistema tenta converter o arquivo baixado para uma versão textual.</li>
+</ul>
+<p>Essa função não tem custo.</p>
+<p>Ativação por <code>builtin_tools</code>:</p>
+<pre><code class="lang-json">{
+    &quot;tools&quot;: [
+        &quot;OpenUrl&quot;
+    ],
+    &quot;options&quot;: {
+    }
+}
+</code></pre>
+<h2 id="memória">Memória</h2>
+<p>Essa função permite que o modelo armazene conteúdo relevante para ser usado por várias conversas.</p>
+<blockquote>
+<p>No momento, essa função só está disponível quando usada em <a href="/docs/pt-br/features/chat-clients">chat clients</a> e quando a sessão está identificada por uma <code>tag</code>.</p>
+</blockquote>
+<p>Através da <code>tag</code> da sessão, o modelo armazena um dado relevante da conversa, como preferência de nomes, lembretes ou ações que a assistente deve realizar.</p>
+<p>A instrução dessa memória instrui o modelo à não salvar dados sensíveis ou pessoais, no entanto, não é garantido que o modelo sempre irá seguir essa regra.</p>
+<p>Os dados são armazenados por um ano nos bancos de dados da AIVAX e podem ser excluídos à qualquer momento pela plataforma. Para toda conversa por um chat client, esses dados são obtidos e anexados na conversa.</p>
+<blockquote>
+<p>Nota: em requisições de chat/completions, a <code>tag</code> é especificada no parâmetro <code>$.user</code>.</p>
+</blockquote>
+<p>Essa função não tem custo.</p>
+<p>Ativação por <code>builtin_tools</code>:</p>
+<pre><code class="lang-json">{
+    &quot;tools&quot;: [
+        &quot;Remember&quot;
+    ],
+    &quot;options&quot;: {
+        // indicates whether all memory contexts should be included in the system instructions.
+        &quot;include_all_memory_context&quot;: true
+    }
+}
+</code></pre>
+<h2 id="geração-de-imagens">Geração de imagens</h2>
+<p>Essa função permite que o modelo crie imagens de IA.</p>
+<p>As imagens geradas por IA são anexadas no contexto da conversa, mas não são visíveis diretamente para a assistente.</p>
+<p>Essa função possui custo. O custo varia de cada modelo de geração de imagem usado. A geração de imagens ocorre em um provedor externo, o que o custo pode mudar conforme vários fatores.</p>
+<p>Você também pode ativar a geração de imagens explícitas e adultas na geração de imagem. Ao ativar esse recurso, o modelo será permitido gerar material adulto. Para isso ocorrer, o modelo também deve &quot;concordar&quot; em gerar esse conteúdo. Certos modelos possuem um filtro de segurança menor que outros. Por exemplo, os modelos Gemini são os com o menor filtro de segurança, sendo uma opção viável para role-play e geração desse tipo de material.</p>
+<p>Você é sempre responsável pelo <a href="/docs/pt-br/legal/terms-of-service.md">material que gera</a> e o material gerado deve ser compatível com nossos termos de serviço.</p>
+<p>Os modelos de geração de imagens disponíveis são:</p>
+<ul>
+<li><code>grok-imagine-pro</code></li>
+<li><code>grok-imagine</code></li>
+<li><code>seedream-5-lite</code></li>
+<li><code>seedream-4-5-pro</code></li>
+<li><code>seedream-4</code></li>
+<li><code>nanobanana-2</code></li>
+<li><code>nanobanana-pro</code></li>
+<li><code>nanobanana</code></li>
+<li><code>gpt-image-1.5</code></li>
+<li><code>gpt-image-1-mini</code></li>
+<li><code>flux-2-klein</code></li>
+<li><code>flux-schnell</code></li>
+<li><code>zimage-turbo</code></li>
+</ul>
+<p>Imagens geradas são armazenadas nos servidores da AIVAX por alguns meses antes de serem permanentemente removidas.</p>
+<p>Ativação por <code>builtin_tools</code>:</p>
+<pre><code class="lang-json">{
+    &quot;tools&quot;: [
+        &quot;ImageGeneration&quot;
+    ],
+    &quot;options&quot;: {
+        // sets the generation model to use for image generation.
+        &quot;image_generation_model_name&quot;: &quot;grok-imagine&quot;,
+
+        // indicates whether image generation is allowed to use references (e.g. images from the web or user uploads) as input.
+        &quot;image_generation_allow_reference_usage&quot;: true,
+
+        // deprecated. sets the quality level for generated images.
+        &quot;image_generation_quality&quot;: &quot;low|medium|high|highest&quot;,
+
+        // sets the maximum number of images that can be generated in a single request.
+        &quot;image_generation_max_results&quot;: 2, // 1-4
+
+        // indicates whether image generation is allowed to produce mature content.
+        &quot;image_generation_allow_mature_content&quot;: false
+    }
+}
+</code></pre>
+<h2 id="pesquisa-de-posts-no-x">Pesquisa de posts no X</h2>
+<p>Essa função permite o modelo pesquisar por posts no X (antigo Twitter).</p>
+<p>É uma alternativa direta ao <code>web_search</code>, pois pode ser usada para procurar por informações atualizadas em tempo real, como notícias, informações, resultados de jogos, etc. Essa ferramenta traz resultados muito mais recentes que a ferramenta de pesquisa na internet convencional.</p>
+<p>Não é recomendado usar as duas funções em conjunto pois elas possuem o mesmo objetivo.</p>
+<p>No momento, os últimos 20 posts de um determinado assunto é inserido no contexto da conversa, contendo link e autor.</p>
+<p>No momento, não é possível acessar posts de perfis específicos.</p>
+<p>O custo dessa função é de <strong>$5</strong> à cada <strong>1.000</strong> pesquisas realizadas.</p>
+<p>Ativação por <code>builtin_tools</code>:</p>
+<pre><code class="lang-json">{
+    &quot;tools&quot;: [
+        &quot;XPostsSearch&quot;
+    ],
+    &quot;options&quot;: {
+    }
+}
+</code></pre>
+<h2 id="geração-de-documentos">Geração de documentos</h2>
+<p>Essa função permite que o modelo possa criar PDFs a partir de textos em HTML.</p>
+<p>Os arquivos criados são hospedados nos servidores da AIVAX e disponibilizados pelo assistente.</p>
+<p>O conteúdo é hospedado por alguns meses antes de ser permanentemente excluído.</p>
+<p>Essa função não tem custo.</p>
+<p>Ativação por <code>builtin_tools</code>:</p>
+<pre><code class="lang-json">{
+    &quot;tools&quot;: [
+        &quot;GenerateDocument&quot;
+    ],
+    &quot;options&quot;: {
+    }
+}
+</code></pre>
+<h2 id="geração-de-páginas-da-web">Geração de páginas da web</h2>
+<p>Essa função permite que o modelo possa hospedar páginas HTML em servidores da AIVAX.</p>
+<p>Isso permite que o modelo possa hospedar relatórios, landing-pages e outros infográficos em HTML.</p>
+<p>O conteúdo é hospedado por alguns meses antes de ser permanentemente excluído.</p>
+<p>Essa função não tem custo.</p>
+<p>Ativação por <code>builtin_tools</code>:</p>
+<pre><code class="lang-json">{
+    &quot;tools&quot;: [
+        &quot;GenerateWebPage&quot;
+    ],
+    &quot;options&quot;: {
+    }
+}
+</code></pre>
+<h2 id="requisição-avançada">Requisição avançada</h2>
+<p>Essa função fornece uma ferramenta de requisições HTTP avançada ao modelo. Com essa função, o modelo consegue definir cabeçalhos, formulários, conteúdos e métodos para realizar requisições HTTP avançadas.</p>
+<p>Respostas grandes são automaticamente truncadas e renderizadas no lado do servidor (renderiza HTML, Markdown, etc.).</p>
+<p>Essa função não possui custo.</p>
+<p>Ativação por <code>builtin_tools</code>:</p>
+<pre><code class="lang-json">{
+    &quot;tools&quot;: [
+        &quot;Request&quot;
+    ],
+    &quot;options&quot;: {
+    }
+}
+</code></pre>
+<h2 id="calendário">Calendário</h2>
+<p>Uma função estática quase idêntica à função de memória, com os mesmos parâmetros de armazenamento, mas otimizada para armazenar memória em datas e não como itens soltos.</p>
+<p>Não é recomendado ativar essa função junto com a função de memória ou funções de agendamento de mensagens do chat client.</p>
+<p>Essa função não possui custo.</p>
+<p>Ativação por <code>builtin_tools</code>:</p>
+<pre><code class="lang-json">{
+    &quot;tools&quot;: [
+        &quot;Calendar&quot;
+    ],
+    &quot;options&quot;: {
+    }
+}
+</code></pre>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/pt-br/tools/builtin-tools.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>

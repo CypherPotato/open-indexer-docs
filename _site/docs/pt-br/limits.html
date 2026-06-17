@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Planos e limites | AIVAX </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="Planos e limites | AIVAX ">
+
+
+        <link rel="icon" href="../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+        
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../toc.html">
+        <meta name="docfx:tocrel" content="toc.html">
+
+        <meta name="docfx:rel" content="../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/pt-br/limits.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+                
+        <script>            
+            function switchLanguage(lang) {
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../index.html">
+                        <img id="logo" class="svg" src="../../assets/img/aivax.png" alt="AIVAX">
+                        AIVAX
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="planos-e-limites">Planos e limites</h1>
+
+<h2 id="planos">Planos</h2>
+<p>A AIVAX oferece três planos de assinatura: <strong>Free</strong>, <strong>Pro</strong> e <strong>Max</strong>. Para comparar diferenças comerciais, recursos inclusos e preços atualizados entre os planos, consulte a <a href="https://aivax.net/pricing">página de preços da AIVAX</a>. Esta página mantém apenas limites técnicos úteis para integração e operação.</p>
+<p>Todos os planos são renovados mensalmente e não exigem compromisso de longo prazo. Ao assinar um plano, o valor da assinatura é deduzido automaticamente do saldo da conta. No dia 1 de todo mês, o valor da assinatura é renovado novamente se existir saldo suficiente em conta para a mensalidade atual. Ao assinar um plano após o primeiro dia do mês, o valor proporcional é cobrado para o período restante do mês, e a renovação completa ocorrerá no próximo ciclo mensal.</p>
+<p>Nenhum plano inclui créditos de uso, e os limites de uso são aplicados independentemente do saldo disponível na conta. Os planos definem limites, recursos e condições comerciais diferentes, além de permitir concentrar o saldo de vários serviços em uma única carteira.</p>
+<p>É importante ressaltar que a utilização de recursos que envolvem custos é imediatamente interrompida quando o saldo da conta é zero ou negativo, independentemente do plano de assinatura. Portanto, é fundamental manter um saldo positivo para garantir a continuidade do acesso aos recursos e evitar interrupções no serviço.</p>
+<h2 id="limites">Limites</h2>
+<p>Os limites de uso regulam o número de requisições e recursos disponíveis conforme o plano de assinatura da sua conta.</p>
+<p>Limites aparecem de formas diferentes conforme o recurso. Em inferência, eles podem limitar requisições por minuto, tokens por minuto ou acesso a grupos de modelos. Em BYOK, eles limitam a quantidade de chamadas que passam pela infraestrutura da AIVAX mesmo quando o custo do provedor externo é seu. Em RAG, eles controlam quantidade de coleções, pesquisas por minuto, inserções por dia e tamanho de lotes JSONL. Em ferramentas embutidas, eles controlam quantas vezes uma ação de serviço pode ser executada por dia ou por período. Em Batch, eles controlam quantos itens podem ser processados em segundo plano conforme o plano.</p>
+<p>Quando um limite é atingido, o comportamento esperado é interromper, pausar ou retornar erro, dependendo do recurso. Uma chamada de inferência direta tende a retornar erro imediatamente. Um job de Batch pode ser pausado e retomado depois, porque ele é assíncrono. Uma ferramenta embutida pode falhar dentro da conversa e o modelo deve explicar a limitação ao usuário. Uma inserção de RAG acima do limite do plano deve ser dividida em lotes menores ou feita após ajuste de plano. Para diferenças comerciais, preços e recursos inclusos, use a <a href="https://aivax.net/pricing">página de preços da AIVAX</a>; esta página serve para orientar integração e operação.</p>
+<div class="tabGroup" id="tabgroup_1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_1_free" role="tab" aria-controls="tabpanel_1_free" data-tab="free" tabindex="0" aria-selected="true">Free</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_1_pro" role="tab" aria-controls="tabpanel_1_pro" data-tab="pro" tabindex="-1">Pro</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_1_max" role="tab" aria-controls="tabpanel_1_max" data-tab="max" tabindex="-1">Max</a>
+</li>
+</ul>
+<section id="tabpanel_1_free" role="tabpanel" data-tab="free">
+
+<table>
+<thead>
+<tr>
+<th>Recurso</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Acesso a modelos</td>
+<td>Modelos básicos</td>
+</tr>
+<tr>
+<td>Comissão sobre inferência</td>
+<td>25%</td>
+</tr>
+<tr>
+<td>BYOK (Bring your own key)</td>
+<td>Limitado</td>
+</tr>
+<tr>
+<td>JSON Healing</td>
+<td>Sim</td>
+</tr>
+<tr>
+<td>Stability routing</td>
+<td>Sim</td>
+</tr>
+<tr>
+<td>Complexity routing</td>
+<td>Não</td>
+</tr>
+<tr>
+<td>Rate limits</td>
+<td>Considerável</td>
+</tr>
+<tr>
+<td>Contexto máximo</td>
+<td>64K tokens</td>
+</tr>
+<tr>
+<td><strong>RAG</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>Coleções</td>
+<td>Até 5 coleções de RAG</td>
+</tr>
+<tr>
+<td>Pesquisas</td>
+<td>Baixo limite — 20 pesquisas/minuto</td>
+</tr>
+<tr>
+<td>Inserções</td>
+<td>Baixo limite — 500 inserções/dia</td>
+</tr>
+<tr>
+<td>Processamento composto</td>
+<td>Não disponível</td>
+</tr>
+<tr>
+<td><strong>Ferramentas embutidas</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>Pesquisa na internet</td>
+<td>15/dia</td>
+</tr>
+<tr>
+<td>Pesquisa no Twitter/X</td>
+<td>Não disponível</td>
+</tr>
+<tr>
+<td>Deep search</td>
+<td>Não disponível</td>
+</tr>
+<tr>
+<td>Geração de documentos e páginas web</td>
+<td>5/dia</td>
+</tr>
+<tr>
+<td>Geração e edição de imagens</td>
+<td>5/dia</td>
+</tr>
+<tr>
+<td>Execução de código e requisições avançadas</td>
+<td>30/dia</td>
+</tr>
+<tr>
+<td>Memória e calendário</td>
+<td>Sim</td>
+</tr>
+<tr>
+<td><strong>Conta</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>Armazenamento incluso</td>
+<td>30 MB (limite fixo)</td>
+</tr>
+<tr>
+<td>Retenção de conversas</td>
+<td>2 horas</td>
+</tr>
+<tr>
+<td>Suporte</td>
+<td>Por e-mail</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="tabpanel_1_pro" role="tabpanel" data-tab="pro" aria-hidden="true" hidden="hidden">
+
+<table>
+<thead>
+<tr>
+<th>Recurso</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Acesso a modelos</td>
+<td>Modelos avançados</td>
+</tr>
+<tr>
+<td>Comissão sobre inferência</td>
+<td>5%</td>
+</tr>
+<tr>
+<td>BYOK (Bring your own key)</td>
+<td>Sim</td>
+</tr>
+<tr>
+<td>JSON Healing</td>
+<td>Sim</td>
+</tr>
+<tr>
+<td>Stability routing</td>
+<td>Sim</td>
+</tr>
+<tr>
+<td>Complexity routing</td>
+<td>Sim</td>
+</tr>
+<tr>
+<td>Rate limits</td>
+<td>Alto</td>
+</tr>
+<tr>
+<td>Contexto máximo</td>
+<td>Ilimitado</td>
+</tr>
+<tr>
+<td><strong>RAG</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>Coleções</td>
+<td>Ilimitado</td>
+</tr>
+<tr>
+<td>Pesquisas</td>
+<td>Alto limite — 500 pesquisas/minuto</td>
+</tr>
+<tr>
+<td>Inserções</td>
+<td>Alto limite — 10.000 inserções/dia</td>
+</tr>
+<tr>
+<td>Processamento composto</td>
+<td>Até 3 arquivos/dia</td>
+</tr>
+<tr>
+<td><strong>Ferramentas embutidas</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>Pesquisa na internet</td>
+<td>1.000/dia</td>
+</tr>
+<tr>
+<td>Pesquisa no Twitter/X</td>
+<td>1.000/dia</td>
+</tr>
+<tr>
+<td>Deep search</td>
+<td>100/dia</td>
+</tr>
+<tr>
+<td>Geração de documentos e páginas web</td>
+<td>1.000/dia</td>
+</tr>
+<tr>
+<td>Geração e edição de imagens</td>
+<td>500/dia</td>
+</tr>
+<tr>
+<td>Execução de código e requisições avançadas</td>
+<td>5.000/dia</td>
+</tr>
+<tr>
+<td>Memória e calendário</td>
+<td>Sim</td>
+</tr>
+<tr>
+<td><strong>Conta</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>Armazenamento incluso</td>
+<td>2 GB (excedente: $0,50/GB/mês)</td>
+</tr>
+<tr>
+<td>Retenção de conversas</td>
+<td>2 dias</td>
+</tr>
+<tr>
+<td>Suporte</td>
+<td>Prioritário</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="tabpanel_1_max" role="tabpanel" data-tab="max" aria-hidden="true" hidden="hidden">
+
+<table>
+<thead>
+<tr>
+<th>Recurso</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Acesso a modelos</td>
+<td>Todos os modelos</td>
+</tr>
+<tr>
+<td>Comissão sobre inferência</td>
+<td>Nenhuma</td>
+</tr>
+<tr>
+<td>BYOK (Bring your own key)</td>
+<td>Sim</td>
+</tr>
+<tr>
+<td>JSON Healing</td>
+<td>Sim</td>
+</tr>
+<tr>
+<td>Stability routing</td>
+<td>Sim</td>
+</tr>
+<tr>
+<td>Complexity routing</td>
+<td>Sim</td>
+</tr>
+<tr>
+<td>Rate limits</td>
+<td>Mais alto</td>
+</tr>
+<tr>
+<td>Contexto máximo</td>
+<td>Ilimitado</td>
+</tr>
+<tr>
+<td><strong>RAG</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>Coleções</td>
+<td>Ilimitado</td>
+</tr>
+<tr>
+<td>Pesquisas</td>
+<td>Limite elevado — 3.000 pesquisas/minuto</td>
+</tr>
+<tr>
+<td>Inserções</td>
+<td>Ilimitado</td>
+</tr>
+<tr>
+<td>Processamento composto</td>
+<td>Até 10 arquivos/dia</td>
+</tr>
+<tr>
+<td><strong>Ferramentas embutidas</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>Pesquisa na internet</td>
+<td>10.000/dia</td>
+</tr>
+<tr>
+<td>Pesquisa no Twitter/X</td>
+<td>10.000/dia</td>
+</tr>
+<tr>
+<td>Deep search</td>
+<td>1.000/dia</td>
+</tr>
+<tr>
+<td>Geração de documentos e páginas web</td>
+<td>50.000/dia</td>
+</tr>
+<tr>
+<td>Geração e edição de imagens</td>
+<td>5.000/dia</td>
+</tr>
+<tr>
+<td>Execução de código e requisições avançadas</td>
+<td>100.000/dia</td>
+</tr>
+<tr>
+<td>Memória e calendário</td>
+<td>Sim</td>
+</tr>
+<tr>
+<td><strong>Conta</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>Armazenamento incluso</td>
+<td>20 GB (excedente: $0,20/GB/mês)</td>
+</tr>
+<tr>
+<td>Retenção de conversas</td>
+<td>30 dias</td>
+</tr>
+<tr>
+<td>Suporte</td>
+<td>Dedicado</td>
+</tr>
+</tbody>
+</table>
+</section>
+</div>
+<h2 id="grupos-de-modelos">Grupos de modelos</h2>
+<p>Certos modelos possuem multiplicadores de taxa:</p>
+<ul>
+<li><strong>Comum:</strong> 1x</li>
+<li><strong>Descontados:</strong> 0,5x</li>
+<li><strong>Baixa-latência:</strong> 0,3x</li>
+<li><strong>Grátis:</strong> 0,1x</li>
+</ul>
+<p>Exemplo: se usar um modelo &quot;descontado&quot;, os limites de taxa serão 50% menores (ex: 75 req/min → 37 req/min).</p>
+<h2 id="limites-para-byok-bring-your-own-key">Limites para BYOK (Bring-your-own-key)</h2>
+<p>Não há custo para utilizar sua própria api-key. O plano Free possui limites mais restritos, o plano Pro possui limite maior e o plano Max não possui limite de requisições BYOK. Para comparar diferenças entre planos, consulte a <a href="https://aivax.net/pricing">página de preços da AIVAX</a>.</p>
+<h2 id="detalhes-de-rate-limits">Detalhes de rate limits</h2>
+<p>Esta seção detalha os limites aplicados por operação para cada plano.</p>
+<h3 id="inferência-integrada">Inferência integrada</h3>
+<ul>
+<li><strong>Free:</strong> 20 req/min, 500 req/dia, 1.000.000 tokens/min</li>
+<li><strong>Pro:</strong> 200 req/min, 20.000.000 tokens/min</li>
+<li><strong>Max:</strong> Ilimitado</li>
+</ul>
+<h3 id="byok-bring-your-own-key">BYOK (Bring your own key)</h3>
+<ul>
+<li><strong>Free:</strong> 30 req/min, sem limite de input tokens</li>
+<li><strong>Pro:</strong> 200 req/min, sem limite de input tokens</li>
+<li><strong>Max:</strong> Ilimitado</li>
+</ul>
+<h3 id="bash-execução-de-código">Bash (execução de código)</h3>
+<p>Os limites de Bash referem-se ao número de comandos executados por hora dentro de containers.</p>
+<ul>
+<li><strong>Free:</strong>
+<ul>
+<li>30 comandos por hora</li>
+<li>2 instâncias concorrentes</li>
+<li>timeout de comando de 15 segundos</li>
+<li>limite de 32 MB de memória por instância</li>
+<li>1 processador virtual por instância</li>
+<li>expira imediatamente após fim do loop agêntico</li>
+<li>permite armazenamento persistente</li>
+</ul>
+</li>
+<li><strong>Pro:</strong>
+<ul>
+<li>1.500 comandos por hora</li>
+<li>10 instâncias concorrentes</li>
+<li>timeout de comando de 30 segundos</li>
+<li>limite de 128 MB de memória por instância</li>
+<li>2 processadores virtuais por instância</li>
+<li>sessões persistentes expiram após 15 minutos</li>
+<li>permite armazenamento persistente</li>
+</ul>
+</li>
+<li><strong>Max:</strong>
+<ul>
+<li>10.000 comandos por hora</li>
+<li>50 instâncias concorrentes</li>
+<li>timeout de comando de 60 segundos</li>
+<li>limite de 256 MB de memória por instância</li>
+<li>4 processadores virtuais por instância</li>
+<li>sessões persistentes expiram após 30 minutos</li>
+<li>permite armazenamento persistente</li>
+</ul>
+</li>
+</ul>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/pt-br/limits.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>

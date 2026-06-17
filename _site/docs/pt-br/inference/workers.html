@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Workers de IA | AIVAX </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="Workers de IA | AIVAX ">
+
+
+        <link rel="icon" href="../../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+        
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
+
+        <meta name="docfx:rel" content="../../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/pt-br/inference/workers.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+                
+        <script>            
+            function switchLanguage(lang) {
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../../index.html">
+                        <img id="logo" class="svg" src="../../../assets/img/aivax.png" alt="AIVAX">
+                        AIVAX
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="workers-de-ia">Workers de IA</h1>
+
+<p>Os workers do gateway de IA são hooks que permitem controlar o comportamento de seus recursos remotamente através de eventos.</p>
+<p>Com um controlador externo configurado, eventos são enviados para ele, e a resposta do seu controlador define se aquela ação deve continuar, ser abortada ou configurada.</p>
+<p>Quando um evento é acionado no lado da AIVAX, uma requisição POST é disparada ao worker configurado com informações do evento disparado. Com base em sua resposta, a ação pode ser anulada ou configurada. Não há nenhum cache - a requisição é feita em todos os eventos que ocorrem no seu gateway de IA.</p>
+<p>O tempo de processamento da resposta acrescenta uma latência entre toda ação do gateway, no entanto, adiciona uma camada de controle e moderação que você pode controlar à qualquer momento.</p>
+<p>Use workers quando uma regra precisa ser decidida fora do prompt. Exemplos comuns são validar se um usuário tem assinatura ativa, anexar dados de CRM antes da inferência, remover informações que não devem chegar ao modelo, trocar uma mensagem por uma versão normalizada, impedir ferramentas em certos horários, substituir o resultado de uma ferramenta por dados de um sistema interno ou registrar auditoria em um sistema próprio. Se a regra é estável e textual, prefira instrução de sistema; se ela depende de banco de dados, política dinâmica, identidade externa ou decisão determinística, use worker.</p>
+<p>O worker deve ser tratado como parte do caminho crítico da inferência. Cada evento enviado a ele adiciona uma requisição HTTP antes de a conversa continuar, então o endpoint precisa responder rápido, com timeout previsível e sem operações desnecessárias. Evite fazer pipelines longos, chamadas lentas ou dependências frágeis dentro do worker. Quando precisar consultar sistemas externos, prefira respostas objetivas e cache próprio no seu lado. Uma resposta 2xx deixa o fluxo continuar; uma resposta não OK interrompe o evento; uma resposta com <code>Content-Type: application/json+worker-action</code> permite alterar o contexto ou substituir resultados.</p>
+<h2 id="segurança-autenticação-e-operação">Segurança, autenticação e operação</h2>
+<p>Quando a conta possui uma chave de hook configurada, a AIVAX envia <code>X-Request-Nonce</code> nas requisições ao worker. Esse cabeçalho contém um hash BCrypt derivado da chave de hook da conta. O worker deve validar esse hash antes de confiar no corpo recebido, principalmente se ele executa ações sensíveis, como consultar dados de clientes, alterar contexto com informações privadas ou liberar ferramentas. Consulte <a href="/docs/pt-br/authentication">Autenticação</a> para exemplos de validação em C#, Python e JavaScript.</p>
+<p>O corpo do evento inclui <code>gatewayId</code>, <code>moment</code>, <code>event.name</code> e <code>event.data</code>. Sempre confira o <code>gatewayId</code> quando o mesmo endpoint atende mais de um gateway, porque isso evita aplicar regras de um agente em outro. Use <code>externalUserId</code> para decisões por usuário ou por canal, mas não presuma que ele sempre existe; chamadas diretas por API podem não ter uma tag de usuário. Use <code>metadata</code> para dados auxiliares do canal ou da sessão, e trate qualquer dado vindo do usuário como não confiável.</p>
+<p>Para falhas, escolha um comportamento explícito. Se o worker não conseguir consultar seu sistema, ele pode responder 2xx e deixar a inferência continuar sem enriquecimento, ou pode responder não OK e bloquear a ação. A primeira opção é melhor para recursos auxiliares; a segunda é melhor para autorização, compliance e regras que não podem falhar abertas. Em ambos os casos, registre logs no seu endpoint com <code>gatewayId</code>, <code>event.name</code>, <code>externalUserId</code>, tempo de execução e decisão tomada.</p>
+<h2 id="funcionamento">Funcionamento</h2>
+<p>Quando um evento é acionado, uma requisição POST é disparada ao seu worker seguindo o formato abaixo:</p>
+<pre><code class="lang-json">{
+    &quot;gatewayId&quot;: &quot;019a6afb-5a03-7b83-a1a2-760bd1ecd11c&quot;,
+    &quot;moment&quot;: &quot;2025-12-29T17:04:39&quot;,
+    &quot;event&quot;: {
+        &quot;name&quot;: &quot;message.received&quot;,
+        &quot;data&quot;: {
+            &quot;messages&quot;: [
+                {
+                    &quot;role&quot;: &quot;system&quot;,
+                    &quot;content&quot;: &quot;User local date is Monday, December 29, 2025 (timezone is America/Sao_Paulo)&quot;
+                },
+                {
+                    &quot;role&quot;: &quot;user&quot;,
+                    &quot;content&quot;: &quot;bom dia&quot;
+                },
+                {
+                    &quot;role&quot;: &quot;assistant&quot;,
+                    &quot;content&quot;: &quot;Bom dia! 😊 Como posso te ajudar hoje?&quot;
+                },
+                {
+                    &quot;role&quot;: &quot;user&quot;,
+                    &quot;content&quot;: &quot;tudo bem?&quot;
+                }
+            ],
+            &quot;origin&quot;: [
+                &quot;SessionsApi&quot;
+            ],
+            &quot;externalUserId&quot;: &quot;mini-app-session@hse075q0q5gftm6jmitvi5&quot;,
+            &quot;metadata&quot;: {}
+        }
+    }
+}
+</code></pre>
+<p>O exemplo acima ilustra uma mensagem do evento <code>message.received</code> com os seus argumentos do evento.</p>
+<h2 id="tipos-de-resposta">Tipos de resposta</h2>
+<p>Após o envio da requisição, a AIVAX aguarda a resposta do seu worker. Existem três tipos de resposta possíveis:</p>
+<table>
+<thead>
+<tr>
+<th>Resposta</th>
+<th>Comportamento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Resposta OK (2xx)</strong></td>
+<td>Continua e prossegue com a execução normal do evento.</td>
+</tr>
+<tr>
+<td><strong>Outras respostas</strong></td>
+<td>Aborta e interrompe a execução do evento.</td>
+</tr>
+<tr>
+<td><strong>Content-Type <code>application/json+worker-action</code></strong></td>
+<td>Executa as ações especificadas na resposta e continua com a execução.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="eventos">Eventos</h2>
+<p>Atualmente, os eventos que podem ser enviados para seu worker são:</p>
+<h3 id="messagereceived"><code>message.received</code></h3>
+<p>Enviado quando uma mensagem é recebida pelo gateway. Esse evento é acionado com todo o histórico de mensagens da conversa.</p>
+<pre><code class="lang-json">{
+    &quot;name&quot;: &quot;message.received&quot;,
+    &quot;data&quot;: {
+        &quot;messages&quot;: [],
+        &quot;origin&quot;: [&quot;SessionsApi&quot;],
+        &quot;externalUserId&quot;: &quot;mini-app-session@lot1xc9k03g2my3j4w2y1&quot;,
+        &quot;metadata&quot;: {}
+    }
+}
+</code></pre>
+<h4 id="ações-disponíveis">Ações disponíveis</h4>
+<p>Para executar ações no evento <code>message.received</code>, retorne uma resposta com o header <code>Content-Type: application/json+worker-action</code> e o corpo no formato:</p>
+<pre><code class="lang-json">{
+    &quot;type&quot;: &quot;message.received.response&quot;,
+    &quot;data&quot;: {
+        &quot;rewrites&quot;: [
+            // lista de ações
+        ]
+    }
+}
+</code></pre>
+<p>As ações disponíveis para o campo <code>rewrites</code> são:</p>
+<table>
+<thead>
+<tr>
+<th>Ação</th>
+<th>Descrição</th>
+<th>Parâmetros</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>clear</code></td>
+<td>Remove todas as entidades especificadas do contexto.</td>
+<td><code>argument</code>: a entidade que será removida. Pode ser <code>messages</code>, <code>meta</code>, <code>system</code>, <code>tools</code>, <code>skills</code> ou <code>all</code>. Padrão para <code>all</code> quando nulo.</td>
+</tr>
+<tr>
+<td><code>add-message</code></td>
+<td>Adiciona uma mensagem ao contexto.</td>
+<td><code>message</code>: objeto de mensagem OpenAI-compatível (ex: <code>role</code> e <code>content</code>)</td>
+</tr>
+<tr>
+<td><code>remove-message</code></td>
+<td>Remove uma mensagem do contexto pelo índice.</td>
+<td><code>index</code>: índice da mensagem a ser removida</td>
+</tr>
+<tr>
+<td><code>add-system</code></td>
+<td>Adiciona uma instrução de sistema.</td>
+<td><code>message</code>: texto da instrução</td>
+</tr>
+<tr>
+<td><code>add-tool</code></td>
+<td>Adiciona uma ferramenta ao contexto.</td>
+<td><code>tool</code>: objeto JSON da ferramenta</td>
+</tr>
+<tr>
+<td><code>add-protocol-tool</code></td>
+<td>Adiciona uma definição de <a href="/docs/pt-br/tools/protocol-functions">protocol function</a> ao contexto.</td>
+<td><code>tool</code>: objeto definição da protocol function</td>
+</tr>
+</tbody>
+</table>
+<h5 id="exemplos-de-ações">Exemplos de ações</h5>
+<p><strong>Limpar e adicionar mensagem:</strong></p>
+<pre><code class="lang-json">{
+    &quot;type&quot;: &quot;message.received.response&quot;,
+    &quot;data&quot;: {
+        &quot;rewrites&quot;: [
+            {
+                &quot;type&quot;: &quot;clear&quot;
+            },
+            {
+                &quot;type&quot;: &quot;add-message&quot;,
+                &quot;message&quot;: {
+                    &quot;role&quot;: &quot;user&quot;,
+                    &quot;content&quot;: &quot;Mensagem substituída pelo worker.&quot;
+                }
+            }
+        ]
+    }
+}
+</code></pre>
+<p><strong>Adicionar instrução de sistema:</strong></p>
+<pre><code class="lang-json">{
+    &quot;type&quot;: &quot;message.received.response&quot;,
+    &quot;data&quot;: {
+        &quot;rewrites&quot;: [
+            {
+                &quot;type&quot;: &quot;add-system&quot;,
+                &quot;message&quot;: &quot;Responda sempre em português formal.&quot;
+            }
+        ]
+    }
+}
+</code></pre>
+<p><strong>Remover mensagem por índice:</strong></p>
+<pre><code class="lang-json">{
+    &quot;type&quot;: &quot;message.received.response&quot;,
+    &quot;data&quot;: {
+        &quot;rewrites&quot;: [
+            {
+                &quot;type&quot;: &quot;remove-message&quot;,
+                &quot;index&quot;: 0
+            }
+        ]
+    }
+}
+</code></pre>
+<h3 id="toolcalled"><code>tool.called</code></h3>
+<p>Enviado quando uma ferramenta interna do servidor está prestes a ser executada.</p>
+<pre><code class="lang-json">{
+  &quot;name&quot;: &quot;tool.called&quot;,
+  &quot;data&quot;: {
+    &quot;toolName&quot;: &quot;memory_search&quot;,
+    &quot;toolArguments&quot;: {
+      &quot;query&quot;: &quot;preferências do usuário&quot;
+    },
+    &quot;origin&quot;: &quot;SessionsApi&quot;,
+    &quot;externalUserId&quot;: &quot;mini-app-session@lot1xc9k03g2my3j4w2y1&quot;,
+    &quot;metadata&quot;: {}
+  }
+}
+</code></pre>
+<h4 id="ações-disponíveis-1">Ações disponíveis</h4>
+<p>Para executar ações no evento <code>tool.called</code>, retorne uma resposta com o header <code>Content-Type: application/json+worker-action</code> e o corpo no formato:</p>
+<pre><code class="lang-json">{
+  &quot;type&quot;: &quot;tool.called.response&quot;,
+  &quot;data&quot;: {
+    &quot;result&quot;: &quot;Resultado textual da ferramenta.&quot;,
+    &quot;messages&quot;: []
+  }
+}
+</code></pre>
+<p>Campos de <code>data</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>result</code></td>
+<td>Conteúdo textual injetado como resultado da ferramenta.</td>
+</tr>
+<tr>
+<td><code>messages</code></td>
+<td>Lista opcional de mensagens adicionais no formato OpenAI anexadas ao contexto da conversa.</td>
+</tr>
+</tbody>
+</table>
+<p>Quando <code>tool.called.response</code> é retornado, o resultado fornecido pelo worker é usado no lugar da execução padrão da ferramenta.</p>
+<h2 id="exemplos-de-uso">Exemplos de uso</h2>
+<p>Os exemplos abaixo mostram padrões comuns. Eles devem ser adaptados para seu sistema de autenticação, sua estrutura de usuários e seu canal. O ponto mais importante é separar claramente a decisão: responder não OK quando a ação deve parar, responder 2xx vazio quando ela deve continuar sem alterações, ou responder <code>application/json+worker-action</code> quando o contexto deve ser modificado.</p>
+<h3 id="bloqueando-usuários-não-autorizados">Bloqueando usuários não autorizados</h3>
+<p>O exemplo abaixo ilustra um <a href="https://workers.cloudflare.com/">Cloudflare Worker</a> que autentica uma conversa no Telegram com base no ID do usuário:</p>
+<pre><code class="lang-js">export default {
+  async fetch(request, env, ctx) {
+    const CHECKING_GATEWAY_ID = &quot;0197dda5-985f-7c76-96e5-0d0451c596e5&quot;;
+    const ALLOWED_TELEGRAM_USER_IDS = [&quot;123456789&quot;];
+
+    if (request.method == &quot;POST&quot;) {
+      const requestData = await request.json();
+      const { event, gatewayId } = requestData;
+
+      if (gatewayId === CHECKING_GATEWAY_ID &amp;&amp;
+        event.name == &quot;message.received&quot; &amp;&amp;
+        event.data.externalUserId?.startsWith(&quot;zp_telegram:&quot;)) {
+        
+        const telegramUserId = event.data.externalUserId.split(':')[1]?.split('@')[0];
+
+        if (!telegramUserId || !ALLOWED_TELEGRAM_USER_IDS.includes(telegramUserId)) {
+          return new Response(&quot;User is not authed&quot;, { status: 400 });
+        }
+      }
+    }
+
+    return new Response();
+  }
+};
+</code></pre>
+<h3 id="interceptando-e-modificando-mensagens">Interceptando e modificando mensagens</h3>
+<p>O exemplo abaixo demonstra como interceptar uma mensagem e substituí-la por outra quando o usuário não está autorizado:</p>
+<pre><code class="lang-js">export default {
+  async fetch(request, env, ctx) {
+    const CHECKING_GATEWAY_ID = &quot;0197dda5-985f-7c76-96e5-0d0451c596e5&quot;;
+
+    if (request.method == &quot;POST&quot;) {
+      const requestData = await request.json();
+      const { event, gatewayId } = requestData;
+
+      if (gatewayId === CHECKING_GATEWAY_ID &amp;&amp; event.name == &quot;message.received&quot;) {
+        const userIsPaid = await checkUserSubscription(event.data.externalUserId);
+
+        if (!userIsPaid) {
+          return new Response(JSON.stringify({
+            type: &quot;message.received.response&quot;,
+            data: {
+              rewrites: [
+                { type: &quot;clear&quot; },
+                {
+                  type: &quot;add-message&quot;,
+                  message: {
+                    role: &quot;user&quot;,
+                    content: &quot;O usuário enviou uma mensagem mas ela foi excluída pelo sistema. Informe ao usuário que ele não pagou sua assinatura mensal para continuar.&quot;
+                  }
+                }
+              ]
+            }
+          }), {
+            headers: { &quot;Content-Type&quot;: &quot;application/json+worker-action&quot; }
+          });
+        }
+      }
+    }
+
+    return new Response();
+  }
+};
+
+async function checkUserSubscription(externalUserId) {
+  // Implemente sua lógica de verificação de assinatura aqui
+  return true;
+}
+</code></pre>
+<h3 id="substituindo-uma-ferramenta-por-um-sistema-interno">Substituindo uma ferramenta por um sistema interno</h3>
+<p>O evento <code>tool.called</code> é útil quando você quer que o modelo continue acreditando que chamou uma ferramenta, mas o resultado real venha de um sistema controlado por você. Por exemplo, um gateway pode ter uma ferramenta chamada <code>memory_search</code>, <code>check_order</code> ou <code>lookup_customer</code>; antes da AIVAX executar o comportamento padrão, seu worker pode reconhecer o nome da ferramenta, consultar sua API interna e devolver um resultado textual para ser anexado à conversa.</p>
+<pre><code class="lang-js">export default {
+  async fetch(request, env) {
+    const body = await request.json();
+
+    if (body.event?.name !== &quot;tool.called&quot;) {
+      return new Response();
+    }
+
+    const { toolName, toolArguments, externalUserId } = body.event.data;
+
+    if (toolName !== &quot;check_order&quot;) {
+      return new Response();
+    }
+
+    const orderId = toolArguments?.order_id;
+    const order = await fetch(`${env.INTERNAL_API}/orders/${orderId}`, {
+      headers: { &quot;Authorization&quot;: `Bearer ${env.INTERNAL_API_TOKEN}` }
+    });
+
+    if (!order.ok) {
+      return new Response(JSON.stringify({
+        type: &quot;tool.called.response&quot;,
+        data: {
+          result: `Não foi possível consultar o pedido ${orderId} para o usuário ${externalUserId}. Oriente o usuário a conferir o número do pedido.`
+        }
+      }), {
+        headers: { &quot;Content-Type&quot;: &quot;application/json+worker-action&quot; }
+      });
+    }
+
+    const orderJson = await order.json();
+
+    return new Response(JSON.stringify({
+      type: &quot;tool.called.response&quot;,
+      data: {
+        result: `Pedido ${orderJson.id}: status ${orderJson.status}, previsão ${orderJson.eta}.`
+      }
+    }), {
+      headers: { &quot;Content-Type&quot;: &quot;application/json+worker-action&quot; }
+    });
+  }
+};
+</code></pre>
+<p>Esse padrão evita expor diretamente a API interna ao modelo. O modelo vê apenas o nome da ferramenta, os parâmetros e o resultado textual. O worker continua sendo responsável por autenticar a requisição, validar o usuário, chamar o sistema interno e decidir quanto dado pode voltar para o contexto.</p>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/pt-br/inference/workers.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>

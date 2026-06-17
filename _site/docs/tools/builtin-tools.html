@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Ferramentas embutidas | AIVAX </title>
+        <title>Built-in Tools | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="Ferramentas embutidas | AIVAX ">
+        <meta name="title" content="Built-in Tools | AIVAX ">
 
 
         <link rel="icon" href="../../assets/img/favicon.ico">
@@ -47,7 +47,8 @@
                 
         <script>            
             function switchLanguage(lang) {
-                const docPart = window.location.pathname.match(/\/docs\/((en)\/)?(.*)/)[3];
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
                 const newPath = lang + docPart;
                 window.location.href = window.location.origin + newPath;
             }        
@@ -107,14 +108,14 @@
                         <ul class="dropdown-menu dropdown-menu-end language-dropdown">
                             <li>
                                 <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
-                                    <img src="/assets/flag/brazil.png">
-                                    Português
+                                    <img src="/assets/flag/usa.png">
+                                    English
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/en/')">
-                                    <img src="/assets/flag/usa.png">
-                                    English
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
                                 </a>
                             </li>
                         </ul>
@@ -122,52 +123,50 @@
                 </div>
 
                 <article data-uid="">
-<h1 id="ferramentas-embutidas">Ferramentas embutidas</h1>
+<h1 id="built-in-tools">Built-in Tools</h1>
 
-<p>A AIVAX fornece uma lista de ferramentas embutidas para você habilitar em seu modelo. Essas ferramentas podem ser usadas em conjunto com as <a href="/docs/tools/protocol-functions">funções do lado do servidor</a>.</p>
-<p>Algumas funções possuem custo. Esse custo é aplicado em modelos usados pela AIVAX e os que você fornece através do BYOK (bring-your-own-key), portanto, é importante adicionar saldo se você pretende usar essas ferramentas.</p>
-<p>Note que cada modelo decide qual função chamar e seus parâmetros. Nem todos os modelos podem obedecer as regras de chamadas.</p>
-<h2 id="como-escolher-e-combinar-ferramentas">Como escolher e combinar ferramentas</h2>
-<p>Ferramentas embutidas devem ser habilitadas como capacidades de trabalho, não como decoração do agente. Cada ferramenta adiciona uma decisão ao modelo: ele precisa perceber que a ferramenta existe, entender quando deve usá-la, montar argumentos válidos, aguardar o resultado e continuar a resposta. Quanto mais ferramentas parecidas estiverem disponíveis ao mesmo tempo, maior a chance de uso redundante ou escolha ruim. Comece com o menor conjunto que resolve o caso de uso e escreva instruções claras sobre quando usar cada uma.</p>
-<p>Use <code>WebSearch</code> quando a resposta depende de informação pública, recente ou variável. Use <code>OpenUrl</code> quando o usuário já forneceu uma URL e quer que a assistente analise aquele conteúdo específico. Use <code>AdvancedWebUsage</code> quando a tarefa exige navegação, interação ou páginas que não podem ser resolvidas por uma simples busca. Use <code>Code</code> para cálculo, transformação de dados e raciocínio algorítmico pequeno. Use <code>Request</code> quando o modelo precisa chamar uma API HTTP com método, cabeçalhos ou corpo customizado. Use <code>Remember</code> e <code>Calendar</code> apenas em chat clients ou chamadas com usuário identificável, porque essas ferramentas dependem de contexto persistente por usuário.</p>
-<p>Ferramentas de geração, como imagem, documento e página web, devem ser tratadas como ações de saída. Elas não servem apenas para “responder melhor”; elas criam artefatos hospedados ou anexados à conversa. Por isso, instrua o modelo sobre quando gerar um artefato e quando responder em texto. Em atendimento, por exemplo, gerar documento pode ser útil para um orçamento, proposta ou resumo formal; gerar página web pode ser útil para relatório visual; gerar imagem pode ser útil para ideação criativa. Se o usuário só pediu uma explicação, normalmente texto é suficiente.</p>
-<p>Quando ferramentas estão disponíveis via <code>builtin_tools</code> em uma chamada direta, a aplicação que faz a requisição decide a lista a cada inferência. Quando estão configuradas no AI Gateway, a lista fica centralizada e pode ser combinada com skills, workers, MCP e funções de protocolo. Em produção, prefira gateway para políticas permanentes, porque isso evita que diferentes clientes habilitem ferramentas diferentes sem controle. Use chamada direta para testes, rotinas internas e fluxos em que a aplicação realmente precisa escolher ferramentas dinamicamente.</p>
-<h2 id="pesquisa-na-internet">Pesquisa na internet</h2>
-<p>Essa função habilita a pesquisa na internet no seu modelo. Com isso, o modelo pode consultar por informações específicas ou em tempo real, como dados meteorológicos, notícias, resultados de jogos, etc.</p>
-<p>A pesquisa na internet é feita por vários provedores, escolhido conforme disponibilidade de rede e latência. A AIVAX utiliza uma mistura de provedores para realizar pesquisas na internet.</p>
-<p>A AIVAX fornece dois tipos de pesquisa configuráveis pelo seu dashboard:</p>
+<p>AIVAX provides a list of built-in tools for you to enable in your model. These tools can be used together with the <a href="/docs/tools/protocol-functions">server-side functions</a>.</p>
+<p>Some functions have a cost. This cost is applied to models used by AIVAX and those you provide through BYOK (bring-your-own-key), so it is important to add balance if you intend to use these tools.</p>
+<p>Note that each model decides which function to call and its parameters. Not all models can obey the call rules.</p>
+<h2 id="how-to-choose-and-combine-tools">How to Choose and Combine Tools</h2>
+<p>Built-in tools should be enabled as work capabilities, not as agent decoration. Each tool adds a decision to the model: it needs to perceive that the tool exists, understand when to use it, assemble valid arguments, wait for the result, and continue the response. The more similar tools are available at the same time, the higher the chance of redundant use or poor choice. Start with the smallest set that solves the use case and write clear instructions on when to use each.</p>
+<p>Use <code>WebSearch</code> when the answer depends on public, recent, or variable information. Use <code>OpenUrl</code> when the user has already provided a URL and wants the assistant to analyze that specific content. Use <code>AdvancedWebUsage</code> when the task needs a deeper research pass over multiple sources rather than a single search. Use <code>Code</code> for calculation, data transformation, and small algorithmic reasoning. Use <code>Request</code> when the model needs to call an HTTP API with method, headers, or custom body. Use <code>Remember</code> and <code>Calendar</code> only in chat clients or calls with an identifiable user, because these tools depend on persistent per-user context.</p>
+<p>Generation tools, such as image, document, and web page, should be treated as output actions. They do more than improve an answer; they create artifacts hosted or attached to the conversation. Therefore, instruct the model on when to generate an artifact and when to reply in text. In support, for example, generating a document can be useful for a quote, proposal, or formal summary; generating a web page can be useful for a visual report; generating an image can be useful for creative ideation. If the user only asked for an explanation, plain text is usually sufficient.</p>
+<p>When tools are available via <code>builtin_tools</code> in a direct call, the application making the request decides the list for each inference. When configured in the AI Gateway, the list is centralized and can be combined with skills, workers, MCP, protocol functions, and shell. In production, prefer the gateway for permanent policies, because it prevents different clients from enabling different tools without control. Use direct calls for testing, internal routines, and flows where the application truly needs to choose tools dynamically.</p>
+<p>The values in <code>builtin_tools.tools</code> are configuration flags such as <code>WebSearch</code>, <code>Code</code>, and <code>OpenUrl</code>. The model sees runtime function names such as <code>web_search</code>, <code>evaluate_code</code>, and <code>open_url</code>. Use runtime function names when configuring skill tool allowlists or shell tool allowlists.</p>
+<h2 id="internet-search">Internet Search</h2>
+<p>This function enables internet search in your model. With this, the model can query specific or real‑time information such as weather data, news, game results, etc.</p>
+<p>Internet search is performed by multiple providers, chosen based on network availability and latency. AIVAX uses a mix of providers to perform internet searches.</p>
+<p>AIVAX provides two types of searches configurable via its dashboard:</p>
 <ul>
-<li><strong>Full</strong>: a pesquisa realizada é completa, inserindo no contexto da conversa o conteúdo inteiro de cada resultado encontrado.</li>
-<li><strong>Summarized</strong>: a pesquisa realizada é resumida, inserindo no contexto da conversa um resumo feito por IA pelo próprio provedor de pesquisa.</li>
+<li><strong>Full</strong>: the performed search is complete, inserting the entire content of each result into the conversation context.</li>
+<li><strong>Summarized</strong>: the performed search is summarized, inserting into the conversation context a summary generated by AI by the search provider itself.</li>
 </ul>
-<p>O custo dos dois modos é de <strong>$5</strong> à cada <strong>1.000</strong> pesquisas realizadas. O modo <code>Full</code> pode consumir mais tokens de entrada da conversa, mas pode proporcionar resultados mais precisos.</p>
+<p>The cost of both modes is <strong>$5</strong> per <strong>1,000</strong> searches performed. The <code>Full</code> mode may consume more input tokens from the conversation, but can provide more precise results. <code>web_search_max_results</code> must be between 1 and 25. <code>web_search_mode</code> accepts <code>full</code> or <code>summarized</code>.</p>
 <div class="NOTE">
 <h5>Note</h5>
-<p><strong>Importante:</strong> nem sempre a pesquisa <code>Full</code> está disponível.</p>
+<p><strong>Important:</strong> the <code>Full</code> search is not always available.</p>
 </div>
-<p>Ativação por <code>builtin_tools</code>:</p>
+<p>Activation via <code>builtin_tools</code>:</p>
 <pre><code class="lang-json">{
     &quot;tools&quot;: [
         &quot;WebSearch&quot;
     ],
     &quot;options&quot;: {
-        // maximum number of results returned by web search operations.
-        &quot;web_search_max_results&quot;: 10, // between 1-25
-
-        // level of detail returned by web search operations.
-        &quot;web_search_mode&quot;: &quot;full&quot; // full, summarized
+        &quot;web_search_max_results&quot;: 10,
+        &quot;web_search_mode&quot;: &quot;full&quot;
     }
 }
 </code></pre>
-<h2 id="diagnóstico-de-ferramentas">Diagnóstico de ferramentas</h2>
-<p>Quando uma ferramenta não é chamada, primeiro confirme se ela está habilitada no gateway ou no campo <code>builtin_tools</code> da requisição. Depois, verifique se o modelo escolhido suporta chamadas de função ou se existe um tool handler configurado para modelos sem suporte nativo. Em seguida, revise a instrução: se ela não diz quando pesquisar, abrir URL, gerar imagem ou consultar memória, o modelo pode responder apenas com conhecimento próprio. Por fim, teste uma pergunta direta que obviamente exige a ferramenta, como pedir uma notícia recente para <code>WebSearch</code> ou pedir para abrir uma URL específica para <code>OpenUrl</code>.</p>
-<p>Quando uma ferramenta é chamada demais, reduza ambiguidade. Ferramentas como <code>WebSearch</code> e <code>XPostsSearch</code> competem por informação recente; <code>OpenUrl</code> e <code>Request</code> podem parecer parecidas quando o usuário envia um link; <code>Remember</code> e <code>Calendar</code> podem se sobrepor quando o usuário fala de preferências e datas. Remova ferramentas que não são necessárias, deixe descrições mais restritivas nas instruções do gateway e, quando possível, use workers para bloquear ou substituir chamadas em cenários específicos.</p>
-<p>Quando uma ferramenta falha, trate como parte normal da experiência. Buscas podem retornar pouco conteúdo, URLs podem bloquear bots, APIs podem negar autorização, geração de imagem pode recusar conteúdo e execução de código pode receber entrada ambígua. Instrua o modelo a explicar a limitação de forma objetiva e oferecer o próximo passo, como pedir outro link, tentar uma consulta mais específica, solicitar autorização ou responder com base apenas no contexto disponível. Não dependa de uma ferramenta externa como única forma de concluir uma conversa crítica sem fallback de experiência.</p>
-<h2 id="pesquisa-avançada-na-internet">Pesquisa avançada na internet</h2>
-<p>Essa função permite que o modelo tenha um navegador da internet e consiga realizar automação, como pesquisas, navegar em sites, preencher formulários e clicar em botões.</p>
-<p>No momento não há parametrização dessa função.</p>
-<p>O custo dessa função é de <strong>$2</strong> por hora de automação, tendo também uma quantia fixa de <strong>$11,10</strong> à cada <strong>1.000</strong> chamadas dessa função.</p>
-<p>Ativação por <code>builtin_tools</code>:</p>
+<h2 id="tool-diagnosis">Tool Diagnosis</h2>
+<p>When a tool is not called, first confirm that it is enabled in the gateway or in the <code>builtin_tools</code> field of the request. Then, check whether the selected model supports function calls or if a tool handler is configured for models without native support. Next, review the instruction: if it does not specify when to search, open a URL, generate an image, or query memory, the model may respond only with its own knowledge. Finally, test a direct question that clearly requires the tool, such as requesting a recent news article for <code>WebSearch</code> or asking to open a specific URL for <code>OpenUrl</code>.</p>
+<p>When a tool is called too often, reduce ambiguity. Tools like <code>WebSearch</code>, <code>AdvancedWebUsage</code>, and <code>XPostsSearch</code> compete for recent information; <code>OpenUrl</code> and <code>Request</code> can seem similar when the user sends a link; <code>Remember</code> and <code>Calendar</code> can overlap when the user talks about preferences and dates. Remove unnecessary tools, make gateway instruction descriptions more restrictive, and, when possible, use workers to block or replace calls in specific scenarios.</p>
+<p>When a tool fails, treat it as a normal part of the experience. Searches may return little content, URLs may block bots, APIs may deny authorization, image generation may refuse content, and code execution may receive ambiguous input. Instruct the model to explain the limitation objectively and offer the next step, such as requesting another link, trying a more specific query, asking for authorization, or responding based only on the available context. Do not rely on an external tool as the sole way to conclude a critical conversation without an experience fallback.</p>
+<h2 id="advanced-internet-search">Advanced Internet Search</h2>
+<p>This function runs a deeper web research request through AIVAX's research agent. It is intended for complex questions that need synthesis across multiple sources or a more detailed research pass than <code>WebSearch</code>.</p>
+<p>The runtime function name is <code>advanced_web_search</code>, and it accepts a single <code>prompt</code> argument. Avoid enabling it for routine lookup tasks; use <code>WebSearch</code> for quick current facts and <code>OpenUrl</code> for user-provided URLs.</p>
+<p>This function has usage cost for the research model and search request.</p>
+<p>Activation via <code>builtin_tools</code>:</p>
 <pre><code class="lang-json">{
     &quot;tools&quot;: [
         &quot;AdvancedWebUsage&quot;
@@ -176,11 +175,11 @@
     }
 }
 </code></pre>
-<h2 id="execução-de-código">Execução de código</h2>
-<p>Essa função permite que o modelo execute código JavaScript e inspecione o resultado da execução. Com isso, o modelo consegue avaliar através de algoritmos resultados de expressões matemáticas e outras situações que são melhores representadas através de código.</p>
-<p>O código é executado em um ambiente protegido com pouquíssimas funções disponíveis. O modelo não conseguirá acessar I/O, acesso à internet ou importar scripts por essa ferramenta.</p>
-<p>Essa função não tem custo.</p>
-<p>Ativação por <code>builtin_tools</code>:</p>
+<h2 id="code-execution">Code Execution</h2>
+<p>This function allows the model to execute JavaScript code and inspect the execution result. With this, the model can evaluate algorithmic results of mathematical expressions and other situations that are better represented through code.</p>
+<p>The code runs in a protected JavaScript environment. It is intended for calculations and small transformations, not for file I/O, network access, or importing external scripts.</p>
+<p>This function has no cost.</p>
+<p>Activation via <code>builtin_tools</code>:</p>
 <pre><code class="lang-json">{
     &quot;tools&quot;: [
         &quot;Code&quot;
@@ -189,17 +188,17 @@
     }
 }
 </code></pre>
-<h2 id="contexto-de-url">Contexto de URL</h2>
-<p>Essa função permite que o modelo acesse conteúdo externo em URLs e links providos pelo usuário. Com essa função, o modelo consegue acessar links e avaliar seu conteúdo.</p>
-<p>Note que, alguns destinos podem identificar o acesso como bot e barrar o acesso, desde que essa função não é um crawling e sim um simples GET feito no destino.</p>
-<p>O modelo consegue acessar até 5 links de uma vez. Somente os primeiros 10MB dos links são lidos. Ao obter o conteúdo do link, o sistema verifica o conteúdo de retorno e lida com eles de acordo com cada tipo:</p>
+<h2 id="url-context">URL Context</h2>
+<p>This function allows the model to access external content at URLs and links provided by the user. With this function, the model can access links and evaluate their content.</p>
+<p>Note that some destinations may identify the access as a bot and block it, as this function is not crawling but a simple GET to the destination.</p>
+<p>The model can access up to 5 links at once. Only the first 5 MB of the links are read. Upon obtaining the link content, the system checks the return content and handles them according to each type:</p>
 <ul>
-<li>Conteúdos de HTML são renderizados: as tags HTML, scripts, CSS e &quot;ruídos&quot; são removidos do resultado do acesso, mantendo somente o texto puro do link.</li>
-<li>Outros conteúdos textuais: o conteúdo é lido diretamente e nenhuma transformação é realizada.</li>
-<li>Conteúdos não textuais: quando o link responde com um conteúdo não textual e a resposta indica um nome de arquivo (seja pelo caminho ou pelo cabeçalho <code>Content-Disposition</code>), o sistema tenta converter o arquivo baixado para uma versão textual.</li>
+<li>HTML content is rendered: HTML tags, scripts, CSS, and “noise” are removed from the access result, keeping only the plain text of the link.</li>
+<li>Other textual content: the content is read directly and no transformation is performed.</li>
+<li>Non‑textual content: when the link responds with non‑textual content and the response indicates a filename (either by path or by the <code>Content‑Disposition</code> header), the system attempts to convert the downloaded file to a textual version.</li>
 </ul>
-<p>Essa função não tem custo.</p>
-<p>Ativação por <code>builtin_tools</code>:</p>
+<p>This function has no cost.</p>
+<p>Activation via <code>builtin_tools</code>. <code>image_generation_max_results</code> must be between 1 and 4:</p>
 <pre><code class="lang-json">{
     &quot;tools&quot;: [
         &quot;OpenUrl&quot;
@@ -208,83 +207,81 @@
     }
 }
 </code></pre>
-<h2 id="memória">Memória</h2>
-<p>Essa função permite que o modelo armazene conteúdo relevante para ser usado por várias conversas.</p>
+<h2 id="memory">Memory</h2>
+<p>This function allows the model to store relevant content to be used across multiple conversations.</p>
 <blockquote>
-<p>No momento, essa função só está disponível quando usada em <a href="/docs/features/chat-clients">chat clients</a> e quando a sessão está identificada por uma <code>tag</code>.</p>
+<p>Currently, this function is only available when used in <a href="/docs/features/chat-clients">chat clients</a> and when the session is identified by a <code>tag</code>.</p>
 </blockquote>
-<p>Através da <code>tag</code> da sessão, o modelo armazena um dado relevante da conversa, como preferência de nomes, lembretes ou ações que a assistente deve realizar.</p>
-<p>A instrução dessa memória instrui o modelo à não salvar dados sensíveis ou pessoais, no entanto, não é garantido que o modelo sempre irá seguir essa regra.</p>
-<p>Os dados são armazenados por um ano nos bancos de dados da AIVAX e podem ser excluídos à qualquer momento pela plataforma. Para toda conversa por um chat client, esses dados são obtidos e anexados na conversa.</p>
+<p>Through the session <code>tag</code>, the model stores a relevant piece of conversation data, such as name preferences or persistent context the assistant should remember.</p>
+<p>The memory tool requires an identifiable session. Without a user reference ID, memory operations return an error instead of storing or searching information. The memory instruction tells the model not to save sensitive or personal data, however, it is not guaranteed that the model will always follow this rule.</p>
+<p>Each saved memory can request a retention period from 1 to 365 days; when omitted, the default is 30 days. Memory items can be searched, updated, removed individually, or cleared for the user.</p>
 <blockquote>
-<p>Nota: em requisições de chat/completions, a <code>tag</code> é especificada no parâmetro <code>$.user</code>.</p>
+<p>Note: in chat/completions requests, the <code>tag</code> is specified in the <code>$.user</code> parameter.</p>
 </blockquote>
-<p>Essa função não tem custo.</p>
-<p>Ativação por <code>builtin_tools</code>:</p>
+<p>This function has no cost.</p>
+<p>Activation via <code>builtin_tools</code>:</p>
 <pre><code class="lang-json">{
     &quot;tools&quot;: [
         &quot;Remember&quot;
     ],
     &quot;options&quot;: {
-        // indicates whether all memory contexts should be included in the system instructions.
         &quot;include_all_memory_context&quot;: true
     }
 }
 </code></pre>
-<h2 id="geração-de-imagens">Geração de imagens</h2>
-<p>Essa função permite que o modelo crie imagens de IA.</p>
-<p>As imagens geradas por IA são anexadas no contexto da conversa, mas não são visíveis diretamente para a assistente.</p>
-<p>Essa função possui custo. O custo varia de cada modelo de geração de imagem usado. A geração de imagens ocorre em um provedor externo, o que o custo pode mudar conforme vários fatores.</p>
-<p>Você também pode ativar a geração de imagens explícitas e adultas na geração de imagem. Ao ativar esse recurso, o modelo será permitido gerar material adulto. Para isso ocorrer, o modelo também deve &quot;concordar&quot; em gerar esse conteúdo. Certos modelos possuem um filtro de segurança menor que outros. Por exemplo, os modelos Gemini são os com o menor filtro de segurança, sendo uma opção viável para role-play e geração desse tipo de material.</p>
-<p>Você é sempre responsável pelo <a href="/docs/legal/terms-of-service.md">material que gera</a> e o material gerado deve ser compatível com nossos termos de serviço.</p>
-<p>Os modelos de geração de imagens disponíveis são:</p>
+<h2 id="image-generation">Image Generation</h2>
+<p>This function allows the model to create AI images.</p>
+<p>AI‑generated images are attached to the conversation context, but are not directly visible to the assistant.</p>
+<p>This function has a cost. The cost varies by the image generation model used. Image generation occurs on an external provider, so the cost can change based on various factors.</p>
+<p>You can also enable the generation of explicit and adult images in image generation. When this feature is enabled, the model will be allowed to generate adult material. For this to happen, the model must also “agree” to generate such content. Some models have a lower security filter than others. For example, Gemini models have the lowest security filter, making them a viable option for role‑play and generating such material.</p>
+<p>You are always responsible for the <a href="/docs/legal/terms-of-service.md">material you generate</a> and the generated material must be compatible with our terms of service.</p>
+<p>The available image generation models are:</p>
 <ul>
+<li><code>gpt-image-2</code></li>
+<li><code>wan-image-2.7-pro</code></li>
+<li><code>wan-image-2.7</code></li>
 <li><code>grok-imagine-pro</code></li>
 <li><code>grok-imagine</code></li>
 <li><code>seedream-5-lite</code></li>
-<li><code>seedream-4-5-pro</code></li>
-<li><code>seedream-4</code></li>
 <li><code>nanobanana-2</code></li>
-<li><code>nanobanana-pro</code></li>
-<li><code>nanobanana</code></li>
 <li><code>gpt-image-1.5</code></li>
 <li><code>gpt-image-1-mini</code></li>
-<li><code>flux-2-klein</code></li>
+<li><code>seedream-4.5-pro</code></li>
+<li><code>seedream-4</code></li>
+<li><code>nanobanana-pro</code></li>
+<li><code>nanobanana</code></li>
 <li><code>flux-schnell</code></li>
 <li><code>zimage-turbo</code></li>
+<li><code>flux-2-klein</code></li>
+<li><code>majicMIX-realistic</code></li>
+<li><code>AbsoluteReality</code></li>
+<li><code>CyberRealistic</code></li>
+<li><code>RealCartoon-Realistic</code></li>
+<li><code>CyberRealistic-Pony</code></li>
+<li><code>Hassaku-XL</code></li>
+<li><code>Meina-Mix</code></li>
 </ul>
-<p>Imagens geradas são armazenadas nos servidores da AIVAX por alguns meses antes de serem permanentemente removidas.</p>
-<p>Ativação por <code>builtin_tools</code>:</p>
+<p>Generated images are stored on AIVAX servers for a few months before being permanently removed.</p>
+<p>Activation via <code>builtin_tools</code>:</p>
 <pre><code class="lang-json">{
     &quot;tools&quot;: [
         &quot;ImageGeneration&quot;
     ],
     &quot;options&quot;: {
-        // sets the generation model to use for image generation.
         &quot;image_generation_model_name&quot;: &quot;grok-imagine&quot;,
-
-        // indicates whether image generation is allowed to use references (e.g. images from the web or user uploads) as input.
         &quot;image_generation_allow_reference_usage&quot;: true,
-
-        // deprecated. sets the quality level for generated images.
-        &quot;image_generation_quality&quot;: &quot;low|medium|high|highest&quot;,
-
-        // sets the maximum number of images that can be generated in a single request.
-        &quot;image_generation_max_results&quot;: 2, // 1-4
-
-        // indicates whether image generation is allowed to produce mature content.
+        &quot;image_generation_quality&quot;: &quot;high&quot;,
+        &quot;image_generation_max_results&quot;: 2,
         &quot;image_generation_allow_mature_content&quot;: false
     }
 }
 </code></pre>
-<h2 id="pesquisa-de-posts-no-x">Pesquisa de posts no X</h2>
-<p>Essa função permite o modelo pesquisar por posts no X (antigo Twitter).</p>
-<p>É uma alternativa direta ao <code>web_search</code>, pois pode ser usada para procurar por informações atualizadas em tempo real, como notícias, informações, resultados de jogos, etc. Essa ferramenta traz resultados muito mais recentes que a ferramenta de pesquisa na internet convencional.</p>
-<p>Não é recomendado usar as duas funções em conjunto pois elas possuem o mesmo objetivo.</p>
-<p>No momento, os últimos 20 posts de um determinado assunto é inserido no contexto da conversa, contendo link e autor.</p>
-<p>No momento, não é possível acessar posts de perfis específicos.</p>
-<p>O custo dessa função é de <strong>$5</strong> à cada <strong>1.000</strong> pesquisas realizadas.</p>
-<p>Ativação por <code>builtin_tools</code>:</p>
+<h2 id="x-posts-search">X Posts Search</h2>
+<p>This function allows the model to search for posts on X (formerly Twitter), and to read a specific post when the model has a post ID.</p>
+<p>It is a direct alternative to <code>web_search</code>, as it can be used to look for up‑to‑date information in real time, such as news, information, game results, etc. This tool provides much more recent results than the conventional internet search tool.</p>
+<p>It is not recommended to use both functions together because they have the same purpose.</p>
+<p>The cost of this function is <strong>$5</strong> per <strong>1,000</strong> searches performed.</p>
+<p>Activation via <code>builtin_tools</code>:</p>
 <pre><code class="lang-json">{
     &quot;tools&quot;: [
         &quot;XPostsSearch&quot;
@@ -293,12 +290,12 @@
     }
 }
 </code></pre>
-<h2 id="geração-de-documentos">Geração de documentos</h2>
-<p>Essa função permite que o modelo possa criar PDFs a partir de textos em HTML.</p>
-<p>Os arquivos criados são hospedados nos servidores da AIVAX e disponibilizados pelo assistente.</p>
-<p>O conteúdo é hospedado por alguns meses antes de ser permanentemente excluído.</p>
-<p>Essa função não tem custo.</p>
-<p>Ativação por <code>builtin_tools</code>:</p>
+<h2 id="document-generation">Document Generation</h2>
+<p>This function allows the model to create PDFs from HTML text.</p>
+<p>The created files are hosted on AIVAX servers and made available by the assistant.</p>
+<p>The content is hosted for a few months before being permanently deleted.</p>
+<p>This function has no cost.</p>
+<p>Activation via <code>builtin_tools</code>:</p>
 <pre><code class="lang-json">{
     &quot;tools&quot;: [
         &quot;GenerateDocument&quot;
@@ -307,12 +304,12 @@
     }
 }
 </code></pre>
-<h2 id="geração-de-páginas-da-web">Geração de páginas da web</h2>
-<p>Essa função permite que o modelo possa hospedar páginas HTML em servidores da AIVAX.</p>
-<p>Isso permite que o modelo possa hospedar relatórios, landing-pages e outros infográficos em HTML.</p>
-<p>O conteúdo é hospedado por alguns meses antes de ser permanentemente excluído.</p>
-<p>Essa função não tem custo.</p>
-<p>Ativação por <code>builtin_tools</code>:</p>
+<h2 id="web-page-generation">Web Page Generation</h2>
+<p>This function allows the model to host HTML pages on AIVAX servers.</p>
+<p>This allows the model to host reports, landing pages, and other HTML infographics.</p>
+<p>The content is hosted for a few months before being permanently deleted.</p>
+<p>This function has no cost.</p>
+<p>Activation via <code>builtin_tools</code>:</p>
 <pre><code class="lang-json">{
     &quot;tools&quot;: [
         &quot;GenerateWebPage&quot;
@@ -321,11 +318,11 @@
     }
 }
 </code></pre>
-<h2 id="requisição-avançada">Requisição avançada</h2>
-<p>Essa função fornece uma ferramenta de requisições HTTP avançada ao modelo. Com essa função, o modelo consegue definir cabeçalhos, formulários, conteúdos e métodos para realizar requisições HTTP avançadas.</p>
-<p>Respostas grandes são automaticamente truncadas e renderizadas no lado do servidor (renderiza HTML, Markdown, etc.).</p>
-<p>Essa função não possui custo.</p>
-<p>Ativação por <code>builtin_tools</code>:</p>
+<h2 id="advanced-request">Advanced Request</h2>
+<p>This function provides the model with an advanced HTTP request tool. With this function, the model can set headers, forms, contents, and methods to perform advanced HTTP requests.</p>
+<p>Text responses are read up to the platform content limit. Binary responses are not expanded into the context; the tool returns a short binary-content marker with the content type and size when available.</p>
+<p>This function has no cost.</p>
+<p>Activation via <code>builtin_tools</code>:</p>
 <pre><code class="lang-json">{
     &quot;tools&quot;: [
         &quot;Request&quot;
@@ -334,11 +331,11 @@
     }
 }
 </code></pre>
-<h2 id="calendário">Calendário</h2>
-<p>Uma função estática quase idêntica à função de memória, com os mesmos parâmetros de armazenamento, mas otimizada para armazenar memória em datas e não como itens soltos.</p>
-<p>Não é recomendado ativar essa função junto com a função de memória ou funções de agendamento de mensagens do chat client.</p>
-<p>Essa função não possui custo.</p>
-<p>Ativação por <code>builtin_tools</code>:</p>
+<h2 id="calendar">Calendar</h2>
+<p>Calendar is backed by the same persistent information store as memory, but stores date-based reminder objects instead of loose memory text. It can create, search, find, update, and delete appointments for an identified user.</p>
+<p>It is not recommended to activate this function together with the memory function or message scheduling functions of the chat client.</p>
+<p>This function has no cost.</p>
+<p>Activation via <code>builtin_tools</code>:</p>
 <pre><code class="lang-json">{
     &quot;tools&quot;: [
         &quot;Calendar&quot;

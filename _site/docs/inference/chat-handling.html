@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Tratamento de chat | AIVAX </title>
+        <title>Chat handling | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="Tratamento de chat | AIVAX ">
+        <meta name="title" content="Chat handling | AIVAX ">
 
 
         <link rel="icon" href="../../assets/img/favicon.ico">
@@ -47,7 +47,8 @@
                 
         <script>            
             function switchLanguage(lang) {
-                const docPart = window.location.pathname.match(/\/docs\/((en)\/)?(.*)/)[3];
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
                 const newPath = lang + docPart;
                 window.location.href = window.location.origin + newPath;
             }        
@@ -107,14 +108,14 @@
                         <ul class="dropdown-menu dropdown-menu-end language-dropdown">
                             <li>
                                 <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
-                                    <img src="/assets/flag/brazil.png">
-                                    Português
+                                    <img src="/assets/flag/usa.png">
+                                    English
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/en/')">
-                                    <img src="/assets/flag/usa.png">
-                                    English
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
                                 </a>
                             </li>
                         </ul>
@@ -122,60 +123,60 @@
                 </div>
 
                 <article data-uid="">
-<h1 id="tratamento-de-chat">Tratamento de chat</h1>
+<h1 id="chat-handling">Chat handling</h1>
 
-<p>Clientes de chat que usam inferência por streaming devem tratar a resposta como uma linha do tempo de eventos, não como blocos separados por tipo de informação. Em uma única inferência, o modelo pode raciocinar, chamar ferramentas do lado do servidor, responder parcialmente, voltar a raciocinar e continuar a resposta. Essa sequência deve ser preservada na interface.</p>
-<p>O comportamento mais importante é: cada pedaço recebido pelo SSE representa o próximo passo da resposta da assistente. O cliente deve construir a resposta na ordem em que os eventos chegam.</p>
-<h2 id="por-que-manter-uma-linha-do-tempo">Por que manter uma linha do tempo</h2>
-<p>Modelos diferentes organizam a resposta de formas diferentes. O diagrama de sequência abaixo representa dois comportamentos comuns dentro de uma única inferência:</p>
+<p>Chat clients that use streaming inference must treat the response as a timeline of events, not as independent blocks grouped by type. In a single inference, the model can reason, call server-side tools, respond partially, resume reasoning, and continue the answer. The interface should preserve that sequence.</p>
+<p>Each piece received via SSE represents the next step of the assistant's response. Build the response in the order the events arrive.</p>
+<h2 id="why-keep-a-timeline">Why keep a timeline</h2>
+<p>Different models organize the response in different ways. The sequence diagram below shows two common server-side tool patterns within a single inference:</p>
 <pre><code class="lang-mermaid">sequenceDiagram
-    participant Usuario
-    participant Cliente
+    participant User
+    participant Client
     participant AIVAX
-    participant Modelo
-    participant Ferramentas
+    participant Model
+    participant Tools
 
-    Usuario-&gt;&gt;Cliente: Envia mensagem
-    Cliente-&gt;&gt;AIVAX: Cria inferencia em streaming
-    AIVAX-&gt;&gt;Modelo: Inicia inferencia
+    User-&gt;&gt;Client: Sends a message
+    Client-&gt;&gt;AIVAX: Creates a streaming inference
+    AIVAX-&gt;&gt;Model: Starts inference
 
-    Note over AIVAX,Cliente: Padrao comum em modelos como Gemini
-    AIVAX--&gt;&gt;Cliente: reasoning
-    AIVAX-&gt;&gt;Ferramentas: Chamada de ferramenta
-    Ferramentas--&gt;&gt;AIVAX: Resultado
-    AIVAX--&gt;&gt;Cliente: tool call ou servertool
-    AIVAX--&gt;&gt;Cliente: answer
-    AIVAX--&gt;&gt;Cliente: reasoning
-    AIVAX--&gt;&gt;Cliente: answer
+    Note over AIVAX,Client: Common pattern in models such as Gemini
+    AIVAX--&gt;&gt;Client: reasoning
+    AIVAX-&gt;&gt;Tools: Server-side tool call
+    Tools--&gt;&gt;AIVAX: Result
+    AIVAX--&gt;&gt;Client: servertool update
+    AIVAX--&gt;&gt;Client: answer
+    AIVAX--&gt;&gt;Client: reasoning
+    AIVAX--&gt;&gt;Client: answer
 
-    Note over AIVAX,Cliente: Padrao comum em modelos que falam enquanto pensam
-    AIVAX--&gt;&gt;Cliente: reasoning
-    AIVAX--&gt;&gt;Cliente: answer
-    AIVAX-&gt;&gt;Ferramentas: Chamadas de ferramenta
-    Ferramentas--&gt;&gt;AIVAX: Resultados
-    AIVAX--&gt;&gt;Cliente: tool calls ou servertool
-    AIVAX--&gt;&gt;Cliente: reasoning
-    AIVAX--&gt;&gt;Cliente: answer
+    Note over AIVAX,Client: Common pattern in models that speak while reasoning
+    AIVAX--&gt;&gt;Client: reasoning
+    AIVAX--&gt;&gt;Client: answer
+    AIVAX-&gt;&gt;Tools: Server-side tool calls
+    Tools--&gt;&gt;AIVAX: Results
+    AIVAX--&gt;&gt;Client: servertool updates
+    AIVAX--&gt;&gt;Client: reasoning
+    AIVAX--&gt;&gt;Client: answer
 
-    AIVAX--&gt;&gt;Cliente: stop e usage
-    AIVAX--&gt;&gt;Cliente: DONE
+    AIVAX--&gt;&gt;Client: stop and usage
+    AIVAX--&gt;&gt;Client: DONE
 </code></pre>
-<p>Por isso, não é uma boa ideia renderizar um painel fixo para raciocínio e outro para conteúdo final como se fossem fluxos independentes. Com AIVAX, uma única inferência também pode resumir vários turnos internos por causa de ferramentas executadas no servidor, como MCP, pesquisa e outras funções embutidas. Se o cliente separar tudo por tipo, o usuário perde a ordem real do que aconteceu.</p>
+<p>Do not render a fixed panel for all reasoning and another fixed panel for final content as if they were independent streams. With AIVAX, a single inference can include multiple internal turns because of server-executed tools such as MCP, search, and other built-in functions. If the client separates everything by type, the user loses the real order of what happened.</p>
 <h2 id="streaming-sse">Streaming SSE</h2>
-<p>Use <code>stream: true</code> no endpoint <code>POST /v1/chat/completions</code> para receber a resposta em Server-Sent Events (SSE):</p>
+<p>Use <code>stream: true</code> on <code>POST /v1/chat/completions</code> to receive the response in Server-Sent Events (SSE):</p>
 <pre><code class="lang-json">{
     &quot;model&quot;: &quot;my-gateway:50c3&quot;,
     &quot;messages&quot;: [
         {
             &quot;role&quot;: &quot;user&quot;,
-            &quot;content&quot;: &quot;Resuma os principais pontos deste documento.&quot;
+            &quot;content&quot;: &quot;Summarize the main points of this document.&quot;
         }
     ],
     &quot;stream&quot;: true
 }
 </code></pre>
-<p>Por padrão, o servidor envia pings periódicos para manter a conexão aberta. Envie o cabeçalho <code>Sse-Stream-Options: no-ping</code> quando o seu cliente ou proxy não aceitar mensagens de keep-alive no SSE.</p>
-<p>Cada evento de conteúdo segue o formato <code>chat.completion.chunk</code>:</p>
+<p>By default, the server sends periodic pings every 15 seconds to keep the connection open. Send the header <code>Sse-Stream-Options: no-ping</code> when your client or proxy does not accept keep-alive messages on SSE.</p>
+<p>Each content event follows the <code>chat.completion.chunk</code> format:</p>
 <pre><code class="lang-json">{
     &quot;id&quot;: &quot;chatcmpl-...&quot;,
     &quot;object&quot;: &quot;chat.completion.chunk&quot;,
@@ -189,27 +190,27 @@
             &quot;logprobs&quot;: null,
             &quot;delta&quot;: {
                 &quot;role&quot;: &quot;assistant&quot;,
-                &quot;content&quot;: &quot;A resposta começa aqui&quot;
+                &quot;content&quot;: &quot;The answer starts here&quot;
             }
         }
     ],
     &quot;usage&quot;: null
 }
 </code></pre>
-<p>O primeiro chunk útil inclui <code>delta.role: &quot;assistant&quot;</code>. Os chunks seguintes podem trazer <code>delta.content</code>, <code>delta.reasoning</code>, <code>delta.tool_calls</code> ou uma combinação desses campos. Chunks sem conteúdo, raciocínio, ferramentas ou uso são ignorados pelo servidor e não chegam ao cliente.</p>
-<h2 id="como-renderizar">Como renderizar</h2>
-<p>Dentro de uma resposta em andamento, renderize cada informação na ordem recebida:</p>
+<p>The first useful chunk includes <code>delta.role: &quot;assistant&quot;</code>. Subsequent chunks may contain <code>delta.content</code>, <code>delta.reasoning</code>, <code>delta.tool_calls</code>, or a combination of these fields. Empty chunks without content, reasoning, tools, or usage are not forwarded to the client.</p>
+<h2 id="how-to-render">How to render</h2>
+<p>Within an in-progress response, render each piece of information in the order received:</p>
 <ul>
-<li><code>delta.content</code>: adiciona texto visível na fala da assistente;</li>
-<li><code>delta.reasoning</code>: adiciona um evento de raciocínio no ponto atual da resposta;</li>
-<li><code>delta.tool_calls</code>: adiciona ou atualiza uma chamada de ferramenta no ponto atual da resposta;</li>
-<li><code>servertool</code>: adiciona ou atualiza um evento de ferramenta executada pelo servidor;</li>
-<li><code>finish_reason: &quot;stop&quot;</code>: encerra a resposta normalmente;</li>
-<li><code>finish_reason: &quot;error&quot;</code>: encerra a resposta com erro.</li>
+<li><code>delta.content</code>: Adds visible assistant text.</li>
+<li><code>delta.reasoning</code>: Adds a reasoning event at the current point in the response.</li>
+<li><code>delta.tool_calls</code>: Exposes a client-side tool call and ends the streamed turn with <code>finish_reason: &quot;tool_calls&quot;</code>.</li>
+<li><code>servertool</code>: Adds or updates a server-executed tool event.</li>
+<li><code>finish_reason: &quot;stop&quot;</code>: Ends the response normally.</li>
+<li><code>finish_reason: &quot;error&quot;</code>: Ends the response with an error.</li>
 </ul>
-<p>O chat pode estilizar cada tipo de evento de forma diferente, mas a ordem deve continuar sendo uma só. Por exemplo, um trecho de raciocínio pode aparecer como uma linha discreta ou recolhível dentro da própria resposta da assistente, seguido pela ferramenta chamada e depois pelo texto que veio depois. O ponto essencial é não mover todos os raciocínios para uma área separada e todos os textos para outra área, porque isso desmonta a sequência da inferência.</p>
-<h2 id="raciocínio">Raciocínio</h2>
-<p>Quando o modelo ou gateway retorna tokens de raciocínio, o chunk inclui <code>delta.reasoning</code>:</p>
+<p>The chat UI can style each event type differently, but the order must remain a single sequence. For example, a reasoning snippet may appear as a discrete or collapsible line within the assistant's own response, followed by a tool event and then the subsequent text.</p>
+<h2 id="reasoning">Reasoning</h2>
+<p>When the model or gateway returns reasoning tokens, the chunk includes <code>delta.reasoning</code>:</p>
 <pre><code class="lang-json">{
     &quot;choices&quot;: [
         {
@@ -217,15 +218,15 @@
             &quot;finish_reason&quot;: null,
             &quot;logprobs&quot;: null,
             &quot;delta&quot;: {
-                &quot;reasoning&quot;: &quot;Analisando os critérios relevantes...&quot;
+                &quot;reasoning&quot;: &quot;Analyzing the relevant criteria...&quot;
             }
         }
     ]
 }
 </code></pre>
-<p>Esse campo não substitui <code>delta.content</code>. Ele representa um evento próprio no fluxo da resposta. Se o cliente optar por mostrar raciocínio, mostre-o na posição em que ele chegou. Se o cliente optar por ocultar raciocínio, preserve a ordem dos demais eventos e continue renderizando conteúdo e ferramentas normalmente.</p>
-<h2 id="ferramentas">Ferramentas</h2>
-<p>Chamadas de ferramenta do modelo chegam em <code>delta.tool_calls</code> usando o formato de function calling:</p>
+<p>This field does not replace <code>delta.content</code>. It represents its own event in the response flow. If the client shows reasoning, display it at the position where it arrives. If the client hides reasoning, preserve the order of the remaining events and continue rendering content and tools normally.</p>
+<h2 id="tools">Tools</h2>
+<p>Client-side model tool calls arrive in <code>delta.tool_calls</code> using the function-calling format:</p>
 <pre><code class="lang-json">{
     &quot;choices&quot;: [
         {
@@ -239,7 +240,7 @@
                         &quot;type&quot;: &quot;function&quot;,
                         &quot;function&quot;: {
                             &quot;name&quot;: &quot;search_documents&quot;,
-                            &quot;arguments&quot;: &quot;{\&quot;query\&quot;:\&quot;contrato\&quot;}&quot;
+                            &quot;arguments&quot;: &quot;{\&quot;query\&quot;:\&quot;contract\&quot;}&quot;
                         }
                     }
                 ]
@@ -248,8 +249,8 @@
     ]
 }
 </code></pre>
-<p>O campo <code>function.arguments</code> é entregue como texto e pode representar JSON parcial enquanto a geração ainda está em andamento. Em chats contínuos, atualize a chamada de ferramenta conforme novos dados chegarem e só interprete os argumentos quando estiverem completos.</p>
-<p>Ferramentas internas do gateway podem enviar eventos de atualização no mesmo stream. Esses eventos usam <code>choices: []</code> e o objeto <code>servertool</code>:</p>
+<p>The <code>function.arguments</code> field is delivered as JSON text. Parse it defensively after the tool call is complete. In AIVAX's OpenAI-compatible stream, a client-side tool call is followed by a final chunk with <code>finish_reason: &quot;tool_calls&quot;</code>.</p>
+<p>Internal gateway tools can send update events on the same stream while AIVAX continues the server-side tool loop. These events use <code>choices: []</code> and the <code>servertool</code> object:</p>
 <pre><code class="lang-json">{
     &quot;id&quot;: &quot;chatcmpl-...&quot;,
     &quot;object&quot;: &quot;chat.completion.chunk&quot;,
@@ -260,15 +261,15 @@
     &quot;servertool&quot;: {
         &quot;name&quot;: &quot;WebSearch&quot;,
         &quot;id&quot;: &quot;tool_...&quot;,
-        &quot;contents&quot;: &quot;{\&quot;query\&quot;:\&quot;notícias recentes\&quot;}&quot;,
+        &quot;contents&quot;: &quot;{\&quot;query\&quot;:\&quot;recent news\&quot;}&quot;,
         &quot;state&quot;: &quot;Running&quot;
     },
     &quot;usage&quot;: null
 }
 </code></pre>
-<p>Use <code>servertool</code> para mostrar estados como “pesquisando”, “abrindo link” ou “executando ferramenta”. Esse evento também faz parte da linha do tempo da resposta, mas não deve ser concatenado como texto da assistente.</p>
-<h2 id="uso-finalização-e-erros">Uso, finalização e erros</h2>
-<p>O uso de tokens não acompanha cada chunk. Quando disponível, ele aparece no último chunk antes de <code>[DONE]</code>, junto com <code>finish_reason: &quot;stop&quot;</code>:</p>
+<p>Use <code>servertool</code> to show states such as &quot;searching&quot;, &quot;opening link&quot;, or &quot;executing tool&quot;. This event is also part of the response timeline, but it should not be concatenated as assistant text.</p>
+<h2 id="usage-completion-and-errors">Usage, completion, and errors</h2>
+<p>Token usage is not attached to each chunk. When available, it appears in the last chunk before <code>[DONE]</code>, together with <code>finish_reason: &quot;stop&quot;</code> or <code>finish_reason: &quot;tool_calls&quot;</code>:</p>
 <pre><code class="lang-json">{
     &quot;choices&quot;: [
         {
@@ -289,7 +290,7 @@
     }
 }
 </code></pre>
-<p>Depois do último chunk, o servidor envia a linha <code>[DONE]</code> e fecha o SSE. Se ocorrer um erro durante o streaming, o servidor envia um chunk com <code>finish_reason: &quot;error&quot;</code>, um objeto <code>error</code> com a mensagem segura para o cliente e, em seguida, <code>[DONE]</code>.</p>
+<p>After the final chunk, the server sends the <code>[DONE]</code> line and closes the SSE. If an error occurs during streaming, the server sends a chunk with <code>finish_reason: &quot;error&quot;</code>, an <code>error</code> object with a client-safe message, and then <code>[DONE]</code>.</p>
 <pre><code class="lang-json">{
     &quot;choices&quot;: [
         {
@@ -302,12 +303,12 @@
     ],
     &quot;error&quot;: {
         &quot;code&quot;: &quot;server_error&quot;,
-        &quot;message&quot;: &quot;Mensagem do erro&quot;
+        &quot;message&quot;: &quot;Error message&quot;
     }
 }
 </code></pre>
-<h2 id="respostas-json-em-streaming">Respostas JSON em streaming</h2>
-<p>Quando <code>json_only: true</code> é usado com <code>stream: true</code>, o comportamento muda: o servidor envia o JSON completo gerado pelo modelo como um único evento, depois envia <code>[DONE]</code>. Nesse modo, não há envelope <code>chat.completion.chunk</code>, <code>delta</code>, <code>usage</code> ou metadados de geração no conteúdo enviado.</p>
+<h2 id="streaming-json-responses">Streaming JSON responses</h2>
+<p>When <code>json_only: true</code> is used with <code>stream: true</code>, the behavior changes: the server sends the complete JSON generated by the model as a single SSE data event, then sends <code>[DONE]</code>. In this mode, there is no <code>chat.completion.chunk</code> envelope, no <code>delta</code>, no <code>usage</code>, and no generation metadata in the transmitted content.</p>
 
 </article>
 

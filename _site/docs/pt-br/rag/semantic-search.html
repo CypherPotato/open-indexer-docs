@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Pesquisa Sem&#226;ntica | AIVAX </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="Pesquisa Sem&#226;ntica | AIVAX ">
+
+
+        <link rel="icon" href="../../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+        
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
+
+        <meta name="docfx:rel" content="../../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/pt-br/rag/semantic-search.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+                
+        <script>            
+            function switchLanguage(lang) {
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../../index.html">
+                        <img id="logo" class="svg" src="../../../assets/img/aivax.png" alt="AIVAX">
+                        AIVAX
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="pesquisa-semântica">Pesquisa Semântica</h1>
+
+<p>A API de pesquisa realiza busca semântica nas coleções informadas, fazendo uma comparação inteligente entre os termos enviados e cada documento indexado.</p>
+<p>Após criar uma coleção, você obterá seu ID. Utilize o ID da sua coleção para realizar a busca nos documentos indexados da mesma.</p>
+<p>O AIVAX utiliza modelos de embedding que permitem a orientação da tarefa. Para a busca, o termo é vetorizado com uma orientação <code>DOCUMENT_QUERY</code>. Para indexação dos documentos, a orientação é <code>DOCUMENT_RETRIEVAL</code>, o que fornece uma busca mais otimizada.</p>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>Esse endpoint gera custo. O custo é calculado em cima dos tokens do termo de busca.</p>
+</div>
+<script src="https://inference.aivax.net/apidocs?embed-target=Semantic%20search&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<h2 id="ranqueamento">Ranqueamento</h2>
+<p>A AIVAX pode aplicar reranking depois da busca vetorial. A primeira etapa encontra documentos semanticamente próximos aos termos consultados. Em seguida, o reranker reavalia os candidatos encontrados e ajusta a ordem final dos resultados.</p>
+<p>Esse processo é útil quando vários documentos são parecidos entre si. A busca semântica pode encontrar o conjunto certo de candidatos, mas ainda assim deixar o documento mais útil abaixo de outros documentos relacionados. O reranking funciona como uma segunda etapa de precisão.</p>
+<p>Por exemplo: em uma coleção de suporte técnico, buscar por &quot;como cancelar assinatura anual sem multa&quot; pode retornar documentos sobre &quot;cancelamento de assinatura&quot;, &quot;multa contratual&quot;, &quot;assinatura mensal&quot; e &quot;reembolsos&quot;. O reranker reordena esses candidatos para favorecer o documento que responde melhor à consulta completa.</p>
+<p>Rerankers disponíveis:</p>
+<table>
+<thead>
+<tr>
+<th>Algoritmo</th>
+<th>Custo</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>none</code></td>
+<td>Sem custo</td>
+<td>Desativa o reranking. Os resultados finais usam apenas a pontuação semântica da busca vetorial.</td>
+</tr>
+<tr>
+<td><code>lexical</code></td>
+<td>Sem custo</td>
+<td>Aplica um pequeno ajuste local de score com base em correspondência lexical, correspondência aproximada e proximidade dos termos no nome e no conteúdo do documento.</td>
+</tr>
+<tr>
+<td><code>smart</code></td>
+<td>$0,005/mtokens</td>
+<td>Usa um modelo de reranking para reavaliar os documentos candidatos com a consulta completa e substituir a pontuação final pela pontuação do modelo.</td>
+</tr>
+</tbody>
+</table>
+<p>Na API de pesquisa semântica, o reranker padrão é <code>lexical</code>. Para desativar o reranking, envie <code>none</code> no parâmetro <code>reranker</code>. Para usar o reranker baseado em modelo, envie <code>smart</code>.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>O reranking não amplia a busca para documentos que ficaram fora dos candidatos iniciais. Ele atua sobre os candidatos retornados pela busca vetorial e melhora a ordenação final.</p>
+</div>
+<h2 id="busca-por-termos">Busca por termos</h2>
+<p>A busca por vários termos funciona como uma união ranqueada por melhor correspondência. Ela não faz interseção obrigatória entre termos e não exige que cada resultado combine com todos os termos fornecidos.</p>
+<p>Para vários termos, cada documento é comparado com todos os termos fornecidos. A pontuação semântica do documento usa a melhor correspondência encontrada entre esses termos. Na prática, um documento pode aparecer bem posicionado por combinar muito bem com apenas um dos termos.</p>
+<p>Para várias coleções, a busca percorre as coleções configuradas, agrega os melhores candidatos de cada uma e ordena tudo em uma única lista final. O resultado não é separado por coleção e também não é uma interseção entre coleções.</p>
+<p>Exemplo: ao buscar os termos <code>cancelamento</code>, <code>multa</code> e <code>reembolso</code> nas coleções <code>suporte</code> e <code>contratos</code>, a resposta será equivalente a:</p>
+<blockquote>
+<p><em>melhores documentos de suporte ou contratos que combinem bem com cancelamento ou multa ou reembolso</em></p>
+</blockquote>
+<p>Ela não significa:</p>
+<blockquote>
+<p><em>documentos que combinem com cancelamento e multa e reembolso ao mesmo tempo</em></p>
+</blockquote>
+<p>nem:</p>
+<blockquote>
+<p><em>documentos presentes simultaneamente em suporte e contratos</em></p>
+</blockquote>
+<p>Se a intenção for buscar uma ideia composta, prefira enviar essa ideia como um termo completo, por exemplo <code>cancelamento de assinatura anual sem multa</code>, em vez de quebrar a consulta em muitas palavras isoladas. Use vários termos quando quiser cobrir formas diferentes de expressar a mesma necessidade ou quando aceitar resultados relevantes para qualquer uma das variações.</p>
+<h2 id="projeto-de-busca-e-qualidade-dos-resultados">Projeto de busca e qualidade dos resultados</h2>
+<p>A qualidade da busca semântica depende tanto da consulta quanto da forma como os documentos foram preparados. Quando um usuário pergunta algo específico, a melhor consulta costuma ser uma frase completa com intenção clara, não uma lista de palavras-chave soltas. Por exemplo, <code>como cancelar assinatura anual sem multa</code> tende a recuperar documentos melhores que <code>cancelamento</code>, <code>assinatura</code>, <code>multa</code>, porque preserva a relação entre os termos. Use múltiplos termos quando você quer cobrir sinônimos ou formulações alternativas, como <code>cancelar assinatura</code>, <code>encerrar contrato</code> e <code>rescindir plano</code>; nesse caso, a busca funciona como uma união de possibilidades e não como uma exigência de que todas apareçam ao mesmo tempo.</p>
+<p>O parâmetro <code>top</code> controla quantos documentos entram na resposta, enquanto <code>minScore</code> controla o corte mínimo de relevância. Valores baixos de <code>minScore</code> aumentam a chance de recuperar algum conteúdo, mas também aumentam ruído. Valores altos reduzem ruído, mas podem retornar poucos resultados quando a coleção é pequena, quando os documentos estão mal segmentados ou quando a pergunta usa uma linguagem diferente dos documentos. Em assistentes com RAG no gateway, comece com poucos documentos e uma pontuação mínima moderada; depois aumente <code>top</code> apenas quando a resposta precisa comparar políticas, procedimentos ou trechos de fontes diferentes.</p>
+<p>O reranker deve ser escolhido pelo custo de erro da tarefa. <code>lexical</code> é um bom padrão porque melhora a ordenação sem custo adicional, especialmente quando nomes, códigos, títulos ou termos técnicos aparecem no documento. <code>smart</code> faz sentido quando os documentos candidatos são muito parecidos entre si e a pergunta exige entender a frase inteira, como suporte técnico, jurídico, financeiro ou documentação longa. <code>none</code> só deve ser usado quando você quer a menor latência possível e aceita a ordenação puramente vetorial. O reranking não corrige uma coleção ruim: se documentos relevantes não aparecem entre os candidatos iniciais, melhore chunking, nomes, conteúdo ou estratégia de consulta.</p>
+<p>Quando a busca não retorna o que você espera, investigue em camadas. Primeiro, confirme se os documentos estão indexados e se a coleção correta está sendo consultada. Segundo, teste a consulta direta pela API antes de testar dentro de um gateway, porque isso separa problema de busca de problema de prompt. Terceiro, compare uma consulta curta, uma consulta completa e duas ou três variações semânticas. Quarto, revise se os documentos são autossuficientes; documentos que dependem de contexto externo, títulos genéricos ou trechos muito longos tendem a pontuar mal. Por fim, se o gateway usa uma estratégia de reescrita, teste a mesma pergunta com <code>Plain</code> para descobrir se o problema está na reescrita ou na coleção.</p>
+<h2 id="mcp">MCP</h2>
+<p>É possível fornecer suas coleções de RAG através de funções MCP (Model Context Protocol). Isso permite que modelos de IA acessem e pesquisem suas coleções de forma nativa através do protocolo MCP.</p>
+<p>Para configurar uma coleção como servidor MCP, utilize o endpoint <code>https://inference.aivax.net/v1/mcp/collections</code> e configure os seguintes cabeçalhos HTTP:</p>
+<table>
+<thead>
+<tr>
+<th>Cabeçalho</th>
+<th>Descrição</th>
+<th>Padrão</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Authorization</code></td>
+<td>Bearer token da sua API key</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>X-Mcp-Collection-Id</code></td>
+<td>IDs das coleções a serem expostas (separados por vírgula para múltiplas coleções)</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>X-Mcp-Collection-Name</code></td>
+<td>Nome da coleção para identificação na ferramenta MCP</td>
+<td><code>collection</code></td>
+</tr>
+<tr>
+<td><code>X-Mcp-Reranker</code></td>
+<td>Reranker que será usado (<code>lexical</code>, <code>smart</code> ou <code>none</code>).</td>
+<td><code>lexical</code></td>
+</tr>
+<tr>
+<td><code>X-Mcp-Top-K</code></td>
+<td>Número máximo de resultados a retornar</td>
+<td><code>5</code></td>
+</tr>
+<tr>
+<td><code>X-Mcp-Min-Score</code></td>
+<td>Score mínimo de relevância (0.0 a 1.0)</td>
+<td><code>0.4</code></td>
+</tr>
+<tr>
+<td><code>X-Mcp-Use-References</code></td>
+<td>Define se deve incluir referências dos chunks. No comportamento atual, envie <code>none</code> para incluir referências; omita o cabeçalho para não incluir.</td>
+<td>desabilitado</td>
+</tr>
+<tr>
+<td><code>X-Mcp-Allow-Write</code></td>
+<td>Use <code>yes</code> para expor ferramentas de criação e remoção de documentos no servidor MCP.</td>
+<td>desabilitado</td>
+</tr>
+<tr>
+<td><code>X-Mcp-Naming-Convention</code></td>
+<td>Convenção de nomes das ferramentas. Use <code>default</code> ou <code>agent</code>.</td>
+<td><code>default</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="exemplo-de-configuração">Exemplo de configuração</h3>
+<p>Visual Studio Code:</p>
+<pre><code class="lang-json">{
+  &quot;servers&quot;: {
+    &quot;my-rag-collection-mcp&quot;: {
+      &quot;type&quot;: &quot;http&quot;,
+      &quot;url&quot;: &quot;https://inference.aivax.net/v1/mcp/collections&quot;,
+      &quot;headers&quot;: {
+        &quot;Authorization&quot;: &quot;Bearer {your_api_key}&quot;,
+        &quot;X-Mcp-Collection-Id&quot;: &quot;019b80d5-cee2-7010-ab22-f676271af866&quot;,
+        &quot;X-Mcp-Collection-Name&quot;: &quot;my_collection&quot;,
+        &quot;X-Mcp-Top-K&quot;: &quot;5&quot;,
+        &quot;X-Mcp-Min-Score&quot;: &quot;0.4&quot;,
+        &quot;X-Mcp-Use-References&quot;: &quot;none&quot;
+      }
+    }
+  }
+}
+</code></pre>
+<h3 id="ferramenta-gerada">Ferramenta gerada</h3>
+<p>O servidor MCP criará automaticamente uma ferramenta com o nome <code>{collection_name}_search</code> que aceita o parâmetro:</p>
+<ul>
+<li><strong>search_terms</strong> (<code>string[]</code>): Termos de busca para obter informações da coleção</li>
+</ul>
+<p>A ferramenta executará uma pesquisa semântica na(s) coleção(ões) configurada(s) e retornará os documentos mais relevantes baseados nos parâmetros definidos.</p>
+<p>Essa pesquisa limita a quantia de pesquisas que <code>search_terms</code> pode realizar para no máximo 10 termos por chamada e ter no máximo 500 caracteres (soma de todos os termos). Se os limites forem excedidos, a ferramenta retornará um erro. Este limite garante que a ferramenta seja utilizada para buscas específicas e relevantes, evitando consultas excessivamente amplas que possam impactar a performance do modelo e gerar custos elevados.</p>
+<p>Quando <code>X-Mcp-Allow-Write</code> está desabilitado, o MCP de coleções funciona como uma ferramenta de leitura. Esse é o modo recomendado para assistentes que apenas precisam consultar conhecimento. Quando <code>X-Mcp-Allow-Write: yes</code> é enviado, o servidor também expõe ferramentas de escrita e remoção de documentos. Esse modo é útil para agentes internos que mantêm uma base viva, por exemplo um assistente que registra novas respostas aprovadas, atualiza uma base de procedimentos ou remove documentos obsoletos. Habilite escrita apenas para clientes confiáveis, porque o modelo poderá alterar a coleção com base na conversa.</p>
+<p>A convenção de nomes também muda como o modelo percebe a ferramenta. No modo <code>default</code>, a ferramenta de leitura usa o nome <code>{collection_name}_search</code>, que funciona bem quando a coleção tem um nome claro, como <code>manual_suporte_search</code>. No modo <code>agent</code>, as ferramentas usam nomes mais diretos para agentes, como leitura, escrita e remoção associadas ao nome da coleção. A escolha deve considerar o cliente MCP: em um editor de código, nomes explícitos ajudam o modelo a escolher a ferramenta; em um subagente com poucas ferramentas, nomes curtos podem ser suficientes.</p>
+<p>O MCP de coleções é melhor quando você quer dar acesso direto à base para outro modelo ou cliente MCP. Para um chat client comum, normalmente é mais simples vincular a coleção no próprio AI Gateway e deixar o pipeline de RAG anexar os documentos automaticamente. Use MCP quando o modelo chamador precisa decidir quando pesquisar, quando você quer expor a mesma coleção para várias ferramentas externas, ou quando a coleção precisa ser acessada por agentes que não estão dentro da AIVAX.</p>
+<p>Este MCP compartilha os <a href="/docs/pt-br/limits">limites de taxa de pesquisa semântica</a> para evitar abusos e garantir a estabilidade do serviço. Se os limites de taxa forem excedidos, a ferramenta retornará um erro indicando que o limite foi atingido.</p>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/pt-br/rag/semantic-search.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>

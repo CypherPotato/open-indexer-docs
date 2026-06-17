@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Processadores de dados | AIVAX </title>
+        <title>Data Processors | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="Processadores de dados | AIVAX ">
+        <meta name="title" content="Data Processors | AIVAX ">
 
 
         <link rel="icon" href="../../assets/img/favicon.ico">
@@ -47,7 +47,8 @@
                 
         <script>            
             function switchLanguage(lang) {
-                const docPart = window.location.pathname.match(/\/docs\/((en)\/)?(.*)/)[3];
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
                 const newPath = lang + docPart;
                 window.location.href = window.location.origin + newPath;
             }        
@@ -107,14 +108,14 @@
                         <ul class="dropdown-menu dropdown-menu-end language-dropdown">
                             <li>
                                 <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
-                                    <img src="/assets/flag/brazil.png">
-                                    Português
+                                    <img src="/assets/flag/usa.png">
+                                    English
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/en/')">
-                                    <img src="/assets/flag/usa.png">
-                                    English
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
                                 </a>
                             </li>
                         </ul>
@@ -122,195 +123,210 @@
                 </div>
 
                 <article data-uid="">
-<h1 id="processadores-de-dados">Processadores de dados</h1>
+<h1 id="data-processors">Data Processors</h1>
 
-<p>A AIVAX utiliza serviços de terceiros para operações específicas, como coleta de pagamentos, envio de mensagens, inferência e armazenamento de dados. Note que, a AIVAX não possue nenhum vínculo comercial ou de parceria com os provedores listados abaixo, e a escolha por eles é baseada exclusivamente em critérios técnicos e de desempenho.</p>
-<h3 id="provedores-de-operações-serviços-e-infraestrutura">Provedores de operações, serviços e infraestrutura:</h3>
+<p>AIVAX uses third-party services for specific operations such as infrastructure, object storage, email delivery, payment processing, web search, AI inference, reranking, and image generation. The providers involved in a request depend on the selected model, gateway, tool, and integration.</p>
+<p>This page is a technical inventory, not legal advice. Provider policies may change, and Account Managers should review the provider terms that apply to their selected models and tools before sending personal, confidential, regulated, or sensitive data.</p>
+<h2 id="operations-services-and-infrastructure">Operations, Services, and Infrastructure</h2>
 <table>
 <thead>
 <tr>
-<th>Provedor</th>
-<th>Usado em</th>
-<th>País de origem</th>
-<th>Legislação de proteção de dados</th>
+<th>Provider</th>
+<th>Used for</th>
+<th>Evidence in the platform code</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><a href="https://www.cloudflare.com/">Cloudflare</a></td>
-<td>CDN, proxy reverso, proteção contra DDoS, firewall e DNS</td>
-<td>Estados Unidos</td>
-<td><a href="https://www.cloudflare.com/trust-hub/gdpr/">GDPR</a>, <a href="https://www.cloudflare.com/trust-hub/ccpa/">CCPA</a>, <a href="https://www.cloudflare.com/trust-hub/eu-us-data-privacy-framework/">DPF</a></td>
-</tr>
-<tr>
-<td><a href="https://www.hetzner.com/">Hetzner</a></td>
-<td>Hospedagem de servidores e infraestrutura de computação em nuvem</td>
-<td>Alemanha</td>
-<td><a href="https://www.hetzner.com/legal/privacy-policy/">GDPR</a></td>
+<td>Reverse proxy/security where deployed; Workers AI reranking; Cloudflare embedding service configuration</td>
+<td>Cloudflare API key/account parameters; <code>CloudflareWorkersAiReranker</code>; <code>CloudflareEmbeddingService</code></td>
 </tr>
 <tr>
 <td><a href="https://www.backblaze.com/">Backblaze</a></td>
-<td>Armazenamento de objetos e arquivos</td>
-<td>Estados Unidos</td>
-<td><a href="https://www.backblaze.com/company/privacy.html">GDPR</a>, <a href="https://www.backblaze.com/company/ccpa.html">CCPA</a></td>
+<td>Object/file storage for generated media, uploaded media, generated documents, exposed files, and error artifacts</td>
+<td><code>BackblazeService</code>; B2 bucket/account parameters</td>
 </tr>
 <tr>
 <td><a href="https://www.brevo.com/">Brevo</a></td>
-<td>Envio de e-mails transacionais e notificações</td>
-<td>França</td>
-<td><a href="https://www.brevo.com/legal/privacypolicy/">GDPR</a></td>
-</tr>
-<tr>
-<td><a href="https://developer.x.com/">Twitter/X</a></td>
-<td>Integração com a API para publicação e autenticação via redes sociais</td>
-<td>Estados Unidos</td>
-<td><a href="https://x.com/en/privacy">CCPA</a>, <a href="https://x.com/en/privacy">GDPR</a></td>
-</tr>
-<tr>
-<td><a href="https://www.linkup.so/">Linkup</a></td>
-<td>Pesquisa na web em tempo real para enriquecimento de contexto</td>
-<td>França</td>
-<td><a href="https://www.linkup.so/privacy-policy">GDPR</a>, <a href="https://www.linkup.so/privacy-policy">CCPA</a></td>
+<td>Transactional email and notifications</td>
+<td><code>EmailService</code>; Brevo API key parameter</td>
 </tr>
 <tr>
 <td><a href="https://infinitepay.io/">InfinitePay</a></td>
-<td>Coleta de pagamentos e processamento de transações</td>
-<td>Brasil</td>
-<td><a href="https://infinitepay.io/politica-de-privacidade-e-cookies">LGPD</a></td>
+<td>Payment invoice creation and payment confirmation webhook</td>
+<td><code>InfinitePayProvider</code>; InfinitePay webhook</td>
+</tr>
+<tr>
+<td><a href="https://stripe.com/">Stripe</a></td>
+<td>Payment event webhook support where Stripe checkout is configured</td>
+<td>Stripe API key parameter; Stripe webhook</td>
+</tr>
+<tr>
+<td><a href="https://developer.x.com/">Twitter/X</a></td>
+<td>Built-in X/Twitter search and post reading tools</td>
+<td><code>TwitterService</code>; <code>TwitterFunctions</code>; X/Twitter API key parameter</td>
+</tr>
+<tr>
+<td><a href="https://www.linkup.so/">Linkup</a></td>
+<td>Web search for context enrichment</td>
+<td><code>LinkupResearchClient</code></td>
+</tr>
+<tr>
+<td><a href="https://www.tavily.com/">Tavily</a></td>
+<td>Web search for context enrichment</td>
+<td><code>TavilyResearchClient</code></td>
+</tr>
+<tr>
+<td><a href="https://sinkin.ai/">Sinkin AI</a></td>
+<td>Image generation provider for selected image models</td>
+<td><code>SinkinImageGenerationProvider</code></td>
+</tr>
+<tr>
+<td><a href="https://pollinations.ai/">Pollinations</a></td>
+<td>Image generation provider for selected image models</td>
+<td><code>PollinationsImageGenerationProvider</code></td>
 </tr>
 </tbody>
 </table>
-<hr>
-<h3 id="provedores-de-inferência-e-inteligência-artificial">Provedores de inferência e inteligência artificial:</h3>
+<h2 id="direct-inference-embedding-and-reranking-providers">Direct Inference, Embedding, and Reranking Providers</h2>
+<p>These providers are directly configured in provider factories, embedding services, rerankers, or runtime parameters.</p>
 <table>
 <thead>
 <tr>
-<th>Provedor</th>
-<th>Usado em</th>
-<th>País de origem</th>
-<th>Legislação de proteção de dados</th>
+<th>Provider</th>
+<th>Used for</th>
+<th>Evidence in the platform code</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><a href="https://groq.com/">Groq</a></td>
-<td>Inferência de LLMs de alta velocidade</td>
-<td>Estados Unidos</td>
-<td><a href="https://groq.com/privacy-policy/">GDPR</a>, <a href="https://groq.com/privacy-policy/">CCPA</a></td>
+<td>LLM inference through an OpenAI-compatible endpoint</td>
+<td><code>CreateGroqAi</code>; Groq API key parameter</td>
 </tr>
 <tr>
 <td><a href="https://deepinfra.com/">DeepInfra</a></td>
-<td>Inferência de modelos de IA open-source</td>
-<td>Estados Unidos</td>
-<td><a href="https://deepinfra.com/privacy">GDPR</a></td>
+<td>LLM inference through an OpenAI-compatible endpoint</td>
+<td><code>CreateDeepInfra</code>; DeepInfra API key parameter</td>
 </tr>
 <tr>
 <td><a href="https://www.vultr.com/">Vultr</a></td>
-<td>Inferência de modelos via cloud computing</td>
-<td>Estados Unidos</td>
-<td><a href="https://www.vultr.com/legal/privacy/">GDPR</a>, <a href="https://www.vultr.com/legal/privacy/">CCPA</a></td>
-</tr>
-<tr>
-<td><a href="https://openai.com/">OpenAI</a></td>
-<td>Inferência de modelos GPT e outros</td>
-<td>Estados Unidos</td>
-<td><a href="https://openai.com/policies/privacy-policy/">GDPR</a>, <a href="https://openai.com/policies/privacy-policy/">CCPA</a></td>
-</tr>
-<tr>
-<td><a href="https://cloud.google.com/vertex-ai">Google Vertex AI</a></td>
-<td>Inferência de modelos Gemini e outros</td>
-<td>Estados Unidos</td>
-<td><a href="https://cloud.google.com/terms/data-privacy">GDPR</a>, <a href="https://cloud.google.com/terms/data-privacy">CCPA</a></td>
-</tr>
-<tr>
-<td><a href="https://www.inceptionlabs.ai/">Inception</a></td>
-<td>Inferência de modelos Mercury</td>
-<td>Estados Unidos</td>
-<td><a href="https://www.inceptionlabs.ai/privacy">Política de privacidade</a></td>
-</tr>
-<tr>
-<td><a href="https://platform.xiaomimimo.com/">Xiaomi MiMo</a></td>
-<td>Inferência de modelos proprietários Xiaomi</td>
-<td>Países Baixos / Singapura</td>
-<td><a href="https://platform.xiaomimimo.com/#/docs/terms/privacy-policy">GDPR</a></td>
-</tr>
-<tr>
-<td><a href="https://naga.ac/">NagaAI</a></td>
-<td>Agregador de APIs de modelos de IA</td>
-<td>Polônia</td>
-<td><a href="https://naga.ac/legal/privacy">Política de privacidade</a></td>
+<td>LLM inference through Vultr Inference</td>
+<td><code>CreateVultr</code>; Vultr inference API key parameter</td>
 </tr>
 <tr>
 <td><a href="https://ai.nahcrof.com/">CrofAI</a></td>
-<td>Inferência de modelos de IA</td>
-<td>Estados Unidos</td>
-<td><a href="https://ai.nahcrof.com/privacy">CCPA</a></td>
-</tr>
-<tr>
-<td><a href="https://pollinations.ai/">Pollinations</a></td>
-<td>Geração de imagens e vídeo</td>
-<td>Estônia</td>
-<td><a href="https://pollinations.ai/privacy">GDPR</a></td>
+<td>LLM inference through an OpenAI-compatible endpoint</td>
+<td><code>CreateCrof</code>; Crof API key parameter</td>
 </tr>
 <tr>
 <td><a href="https://openrouter.ai/">OpenRouter</a></td>
-<td>Roteamento e fallback entre provedores de IA</td>
-<td>Estados Unidos</td>
-<td><a href="https://openrouter.ai/privacy">GDPR</a>, <a href="https://openrouter.ai/privacy">CCPA</a></td>
+<td>Model routing and fallback for many model families; Grok Voice TTS</td>
+<td><code>CreateOpenRouter</code>; OpenRouter API key parameter; <code>TtsService</code></td>
 </tr>
 <tr>
-<td><a href="https://www.anthropic.com/">Anthropic</a></td>
-<td>Inferência de modelos Claude</td>
-<td>Estados Unidos</td>
-<td><a href="https://www.anthropic.com/privacy">Política de privacidade</a></td>
+<td><a href="https://platform.xiaomimimo.com/">Xiaomi MiMo</a></td>
+<td>Xiaomi model inference</td>
+<td><code>CreateXiaomi</code>; Xiaomi API key parameter</td>
 </tr>
 <tr>
-<td><a href="https://aws.amazon.com/">AWS</a></td>
-<td>Inferência e infraestrutura de IA</td>
-<td>Estados Unidos</td>
-<td><a href="https://aws.amazon.com/compliance/gdpr-center/">GDPR</a>, <a href="https://aws.amazon.com/compliance/ccpa/">CCPA</a></td>
+<td><a href="https://naga.ac/">NagaAI</a></td>
+<td>LLM inference, embeddings, TTS, and selected research flows</td>
+<td><code>CreateNagaAi</code>; <code>NagaEmbeddingService</code>; <code>TtsService</code></td>
 </tr>
 <tr>
-<td><a href="https://cohere.com/">Cohere</a></td>
-<td>Inferência de modelos de IA</td>
-<td>Canadá</td>
-<td><a href="https://cohere.com/privacy">Política de privacidade</a></td>
+<td><a href="https://www.inceptionlabs.ai/">Inception Labs</a></td>
+<td>Mercury model inference</td>
+<td><code>CreateInception</code>; Inception API key parameter</td>
 </tr>
 <tr>
-<td><a href="https://x.ai/">xAI</a></td>
-<td>Inferência de modelos Grok</td>
-<td>Estados Unidos</td>
-<td><a href="https://x.ai/privacy">Política de privacidade</a></td>
-</tr>
-<tr>
-<td><a href="https://mistral.ai/">Mistral AI</a></td>
-<td>Inferência de modelos de IA</td>
-<td>França</td>
-<td><a href="https://mistral.ai/terms/#privacy-policy">Política de privacidade</a></td>
-</tr>
-<tr>
-<td><a href="https://www.deepseek.com/">DeepSeek</a></td>
-<td>Inferência de modelos de IA</td>
-<td>China</td>
-<td><a href="https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html">Política de privacidade</a></td>
-</tr>
-<tr>
-<td><a href="https://z.ai/">Z.ai</a></td>
-<td>Inferência de modelos de IA</td>
-<td>China</td>
-<td><a href="https://z.ai/privacy">Política de privacidade</a></td>
-</tr>
-<tr>
-<td><a href="https://www.alibabacloud.com/">Alibaba Cloud</a></td>
-<td>Inferência de modelos de IA</td>
-<td>China</td>
-<td><a href="https://www.alibabacloud.com/help/en/legal/latest/alibaba-cloud-international-website-privacy-policy">Política de privacidade</a></td>
+<td><a href="https://developers.cloudflare.com/workers-ai/">Cloudflare Workers AI</a></td>
+<td>Smart reranking and Cloudflare embedding service</td>
+<td><code>CloudflareWorkersAiReranker</code>; <code>CloudflareEmbeddingService</code></td>
 </tr>
 </tbody>
 </table>
-<h3 id="coleta-de-dados-de-provedores">Coleta de dados de provedores</h3>
-<p>De acordo com nossa <a href="/docs/legal/privacy-policy">política de privacidade</a>, a AIVAX não coleta nenhum dado sensível, incluindo prompts, para nenhuma finalidade comercial ou de treinamento. As conversas são armazenadas exclusivamente para fins de segurança e auditoria, e o próprio usuário pode visualizar, gerenciar ou desativar esse armazenamento a qualquer momento.</p>
-<p>A AIVAX exige que os provedores de inferência utilizados não coletem dados de prompts para treinamento de modelos. No entanto, como essa garantia depende da conformidade de cada provedor, a AIVAX não pode assegurá-la de forma absoluta. Recomendamos evitar o compartilhamento de informações sensíveis ou pessoais nos prompts como medida de precaução adicional. Nenhum provedor que coleta dados de prompts para treinamento é utilizado pela AIVAX.</p>
+<h2 id="model-families-and-underlying-providers">Model Families and Underlying Providers</h2>
+<p>The model catalog also identifies model families or underlying providers that may be selected directly or reached through aggregators such as OpenRouter or NagaAI. Not every request is sent to every provider.</p>
+<table>
+<thead>
+<tr>
+<th>Provider</th>
+<th>Used for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://openai.com/">OpenAI</a></td>
+<td>OpenAI model families exposed in the catalog or compatible integrations</td>
+</tr>
+<tr>
+<td><a href="https://cloud.google.com/vertex-ai">Google Vertex AI</a></td>
+<td>Gemini and other Google model families</td>
+</tr>
+<tr>
+<td><a href="https://www.anthropic.com/">Anthropic</a></td>
+<td>Claude model families</td>
+</tr>
+<tr>
+<td><a href="https://aws.amazon.com/">AWS</a></td>
+<td>AWS-hosted model families such as Amazon Nova or Bedrock-backed providers</td>
+</tr>
+<tr>
+<td><a href="https://cohere.com/">Cohere</a></td>
+<td>Cohere model families</td>
+</tr>
+<tr>
+<td><a href="https://x.ai/">xAI</a></td>
+<td>Grok model families and Grok Voice through configured routes</td>
+</tr>
+<tr>
+<td><a href="https://mistral.ai/">Mistral AI</a></td>
+<td>Mistral model families</td>
+</tr>
+<tr>
+<td><a href="https://www.deepseek.com/">DeepSeek</a></td>
+<td>DeepSeek model families</td>
+</tr>
+<tr>
+<td><a href="https://z.ai/">Z.ai</a></td>
+<td>GLM/Z.ai model families</td>
+</tr>
+<tr>
+<td><a href="https://www.alibabacloud.com/">Alibaba Cloud</a></td>
+<td>Qwen/Alibaba model families</td>
+</tr>
+<tr>
+<td><a href="https://www.cerebras.ai/">Cerebras</a></td>
+<td>Cerebras model families</td>
+</tr>
+<tr>
+<td><a href="https://nebius.com/">Nebius</a></td>
+<td>Nebius-backed model families</td>
+</tr>
+<tr>
+<td><a href="https://fireworks.ai/">Fireworks AI</a></td>
+<td>Fireworks-backed model families</td>
+</tr>
+<tr>
+<td><a href="https://novita.ai/">Novita</a></td>
+<td>Novita-backed model families</td>
+</tr>
+<tr>
+<td><a href="https://azure.microsoft.com/">Azure</a></td>
+<td>Azure-backed model families</td>
+</tr>
+<tr>
+<td><a href="https://longcat.chat/">LongCat</a></td>
+<td>LongCat/Meituan model family metadata</td>
+</tr>
+</tbody>
+</table>
+<h2 id="data-handling-notes">Data Handling Notes</h2>
+<p>AIVAX does not use Account Manager Input Content, Generated Content, or Conversations to train proprietary AIVAX models.</p>
+<p>Third-party providers and aggregators may have their own processing, retention, abuse-monitoring, and model-improvement rules. The selected model, provider, tool, or integration determines which third party receives data for a specific request.</p>
+<p>Avoid sending sensitive, confidential, regulated, or personal information to a provider unless you have reviewed that provider's current terms and have an appropriate legal basis for the processing.</p>
 
 </article>
 

@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Infer&#234;ncia | AIVAX </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="Infer&#234;ncia | AIVAX ">
+
+
+        <link rel="icon" href="../../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+        
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
+
+        <meta name="docfx:rel" content="../../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/pt-br/inference/inference.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+                
+        <script>            
+            function switchLanguage(lang) {
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../../index.html">
+                        <img id="logo" class="svg" src="../../../assets/img/aivax.png" alt="AIVAX">
+                        AIVAX
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="inferência">Inferência</h1>
+
+<p>A AIVAX utiliza uma versão customizada do antigo protocolo <code>chat/completions</code> criado pela OpenAI. Essas customizações são aditivas: não alteram o comportamento esperado do protocolo e é totalmente compatível com clientes e SDKs OpenAI.</p>
+<p>Algumas customizações foram feitas para tornar a comunicação com o modelo normalizada, compatível e comunicar com os serviços que a AIVAX fornece.</p>
+<h2 id="entrada-e-multi-modalidade">Entrada e multi-modalidade</h2>
+<p>AIVAX é totalmente compatível com multi-modalidade. É possível encaminhar áudios, imagens, vídeos e documentos para o modelo usando a API compatível:</p>
+<div class="request-item post">
+    <span>POST</span>
+    <span>
+        /v1/chat/completions
+    </span>
+</div>
+<pre><code class="lang-json">{
+    &quot;model&quot;: &quot;@google/gemini-3-flash&quot;,
+    &quot;messages&quot;: [
+        {
+            &quot;role&quot;: &quot;user&quot;,
+            &quot;content&quot;: [
+                { 
+                    &quot;type&quot;: &quot;text&quot;,
+                    &quot;text&quot;: &quot;Describe this image briefly.&quot;
+                },
+                {
+                    &quot;type&quot;: &quot;image_url&quot;,
+                    &quot;image_url&quot;: {
+                        &quot;url&quot;: &quot;https://example.com/receipt.png&quot;,
+                        &quot;detail&quot;: &quot;auto&quot;
+                    }
+                },
+                {
+                    &quot;type&quot;: &quot;input_audio&quot;,
+                    &quot;input_audio&quot;: {
+                        &quot;data&quot;: &quot;base64-encoded-audio&quot;,
+                        &quot;format&quot;: &quot;wav&quot;
+                    }
+                },
+                {
+                    &quot;type&quot;: &quot;file&quot;,
+                    &quot;file&quot;: {
+                        &quot;filename&quot;: &quot;document.pdf&quot;,
+                        &quot;file_data&quot;: &quot;https://bitcoin.org/bitcoin.pdf&quot;,
+                    },
+                },
+            ]
+        }
+    ]
+}
+</code></pre>
+<ul>
+<li>Interpretação de imagens:
+<ul>
+<li>conteúdo tipo <code>image_url</code></li>
+<li><code>image_url.url</code> pode ser uma URL externa ou um data-url codificado em base64 (<code>data:image/png;base64,...</code>).</li>
+<li><code>image_url.detail</code> pode ser nulo, <code>low</code>, <code>high</code> ou <code>auto</code>. Nem todos modelos suportam este parâmetro.</li>
+</ul>
+</li>
+<li>Interpretação de vídeo:
+<ul>
+<li>conteúdo tipo <code>video_url</code></li>
+<li><code>video_url.url</code> pode ser uma URL externa ou um data-url codificado em base64 (<code>data:video/mp4;base64,...</code>). Modelos Gemini geralmente suportam links do YouTube. É altamente recomendado fornecer uma URL ao invés de um conteúdo inline.</li>
+</ul>
+</li>
+<li>Interpretação de áudio:
+<ul>
+<li>conteúdo tipo <code>input_audio</code></li>
+<li><code>input_audio.data</code> áudio codificado em base64. Não são aceitos links externos em áudios.</li>
+<li><code>input_audio.format</code> formato do áudio. Geralmente modelos aceitam melhor <code>wav</code> e <code>mp3</code>, mas certos modelos podem expandir para <code>aiff</code>, <code>aac</code>, <code>ogg</code>, <code>flac</code>, <code>m4a</code> e <code>pcm16/24</code>.</li>
+</ul>
+</li>
+<li>Interpretação de arquivos:
+<ul>
+<li>conteúdo tipo <code>file</code></li>
+<li><code>file.filename</code> nome do arquivo. É útil para guiar o modelo para o que esse arquivo representa.</li>
+<li><code>file.file_data</code> pode ser uma URL externa ou um data-url codificado em base64. Alguns modelos suportam mais formatos além de PDFs.</li>
+</ul>
+</li>
+</ul>
+<p>É necessário saber que o modelo que está usando suporta a modalidade de entrada que está enviando. Para certos tipos de arquivos, modelos tendem à rejeitar por regras específicas de tamanhos e formatos.</p>
+<p>Tenha certeza que links para recursos externos sejam acessíveis sem autenticação e sem firewall, pois respostas incorretas, redirecionamentos ou renderização preguiçosa (JavaScript) poderão atirar uma exceção na inferência.</p>
+<p>Você também pode fornecer uma entrada textual simples usando o parâmetro <code>prompt</code>:</p>
+<div class="request-item post">
+    <span>POST</span>
+    <span>
+        /v1/chat/completions
+    </span>
+</div>
+<pre><code class="lang-json">{
+    &quot;model&quot;: &quot;@google/gemini-3-flash&quot;,
+    &quot;prompt&quot;: &quot;Say hello&quot;
+}
+</code></pre>
+<p>É possível também ativar o processamento multi-modalidades do lado do servidor da AIVAX, convertendo conteúdo multi-modal para texto para modelos que não possuem capacidades de leitura multi-modal:</p>
+<div class="request-item post">
+    <span>POST</span>
+    <span>
+        /v1/chat/completions
+    </span>
+</div>
+<pre><code class="lang-json">{
+    &quot;model&quot;: &quot;@meta/llama-3.3-70b&quot;,
+    &quot;messages&quot;: [
+        {
+            &quot;role&quot;: &quot;user&quot;,
+            &quot;content&quot;: [
+                { 
+                    &quot;type&quot;: &quot;text&quot;,
+                    &quot;text&quot;: &quot;Describe this file briefly.&quot;
+                },
+                {
+                    &quot;type&quot;: &quot;file&quot;,
+                    &quot;file&quot;: {
+                        &quot;filename&quot;: &quot;document.pdf&quot;,
+                        &quot;file_data&quot;: &quot;https://bitcoin.org/bitcoin.pdf&quot;,
+                    },
+                },
+            ]
+        }
+    ],
+    &quot;multimodal_preprocess&quot;: [
+        &quot;File&quot;
+    ]
+}
+</code></pre>
+<p>Opções disponíveis de pre-processamento multi-modalidades são:</p>
+<ul>
+<li><code>Image</code></li>
+<li><code>File</code></li>
+<li><code>Video</code></li>
+<li><code>Audio</code></li>
+<li><code>OtherFiles</code></li>
+<li><code>All</code></li>
+</ul>
+<blockquote>
+<p>Dica: A modalidade <code>OtherFiles</code> processa vários tipos de arquivos, como PDFs, planilhas do excel, apresentações do powerpoint, usando um motor interno da AIVAX e essa modalidade não possui custo.</p>
+</blockquote>
+<p>Arquivos e vídeos exigem saldo mínimo de $0,50 na conta. Imagens e áudios exigem saldo mínimo de $0,10.</p>
+<p>Use multimodalidade direta quando o modelo escolhido já entende aquele tipo de entrada. Use <code>multimodal_preprocess</code> quando você precisa transformar a entrada em texto antes de enviá-la ao modelo principal, normalmente porque o modelo é barato, rápido ou especializado em texto, mas não entende imagem, áudio, vídeo ou arquivo. Essa escolha muda a forma como a conversa é construída: com entrada multimodal direta, o conteúdo original chega ao modelo; com pré-processamento, a AIVAX gera uma descrição textual e essa descrição entra no contexto. O pré-processamento é especialmente útil para PDFs, planilhas, apresentações e imagens simples que só precisam ser resumidas ou extraídas antes de uma resposta textual.</p>
+<p>Para arquivos, prefira URLs públicas quando o arquivo é grande ou quando você quer evitar payloads base64 muito longos. Para imagens pequenas, data URLs podem simplificar a integração. Para áudio, envie base64 no campo <code>input_audio.data</code> e informe <code>format</code>; links externos de áudio não são aceitos nesse campo. Para vídeo, prefira URL externa, principalmente quando o provedor do modelo consegue buscar o conteúdo diretamente. Em qualquer modalidade, o recurso precisa estar acessível sem autenticação, sem bloqueios por IP e sem depender de JavaScript para carregar o conteúdo principal.</p>
+<p>Quando uma inferência multimodal falhar, reduza o problema. Primeiro, teste uma mensagem textual simples com o mesmo modelo. Depois, teste um único anexo pequeno. Em seguida, teste o mesmo anexo com <code>multimodal_preprocess</code>. Se o modelo direto falha e o pré-processamento funciona, o problema provavelmente é suporte multimodal do modelo. Se ambos falham, revise URL, formato, tamanho, saldo mínimo e acessibilidade do recurso. Em produção, trate anexos como entradas que podem falhar e escreva a experiência do usuário para pedir reenvio, usar outro formato ou responder com uma limitação clara.</p>
+<h2 id="respostas-estruturadas">Respostas estruturadas</h2>
+<p>AIVAX suporta respostas estruturas e JSON healing, que automaticamente corrije JSONs defeituosos ou que não seguem o schema fornecido durante inferência.</p>
+<div class="request-item post">
+    <span>POST</span>
+    <span>
+        /v1/chat/completions
+    </span>
+</div>
+<pre><code class="lang-json">{
+    &quot;model&quot;: &quot;@google/gemini-2.5-flash&quot;,
+    &quot;prompt&quot;: &quot;Pesquise por notícias em São José do Rio Preto.&quot;,
+    &quot;stream&quot;: true,
+    &quot;builtin_tools&quot;: {
+        &quot;tools&quot;: [
+            &quot;WebSearch&quot;
+        ],
+        &quot;options&quot;: {
+            &quot;web_search_mode&quot;: &quot;full&quot;
+        }
+    },
+    &quot;response_schema&quot;: {
+        &quot;type&quot;: &quot;object&quot;,
+        &quot;properties&quot;: {
+            &quot;news&quot;: {
+                &quot;type&quot;: &quot;array&quot;,
+                &quot;items&quot;: {
+                    &quot;type&quot;: &quot;object&quot;,
+                    &quot;properties&quot;: {
+                        &quot;title&quot;: {
+                            &quot;type&quot;: &quot;string&quot;,
+                            &quot;description&quot;: &quot;Título da notícia&quot;
+                        },
+                        &quot;content&quot;: {
+                            &quot;type&quot;: &quot;string&quot;,
+                            &quot;description&quot;: &quot;Resumo da notícia&quot;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+</code></pre>
+<p>Leia mais sobre respostas estruturadas em sua <a href="/docs/pt-br/inference/structured-responses">página dedicada</a>.</p>
+<h2 id="funções-em-demanda">Funções em demanda</h2>
+<p>Você pode usar ferramentas embutidas da AIVAX durante inferência sem a necessidade de definir um gateway de IA para isso.</p>
+<div class="request-item post">
+    <span>POST</span>
+    <span>
+        /v1/chat/completions
+    </span>
+</div>
+<pre><code class="lang-json">{
+    &quot;model&quot;: &quot;@google/gemini-2.5-flash&quot;,
+    &quot;prompt&quot;: &quot;Pesquise por notícias em São José do Rio Preto.&quot;,
+    &quot;stream&quot;: true,
+    &quot;builtin_tools&quot;: {
+        &quot;tools&quot;: [
+            &quot;WebSearch&quot;
+        ],
+        &quot;options&quot;: {
+            &quot;web_search_mode&quot;: &quot;full&quot;
+        }
+    }
+}
+</code></pre>
+<p>A lista de opções e ferramentas embutidas disponíveis está disponível na página de <a href="/docs/pt-br/tools/builtin-tools">ferramentas embutidas</a>.</p>
+<p>Ferramentas em demanda são adequadas para chamadas pontuais, protótipos e integrações que não precisam de um gateway persistente. Se a mesma aplicação sempre usa as mesmas ferramentas, prefira configurá-las no AI Gateway para manter a política centralizada. Em chamadas diretas, o cliente que faz a requisição controla a lista de ferramentas a cada chamada; em gateways, o administrador do agente controla o conjunto disponível. Essa diferença é importante para segurança: ferramentas como <code>Request</code>, <code>AdvancedWebUsage</code>, geração de documentos e pesquisa web podem acessar recursos externos ou gerar conteúdo hospedado, então devem ser habilitadas com intenção clara.</p>
+<h2 id="corpo-customizado-em-resposta">Corpo customizado em resposta</h2>
+<p>Ao usar gateways de IA com API key fornecida (BYOK), você pode encaminhar JSON customizado na requisição, substituindo o JSON comum da AIVAX:</p>
+<div class="request-item post">
+    <span>POST</span>
+    <span>
+        /v1/chat/completions
+    </span>
+</div>
+<pre><code class="lang-json">{
+    &quot;model&quot;: &quot;my-custom-model:abc4&quot;,
+    &quot;messages&quot;: [...],
+    &quot;extra_body&quot;: {
+        &quot;reasoning&quot;: {
+            &quot;enabled&quot;: true
+        }
+    }
+}
+</code></pre>
+<p>Essa propriedade não é compatível com modelos roteados pela AIVAX.</p>
+<h2 id="explicações-de-ferramentas">Explicações de ferramentas</h2>
+<p>Modelos invocam ferramentas durante ações, seja ferramentas locais (client-side) ou ferramentas do lado do servidor (embutidas, MCP ou protocolo de funções). Ao encaminhar a propriedade <code>tool_invocation_explanations</code>, você pode incluir um parâmetro adicional no corpo da função para o modelo explicar por que está chamando aquela ferramenta. Isso pode ser útil para exibir ao usuário de forma agradável e em tempo real do que o modelo está fazendo para responder o usuário.</p>
+<div class="request-item post">
+    <span>POST</span>
+    <span>
+        /v1/chat/completions
+    </span>
+</div>
+<pre><code class="lang-json">{
+    &quot;model&quot;: &quot;my-custom-model:abc4&quot;,
+    &quot;messages&quot;: [...],
+    &quot;tool_invocation_explanations&quot;: true
+}
+</code></pre>
+<p>Nisso, chunks de ferramentas de servidor <code>servertool</code> terão uma propriedade da explicação da ferramenta:</p>
+<pre><code class="lang-json">{
+  &quot;id&quot;: &quot;chatcmpl-019e1d73-cf92-7f3f-bac7-d0869770cda8&quot;,
+  &quot;object&quot;: &quot;chat.completion.chunk&quot;,
+  &quot;created&quot;: 1778610589,
+  &quot;model&quot;: &quot;@x-ai/grok-4.3&quot;,
+  &quot;system_fingerprint&quot;: &quot;fp_uu72kl&quot;,
+  &quot;choices&quot;: [],
+  &quot;servertool&quot;: {
+    &quot;name&quot;: &quot;web_search&quot;,
+    &quot;id&quot;: &quot;call-70944e44-fbc5-4906-9f9f-99559c05db11-0&quot;,
+    &quot;contents&quot;: &quot;{\&quot;query\&quot;:\&quot;What's the weather forecast for today?\&quot;,\&quot;_tool_reason\&quot;:\&quot;Searching for today's weather forecast online\&quot;,\&quot;_tool_goal\&quot;:\&quot;I need current weather information to provide an accurate forecast for today, as the user's location isn't specified so I'll use a general search to retrieve relevant data.\&quot;}&quot;,
+    &quot;state&quot;: &quot;Created&quot;,
+    &quot;explanation&quot;: {
+      &quot;reason&quot;: &quot;Searching for today's weather forecast online&quot;,
+      &quot;goal&quot;: &quot;I need current weather information to provide an accurate forecast for today, as the user's location isn't specified so I'll use a general search to retrieve relevant data.&quot;
+    }
+  },
+  &quot;usage&quot;: null
+}
+</code></pre>
+<h2 id="renderização-de-resposta">Renderização de resposta</h2>
+<p>É possível renderizar raciocínio e chamadas de ferramenta do lado do servidor para uma exibição em linha do tempo segmentada e em tempo real normalizando raciocínio em blocos XML customizados.</p>
+<p>Ao habilitar essa função, o modelo passará a responder agrupando suas chamadas de função e raciocínio em blocos <code>&lt;thinking_group&gt;</code> e <code>&lt;think&gt;</code>:</p>
+<pre><code>&lt;thinking-group&gt;
+
+&lt;think&gt;We need current weather forecast for São Paulo. Must use web_search tool. Provide meta fields. Search term likely &quot;São Paulo weather forecast today&quot;.&lt;/think&gt;
+
+&lt;tool&gt;&lt;toolname&gt;web_search&lt;/toolname&gt;&lt;toolreason&gt;Searching today's weather forecast for São Paulo&lt;/toolreason&gt;&lt;/tool&gt;
+
+&lt;think&gt;The search results are messy. Need specific forecast. Could open one of the Brazilweather.org pages. Let's open the English? The result appears to be Portuguese/Catalan. Use open? There's no open tool, only web_search. We may need to extract info from snippet. The snippet for tradefairdates shows temperature 14°C 20°C today 10.05.2026 (future). Not relevant. We need today's forecast. Likely we can answer based on typical current data, but should provide up-to-date. Could try another search with &quot;São Paulo weather today&quot; maybe results better. Let's call again.&lt;/think&gt;
+
+&lt;tool&gt;&lt;toolname&gt;web_search&lt;/toolname&gt;&lt;toolreason&gt;Searching for São Paulo Brazil weather today forecast&lt;/toolreason&gt;&lt;/tool&gt;
+
+&lt;think&gt;We should answer in English (conversation language). Provide forecast, temperature highs, lows, chance of rain, maybe wind.&lt;/think&gt;
+&lt;/thinking-group&gt;
+
+Here’s the weather outlook for **São Paulo (Brazil) today, May 12 2026**:
+
+...
+
+**Current conditions (as of 15:30 local time)** – Sunny, 20 °C (68 °F), light east breeze (~4 km/h), humidity 40 %, no precipitation observed.
+
+Overall, today will be comfortably warm and dry, with clear skies and virtually no rain expected.
+</code></pre>
+<p>É agrupado automaticamente em grupos de raciocínios trechos de pensamento emitidos pelo modelo e chamadas de ferramentas do lado do servidor consecutivos, e automaticamente terminado quando o modelo começa uma resposta.</p>
+<p>Essa função é indicada para renderizar um chat agradável e informativo ao usuário final, tratando os trechos XML como componentes ou especificações extendidas do leitor markdown da aplicação.</p>
+<h2 id="quando-usar-chamada-direta-ou-gateway">Quando usar chamada direta ou gateway</h2>
+<p>Use chamada direta para tarefas simples, testes, rotinas internas e integrações em que a aplicação já controla prompt, modelo, ferramentas e contexto. Ela é o caminho mais curto para chamar um modelo, enviar uma entrada multimodal, pedir uma resposta estruturada ou habilitar ferramentas embutidas por requisição. A chamada direta também é útil quando você quer alternar modelos dinamicamente pela aplicação e não precisa de uma configuração persistente no console.</p>
+<p>Use um AI Gateway quando o comportamento precisa ser estável, auditável e reutilizável. Gateways são melhores para assistentes de atendimento, bots em chat clients, agentes com RAG, ferramentas permanentes, workers, skills e configurações que vários clientes vão compartilhar. O gateway reduz repetição na aplicação e permite alterar comportamento sem mudar código. Uma boa regra prática: se você está copiando o mesmo prompt, a mesma lista de ferramentas ou a mesma coleção de RAG em várias chamadas, essa configuração provavelmente deveria estar em um gateway.</p>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/pt-br/inference/inference.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>

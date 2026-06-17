@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Habilidades | AIVAX </title>
+        <title>Skills | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="Habilidades | AIVAX ">
+        <meta name="title" content="Skills | AIVAX ">
 
 
         <link rel="icon" href="../../assets/img/favicon.ico">
@@ -47,7 +47,8 @@
                 
         <script>            
             function switchLanguage(lang) {
-                const docPart = window.location.pathname.match(/\/docs\/((en)\/)?(.*)/)[3];
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
                 const newPath = lang + docPart;
                 window.location.href = window.location.origin + newPath;
             }        
@@ -107,14 +108,14 @@
                         <ul class="dropdown-menu dropdown-menu-end language-dropdown">
                             <li>
                                 <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
-                                    <img src="/assets/flag/brazil.png">
-                                    Português
+                                    <img src="/assets/flag/usa.png">
+                                    English
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/en/')">
-                                    <img src="/assets/flag/usa.png">
-                                    English
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
                                 </a>
                             </li>
                         </ul>
@@ -122,146 +123,146 @@
                 </div>
 
                 <article data-uid="">
-<h1 id="habilidades">Habilidades</h1>
+<h1 id="skills">Skills</h1>
 
-<p>Habilidades (também conhecido como skills) podem ser usadas para melhorar como seu agente performa em tarefas específicas. Habilidades são instruções especiais que são recuperadas por demanda, e o seu agente carrega essas habilidades conforme necessita.</p>
-<p>O ideal é que seu agente só use uma habilidade quando relevante para a tarefa que está desempenhando. Ela é embutida na conversa através de uma ferramenta especial e instruções sobre habilidades são adicionadas no contexto, indicando que o agente possui habilidades fornecidas no contexto e que podem ser usadas na conversa.</p>
-<h2 id="como-funcionam-as-habilidades">Como funcionam as habilidades?</h2>
-<p>As habilidades são primariamente fornecidas através de nome e uma breve descrição do que aquela habilidade é e quando ela deve ser usada. Você pode ter várias habilidades em sua conta, mas usar somente parte delas em seu <a href="/docs/inference/ai-gateway">AI Gateway</a>. As habilidades ativadas no AI Gateway são injetadas nas instruções de sistema do seu modelo e uma função adicional é adicionada no contexto.</p>
-<p>Quando o modelo chama a ferramenta de leitura de habilidades, as instruções daquela habilidade é inserida nas instruções do sistema do contexto de forma dinâmica. Somente uma habilidade pode ser ativada por contexto, e o LLM pode alterar a habilidade ativa conforme necessita.</p>
-<p>Para que isso funcione, o modelo base escolhido deve suportar <strong>chamadas de função</strong> e <strong>instruções de sistema</strong>.</p>
+<p>Skills (also known as abilities) can be used to improve how your agent performs on specific tasks. Skills are special instructions that are retrieved on demand, and your agent loads these skills as needed.</p>
+<p>Ideally, your agent should only use a skill when it is relevant to the task it is performing. It is embedded in the conversation through a special tool, and skill instructions are added to the context, indicating that the agent has context provided in the context that can be used in the conversation.</p>
+<h2 id="how-do-skills-work">How do skills work?</h2>
+<p>Skills are primarily provided through a slug and a brief description of what that skill is and when it should be used. You can have multiple skills in your account, but only use a subset of them in your <a href="/docs/inference/ai-gateway">AI Gateway</a>. The skills enabled in the AI Gateway are listed in the model’s system instructions and the <code>read_skill</code> function is added to the context.</p>
+<p>When the model calls <code>read_skill</code>, it passes an array of skill slugs. The instructions for the matching skills are inserted into the system instructions of the next context turn inside <code>&lt;activated_skill&gt;</code> blocks. More than one skill can be activated when a task spans multiple domains, and the model can call <code>read_skill</code> again with a different list when the active task changes.</p>
+<p>For this to work, the chosen base model must support <strong>function calls</strong> and <strong>system instructions</strong>.</p>
 <ul>
-<li>Caso seu modelo não suporte chamadas de função, considere usar um <a href="/docs/inference/pipelines">tool handler</a> para manipular chamadas de função.</li>
-<li>Caso seu modelo não suporte instruções de sistema, considere usar a flag <code>No system instructions</code>, que fornece instruções de sistema como uma mensagem de usuário.</li>
+<li>If your model does not support function calls, consider using a <a href="/docs/inference/pipelines">tool handler</a> to handle function calls.</li>
+<li>If your model does not support system instructions, consider using the <code>No system instructions</code> flag, which provides system instructions as a user message.</li>
 </ul>
-<p>Modelos maiores tendem à seguir estritamente instruções e chamadas de função. Realize testes para saber se seu modelo está alterando suas habilidades conforme necessário.</p>
-<h2 id="estrutura-e-operação">Estrutura e operação</h2>
-<p>Uma habilidade possui <code>slug</code>, <code>description</code>, <code>instructions</code> e <code>options</code>. O <code>slug</code> é o identificador técnico usado pela conta e deve ser curto, estável e legível. A <code>description</code> é o texto que ajuda o modelo a decidir quando aquela habilidade deve ser carregada; ela precisa explicar o cenário de uso, não apenas repetir o nome. As <code>instructions</code> são o conteúdo completo que será inserido quando a habilidade for ativada. Em <code>options</code>, é possível definir <code>instructionSources</code>, para carregar instruções adicionais de fontes remotas, e <code>allowedToolsNames</code>, para controlar quais ferramentas ficam associadas àquela habilidade.</p>
-<p>Escreva a descrição como uma regra de roteamento. Uma descrição como “habilidade jurídica” é fraca porque não diz quando usar. Uma descrição melhor seria “use quando o usuário pedir análise, revisão ou explicação de cláusulas contratuais em linguagem simples”. As instruções, por outro lado, devem ser operacionais: explique como responder, quais perguntas fazer quando faltam dados, quais ferramentas podem ser úteis, quais limites devem ser respeitados e qual formato final é esperado. O modelo lê a descrição para escolher a skill e lê as instruções para executar a tarefa.</p>
-<p><code>allowedToolsNames</code> é útil quando uma habilidade só deve expor parte das ferramentas do gateway. Por exemplo, uma skill de pesquisa pode permitir <code>web_search</code> e <code>open_url</code>, enquanto uma skill de geração visual pode permitir geração de imagem e página web. Se o gateway estiver configurado para esconder ferramentas sem skill, as ferramentas só ficam visíveis quando a habilidade relevante está ativa, reduzindo ruído no contexto e ajudando o modelo a escolher ações com mais precisão.</p>
-<p>Skills também podem ser importadas e exportadas em JSONL. Esse formato é útil para versionar habilidades, migrar configurações entre contas, manter um conjunto de skills em um repositório ou revisar mudanças antes de publicar. Cada linha deve representar uma skill com pelo menos <code>slug</code> e <code>instructions</code>; <code>description</code> e <code>options</code> podem complementar a configuração. Ao importar uma skill com <code>slug</code> já existente, a AIVAX atualiza a skill correspondente em vez de criar uma duplicata.</p>
-<h2 id="como-escrever-habilidades">Como escrever habilidades?</h2>
-<p>Escrever habilidades eficazes requer clareza e especificidade nas instruções. Aqui estão as principais diretrizes:</p>
-<h3 id="estrutura-de-uma-habilidade">Estrutura de uma habilidade</h3>
-<p>Uma habilidade bem escrita deve conter:</p>
+<p>Larger models tend to follow instructions and function calls very strictly. Run tests to see if your model is changing its skills as required.</p>
+<h2 id="structure-and-operation">Structure and operation</h2>
+<p>A skill has <code>slug</code>, <code>description</code>, <code>instructions</code>, and <code>options</code>. The <code>slug</code> is the technical identifier used by the account and must be 64 characters or fewer, using letters, numbers, underscores, periods, or hyphens. The <code>description</code> is the text that helps the model decide when that skill should be loaded; it needs to explain the usage scenario instead of repeating the name. The <code>instructions</code> are the full content that will be inserted when the skill is activated. In the current runtime path, <code>instructionSources</code> is stored and exported with the skill configuration, but only the inline <code>instructions</code> field is injected when the model activates a skill.</p>
+<p>Write the description as a routing rule. A description like “legal skill” is weak because it doesn’t say when to use it. A better description would be “use when the user asks for analysis, review, or explanation of contractual clauses in simple language.” The instructions, on the other hand, should be operational: explain how to respond, what questions to ask when data is missing, which tools may be useful, what limits must be respected, and the expected final format. The model reads the description to choose the skill and reads the instructions to perform the task.</p>
+<p><code>allowedToolsNames</code> is part of the skill configuration and is intended to associate runtime tool names with a skill, such as <code>web_search</code>, <code>open_url</code>, <code>generate_image</code>, or <code>generate_web_page</code>. In the current runtime path, the general always-visible tool list is the reliable way to keep shared tools visible when the gateway hides tools without a skill.</p>
+<p>Skills can also be imported and exported in JSONL. This format is useful for versioning skills, migrating settings between accounts, keeping a set of skills in a repository, or reviewing changes before publishing. Each line must represent a skill with at least <code>slug</code> and <code>instructions</code>; <code>description</code> and <code>options</code> can complement the configuration. The current import loop can process up to 10,001 lines. When importing a skill with an existing <code>slug</code>, AIVAX updates the corresponding skill instead of creating a duplicate.</p>
+<h2 id="how-to-write-skills">How to write skills?</h2>
+<p>Writing effective skills requires clarity and specificity in the instructions. Here are the main guidelines:</p>
+<h3 id="skill-structure">Skill structure</h3>
+<p>A well‑written skill should contain:</p>
 <ol>
-<li><p><strong>Nome claro e descritivo</strong>: Use nomes que identifiquem imediatamente o propósito da habilidade (ex: &quot;Análise de Código Python&quot;, &quot;Atendimento ao Cliente&quot;, &quot;Tradução Técnica&quot;).</p>
+<li><p><strong>Clear, descriptive slug</strong>: Use a short slug that immediately identifies the purpose of the skill, such as <code>python_code_analysis</code>, <code>customer_support</code>, or <code>technical_translation</code>.</p>
 </li>
-<li><p><strong>Descrição concisa</strong>: Forneça uma descrição breve (1-2 frases) que explique quando a habilidade deve ser ativada. Esta descrição é crucial, pois o modelo usa ela para decidir se deve carregar a habilidade.</p>
+<li><p><strong>Concise description</strong>: Provide a brief description (1–2 sentences) that explains when the skill should be activated. This description is crucial because the model uses it to decide whether to load the skill.</p>
 </li>
-<li><p><strong>Instruções detalhadas</strong>: As instruções propriamente ditas devem incluir:</p>
+<li><p><strong>Detailed instructions</strong>: The actual instructions should include:</p>
 <ul>
-<li>Objetivos claros da tarefa</li>
-<li>Formato esperado de resposta</li>
-<li>Regras específicas a seguir</li>
-<li>Exemplos quando apropriado</li>
-<li>Restrições ou limitações importantes</li>
+<li>Clear objectives of the task</li>
+<li>Expected response format</li>
+<li>Specific rules to follow</li>
+<li>Examples where appropriate</li>
+<li>Important constraints or limitations</li>
 </ul>
 </li>
 </ol>
-<h3 id="boas-práticas">Boas práticas</h3>
+<h3 id="best-practices">Best practices</h3>
 <ul>
-<li><strong>Seja específico</strong>: Evite instruções vagas. Em vez de &quot;seja útil&quot;, diga &quot;forneça explicações passo a passo com exemplos de código&quot;.</li>
-<li><strong>Use linguagem imperativa</strong>: Comece frases com verbos de ação (analise, explique, compare, liste).</li>
-<li><strong>Mantenha o escopo limitado</strong>: Cada habilidade deve focar em uma área específica de conhecimento ou tipo de tarefa.</li>
-<li><strong>Teste iterativamente</strong>: Refine suas habilidades baseado em como o modelo responde na prática.</li>
-<li><strong>Evite redundância</strong>: Não repita informações já presentes nas instruções base do sistema.</li>
+<li><strong>Be specific</strong>: Avoid vague instructions. Instead of “be helpful,” say “provide step‑by‑step explanations with code examples.”</li>
+<li><strong>Use imperative language</strong>: Start sentences with action verbs (analyze, explain, compare, list).</li>
+<li><strong>Keep the scope limited</strong>: Each skill should focus on a specific knowledge area or type of task.</li>
+<li><strong>Iteratively test</strong>: Refine your skills based on how the model responds in practice.</li>
+<li><strong>Avoid redundancy</strong>: Do not repeat information already present in the base system instructions.</li>
 </ul>
-<h3 id="exemplo-de-habilidade">Exemplo de habilidade</h3>
+<h3 id="skill-example">Skill example</h3>
 <ul>
-<li>Nome: Análise de Performance de Código</li>
-<li>Descrição: Use quando o usuário pedir análise de performance, otimização ou identificação de gargalos em código.</li>
+<li>Name: Code Performance Analysis</li>
+<li>Description: Use when the user asks for performance analysis, optimization, or bottleneck identification in code.</li>
 </ul>
-<pre><code class="lang-markdown">- Analise o código fornecido identificando possíveis gargalos de performance
-- Considere complexidade temporal (Big O) e uso de memória
-- Sugira otimizações específicas com exemplos de código
-- Explique o impacto de cada otimização proposta
-- Priorize legibilidade e manutenibilidade junto com performance
+<pre><code class="lang-markdown">- Analyze the provided code identifying possible performance bottlenecks
+- Consider temporal complexity (Big O) and memory usage
+- Suggest specific optimizations with code examples
+- Explain the impact of each proposed optimization
+- Prioritize readability and maintainability alongside performance
 </code></pre>
-<h2 id="quando-usar-habilidades">Quando usar habilidades?</h2>
-<p>Habilidades são mais úteis em cenários específicos onde você precisa de comportamento especializado:</p>
-<h3 id="cenários-ideais">Cenários ideais</h3>
-<p><strong>1. Conhecimento especializado de domínio</strong></p>
+<h2 id="when-to-use-skills">When to use skills?</h2>
+<p>Skills are most useful in specific scenarios where you need specialized behavior:</p>
+<h3 id="ideal-scenarios">Ideal scenarios</h3>
+<p><strong>1. Domain‑specific expertise</strong></p>
 <ul>
-<li>Terminologia técnica específica de uma indústria</li>
-<li>Conformidade com regulamentações ou padrões</li>
-<li>Metodologias específicas (Scrum, ITIL, SOC 2, etc.)</li>
+<li>Technical terminology specific to an industry</li>
+<li>Compliance with regulations or standards</li>
+<li>Specific methodologies (Scrum, ITIL, SOC 2, etc.)</li>
 </ul>
-<p><strong>2. Mudança de tom ou estilo</strong></p>
+<p><strong>2. Tone or style shift</strong></p>
 <ul>
-<li>Atendimento formal vs. casual</li>
-<li>Comunicação técnica vs. simplificada</li>
-<li>Diferentes personas ou papéis</li>
+<li>Formal vs. casual service</li>
+<li>Technical vs. simplified communication</li>
+<li>Different personas or roles</li>
 </ul>
-<p><strong>3. Processos complexos e estruturados</strong></p>
+<p><strong>3. Complex, structured processes</strong></p>
 <ul>
-<li>Fluxos de trabalho multi-etapa</li>
-<li>Análises que seguem frameworks específicos</li>
-<li>Geração de documentos com formatos rigorosos</li>
+<li>Multi‑step workflows</li>
+<li>Analyses that follow specific frameworks</li>
+<li>Document generation with strict formats</li>
 </ul>
-<p><strong>4. Tarefas que exigem contexto extenso</strong></p>
+<p><strong>4. Tasks that require extensive context</strong></p>
 <ul>
-<li>Quando as instruções são muito longas para incluir sempre</li>
-<li>Conhecimento que só é relevante ocasionalmente</li>
-<li>Múltiplos conjuntos de regras mutuamente exclusivos</li>
+<li>When instructions are too long to include every time</li>
+<li>Knowledge that is only occasionally relevant</li>
+<li>Multiple mutually exclusive rule sets</li>
 </ul>
-<h3 id="quando-não-usar-habilidades">Quando NÃO usar habilidades</h3>
+<h3 id="when-not-to-use-skills">When NOT to use skills</h3>
 <ul>
-<li><strong>Instruções permanentes</strong>: Se as instruções devem estar sempre ativas, coloque-as nas instruções de sistema base.</li>
-<li><strong>Tarefas simples</strong>: Para respostas diretas que não exigem contexto especial.</li>
-<li><strong>Conhecimento geral</strong>: Informações que o modelo já conhece bem não precisam ser reforçadas via habilidades.</li>
-<li><strong>Muito poucas ou muitas habilidades</strong>: O ideal é ter entre 3-10 habilidades. Menos que isso, considere usar instruções base. Mais que isso, pode confundir o modelo.</li>
+<li><strong>Permanent instructions</strong>: If instructions should always be active, put them in the base system instructions.</li>
+<li><strong>Simple tasks</strong>: For direct answers that don’t require special context.</li>
+<li><strong>General knowledge</strong>: Information the model already knows well does not need to be reinforced via skills.</li>
+<li><strong>Too few or too many skills</strong>: Aim for 3–10 skills. Less than that, consider using base instructions. More than that can confuse the model.</li>
 </ul>
-<h3 id="comparação-habilidades-vs-instruções-de-sistema">Comparação: Habilidades vs. Instruções de Sistema</h3>
+<h3 id="comparison-skills-vs-system-instructions">Comparison: Skills vs. System Instructions</h3>
 <table>
 <thead>
 <tr>
-<th>Aspecto</th>
-<th>Habilidades</th>
-<th>Instruções de Sistema</th>
+<th>Aspect</th>
+<th>Skills</th>
+<th>System Instructions</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Quando aplicar</td>
-<td>Sob demanda, quando relevante</td>
-<td>Sempre ativas</td>
+<td>When to apply</td>
+<td>On demand, when relevant</td>
+<td>Always active</td>
 </tr>
 <tr>
-<td>Tamanho ideal</td>
-<td>Podem ser extensas</td>
-<td>Devem ser concisas</td>
+<td>Ideal size</td>
+<td>Can be extensive</td>
+<td>Should be concise</td>
 </tr>
 <tr>
-<td>Mudança de contexto</td>
-<td>Sim, podem alternar</td>
-<td>Não, são fixas</td>
+<td>Context switching</td>
+<td>Yes, can alternate</td>
+<td>No, fixed</td>
 </tr>
 <tr>
-<td>Uso de tokens</td>
-<td>Econômico (só quando necessário)</td>
-<td>Constante</td>
+<td>Token usage</td>
+<td>Economical (only when needed)</td>
+<td>Constant</td>
 </tr>
 <tr>
-<td>Melhor para</td>
-<td>Conhecimento especializado</td>
-<td>Comportamento base do agente</td>
+<td>Best for</td>
+<td>Specialized knowledge</td>
+<td>Base agent behavior</td>
 </tr>
 </tbody>
 </table>
-<h3 id="dicas-de-implementação">Dicas de implementação</h3>
+<h3 id="implementation-tips">Implementation tips</h3>
 <ul>
-<li><strong>Comece pequeno</strong>: Implemente 2-3 habilidades inicialmente e expanda conforme necessário.</li>
-<li><strong>Monitore o uso</strong>: Verifique se o modelo está ativando as habilidades corretamente.</li>
-<li><strong>Evite sobreposição</strong>: Habilidades com descrições similares podem confundir o modelo.</li>
-<li><strong>Teste a transição</strong>: Certifique-se de que o modelo muda de habilidade quando apropriado.</li>
+<li><strong>Start small</strong>: Implement 2–3 skills initially and expand as needed.</li>
+<li><strong>Monitor usage</strong>: Check that the model is activating skills correctly.</li>
+<li><strong>Avoid overlap</strong>: Skills with similar descriptions can confuse the model.</li>
+<li><strong>Test transitions</strong>: Ensure the model switches skills when appropriate.</li>
 </ul>
-<h2 id="comparando-skills-rag-e-system-prompt">Comparando Skills, RAG e System Prompt</h2>
-<p>Para entender melhor quando e como usar habilidades em comparação com outras técnicas como <strong>RAG (Retrieval-Augmented Generation)</strong> e <strong>System Prompt (Instruções de Sistema)</strong>, use as orientações desta página em conjunto com a documentação de <a href="/docs/rag/collections">coleções</a> e <a href="/docs/inference/pipelines">pipelines</a>.</p>
-<p>Veja também:</p>
+<h2 id="comparing-skills-rag-and-system-prompt">Comparing Skills, RAG, and System Prompt</h2>
+<p>To better understand when and how to use skills compared to other techniques such as <strong>RAG (Retrieval‑Augmented Generation)</strong> and <strong>System Prompt (System Instructions)</strong>, use the guidance on this page together with the documentation for <a href="/docs/rag/collections">collections</a> and <a href="/docs/inference/pipelines">pipelines</a>.</p>
+<p>See also:</p>
 <ul>
 <li><a href="https://www.promptingguide.ai/">Prompt Engineering Guide</a></li>
-<li><a href="https://www.anthropic.com/index/building-effective-agents">Building Production-Ready RAG Applications</a></li>
+<li><a href="https://www.anthropic.com/index/building-effective-agents">Building Production‑Ready RAG Applications</a></li>
 <li><a href="/docs/inference/ai-gateway">AI Gateway Documentation</a></li>
 </ul>
 

@@ -47,7 +47,8 @@
                 
         <script>            
             function switchLanguage(lang) {
-                const docPart = window.location.pathname.match(/\/docs\/((en)\/)?(.*)/)[3];
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
                 const newPath = lang + docPart;
                 window.location.href = window.location.origin + newPath;
             }        
@@ -93,14 +94,14 @@
                         <ul class="dropdown-menu dropdown-menu-end language-dropdown">
                             <li>
                                 <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
-                                    <img src="/assets/flag/brazil.png">
-                                    Português
+                                    <img src="/assets/flag/usa.png">
+                                    English
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/en/')">
-                                    <img src="/assets/flag/usa.png">
-                                    English
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
                                 </a>
                             </li>
                         </ul>
@@ -110,8 +111,8 @@
                 <article data-uid="">
 <h1 id="aivax-documentation">AIVAX Documentation</h1>
 
-<p>This repository contains the source code for the AIVAX documentation website.</p>
-<h2 id="building">Building</h2>
+<p>This repository contains the source files for the AIVAX documentation website.</p>
+<h2 id="build">Build</h2>
 <p>Use the project scripts when possible:</p>
 <ol>
 <li>Run <code>comp.ps1</code> for a fast rebuild of Cascadium styles and DocFX.</li>
@@ -120,19 +121,23 @@
 </ol>
 <div class="WARNING">
 <h5>Warning</h5>
-<p>Please, <strong>do not</strong> use the docfx version <strong>2.78.0</strong> or later. This version has a bug that changes the documentation navigation layout. See the <a href="https://github.com/dotnet/docfx/issues/10424">tracking issue</a>.</p>
-<p>Prefer the version <strong>2.76.0</strong>:</p>
-<pre><code>dotnet tool install -g docfx --version 2.76.0
+<p>Do not use DocFX 2.78.0 or later. That version changes the documentation navigation layout. See the <a href="https://github.com/dotnet/docfx/issues/10424">tracking issue</a>.</p>
+<p>Prefer DocFX 2.76.0:</p>
+<pre><code class="lang-text">dotnet tool install -g docfx --version 2.76.0
 </code></pre>
 </div>
-<p>Then you're ready to go and you'll have the static website files at <code>/_site</code>.</p>
-<h2 id="contributing">Contributing</h2>
-<p>Contributions are always welcome. Contribute with spelling corrections, fixing broken links and more.</p>
-<p>Edit the Portuguese source files under <code>docs/</code>. Do not edit generated output under <code>_site/</code>, generated API artifacts under <code>ref/</code>, or translated files under <code>docs/en/</code> unless the translation pipeline is being intentionally updated.</p>
-<div class="NOTE">
-<h5>Note</h5>
-<p>Please do not edit API specification files. These files are generated. If you want to edit API documentation, update it in the repository where the API code is hosted.</p>
-</div>
+<p>Generated static files are written to <code>_site/</code>.</p>
+<h2 id="contribute">Contribute</h2>
+<p>Keep documentation changes focused and edit source files, not generated output.</p>
+<ul>
+<li>Root navigation is defined in <code>toc.yml</code>.</li>
+<li>Section navigation is defined in <code>docs/toc.yml</code>.</li>
+<li>Documentation pages live under <code>docs/</code>.</li>
+<li>Portuguese documentation lives under <code>docs/pt-br/</code>.</li>
+<li>Generated API artifacts live under <code>ref/</code>.</li>
+<li>Generated site output lives under <code>_site/</code>.</li>
+</ul>
+<p>Do not edit <code>_site/</code>, <code>ref/</code>, or generated translation output by hand. If an API endpoint description is wrong, update the API source in the service repository that generates the reference.</p>
 
 </article>
 

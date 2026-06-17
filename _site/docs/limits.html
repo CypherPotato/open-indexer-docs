@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Planos e limites | AIVAX </title>
+        <title>Plans and Limits | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="Planos e limites | AIVAX ">
+        <meta name="title" content="Plans and Limits | AIVAX ">
 
 
         <link rel="icon" href="../assets/img/favicon.ico">
@@ -47,7 +47,8 @@
                 
         <script>            
             function switchLanguage(lang) {
-                const docPart = window.location.pathname.match(/\/docs\/((en)\/)?(.*)/)[3];
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
                 const newPath = lang + docPart;
                 window.location.href = window.location.origin + newPath;
             }        
@@ -107,14 +108,14 @@
                         <ul class="dropdown-menu dropdown-menu-end language-dropdown">
                             <li>
                                 <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
-                                    <img src="/assets/flag/brazil.png">
-                                    Português
+                                    <img src="/assets/flag/usa.png">
+                                    English
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/en/')">
-                                    <img src="/assets/flag/usa.png">
-                                    English
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
                                 </a>
                             </li>
                         </ul>
@@ -122,431 +123,343 @@
                 </div>
 
                 <article data-uid="">
-<h1 id="planos-e-limites">Planos e limites</h1>
+<h1 id="plans-and-limits">Plans and Limits</h1>
 
-<h2 id="planos">Planos</h2>
-<p>A AIVAX oferece três planos de assinatura: <strong>Free</strong>, <strong>Pro</strong> e <strong>Max</strong>. Para comparar diferenças comerciais, recursos inclusos e preços atualizados entre os planos, consulte a <a href="https://aivax.net/pricing">página de preços da AIVAX</a>. Esta página mantém apenas limites técnicos úteis para integração e operação.</p>
-<p>Todos os planos são renovados mensalmente e não exigem compromisso de longo prazo. Ao assinar um plano, o valor da assinatura é deduzido automaticamente do saldo da conta. No dia 1 de todo mês, o valor da assinatura é renovado novamente se existir saldo suficiente em conta para a mensalidade atual. Ao assinar um plano após o primeiro dia do mês, o valor proporcional é cobrado para o período restante do mês, e a renovação completa ocorrerá no próximo ciclo mensal.</p>
-<p>Nenhum plano inclui créditos de uso, e os limites de uso são aplicados independentemente do saldo da conta, independente do saldo disponível em conta. Os planos implicam melhor em planos e recursos que são fornecidos no AIVAX, além da facilidade em concentrar o saldo para vários serviços diferentes em uma única carteira.</p>
-<p>É importante ressaltar que a utilização de recursos que envolvem custos é imediatamente interrompida quando o saldo da conta é zero ou negativo, independentemente do plano de assinatura. Portanto, é fundamental manter um saldo positivo para garantir a continuidade do acesso aos recursos e evitar interrupções no serviço.</p>
-<h2 id="limites">Limites</h2>
-<p>Os limites de uso regulam o número de requisições e recursos disponíveis conforme o plano de assinatura da sua conta.</p>
-<p>Limites aparecem de formas diferentes conforme o recurso. Em inferência, eles podem limitar requisições por minuto, tokens por minuto ou acesso a grupos de modelos. Em BYOK, eles limitam a quantidade de chamadas que passam pela infraestrutura da AIVAX mesmo quando o custo do provedor externo é seu. Em RAG, eles controlam quantidade de coleções, pesquisas por minuto, inserções por dia e tamanho de lotes JSONL. Em ferramentas embutidas, eles controlam quantas vezes uma ação de serviço pode ser executada por dia ou por período. Em Batch, eles controlam quantos itens podem ser processados em segundo plano conforme o plano.</p>
-<p>Quando um limite é atingido, o comportamento esperado é interromper, pausar ou retornar erro, dependendo do recurso. Uma chamada de inferência direta tende a retornar erro imediatamente. Um job de Batch pode ser pausado e retomado depois, porque ele é assíncrono. Uma ferramenta embutida pode falhar dentro da conversa e o modelo deve explicar a limitação ao usuário. Uma inserção de RAG acima do limite do plano deve ser dividida em lotes menores ou feita após ajuste de plano. Para diferenças comerciais, preços e recursos inclusos, use a <a href="https://aivax.net/pricing">página de preços da AIVAX</a>; esta página serve para orientar integração e operação.</p>
-<div class="tabGroup" id="tabgroup_1">
-<ul role="tablist">
-<li role="presentation">
-<a href="#tabpanel_1_free" role="tab" aria-controls="tabpanel_1_free" data-tab="free" tabindex="0" aria-selected="true">Free</a>
-</li>
-<li role="presentation">
-<a href="#tabpanel_1_pro" role="tab" aria-controls="tabpanel_1_pro" data-tab="pro" tabindex="-1">Pro</a>
-</li>
-<li role="presentation">
-<a href="#tabpanel_1_max" role="tab" aria-controls="tabpanel_1_max" data-tab="max" tabindex="-1">Max</a>
-</li>
+<p>AIVAX has three account plans: <strong>Free</strong>, <strong>Pro</strong>, and <strong>Max</strong>. The current plan is stored on the account and controls model access, commissions, rate limits, RAG quotas, tool limits, storage quota, conversation retention, and subscription-model reserve windows.</p>
+<p>For commercial subscription prices and plan packaging, use the <a href="https://aivax.net/pricing">AIVAX pricing page</a>. This page documents the technical limits implemented by the API.</p>
+<h2 id="how-limits-are-enforced">How limits are enforced</h2>
+<p>Limits are enforced at different layers:</p>
+<ul>
+<li>Authentication rejects missing, expired, or unknown API keys.</li>
+<li>Public API keys are restricted to public routes and have key-level and per-IP request and token limits.</li>
+<li>Balance middleware rejects billable requests when the account balance is below the required minimum.</li>
+<li>Storage middleware rejects requests when account storage exceeds the plan quota.</li>
+<li>Inference checks model access, request rate, input-token rate, BYOK rate, and Free-plan context size.</li>
+<li>RAG checks collection count, search rate, insertion rate, and JSONL import size.</li>
+<li>Built-in tools check daily service limits.</li>
+<li>Batch processing checks how many workflow items can be processed per day.</li>
 </ul>
-<section id="tabpanel_1_free" role="tabpanel" data-tab="free">
-
+<p>Reference:</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=Get%20Account%20Balance&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<h2 id="plan-summary">Plan summary</h2>
 <table>
 <thead>
 <tr>
-<th>Recurso</th>
-<th>Valor</th>
+<th>Feature</th>
+<th>Free</th>
+<th>Pro</th>
+<th>Max</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Acesso a modelos</td>
-<td>Modelos básicos</td>
+<td>Model access</td>
+<td>Low-price/basic models</td>
+<td>Advanced models</td>
+<td>All models</td>
 </tr>
 <tr>
-<td>Comissão sobre inferência</td>
-<td>25%</td>
+<td>Inference commission multiplier</td>
+<td>1.25x</td>
+<td>1.05x</td>
+<td>1.00x</td>
 </tr>
 <tr>
-<td>BYOK (Bring your own key)</td>
-<td>Limitado</td>
+<td>BYOK requests</td>
+<td>30/min</td>
+<td>200/min</td>
+<td>Unlimited</td>
 </tr>
 <tr>
-<td>JSON Healing</td>
-<td>Sim</td>
+<td>Maximum context</td>
+<td>65,536 input tokens enforced at runtime</td>
+<td>Model or gateway limit</td>
+<td>Model or gateway limit</td>
 </tr>
 <tr>
-<td>Stability routing</td>
-<td>Sim</td>
+<td>Subscription model reserve</td>
+<td>None</td>
+<td>250 units/6h and 3,000 units/week</td>
+<td>1,000 units/6h and 15,000 units/week</td>
 </tr>
 <tr>
-<td>Complexity routing</td>
-<td>Não</td>
+<td>Storage quota</td>
+<td>30 MB</td>
+<td>2 GB</td>
+<td>20 GB</td>
 </tr>
 <tr>
-<td>Rate limits</td>
-<td>Considerável</td>
+<td>Conversation retention</td>
+<td>2 hours</td>
+<td>2 days</td>
+<td>30 days</td>
 </tr>
 <tr>
-<td>Contexto máximo</td>
-<td>64K tokens</td>
-</tr>
-<tr>
-<td><strong>RAG</strong></td>
-<td></td>
-</tr>
-<tr>
-<td>Coleções</td>
-<td>Até 5 coleções de RAG</td>
-</tr>
-<tr>
-<td>Pesquisas</td>
-<td>Baixo limite — 20 pesquisas/minuto</td>
-</tr>
-<tr>
-<td>Inserções</td>
-<td>Baixo limite — 500 inserções/dia</td>
-</tr>
-<tr>
-<td>Processamento composto</td>
-<td>Não disponível</td>
-</tr>
-<tr>
-<td><strong>Ferramentas embutidas</strong></td>
-<td></td>
-</tr>
-<tr>
-<td>Pesquisa na internet</td>
-<td>15/dia</td>
-</tr>
-<tr>
-<td>Pesquisa no Twitter/X</td>
-<td>Não disponível</td>
-</tr>
-<tr>
-<td>Deep search</td>
-<td>Não disponível</td>
-</tr>
-<tr>
-<td>Geração de documentos e páginas web</td>
-<td>5/dia</td>
-</tr>
-<tr>
-<td>Geração e edição de imagens</td>
-<td>5/dia</td>
-</tr>
-<tr>
-<td>Execução de código e requisições avançadas</td>
-<td>30/dia</td>
-</tr>
-<tr>
-<td>Memória e calendário</td>
-<td>Sim</td>
-</tr>
-<tr>
-<td><strong>Conta</strong></td>
-<td></td>
-</tr>
-<tr>
-<td>Armazenamento incluso</td>
-<td>30 MB (limite fixo)</td>
-</tr>
-<tr>
-<td>Retenção de conversas</td>
-<td>2 horas</td>
-</tr>
-<tr>
-<td>Suporte</td>
-<td>Por e-mail</td>
+<td>Support level</td>
+<td>Email</td>
+<td>Priority</td>
+<td>Dedicated</td>
 </tr>
 </tbody>
 </table>
-</section>
-<section id="tabpanel_1_pro" role="tabpanel" data-tab="pro" aria-hidden="true" hidden="hidden">
-
+<h2 id="integrated-inference">Integrated inference</h2>
+<p>Integrated model requests are rate-limited by request count and input tokens.</p>
 <table>
 <thead>
 <tr>
-<th>Recurso</th>
-<th>Valor</th>
+<th>Plan</th>
+<th>Request limit</th>
+<th>Input-token limit</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Acesso a modelos</td>
-<td>Modelos avançados</td>
+<td>Free</td>
+<td>20/min and 500/day</td>
+<td>1,000,000/min</td>
 </tr>
 <tr>
-<td>Comissão sobre inferência</td>
-<td>5%</td>
+<td>Pro</td>
+<td>200/min</td>
+<td>20,000,000/min</td>
 </tr>
 <tr>
-<td>BYOK (Bring your own key)</td>
-<td>Sim</td>
-</tr>
-<tr>
-<td>JSON Healing</td>
-<td>Sim</td>
-</tr>
-<tr>
-<td>Stability routing</td>
-<td>Sim</td>
-</tr>
-<tr>
-<td>Complexity routing</td>
-<td>Sim</td>
-</tr>
-<tr>
-<td>Rate limits</td>
-<td>Alto</td>
-</tr>
-<tr>
-<td>Contexto máximo</td>
-<td>Ilimitado</td>
-</tr>
-<tr>
-<td><strong>RAG</strong></td>
-<td></td>
-</tr>
-<tr>
-<td>Coleções</td>
-<td>Ilimitado</td>
-</tr>
-<tr>
-<td>Pesquisas</td>
-<td>Alto limite — 500 pesquisas/minuto</td>
-</tr>
-<tr>
-<td>Inserções</td>
-<td>Alto limite — 10.000 inserções/dia</td>
-</tr>
-<tr>
-<td>Processamento composto</td>
-<td>Até 3 arquivos/dia</td>
-</tr>
-<tr>
-<td><strong>Ferramentas embutidas</strong></td>
-<td></td>
-</tr>
-<tr>
-<td>Pesquisa na internet</td>
-<td>1.000/dia</td>
-</tr>
-<tr>
-<td>Pesquisa no Twitter/X</td>
-<td>1.000/dia</td>
-</tr>
-<tr>
-<td>Deep search</td>
-<td>100/dia</td>
-</tr>
-<tr>
-<td>Geração de documentos e páginas web</td>
-<td>1.000/dia</td>
-</tr>
-<tr>
-<td>Geração e edição de imagens</td>
-<td>500/dia</td>
-</tr>
-<tr>
-<td>Execução de código e requisições avançadas</td>
-<td>5.000/dia</td>
-</tr>
-<tr>
-<td>Memória e calendário</td>
-<td>Sim</td>
-</tr>
-<tr>
-<td><strong>Conta</strong></td>
-<td></td>
-</tr>
-<tr>
-<td>Armazenamento incluso</td>
-<td>2 GB (excedente: $0,50/GB/mês)</td>
-</tr>
-<tr>
-<td>Retenção de conversas</td>
-<td>2 dias</td>
-</tr>
-<tr>
-<td>Suporte</td>
-<td>Prioritário</td>
+<td>Max</td>
+<td>Unlimited</td>
+<td>Unlimited</td>
 </tr>
 </tbody>
 </table>
-</section>
-<section id="tabpanel_1_max" role="tabpanel" data-tab="max" aria-hidden="true" hidden="hidden">
-
+<p>Model rate-limit groups adjust request-count thresholds:</p>
 <table>
 <thead>
 <tr>
-<th>Recurso</th>
-<th>Valor</th>
+<th>Rate-limit group</th>
+<th>Threshold multiplier</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Acesso a modelos</td>
-<td>Todos os modelos</td>
+<td>Common</td>
+<td>1.0x</td>
 </tr>
 <tr>
-<td>Comissão sobre inferência</td>
-<td>Nenhuma</td>
+<td>Discounted</td>
+<td>0.5x</td>
 </tr>
 <tr>
-<td>BYOK (Bring your own key)</td>
-<td>Sim</td>
+<td>Low</td>
+<td>0.3x</td>
 </tr>
 <tr>
-<td>JSON Healing</td>
-<td>Sim</td>
-</tr>
-<tr>
-<td>Stability routing</td>
-<td>Sim</td>
-</tr>
-<tr>
-<td>Complexity routing</td>
-<td>Sim</td>
-</tr>
-<tr>
-<td>Rate limits</td>
-<td>Mais alto</td>
-</tr>
-<tr>
-<td>Contexto máximo</td>
-<td>Ilimitado</td>
-</tr>
-<tr>
-<td><strong>RAG</strong></td>
-<td></td>
-</tr>
-<tr>
-<td>Coleções</td>
-<td>Ilimitado</td>
-</tr>
-<tr>
-<td>Pesquisas</td>
-<td>Limite elevado — 3.000 pesquisas/minuto</td>
-</tr>
-<tr>
-<td>Inserções</td>
-<td>Ilimitado</td>
-</tr>
-<tr>
-<td>Processamento composto</td>
-<td>Até 10 arquivos/dia</td>
-</tr>
-<tr>
-<td><strong>Ferramentas embutidas</strong></td>
-<td></td>
-</tr>
-<tr>
-<td>Pesquisa na internet</td>
-<td>10.000/dia</td>
-</tr>
-<tr>
-<td>Pesquisa no Twitter/X</td>
-<td>10.000/dia</td>
-</tr>
-<tr>
-<td>Deep search</td>
-<td>1.000/dia</td>
-</tr>
-<tr>
-<td>Geração de documentos e páginas web</td>
-<td>50.000/dia</td>
-</tr>
-<tr>
-<td>Geração e edição de imagens</td>
-<td>5.000/dia</td>
-</tr>
-<tr>
-<td>Execução de código e requisições avançadas</td>
-<td>100.000/dia</td>
-</tr>
-<tr>
-<td>Memória e calendário</td>
-<td>Sim</td>
-</tr>
-<tr>
-<td><strong>Conta</strong></td>
-<td></td>
-</tr>
-<tr>
-<td>Armazenamento incluso</td>
-<td>20 GB (excedente: $0,20/GB/mês)</td>
-</tr>
-<tr>
-<td>Retenção de conversas</td>
-<td>30 dias</td>
-</tr>
-<tr>
-<td>Suporte</td>
-<td>Dedicado</td>
+<td>Free</td>
+<td>0.1x</td>
 </tr>
 </tbody>
 </table>
-</section>
-</div>
-<h2 id="grupos-de-modelos">Grupos de modelos</h2>
-<p>Certos modelos possuem multiplicadores de taxa:</p>
-<ul>
-<li><strong>Comum:</strong> 1x</li>
-<li><strong>Descontados:</strong> 0,5x</li>
-<li><strong>Baixa-latência:</strong> 0,3x</li>
-<li><strong>Grátis:</strong> 0,1x</li>
-</ul>
-<p>Exemplo: se usar um modelo &quot;descontado&quot;, os limites de taxa serão 50% menores (ex: 75 req/min → 37 req/min).</p>
-<h2 id="limites-para-byok-bring-your-own-key">Limites para BYOK (Bring-your-own-key)</h2>
-<p>Não há custo para utilizar sua própria api-key. O plano Free possui limites mais restritos, o plano Pro possui limite maior e o plano Max não possui limite de requisições BYOK. Para comparar diferenças entre planos, consulte a <a href="https://aivax.net/pricing">página de preços da AIVAX</a>.</p>
-<h2 id="detalhes-de-rate-limits">Detalhes de rate limits</h2>
-<p>Esta seção detalha os limites aplicados por operação para cada plano.</p>
-<h3 id="inferência-integrada">Inferência integrada</h3>
-<ul>
-<li><strong>Free:</strong> 20 req/min, 500 req/dia, 1.000.000 tokens/min</li>
-<li><strong>Pro:</strong> 200 req/min, 20.000.000 tokens/min</li>
-<li><strong>Max:</strong> Ilimitado</li>
-</ul>
-<h3 id="byok-bring-your-own-key">BYOK (Bring your own key)</h3>
-<ul>
-<li><strong>Free:</strong> 30 req/min, sem limite de input tokens</li>
-<li><strong>Pro:</strong> 200 req/min, sem limite de input tokens</li>
-<li><strong>Max:</strong> Ilimitado</li>
-</ul>
-<h3 id="bash-execução-de-código">Bash (execução de código)</h3>
-<p>Os limites de Bash referem-se ao número de comandos executados por hora dentro de containers.</p>
-<ul>
-<li><strong>Free:</strong>
-<ul>
-<li>30 comandos por hora</li>
-<li>2 instâncias concorrentes</li>
-<li>timeout de comando de 15 segundos</li>
-<li>limite de 32 MB de memória por instância</li>
-<li>1 processador virtual por instância</li>
-<li>expira imediatamente após fim do loop agêntico</li>
-<li>permite armazenamento persistente</li>
-</ul>
-</li>
-<li><strong>Pro:</strong>
-<ul>
-<li>1.500 comandos por hora</li>
-<li>10 instâncias concorrentes</li>
-<li>timeout de comando de 30 segundos</li>
-<li>limite de 128 MB de memória por instância</li>
-<li>2 processadores virtuais por instância</li>
-<li>sessões persistentes expiram após 15 minutos</li>
-<li>permite armazenamento persistente</li>
-</ul>
-</li>
-<li><strong>Max:</strong>
-<ul>
-<li>10.000 comandos por hora</li>
-<li>50 instâncias concorrentes</li>
-<li>timeout de comando de 60 segundos</li>
-<li>limite de 256 MB de memória por instância</li>
-<li>4 processadores virtuais por instância</li>
-<li>sessões persistentes expiram após 30 minutos</li>
-<li>permite armazenamento persistente</li>
-</ul>
-</li>
-</ul>
+<p>For example, a Pro account normally has 200 integrated-model requests per minute. With a <code>Discounted</code> model group, the adjusted threshold is 100 requests per minute.</p>
+<h2 id="byok-inference">BYOK inference</h2>
+<p>BYOK means the gateway uses a provider key configured on the gateway instead of an integrated AIVAX model. BYOK still passes through AIVAX infrastructure and is rate-limited by plan:</p>
+<table>
+<thead>
+<tr>
+<th>Plan</th>
+<th>BYOK request limit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Free</td>
+<td>30/min</td>
+</tr>
+<tr>
+<td>Pro</td>
+<td>200/min</td>
+</tr>
+<tr>
+<td>Max</td>
+<td>Unlimited</td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-api-keys">Public API keys</h2>
+<p>Public keys have additional limits independent of the account plan.</p>
+<table>
+<thead>
+<tr>
+<th>Scope</th>
+<th>Request limits</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Per remote address</td>
+<td>3/5s, 20/min, 300/hour, 1,000/day</td>
+</tr>
+<tr>
+<td>Global per key</td>
+<td>10/5s, 60/min, 1,500/hour, 10,000/day</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Scope</th>
+<th>Token limits</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Per remote address</td>
+<td>100,000/5min, 500,000/30min, 2,000,000/6h, 5,000,000/day</td>
+</tr>
+<tr>
+<td>Global per key</td>
+<td>500,000/5min, 2,000,000/30min, 10,000,000/6h, 25,000,000/day</td>
+</tr>
+</tbody>
+</table>
+<p>Public keys are only accepted on routes marked public by the backend. In this checkout, public routes include RAG semantic search, RAG answer generation, and chat completions. For chat completions, public keys also require a full AI Gateway UUID, restrict request parameters, and strip server-side tool surfaces. See <a href="authentication.html">Authentication</a>.</p>
+<h2 id="rag-and-collection-limits">RAG and collection limits</h2>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Free</th>
+<th>Pro</th>
+<th>Max</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Collections</td>
+<td>5</td>
+<td>Unlimited</td>
+<td>Unlimited</td>
+</tr>
+<tr>
+<td>Semantic searches</td>
+<td>20/min</td>
+<td>500/min</td>
+<td>3,000/min</td>
+</tr>
+<tr>
+<td>Document insertions</td>
+<td>500/day</td>
+<td>10,000/day</td>
+<td>Unlimited</td>
+</tr>
+<tr>
+<td>JSONL documents per import request</td>
+<td>1,000</td>
+<td>10,000</td>
+<td>1,000,000</td>
+</tr>
+<tr>
+<td>Compound file processing</td>
+<td>Not available</td>
+<td>3 files/day</td>
+<td>10 files/day</td>
+</tr>
+</tbody>
+</table>
+<p>The JSONL import endpoint rejects a request when it reaches the plan's per-request document limit.</p>
+<h2 id="built-in-tool-limits">Built-in tool limits</h2>
+<table>
+<thead>
+<tr>
+<th>Tool category</th>
+<th>Free</th>
+<th>Pro</th>
+<th>Max</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Web search</td>
+<td>15/day</td>
+<td>1,000/day</td>
+<td>10,000/day</td>
+</tr>
+<tr>
+<td>X/Twitter search</td>
+<td>Not available</td>
+<td>1,000/day</td>
+<td>10,000/day</td>
+</tr>
+<tr>
+<td>Advanced web search</td>
+<td>Not available</td>
+<td>100/day</td>
+<td>1,000/day</td>
+</tr>
+<tr>
+<td>Document and web page generation</td>
+<td>5/day</td>
+<td>1,000/day</td>
+<td>50,000/day</td>
+</tr>
+<tr>
+<td>Image generation and editing</td>
+<td>5/day</td>
+<td>500/day</td>
+<td>5,000/day</td>
+</tr>
+<tr>
+<td>General service actions</td>
+<td>30/day</td>
+<td>5,000/day</td>
+<td>100,000/day</td>
+</tr>
+<tr>
+<td>Bash commands</td>
+<td>30/hour</td>
+<td>1,500/hour</td>
+<td>10,000/hour</td>
+</tr>
+</tbody>
+</table>
+<p>General service actions cover service operations wired through the shared <code>ServicesGeneral</code> limiter.</p>
+<h2 id="batch-processing">Batch processing</h2>
+<p>Batch imports have request-size guards, and workflow processing has a daily plan limit.</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Free</th>
+<th>Pro</th>
+<th>Max</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Workflow items processed</td>
+<td>500/day</td>
+<td>100,000/day</td>
+<td>Unlimited</td>
+</tr>
+<tr>
+<td>Files per import request</td>
+<td>1,000</td>
+<td>1,000</td>
+<td>1,000</td>
+</tr>
+<tr>
+<td>Total import size</td>
+<td>100 MB/request</td>
+<td>100 MB/request</td>
+<td>100 MB/request</td>
+</tr>
+<tr>
+<td>Single imported file size</td>
+<td>10 MB</td>
+<td>10 MB</td>
+<td>10 MB</td>
+</tr>
+</tbody>
+</table>
+<p>Batch is asynchronous. If processing is paused or fails because of quota, retry after the quota window resets or upgrade the account.</p>
 
 </article>
 

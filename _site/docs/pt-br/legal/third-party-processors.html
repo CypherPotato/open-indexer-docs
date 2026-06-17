@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Processadores de dados | AIVAX </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="Processadores de dados | AIVAX ">
+
+
+        <link rel="icon" href="../../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+        
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
+
+        <meta name="docfx:rel" content="../../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/pt-br/legal/third-party-processors.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+                
+        <script>            
+            function switchLanguage(lang) {
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../../index.html">
+                        <img id="logo" class="svg" src="../../../assets/img/aivax.png" alt="AIVAX">
+                        AIVAX
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="processadores-de-dados">Processadores de dados</h1>
+
+<p>A AIVAX utiliza serviços de terceiros para operações específicas, como coleta de pagamentos, envio de mensagens, inferência e armazenamento de dados. Note que, a AIVAX não possue nenhum vínculo comercial ou de parceria com os provedores listados abaixo, e a escolha por eles é baseada exclusivamente em critérios técnicos e de desempenho.</p>
+<h3 id="provedores-de-operações-serviços-e-infraestrutura">Provedores de operações, serviços e infraestrutura:</h3>
+<table>
+<thead>
+<tr>
+<th>Provedor</th>
+<th>Usado em</th>
+<th>País de origem</th>
+<th>Legislação de proteção de dados</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://www.cloudflare.com/">Cloudflare</a></td>
+<td>CDN, proxy reverso, proteção contra DDoS, firewall e DNS</td>
+<td>Estados Unidos</td>
+<td><a href="https://www.cloudflare.com/trust-hub/gdpr/">GDPR</a>, <a href="https://www.cloudflare.com/trust-hub/ccpa/">CCPA</a>, <a href="https://www.cloudflare.com/trust-hub/eu-us-data-privacy-framework/">DPF</a></td>
+</tr>
+<tr>
+<td><a href="https://www.hetzner.com/">Hetzner</a></td>
+<td>Hospedagem de servidores e infraestrutura de computação em nuvem</td>
+<td>Alemanha</td>
+<td><a href="https://www.hetzner.com/legal/privacy-policy/">GDPR</a></td>
+</tr>
+<tr>
+<td><a href="https://www.backblaze.com/">Backblaze</a></td>
+<td>Armazenamento de objetos e arquivos</td>
+<td>Estados Unidos</td>
+<td><a href="https://www.backblaze.com/company/privacy.html">GDPR</a>, <a href="https://www.backblaze.com/company/ccpa.html">CCPA</a></td>
+</tr>
+<tr>
+<td><a href="https://www.brevo.com/">Brevo</a></td>
+<td>Envio de e-mails transacionais e notificações</td>
+<td>França</td>
+<td><a href="https://www.brevo.com/legal/privacypolicy/">GDPR</a></td>
+</tr>
+<tr>
+<td><a href="https://developer.x.com/">Twitter/X</a></td>
+<td>Integração com a API para publicação e autenticação via redes sociais</td>
+<td>Estados Unidos</td>
+<td><a href="https://x.com/en/privacy">CCPA</a>, <a href="https://x.com/en/privacy">GDPR</a></td>
+</tr>
+<tr>
+<td><a href="https://www.linkup.so/">Linkup</a></td>
+<td>Pesquisa na web em tempo real para enriquecimento de contexto</td>
+<td>França</td>
+<td><a href="https://www.linkup.so/privacy-policy">GDPR</a>, <a href="https://www.linkup.so/privacy-policy">CCPA</a></td>
+</tr>
+<tr>
+<td><a href="https://infinitepay.io/">InfinitePay</a></td>
+<td>Coleta de pagamentos e processamento de transações</td>
+<td>Brasil</td>
+<td><a href="https://infinitepay.io/politica-de-privacidade-e-cookies">LGPD</a></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="provedores-de-inferência-e-inteligência-artificial">Provedores de inferência e inteligência artificial:</h3>
+<table>
+<thead>
+<tr>
+<th>Provedor</th>
+<th>Usado em</th>
+<th>País de origem</th>
+<th>Legislação de proteção de dados</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://groq.com/">Groq</a></td>
+<td>Inferência de LLMs de alta velocidade</td>
+<td>Estados Unidos</td>
+<td><a href="https://groq.com/privacy-policy/">GDPR</a>, <a href="https://groq.com/privacy-policy/">CCPA</a></td>
+</tr>
+<tr>
+<td><a href="https://deepinfra.com/">DeepInfra</a></td>
+<td>Inferência de modelos de IA open-source</td>
+<td>Estados Unidos</td>
+<td><a href="https://deepinfra.com/privacy">GDPR</a></td>
+</tr>
+<tr>
+<td><a href="https://www.vultr.com/">Vultr</a></td>
+<td>Inferência de modelos via cloud computing</td>
+<td>Estados Unidos</td>
+<td><a href="https://www.vultr.com/legal/privacy/">GDPR</a>, <a href="https://www.vultr.com/legal/privacy/">CCPA</a></td>
+</tr>
+<tr>
+<td><a href="https://openai.com/">OpenAI</a></td>
+<td>Inferência de modelos GPT e outros</td>
+<td>Estados Unidos</td>
+<td><a href="https://openai.com/policies/privacy-policy/">GDPR</a>, <a href="https://openai.com/policies/privacy-policy/">CCPA</a></td>
+</tr>
+<tr>
+<td><a href="https://cloud.google.com/vertex-ai">Google Vertex AI</a></td>
+<td>Inferência de modelos Gemini e outros</td>
+<td>Estados Unidos</td>
+<td><a href="https://cloud.google.com/terms/data-privacy">GDPR</a>, <a href="https://cloud.google.com/terms/data-privacy">CCPA</a></td>
+</tr>
+<tr>
+<td><a href="https://www.inceptionlabs.ai/">Inception</a></td>
+<td>Inferência de modelos Mercury</td>
+<td>Estados Unidos</td>
+<td><a href="https://www.inceptionlabs.ai/privacy">Política de privacidade</a></td>
+</tr>
+<tr>
+<td><a href="https://platform.xiaomimimo.com/">Xiaomi MiMo</a></td>
+<td>Inferência de modelos proprietários Xiaomi</td>
+<td>Países Baixos / Singapura</td>
+<td><a href="https://platform.xiaomimimo.com/#/docs/en/terms/privacy-policy">GDPR</a></td>
+</tr>
+<tr>
+<td><a href="https://naga.ac/">NagaAI</a></td>
+<td>Agregador de APIs de modelos de IA</td>
+<td>Polônia</td>
+<td><a href="https://naga.ac/legal/privacy">Política de privacidade</a></td>
+</tr>
+<tr>
+<td><a href="https://ai.nahcrof.com/">CrofAI</a></td>
+<td>Inferência de modelos de IA</td>
+<td>Estados Unidos</td>
+<td><a href="https://ai.nahcrof.com/privacy">CCPA</a></td>
+</tr>
+<tr>
+<td><a href="https://pollinations.ai/">Pollinations</a></td>
+<td>Geração de imagens e vídeo</td>
+<td>Estônia</td>
+<td><a href="https://pollinations.ai/privacy">GDPR</a></td>
+</tr>
+<tr>
+<td><a href="https://openrouter.ai/">OpenRouter</a></td>
+<td>Roteamento e fallback entre provedores de IA</td>
+<td>Estados Unidos</td>
+<td><a href="https://openrouter.ai/privacy">GDPR</a>, <a href="https://openrouter.ai/privacy">CCPA</a></td>
+</tr>
+<tr>
+<td><a href="https://www.anthropic.com/">Anthropic</a></td>
+<td>Inferência de modelos Claude</td>
+<td>Estados Unidos</td>
+<td><a href="https://www.anthropic.com/privacy">Política de privacidade</a></td>
+</tr>
+<tr>
+<td><a href="https://aws.amazon.com/">AWS</a></td>
+<td>Inferência e infraestrutura de IA</td>
+<td>Estados Unidos</td>
+<td><a href="https://aws.amazon.com/compliance/gdpr-center/">GDPR</a>, <a href="https://aws.amazon.com/compliance/ccpa/">CCPA</a></td>
+</tr>
+<tr>
+<td><a href="https://cohere.com/">Cohere</a></td>
+<td>Inferência de modelos de IA</td>
+<td>Canadá</td>
+<td><a href="https://cohere.com/privacy">Política de privacidade</a></td>
+</tr>
+<tr>
+<td><a href="https://x.ai/">xAI</a></td>
+<td>Inferência de modelos Grok</td>
+<td>Estados Unidos</td>
+<td><a href="https://x.ai/privacy">Política de privacidade</a></td>
+</tr>
+<tr>
+<td><a href="https://mistral.ai/">Mistral AI</a></td>
+<td>Inferência de modelos de IA</td>
+<td>França</td>
+<td><a href="https://mistral.ai/terms/#privacy-policy">Política de privacidade</a></td>
+</tr>
+<tr>
+<td><a href="https://www.deepseek.com/">DeepSeek</a></td>
+<td>Inferência de modelos de IA</td>
+<td>China</td>
+<td><a href="https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html">Política de privacidade</a></td>
+</tr>
+<tr>
+<td><a href="https://z.ai/">Z.ai</a></td>
+<td>Inferência de modelos de IA</td>
+<td>China</td>
+<td><a href="https://z.ai/privacy">Política de privacidade</a></td>
+</tr>
+<tr>
+<td><a href="https://www.alibabacloud.com/">Alibaba Cloud</a></td>
+<td>Inferência de modelos de IA</td>
+<td>China</td>
+<td><a href="https://www.alibabacloud.com/help/en/legal/latest/alibaba-cloud-international-website-privacy-policy">Política de privacidade</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="coleta-de-dados-de-provedores">Coleta de dados de provedores</h3>
+<p>A AIVAX não utiliza prompts, respostas ou conversas para fins comerciais próprios, treinamento de modelos próprios ou revenda de dados. Conversas podem ser armazenadas pela AIVAX para segurança, auditoria técnica, depuração e operação do serviço, conforme a <a href="/docs/pt-br/legal/privacy-policy">política de privacidade</a>, e o usuário pode visualizar, gerenciar ou desativar esse armazenamento quando o recurso estiver disponível para sua conta.</p>
+<p>Quando uma requisição é enviada a um provedor de inferência, esse provedor processa os dados necessários para executar o modelo escolhido e aplica suas próprias políticas de privacidade, retenção, segurança e uso de dados. A AIVAX seleciona e configura provedores buscando reduzir coleta e uso indevido de prompts, mas não controla de forma absoluta as políticas internas de terceiros. Por isso, antes de enviar dados pessoais, sensíveis, confidenciais ou regulados, valide a política do provedor do modelo escolhido e considere usar modelos, chaves ou configurações compatíveis com os requisitos do seu caso.</p>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/pt-br/legal/third-party-processors.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>

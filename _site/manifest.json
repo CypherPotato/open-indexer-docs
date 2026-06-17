@@ -742,259 +742,6 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "docs/en/authentication.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/authentication.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/en/features/batch.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/features/batch.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/en/features/chat-clients.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/features/chat-clients.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/en/features/skills.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/features/skills.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/en/getting-started.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/getting-started.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/en/inference/ai-gateway.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/inference/ai-gateway.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/en/inference/chat-handling.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/inference/chat-handling.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/en/inference/inference.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/inference/inference.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/en/inference/pipelines.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/inference/pipelines.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/en/inference/structured-responses.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/inference/structured-responses.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/en/inference/workers.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/inference/workers.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/en/legal/privacy-policy.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/legal/privacy-policy.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/en/legal/terms-of-service.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/legal/terms-of-service.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/en/legal/third-party-processors.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/legal/third-party-processors.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/en/limits.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/limits.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/en/overview.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/overview.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/en/pricing.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/pricing.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/en/rag/best-practices.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/rag/best-practices.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/en/rag/collections.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/rag/collections.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/en/rag/semantic-search.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/rag/semantic-search.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Toc",
-      "source_relative_path": "docs/en/toc.yml",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/toc.html"
-        },
-        ".json": {
-          "relative_path": "docs/en/toc.json"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/en/tools/builtin-tools.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/tools/builtin-tools.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/en/tools/mcp.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/tools/mcp.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/en/tools/protocol-functions.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/tools/protocol-functions.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/en/tools/shell.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/en/tools/shell.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
       "source_relative_path": "docs/features/batch.md",
       "output": {
         ".html": {
@@ -1149,6 +896,259 @@
       "output": {
         ".html": {
           "relative_path": "docs/pricing.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/authentication.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/authentication.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/features/batch.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/features/batch.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/features/chat-clients.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/features/chat-clients.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/features/skills.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/features/skills.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/getting-started.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/getting-started.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/inference/ai-gateway.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/inference/ai-gateway.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/inference/chat-handling.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/inference/chat-handling.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/inference/inference.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/inference/inference.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/inference/pipelines.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/inference/pipelines.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/inference/structured-responses.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/inference/structured-responses.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/inference/workers.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/inference/workers.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/legal/privacy-policy.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/legal/privacy-policy.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/legal/terms-of-service.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/legal/terms-of-service.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/legal/third-party-processors.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/legal/third-party-processors.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/limits.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/limits.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/overview.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/overview.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/pricing.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/pricing.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/rag/best-practices.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/rag/best-practices.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/rag/collections.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/rag/collections.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/rag/semantic-search.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/rag/semantic-search.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "docs/pt-br/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/toc.html"
+        },
+        ".json": {
+          "relative_path": "docs/pt-br/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/tools/builtin-tools.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/tools/builtin-tools.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/tools/mcp.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/tools/mcp.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/tools/protocol-functions.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/tools/protocol-functions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/tools/shell.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/tools/shell.html"
         }
       },
       "version": ""

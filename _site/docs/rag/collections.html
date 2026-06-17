@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Cole&#231;&#245;es e Documentos | AIVAX </title>
+        <title>Collections and Documents | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="Cole&#231;&#245;es e Documentos | AIVAX ">
+        <meta name="title" content="Collections and Documents | AIVAX ">
 
 
         <link rel="icon" href="../../assets/img/favicon.ico">
@@ -47,7 +47,8 @@
                 
         <script>            
             function switchLanguage(lang) {
-                const docPart = window.location.pathname.match(/\/docs\/((en)\/)?(.*)/)[3];
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
                 const newPath = lang + docPart;
                 window.location.href = window.location.origin + newPath;
             }        
@@ -107,14 +108,14 @@
                         <ul class="dropdown-menu dropdown-menu-end language-dropdown">
                             <li>
                                 <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
-                                    <img src="/assets/flag/brazil.png">
-                                    Português
+                                    <img src="/assets/flag/usa.png">
+                                    English
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/en/')">
-                                    <img src="/assets/flag/usa.png">
-                                    English
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
                                 </a>
                             </li>
                         </ul>
@@ -122,79 +123,175 @@
                 </div>
 
                 <article data-uid="">
-<h1 id="coleções-e-documentos">Coleções e Documentos</h1>
+<h1 id="collections-and-documents">Collections and Documents</h1>
 
-<p>A AIVAX fornece um serviço autônomo de RAG (Retrieval-Augmented Generation) que permite usar documentos em conversas de chat. As coleções são grupos de documentos que possuem informações que serão obtidas posteriormente, armazenados de forma persistente em um banco de dados de similaridade.</p>
-<h2 id="coleções">Coleções</h2>
-<p>As coleções permitem você enviar, salvar, gerenciar e consultar semanticamente por documentos armazenadas nela. Você pode associar uma coleção à um gateway de IA ou consultar diretamente nela através da API.</p>
-<p>Pela interface da AIVAX, é possível enviar lotes de documentos e criar documentos com chunking, e associá-los como um documento só no resultado da incorporação.</p>
-<h3 id="custos-e-limites">Custos e limites</h3>
-<p>Não há um limite de quantos documentos podem ser indexados em coleções. Preços de consulta e <a href="/docs/pricing">armazenamento</a> podem ocorrer na conta.</p>
-<p>O custo de pesquisa e indexação é calculado em cima dos tokens do conteúdo de cada documento quando ele é indexado ou modificado. O conteúdo é tokenizado de acordo com o modelo usado na indexação.</p>
-<h2 id="documentos">Documentos</h2>
-<p>Um documento representa um pedaço de um conhecimento. É um trecho limitado, autosuficiente e que faça sentido de forma isolada. Um documento é o componente que é indexado pelo modelo interno para ser recuperado posteriormente através de um termo de busca semântico.</p>
-<p>Considere um manual sobre um carro: ele não é um documento mas sim vários documentos. Cada um destes documentos fala, de forma isolada, sobre um determinado assunto sobre esse carro, de forma que esse documento não dependa de um contexto ou informação externa para fazer sentido.</p>
-<p>Um bom documento de RAG deve ser pequeno o suficiente para ser recuperado com precisão e completo o suficiente para responder uma pergunta sem depender de páginas vizinhas. Evite transformar capítulos inteiros em um único documento, porque textos longos diluem a pontuação semântica e aumentam a chance de o modelo receber contexto demais. Também evite documentos curtos demais, como uma frase solta sem título, porque eles podem perder a informação necessária para o usuário entender a resposta. Como regra prática, escreva documentos com título claro, assunto único, linguagem parecida com a pergunta do usuário e conteúdo que possa ser citado diretamente na resposta.</p>
-<p>Use <code>docid</code> como identificador estável. Se você reenviar uma linha com o mesmo <code>docid</code> e texto diferente, o documento será atualizado e reindexado. Se alterar apenas <code>__meta</code>, os metadados podem ser atualizados sem reindexar o conteúdo. Use <code>__tags</code> para organização operacional, filtros e manutenção da base. Use <code>__ref</code> quando vários documentos representam partes do mesmo item lógico e devem ser recuperados juntos, como seções de uma política, trechos de um mesmo contrato ou fragmentos de um produto. Use <code>__meta</code> para dados auxiliares que sua aplicação precisa preservar, como origem, versão, categoria interna, autor, URL canônica ou data de publicação.</p>
-<p>Ao importar documentos gerados a partir de arquivos grandes, revise o resultado do chunking antes de considerar a coleção pronta. PDFs, planilhas e páginas web podem produzir trechos com cabeçalhos repetidos, rodapés, tabelas quebradas ou textos sem contexto. Esses ruídos prejudicam tanto a busca quanto a resposta final. Quando possível, normalize o conteúdo antes de indexar: remova menus, repetições e disclaimers irrelevantes; inclua título e subtítulo no início do documento; mantenha unidades de informação juntas; e use tags para separar produtos, idiomas, versões ou públicos.</p>
-<h3 id="enviar-documentos-em-lote">Enviar documentos em lote</h3>
-<p>Para enviar uma lista em massa de documentos para uma coleção, estruture-os seguindo o formato <a href="https://jsonlines.org/">JSONL</a>. A estrutura é composta pelas propriedades:</p>
+<p>AIVAX provides a RAG (Retrieval-Augmented Generation) service for storing documents and retrieving them later through semantic search. A collection is an account-owned group of documents. Each document stores text, optional tags, an optional reference, optional metadata, and the vectors generated by the indexing job.</p>
+<p>Collections can be searched directly through the RAG API or attached to an AI Gateway so retrieved documents can be injected into the model context.</p>
+<h2 id="collections">Collections</h2>
+<p>Use collections to group documents that belong to the same knowledge base, product, tenant, language, or operational purpose.</p>
+<p>A collection is the container you create before adding searchable knowledge. Think of it as the boundary for a knowledge base: a support collection can hold help-center answers, a legal collection can hold contract clauses, and a product collection can hold descriptions, policies, and troubleshooting notes. Later, you can search the collection directly with the <a href="semantic-search.html">Semantic Search</a> API, expose it as an MCP tool, or attach it to an <a href="/docs/inference/ai-gateway">AI Gateway</a> so retrieved documents are placed into the model context automatically.</p>
+<p>Each collection has:</p>
+<ul>
+<li>A unique collection ID.</li>
+<li>A name.</li>
+<li>Optional context and contextual tags.</li>
+<li>A set of documents.</li>
+<li>Usage statistics based on RAG transactions.</li>
+</ul>
+<p>The Free plan currently allows up to 5 collections. Pro and Max do not define a collection-count limit in the current plan configuration.</p>
+<h2 id="documents">Documents</h2>
+<p>A document is the unit that gets indexed and retrieved. It should be small enough to match a specific question and complete enough to be useful on its own.</p>
+<p>This is the part that most affects RAG quality. A document should not be &quot;everything you know&quot; about a source; it should be one piece of knowledge that can stand alone when the model reads it later. If a user asks about cancellation fees, the retrieved document should already contain the relevant rule, product, condition, and exception. If the answer only makes sense when the model also sees the previous page, the document is probably too dependent on surrounding context.</p>
+<p>A good document usually has:</p>
+<ul>
+<li>A stable name.</li>
+<li>Focused text.</li>
+<li>Optional tags for filtering or maintenance.</li>
+<li>Optional metadata for application-specific data.</li>
+<li>An optional reference ID when the document is one chunk of a larger logical item.</li>
+</ul>
+<p>For example, a car manual should not be indexed as one document. Index separate documents for topics such as starting the vehicle, checking tire pressure, pairing Bluetooth, and replacing a headlight. Each document should include enough context to be read independently. For broader chunking guidance, see <a href="best-practices.html">Best Practices for RAG</a>; for query behavior after indexing, see <a href="semantic-search.html">Semantic Search</a>.</p>
+<h2 id="document-fields">Document Fields</h2>
+<p>When you import documents in JSONL, each line represents one document that can be created or updated. The important field is <code>docid</code>: it is the stable name AIVAX uses to recognize the same document on future imports. If you send the same <code>docid</code> again with different text, the existing document is updated and reindexed. If you only need to preserve extra application data, use <code>__meta</code> instead of mixing that data into the searchable text.</p>
+<p>The JSONL import endpoint accepts one JSON object per line:</p>
 <table>
 <thead>
 <tr>
-<th>Propriedade</th>
-<th>Tipo</th>
-<th>Descrição</th>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>docid</code></td>
 <td><code>string</code></td>
-<td>Especifica o nome do documento. Útil para depuração e identificação.</td>
+<td>Yes</td>
+<td>Stable document name. Existing documents are matched by this value.</td>
 </tr>
 <tr>
 <td><code>text</code></td>
 <td><code>string</code></td>
-<td>O conteúdo &quot;cru&quot; do documento que será indexado.</td>
+<td>Yes</td>
+<td>Text content to index semantically.</td>
 </tr>
 <tr>
 <td><code>__ref</code></td>
 <td><code>string</code></td>
-<td>Opcional. Especifica um ID de referência do documento.</td>
+<td>No</td>
+<td>Reference ID used to group related chunks. Maximum stored length is 64 characters.</td>
 </tr>
 <tr>
 <td><code>__tags</code></td>
 <td><code>string[]</code></td>
-<td>Opcional. Especifica um array de tags do documento. Útil para gestão de documentos.</td>
+<td>No</td>
+<td>Tags for filtering, browsing, and maintenance.</td>
 </tr>
 <tr>
 <td><code>__meta</code></td>
 <td><code>object</code></td>
-<td>Opcional. Metadados adicionais do documento. Alterações apenas em <code>__meta</code> atualizam os metadados sem reindexar o conteúdo.</td>
+<td>No</td>
+<td>Metadata returned with document details and search results. Metadata is not the semantic text used for embeddings.</td>
 </tr>
 </tbody>
 </table>
-<p>A <strong>referência</strong> de um documento é um ID que pode ser especificado em vários documentos que precisam estar vinculados em uma busca quando um dos mesmos for correspondido em uma busca de similaridade. Por exemplo, se uma busca encontrar um documento que possui um ID de referência, todos os outros documentos da mesma coleção que compartilham o mesmo ID de referência do documento correspondido também serão incluídos na resposta da busca.</p>
-<p>O limite de linhas por requisição depende do plano da conta: Free aceita até 1.000 linhas, Pro até 10.000 linhas e Max até 1.000.000 linhas. Para comparar diferenças entre planos, consulte <a href="https://aivax.net/pricing">a página de preços da AIVAX</a>. Se precisar enviar mais documentos, separe o envio em mais requisições.</p>
+<p>The document name must be non-empty and is limited by the API to 256 characters. The stored document content is required and cannot be empty.</p>
+<h2 id="upserts-and-reindexing">Upserts and Reindexing</h2>
+<p>Documents are matched by name (<code>docid</code> in JSONL, <code>Name</code> in the single-document API).</p>
+<p>When a document is created, it is queued for indexing. When existing document text changes, the document is queued again and its vectors are regenerated by the background indexer. When only <code>__meta</code> changes, metadata is updated without reindexing the document text.</p>
+<p>Reference and tag values are stored with the document. In the single-document API, changed reference, tags, or metadata can update an existing document without reindexing when the text is unchanged. In the JSONL import endpoint, changed text queues reindexing, metadata-only changes update metadata without reindexing, and changed text can also update reference, tags, and metadata.</p>
+<h2 id="references">References</h2>
+<p>Use <code>__ref</code> when multiple documents represent parts of the same logical source, such as:</p>
+<ul>
+<li>Sections of the same contract.</li>
+<li>Clauses from the same policy.</li>
+<li>Chunks from the same PDF.</li>
+<li>Product fragments that should be shown together.</li>
+</ul>
+<p>When search reference expansion is enabled, if one chunk matches, other documents in the same collection with the same reference can be included in the response.</p>
+<h2 id="batch-import-limits">Batch Import Limits</h2>
+<p>Batch import is sent as a JSONL file in the <code>documents</code> multipart field.</p>
+<p>Use batch import when you already have many documents prepared outside AIVAX, such as chunks generated from PDFs, product catalogs, policies, or help-center articles. If you are creating or updating one document from an application flow, the single-document endpoint below is usually easier. If you are preparing a large knowledge base, import in batches, wait for indexing, and then test retrieval through <a href="semantic-search.html">Semantic Search</a> before attaching the collection to a production gateway.</p>
+<p>The current effective per-request JSONL line limits are:</p>
+<table>
+<thead>
+<tr>
+<th>Plan</th>
+<th style="text-align: right;">Maximum JSONL lines per request</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Free</td>
+<td style="text-align: right;">999</td>
+</tr>
+<tr>
+<td>Pro</td>
+<td style="text-align: right;">9,999</td>
+</tr>
+<tr>
+<td>Max</td>
+<td style="text-align: right;">999,999</td>
+</tr>
+</tbody>
+</table>
+<p>Daily RAG insertion limits are separate from the per-request line limit:</p>
+<table>
+<thead>
+<tr>
+<th>Plan</th>
+<th style="text-align: right;">RAG insertions per day</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Free</td>
+<td style="text-align: right;">500</td>
+</tr>
+<tr>
+<td>Pro</td>
+<td style="text-align: right;">10,000</td>
+</tr>
+<tr>
+<td>Max</td>
+<td style="text-align: right;">Not limited by the current plan configuration</td>
+</tr>
+</tbody>
+</table>
+<p>If your import exceeds the request limit, split it into multiple files. If your account reaches the daily insertion limit, wait for the rate window to reset or upgrade the plan.</p>
 <div class="WARNING">
 <h5>Warning</h5>
-<p>Esse endpoint gera custo calculado em cima dos tokens do conteúdo de cada documento.</p>
+<p>Indexing incurs cost based on document text tokens when documents are created or when their text changes.</p>
 </div>
 <script src="https://inference.aivax.net/apidocs?embed-target=Index%20Documents%20(JSONL)&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
-<h3 id="gerenciamento-de-documentos">Gerenciamento de Documentos</h3>
-<h4 id="criar-ou-modificar-documento">Criar ou modificar documento</h4>
-<p>Esse endpoint cria ou modifica um documento a partir do seu nome. Quando um documento é modificado, seus vetores de indexação são resetados e o documento entra na fila para ser reindexado. O custo é gerado apenas quando o documento é de fato alterado.</p>
+<h2 id="document-management">Document Management</h2>
+<h3 id="create-or-update-document">Create or update document</h3>
+<p>This endpoint is useful when your application manages documents one at a time. For example, an admin screen can save one FAQ entry, one policy clause, or one product note directly into a collection. AIVAX matches the document by name: changed text queues reindexing, while metadata-only changes update metadata without reindexing the content.</p>
 <script src="https://inference.aivax.net/apidocs?embed-target=Create%20or%20Update%20Document&r=https%3A%2F%2Finference.aivax.net%2Fapidocs%23CreateorUpdateDocument"></script>
-<h4 id="listar-documentos">Listar documentos</h4>
-<p>Lista todos os documentos disponíveis em uma coleção. Suporta filtro por nome, tag, referência ou conteúdo.</p>
-<p>Filtros suportados:</p>
+<h3 id="list-documents">List documents</h3>
+<p>The browse endpoint helps you inspect what is already inside a collection. Use it when you need to verify an import, find a document by name, review queued versus indexed documents, or filter content before deciding whether to update, delete, or reimport part of the knowledge base.</p>
+<p>Supported filters:</p>
 <ul>
-<li><code>-t &quot;tag&quot;</code>: filtra documentos que possuem essa tag.</li>
-<li><code>-r &quot;reference&quot;</code>: filtra documentos que possuem esse ID de referência.</li>
-<li><code>-c &quot;content&quot;</code>: filtra documentos que possuem esse trecho em seu conteúdo.</li>
-<li><code>-n &quot;name&quot;</code>: filtra documentos que possuem esse trecho em seu nome.</li>
-<li><code>in &quot;id&quot;</code>: filtra documentos por ID.</li>
+<li><code>-t &quot;tag&quot;</code>: documents containing the tag.</li>
+<li><code>-r &quot;reference&quot;</code>: documents with the exact reference ID.</li>
+<li><code>-c &quot;content&quot;</code>: documents whose content contains the text snippet.</li>
+<li><code>-n &quot;name&quot;</code>: documents whose name contains the text snippet.</li>
+<li><code>-i &quot;id&quot;</code>: documents whose ID contains the supplied text.</li>
+</ul>
+<p>Supported states:</p>
+<ul>
+<li><code>queued</code>: documents waiting for indexing.</li>
+<li><code>indexed</code>: documents already indexed.</li>
+</ul>
+<p>Supported sort values:</p>
+<ul>
+<li><code>created_at_asce</code></li>
+<li><code>created_at_desc</code></li>
+<li><code>updated_at_asce</code></li>
+<li><code>updated_at_desc</code></li>
+<li><code>indexed_at_asce</code></li>
+<li><code>indexed_at_desc</code></li>
 </ul>
 <script src="https://inference.aivax.net/apidocs?embed-target=Browse%20Documents&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
 

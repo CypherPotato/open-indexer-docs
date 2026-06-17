@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Infer&#234;ncia | AIVAX </title>
+        <title>Inference | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="Infer&#234;ncia | AIVAX ">
+        <meta name="title" content="Inference | AIVAX ">
 
 
         <link rel="icon" href="../../assets/img/favicon.ico">
@@ -47,7 +47,8 @@
                 
         <script>            
             function switchLanguage(lang) {
-                const docPart = window.location.pathname.match(/\/docs\/((en)\/)?(.*)/)[3];
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
                 const newPath = lang + docPart;
                 window.location.href = window.location.origin + newPath;
             }        
@@ -107,14 +108,14 @@
                         <ul class="dropdown-menu dropdown-menu-end language-dropdown">
                             <li>
                                 <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
-                                    <img src="/assets/flag/brazil.png">
-                                    Português
+                                    <img src="/assets/flag/usa.png">
+                                    English
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/en/')">
-                                    <img src="/assets/flag/usa.png">
-                                    English
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
                                 </a>
                             </li>
                         </ul>
@@ -122,27 +123,29 @@
                 </div>
 
                 <article data-uid="">
-<h1 id="inferência">Inferência</h1>
+<h1 id="inference">Inference</h1>
 
-<p>A AIVAX utiliza uma versão customizada do antigo protocolo <code>chat/completions</code> criado pela OpenAI. Essas customizações são aditivas: não alteram o comportamento esperado do protocolo e é totalmente compatível com clientes e SDKs OpenAI.</p>
-<p>Algumas customizações foram feitas para tornar a comunicação com o modelo normalizada, compatível e comunicar com os serviços que a AIVAX fornece.</p>
-<h2 id="entrada-e-multi-modalidade">Entrada e multi-modalidade</h2>
-<p>AIVAX é totalmente compatível com multi-modalidade. É possível encaminhar áudios, imagens, vídeos e documentos para o modelo usando a API compatível:</p>
+<p>AIVAX exposes an OpenAI-compatible <code>chat/completions</code> API with additional AIVAX parameters. The additions are optional and are designed to support gateways, RAG, built-in tools, structured responses, multimodal pre-processing, model routing, and billing metadata.</p>
+<p>Use this page for direct inference calls. Use <a href="/docs/inference/ai-gateway">AI Gateway</a> when the same configuration must be reused or centrally managed.</p>
+<h2 id="endpoint">Endpoint</h2>
 <div class="request-item post">
     <span>POST</span>
     <span>
         /v1/chat/completions
     </span>
 </div>
+<p>The endpoint also has the API alias <code>/api/v1/chat/completions</code>.</p>
+<h2 id="input-and-multimodality">Input and multimodality</h2>
+<p>AIVAX accepts OpenAI-compatible message content parts for text, images, audio, videos, and files. The selected model must support the modality unless you ask AIVAX to pre-process the media into text.</p>
 <pre><code class="lang-json">{
     &quot;model&quot;: &quot;@google/gemini-3-flash&quot;,
     &quot;messages&quot;: [
         {
             &quot;role&quot;: &quot;user&quot;,
             &quot;content&quot;: [
-                { 
+                {
                     &quot;type&quot;: &quot;text&quot;,
-                    &quot;text&quot;: &quot;Describe this image briefly.&quot;
+                    &quot;text&quot;: &quot;Describe these inputs briefly.&quot;
                 },
                 {
                     &quot;type&quot;: &quot;image_url&quot;,
@@ -162,71 +165,38 @@
                     &quot;type&quot;: &quot;file&quot;,
                     &quot;file&quot;: {
                         &quot;filename&quot;: &quot;document.pdf&quot;,
-                        &quot;file_data&quot;: &quot;https://bitcoin.org/bitcoin.pdf&quot;,
-                    },
-                },
+                        &quot;file_data&quot;: &quot;https://bitcoin.org/bitcoin.pdf&quot;
+                    }
+                }
             ]
         }
     ]
 }
 </code></pre>
+<p>Supported content part mappings:</p>
 <ul>
-<li>Interpretação de imagens:
-<ul>
-<li>conteúdo tipo <code>image_url</code></li>
-<li><code>image_url.url</code> pode ser uma URL externa ou um data-url codificado em base64 (<code>data:image/png;base64,...</code>).</li>
-<li><code>image_url.detail</code> pode ser nulo, <code>low</code>, <code>high</code> ou <code>auto</code>. Nem todos modelos suportam este parâmetro.</li>
+<li><code>text</code>: Plain text.</li>
+<li><code>image_url</code>: Image content. <code>image_url.url</code> can be an external URL or a base64 data URL. <code>image_url.detail</code> can be <code>low</code>, <code>high</code>, or <code>auto</code> when the model supports it.</li>
+<li><code>video_url</code>: Video content. <code>video_url.url</code> can be an external URL or a base64 data URL. Prefer URLs for large videos.</li>
+<li><code>input_audio</code>: Audio content. <code>input_audio.data</code> is base64 audio data, and <code>input_audio.format</code> names the format.</li>
+<li><code>file</code>: File content. <code>file.filename</code> names the file, and <code>file.file_data</code> can be an external URL or a base64 data URL.</li>
 </ul>
-</li>
-<li>Interpretação de vídeo:
-<ul>
-<li>conteúdo tipo <code>video_url</code></li>
-<li><code>video_url.url</code> pode ser uma URL externa ou um data-url codificado em base64 (<code>data:video/mp4;base64,...</code>). Modelos Gemini geralmente suportam links do YouTube. É altamente recomendado fornecer uma URL ao invés de um conteúdo inline.</li>
-</ul>
-</li>
-<li>Interpretação de áudio:
-<ul>
-<li>conteúdo tipo <code>input_audio</code></li>
-<li><code>input_audio.data</code> áudio codificado em base64. Não são aceitos links externos em áudios.</li>
-<li><code>input_audio.format</code> formato do áudio. Geralmente modelos aceitam melhor <code>wav</code> e <code>mp3</code>, mas certos modelos podem expandir para <code>aiff</code>, <code>aac</code>, <code>ogg</code>, <code>flac</code>, <code>m4a</code> e <code>pcm16/24</code>.</li>
-</ul>
-</li>
-<li>Interpretação de arquivos:
-<ul>
-<li>conteúdo tipo <code>file</code></li>
-<li><code>file.filename</code> nome do arquivo. É útil para guiar o modelo para o que esse arquivo representa.</li>
-<li><code>file.file_data</code> pode ser uma URL externa ou um data-url codificado em base64. Alguns modelos suportam mais formatos além de PDFs.</li>
-</ul>
-</li>
-</ul>
-<p>É necessário saber que o modelo que está usando suporta a modalidade de entrada que está enviando. Para certos tipos de arquivos, modelos tendem à rejeitar por regras específicas de tamanhos e formatos.</p>
-<p>Tenha certeza que links para recursos externos sejam acessíveis sem autenticação e sem firewall, pois respostas incorretas, redirecionamentos ou renderização preguiçosa (JavaScript) poderão atirar uma exceção na inferência.</p>
-<p>Você também pode fornecer uma entrada textual simples usando o parâmetro <code>prompt</code>:</p>
-<div class="request-item post">
-    <span>POST</span>
-    <span>
-        /v1/chat/completions
-    </span>
-</div>
+<p>External links must be accessible to AIVAX without authentication, firewall restrictions, or JavaScript-only rendering. Failed downloads, redirects, blocked URLs, unsupported formats, or provider-specific size limits can fail the inference.</p>
+<p>You can also send a simple text request with <code>prompt</code>:</p>
 <pre><code class="lang-json">{
     &quot;model&quot;: &quot;@google/gemini-3-flash&quot;,
     &quot;prompt&quot;: &quot;Say hello&quot;
 }
 </code></pre>
-<p>É possível também ativar o processamento multi-modalidades do lado do servidor da AIVAX, convertendo conteúdo multi-modal para texto para modelos que não possuem capacidades de leitura multi-modal:</p>
-<div class="request-item post">
-    <span>POST</span>
-    <span>
-        /v1/chat/completions
-    </span>
-</div>
+<h2 id="multimodal-pre-processing">Multimodal pre-processing</h2>
+<p>Use <code>multimodal_preprocess</code> when the main model should receive a textual description of media instead of the original media object. This is useful for text-first models or when you want AIVAX to normalize files before the main inference.</p>
 <pre><code class="lang-json">{
     &quot;model&quot;: &quot;@meta/llama-3.3-70b&quot;,
     &quot;messages&quot;: [
         {
             &quot;role&quot;: &quot;user&quot;,
             &quot;content&quot;: [
-                { 
+                {
                     &quot;type&quot;: &quot;text&quot;,
                     &quot;text&quot;: &quot;Describe this file briefly.&quot;
                 },
@@ -234,44 +204,38 @@
                     &quot;type&quot;: &quot;file&quot;,
                     &quot;file&quot;: {
                         &quot;filename&quot;: &quot;document.pdf&quot;,
-                        &quot;file_data&quot;: &quot;https://bitcoin.org/bitcoin.pdf&quot;,
-                    },
-                },
+                        &quot;file_data&quot;: &quot;data:application/pdf;base64,BASE64_PDF_CONTENT&quot;
+                    }
+                }
             ]
         }
     ],
-    &quot;multimodal_preprocess&quot;: [
-        &quot;File&quot;
-    ]
+    &quot;multimodal_preprocess&quot;: &quot;File&quot;
 }
 </code></pre>
-<p>Opções disponíveis de pre-processamento multi-modalidades são:</p>
+<p>Available pre-processing flags are:</p>
 <ul>
 <li><code>Image</code></li>
-<li><code>File</code></li>
-<li><code>Video</code></li>
 <li><code>Audio</code></li>
+<li><code>Video</code></li>
+<li><code>File</code></li>
 <li><code>OtherFiles</code></li>
 <li><code>All</code></li>
 </ul>
-<blockquote>
-<p>Dica: A modalidade <code>OtherFiles</code> processa vários tipos de arquivos, como PDFs, planilhas do excel, apresentações do powerpoint, usando um motor interno da AIVAX e essa modalidade não possui custo.</p>
-</blockquote>
-<p>Arquivos e vídeos exigem saldo mínimo de $0,50 na conta. Imagens e áudios exigem saldo mínimo de $0,10.</p>
-<p>Use multimodalidade direta quando o modelo escolhido já entende aquele tipo de entrada. Use <code>multimodal_preprocess</code> quando você precisa transformar a entrada em texto antes de enviá-la ao modelo principal, normalmente porque o modelo é barato, rápido ou especializado em texto, mas não entende imagem, áudio, vídeo ou arquivo. Essa escolha muda a forma como a conversa é construída: com entrada multimodal direta, o conteúdo original chega ao modelo; com pré-processamento, a AIVAX gera uma descrição textual e essa descrição entra no contexto. O pré-processamento é especialmente útil para PDFs, planilhas, apresentações e imagens simples que só precisam ser resumidas ou extraídas antes de uma resposta textual.</p>
-<p>Para arquivos, prefira URLs públicas quando o arquivo é grande ou quando você quer evitar payloads base64 muito longos. Para imagens pequenas, data URLs podem simplificar a integração. Para áudio, envie base64 no campo <code>input_audio.data</code> e informe <code>format</code>; links externos de áudio não são aceitos nesse campo. Para vídeo, prefira URL externa, principalmente quando o provedor do modelo consegue buscar o conteúdo diretamente. Em qualquer modalidade, o recurso precisa estar acessível sem autenticação, sem bloqueios por IP e sem depender de JavaScript para carregar o conteúdo principal.</p>
-<p>Quando uma inferência multimodal falhar, reduza o problema. Primeiro, teste uma mensagem textual simples com o mesmo modelo. Depois, teste um único anexo pequeno. Em seguida, teste o mesmo anexo com <code>multimodal_preprocess</code>. Se o modelo direto falha e o pré-processamento funciona, o problema provavelmente é suporte multimodal do modelo. Se ambos falham, revise URL, formato, tamanho, saldo mínimo e acessibilidade do recurso. Em produção, trate anexos como entradas que podem falhar e escreva a experiência do usuário para pedir reenvio, usar outro formato ou responder com uma limitação clara.</p>
-<h2 id="respostas-estruturadas">Respostas estruturadas</h2>
-<p>AIVAX suporta respostas estruturas e JSON healing, que automaticamente corrije JSONs defeituosos ou que não seguem o schema fornecido durante inferência.</p>
-<div class="request-item post">
-    <span>POST</span>
-    <span>
-        /v1/chat/completions
-    </span>
-</div>
+<p>The resolver caches media descriptions by content hash for reuse. <code>Image</code>, <code>Audio</code>, <code>Video</code>, and PDF <code>File</code> pre-processing use auxiliary multimodal inference. <code>OtherFiles</code> uses the internal extraction path for non-PDF files that can be converted to text.</p>
+<p>Files and videos require a minimum account balance of $0.50. Images and audio require a minimum account balance of $0.10.</p>
+<p>When a multimodal inference fails, narrow down the problem:</p>
+<ol>
+<li>Test a simple text message with the same model.</li>
+<li>Test one small attachment.</li>
+<li>Test the same attachment with <code>multimodal_preprocess</code>.</li>
+<li>Review the URL, format, size, balance requirement, and model modality support.</li>
+</ol>
+<h2 id="structured-responses">Structured responses</h2>
+<p>AIVAX supports structured responses through <code>response_schema</code>, <code>response_format</code>, and <code>json_only</code>.</p>
 <pre><code class="lang-json">{
     &quot;model&quot;: &quot;@google/gemini-2.5-flash&quot;,
-    &quot;prompt&quot;: &quot;Pesquise por notícias em São José do Rio Preto.&quot;,
+    &quot;prompt&quot;: &quot;Search for recent news about electric vehicles.&quot;,
     &quot;stream&quot;: true,
     &quot;builtin_tools&quot;: {
         &quot;tools&quot;: [
@@ -291,55 +255,52 @@
                     &quot;properties&quot;: {
                         &quot;title&quot;: {
                             &quot;type&quot;: &quot;string&quot;,
-                            &quot;description&quot;: &quot;Título da notícia&quot;
+                            &quot;description&quot;: &quot;News title&quot;
                         },
-                        &quot;content&quot;: {
+                        &quot;summary&quot;: {
                             &quot;type&quot;: &quot;string&quot;,
-                            &quot;description&quot;: &quot;Resumo da notícia&quot;
+                            &quot;description&quot;: &quot;News summary&quot;
                         }
-                    }
+                    },
+                    &quot;required&quot;: [&quot;title&quot;, &quot;summary&quot;]
                 }
             }
-        }
+        },
+        &quot;required&quot;: [&quot;news&quot;]
     }
 }
 </code></pre>
-<p>Leia mais sobre respostas estruturadas em sua <a href="/docs/inference/structured-responses">página dedicada</a>.</p>
-<h2 id="funções-em-demanda">Funções em demanda</h2>
-<p>Você pode usar ferramentas embutidas da AIVAX durante inferência sem a necessidade de definir um gateway de IA para isso.</p>
-<div class="request-item post">
-    <span>POST</span>
-    <span>
-        /v1/chat/completions
-    </span>
-</div>
+<p><code>response_schema</code> enables JSON Healing. AIVAX asks the model for JSON, extracts JSON from the generated text or markdown blocks, validates it against the schema, and retries with validation feedback until the output is valid or the attempt limit is reached.</p>
+<p>Read more on <a href="/docs/inference/structured-responses">Structured responses</a>.</p>
+<h2 id="on-demand-functions">On-demand functions</h2>
+<p>Use <code>builtin_tools</code> to enable AIVAX built-in tools for a direct request without creating a gateway:</p>
 <pre><code class="lang-json">{
     &quot;model&quot;: &quot;@google/gemini-2.5-flash&quot;,
-    &quot;prompt&quot;: &quot;Pesquise por notícias em São José do Rio Preto.&quot;,
+    &quot;prompt&quot;: &quot;Search for recent news about electric vehicles.&quot;,
     &quot;stream&quot;: true,
     &quot;builtin_tools&quot;: {
         &quot;tools&quot;: [
             &quot;WebSearch&quot;
         ],
         &quot;options&quot;: {
-            &quot;web_search_mode&quot;: &quot;full&quot;
+            &quot;web_search_mode&quot;: &quot;full&quot;,
+            &quot;web_search_max_results&quot;: 5
         }
     }
 }
 </code></pre>
-<p>A lista de opções e ferramentas embutidas disponíveis está disponível na página de <a href="/docs/tools/builtin-tools">ferramentas embutidas</a>.</p>
-<p>Ferramentas em demanda são adequadas para chamadas pontuais, protótipos e integrações que não precisam de um gateway persistente. Se a mesma aplicação sempre usa as mesmas ferramentas, prefira configurá-las no AI Gateway para manter a política centralizada. Em chamadas diretas, o cliente que faz a requisição controla a lista de ferramentas a cada chamada; em gateways, o administrador do agente controla o conjunto disponível. Essa diferença é importante para segurança: ferramentas como <code>Request</code>, <code>AdvancedWebUsage</code>, geração de documentos e pesquisa web podem acessar recursos externos ou gerar conteúdo hospedado, então devem ser habilitadas com intenção clara.</p>
-<h2 id="corpo-customizado-em-resposta">Corpo customizado em resposta</h2>
-<p>Ao usar gateways de IA com API key fornecida (BYOK), você pode encaminhar JSON customizado na requisição, substituindo o JSON comum da AIVAX:</p>
-<div class="request-item post">
-    <span>POST</span>
-    <span>
-        /v1/chat/completions
-    </span>
-</div>
+<p>Built-in tools include <code>WebSearch</code>, <code>AdvancedWebUsage</code>, <code>OpenUrl</code>, <code>Code</code>, <code>Request</code>, <code>Calendar</code>, <code>Remember</code>, <code>GenerateWebPage</code>, <code>GenerateDocument</code>, <code>XPostsSearch</code>, and <code>ImageGeneration</code>.</p>
+<p>On-demand tools are suitable for occasional calls, prototypes, and integrations that do not need a persistent gateway. If the same application always uses the same tools, prefer configuring them in an AI Gateway so the policy is centralized.</p>
+<h2 id="custom-provider-request-body">Custom provider request body</h2>
+<p>When a gateway uses a provided API key and an OpenAI-compatible provider endpoint, <code>extra_body</code> can merge custom JSON into the provider request body:</p>
 <pre><code class="lang-json">{
     &quot;model&quot;: &quot;my-custom-model:abc4&quot;,
-    &quot;messages&quot;: [...],
+    &quot;messages&quot;: [
+        {
+            &quot;role&quot;: &quot;user&quot;,
+            &quot;content&quot;: &quot;Explain the tradeoff.&quot;
+        }
+    ],
     &quot;extra_body&quot;: {
         &quot;reasoning&quot;: {
             &quot;enabled&quot;: true
@@ -347,71 +308,46 @@
     }
 }
 </code></pre>
-<p>Essa propriedade não é compatível com modelos roteados pela AIVAX.</p>
-<h2 id="explicações-de-ferramentas">Explicações de ferramentas</h2>
-<p>Modelos invocam ferramentas durante ações, seja ferramentas locais (client-side) ou ferramentas do lado do servidor (embutidas, MCP ou protocolo de funções). Ao encaminhar a propriedade <code>tool_invocation_explanations</code>, você pode incluir um parâmetro adicional no corpo da função para o modelo explicar por que está chamando aquela ferramenta. Isso pode ser útil para exibir ao usuário de forma agradável e em tempo real do que o modelo está fazendo para responder o usuário.</p>
-<div class="request-item post">
-    <span>POST</span>
-    <span>
-        /v1/chat/completions
-    </span>
-</div>
+<p><code>extra_body</code> is not allowed with integrated AIVAX models.</p>
+<h2 id="tool-explanations">Tool explanations</h2>
+<p>Set <code>tool_invocation_explanations: true</code> to ask AIVAX to include explanation fields in server-side tool arguments. When the model supplies <code>_tool_reason</code> and <code>_tool_goal</code>, <code>servertool.explanation</code> contains a client-friendly copy:</p>
 <pre><code class="lang-json">{
-    &quot;model&quot;: &quot;my-custom-model:abc4&quot;,
-    &quot;messages&quot;: [...],
+    &quot;model&quot;: &quot;@x-ai/grok-4.3&quot;,
+    &quot;messages&quot;: [
+        {
+            &quot;role&quot;: &quot;user&quot;,
+            &quot;content&quot;: &quot;What's the weather forecast for today?&quot;
+        }
+    ],
+    &quot;stream&quot;: true,
+    &quot;builtin_tools&quot;: {
+        &quot;tools&quot;: [&quot;WebSearch&quot;]
+    },
     &quot;tool_invocation_explanations&quot;: true
 }
 </code></pre>
-<p>Nisso, chunks de ferramentas de servidor <code>servertool</code> terão uma propriedade da explicação da ferramenta:</p>
+<p>Example stream event:</p>
 <pre><code class="lang-json">{
-  &quot;id&quot;: &quot;chatcmpl-019e1d73-cf92-7f3f-bac7-d0869770cda8&quot;,
-  &quot;object&quot;: &quot;chat.completion.chunk&quot;,
-  &quot;created&quot;: 1778610589,
-  &quot;model&quot;: &quot;@x-ai/grok-4.3&quot;,
-  &quot;system_fingerprint&quot;: &quot;fp_uu72kl&quot;,
-  &quot;choices&quot;: [],
-  &quot;servertool&quot;: {
-    &quot;name&quot;: &quot;web_search&quot;,
-    &quot;id&quot;: &quot;call-70944e44-fbc5-4906-9f9f-99559c05db11-0&quot;,
-    &quot;contents&quot;: &quot;{\&quot;query\&quot;:\&quot;What's the weather forecast for today?\&quot;,\&quot;_tool_reason\&quot;:\&quot;Searching for today's weather forecast online\&quot;,\&quot;_tool_goal\&quot;:\&quot;I need current weather information to provide an accurate forecast for today, as the user's location isn't specified so I'll use a general search to retrieve relevant data.\&quot;}&quot;,
-    &quot;state&quot;: &quot;Created&quot;,
-    &quot;explanation&quot;: {
-      &quot;reason&quot;: &quot;Searching for today's weather forecast online&quot;,
-      &quot;goal&quot;: &quot;I need current weather information to provide an accurate forecast for today, as the user's location isn't specified so I'll use a general search to retrieve relevant data.&quot;
-    }
-  },
-  &quot;usage&quot;: null
+    &quot;choices&quot;: [],
+    &quot;servertool&quot;: {
+        &quot;name&quot;: &quot;web_search&quot;,
+        &quot;id&quot;: &quot;call-70944e44-fbc5-4906-9f9f-99559c05db11-0&quot;,
+        &quot;contents&quot;: &quot;{\&quot;query\&quot;:\&quot;weather forecast today\&quot;,\&quot;_tool_reason\&quot;:\&quot;Searching for today's weather forecast online\&quot;,\&quot;_tool_goal\&quot;:\&quot;I need current weather information to answer accurately.\&quot;}&quot;,
+        &quot;state&quot;: &quot;Created&quot;,
+        &quot;explanation&quot;: {
+            &quot;reason&quot;: &quot;Searching for today's weather forecast online&quot;,
+            &quot;goal&quot;: &quot;I need current weather information to answer accurately.&quot;
+        }
+    },
+    &quot;usage&quot;: null
 }
 </code></pre>
-<h2 id="renderização-de-resposta">Renderização de resposta</h2>
-<p>É possível renderizar raciocínio e chamadas de ferramenta do lado do servidor para uma exibição em linha do tempo segmentada e em tempo real normalizando raciocínio em blocos XML customizados.</p>
-<p>Ao habilitar essa função, o modelo passará a responder agrupando suas chamadas de função e raciocínio em blocos <code>&lt;thinking_group&gt;</code> e <code>&lt;think&gt;</code>:</p>
-<pre><code>&lt;thinking-group&gt;
-
-&lt;think&gt;We need current weather forecast for São Paulo. Must use web_search tool. Provide meta fields. Search term likely &quot;São Paulo weather forecast today&quot;.&lt;/think&gt;
-
-&lt;tool&gt;&lt;toolname&gt;web_search&lt;/toolname&gt;&lt;toolreason&gt;Searching today's weather forecast for São Paulo&lt;/toolreason&gt;&lt;/tool&gt;
-
-&lt;think&gt;The search results are messy. Need specific forecast. Could open one of the Brazilweather.org pages. Let's open the English? The result appears to be Portuguese/Catalan. Use open? There's no open tool, only web_search. We may need to extract info from snippet. The snippet for tradefairdates shows temperature 14°C 20°C today 10.05.2026 (future). Not relevant. We need today's forecast. Likely we can answer based on typical current data, but should provide up-to-date. Could try another search with &quot;São Paulo weather today&quot; maybe results better. Let's call again.&lt;/think&gt;
-
-&lt;tool&gt;&lt;toolname&gt;web_search&lt;/toolname&gt;&lt;toolreason&gt;Searching for São Paulo Brazil weather today forecast&lt;/toolreason&gt;&lt;/tool&gt;
-
-&lt;think&gt;We should answer in English (conversation language). Provide forecast, temperature highs, lows, chance of rain, maybe wind.&lt;/think&gt;
-&lt;/thinking-group&gt;
-
-Here’s the weather outlook for **São Paulo (Brazil) today, May 12 2026**:
-
-...
-
-**Current conditions (as of 15:30 local time)** – Sunny, 20 °C (68 °F), light east breeze (~4 km/h), humidity 40 %, no precipitation observed.
-
-Overall, today will be comfortably warm and dry, with clear skies and virtually no rain expected.
-</code></pre>
-<p>É agrupado automaticamente em grupos de raciocínios trechos de pensamento emitidos pelo modelo e chamadas de ferramentas do lado do servidor consecutivos, e automaticamente terminado quando o modelo começa uma resposta.</p>
-<p>Essa função é indicada para renderizar um chat agradável e informativo ao usuário final, tratando os trechos XML como componentes ou especificações extendidas do leitor markdown da aplicação.</p>
-<h2 id="quando-usar-chamada-direta-ou-gateway">Quando usar chamada direta ou gateway</h2>
-<p>Use chamada direta para tarefas simples, testes, rotinas internas e integrações em que a aplicação já controla prompt, modelo, ferramentas e contexto. Ela é o caminho mais curto para chamar um modelo, enviar uma entrada multimodal, pedir uma resposta estruturada ou habilitar ferramentas embutidas por requisição. A chamada direta também é útil quando você quer alternar modelos dinamicamente pela aplicação e não precisa de uma configuração persistente no console.</p>
-<p>Use um AI Gateway quando o comportamento precisa ser estável, auditável e reutilizável. Gateways são melhores para assistentes de atendimento, bots em chat clients, agentes com RAG, ferramentas permanentes, workers, skills e configurações que vários clientes vão compartilhar. O gateway reduz repetição na aplicação e permite alterar comportamento sem mudar código. Uma boa regra prática: se você está copiando o mesmo prompt, a mesma lista de ferramentas ou a mesma coleção de RAG em várias chamadas, essa configuração provavelmente deveria estar em um gateway.</p>
+<h2 id="response-rendering-mode">Response rendering mode</h2>
+<p>Set <code>rendering_mode: &quot;textual_blocks&quot;</code> when a client wants reasoning and server-side tool markers normalized into textual blocks. In this mode, reasoning can be emitted as <code>&lt;thinking-group&gt;</code> and <code>&lt;think&gt;</code> blocks, and server-side tool markers can be emitted as <code>&lt;tool&gt;</code> blocks.</p>
+<p>This mode is intended for clients that render those blocks as components in a chat timeline. Clients that do not understand the markup should use the default rendering mode and handle <code>delta.reasoning</code> and <code>servertool</code> events instead.</p>
+<h2 id="direct-call-or-gateway">Direct call or gateway</h2>
+<p>Use a direct call for simple tasks, tests, internal routines, and integrations where the application controls the model, prompt, tools, and context for each request.</p>
+<p>Use an AI Gateway when behavior needs to be stable, auditable, and reusable. Gateways are better for support assistants, chat bots, RAG agents, permanent tools, workers, skills, and configurations shared by multiple clients.</p>
 
 </article>
 

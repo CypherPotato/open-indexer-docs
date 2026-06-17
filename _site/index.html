@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Bem-vindo! | AIVAX </title>
+        <title>AIVAX Documentation | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="Bem-vindo! | AIVAX ">
+        <meta name="title" content="AIVAX Documentation | AIVAX ">
 
 
         <link rel="icon" href="assets/img/favicon.ico">
@@ -47,7 +47,8 @@
                 
         <script>            
             function switchLanguage(lang) {
-                const docPart = window.location.pathname.match(/\/docs\/((en)\/)?(.*)/)[3];
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
                 const newPath = lang + docPart;
                 window.location.href = window.location.origin + newPath;
             }        
@@ -93,14 +94,14 @@
                         <ul class="dropdown-menu dropdown-menu-end language-dropdown">
                             <li>
                                 <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
-                                    <img src="/assets/flag/brazil.png">
-                                    Português
+                                    <img src="/assets/flag/usa.png">
+                                    English
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/en/')">
-                                    <img src="/assets/flag/usa.png">
-                                    English
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
                                 </a>
                             </li>
                         </ul>
@@ -108,9 +109,25 @@
                 </div>
 
                 <article data-uid="">
-<h1 id="bem-vindo">Bem-vindo!</h1>
+<h1 id="aivax-documentation">AIVAX Documentation</h1>
 
-<p>Bem-vindo à documentação da AIVAX.</p>
+<p>AIVAX is an AI orchestration platform for building assistants on top of hosted or BYOK language models, RAG collections, tools, skills, workers, and chat channels.</p>
+<p>Use these docs to:</p>
+<ul>
+<li>Make your first OpenAI-compatible inference call.</li>
+<li>Create and protect API keys.</li>
+<li>Understand account balance, plan limits, and usage billing.</li>
+<li>Connect gateways, collections, tools, skills, chat clients, and batch workflows.</li>
+</ul>
+<h2 id="start-here">Start here</h2>
+<ul>
+<li><a href="docs/overview.html">Overview</a></li>
+<li><a href="docs/getting-started.html">Getting started</a></li>
+<li><a href="docs/authentication.html">Authentication</a></li>
+<li><a href="docs/pricing.html">Pricing</a></li>
+<li><a href="docs/limits.html">Plans and limits</a></li>
+</ul>
+<p>For generated endpoint details, see the <a href="https://inference.aivax.net/apidocs">AIVAX API reference</a>.</p>
 
 </article>
 

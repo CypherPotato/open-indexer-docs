@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Precifica&#231;&#227;o | AIVAX </title>
+        <title>Pricing | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="Precifica&#231;&#227;o | AIVAX ">
+        <meta name="title" content="Pricing | AIVAX ">
 
 
         <link rel="icon" href="../assets/img/favicon.ico">
@@ -47,7 +47,8 @@
                 
         <script>            
             function switchLanguage(lang) {
-                const docPart = window.location.pathname.match(/\/docs\/((en)\/)?(.*)/)[3];
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
                 const newPath = lang + docPart;
                 window.location.href = window.location.origin + newPath;
             }        
@@ -107,14 +108,14 @@
                         <ul class="dropdown-menu dropdown-menu-end language-dropdown">
                             <li>
                                 <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
-                                    <img src="/assets/flag/brazil.png">
-                                    Português
+                                    <img src="/assets/flag/usa.png">
+                                    English
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/en/')">
-                                    <img src="/assets/flag/usa.png">
-                                    English
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
                                 </a>
                             </li>
                         </ul>
@@ -122,43 +123,162 @@
                 </div>
 
                 <article data-uid="">
-<h1 id="precificação">Precificação</h1>
+<h1 id="pricing">Pricing</h1>
 
-<p>O modelo de pagamento da AIVAX é <strong>pré-pago</strong>: você adiciona saldo à sua conta e utiliza nossos serviços consumindo esse crédito. A AIVAX utiliza um modelo de assinatura mensal em conjunto com o saldo de utilização dos serviços. Para comparar diferenças entre Free, Pro e Max, consulte a <a href="https://aivax.net/pricing">página de preços da AIVAX</a>, que é a fonte atualizada para planos. O consumo dos serviços é sempre debitado do saldo da conta.</p>
-<p>Ao adicionar créditos, a AIVAX cobra uma pequena taxa (variável por método de pagamento) para cobrir impostos (notas fiscais), tarifas bancárias e custos operacionais.</p>
-<p>Alguns planos incluem uma <strong>taxa de comissão</strong> para o uso de saldo, que é uma porcentagem aplicada sobre o valor gasto em inferência (geração de texto). Consulte a <a href="https://aivax.net/pricing">página de preços da AIVAX</a> para ver a comissão atual de cada plano.</p>
-<p>A precificação de inferência (geração de texto) é repassada diretamente dos provedores (como Google e OpenAI). Você paga na AIVAX exatamente o mesmo preço de tabela que pagaria utilizando esses provedores diretamente.</p>
-<p>Usamos diferentes <a href="/docs/tools/builtin-tools">serviços</a> para ajudar você a criar assistentes agênticos. Algumas ferramentas possuem custos específicos que são debitados do seu saldo sem taxas adicionais.</p>
-<blockquote>
-<p><strong>Nota:</strong> Todos os custos são calculados em dólares americanos (USD). Pode haver flutuação cambial ao converter da sua moeda local para o dólar no momento da recarga ou do uso.</p>
-</blockquote>
-<h2 id="expiração-de-créditos">Expiração de Créditos</h2>
-<p>Como não podemos prever qual modelo você utilizará, precisamos alinhar a validade dos créditos com as políticas mais restritivas dos nossos fornecedores.</p>
-<p>Atualmente, os créditos expiram <strong>12 meses</strong> após a data de adição. Consulte os detalhes em nossos <a href="/docs/legal/terms-of-service">termos de uso</a>.</p>
-<h2 id="rag-coleções-e-vetores">RAG (Coleções e Vetores)</h2>
-<p>O custo de indexação e incorporação de documentos do RAG na AIVAX é de <strong>$0,025</strong> por milhão de tokens processados.</p>
-<h2 id="armazenamento">Armazenamento</h2>
-<p>Para manter a integridade e disponibilidade dos seus dados, cobramos uma taxa de armazenamento por hora. O preço varia conforme o plano de assinatura:</p>
+<p>AIVAX uses a prepaid account balance. Paid invoices add credit to the account, and usage records subtract from that balance.</p>
+<p>The backend calculates balance as:</p>
+<pre><code class="lang-text">balance = paid, unexpired invoice total - usage total
+</code></pre>
+<p>Use the <a href="https://aivax.net/pricing">AIVAX pricing page</a> for current commercial plan prices. This page documents billing behavior that is visible in the API source.</p>
+<h2 id="credits-and-invoices">Credits and invoices</h2>
+<p>Credits are represented as invoices.</p>
 <ul>
-<li><strong>Plano free</strong>: 30 MB franquia, sem opção de armazenamento adicional.</li>
-<li><strong>Plano Pro</strong>: 2 GB franquia, $0,50 por GB adicional por mês, cobrado por hora.</li>
-<li><strong>Plano Max</strong>: 20 GB franquia, $0,20 por GB adicional por mês, cobrado por hora.</li>
+<li>Paid invoices increase the usable account balance until their expiration date.</li>
+<li>Unpaid payment invoices are created with a one-year expiration.</li>
+<li>Unpaid invoices older than three days are removed by cleanup.</li>
+<li>Expired paid invoices no longer count toward balance.</li>
+<li>Payment invoice creation requires at least 3 USD and is rate-limited.</li>
 </ul>
-<p><strong>Como funciona a cobrança:</strong>
-Você paga apenas pelo <strong>excedente</strong> da franquia.</p>
+<h2 id="usage-billing">Usage billing</h2>
+<p>Every billable operation writes one or more usage records. Each usage record has:</p>
 <ul>
-<li><em>Exemplo:</em> Se estiver no plano Pro você usar 2,20 GB por uma hora, pagará apenas sobre os 0,20 GB excedentes. Se usar 250 MB, o custo é zero.</li>
+<li>Description.</li>
+<li>Unit price.</li>
+<li>Quantity.</li>
+<li>Optional model name.</li>
+<li>Usage category.</li>
+<li>Resources such as API key, gateway, or collection.</li>
 </ul>
-<p><strong>O que consome armazenamento:</strong></p>
-<ol>
-<li>Memória de longo prazo dos usuários (chats e inferências salvas);</li>
-<li>Cache de descrições de imagens (processamento multi-modal);</li>
-<li>Conteúdo de documentos RAG e seus vetores;</li>
-<li>Armazenamento do bash/shell virtual.</li>
-</ol>
-<p>Logs de sistema são temporários e não geram custos de armazenamento.</p>
-<h2 id="ferramentas-tools">Ferramentas (Tools)</h2>
-<p>As <a href="/docs/tools/builtin-tools">ferramentas nativas</a> da AIVAX possuem preços e limites específicos. Consulte a documentação de cada ferramenta.</p>
+<p>The final unit price is multiplied by the account tax multiplier and the current plan commission multiplier.</p>
+<table>
+<thead>
+<tr>
+<th>Plan</th>
+<th>Commission multiplier</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Free</td>
+<td>1.25x</td>
+</tr>
+<tr>
+<td>Pro</td>
+<td>1.05x</td>
+</tr>
+<tr>
+<td>Max</td>
+<td>1.00x</td>
+</tr>
+</tbody>
+</table>
+<h2 id="inference-billing">Inference billing</h2>
+<p>Integrated model billing uses the model's pricing table from the backend. Pricing can vary by model and by input-token threshold. Usage can include:</p>
+<ul>
+<li>Text input tokens.</li>
+<li>Cached input tokens, when the selected model has cached-input pricing.</li>
+<li>Audio input tokens, when applicable.</li>
+<li>Output tokens.</li>
+</ul>
+<p>Some integrated models can be covered by subscription-model reserve windows. When a model has a subscription usage multiplier and the account still has reserve remaining in both the six-hour and weekly windows, the recorded model usage can be covered instead of charged to balance.</p>
+<p>Current reserve windows are:</p>
+<table>
+<thead>
+<tr>
+<th>Plan</th>
+<th>Six-hour reserve</th>
+<th>Weekly reserve</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Free</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr>
+<td>Pro</td>
+<td>250 units</td>
+<td>3,000 units</td>
+</tr>
+<tr>
+<td>Max</td>
+<td>1,000 units</td>
+<td>15,000 units</td>
+</tr>
+</tbody>
+</table>
+<p>BYOK calls use your external provider key, but AIVAX still enforces BYOK request limits because the request passes through AIVAX infrastructure.</p>
+<h2 id="rag-billing">RAG billing</h2>
+<p>The default embedding model is <code>@aivax/data-embedding</code>. Its backend price is:</p>
+<pre><code class="lang-text">$0.015 per 1,000,000 input tokens
+</code></pre>
+<p>This applies to document indexing and query embedding usage that uses the default embedding model. Reranking, when enabled, can add separate reranking usage.</p>
+<h2 id="storage-billing">Storage billing</h2>
+<p>Storage is checked before balance-gated operations. If storage usage exceeds the plan quota, the request can fail with <code>402 Payment Required</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Plan</th>
+<th>Included storage</th>
+<th>Overage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Free</td>
+<td>30 MB</td>
+<td>No paid overage</td>
+</tr>
+<tr>
+<td>Pro</td>
+<td>2 GB</td>
+<td>$0.50/GB/month, charged hourly</td>
+</tr>
+<tr>
+<td>Max</td>
+<td>20 GB</td>
+<td>$0.20/GB/month, charged hourly</td>
+</tr>
+</tbody>
+</table>
+<p>Storage overage is charged hourly. The job bills only excess usage above the included quota, and only when the billable excess is greater than 1 MB.</p>
+<p>Storage can include RAG document content and vectors, long-term memory items, media description cache, web chat session content, and shell files.</p>
+<h2 id="balance-requirements">Balance requirements</h2>
+<p>Billable routes check balance before running. The generic balance middleware rejects balances below the route minimum; chat clients, integrations, and batch processing also stop when the balance is zero or negative. Some multimodal chat-completion inputs require a minimum balance before the model call starts:</p>
+<table>
+<thead>
+<tr>
+<th>Input type</th>
+<th>Minimum balance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Image or audio</td>
+<td>$0.10</td>
+</tr>
+<tr>
+<td>File or video</td>
+<td>$0.50</td>
+</tr>
+</tbody>
+</table>
+<p>If the account balance is too low, the API returns <code>402 Payment Required</code>.</p>
+<h2 id="plans-and-limits">Plans and limits</h2>
+<p>Plans affect both price and operation:</p>
+<ul>
+<li>Model access.</li>
+<li>Commission multiplier.</li>
+<li>Request and token rate limits.</li>
+<li>BYOK request limits.</li>
+<li>RAG quotas.</li>
+<li>Tool limits.</li>
+<li>Storage quota and overage price.</li>
+<li>Conversation retention.</li>
+<li>Subscription-model reserve windows.</li>
+</ul>
+<p>See <a href="limits.html">Plans and limits</a> for the technical quota matrix.</p>
 
 </article>
 

@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Boas Pr&#225;ticas de RAG | AIVAX </title>
+        <title>Best Practices for RAG | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="Boas Pr&#225;ticas de RAG | AIVAX ">
+        <meta name="title" content="Best Practices for RAG | AIVAX ">
 
 
         <link rel="icon" href="../../assets/img/favicon.ico">
@@ -47,7 +47,8 @@
                 
         <script>            
             function switchLanguage(lang) {
-                const docPart = window.location.pathname.match(/\/docs\/((en)\/)?(.*)/)[3];
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
                 const newPath = lang + docPart;
                 window.location.href = window.location.origin + newPath;
             }        
@@ -107,14 +108,14 @@
                         <ul class="dropdown-menu dropdown-menu-end language-dropdown">
                             <li>
                                 <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
-                                    <img src="/assets/flag/brazil.png">
-                                    Português
+                                    <img src="/assets/flag/usa.png">
+                                    English
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/en/')">
-                                    <img src="/assets/flag/usa.png">
-                                    English
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
                                 </a>
                             </li>
                         </ul>
@@ -122,48 +123,78 @@
                 </div>
 
                 <article data-uid="">
-<h1 id="boas-práticas-de-rag">Boas Práticas de RAG</h1>
+<h1 id="best-practices-for-rag">Best Practices for RAG</h1>
 
-<p>Para obter os melhores resultados com a indexação e busca semântica, a qualidade dos seus documentos é fundamental. A forma como você estrutura e escreve seus documentos impacta diretamente na capacidade do modelo de recuperar a informação correta.</p>
-<h2 id="estrutura-e-tamanho">Estrutura e Tamanho</h2>
-<p>Um documento deve representar um trecho limitado e autossuficiente de conhecimento.</p>
+<p>Use this guide when preparing documents for AIVAX collections and semantic search. The search pipeline indexes document text as embeddings, stores the resulting vectors, and later compares user queries with those indexed vectors. Search quality depends heavily on how clear, focused, and self-contained each document is.</p>
+<h2 id="document-size">Document Size</h2>
+<p>A document should represent one limited piece of knowledge.</p>
+<p>As a practical target, keep most documents between 20 and 700 words. This range is not a hard API rule, but it usually gives the embedding model enough context without mixing unrelated topics.</p>
+<p>The current indexer also records warnings for unusually small or large documents:</p>
 <ul>
-<li><strong>Tamanho ideal</strong>: Mantenha documentos entre 20 e 700 palavras.
+<li>Documents below about 10 tokens are accepted, but may be too small to retrieve reliably.</li>
+<li>Documents above about 1,562 tokens are accepted, but the indexer truncates the text used for embedding to about 5,000 characters and records a warning.</li>
+</ul>
+<p>If a document is longer than that, split it before indexing. Use paragraphs, sections, policy clauses, FAQ entries, product descriptions, or other logical units.</p>
+<h2 id="what-to-avoid">What to Avoid</h2>
 <ul>
-<li><strong>Muito curto (&lt; 20 palavras)</strong>: Pode não ter contexto suficiente para ser encontrado semanticamente.</li>
-<li><strong>Muito longo (&gt; 700 palavras)</strong>: Pode ter seu conteúdo truncado, afetando a qualidade da indexação, ou misturar muitos tópicos diferentes, confundindo a busca.</li>
+<li>Empty, tiny, or title-only documents.</li>
+<li>Entire PDFs, chapters, logs, or manuals as one document.</li>
+<li>Multiple unrelated subjects in one document.</li>
+<li>Text that depends on surrounding pages to make sense.</li>
+<li>Mixed languages inside the same document, unless the user is expected to search that way.</li>
+<li>Raw JSON, code, tables, or logs without a short natural-language explanation.</li>
+<li>Generic pronouns and references such as &quot;it&quot;, &quot;this process&quot;, or &quot;the product&quot; when the document does not identify the subject.</li>
 </ul>
-</li>
-</ul>
-<h2 id="o-que-fazer-e-o-que-evitar">O que Fazer e O que Evitar</h2>
-<h3 id="-não-faça">❌ Não faça</h3>
+<h2 id="what-to-do">What to Do</h2>
 <ul>
-<li><strong>Documentos muito curtos ou vazios</strong>: Evite criar documentos com 10 ou menos palavras.</li>
-<li><strong>Documentos gigantes</strong>: Não envie documentos com milhares de palavras; quebre-os em partes menores.</li>
-<li><strong>Mistura de assuntos</strong>: Não fale sobre múltiplas coisas desconexas em um mesmo documento (ex: &quot;Como ligar o carro&quot; e &quot;Preço da gasolina&quot; no mesmo texto).</li>
-<li><strong>Mistura de idiomas</strong>: Mantenha o documento em uma única língua para melhor performance do embedding.</li>
-<li><strong>Linguagem implícita</strong>: Evite textos onde o sujeito ou contexto não está claro (ex: &quot;Ele é azul&quot; - quem é ele?).</li>
-<li><strong>Linguagem excessivamente técnica</strong>: Evite indexar JSONs puros ou logs de código sem explicação textual.</li>
+<li>Give each document a clear name and focused text.</li>
+<li>Put the subject near the start of the document.</li>
+<li>Use natural language similar to the way users ask questions.</li>
+<li>Repeat important identifiers, product names, policy names, acronyms, and terms when they matter.</li>
+<li>Keep one document focused on one answerable topic.</li>
+<li>Use <code>__tags</code> to organize documents operationally.</li>
+<li>Use <code>__ref</code> to group chunks that belong to the same logical source.</li>
+<li>Use <code>__meta</code> for structured data your application needs to keep, such as source URL, version, author, or publication date.</li>
 </ul>
-<h3 id="-faça">✅ Faça</h3>
+<p>Example:</p>
+<p>Prefer:</p>
+<pre><code class="lang-text">The color of the 2015 Honda Civic registered in fleet record CAR-123 is yellow.
+</code></pre>
+<p>Avoid:</p>
+<pre><code class="lang-text">The car is yellow.
+</code></pre>
+<p>The first version can be retrieved and understood without external context.</p>
+<h2 id="metadata-tags-and-references">Metadata, Tags, and References</h2>
+<p>Only the document text is embedded for semantic matching. Metadata is returned with results and can be useful for applications, audits, source links, versioning, or display, but it should not replace searchable text.</p>
+<p>Use tags for maintenance and filtering, not as the only place where important meaning appears. If a user may search for &quot;refund policy&quot;, those words should appear in the document text, not only in a tag.</p>
+<p>Use references when several chunks represent the same source item. When reference expansion is enabled, a matched chunk can return other documents that share the same reference.</p>
+<h2 id="chunking-larger-sources">Chunking Larger Sources</h2>
+<p>When importing PDFs, spreadsheets, web pages, or manuals, inspect the generated chunks before relying on the collection. Remove repeated headers, footers, navigation menus, broken tables, boilerplate, and irrelevant disclaimers when possible.</p>
+<p>Good chunks usually include:</p>
 <ul>
-<li><strong>Seja explícito</strong>: O documento deve fazer sentido sozinho.</li>
-<li><strong>Foco único</strong>: Cada documento deve cobrir um único tópico ou conceito.</li>
-<li><strong>Repetição de palavras-chave</strong>: Use termos importantes explicitamente.
+<li>A title or source heading.</li>
+<li>The immediate section context.</li>
+<li>The complete rule, answer, instruction, or explanation.</li>
+<li>Enough surrounding text to answer a question without neighboring pages.</li>
+</ul>
+<p>Poor chunks often contain:</p>
 <ul>
-<li><em>Exemplo</em>: Prefira &quot;A cor do Honda Civic 2015 é amarela&quot; ao invés de &quot;a cor do carro é amarelo&quot;.</li>
+<li>Half of a table row.</li>
+<li>A sentence that depends on the previous page.</li>
+<li>Several policies mixed into one block.</li>
+<li>Repeated layout text from the original file.</li>
 </ul>
-</li>
-<li><strong>Linguagem natural</strong>: Escreva como um humano falaria ou explicaria o assunto.</li>
-<li><strong>Use Tags</strong>: Utilize tags para categorizar seus documentos e facilitar filtros.</li>
-</ul>
-<h2 id="dicas-adicionais">Dicas Adicionais</h2>
+<h2 id="query-quality">Query Quality</h2>
+<p>Semantic search works best when documents and queries use compatible language. If users ask full questions, prepare documents that contain complete explanations. If users search by product codes, policy IDs, plan names, or procedure names, include those identifiers in the text.</p>
+<p>When search results are poor, check the basics first:</p>
 <ul>
-<li><strong>Independência de Contexto</strong>: Imagine que o documento será lido fora de ordem. Ele ainda faz sentido? Se a resposta for não, reescreva-o para ser independente.</li>
-<li><strong>Metadados</strong>: Use o campo de metadados para armazenar informações estruturadas (fonte, autor, data) que não precisam ser pesquisadas semanticamente mas são úteis para referência.</li>
-<li><strong>Chunks</strong>: Se você tem um PDF grande, faça o &quot;chunking&quot; (divisão) dele em parágrafos ou seções lógicas antes de indexar.</li>
+<li>Confirm the documents are indexed.</li>
+<li>Search the collection directly before testing through an AI gateway.</li>
+<li>Try a complete question instead of isolated keywords.</li>
+<li>Compare the query language with the document language.</li>
+<li>Review whether the relevant answer is split across too many small chunks or buried inside a very large one.</li>
 </ul>
-<p>Seguir essas diretrizes garantirá que o sistema RAG recupere as informações mais relevantes para seus usuários.</p>
+<p>Well-prepared documents make RAG predictable: the model receives clearer source material, search returns fewer irrelevant matches, and answers become easier to audit.</p>
 
 </article>
 

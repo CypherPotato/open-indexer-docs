@@ -47,7 +47,8 @@
                 
         <script>            
             function switchLanguage(lang) {
-                const docPart = window.location.pathname.match(/\/docs\/((en)\/)?(.*)/)[3];
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
                 const newPath = lang + docPart;
                 window.location.href = window.location.origin + newPath;
             }        
@@ -107,14 +108,14 @@
                         <ul class="dropdown-menu dropdown-menu-end language-dropdown">
                             <li>
                                 <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
-                                    <img src="/assets/flag/brazil.png">
-                                    Português
+                                    <img src="/assets/flag/usa.png">
+                                    English
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/en/')">
-                                    <img src="/assets/flag/usa.png">
-                                    English
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
                                 </a>
                             </li>
                         </ul>
@@ -124,17 +125,25 @@
                 <article data-uid="">
 <h1 id="shell">Shell</h1>
 
-<p>A AIVAX oferece um ambiente de shell virtual que pode ser utilizado por assistentes agênticos para executar comandos de terminal. Este recurso é especialmente útil para tarefas como automação, gerenciamento de sistemas, execução de scripts e outras operações que exigem interação com o sistema operacional.</p>
-<p>O ambiente de shell possibilita mover ferramentas usadas pelo agente para o lado do shell, transformando-as em uma ferramenta de CLI. Isso é vantajoso para quando você possui centenas de ferramentas e não quer sobrecarregar o contexto do modelo, ou para quando as ferramentas possuem uma interface de linha de comando mais complexa que seria difícil de ser chamada diretamente pelo modelo.</p>
-<h2 id="adaptando-ferramentas-para-shell">Adaptando ferramentas para shell</h2>
-<p>Na interface virtual do shell, ferramentas de manipulação padrão do sistema operacional estão disponíveis, como <code>grep</code>, <code>awk</code>, <code>sed</code>, <code>curl</code>, <code>wget</code>, entre outras. Dessa forma, você pode adaptar suas ferramentas para retornarem saídas brutas ou longas, e o modelo usar as ferramentas de manipulação de texto do shell para extrair as informações relevantes, exemplo:</p>
+<p>AIVAX offers a virtual shell environment that can be used by agent assistants to execute terminal commands during inference. This feature is especially useful for tasks such as data manipulation, API calls, script execution, and workflows that are easier to express as command-line operations.</p>
+<p>The shell environment allows moving selected model tools to the shell side, turning them into CLI commands. This is useful when you have many tools and do not want to expose all of them directly to the model, or when a tool is easier to use through command-line arguments and pipes.</p>
+<p>When enabled in an AI Gateway, the model sees a <code>shell</code> tool with one argument: <code>command</code>. Commands run in a sandboxed shell with network modules, filesystem defaults, and a workspace mounted at <code>/home/workspace</code>. The current backend limits each command to 30 seconds and returns up to 4,096 characters of output to the model.</p>
+<h2 id="adapting-tools-for-shell">Adapting tools for shell</h2>
+<p>In the virtual shell interface, standard command-line utilities and registered shell modules are available. This way, you can adapt your tools to return raw or long outputs, and the model can use the shell's text manipulation tools to extract the relevant information, for example:</p>
 <pre><code class="lang-bash">get-users --filter active --format csv | grep &quot;John Doe&quot; | awk -F, '{print $1, $2}'
 </code></pre>
-<p>Na linha acima, <code>get-users</code> é uma ferramenta personalizada que retorna uma lista de usuários em formato CSV. O comando <code>grep</code> filtra os resultados para encontrar &quot;John Doe&quot;, e o <code>awk</code> extrai e formata as colunas desejadas. Essa ferramenta pode ter sido definida por <a href="/docs/tools/mcp">MCP</a>, <a href="/docs/tools/builtin-tools">ferramentas embutidas</a> ou ser uma <a href="/docs/tools/protocol-functions">ferramenta de protocolo</a>.</p>
-<p>Não é possível virtualizar ferramentas que executam no lado do cliente no ambiente bash. Ao tentar fazer isso, um erro será retornado na API. Defina ferramentas em white-list ou black-list da shell para controlar quais ferramentas estão disponíveis para serem usadas no ambiente de shell.</p>
-<h2 id="persistência-de-dados">Persistência de dados</h2>
-<p>É possível definir persistência de dados para o ambiente da shell. Quando ativado, o usuário de inferência (através do parâmetro <code>$.user</code> ou <code>$.tag</code> do cliente de chat) terá um ambiente de shell virtual exclusivo, o que pode ser acessado em diferentes conversas e sessões. Isso é útil para quando o agente precisa manter um estado entre sessões, como arquivos temporários, logs ou outros dados que precisam ser persistidos.</p>
-<p>Se essa persistência estiver desativada, o ambiente de shell é descartado após uma iteração de inferência.</p>
+<p>In the line above, <code>get-users</code> is a custom tool that returns a list of users in CSV format. The <code>grep</code> command filters the results to find &quot;John Doe&quot;, and <code>awk</code> extracts and formats the desired columns. This tool may have been defined by <a href="/docs/tools/mcp">MCP</a>, <a href="/docs/tools/builtin-tools">built-in tools</a> or be a <a href="/docs/tools/protocol-functions">protocol tool</a>.</p>
+<p>Tools moved into the shell are no longer exposed as direct model functions, except reserved tools such as <code>shell</code> and <code>read_skill</code>. Configure the shell tool list as either:</p>
+<ul>
+<li><code>WhiteList</code>: only listed tools are exposed as shell commands.</li>
+<li><code>BlackList</code>: listed tools remain direct model tools, and the other non-reserved tools are exposed as shell commands.</li>
+</ul>
+<p>Use the runtime function name when listing tools, such as <code>web_search</code>, <code>open_url</code>, <code>request</code>, or a protocol/MCP function name. Each shell command generated from a tool supports <code>--help</code> and maps JSON Schema properties to command-line options.</p>
+<h2 id="data-persistence">Data persistence</h2>
+<p>It is possible to define data persistence for the shell environment. When <code>allowDataPersistence</code> is enabled and the inference context has a user external ID, AIVAX mounts a persistent workspace scoped to the account and user. This allows the agent to keep files across conversations and sessions for that identified user.</p>
+<p>If persistence is disabled, or the inference context has no user external ID, the shell uses an in-memory filesystem and the workspace is discarded after the inference iteration.</p>
+<h2 id="shell-file-api">Shell file API</h2>
+<p>AIVAX also exposes Shell I/O endpoints under <code>/api/v1/shell/io</code> for authenticated accounts. These endpoints use the required <code>X-Shell-User-Id</code> header to scope the filesystem sandbox and support listing directories, downloading files, inspecting file metadata, creating temporary public file addresses, uploading files, creating directories, and deleting files or directories. Uploads are documented with a 100 MB maximum request body.</p>
 
 </article>
 
