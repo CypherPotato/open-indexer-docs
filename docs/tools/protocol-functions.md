@@ -1,71 +1,72 @@
-# Funções do lado do servidor
+﻿# Server-side functions
 
-As funções de protocolo da AIVAX, ou _server-side functions_, é uma implementação em que a chamada de ferramentas do modelo ocorre do lado do servidor. Similar ao MCP, mas com suporte nativo à autenticação e otimizado para funcionar externamente.
+The protocol functions of AIVAX, or _server-side functions_, are an implementation where the model's tool calls occur on the server side. Similar to MCP, but with native authentication support and optimized to work externally.
 
-As funções de protocolo permitem a tomada de ações no lado do servidor da AIVAX, removendo a necessidade de implementação da função no lado do cliente e integrando com aplicações e serviços existentes.
+Protocol functions allow taking actions on the AIVAX server side, removing the need to implement the function on the client side and integrating with existing applications and services.
 
 <img src="/assets/diagrams/protocol-functions-1.drawio.svg">
 
-Essas funções esperam um **callback** através de uma URL, e quando o modelo decide chamar a função, o callback é acessado com os parâmetros informados pela própria assistente. A assistente não sabe qual URL ela está chamando, pois a mesma permanece invisível tanto para a assistente quanto para o usuário.
+These functions expect a **callback** via a URL, and when the model decides to call the function, the callback is accessed with the parameters provided by the assistant itself. The assistant does not know which URL it is calling, as it remains invisible to both the assistant and the user.
 
-## Quando usar funções de protocolo
+## When to use protocol functions
 
-Use funções de protocolo quando você quer expor uma ação HTTP específica para um AI Gateway sem criar um servidor MCP completo. Elas são boas para integrações pontuais, como consultar um pedido, abrir um ticket, buscar um usuário, validar um cupom, registrar um lead ou chamar uma automação interna. A AIVAX mantém a URL invisível para o modelo, envia a requisição do lado do servidor e adiciona o resultado textual ao contexto da conversa.
+Use protocol functions when you want to expose a specific HTTP action to an AI Gateway without creating a full MCP server. They are good for point integrations, such as checking an order, opening a ticket, fetching a user, validating a coupon, registering a lead, or invoking an internal automation. AIVAX keeps the URL invisible to the model, sends the request from the server side, and adds the textual result to the conversation context.
 
-Se você tem muitas ferramentas, ferramentas dinâmicas ou um sistema que já implementa Model Context Protocol, prefira [MCP](/docs/tools/mcp). Se você quer usar capacidades já mantidas pela AIVAX, prefira [ferramentas embutidas](/docs/tools/builtin-tools). Se você precisa tomar decisões antes ou depois de eventos da inferência, prefira [workers](/docs/inference/workers). Funções de protocolo ficam no meio: são mais simples que MCP e mais específicas que workers, mas ainda dão ao modelo uma ferramenta controlada para executar uma ação externa.
+If you have many tools, dynamic tools, or a system that already implements Model Context Protocol, prefer [MCP](/docs/tools/mcp). If you want to use capabilities already maintained by AIVAX, prefer [built-in tools](/docs/tools/builtin-tools). If you need to make decisions before or after inference events, prefer [workers](/docs/inference/workers). Protocol functions sit in the middle: they are simpler than MCP and more specific than workers, but still give the model a controlled tool to execute an external action.
 
-Uma função de protocolo deve ter um nome de ferramenta, uma descrição e um schema de argumentos. O nome ajuda o modelo a reconhecer a ação; a descrição explica quando chamar; o schema limita o formato dos argumentos. A URL de callback e detalhes de autenticação não ficam visíveis para o modelo. Isso permite criar ferramentas especializadas sem expor endpoints internos, desde que seu serviço valide o `X-Request-Nonce`, valide argumentos recebidos e aplique autorização própria quando a chamada depende do usuário.
+A protocol function must have a tool name, a description, a callback URL, and an argument schema. The name helps the model recognize the action; the description explains when to call; the schema limits the argument format. Function names must be valid JavaScript identifiers with at least three characters. The callback URL and authentication details are not visible to the model. This allows creating specialized tools without exposing internal endpoints, provided your service validates the `X-Request-Nonce`, validates received arguments, and applies its own authorization when the call depends on the user.
 
-### Escolhendo o nome da função
+### Choosing the function name
 
-O nome da função deve ser simples e determinístico ao que essa função faz. Evite nomes difíceis de advinhar ou que não remetam ao papel da função, pois a assistente pode se confundir e não chamar a função quando apropriado.
+The function name should be simple and deterministic to what the function does. Avoid names that are hard to guess or that do not reflect the function's role, as the assistant may get confused and not call the function when appropriate.
 
-Como um exemplo, vamos pensar em uma função de consultar um usuário em um banco de dados externo. Os nomes a seguir são bons exemplos para considerar para a chamada:
+For example, let's think of a function to query a user in an external database. The following names are good examples to consider for the call:
 
 - `search_user`
 - `query_user`
 
-Nomes ruins incluem:
+Bad names include:
 
-- `search` (pouco abrangente)
-- `query-user-in-database-data` (nome muito grande)
-- `pesquisa-usuario` (nome não em inglês)
-- `search user` (nome com caracteres impróprios)
+- `search` (not very broad)
+- `query-user-in-database-data` (name too long)
+- `pesquisa-usuario` (name not in English)
+- `search user` (name with improper characters)
 
-Tendo o nome da função, podemos pensar na descrição da função.
+Having the function name, we can think about the function description.
 
-### Escolhendo a descrição da função.
+### Choosing the function description
 
-A descrição da função deve explicar conceitualmente duas situações: o que ela faz e quando deve ser chamada pela assistente. Essa descrição deve incluir os cenários que a assistente deve considerar chamar ela e quando não deve ser chamada, fornecendo poucos exemplos de chamadas (one-shot) e/ou tornando explícitas as regras da função.
+The function description should conceptually explain two situations: what it does and when it should be called by the assistant. This description should include the scenarios the assistant should consider calling it and when it should not be called, providing a few call examples (one-shot) and/or making the function's rules explicit.
 
-## Definindo funções de protocolo
+## Defining protocol functions
 
-Essas funções são definidas no [AI Gateway](/docs/inference/ai-gateway), o que permite a criação de agentes inteligentes que realizam ações sem intervenção humana. Elas seguem uma sintaxe simples, esperam o nome da função, uma descrição do que ela faz e os parâmetros de invocação.
+These functions are defined in the [AI Gateway](/docs/inference/ai-gateway), which allows the creation of intelligent agents that perform actions without human intervention. They follow a simple syntax, expecting the function name, a description of what it does, and the invocation parameters.
 
-Funções de protocolo são definidas no AI gateway seguindo o JSON:
+Protocol functions are defined in the AI Gateway configuration.
 
-<div class="request-item post">
-    <span>POST</span>
-    <span>
-        /api/v1/ai-gateways
-    </span>
-</div>
+Reference:
+
+<script src="https://inference.aivax.net/apidocs?embed-target=Create%20AI%20Gateway&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
 
 ```json
 {
     "name": "my-ai-gateway",
     "parameters": {
-        ...
+        "baseAddress": "@integrated",
+        "modelName": "@openai/gpt-5-mini",
         "protocolFunctions": [
             {
                 "name": "list_clients",
-                "description": "Use essa ferramenta para listar e procurar pelos clientes do usuário.",
+                "description": "Use this tool to list and search for the user's clients.",
                 "callbackUrl": "https://my-external-api.com/api/scp/users",
-                "contentFormat": null
+                "contentFormat": {
+                    "type": "object",
+                    "properties": {}
+                }
             },
             {
                 "name": "view_client",
-                "description": "Use essa ferramenta para obter detalhes e pedidos de um cliente através do seu ID.",
+                "description": "Use this tool to obtain details and orders of a client via its ID.",
                 "callbackUrl": "https://my-external-api.com/api/scp/users",
                 "contentFormat": {
                     "type": "object",
@@ -83,26 +84,20 @@ Funções de protocolo são definidas no AI gateway seguindo o JSON:
 }
 ```
 
-No snippet acima, você está fornecendo duas funções para seu modelo de IA: `list_clients` e `view_client`, o qual irá decidir qual será executada durante o seu raciocínio. Você pode fornecer também um formato de conteúdo JSON para qual o modelo irá chamar sua API fornecendo o contéudo informado.
+In the snippet above, you are providing two functions for your AI model: `list_clients` and `view_client`, which will decide which one will be executed during its reasoning. You can also provide a JSON content format for which the model will call your API supplying the provided content.
 
-Você também pode definir as lista de funções suportadas através de um endpoint. Toda vez que o modelo receber uma mensagem, ele irá consultar o endpoint fornecido para obter uma lista de funções que ele possa executar.
+You can also define the list of supported functions via an endpoint. Every time the model receives a message, it will query the provided endpoint to obtain a list of functions it can execute.
 
 <img src="/assets/diagrams/protocol-functions-2.drawio.svg">
 
-Defina os endpoints de listagem de funções no seu AI gateway:
-
-<div class="request-item post">
-    <span>POST</span>
-    <span>
-        /api/v1/ai-gateways
-    </span>
-</div>
+Define the function listing endpoints in your AI Gateway:
 
 ```json
 {
     "name": "my-ai-gateway",
     "parameters": {
-        ...
+        "baseAddress": "@integrated",
+        "modelName": "@openai/gpt-5-mini",
         "protocolFunctionSources": [
             "https://my-external-api.com/api/scp/listings"
         ]
@@ -110,7 +105,7 @@ Defina os endpoints de listagem de funções no seu AI gateway:
 }
 ```
 
-Os endpoint de fornecimento de funções deve responder seguindo o formato:
+The function provisioning endpoint must respond following the format:
 
 <div class="request-item post">
     <span>GET</span>
@@ -124,13 +119,16 @@ Os endpoint de fornecimento de funções deve responder seguindo o formato:
     "functions": [
         {
             "name": "list_clients",
-            "description": "Use essa ferramenta para listar e procurar pelos clientes do usuário.",
+            "description": "Use this tool to list and search for the user's clients.",
             "callbackUrl": "https://my-external-api.com/api/scp/users",
-            "contentFormat": null
+            "contentFormat": {
+                "type": "object",
+                "properties": {}
+            }
         },
         {
             "name": "view_client",
-            "description": "Use essa ferramenta para obter detalhes e pedidos de um cliente através do seu ID.",
+            "description": "Use this tool to obtain details and orders of a client via its ID.",
             "callbackUrl": "https://my-external-api.com/api/scp/users",
             "contentFormat": {
                 "type": "object",
@@ -147,14 +145,15 @@ Os endpoint de fornecimento de funções deve responder seguindo o formato:
 }
 ```
 
-Essas funções são armazenadas em cache por 10 minutos antes de uma nova requisição ser feita no endpoint fornecido.
+These functions are cached for 10 minutes before a new request is made to the provided endpoint.
 
-### Lidando com chamada de funções
+### Handling function calls
 
-As funções são invocadas no endpoint fornecido em `callbackUrl` através de uma requisição HTTP POST, com o corpo:
+Functions are invoked at the provided endpoint in `callbackUrl` via an HTTP POST request. AIVAX sends `Content-Type: application/json` and a body equivalent to:
 
 ```json
 {
+    "type": "tool_call",
     "function": {
         "name": "view_client",
         "content": {
@@ -163,63 +162,67 @@ As funções são invocadas no endpoint fornecido em `callbackUrl` através de u
     },
     "context": {
         "externalUserId": "...",
+        "metadata": {},
+        "callSource": "WebChatClient",
+        "conversationToken": "...",
         "moment": "2025-05-18T03:36:27"
     }
 }
 ```
 
-A resposta dessa ação deve responder sempre com um status HTTP OK (2xx ou 3xx), até mesmo para erros que a assistente possa ter cometido. Uma resposta não OK irá indicar para a assistente que não foi possível chamar a função e ela não irá continuar com o que estava planejando fazer.
+The response to this action must return a successful HTTP status (2xx), even for errors the assistant may have made. A non-success response is logged and the model receives a generic tool-call error instead of your response body.
 
-#### Formato das respostas
+#### Response format
 
-As respostas bem sucedidas devem ser textuais e serão anexadas como resposta da função do jeito que for respondida pelo endpoint. Não há formato JSON ou estrutura para essa resposta, mas é aconselhável que dê uma resposta simples, humanamente legível, para que a assistente consiga ler o resultado da ação.
+Successful responses should be textual and will be attached as the function response in whatever way the endpoint returns. There is no JSON format or structure for this response, but it is advisable to give a simple, human‑readable answer so that the assistant can read the action result.
 
-Erros podem ser comuns, como não encontrar um cliente pelo ID ou algum campo não estiver no formato desejado. Nestes casos, responda com um status OK e no corpo da resposta inclua uma descrição humana do erro e como a assistente pode contornar ele.
+Errors can be common, such as not finding a client by ID or a field not being in the desired format. In these cases, respond with an OK status and include a human description of the error in the response body and how the assistant can work around it.
 
-**É garantido** que a requisição irá seguir estritamente o JSON Schema do conteúdo fornecido pela definição da função. Funções que não esperam argumentos não devem especificar um formato de conteúdo para essa função.
+Arguments are validated against the JSON Schema before execution. Your callback should still validate received arguments, because schemas can limit structure but cannot replace business authorization or consistency checks. Functions that do not expect arguments should use an empty object schema.
 
-A resposta da função deve ser escrita para o modelo, não para o usuário final. Ela pode conter dados, avisos e instruções curtas sobre como usar o resultado. Por exemplo, se uma busca de pedido encontrar o status, responda com o status, data prevista e restrições relevantes. Se não encontrar, responda que o pedido não foi localizado e diga quais dados a assistente deve pedir ao usuário. Evite retornar objetos enormes, HTML, logs brutos ou mensagens internas, porque esse conteúdo entra no contexto e pode confundir a próxima resposta.
+The function response should be written for the model, not for the end user. It may contain data, warnings, and short instructions on how to use the result. For example, if an order search finds the status, respond with the status, expected date, and relevant restrictions. If not found, respond that the order was not located and indicate which data the assistant should ask the user for. Avoid returning huge objects, HTML, raw logs, or internal messages, because this content enters the context and can confuse the next response.
 
 > [!IMPORTANT]
 >
-> Quanto mais funções você definir, mais de entrada tokens você irá consumir no processo de raciocínio. A definição da função, bem como o formato dela, consome tokens do processo de raciocínio.
+> The more functions you define, the more input tokens you will consume in the reasoning process. The function definition, as well as its format, consumes tokens from the reasoning process.
 
-#### Autenticação
+#### Authentication
 
-A autenticação das requisições é feita pelo cabeçalho `X-Request-Nonce` enviado nas requisições de protocolo das funções, incluindo as de listagem.
+Request authentication is done via the `X-Request-Nonce` header sent in the protocol function requests, including listing ones.
 
-Veja o manual de [autenticação](/docs/authentication) para entender como autenticar requisições reversas do AIVAX.
+See the [authentication](/docs/authentication) manual to understand how to authenticate reverse requests from AIVAX.
 
-#### Autenticação de usuário
+#### User authentication
 
-As chamadas de função enviam um campo `$.context.externalUserId` contendo a tag de usuário criada em uma [sessão de chat](/docs/features/chat-clients). Essa tag pode ser usada para autenticar o usuário que chamou essa função.
+Function calls send `$.context.externalUserId` when the call comes from an identified [chat session](/docs/features/chat-clients). They also include `metadata`, `callSource`, `conversationToken`, and `moment`. Use these fields for correlation and user-level authorization, but do not treat them as the only security boundary; validate the nonce and apply your own authorization rules.
 
-#### Considerações de segurança
+#### Security considerations
 
-Para o modelo de IA, somente é visível o nome, descrição e formato da função. Ela não é capaz de ver o endpoint para onde essa função aponta. Além disso, ela não possui acesso à tag do usuário que está autenticado em um [cliente de chat](/docs/features/chat-clients).
+For the AI model, only the name, description, and format of the function are visible. It cannot see the endpoint the function points to. Moreover, it does not have access to the user tag authenticated in a [chat client](/docs/features/chat-clients).
 
-## Funções especialistas
+## Specialist functions
 
-Além das [funções embutidas](/docs/tools/builtin-tools), você pode definir funções especialistas, que executam tarefas específicas na sua conta da AIVAX.
+In addition to [built-in functions](/docs/tools/builtin-tools), you can define specialist functions that perform specific tasks in your AIVAX account.
 
-Você define funções especialistas pelo esquema de URL `aivax://`, seguindo o exemplo abaixo:
+You define specialist functions using the `aivax://` URL scheme, following the example below:
 
 ```json
 {
     "name": "my-ai-gateway",
     "parameters": {
-        ...
+        "baseAddress": "@integrated",
+        "modelName": "@openai/gpt-5-mini",
         "protocolFunctions": [
             {
                 "name": "search_disease",
-                "description": "Use essa ferramenta para pesquisar por doenças, tratamentos e sintomas.",
+                "description": "Use this tool to search for diseases, treatments, and symptoms.",
                 "callbackUrl": "aivax://query-collection?collection-id=0196f5ef-9334-742b-a988-f913bb3be5ba&top=5&min=0.4",
                 "contentFormat": {
                     "type": "object",
                     "properties": {
                         "query": {
                             "type": "string",
-                            "description": "Nome da doença, tratamento ou sintomas."
+                            "description": "Name of the disease, treatment, or symptoms."
                         }
                     },
                     "required": [
@@ -232,29 +235,32 @@ Você define funções especialistas pelo esquema de URL `aivax://`, seguindo o 
 }
 ```
 
-A função acima cria uma ferramenta para IA consultar em uma [coleção de documentos](/docs/rag/collections) específica, guiando a assistente do que ela deve pesquisar nessa coleção e o que esperar de uma resposta. Dessa forma, você pode vincular várias coleções de RAG para uma assistente poder buscar conteúdo especialista.
+The above function creates a tool for the AI to query a specific [document collection](/docs/rag/collections), guiding the assistant on what to search in that collection and what to expect from a response. This way, you can link multiple RAG collections for an assistant to retrieve specialist content.
 
-Você pode personalizar a descrição das propriedades do JSON Schema de funções especialistas mas não sua estrutura, pois nosso backend espera um formato específico para chamar as funções. Os parâmetros de funções especialistas são fornecidos na URL através de parâmetros da query.
+You can customize the description of the JSON Schema properties for specialist functions but not its structure, as our backend expects a specific format to call the functions. Specialist function parameters are supplied in the URL via query parameters.
 
-Atualmente, apenas uma função especialista existe:
-- `query-collection`: executa uma pesquisa RAG em uma coleção informada.
-    Parâmetros da query:
-    - `collection-id`: o UUID da coleção que será pesquisada.
-    - `top`: um número indicando quantos documentos devem ser retornados na pesquisa.
-    - `min`: um decimal indicando qual a pontuação mínima de similaridade da busca.
+Currently, only one specialist function exists:
+- `query-collection`: performs an RAG search on a specified collection.
 
-    Formato JSON da função:
-    ```json
-    {
-        "type": "object",
-        "properties": {
-            "query": {
-                "type": "string",
-                "description": "Conteúdo da pesquisa."
-            }
-        },
-        "required": [
-            "query"
-        ]
-    }
-    ```
+Query parameters:
+- `collection-id`: the UUID of the collection to be searched.
+- `top`: a number indicating how many documents should be returned in the search.
+- `min`: a decimal indicating the minimum similarity score of the search.
+
+Function JSON format:
+```json
+{
+    "type": "object",
+    "properties": {
+        "query": {
+            "type": "string",
+            "description": "Search content."
+        }
+    },
+    "required": [
+        "query"
+    ]
+}
+```
+
+The optional `refs` query parameter controls whether references are included in the RAG result. In the current backend, references are included when the `refs` parameter is present.

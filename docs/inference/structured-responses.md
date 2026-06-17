@@ -1,47 +1,33 @@
-# Respostas estruturadas
+# Structured Responses
 
-AIVAX possui um mecanismo de respostas estruturadas que funciona com **qualquer LLM**, mesmo aqueles que não suportam nativamente structured outputs. A AIVAX analisa o esquema JSON fornecido e valida manualmente se o modelo respondeu conforme esperado. Quando o modelo falha, a AIVAX notifica os erros automaticamente até que ele gere um JSON válido. Esse mecanismo é chamado de **JSON Healing**.
+AIVAX can produce structured JSON through two paths:
 
-Esse processo continua até que o parâmetro o máximo de tentavias seja atingido ou um JSON válido seja gerado. A AIVAX interpreta JSONs em blocos markdown, precedidos ou antecedidos por texto, e extrai a resposta final automaticamente.
+- `response_schema`: AIVAX validates the final model output against a JSON Schema and retries with validation feedback when the output is invalid. This is the JSON Healing path.
+- `response_format`: AIVAX passes a native OpenAI-compatible response format to the provider, or applies healing when `healing_options` is present or automatic JSON Healing is enabled on the account.
 
-Você pode usar respostas estruturadas com modelos que possuem raciocínio (reasoning) sem quebrar a fase de raciocínio para gerar o JSON. Além disso, é possível usar [ferramentas embutidas](/docs/tools/builtin-tools) durante a geração, como pesquisa na internet, geração de documentos e abertura de links.
+Use structured responses when another system will consume the output and free-form text would be fragile.
 
-## Como funciona
+## How JSON Healing works
 
-Ao fazer uma chamada de inferência, você define **o que o modelo deve fazer** através de instruções e **como ele deve responder** através de um JSON Schema.
+When `response_schema` is present, AIVAX adds schema instructions to the model request. After the model generates an answer, AIVAX tries to extract JSON from:
 
-A AIVAX valida a resposta do modelo em tempo real. Se o JSON gerado for inválido ou não seguir o schema, o modelo recebe feedback automático sobre os erros e tenta novamente. Esse ciclo continua até que:
-- Um JSON válido seja gerado (sucesso na primeira tentativa ou após correções)
-- O limite de `maxAttempts` seja atingido
+- The complete generated text.
+- Common repaired variants, such as missing opening or closing braces.
+- JSON code blocks found in the generated text.
 
-**Cobrança:** Você é cobrado por cada tentativa de geração. Modelos mais inteligentes geralmente acertam na primeira tentativa, enquanto modelos menores podem precisar de múltiplas tentativas.
+If the extracted JSON does not validate against the schema, AIVAX adds a feedback message with the validation errors and asks the model to generate the JSON again. This continues until a valid JSON value is generated or the configured attempt limit is reached.
 
-**Dica de performance:** Use cache no lado da sua aplicação para dados que não mudam frequentemente (clima, estatísticas diárias, etc). A AIVAX não realiza cache automático.
+JSON Healing improves reliability, but it is not an absolute guarantee. If the model repeatedly fails the schema, the request can fail after the attempt limit.
 
-## Ferramentas embutidas
+## Choosing a mode
 
-Você pode usar [ferramentas embutidas](/docs/tools/builtin-tools) durante a geração de JSON, permitindo que o modelo:
-- Pesquise na internet para obter informações atualizadas
-- Execute código para cálculos complexos
-- Abra e analise URLs
-- Gere imagens
-- Busque posts em redes sociais
+Use `response_schema` when AIVAX should own validation and repair. This is the safest mode for models that do not natively support structured output, for responses that use tools before producing JSON, and for systems that cannot tolerate malformed JSON.
 
-Essas ferramentas são especialmente úteis para funções que precisam de dados em tempo real ou processamento adicional antes de gerar a resposta estruturada.
+Use `response_format` with `type: "json_schema"` when the provider model should handle the structured output natively. AIVAX will still use the schema internally, and healing is applied when `response_format.json_schema.healing_options` is provided or the account has automatic JSON Healing enabled.
 
-## Escolhendo o modo correto
+Use `json_only: true` when the HTTP response body should be only the final JSON. This removes the normal chat completion envelope, choices, usage, and generation metadata from the response body.
 
-Use `response_schema` quando você quer que a AIVAX seja responsável por validar e corrigir a saída. Esse é o modo mais seguro quando o modelo não suporta structured outputs nativamente, quando você está usando ferramentas, quando o modelo possui raciocínio antes da resposta final ou quando a saída será consumida por um sistema que não tolera JSON inválido. Nesse modo, a AIVAX extrai o JSON da resposta, valida contra o schema e, se necessário, envia feedback ao modelo para tentar novamente até o limite configurado.
-
-Use `response_format` quando você quer aproveitar o structured output nativo do provedor. Esse modo é melhor quando o modelo já é confiável para JSON Schema e você quer reduzir interferência da AIVAX no fluxo. Se a conta estiver com JSON Healing automático ativado, a AIVAX ainda pode aplicar healing mesmo nesse modo. Para controlar isso explicitamente, use `response_format.json_schema.healing_options` quando quiser healing ou mantenha apenas o schema quando quiser passar a responsabilidade ao modelo.
-
-Use `json_only` quando o consumidor da resposta precisa receber apenas o JSON, sem envelope de chat completion. Isso é útil para webhooks, jobs internos, automações e pipelines que esperam um objeto JSON diretamente. Com `stream: true`, o JSON vem em um único chunk e depois `[DONE]`; com `stream: false`, o corpo da resposta contém apenas o JSON final. Esse modo remove metadados úteis como usage e choices, então não é ideal quando você precisa de auditoria detalhada da inferência na própria resposta.
-
-Em produção, trate o schema como contrato. Campos obrigatórios devem estar em `required`; objetos que não devem aceitar campos extras devem usar `additionalProperties: false`; listas devem declarar `items`; strings críticas devem usar `enum`, `format`, `minLength`, `maxLength` ou `pattern` quando possível. Quanto mais explícito o schema, menor a margem para o modelo inventar formatos parecidos. Ao mesmo tempo, evite schemas complexos demais no primeiro teste: comece com o objeto essencial, valide com dados reais e só depois adicione restrições.
-
-## Como usar
-
-Você usa o serviço de respostas estruturadas no mesmo endpoint de chat completions.
+## Basic example
 
 <div class="request-item post">
     <span>POST</span>
@@ -53,7 +39,7 @@ Você usa o serviço de respostas estruturadas no mesmo endpoint de chat complet
 ```json
 {
     "model": "@google/gemini-2.5-flash",
-    "prompt": "Pesquise por notícias em São José do Rio Preto.",
+    "prompt": "Search for recent news about electric vehicles.",
     "stream": true,
     "builtin_tools": {
         "tools": [
@@ -73,43 +59,113 @@ Você usa o serviço de respostas estruturadas no mesmo endpoint de chat complet
                     "properties": {
                         "title": {
                             "type": "string",
-                            "description": "Título da notícia"
+                            "description": "News title"
                         },
-                        "content": {
+                        "summary": {
                             "type": "string",
-                            "description": "Resumo da notícia"
+                            "description": "News summary"
+                        }
+                    },
+                    "required": ["title", "summary"]
+                }
+            }
+        },
+        "required": ["news"]
+    }
+}
+```
+
+`builtin_tools` is optional. If you enable tools, the selected model must support tool calling or the gateway must provide a tool handler.
+
+## Native structured output
+
+Use `response_format` when you want to use the provider's native JSON Schema support:
+
+```json
+{
+    "model": "@openai/gpt-4o",
+    "messages": [
+        {
+            "role": "user",
+            "content": "List 3 European capitals."
+        }
+    ],
+    "response_format": {
+        "type": "json_schema",
+        "json_schema": {
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "capitals": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "city": { "type": "string" },
+                                "country": { "type": "string" }
+                            },
+                            "required": ["city", "country"]
                         }
                     }
-                }
+                },
+                "required": ["capitals"]
             }
         }
     }
 }
 ```
 
-Veja que o parâmetro `builtin_tools` define quais ferramentas embutidas o modelo pode usar para gerar a resposta estruturada. Note que, o modelo usado deve ser compatível com chamadas de função.
+If the selected integrated model has strict JSON support, AIVAX can forward the schema using the provider's JSON Schema response format.
 
-Você também pode usar respostas estruturadas com seus gateways de IA fornecendo o ID do seu gateway no nome do modelo.
+## Enabling healing in `response_format`
 
-## Modos de resposta JSON
-
-Existem duas formas de solicitar respostas estruturadas: com ou sem JSON Healing.
-
-### Com JSON Healing (`response_schema`)
-
-Use `response_schema` para habilitar automaticamente o JSON Healing com o schema fornecido. A AIVAX valida a resposta do modelo e, se inválida, fornece feedback automático para correção:
-
-<div class="request-item post">
-    <span>POST</span>
-    <span>
-        /v1/chat/completions
-    </span>
-</div>
+You can explicitly enable JSON Healing inside `response_format.json_schema`:
 
 ```json
 {
-    "model": "@google/gemini-2.5-flash",
-    "messages": [{ "role": "user", "content": "Liste 3 capitais europeias" }],
+    "model": "@openai/gpt-4o",
+    "messages": [
+        {
+            "role": "user",
+            "content": "Return a short status object."
+        }
+    ],
+    "response_format": {
+        "type": "json_schema",
+        "json_schema": {
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "status": { "type": "string" },
+                    "message": { "type": "string" }
+                },
+                "required": ["status", "message"]
+            },
+            "healing_options": {
+                "max_attempts": 5
+            }
+        }
+    }
+}
+```
+
+`max_attempts` must be between 1 and 10. Each retry is another model generation attempt and can increase cost and latency.
+
+If healing frequently reaches the attempt limit, adjust the instruction and schema before raising the limit. Common causes are overly rigid schemas, missing `required` fields, vague prompts, noisy tool results, or a model that is too small for the task.
+
+## `json_only` mode
+
+Set `json_only: true` when the client should receive only the generated JSON:
+
+```json
+{
+    "model": "@openai/gpt-4o",
+    "messages": [
+        {
+            "role": "user",
+            "content": "List 3 European capitals."
+        }
+    ],
     "response_schema": {
         "type": "object",
         "properties": {
@@ -126,151 +182,33 @@ Use `response_schema` para habilitar automaticamente o JSON Healing com o schema
             }
         },
         "required": ["capitals"]
-    }
-}
-```
-
-**Vantagens do JSON Healing:**
-
-- **Garantia de formato:** O modelo sempre responderá no formato JSON especificado
-- **Compatível com raciocínio:** O modelo pode raciocinar livremente antes de gerar o JSON
-- **Compatível com ferramentas:** Funciona em conjunto com [ferramentas embutidas](/docs/tools/builtin-tools) e function calling
-
-A AIVAX extrai automaticamente o JSON da resposta, mesmo que esteja em um bloco markdown ou precedido por texto explicativo.
-
-### Sem JSON Healing (`response_format`)
-
-Use `response_format` quando o modelo nativo já suporta structured outputs (como GPT-4o ou Gemini) e você não precisa de validação adicional:
-
-<div class="request-item post">
-    <span>POST</span>
-    <span>
-        /v1/chat/completions
-    </span>
-</div>
-
-```json
-{
-    "model": "@openai/gpt-4o",
-    "messages": [{ "role": "user", "content": "Liste 3 capitais europeias" }],
-    "response_format": {
-        "type": "json_schema",
-        "json_schema": {
-            "schema": {
-                "type": "object",
-                "properties": {
-                    "capitals": { "type": "array" }
-                }
-            }
-        }
-    }
-}
-```
-
-Neste modo, o schema é passado diretamente ao modelo sem validação adicional da AIVAX, exceto quando sua conta estiver configurada para ativar JSON Healing automático.
-
-### Habilitando JSON Healing no `response_format`
-
-Você pode habilitar JSON Healing explicitamente passando um objeto `healing_options` dentro de `response_format.json_schema` quando `type` é `json_schema`:
-
-<div class="request-item post">
-    <span>POST</span>
-    <span>
-        /v1/chat/completions
-    </span>
-</div>
-
-```json
-{
-    "response_format": {
-        "type": "json_schema",
-        "json_schema": {
-            "schema": {
-                "type": "object",
-                "properties": {
-                    "answer": { "type": "string" }
-                }
-            },
-            "healing_options": {
-                "max_attempts": 5
-            }
-        }
-    }
-}
-```
-
-O parâmetro `max_attempts` define o número máximo de tentativas de correção. Você é cobrado por cada tentativa que falhar. Vale notar que, modelos mais inteligentes tendem a acertar na primeira tentativa.
-
-Se o healing atinge o limite de tentativas com frequência, o problema geralmente está em um destes pontos: o schema está rígido demais para a informação disponível, a instrução não explica o formato esperado, o modelo é pequeno para a tarefa, ferramentas estão retornando texto ruidoso ou a entrada do usuário não contém dados suficientes. Ajuste primeiro a instrução e o schema antes de simplesmente aumentar `max_attempts`, porque mais tentativas podem aumentar custo sem resolver a causa.
-
-## JSON Schema suportado
-
-A AIVAX guia o modelo para gerar uma resposta conforme o JSON Schema fornecido. Quando o modelo gera algo inválido, ele recebe feedback sobre os erros e tenta novamente até que a saída esteja conforme a especificação.
-
-### Tipos e validações suportadas
-
-- **string**:
-    - `minLength`, `maxLength`
-    - `pattern` (regex)
-    - `format`: `date-time`, `email`, `time`, `duration`, `uri`, `url`, `ipv4`, `ipv6`, `uuid`, `guid`
-    - `enum`
-- **number** e **integer**:
-    - `minimum`, `maximum`
-    - `exclusiveMinimum`, `exclusiveMaximum`
-    - `multipleOf`
-- **array**:
-    - `items`
-    - `uniqueItems`
-    - `minItems`, `maxItems`
-- **object**:
-    - `properties`
-    - `required`
-- **bool**, **boolean**
-- **null**
-
-**Tipos múltiplos:** Você pode especificar múltiplos tipos em um campo:
-
-```json
-{
-    "type": ["string", "number"]
-}
-```
-
-> **Nota:** `number` e `integer` são sinônimos. O tipo `integer` não garante que o valor será um número inteiro.
-
-## Suporte de respostas
-
-O JSON healing da AIVAX é compatível com qualquer modelo e qualquer tipo de resposta através do endpoint de [chat completions](https://inference.aivax.net/apidocs#Inferencechatcompletions). Quando usado com `stream = false`, o conteúdo JSON completo virá no conteúdo delta gerado pelo modelo. 
-
-Quando usado com `stream = true` (SSE), o JSON virá em um único chunk completo, mesmo que o modelo gere o contéudo em múltiplos chunks. Isso torna possível o uso de respostas estruturadas com streaming, o que possibilita uma maneira de **contornar timeouts do gateway** para respostas muito demoradas.
-
-## Modo `json_only`
-
-Ao usar o parâmetro especial `json_only` no corpo da requisição:
-
-```json
-{
-    "model": "@openai/gpt-4o",
-    "messages": [{ "role": "user", "content": "Liste 3 capitais europeias" }],
-    "response_format": {
-        "type": "json_schema",
-        "json_schema": {
-            "schema": {
-                "type": "object",
-                "properties": {
-                    "capitals": { "type": "array" }
-                }
-            }
-        }
     },
     "json_only": true
 }
 ```
 
-A resposta é exatamente o JSON gerado pelo modelo, sem os metadados de geração, deltas, etc. Essa função é compatível com respostas `stream = false` e `stream = true`. No caso de `stream = true`, o JSON completo virá em um único chunk do SSE, sem nenhuma outra marcação ou conteúdo adicional. Após gerar o JSON, uma linha `[DONE]` é enviada para indicar o fim da resposta.
+With `stream: false`, the HTTP response body is the final JSON with `Content-Type: application/json`. With `stream: true`, AIVAX sends the complete JSON as one SSE data event and then sends `[DONE]`.
 
-## Padrões práticos
+## Supported schema features
 
-Para extração de dados, escreva a instrução dizendo quais campos devem ser inferidos, quais devem ficar nulos quando ausentes e quais não podem ser inventados. Para classificação, use `enum` no schema e peça justificativa curta em um campo separado, porque isso facilita auditoria sem misturar texto livre ao rótulo final. Para respostas que usam pesquisa web, permita que o modelo use ferramentas antes de gerar o JSON e inclua campos de fonte quando a aplicação precisa rastrear de onde veio a informação. Para formulários conversacionais, use campos opcionais e uma propriedade como `missing_fields` para que o sistema saiba o que perguntar em seguida.
+AIVAX validates the generated JSON with JSON Schema. The documented supported features are:
 
-Quando o JSON será salvo em banco ou enviado para outro serviço, valide novamente no seu lado. A AIVAX reduz muito a chance de JSON inválido, mas a aplicação continua sendo responsável por regras de negócio que não cabem em JSON Schema, como verificar se um ID existe, se uma data está dentro de um contrato, se uma categoria é permitida para aquela conta ou se o usuário tem permissão para executar uma ação.
+- `string`: `minLength`, `maxLength`, `pattern`, `format`, and `enum`.
+- `number` and `integer`: `minimum`, `maximum`, `exclusiveMinimum`, `exclusiveMaximum`, and `multipleOf`.
+- `array`: `items`, `uniqueItems`, `minItems`, and `maxItems`.
+- `object`: `properties` and `required`.
+- `boolean` and `bool`.
+- `null`.
+- Multiple types, for example `"type": ["string", "number"]`.
+
+Use `required` for fields your application must receive. Use explicit `items` for arrays. Use `enum`, `format`, and length or pattern restrictions when the accepted values are known.
+
+## Practical patterns
+
+For extraction, tell the model which fields must be inferred, which fields should be `null` when missing, and which fields must not be invented.
+
+For classification, use `enum` for the final label and add a short `reason` field when humans need to audit the decision.
+
+For tool-backed JSON, allow the model to use tools before producing the JSON and include source fields when the application needs provenance.
+
+For database writes or external API calls, validate the JSON again in your application. AIVAX validates the JSON shape, but your application remains responsible for business rules such as permissions, valid IDs, date ranges, and account-specific constraints.

@@ -1,106 +1,115 @@
 # AI Gateway
 
-Os gateways de AI é um serviço que a AIVAX fornece para criar um túnel de inferência entre um modelo de LLM e uma base de conhecimento. Nele é possível:
+An AI Gateway is a persistent inference configuration. It lets you call an agent by model name while AIVAX applies the gateway's model settings, instructions, RAG collections, tools, skills, workers, moderation, and context controls.
 
-- Criar um modelo com instruções personalizadas
-- Usar um modelo provido por você através de um endpoint OpenAI compatível, ou usar um modelo disponibilizado pela AIVAX
-- Personalizar parâmetros de inferência, como temperatura, top_p, prefill
-- Usar uma coleção de conhecimento como fundação de respostas para IA
+Use a gateway when the same behavior must be reused by multiple clients or changed without redeploying the calling application.
 
-Dentre outros recursos. Com o AI Gateway, você cria um modelo pronto para uso, parametrizado e fundamentado nas instruções que você definir.
+## How to think about a gateway
 
-## Como pensar em um gateway
+A direct call to `/v1/chat/completions` can call an integrated AIVAX model directly, for example `@openai/gpt-5-mini`. A gateway stores the decisions you do not want to repeat on every request:
 
-Pense no AI Gateway como a configuração permanente de um agente. Uma chamada direta para `/v1/chat/completions` resolve uma inferência isolada, mas um gateway guarda as decisões que você não quer repetir a cada requisição: qual modelo usar, quais instruções base definem a personalidade e as regras da assistente, quais coleções de RAG entram no contexto, quais ferramentas ficam disponíveis, quais skills podem ser ativadas, como o contexto será truncado, como as ferramentas serão interpretadas e quais workers externos podem intervir no fluxo. Essa separação é útil porque a aplicação cliente passa a enviar apenas a conversa e, opcionalmente, alguns overrides controlados, enquanto a configuração operacional do agente permanece centralizada no console ou na API da AIVAX.
+- Model provider and model name.
+- System instructions, remote instruction sources, user prompt template, and assistant prefill.
+- RAG collections, result limits, score threshold, reranker, reference behavior, and query strategy.
+- OpenAI-compatible tools, AIVAX built-in tools, MCP tools, protocol functions, skills, and the optional bash environment.
+- Context window behavior, tool-message truncation, moderation, workers, model routing, and tool-call handling.
 
-Um gateway também funciona como uma fronteira de responsabilidade. O sistema que chama a AIVAX não precisa conhecer todos os detalhes internos de RAG, MCP, funções de protocolo, ferramentas embutidas ou moderação; ele só precisa chamar um modelo pelo nome do gateway. Por outro lado, quem administra o gateway consegue trocar o modelo, ajustar instruções, habilitar ferramentas e alterar estratégias sem republicar a aplicação cliente. Em ambientes de produção, isso evita que regras de negócio, chaves de integração e decisões de prompt fiquem espalhadas em vários serviços.
+This creates a responsibility boundary. The client application sends messages and optional request overrides. The gateway administrator controls the operational policy.
 
-As principais decisões de configuração são agrupadas em alguns blocos. O bloco de **modelo** define se o gateway usa um modelo integrado da AIVAX ou um modelo BYOK compatível com OpenAI, além de parâmetros como `temperature`, `top_p`, `reasoning_effort` e prefill da assistente. O bloco de **contexto** define instruções de sistema, templates, skills, instruções remotas e truncamento. O bloco de **conhecimento** define coleções de RAG e a estratégia de busca. O bloco de **ferramentas** inclui ferramentas OpenAI fornecidas diretamente, ferramentas embutidas da AIVAX, MCP externo e funções de protocolo. O bloco de **controle** inclui moderação, workers e tool handlers para modelos que precisam de ajuda para chamar funções.
+In production, start with a conservative configuration: clear system instructions, a model that supports the required modalities and tools, one well-prepared RAG collection, and only the tools that are actually needed. Adding many tools, skills, or collections increases input tokens, cost, and the chance of the model choosing the wrong path.
 
-Em produção, comece com uma configuração conservadora: uma instrução de sistema clara, um modelo que suporte as modalidades e ferramentas necessárias, uma única coleção de RAG bem preparada e poucas ferramentas realmente úteis. Depois de observar conversas reais, aumente a sofisticação. Adicionar muitas ferramentas, muitas skills ou muitos documentos sem critério aumenta tokens de entrada, custo e chance de o modelo escolher o caminho errado. Um gateway bom costuma ser mais parecido com uma operação bem delimitada do que com um catálogo de todas as capacidades possíveis.
+## Models and gateway names
 
-## Modelos
+There are three common ways to choose what `/v1/chat/completions` uses:
 
-Você pode trazer um modelo de IA compatível com a interface OpenAI para o gateway de IA. Se você trazer seu modelo de IA, iremos cobrar apenas pela pesquisa de documentos anexada na IA. Você também pode usar um dos modelos abaixo que já estão prontos para começar com o AIVAX.
+- Use an integrated AIVAX model tag, usually beginning with `@`.
+- Use a gateway full ID.
+- Use a gateway slug in the format `name:final-id`, such as `support:50c3`.
 
-Ao usar um modelo, você perceberá que alguns são mais inteligentes que outros para determinadas tarefas. Alguns modelos são melhores com certas estratégias de obtenção de dados do que outros. Realize testes para encontrar o melhor modelo.
+Private API keys can resolve a gateway by full ID or by slug. Public API keys are more restricted: they can use AI gateways only by full ID, and only a limited set of chat completion request parameters is accepted.
 
-Você pode identificar um gateway por seu ID completo ou pelo formato `nome:final-do-id`, como `suporte:50c3`. Esse formato é útil porque permite trocar o ID completo por uma referência curta, mas ainda evita ambiguidade quando há gateways com nomes parecidos. Modelos integrados da AIVAX usam tags próprias, geralmente iniciadas por `@`, e podem ser chamados diretamente quando você não precisa de uma configuração permanente de gateway.
+When choosing a model, validate three points before putting it into production:
 
-Ao escolher um modelo, valide três pontos antes de colocá-lo em produção. Primeiro, confirme se ele suporta as entradas que você pretende enviar, como imagem, áudio, vídeo ou arquivos. Segundo, confirme se ele suporta chamadas de função caso o gateway use ferramentas, RAG por `QueryFunction`, MCP, funções de protocolo ou skills. Terceiro, confira se o modelo aceita os parâmetros que você quer usar; alguns modelos não aceitam temperatura, prefill de assistente ou esforço de raciocínio, e nesses casos o gateway precisa ser configurado de forma compatível.
+- The model supports the input modalities you intend to send, such as image, audio, video, or file.
+- The model supports function calling if the gateway uses tools, RAG through `QueryFunction`, MCP, protocol functions, skills, or built-in functions.
+- The model accepts the parameters you configure. Some integrated models reject assistant prefill, temperature, stop sequences, or reasoning effort.
 
-## Usar um gateway de IA
+Gateways can also use model routing. For the complexity router, AIVAX classifies the latest user request as low, medium, or high complexity, selects the configured model for that level, and emits `X-Model-Routed-Complexity` on the HTTP response when available.
 
-A AIVAX provê um endpoint compatível com a interface OpenAI através de um AI-gateway, o que facilita a integração do modelo criado pela AIVAX com aplicações e SDKs existentes. Vale ressaltar que somente algumas propriedades são suportadas.
+## Using an AI Gateway
 
-Em um gateway de IA, você já configura os parâmetros do modelo, como System Prompt, temperatura e nome do modelo. Ao usar esse endpoint, alguns valores do gateway podem ser sobrescritos pela requisição.
+AIVAX provides an OpenAI-compatible chat completions endpoint:
 
 <script src="https://inference.aivax.net/apidocs?embed-target=Inference%20(chat%20completions)&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
 
-Para orientações sobre renderização de streaming, raciocínio, ferramentas e respostas contínuas, consulte [Tratamento de chat](/docs/inference/chat-handling).
+Gateway values can be overridden by the request for supported parameters such as `temperature`, `top_p`, `seed`, `reasoning_effort`, `max_completion_tokens`, `stop`, `tools`, `response_schema`, `response_format`, `builtin_tools`, `multimodal_preprocess`, and `tool_invocation_explanations`.
 
-## Uso com SDKs
+For guidance on streaming rendering, reasoning, tools, and JSON-only responses, see [Chat handling](/docs/inference/chat-handling).
 
-Por prover endpoints compatíveis com a interface OpenAI, a AIVAX é totalmente compatível com SDKs existentes, facilitando a integração plug-and-play.
+## Using SDKs
 
-Veja o exemplo abaixo:
+Because the endpoint follows the OpenAI chat completions shape, you can use existing OpenAI-compatible SDKs.
 
 ```python
 from openai import OpenAI
- 
+
 client = OpenAI(
     base_url="https://inference.aivax.net/v1",
-    api_key="oky_gr5u...oqbfd3d9y"
+    api_key="YOUR_AIVAX_API_KEY"
 )
- 
+
 response = client.chat.completions.create(
-    model="my-gateway:50c3", # you can also provide your ai-gateway full ID here
+    model="my-gateway:50c3",
     messages=[
-        {"role": "user", "content": "Explain why AI-gateways are useful."}
+        {"role": "user", "content": "Explain why AI gateways are useful."}
     ]
 )
- 
+
 print(response.choices[0].message.content)
 ```
 
-No momento, a AIVAX só suporta o formato `chat/completions`. No futuro, pretendemos criar suporte para a API Responses.
+The current OpenAI-compatible inference implementation is `chat/completions`. The repository does not expose a `/v1/responses` implementation in this checkout.
 
-## Configuração recomendada para produção
+## Recommended production configuration
 
-Uma configuração de produção deve ser escrita de forma que o modelo entenda sua função, suas fontes de verdade e seus limites. Nas instruções de sistema, descreva o papel da assistente, o público que ela atende, o que ela pode ou não prometer, quando deve usar RAG, quando deve usar ferramentas e como responder quando a informação não estiver disponível. Evite colocar no prompt regras operacionais que já existem em outros lugares do gateway, como limites de truncamento ou lista de ferramentas, porque isso duplica manutenção e aumenta o risco de contradição.
+Write the system instructions so the model understands its role, audience, sources of truth, and limits. Include when to use RAG, when to use tools, and how to respond when information is unavailable. Avoid repeating operational settings that already exist in the gateway, such as truncation limits or tool lists.
 
-Para RAG, prefira vincular coleções com documentos curtos, autossuficientes e bem nomeados. Se a assistente precisa responder com base em uma base específica, diga nas instruções que a coleção é a fonte preferencial e que a assistente deve avisar quando não encontrar informação suficiente. Escolha a estratégia de busca conforme o tipo de conversa: `Plain` funciona bem para perguntas diretas; `Concatenate` ajuda quando a pergunta depende das últimas mensagens do usuário; `UserRewrite` e `FullRewrite` são melhores quando o usuário faz perguntas fragmentadas ou anafóricas, como “e nesse caso?”; `QueryFunction` é útil quando o modelo deve decidir se precisa pesquisar ou não antes de responder.
+For RAG, link collections with short, self-contained, well-named documents. Choose the query strategy based on the conversation type:
 
-Para ferramentas, habilite apenas as que têm um papel claro. Ferramentas embutidas resolvem tarefas comuns como pesquisa web, abertura de URL, execução de código, geração de imagens, documentos e páginas. MCP externo é melhor quando você já tem um servidor MCP com ferramentas de negócio. Funções de protocolo são úteis quando você quer expor callbacks HTTP específicos para o modelo sem instalar um servidor MCP completo. Quando o modelo não chama ferramentas de forma confiável, configure um tool handler; quando ele chama ferramentas demais, torne as descrições mais restritivas e remova ferramentas redundantes.
+- `Plain`: Uses the last user message as the search term.
+- `Concatenate`: Joins the last configured number of user messages line by line.
+- `UserRewrite`: Rewrites recent user messages into one or more search queries using a resolver model.
+- `FullRewrite`: Rewrites recent user and assistant messages using a resolver model.
+- `QueryFunction`: Exposes a search function to the model instead of injecting a search result before inference.
 
-Para observabilidade e controle, use workers quando precisar de uma decisão externa em tempo de execução. Um worker pode bloquear uma mensagem, enriquecer contexto, substituir uma chamada de ferramenta ou registrar uma ação em um sistema próprio. Como o worker é chamado durante o fluxo de inferência, ele deve responder rápido e de forma determinística. Use workers para regras que precisam consultar sistemas externos ou políticas atualizadas; use instruções de sistema para regras estáveis que o modelo só precisa seguir.
+For tools, enable only those with a clear role. Built-in tools cover common capabilities such as web search, opening URLs, code execution, image generation, document generation, page generation, calendar actions, memory, HTTP requests, and X post lookup. External MCP is better when you already have an MCP server with business tools. Protocol functions are useful when you want to expose specific HTTP callbacks to the model without installing a full MCP server.
 
-## Uso com MCP
+Use a tool handler only when the selected model needs help producing tool calls. In this checkout, the enabled handler is `react.v1.selfcall`; `native` or no value uses the model's native tool calling.
 
-É possível expor seus AI Gateways através de funções MCP (Model Context Protocol). Isso permite que modelos de IA invoquem outros modelos (sub-agentes) de forma nativa através do protocolo MCP.
+Use workers when an external system must decide something during the inference flow. A worker can block a message, rewrite context, add tools, or replace a server-side tool result. Because the worker is called in the critical path, keep it fast and deterministic.
 
-Para configurar um AI Gateway como servidor MCP, utilize o endpoint `https://inference.aivax.net/v1/mcp/inference` e configure os seguintes cabeçalhos HTTP:
+## Using with MCP
 
-| Cabeçalho | Descrição | Obrigatório |
-|-----------|-----------|-------------|
-| `Authorization` | Bearer token da sua API key | Sim |
-| `X-Mcp-Model-Name` | Tag do modelo ou ID do gateway. Pode ser o ID completo do gateway ou o formato slug `nome:id-parcial` | Sim |
-| `X-Mcp-Tool-Name` | Nome da ferramenta MCP. Será convertido para formato de identificador | Não (padrão: `ai_model`) |
-| `X-Mcp-Tool-Description` | Descrição da ferramenta para o modelo entender quando usá-la | Não |
-| `X-Mcp-Tool-Title` | Título amigável da ferramenta | Não |
-| `X-Mcp-User` | ID do usuário externo para rastreamento | Não |
+You can expose an AI Gateway as an MCP tool. This allows another MCP-capable client or model to call the gateway as a sub-agent.
 
-### Identificação do Gateway
+Configure the MCP server URL as:
 
-Existem três formas de identificar o gateway através do cabeçalho `X-Mcp-Model-Name`:
+```text
+https://inference.aivax.net/v1/mcp/inference
+```
 
-1. **ID completo do gateway**: `550e8400-e29b-41d4-a716-446655440000`
-2. **Formato slug**: `meugateway:50c3` (nome do gateway + parte final do ID)
-3. **Tag de modelo integrado**: Nome direto de um modelo disponível na AIVAX
+Set these HTTP headers:
 
-### Exemplo de configuração
+| Header | Description | Required |
+|---|---|---|
+| `Authorization` | Bearer token for your AIVAX API key. | Yes |
+| `X-Mcp-Model-Name` | Integrated model tag, gateway full ID, or gateway slug. | Yes |
+| `X-Mcp-Tool-Name` | Base tool name. AIVAX converts it to identifier format and exposes `invoke_{tool_name}`. | No, defaults to `ai_model` |
+| `X-Mcp-Tool-Description` | Description shown to the MCP client. | No |
+| `X-Mcp-Tool-Title` | Friendly title shown to the MCP client. | No |
+| `X-Mcp-User` | External user ID stored in the inference context. | No |
 
-Visual Studio Code:
+### Configuration example
 
 ```json
 {
@@ -109,10 +118,10 @@ Visual Studio Code:
             "type": "http",
             "url": "https://inference.aivax.net/v1/mcp/inference",
             "headers": {
-                "Authorization": "Bearer {your_api_key}",
-                "X-Mcp-Model-Name": "meugateway:50c3",
-                "X-Mcp-Tool-Name": "my_assistant",
-                "X-Mcp-Tool-Description": "Use this tool to invoke the specialized assistant for data analysis",
+                "Authorization": "Bearer YOUR_AIVAX_API_KEY",
+                "X-Mcp-Model-Name": "my-gateway:50c3",
+                "X-Mcp-Tool-Name": "data_assistant",
+                "X-Mcp-Tool-Description": "Use this tool to invoke the specialized assistant for data analysis.",
                 "X-Mcp-Tool-Title": "Data Analysis Assistant"
             }
         }
@@ -120,30 +129,10 @@ Visual Studio Code:
 }
 ```
 
-AIVAX Gateway MCP:
+The generated MCP tool accepts one argument:
 
-```json
-[
-    {
-        "name": "Search sub agent",
-        "url": "https://inference.aivax.net/v1/mcp/inference",
-        "headers": {
-            "Authorization": "Bearer {your_api_key}",
-            "X-Mcp-Model-Name": "meugateway:50c3",
-            "X-Mcp-Tool-Name": "my_assistant",
-            "X-Mcp-Tool-Description": "Use this tool to invoke the specialized assistant for data analysis",
-            "X-Mcp-Tool-Title": "Data Analysis Assistant"
-        }
-    }
-]
-```
+| Parameter | Type | Description |
+|---|---|---|
+| `prompt` | string | Prompt sent to the configured model or gateway. |
 
-### Ferramenta gerada
-
-O servidor MCP criará automaticamente uma ferramenta com o nome `invoke_{tool_name}` que aceita o parâmetro:
-
-- **prompt** (string): O prompt a ser enviado ao modelo
-
-A ferramenta executará uma inferência no AI Gateway configurado e retornará a resposta do modelo.
-
-Este MCP compartilha os [limites de taxa de inferência](/docs/limits) para evitar abusos e garantir a estabilidade do serviço. Se os limites de taxa forem excedidos, a ferramenta retornará um erro indicando que o limite foi atingido.
+The MCP tool returns the gateway response as text and shares the same inference billing and rate-limit path as the underlying chat completion.

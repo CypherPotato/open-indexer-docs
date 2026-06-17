@@ -1,47 +1,112 @@
-# Precificação
+# Pricing
 
-O modelo de pagamento da AIVAX é **pré-pago**: você adiciona saldo à sua conta e utiliza nossos serviços consumindo esse crédito. A AIVAX utiliza um modelo de assinatura mensal em conjunto com o saldo de utilização dos serviços. Para comparar diferenças entre Free, Pro e Max, consulte a [página de preços da AIVAX](https://aivax.net/pricing), que é a fonte atualizada para planos. O consumo dos serviços é sempre debitado do saldo da conta.
+AIVAX uses a prepaid account balance. Paid invoices add credit to the account, and usage records subtract from that balance.
 
-Ao adicionar créditos, a AIVAX cobra uma pequena taxa (variável por método de pagamento) para cobrir impostos (notas fiscais), tarifas bancárias e custos operacionais.
+The backend calculates balance as:
 
-Alguns planos incluem uma **taxa de comissão** para o uso de saldo, que é uma porcentagem aplicada sobre o valor gasto em inferência (geração de texto). Consulte a [página de preços da AIVAX](https://aivax.net/pricing) para ver a comissão atual de cada plano.
+```text
+balance = paid, unexpired invoice total - usage total
+```
 
-A precificação de inferência (geração de texto) é repassada diretamente dos provedores (como Google e OpenAI). Você paga na AIVAX exatamente o mesmo preço de tabela que pagaria utilizando esses provedores diretamente.
+Use the [AIVAX pricing page](https://aivax.net/pricing) for current commercial plan prices. This page documents billing behavior that is visible in the API source.
 
-Usamos diferentes [serviços](/docs/tools/builtin-tools) para ajudar você a criar assistentes agênticos. Algumas ferramentas possuem custos específicos que são debitados do seu saldo sem taxas adicionais.
+## Credits and invoices
 
-> **Nota:** Todos os custos são calculados em dólares americanos (USD). Pode haver flutuação cambial ao converter da sua moeda local para o dólar no momento da recarga ou do uso.
+Credits are represented as invoices.
 
-## Expiração de Créditos
+- Paid invoices increase the usable account balance until their expiration date.
+- Unpaid payment invoices are created with a one-year expiration.
+- Unpaid invoices older than three days are removed by cleanup.
+- Expired paid invoices no longer count toward balance.
+- Payment invoice creation requires at least 3 USD and is rate-limited.
 
-Como não podemos prever qual modelo você utilizará, precisamos alinhar a validade dos créditos com as políticas mais restritivas dos nossos fornecedores.
+## Usage billing
 
-Atualmente, os créditos expiram **12 meses** após a data de adição. Consulte os detalhes em nossos [termos de uso](/docs/legal/terms-of-service).
+Every billable operation writes one or more usage records. Each usage record has:
 
-## RAG (Coleções e Vetores)
+- Description.
+- Unit price.
+- Quantity.
+- Optional model name.
+- Usage category.
+- Resources such as API key, gateway, or collection.
 
-O custo de indexação e incorporação de documentos do RAG na AIVAX é de **$0,025** por milhão de tokens processados.
+The final unit price is multiplied by the account tax multiplier and the current plan commission multiplier.
 
-## Armazenamento
+| Plan | Commission multiplier |
+| --- | --- |
+| Free | 1.25x |
+| Pro | 1.05x |
+| Max | 1.00x |
 
-Para manter a integridade e disponibilidade dos seus dados, cobramos uma taxa de armazenamento por hora. O preço varia conforme o plano de assinatura:
+## Inference billing
 
-- **Plano free**: 30 MB franquia, sem opção de armazenamento adicional.
-- **Plano Pro**: 2 GB franquia, $0,50 por GB adicional por mês, cobrado por hora.
-- **Plano Max**: 20 GB franquia, $0,20 por GB adicional por mês, cobrado por hora.
+Integrated model billing uses the model's pricing table from the backend. Pricing can vary by model and by input-token threshold. Usage can include:
 
-**Como funciona a cobrança:**
-Você paga apenas pelo **excedente** da franquia.
-* *Exemplo:* Se estiver no plano Pro você usar 2,20 GB por uma hora, pagará apenas sobre os 0,20 GB excedentes. Se usar 250 MB, o custo é zero.
+- Text input tokens.
+- Cached input tokens, when the selected model has cached-input pricing.
+- Audio input tokens, when applicable.
+- Output tokens.
 
-**O que consome armazenamento:**
-1.  Memória de longo prazo dos usuários (chats e inferências salvas);
-2.  Cache de descrições de imagens (processamento multi-modal);
-3.  Conteúdo de documentos RAG e seus vetores;
-4.  Armazenamento do bash/shell virtual.
+Some integrated models can be covered by subscription-model reserve windows. When a model has a subscription usage multiplier and the account still has reserve remaining in both the six-hour and weekly windows, the recorded model usage can be covered instead of charged to balance.
 
-Logs de sistema são temporários e não geram custos de armazenamento.
+Current reserve windows are:
 
-## Ferramentas (Tools)
+| Plan | Six-hour reserve | Weekly reserve |
+| --- | --- | --- |
+| Free | None | None |
+| Pro | 250 units | 3,000 units |
+| Max | 1,000 units | 15,000 units |
 
-As [ferramentas nativas](/docs/tools/builtin-tools) da AIVAX possuem preços e limites específicos. Consulte a documentação de cada ferramenta.
+BYOK calls use your external provider key, but AIVAX still enforces BYOK request limits because the request passes through AIVAX infrastructure.
+
+## RAG billing
+
+The default embedding model is `@aivax/data-embedding`. Its backend price is:
+
+```text
+$0.015 per 1,000,000 input tokens
+```
+
+This applies to document indexing and query embedding usage that uses the default embedding model. Reranking, when enabled, can add separate reranking usage.
+
+## Storage billing
+
+Storage is checked before balance-gated operations. If storage usage exceeds the plan quota, the request can fail with `402 Payment Required`.
+
+| Plan | Included storage | Overage |
+| --- | --- | --- |
+| Free | 30 MB | No paid overage |
+| Pro | 2 GB | $0.50/GB/month, charged hourly |
+| Max | 20 GB | $0.20/GB/month, charged hourly |
+
+Storage overage is charged hourly. The job bills only excess usage above the included quota, and only when the billable excess is greater than 1 MB.
+
+Storage can include RAG document content and vectors, long-term memory items, media description cache, web chat session content, and shell files.
+
+## Balance requirements
+
+Billable routes check balance before running. The generic balance middleware rejects balances below the route minimum; chat clients, integrations, and batch processing also stop when the balance is zero or negative. Some multimodal chat-completion inputs require a minimum balance before the model call starts:
+
+| Input type | Minimum balance |
+| --- | --- |
+| Image or audio | $0.10 |
+| File or video | $0.50 |
+
+If the account balance is too low, the API returns `402 Payment Required`.
+
+## Plans and limits
+
+Plans affect both price and operation:
+
+- Model access.
+- Commission multiplier.
+- Request and token rate limits.
+- BYOK request limits.
+- RAG quotas.
+- Tool limits.
+- Storage quota and overage price.
+- Conversation retention.
+- Subscription-model reserve windows.
+
+See [Plans and limits](limits.md) for the technical quota matrix.

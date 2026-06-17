@@ -1,47 +1,67 @@
-# Processadores de dados
+# Data Processors
 
-A AIVAX utiliza serviços de terceiros para operações específicas, como coleta de pagamentos, envio de mensagens, inferência e armazenamento de dados. Note que, a AIVAX não possue nenhum vínculo comercial ou de parceria com os provedores listados abaixo, e a escolha por eles é baseada exclusivamente em critérios técnicos e de desempenho.
+AIVAX uses third-party services for specific operations such as infrastructure, object storage, email delivery, payment processing, web search, AI inference, reranking, and image generation. The providers involved in a request depend on the selected model, gateway, tool, and integration.
 
-### Provedores de operações, serviços e infraestrutura:
+This page is a technical inventory, not legal advice. Provider policies may change, and Account Managers should review the provider terms that apply to their selected models and tools before sending personal, confidential, regulated, or sensitive data.
 
-| Provedor | Usado em | País de origem | Legislação de proteção de dados |
-| --- | --- | --- | --- |
-| [Cloudflare](https://www.cloudflare.com/) | CDN, proxy reverso, proteção contra DDoS, firewall e DNS | Estados Unidos | [GDPR](https://www.cloudflare.com/trust-hub/gdpr/), [CCPA](https://www.cloudflare.com/trust-hub/ccpa/), [DPF](https://www.cloudflare.com/trust-hub/eu-us-data-privacy-framework/) |
-| [Hetzner](https://www.hetzner.com/) | Hospedagem de servidores e infraestrutura de computação em nuvem | Alemanha | [GDPR](https://www.hetzner.com/legal/privacy-policy/) |
-| [Backblaze](https://www.backblaze.com/) | Armazenamento de objetos e arquivos | Estados Unidos | [GDPR](https://www.backblaze.com/company/privacy.html), [CCPA](https://www.backblaze.com/company/ccpa.html) |
-| [Brevo](https://www.brevo.com/) | Envio de e-mails transacionais e notificações | França | [GDPR](https://www.brevo.com/legal/privacypolicy/) |
-| [Twitter/X](https://developer.x.com/) | Integração com a API para publicação e autenticação via redes sociais | Estados Unidos | [CCPA](https://x.com/en/privacy), [GDPR](https://x.com/en/privacy) |
-| [Linkup](https://www.linkup.so/) | Pesquisa na web em tempo real para enriquecimento de contexto | França | [GDPR](https://www.linkup.so/privacy-policy), [CCPA](https://www.linkup.so/privacy-policy) |
-| [InfinitePay](https://infinitepay.io/) | Coleta de pagamentos e processamento de transações | Brasil | [LGPD](https://infinitepay.io/politica-de-privacidade-e-cookies) |
+## Operations, Services, and Infrastructure
 
----
+| Provider | Used for | Evidence in the platform code |
+| --- | --- | --- |
+| [Cloudflare](https://www.cloudflare.com/) | Reverse proxy/security where deployed; Workers AI reranking; Cloudflare embedding service configuration | Cloudflare API key/account parameters; `CloudflareWorkersAiReranker`; `CloudflareEmbeddingService` |
+| [Backblaze](https://www.backblaze.com/) | Object/file storage for generated media, uploaded media, generated documents, exposed files, and error artifacts | `BackblazeService`; B2 bucket/account parameters |
+| [Brevo](https://www.brevo.com/) | Transactional email and notifications | `EmailService`; Brevo API key parameter |
+| [InfinitePay](https://infinitepay.io/) | Payment invoice creation and payment confirmation webhook | `InfinitePayProvider`; InfinitePay webhook |
+| [Stripe](https://stripe.com/) | Payment event webhook support where Stripe checkout is configured | Stripe API key parameter; Stripe webhook |
+| [Twitter/X](https://developer.x.com/) | Built-in X/Twitter search and post reading tools | `TwitterService`; `TwitterFunctions`; X/Twitter API key parameter |
+| [Linkup](https://www.linkup.so/) | Web search for context enrichment | `LinkupResearchClient` |
+| [Tavily](https://www.tavily.com/) | Web search for context enrichment | `TavilyResearchClient` |
+| [Sinkin AI](https://sinkin.ai/) | Image generation provider for selected image models | `SinkinImageGenerationProvider` |
+| [Pollinations](https://pollinations.ai/) | Image generation provider for selected image models | `PollinationsImageGenerationProvider` |
 
-### Provedores de inferência e inteligência artificial:
+## Direct Inference, Embedding, and Reranking Providers
 
-| Provedor | Usado em | País de origem | Legislação de proteção de dados |
-| --- | --- | --- | --- |
-| [Groq](https://groq.com/) | Inferência de LLMs de alta velocidade | Estados Unidos | [GDPR](https://groq.com/privacy-policy/), [CCPA](https://groq.com/privacy-policy/) |
-| [DeepInfra](https://deepinfra.com/) | Inferência de modelos de IA open-source | Estados Unidos | [GDPR](https://deepinfra.com/privacy) |
-| [Vultr](https://www.vultr.com/) | Inferência de modelos via cloud computing | Estados Unidos | [GDPR](https://www.vultr.com/legal/privacy/), [CCPA](https://www.vultr.com/legal/privacy/) |
-| [OpenAI](https://openai.com/) | Inferência de modelos GPT e outros | Estados Unidos | [GDPR](https://openai.com/policies/privacy-policy/), [CCPA](https://openai.com/policies/privacy-policy/) |
-| [Google Vertex AI](https://cloud.google.com/vertex-ai) | Inferência de modelos Gemini e outros | Estados Unidos | [GDPR](https://cloud.google.com/terms/data-privacy), [CCPA](https://cloud.google.com/terms/data-privacy) |
-| [Inception](https://www.inceptionlabs.ai/) | Inferência de modelos Mercury | Estados Unidos | [Política de privacidade](https://www.inceptionlabs.ai/privacy) |
-| [Xiaomi MiMo](https://platform.xiaomimimo.com/) | Inferência de modelos proprietários Xiaomi | Países Baixos / Singapura | [GDPR](https://platform.xiaomimimo.com/#/docs/terms/privacy-policy) |
-| [NagaAI](https://naga.ac/) | Agregador de APIs de modelos de IA | Polônia | [Política de privacidade](https://naga.ac/legal/privacy) |
-| [CrofAI](https://ai.nahcrof.com/) | Inferência de modelos de IA | Estados Unidos | [CCPA](https://ai.nahcrof.com/privacy) |
-| [Pollinations](https://pollinations.ai/) | Geração de imagens e vídeo | Estônia | [GDPR](https://pollinations.ai/privacy) |
-| [OpenRouter](https://openrouter.ai/) | Roteamento e fallback entre provedores de IA | Estados Unidos | [GDPR](https://openrouter.ai/privacy), [CCPA](https://openrouter.ai/privacy) |
-| [Anthropic](https://www.anthropic.com/) | Inferência de modelos Claude | Estados Unidos | [Política de privacidade](https://www.anthropic.com/privacy) |
-| [AWS](https://aws.amazon.com/) | Inferência e infraestrutura de IA | Estados Unidos | [GDPR](https://aws.amazon.com/compliance/gdpr-center/), [CCPA](https://aws.amazon.com/compliance/ccpa/) |
-| [Cohere](https://cohere.com/) | Inferência de modelos de IA | Canadá | [Política de privacidade](https://cohere.com/privacy) |
-| [xAI](https://x.ai/) | Inferência de modelos Grok | Estados Unidos | [Política de privacidade](https://x.ai/privacy) |
-| [Mistral AI](https://mistral.ai/) | Inferência de modelos de IA | França | [Política de privacidade](https://mistral.ai/terms/#privacy-policy) |
-| [DeepSeek](https://www.deepseek.com/) | Inferência de modelos de IA | China | [Política de privacidade](https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html) |
-| [Z.ai](https://z.ai/) | Inferência de modelos de IA | China | [Política de privacidade](https://z.ai/privacy) |
-| [Alibaba Cloud](https://www.alibabacloud.com/) | Inferência de modelos de IA | China | [Política de privacidade](https://www.alibabacloud.com/help/en/legal/latest/alibaba-cloud-international-website-privacy-policy) |
+These providers are directly configured in provider factories, embedding services, rerankers, or runtime parameters.
 
-### Coleta de dados de provedores
+| Provider | Used for | Evidence in the platform code |
+| --- | --- | --- |
+| [Groq](https://groq.com/) | LLM inference through an OpenAI-compatible endpoint | `CreateGroqAi`; Groq API key parameter |
+| [DeepInfra](https://deepinfra.com/) | LLM inference through an OpenAI-compatible endpoint | `CreateDeepInfra`; DeepInfra API key parameter |
+| [Vultr](https://www.vultr.com/) | LLM inference through Vultr Inference | `CreateVultr`; Vultr inference API key parameter |
+| [CrofAI](https://ai.nahcrof.com/) | LLM inference through an OpenAI-compatible endpoint | `CreateCrof`; Crof API key parameter |
+| [OpenRouter](https://openrouter.ai/) | Model routing and fallback for many model families; Grok Voice TTS | `CreateOpenRouter`; OpenRouter API key parameter; `TtsService` |
+| [Xiaomi MiMo](https://platform.xiaomimimo.com/) | Xiaomi model inference | `CreateXiaomi`; Xiaomi API key parameter |
+| [NagaAI](https://naga.ac/) | LLM inference, embeddings, TTS, and selected research flows | `CreateNagaAi`; `NagaEmbeddingService`; `TtsService` |
+| [Inception Labs](https://www.inceptionlabs.ai/) | Mercury model inference | `CreateInception`; Inception API key parameter |
+| [Cloudflare Workers AI](https://developers.cloudflare.com/workers-ai/) | Smart reranking and Cloudflare embedding service | `CloudflareWorkersAiReranker`; `CloudflareEmbeddingService` |
 
-De acordo com nossa [política de privacidade](/docs/legal/privacy-policy), a AIVAX não coleta nenhum dado sensível, incluindo prompts, para nenhuma finalidade comercial ou de treinamento. As conversas são armazenadas exclusivamente para fins de segurança e auditoria, e o próprio usuário pode visualizar, gerenciar ou desativar esse armazenamento a qualquer momento.
+## Model Families and Underlying Providers
 
-A AIVAX exige que os provedores de inferência utilizados não coletem dados de prompts para treinamento de modelos. No entanto, como essa garantia depende da conformidade de cada provedor, a AIVAX não pode assegurá-la de forma absoluta. Recomendamos evitar o compartilhamento de informações sensíveis ou pessoais nos prompts como medida de precaução adicional. Nenhum provedor que coleta dados de prompts para treinamento é utilizado pela AIVAX.
+The model catalog also identifies model families or underlying providers that may be selected directly or reached through aggregators such as OpenRouter or NagaAI. Not every request is sent to every provider.
+
+| Provider | Used for |
+| --- | --- |
+| [OpenAI](https://openai.com/) | OpenAI model families exposed in the catalog or compatible integrations |
+| [Google Vertex AI](https://cloud.google.com/vertex-ai) | Gemini and other Google model families |
+| [Anthropic](https://www.anthropic.com/) | Claude model families |
+| [AWS](https://aws.amazon.com/) | AWS-hosted model families such as Amazon Nova or Bedrock-backed providers |
+| [Cohere](https://cohere.com/) | Cohere model families |
+| [xAI](https://x.ai/) | Grok model families and Grok Voice through configured routes |
+| [Mistral AI](https://mistral.ai/) | Mistral model families |
+| [DeepSeek](https://www.deepseek.com/) | DeepSeek model families |
+| [Z.ai](https://z.ai/) | GLM/Z.ai model families |
+| [Alibaba Cloud](https://www.alibabacloud.com/) | Qwen/Alibaba model families |
+| [Cerebras](https://www.cerebras.ai/) | Cerebras model families |
+| [Nebius](https://nebius.com/) | Nebius-backed model families |
+| [Fireworks AI](https://fireworks.ai/) | Fireworks-backed model families |
+| [Novita](https://novita.ai/) | Novita-backed model families |
+| [Azure](https://azure.microsoft.com/) | Azure-backed model families |
+| [LongCat](https://longcat.chat/) | LongCat/Meituan model family metadata |
+
+## Data Handling Notes
+
+AIVAX does not use Account Manager Input Content, Generated Content, or Conversations to train proprietary AIVAX models.
+
+Third-party providers and aggregators may have their own processing, retention, abuse-monitoring, and model-improvement rules. The selected model, provider, tool, or integration determines which third party receives data for a specific request.
+
+Avoid sending sensitive, confidential, regulated, or personal information to a provider unless you have reviewed that provider's current terms and have an appropriate legal basis for the processing.

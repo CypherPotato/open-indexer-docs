@@ -1,8 +1,8 @@
 # AIVAX Documentation
 
-This repository contains the source code for the AIVAX documentation website.
+This repository contains the source files for the AIVAX documentation website.
 
-## Building
+## Build
 
 Use the project scripts when possible:
 
@@ -11,22 +11,25 @@ Use the project scripts when possible:
 3. Run `docfx serve` after a build to preview the generated site.
 
 > [!WARNING]
-> 
-> Please, **do not** use the docfx version **2.78.0** or later. This version has a bug that changes the documentation navigation layout. See the [tracking issue](https://github.com/dotnet/docfx/issues/10424).
-> 
-> Prefer the version **2.76.0**:
-> 
-> ```
+> Do not use DocFX 2.78.0 or later. That version changes the documentation navigation layout. See the [tracking issue](https://github.com/dotnet/docfx/issues/10424).
+>
+> Prefer DocFX 2.76.0:
+>
+> ```text
 > dotnet tool install -g docfx --version 2.76.0
 > ```
 
-Then you're ready to go and you'll have the static website files at `/_site`.
+Generated static files are written to `_site/`.
 
-## Contributing
+## Contribute
 
-Contributions are always welcome. Contribute with spelling corrections, fixing broken links and more.
+Keep documentation changes focused and edit source files, not generated output.
 
-Edit the Portuguese source files under `docs/`. Do not edit generated output under `_site/`, generated API artifacts under `ref/`, or translated files under `docs/en/` unless the translation pipeline is being intentionally updated.
+- Root navigation is defined in `toc.yml`.
+- Section navigation is defined in `docs/toc.yml`.
+- Documentation pages live under `docs/`.
+- Portuguese documentation lives under `docs/pt-br/`.
+- Generated API artifacts live under `ref/`.
+- Generated site output lives under `_site/`.
 
-> [!NOTE]
-> Please do not edit API specification files. These files are generated. If you want to edit API documentation, update it in the repository where the API code is hosted.
+Do not edit `_site/`, `ref/`, or generated translation output by hand. If an API endpoint description is wrong, update the API source in the service repository that generates the reference.

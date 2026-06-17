@@ -1,120 +1,155 @@
-# Pipelines de IA
+# AI Pipelines
 
-A AIVAX fornece vários pipelines para usar em seu gateway de IA.
+AI Gateway pipelines are the processing steps AIVAX applies before and during inference. They can add context, rewrite queries, expose tools, moderate input, route models, truncate conversations, and call external workers.
 
-Você pode usar vários pipelines para executarem no contexto do seu gateway.
+Most pipelines are configured in the gateway parameters. Request-level options can override some inference parameters on direct `chat/completions` calls.
 
 ## RAG
 
-Através de [coleções](/docs/rag/collections), você pode vincular coleções de documentos para seu gateway de IA. Você pode definir os parâmetros de incorporação, como quantidade de documentos, pontuação mínima e estratégia de incorporação.
+RAG links [collections](/docs/rag/collections) to an AI Gateway. The gateway controls:
 
-Cada estratégia de incorporação é mais refinada que a outra. Algumas criam resultados melhores que as demais, mas é importante realizar testes práticos com várias estratégias para entender qual se ajusta melhor no modelo, conversa e tom do usuário.
+- Collections included in retrieval.
+- Maximum number of retrieved documents.
+- Minimum score.
+- Reranker name.
+- Whether chunk references are included.
+- Query strategy.
 
-Talvez seja necessário realizar ajustes no prompt do sistema para informar melhor como a IA deverá considerar os documentos anexados na conversa. Os documentos são anexados como uma mensagem do usuário, limitados aos parâmetros que você define na estratégia de obtenção.
+When a gateway has knowledge collections and the latest user message contains text, AIVAX can retrieve matching documents before the model call. For injection strategies, the retrieved context is inserted at the beginning of the last user message as an internal RAG context block. If a linked collection has its own context text, that collection context is added to system instructions.
 
-Estratégias com reescrita normalmente geram os melhores resultados à um baixo custo de latência e custo. O modelo de reescrita usado sempre o com menor custo, escolhido normalmente por um pool interno que decide o modelo que está com menor latência no momento.
+Query strategies:
 
-Estratégias sem custo de reescrita:
+- `Plain`: Uses the latest user message as the search query.
+- `Concatenate`: Joins the latest configured number of user messages line by line and searches with the combined text.
+- `UserRewrite`: Rewrites recent user messages into one or more search queries using a resolver model.
+- `FullRewrite`: Rewrites recent user and assistant messages into one or more search queries using a resolver model.
+- `QueryFunction`: Adds a query function to the model. The model decides when to search the linked collections, and search results are returned as tool responses.
 
-- `Plain`: a estratégia padrão. É a menos otimizada e não possui custo de reescrita: a última mensagem do usuário é usada como termo de busca para pesquisar na coleção anexada do gateway.
-- `Concatenate`: Concatena em linhas as últimas N mensagens do usuário, e então o resultado da concatenação é usada como termo de busca.
+Rewrite strategies add resolver-model cost and latency. They are useful when users ask follow-up questions such as "what about this case?" because the resolver can turn the recent conversation into a clearer search query.
 
-Estratégias com custo de reescrita (os tokens de inferência são cobrados):
+Defining many RAG results increases input token usage and can increase final inference cost. Start with a small result count and raise it only when the model lacks enough evidence.
 
-- `UserRewrite`: reescreve as últimas N mensagens do usuário usando um modelo menor, criando uma pergunta contextualizada no que o usuário quer dizer.
-- `FullRewrite`: reescreve as últimas N*2 mensagens do chat usando um modelo menor. Similar ao `UserRewrite`, mas considera também as mensagens da assistente na formulação da nova pergunta. Geralmente cria as melhores perguntas, com um custo um pouco maior. É a estratégia mais estável e consistente. Funciona com qualquer modelo.
+## Instructions
 
-Estratégias de função:
+Instruction settings shape the provider-facing prompt:
 
-- `QueryFunction`: fornece uma função de pesquisa na coleção integrada para o modelo de IA. Você deverá ajustar nas instruções do sistema os cenários ideais para o modelo chamar essa função quando necessário. Pode não funcionar tão bem em modelos menores.
+- **System instructions**: Added to the system instruction set.
+- **Remote system instruction sources**: Fetched from configured URLs and added to the system instruction set.
+- **User prompt template**: Replaces `{prompt}` with each user message's text before sending it to the model.
+- **Assistant prefill**: Adds initial assistant content before generation when the model supports prefill.
 
-Ao definir uma coleção de RAG no pipeline de seu gateway, a primeira mensagem do contexto da conversa será o resultado da incorporação do RAG como uma mensagem do usuário (exceto para quando usado como ferramentas onde o resultado da incorporação é anexado como uma resposta de ferramenta).
+Remote instruction sources are fetched as text with a 10 MB maximum response size. Their cache duration is configurable; the default is 600 seconds.
 
-Definir muitos documentos de resposta do RAG aumenta o consumo de tokens de entrada e pode aumentar o preço final da inferência.
+Some models do not support assistant prefill, temperature, stop sequences, or reasoning effort. Integrated model validation rejects incompatible gateway settings when those limitations are known.
 
-## Fixando instruções
+## Skills
 
-O pipeline de instruções permite prefixar instruções em diversos lugares do modelo, guiando e restrigindo o formato de resposta do modelo.
+Skills are on-demand instruction packs available to the model. When a gateway enables skills, AIVAX loads the account skills configured on the gateway and can expose skill-related built-in functions.
 
-As formas atuais de definir instruções são:
-- **Instruções do sistema**: insire um texto fixo no prompt de sistema do contexto.
-- **Template de prompt do usuário**: reformata a pergunta do usuário para seguir um formato específico de pergunta.
-- **Inicialização de assistente (prefill)**: inicializa a mensagem da assistente com tokens iniciais de geração.
+Read more about [skills](/docs/features/skills).
 
-Esses parâmetros podem ser muito úteis para prompt engineering, no entanto, podem não ser compatível com todos os modelos.
+## Multimodal pre-processing
 
-Atenção: prefixando instruções, templates e inicializações podem remover a capacidade de raciocínio, interpretação multi-modalidades e chamadas de ferramentas do modelo.
+Multimodal pre-processing converts selected media content into text before the main model call. The available flags are `Image`, `Audio`, `Video`, `File`, `OtherFiles`, and `All`.
 
-## Instruções remotas
+Use pre-processing when the main model is text-first or when you want AIVAX to normalize media into textual context. For direct multimodal models, send the original media without pre-processing so the model can inspect it directly.
 
-Você também pode fornecer instruções **remotas** no contexto. Instruções remotas fazem uma chamada GET para o recurso fornecido e cacheia ele internamente por 10 minutos. Esses recursos são lidos como texto, limitado à 10 MB por recurso.
+Media descriptions are cached by content hash for reuse.
 
-Estes recursos são inseridos nas instruções de sistema do LLM.
+## Parameterization
 
-## Skills (habilidades)
+The parameterization pipeline configures model request options such as:
 
-Habilidades são instruções fornecidas sob-demanda para o modelo, o que pode obter instruções refinadas e aprimoradas para diferentes tarefas especializadas.
+- `temperature`
+- `top_p`
+- `presence_penalty`
+- `frequency_penalty`
+- `stop`
+- `max_completion_tokens`
+- `reasoning_effort`
+- `verbosity`
+- `seed`
 
-Leia mais sobre [habilidades](/docs/features/skills).
+Request-level values can override gateway values when the endpoint supports the parameter. Some integrated models reject specific parameters, and BYOK providers may have their own restrictions.
 
-## Processamento multi-modal
+## Context truncation
 
-O pré-processamento de conteúdo multi-modal permite processar áudios, imagens, vídeos e documentos usando modelos com essas capacidades para modelos que não possuem essa capacidade.
+The context truncation pipeline uses an approximate token count. When `ContextMaximumSize` is set and the conversation exceeds the limit, the gateway follows `ContextOverflowAction`:
 
-Cada conteúdo multi-modal é convertido para uma representação textual do mesmo através de um modelo auxiliar.
+- `Throw`: Return an error instead of calling the model.
+- `Truncate`: Remove older non-system messages until the conversation fits.
 
-Esse processamento é feito por um modelo multi-modal, o que infere custo de processamento diretamente do provider. O conteúdo gerado é armazenado em um cache de longo prazo em nossos servidores e são evitados após um certo período que não foi acessado. Após esse período, o conteúdo tende a ser re-processado se novamente inserido na conversa.
+Truncation preserves system messages and keeps at least one user message when possible. If the remaining user message still exceeds the limit, the request fails with a message-size error.
 
-## Parametrização
+On the free plan, the effective input context is capped at 65,536 tokens even when a larger context is configured.
 
-O pipeline de parametrização configura os hiper-parâmetros iniciais da inferência, como temperatura, nucleus sampling, presence penalty e demais hiperparâmetros de inferência.
+## Tool message truncation
 
-## Truncating
+`ToolContextCount` controls how many recent tool response messages keep their original content. When it is set to a value greater than zero, older tool messages remain in the conversation but their content is replaced with:
 
-O pipeline de truncating permite definir o tamanho de uma conversa em tokens antes dela ser recortada.
+```text
+[tool response truncated - call this tool again]
+```
 
-Quando esse pipeline está ativado, antes de toda inferência, é calculado se `num_of_chars / 4` é maior que o máximo de tokens de entrada da conversa. Se o contexto for maior, o pipeline começa a remover mensagens do começo da conversa até que as mensagens caibam no contexto especificado.
+This can reduce context usage in long agentic conversations. It can also hurt chains where an old tool result remains important, so use it only when the model can safely call the tool again.
 
-Ao menos uma mensagem do usuário (comumente a última mensagem) é mantida na conversa. Todas as demais mensagens são removidas, exceto as instruções do sistema.
+## Server-side tools
 
-Alternativamente, você pode definir que ao atingir o limite um erro é disparado na API ao invés de recortar o contexto.
+Server-side tools are internal functions executed by AIVAX during inference. They can come from:
 
-## Tool message truncating
+- Built-in tools.
+- Protocol functions.
+- Remote protocol function sources.
+- MCP sources.
+- QueryFunction RAG.
+- Skills.
+- Optional bash environment.
 
-O pipeline de contagem de mensagens de ferramentas é similar ao de truncating: ele remove a resposta de ferramentas mais antigas e preserva somente as mais novas.
+Server-side tool events can be streamed to clients as `servertool` updates. See [Chat handling](/docs/inference/chat-handling).
 
-Isso pode ser útil para quando respostas de ferramentas anteriores não sejam mais úteis em mensagens mais recentes e ocupam espaço no contexto, mas pode ser prejudicial ao usar com modelos agênticos que chamam ferramentas em cadeia.
+## Built-in tools
 
-Esse pipeline é configurado em quantidade de mensagens de ferramentas à serem preservadas ao invés de tokens. Quando uma mensagem de ferramenta é considerada antiga, ela não é removida, mas tem seu conteúdo removido.
+Built-in tools can be configured on a gateway or supplied per request with `builtin_tools`. Available built-in tool flags include:
 
-## Ferramentas do lado do servidor
+- `WebSearch`
+- `AdvancedWebUsage`
+- `OpenUrl`
+- `Code`
+- `Request`
+- `Calendar`
+- `Remember`
+- `GenerateWebPage`
+- `GenerateDocument`
+- `XPostsSearch`
+- `ImageGeneration`
 
-Esse pipeline permite a execução de ferramentas do lado do servidor da AIVAX, similar ao protocolo MCP.
+See [Built-in tools](/docs/tools/builtin-tools).
 
-Leia mais sobre esse pipeline [aqui](/docs/tools/protocol-functions).
+## MCP and protocol functions
 
-## Ferramentas embutidas
+MCP sources are converted into internal functions by listing the remote MCP tools and wrapping their schemas as model-callable functions. MCP tool results can include text, images, and audio; media results are attached to the conversation as additional messages when supported.
 
-Você pode adicionar ferramentas providas pela AIVAX em seu gateway, como pesquisa na internet, geração de imagens e acesso de links. Consulte todas as ferramentas disponíveis [aqui](/docs/tools/builtin-tools).
+Protocol functions expose HTTP callbacks or AIVAX callback URLs as model-callable tools. Remote protocol function sources are fetched and cached, then converted to internal functions.
 
-## Interpretador de funções (tool handler)
+See [Protocol functions](/docs/tools/protocol-functions) and [MCP](/docs/tools/mcp).
 
-É possível alterar o interpretador de funções usado pelo modelo. Isso traz a possibilidade de adicionar a capacidade de **chamar funções** para modelos que não suportam esse recurso.
+## Function interpreter
 
-Atualmente, existem dois tipos de interpretadores:
-- ReAct: um interpretador baseado na técnica [ReAct prompting](https://www.promptingguide.ai/techniques/react) usando um modelo auxiliar. O interpretador `react.v1.selfcall` usa o próprio modelo de inferência para chamar funções antes de gerar uma resposta.
-- NtvCall: utiliza outro modelo para chamar funções para o modelo principal. O fluxo é retomado quando o modelo alternativo não chama nenhuma função e começa a criar uma resposta.
+A tool handler can add tool-calling behavior for models that do not reliably produce native tool calls. In this checkout, the active configured values are:
 
-## Moderação
+- `native` or `null`: Use native model tool calling.
+- `react.v1.selfcall`: Use the ReAct-style self-call handler.
 
-Você pode adicionar uma camada de moderação no seu gateway de IA. Um modelo auxiliar irá analisar o contexto inteiro da conversa e irá classificá-la como segura ou insegura de acordo com suas preferências de moderação.
+If a handler name is not recognized, gateway configuration fails at inference time.
 
-Conversas classificadas como inseguras são removidas da inferência e o modelo tende a gerar uma resposta indicando que não pode gerar conteúdo sobre aquele assunto.
+## Moderation
 
-O custo da moderação é de **$0,20** por milhão de tokens processados.
+Moderation runs a resolver model over the conversation and scores categories for violence, sexually explicit content, political content, dangerous content, and jailbreak attempts. If configured thresholds are exceeded, AIVAX marks the original conversation messages as not forwarded and asks the model to respond that it cannot engage with that content.
+
+Use moderation for broad safety policy. Use workers when the decision depends on external identity, account state, or business-specific policy.
 
 ## Workers
 
-Workers definem o comportamento do seu gateway remotamente, usado para controlar quando certos eventos devem ser abortados ou continuados.
+Workers are external HTTP hooks called during gateway execution. They can stop an event, let it continue, rewrite message context, add tools, add system instructions, or replace a server-side tool result.
 
-Leia mais sobre esse pipeline [aqui](/docs/inference/workers).
+Read more on [AI Workers](/docs/inference/workers).

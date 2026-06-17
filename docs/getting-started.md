@@ -1,40 +1,131 @@
-# Bem-vindo
+# Getting Started
 
-Boas vindas ao AIVAX. Nosso serviço torna mais fácil o desenvolvimento de modelos de IA inteligentes que usam uma base de conhecimento providenciada por você para conversar com o usuário, responder perguntas, fornecer informações em tempo real e mais.
+This guide shows the shortest path from an AIVAX account to a first OpenAI-compatible chat completion.
 
-Para começar, todos os endpoints devem ser feitos na URL de produção da AIVAX:
+## Before you begin
+
+You need:
+
+- An AIVAX account.
+- A private API key from the account dashboard or API key endpoint.
+- Enough account balance for the operation. Some routes only require the balance not to be negative, while chat clients, integrations, batch processing, and multimodal inputs can require a strictly positive or minimum balance.
+- Either a hosted model name or an AI Gateway ID.
+
+Production API base URL:
 
 ```text
-https://inference.aivax.net/
+https://inference.aivax.net
 ```
 
-## Lidando com erros
+OpenAI-compatible SDK base URL:
 
-Todos os erros da API retornam uma resposta HTTP com um status não OK (nunca 2xx ou 3xx), e sempre seguindo o formato JSON:
-
-```json
-{
-    "error": "Uma mensagem explicando o erro",
-    "details": {} // um objeto contendo informações relevantes sobre o erro. Na maioria das vezes é nulo
-}
+```text
+https://inference.aivax.net/v1
 ```
 
-## Diagnóstico operacional
+## 1. Create an API key
 
-Quando uma chamada falha, comece pelo nível mais externo antes de investigar prompt ou modelo. Confirme se a URL base está correta, se a API key foi enviada com `Authorization: Bearer ...` ou pelo parâmetro `?api-key`, se a conta tem saldo suficiente e se o plano possui limite para a operação. Depois, confirme se o endpoint chamado é o esperado: inferência usa `/v1/chat/completions`, MCP de inferência usa `/v1/mcp/inference`, MCP de coleções usa `/v1/mcp/collections`, e operações administrativas ficam na API versionada da AIVAX. Só depois disso investigue modelo, ferramentas, RAG, schema ou workers.
+Use a **private** API key for server-side calls. Private keys are generated with the `sk-aiv-acc` prefix and can call authenticated account APIs and OpenAI-compatible inference endpoints.
 
-Erros de autenticação normalmente indicam chave ausente, chave inválida, header mal formatado ou uso de uma chave que não pertence à conta esperada. Erros de saldo aparecem quando a conta não pode pagar pela operação, quando multimodalidade exige saldo mínimo ou quando uma ferramenta com custo é acionada. Erros de limite aparecem quando a operação ultrapassa rate limit, limite diário, número de coleções, inserções de RAG ou processamento batch do plano. Para comparar diferenças comerciais entre planos, use sempre [a página de preços da AIVAX](https://aivax.net/pricing); esta documentação descreve o funcionamento técnico.
+Public keys use the `pk-aiv-` prefix. They are intended for restricted client-side use on public routes, such as public RAG query/answer routes and restricted chat completions. They cannot call account-management endpoints.
 
-Erros de inferência podem vir do provedor do modelo, do formato da mensagem, do tamanho do contexto, de anexos inacessíveis, de JSON Schema inválido ou de ferramenta mal configurada. Se a mesma mensagem funciona sem ferramentas, o problema provavelmente está nas ferramentas. Se funciona sem RAG, revise coleção, estratégia de busca e documentos. Se funciona sem multimodalidade, revise formato, URL, base64, saldo mínimo e suporte do modelo. Se funciona em `stream: false` mas não em streaming, revise o cliente SSE e se ele trata chunks vazios, pings, `[DONE]`, `servertool` e erros no fluxo.
+For most first integrations, start with a private key from a backend service. It gives you the complete account surface: model listing, chat completions, AI Gateways, RAG collections, batch workflows, and administrative APIs. Public keys are useful later, when you intentionally expose a restricted capability to a browser or another client-side environment.
 
-Workers devem ser investigados separadamente porque eles podem interromper eventos. Quando uma conversa para antes do modelo responder, teste temporariamente sem worker ou faça o worker responder 2xx vazio. Se isso resolver, revise validação de `X-Request-Nonce`, `gatewayId`, tempo de resposta, status HTTP retornado e formato `application/json+worker-action`. Para funções de protocolo, lembre que respostas não OK indicam falha para a assistente; quando o erro é esperado, responda 2xx com uma mensagem humana explicando o problema.
+See [Authentication](authentication.md) for key types, accepted auth schemes, and hook validation. If the next thing you want to build is an end-user widget instead of a backend integration, also read [Chat Clients](features/chat-clients.md), because chat sessions solve identity, conversation history, attachments, and per-user limits more directly than a raw public key.
 
-## Receitas de implementação
+## 2. Find a model or gateway ID
 
-Para criar um assistente de suporte com base de conhecimento, comece criando uma coleção de RAG com documentos curtos e autossuficientes. Depois crie um AI Gateway com instruções de sistema que expliquem o papel da assistente, vincule a coleção, escolha uma estratégia de busca e teste perguntas diretas pela API. Quando a qualidade estiver boa, crie um chat client web ou integração de WhatsApp/Telegram para expor a assistente aos usuários. Se precisar de regras externas, como bloquear usuários sem assinatura ou enriquecer contexto com dados do CRM, adicione um worker ao gateway.
+You can call either:
 
-Para expor uma coleção a outro agente por MCP, use o endpoint `/v1/mcp/collections` com `Authorization`, `X-Mcp-Collection-Id`, `X-Mcp-Collection-Name`, `X-Mcp-Top-K`, `X-Mcp-Min-Score` e `X-Mcp-Reranker`. Comece em modo somente leitura. Habilite `X-Mcp-Allow-Write: yes` apenas quando o cliente MCP for confiável e quando o agente puder criar ou remover documentos. Use nomes de coleção descritivos, porque eles viram parte do nome da ferramenta e influenciam quando o modelo decide chamar a busca.
+- A hosted model name returned by the model listing endpoint.
+- A gateway identifier from your account.
 
-Para gerar JSON confiável, use `response_schema` quando quiser validação e JSON Healing pela AIVAX. Escreva um schema com `required`, tipos claros e `additionalProperties: false` quando a saída será consumida por outro sistema. Se o modelo possui structured outputs nativo e você quer passar o schema diretamente ao provedor, use `response_format` com `json_schema`. Se o consumidor precisa receber apenas o objeto final, use `json_only`, mas lembre que isso remove o envelope de chat completion da resposta.
+Gateway slugs are supported for private keys. Public-key chat completions must use the full gateway UUID and cannot call integrated models directly.
 
-Para processar muitos registros, use Batch em vez de abrir várias chamadas manuais. Crie um workflow com instrução, modelo, schema e ferramentas; importe itens em texto ou JSONL; inicie o job; acompanhe estados, custos e confiança; retente apenas erros ou itens de baixa confiança; exporte resultados em JSONL. Use Batch para trabalhos independentes, como classificação, extração, enriquecimento e avaliação. Não use Batch para conversas em tempo real ou quando cada item depende do resultado do item anterior.
+Use a hosted model name when you only need a direct model call. Use an AI Gateway when you want reusable behavior: instructions, RAG collections, built-in tools, workers, MCP servers, protocol functions, skills, moderation, or provider settings. A gateway becomes the stable "assistant configuration" your application can call repeatedly without rebuilding the same options in every request.
+
+If you are still exploring, list models first and make one direct call. When the prompt, tools, or retrieval rules start becoming part of the product, move that configuration into an [AI Gateway](inference/ai-gateway.md).
+
+Reference:
+
+<script src="https://inference.aivax.net/apidocs?embed-target=Model%20listing&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+
+## 3. Make a chat-completion request
+
+Install the OpenAI SDK for your language, then point it to AIVAX:
+
+```python
+from openai import OpenAI
+
+client = OpenAI(
+    base_url="https://inference.aivax.net/v1",
+    api_key="sk-aiv-acc..."
+)
+
+response = client.chat.completions.create(
+    model="<MODEL_OR_GATEWAY_ID>",
+    messages=[
+        {"role": "user", "content": "Write a one-sentence welcome message."}
+    ]
+)
+
+print(response.choices[0].message.content)
+```
+
+Replace `<MODEL_OR_GATEWAY_ID>` with an integrated model name or a gateway ID available to your account.
+
+This request is intentionally small: one user message, one model or gateway, and one response. After it works, you can add the product pieces one at a time. For structured JSON output, see [Structured Responses](inference/structured-responses.md). To retrieve knowledge from documents before answering, create a [RAG collection](rag/collections.md) and attach it to a gateway. To let the model call external systems, compare [Built-in Tools](tools/builtin-tools.md), [MCP](tools/mcp.md), and [Protocol Functions](tools/protocol-functions.md).
+
+Reference:
+
+<script src="https://inference.aivax.net/apidocs?embed-target=Inference%20(chat%20completions)&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+
+## 4. Confirm billing and limits
+
+After a successful request, usage is recorded against the authenticated account and the API key resource. Integrated model usage is charged from account balance unless it is covered by a subscription-model reserve window.
+
+Checking balance after the first call is a good sanity step because it confirms that authentication, model access, usage tracking, and billing all resolved under the expected account. The balance endpoint also returns plan and limit information, which is useful before enabling higher-volume features such as RAG imports, chat clients, or batch processing.
+
+Reference:
+
+<script src="https://inference.aivax.net/apidocs?embed-target=Get%20Account%20Balance&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+
+## Error formats
+
+AIVAX uses two response shapes:
+
+- OpenAI-compatible endpoints return an OpenAI-style `error` object with `message`, `type`, `param`, and `code`.
+- Administrative endpoints return `{"error": "...", "details": null}` for errors and `{"message": "...", "data": ...}` for successful `JsonResponse` results.
+
+Common failures:
+
+| Status | Likely cause |
+| --- | --- |
+| `401 Unauthorized` | Missing, malformed, expired, or unknown API key. |
+| `403 Forbidden` | A public key tried to call a non-public route, or the resource is not allowed. |
+| `402 Payment Required` | Balance is insufficient or the account exceeded storage quota. |
+| `429 Too Many Requests` | A rate limit was reached. |
+| `400 Bad Request` | Invalid request body, unsupported parameter, missing model, invalid schema, or invalid tool configuration. |
+
+For streaming chat completions, handle normal SSE chunks, optional `servertool` chunks, final usage metadata, `[DONE]`, and streaming error chunks.
+
+## Troubleshooting checklist
+
+When a request fails, verify in this order:
+
+1. Base URL is `https://inference.aivax.net/v1` for OpenAI SDK calls.
+2. The key is sent as `Authorization: Bearer <KEY>`, Basic auth, or the `api-key` query parameter.
+3. The account has enough balance and storage quota.
+4. The model or gateway ID exists and is allowed by the current plan.
+5. The request is under the plan's request, token, RAG, tool, or batch limits.
+6. Public-key calls use only allowed chat-completion parameters and full gateway UUIDs.
+7. Tool, RAG, worker, or schema configuration is isolated by testing the same prompt without that feature.
+
+## Next steps
+
+- [Authentication](authentication.md): understand private keys, public keys, and reverse hook validation.
+- [Plans and limits](limits.md): check request limits, context limits, RAG limits, tool limits, and batch limits before opening a workflow to users.
+- [Pricing](pricing.md): understand how credits, usage, storage, and minimum-balance checks work.
+- [AI Gateways](inference/ai-gateway.md): move from a direct model call to a reusable assistant configuration.
+- [RAG collections](rag/collections.md): store documents and retrieve them during inference.
+- [Batch](features/batch.md): run the same AI workflow over many independent records.

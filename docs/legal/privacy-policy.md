@@ -1,225 +1,240 @@
-# Política de Privacidade
+# Privacy Policy
 
-Versão: 1.1  
-Data de vigência: 05 de outubro de 2025
-Última atualização anterior: 30 de julho de 2025
-
----
-
-Bem-vindo à AIVAX. Esta Política de Privacidade descreve como a AIVAX coleta, utiliza, armazena, compartilha e protege informações em seus serviços de inferência de IA. Nosso compromisso é com transparência, segurança e conformidade com a Lei Geral de Proteção de Dados (LGPD) e o Marco Civil da Internet.
-
-Ao utilizar os serviços da AIVAX, o Gestor da Conta reconhece e concorda com os termos desta política. Esta política não constitui aconselhamento jurídico; recomendamos avaliação pelo departamento jurídico do Gestor.
-
-### 1. Definições
-
-- **AIVAX:** Empresa provedora da plataforma e dos serviços de orquestração de modelos de IA.
-- **Gestor da Conta AIVAX ("Gestor")**: Pessoa física ou jurídica que cria e administra a conta e integra a API.
-- **Usuário Final:** Indivíduo que interage com a aplicação do Gestor que consome a API AIVAX.
-- **Dados de Conta:** Dados cadastrais e administrativos (ex.: nome, e-mail, empresa, cargo, identificadores internos, preferências, configurações de chave de API).
-- **Dados de Faturamento:** Dados necessários a cobrança e notas (ex.: CNPJ/CPF, razão social, endereço, meios de pagamento através de processador terceirizado).
-- **Dados de Inferência:** Entradas (prompts, texto, instruções, metadados) enviadas aos modelos e as saídas/inferências resultantes. (Equivalente aos termos "Conteúdo de Entrada" + "Conteúdo Gerado" definidos nos Termos de Uso.)
-- **Conversas:** Conjunto estruturado de interações de Inferência (entrada + resposta + metadados de contexto).
-- **Metadados Técnicos:** Logs de requisições, IP, timestamp, latência, identificadores de sessão, uso de tokens, códigos de resposta, assinaturas de segurança.
-- **Operadora:** AIVAX quando processa dados segundo instruções do Gestor (dados de inferência/conversas).
-- **Controladora:** AIVAX quando define finalidades para dados de conta, faturamento, segurança e compliance.
-- **Subprocessador:** Terceiro contratado pela AIVAX para apoiar processamento (infraestrutura, monitoramento, billing, e-mail, provedores de modelo, etc.).
+Version: 1.1
+Effective date: October 5, 2025
+Previous update: July 30, 2025
 
 ---
 
-### 2. Papéis de Tratamento
+Welcome to AIVAX. This Privacy Policy describes how AIVAX collects, uses, stores, shares, and protects information in its AI inference services. It is written for transparency and technical clarity, and it does not constitute legal advice. Account Managers should review it with their own legal counsel when needed.
 
-| Tipo de Dado | Papel da AIVAX | Papel do Gestor |
-|--------------|----------------|-----------------|
-| Dados de Conta | Controladora | Titular/Controlador de sua própria relação interna |
-| Dados de Faturamento | Controladora (cumprimento legal e contratual) | Fornece/verifica |
-| Dados de Inferência / Conversas | Operadora | Controlador (define conteúdo e finalidade) |
-| Metadados Técnicos | Controladora (segurança / melhoria) e Operadora (execução técnica) | Controlador (origem) |
+By using AIVAX services, the Account Manager acknowledges and agrees to the terms of this policy.
 
-Quando atuar como Operadora, a AIVAX seguirá estritamente as instruções do Gestor, conforme chamadas de API e configurações de painel.
+### 1. Definitions
 
-Para coerência contratual, em caso de divergência terminológica entre esta política e os Termos de Uso, prevalecerá a equivalência: Dados de Inferência = Conteúdo de Entrada + Conteúdo Gerado.
-
----
-
-### 3. Categorias de Dados Coletados
-
-1. **Fornecidos diretamente pelo Gestor:** Dados de Conta, credenciais (hash ou tokens), preferências, configurações de uso, organização, chaves de API geradas.  
-2. **Gerados pelo uso:** Metadados técnicos (logs, estatísticas agregadas, contagem de tokens, latências, uso por modelo).  
-3. **Dados de Inferência e Conversas:** Conteúdo textual e demais formatos enviados aos modelos e retornos.  
-4. **Suporte e Comunicação:** Mensagens em tickets, e-mails enviados ao suporte ou canais de contato.  
-5. **Faturamento:** Dados fiscais e de pagamento (processados em parte por terceiros especializados).  
-6. **Dados Agregados/Anonimizados:** Métricas derivadas que não identificam o Gestor ou usuários finais.  
-
-Não coletamos deliberadamente categorias especiais de dados pessoais sensíveis (art. 5º, II, LGPD) salvo se o Gestor optar por enviar nos Dados de Inferência. Nesse caso, o Gestor declara possuir base legal adequada e consentimento quando exigido.
+- **AIVAX:** Company providing the platform and AI model orchestration services.
+- **AIVAX Account Manager ("Account Manager"):** Natural or legal person who creates and administers the account and integrates the API.
+- **End User:** Individual who interacts with the Account Manager's application that consumes the AIVAX API.
+- **Account Data:** Registration and administrative data, such as name, email, company, role, internal identifiers, preferences, and API key settings.
+- **Billing Data:** Data required for invoices, receipts, account balance, credits, payment events, and payment processing through third-party processors.
+- **Inference Data:** Inputs sent to models and resulting outputs. In the Terms of Use, this maps to Input Content and Generated Content.
+- **Conversations:** Stored sequences of inference interactions, including messages, metadata, model name, usage object, tools, resources, and error information when conversation logging is enabled.
+- **Technical Metadata:** Request logs, IP or forwarding information, timestamps, latency, session identifiers, token usage, response codes, request identifiers, and security or abuse signals.
+- **Processor:** AIVAX when it processes data according to the Account Manager's instructions.
+- **Controller:** AIVAX when it defines purposes for account, billing, security, and compliance data.
+- **Subprocessor:** Third party contracted or configured by AIVAX to support processing, such as infrastructure, email, billing, model providers, search providers, or object storage.
 
 ---
 
-### 4. Finalidades, Bases Legais e Retenção
+### 2. Processing Roles
 
-| Categoria | Finalidade Principal | Base Legal (LGPD) | Prazo Indicativo de Retenção* |
-|-----------|---------------------|-------------------|-------------------------------|
-| Dados de Conta | Criação, gestão da conta, autenticação, comunicações operacionais | Execução de contrato (art. 7º, V) | Enquanto a conta estiver ativa + até 6 meses após encerramento (auditoria) |
-| Dados de Faturamento | Cobrança, emissão fiscal, prevenção a fraudes (inclui regras de créditos, expiração e reembolsos – ver Termos de Uso) | Obrigações legais (art. 7º, II) / Execução de contrato | 5 a 10 anos (exigências fiscais) |
-| Metadados Técnicos | Segurança, prevenção a abuso, monitoramento de desempenho | Legítimo interesse (art. 7º, IX) + Execução de contrato | 180 dias (logs principais) / até 1 ano (segurança estendida) |
-| Dados de Inferência | Execução da inferência solicitada | Execução de contrato | Tempo operacional (padrão: até 30 dias) |
-| Conversas | Histórico para monitoramento, auditoria técnica, depuração | Legítimo interesse (balanceado) + Execução de contrato | Até 30 dias (padrão) ou menor se configurado; exportáveis e excluíveis |
-| Suporte | Resolver dúvidas, incidentes, compliance | Execução de contrato / Legítimo interesse | Até 12 meses após resolução |
-| Dados Agregados/Anonimizados | Métricas de capacidade, melhoria de confiabilidade | Fora do escopo da LGPD (dados anonimizados) | Indeterminado (enquanto irreversivelmente anonimizados) |
+| Data Type | AIVAX Role | Account Manager Role |
+| --- | --- | --- |
+| Account Data | Controller | Data subject or controller of its own internal relationship |
+| Billing Data | Controller for legal, contractual, and operational billing purposes | Provides and verifies |
+| Inference Data / Conversations | Processor for customer-directed processing; Controller for security, abuse prevention, and operational logs where applicable | Controller of content and purpose |
+| Technical Metadata | Controller for security, reliability, abuse prevention, and platform operations; Processor when generated as part of service execution | Controller of the originating application context |
 
-*Os prazos podem ser encurtados mediante solicitação, exceto onde houver obrigação legal ou necessidade de defesa de direitos. Backups cifrados podem reter dados por até 90 dias adicionais até rotação completa; dados expurgados não retornam a produção após restauração, aplicando-se reprocessamento de exclusões.
+When acting as Processor, AIVAX follows the Account Manager's instructions as expressed through API calls, dashboard settings, model selection, and configured integrations.
 
----
-
-### 5. Não Utilização para Treinamento Próprio
-
-A AIVAX **não** utiliza Dados de Inferência ou Conversas para treinar modelos proprietários, criar perfis de uso individualizados ou monetizar dados. Uso restrito à prestação do serviço contratado.
+For contractual consistency, Inference Data in this policy corresponds to Input Content and Generated Content in the Terms of Use.
 
 ---
 
-### 6. Armazenamento e Exclusão de Conversas
+### 3. Categories of Collected Data
 
-O Gestor pode: (i) ajustar retenção (quando a funcionalidade existir), (ii) excluir conversas individualmente ou em lote, (iii) solicitar purga total. Exclusão é definitiva e irreversível em produção; registros podem persistir temporariamente em backups até a janela de retenção técnica.
+1. **Provided directly by the Account Manager:** Account Data, preferences, account settings, organization information, generated API keys, and credentials stored as hashes or tokens where applicable.
+2. **Generated by use:** Technical metadata, usage records, token counts, latency, model usage, request resources, error information, and billing events.
+3. **Inference Data and Conversations:** Text and other content sent to models, model outputs, message history, conversation metadata, and related usage data.
+4. **Support and Communication:** Ticket messages, emails sent to support or contact channels, and operational communications.
+5. **Billing:** Fiscal, payment, invoice, credit, account balance, payment intent, and payment webhook data.
+6. **Aggregated or Anonymized Data:** Derived metrics that do not identify the Account Manager or end users.
 
----
-
-### 7. Direitos dos Titulares (Art. 18, LGPD)
-
-Quando a AIVAX atuar como Controladora (ex.: dados de conta), os titulares podem exercer: confirmação de tratamento; acesso; correção; anonimização, bloqueio ou eliminação; portabilidade; informação sobre compartilhamentos; revogação de consentimento (se aplicável); oposição a tratamento baseado em legítimo interesse; revisão de decisões automatizadas.  
-Canal: **privacy@aivax.net** ou **wm@aivax.net** (Encarregado). Prazo padrão de resposta: até 15 dias. Poderemos solicitar comprovação de identidade. Para dados em que atuamos como Operadora, direcionaremos o titular ao Gestor Controlador.
-
----
-
-### 8. Encarregado (DPO)
-
-Encarregado pelo Tratamento (Art. 41): **(Identidade anonimizada)** – Contato: **wm@aivax.net**.  
-Funções: canal de comunicação com titulares e ANPD, orientação interna de conformidade, suporte a avaliações de impacto.
+AIVAX does not require special categories of sensitive personal data. If the Account Manager sends sensitive personal data in Inference Data, the Account Manager is responsible for having the appropriate legal basis and notices.
 
 ---
 
-### 9. Subprocessadores
+### 4. Purposes, Legal Bases, and Retention
 
-Utilizamos subprocessadores para: infraestrutura em nuvem, balanceamento, monitoramento de desempenho, e-mail transacional, faturamento, provedores de modelo, detecção de abuso.  
-Publicaremos (ou já publicamos) lista atualizada em página dedicada: (link a adicionar). Notificaremos alterações materiais antes de entrada em vigor sempre que exigido contratualmente; o uso continuado após prazo de objeção razoável constitui aceitação.
+| Category | Primary Purpose | Legal Basis (LGPD) | Technical Retention or Limit |
+| --- | --- | --- | --- |
+| Account Data | Account creation, authentication, account management, operational communications | Contract execution / legitimate interest | While the account is active; disabled or inactive accounts may be deleted by scheduled cleanup according to platform rules |
+| Billing Data | Invoices, credits, payment confirmation, fraud prevention, tax and accounting records | Legal obligations / contract execution | According to legal, accounting, and contractual requirements |
+| Technical Metadata | Security, abuse prevention, debugging, reliability, rate limiting, cost accounting | Legitimate interest / contract execution | Retained as needed for operational, security, audit, and billing workflows |
+| Inference Data | Execution of requested inference and configured integrations | Contract execution | Processed for the request and may be stored inside Conversations when conversation logging is enabled |
+| Conversations | Monitoring, support, export, debugging, usage review, and user-facing history | Legitimate interest / contract execution | Visible/exportable according to plan retention: Free up to 2 hours, Pro up to 2 days, Max up to 30 days |
+| Support | Resolve questions, incidents, and compliance requests | Contract execution / legitimate interest | Retained as needed to resolve the request and maintain business records |
+| Aggregated or Anonymized Data | Capacity planning, reliability, abuse prevention, service improvement | Outside LGPD scope when irreversibly anonymized | Indeterminate while anonymized |
 
----
-
-### 10. Provedores de Modelos de Terceiros
-
-Ao selecionar um modelo específico, o Gestor também se sujeita às políticas do respectivo provedor. Alguns provedores podem usar dados de inferência para melhoria ou treinamento. O Gestor deve validar a adequação antes de enviar dados pessoais ou sensíveis. A AIVAX não controla políticas de terceiros e recomenda a leitura prévia.
-
----
-
-### 11. Transferências Internacionais de Dados
-
-Dados podem ser processados ou armazenados em datacenters fora do Brasil (ex.: EUA, UE), utilizando provedores que adotam padrões de segurança alinhados às melhores práticas internacionais. Aplicamos: (i) contratos com cláusulas de proteção; (ii) criptografia; (iii) minimização; (iv) segregação lógica. Caso a transferência se enquadre em hipóteses específicas do art. 33, adotaremos salvaguardas contratuais e técnicas apropriadas.
+The current code exposes conversation export periods of 2 hours, 1 day, 7 days, and 30 days, capped by the account plan's retention period.
 
 ---
 
-### 12. Segurança da Informação (Camadas)
+### 5. Conversation Logging and Deletion
 
-Medidas principais (sem divulgação de segredos operacionais):
-- Criptografia em trânsito (TLS 1.2+ / 1.3) e em repouso (AES-256 ou equivalente).
-- Controle de acesso baseado em papéis e princípio de mínimo privilégio.
-- Segregação de ambientes (desenvolvimento, staging, produção) e pipeline com revisões.
-- Logs de auditoria para ações administrativas e acessos a dados delicados.
-- Monitoramento de integridade, alertas de anomalia e limitações automáticas de taxa (rate limiting).
-- Testes periódicos de vulnerabilidade e correções priorizadas por criticidade.
-- Hardening de infraestrutura e rotação de credenciais seguras.
-- Pseudonimização ou truncamento de campos sensíveis em logs técnicos.
+Conversation logging is controlled by the account parameter `AllowConversationsLogging`, which is enabled by default in the current implementation. When disabled for an account, the conversation repository does not write conversation records for that account.
 
-Nenhuma medida de segurança é absoluta; mantemos programa contínuo de aprimoramento.
+The authenticated Account Manager can list, view, export, and delete stored conversations through the conversations API, subject to authorization and retention windows. Deleting a conversation removes the matching conversation record for that account from production storage.
 
 ---
 
-### 13. Gestão de Incidentes
+### 6. RAG, Memories, and Storage
 
-Incidentes relevantes de segurança serão avaliados conforme impacto, natureza dos dados e risco a titulares. Caso exigido, notificaremos Gestores afetados e a ANPD com: (i) descrição do evento; (ii) dados possivelmente envolvidos; (iii) medidas já tomadas e mitigação planejada; (iv) orientações ao Gestor. Mantemos plano de resposta revisto periodicamente.
+AIVAX can store RAG collections, documents, embeddings, document metadata, user memories, media descriptions, web chat session data, and shell workspace files when those features are used.
 
----
+Current storage accounting includes:
 
-### 14. Decisões Automatizadas
+- RAG document text and embedding bytes.
+- User persistent information.
+- Media descriptions.
+- Web chat session messages, extra context, and metadata.
+- Account shell files.
 
-Empregamos automações para detecção de abuso, limitação de requisições e prevenção a fraude de uso. Estas automações podem restringir temporariamente acessos ou chaves. Não realizamos decisões exclusivamente automatizadas que produzam efeitos jurídicos ou signifcativos sobre indivíduos. O Gestor pode solicitar revisão humana via suporte.
-
----
-
-### 15. Cookies e Tecnologias de Rastreamento
-
-Na interface de painel podemos utilizar cookies estritamente necessários (sessão/autenticação) e possivelmente cookies funcionais para preferências. Não usamos cookies de publicidade comportamental. Caso venhamos a empregar analytics de terceiros, atualizaremos esta seção e forneceremos mecanismo de consentimento quando aplicável. O Gestor pode gerenciar cookies via configurações de navegador; a desativação de cookies estritamente necessários pode limitar funcionalidades.
+Storage quotas are plan-based. Current included storage is 30 MB for Free, 2 GB for Pro, and 20 GB for Max.
 
 ---
 
-### 16. Crianças, Adolescentes e Menores Emancipados
+### 7. No Use for Proprietary Model Training
 
-Os serviços não se destinam a menores de 18 anos, exceto menores a partir de 16 anos legalmente emancipados nos termos da legislação brasileira. Não coletamos intencionalmente dados pessoais de menores não emancipados. Caso identifiquemos tratamento indevido, adotaremos medidas para remoção rápida e notificação ao Gestor. O Gestor é responsável por implementar verificações quando o uso envolver público potencialmente menor de idade.
-
----
-
-### 17. Dados Sensíveis
-
-Não exigimos o envio de dados sensíveis. O Gestor deve evitar enviar dados de saúde, biométricos, genéticos, crenças religiosas, opinião política ou outros dados especiais, a menos que possua base legal apropriada e comunique claramente os titulares. AIVAX poderá aplicar filtros ou bloqueios para tipos de conteúdo considerados de alto risco.
+AIVAX does not use Account Manager Inference Data or Conversations to train proprietary AIVAX models. Third-party model providers and aggregators may have their own processing terms, retention terms, and model-improvement policies. The Account Manager should review the selected provider's policy before sending personal or sensitive data.
 
 ---
 
-### 18. Limitações de Uso e Conteúdos Proibidos
+### 8. Data Subject Rights (Art. 18, LGPD)
 
-É proibido utilizar a plataforma para armazenar ou processar conteúdos ilícitos, violadores de direitos, malware, material difamatório ou que infrinja direitos de terceiros. Podemos suspender ou bloquear chaves mediante suspeita razoável de violação, preservando logs necessários para investigação. Medidas de suspensão e rescisão seguem também o disposto nos Termos de Uso (Seções 2.1 e 5).
+When AIVAX acts as Controller, data subjects may request confirmation of processing, access, correction, anonymization, blocking or deletion, portability, information about sharing, revocation of consent where applicable, opposition to processing based on legitimate interest, and review of automated decisions where applicable.
 
----
-
-### 19. Anonimização e Dados Agregados
-
-Podemos gerar estatísticas agregadas (ex.: volume de tokens, taxa de erro, distribuição por modelo) sem identificação direta de indivíduos ou do conteúdo específico das Conversas. Tais dados não retornam à forma identificável.
+Channel: **privacy@aivax.net** or **wm@aivax.net** (Data Protection Officer). We may request identity verification. For data where AIVAX acts as Processor, AIVAX may direct the data subject to the Controller Account Manager.
 
 ---
 
-### 20. Exportação e Portabilidade
+### 9. Data Protection Officer (DPO)
 
-Fornecemos (ou forneceremos) mecanismos para exportar histórico de Conversas e métricas em formatos estruturados (JSON), limitados por janelas de retenção e segurança. Para dados mantidos enquanto Operadora, solicitações de titulares devem ser encaminhadas ao Gestor Controlador.
+Data Protection Officer (Art. 41): **(Anonymized identity)**
+Contact: **wm@aivax.net**
 
----
-
-### 21. Backups e Recuperação de Desastre
-
-Backups cifrados são executados em janelas periódicas e retidos por até 90 dias para continuidade operacional. Após exclusões solicitadas, marcamos registros para expurgo lógico e impedimos reintrodução após restauração mediante reprocessamento de fila de exclusões.
+Functions include communication with data subjects and the ANPD, internal compliance guidance, and support for privacy impact assessments.
 
 ---
 
-### 22. Alterações a esta Política
+### 10. Subprocessors and Third-Party Providers
 
-Alterações materiais serão notificadas por e-mail ao Gestor ou aviso destacado no painel com antecedência razoável (preferencialmente 15 dias), salvo exigência legal ou segurança urgente. A continuidade de uso após a vigência constitui aceitação.
+AIVAX uses third-party services for infrastructure, object storage, transactional email, billing, web search, image generation, reranking, and AI model inference. The current technical list is maintained in [Data Processors](/docs/legal/third-party-processors).
 
----
-
-### 23. Canal de Contato e Reclamações
-
-Dúvidas, solicitações de direitos ou reclamações: **privacy@aivax.net** / **wm@aivax.net**.  
-Se não houver solução satisfatória, o titular pode recorrer à **ANPD** (Autoridade Nacional de Proteção de Dados).
+When selecting a model or enabling a tool, the Account Manager may cause content to be sent to the selected model provider, aggregator, or tool provider. AIVAX does not control third-party policies and recommends prior review.
 
 ---
 
-### 24. Histórico de Revisões
+### 11. International Data Transfers
 
-| Versão | Data de Vigência | Principais Alterações |
-|--------|------------------|-----------------------|
-| 1.0 | 30/07/2025 | Versão inicial publicada |
-| 1.1 | 05/10/2025 | Inclusão de bases legais, direitos, retenção detalhada, subprocessadores, transferências, segurança ampliada, incidentes, decisões automatizadas, cookies, dados sensíveis, versionamento |
+Data may be processed or stored outside Brazil depending on the selected infrastructure, model provider, search provider, object storage provider, or payment provider. AIVAX applies technical and contractual safeguards appropriate to the service, including access controls, encryption in transit, minimization, and logical segregation where applicable.
 
 ---
 
-### 25. Contato Geral
+### 12. Information Security
 
-Legal / Privacidade: **legal@aivax.net** – Encarregado: **wm@aivax.net**.  
-Usar sempre canais oficiais para evitar engenharia social.
+Key measures include:
+
+- Encryption in transit with HTTPS/TLS.
+- API key authentication and account-scoped authorization.
+- Role-based administrative access.
+- Rate limiting for inference, RAG search, document insertion, tools, and payment operations.
+- Balance, minimum-balance, and storage-quota checks before cost-incurring operations.
+- Operational logs and error reporting for troubleshooting and abuse prevention.
+- Separation between account-owned resources, such as collections, documents, conversations, memories, and shell files.
+- Secure credential configuration through application initialization parameters rather than hardcoded secrets.
+
+No security measure is absolute; AIVAX maintains a continuous improvement process.
 
 ---
 
-### 26. Disposições Finais
+### 13. Incident Management
 
-Caso alguma cláusula desta política seja considerada inválida, as demais permanecem em pleno vigor. Em caso de conflito entre esta política e termos específicos de produto, prevalecerá a disposição mais protetiva aos titulares, salvo obrigação legal diversa.
+Relevant security incidents are assessed based on impact, data nature, and risk to data subjects. When required, AIVAX will notify affected Account Managers and competent authorities with available information about the event, affected data categories, mitigation steps, and recommended actions.
 
 ---
 
-Se restarem dúvidas sobre qualquer ponto desta política, entre em contato. Mantemos compromisso com melhoria contínua de privacidade e segurança.
+### 14. Automated Decisions
 
-> Nota: Esta política poderá ser complementada por um Acordo de Processamento de Dados (DPA) específico entre AIVAX e o Gestor, quando aplicável.
+AIVAX uses automation for rate limiting, balance checks, storage quota checks, abuse prevention, fraud prevention, indexing, routing, and operational monitoring. These automations may temporarily restrict requests or keys. The Account Manager may request review through support channels.
+
+---
+
+### 15. Cookies and Tracking Technologies
+
+Dashboard interfaces may use strictly necessary cookies or equivalent browser storage for sessions, authentication, and preferences. AIVAX does not use behavioral advertising cookies in the documented platform flow.
+
+---
+
+### 16. Children, Adolescents, and Emancipated Minors
+
+The services are not intended for persons under 18, except legally emancipated minors aged 16 or older under Brazilian law. The Account Manager is responsible for implementing appropriate checks when their use case may involve minors.
+
+---
+
+### 17. Sensitive Data
+
+AIVAX does not require sensitive data to use the platform. The Account Manager should avoid sending health, biometric, genetic, religious belief, political opinion, or other sensitive data unless they have an appropriate legal basis and clear notices for data subjects.
+
+---
+
+### 18. Use Limitations and Prohibited Content
+
+It is prohibited to use the platform to store or process illegal content, rights-infringing material, malware, defamatory material, or content that infringes third-party rights. AIVAX may suspend, restrict, or block keys upon reasonable suspicion of violation, preserving logs necessary for investigation.
+
+---
+
+### 19. Aggregated Data
+
+AIVAX may generate aggregate statistics such as token volume, error rate, model distribution, storage usage, and latency. Aggregated statistics are used for capacity planning, reliability, billing, and abuse prevention.
+
+---
+
+### 20. Export and Portability
+
+AIVAX provides APIs to export conversation history in JSON or JSONL within the configured retention window. Collection documents can be exported in JSONL format. Export availability is subject to authentication, authorization, retention, and account state.
+
+---
+
+### 21. Backups and Disaster Recovery
+
+AIVAX may maintain backups and disaster recovery processes for operational continuity. Deleted production data may remain in backup media until backup rotation or disaster recovery procedures complete.
+
+---
+
+### 22. Changes to This Policy
+
+Material changes may be notified by email, dashboard notice, or publication of an updated policy. Continued use after the effective date constitutes acceptance where permitted by law and contract.
+
+---
+
+### 23. Contact Channel and Complaints
+
+Questions, rights requests, or complaints: **privacy@aivax.net** / **wm@aivax.net**.
+If unsatisfied, the data subject may appeal to the **ANPD** (National Data Protection Authority).
+
+---
+
+### 24. Revision History
+
+| Version | Effective Date | Major Changes |
+| --- | --- | --- |
+| 1.0 | 07/30/2025 | Initial version published |
+| 1.1 | 10/05/2025 | Added legal bases, rights, detailed retention, subprocessors, transfers, expanded security, incidents, automated decisions, cookies, sensitive data, versioning |
+
+---
+
+### 25. General Contact
+
+Legal / Privacy: **legal@aivax.net**
+Data Protection Officer: **wm@aivax.net**
+
+Always use official channels to avoid social engineering.
+
+---
+
+### 26. Final Provisions
+
+If any clause of this policy is deemed invalid, the remaining provisions remain in full force. In case of conflict between this policy and specific product terms, the more protective provision for data subjects will prevail unless a different legal obligation applies.
+
+> Note: This policy may be complemented by a specific Data Processing Agreement (DPA) between AIVAX and the Account Manager, when applicable.

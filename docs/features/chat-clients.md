@@ -1,48 +1,52 @@
-# Chat Clients
+﻿# Chat Clients
 
-Um cliente de chat provê uma interface de usuário através de um [AI Gateway](/docs/inference/ai-gateway) que permite o usuário conversar com sua assistente. Um chat client é integrado à inferência do AI gateway e dá suporte para pensamento profundo, pesquisa, conversa por texto e envio de imagens. Recursos de áudio dependem da integração e da configuração do cliente.
+A chat client provides a user interface via an [AI Gateway](/docs/inference/ai-gateway) that allows the user to converse with their assistant. A chat client is integrated with the AI gateway inference and supports deep thinking, search, text conversation, and image sending. Audio features depend on the integration and client configuration.
 
-Você pode personalizar a interface do seu chat client com CSS e JavaScript personalizado, além de poder escolher a linguagem dos recursos do chat.
+You can customize the chat client interface with CSS, custom JavaScript, colors, labels, suggestion buttons, frame origins, input modes, and the language used by the chat resources.
 
-## Como o chat client funciona
+## How the chat client works
 
-Um chat client é uma camada de sessão em cima de um AI Gateway. O gateway define o comportamento da assistente; o chat client define como um usuário final conversa com ela, como a sessão é identificada, quanto tempo ela dura, quais limites são aplicados, quais recursos visuais aparecem e como mensagens entram e saem por canais externos. Essa separação é importante: você pode usar o mesmo gateway em uma API interna, em um widget web, no Telegram e no WhatsApp, mas cada canal terá regras próprias de identidade, anexos, formatação, comandos e entrega de mensagens.
+A chat client is a session layer on top of an AI Gateway. The gateway defines the assistant’s behavior; the chat client defines how an end user converses with it, how the session is identified, how long it lasts, what limits are applied, which visual resources appear, and how messages enter and exit through external channels. This separation is important: you can use the same gateway in an internal API, a web widget, Telegram, and WhatsApp, but each channel will have its own rules for identity, attachments, formatting, commands, and message delivery.
 
-Cada sessão mantém histórico de mensagens, contexto adicional, metadados, token de conversa e uma identificação externa opcional. Quando você cria uma sessão com `tag`, a AIVAX tenta reutilizar a sessão ativa daquela tag em vez de criar uma conversa nova. Isso permite que um usuário volte ao widget ou envie outra mensagem pelo mesmo canal sem perder o contexto imediatamente. Quando a sessão não tem `tag`, ela funciona como uma conversa avulsa controlada pelo token de acesso gerado na criação.
+Each session maintains a message history, additional context, metadata, conversation token, and an optional external identifier. When you create a session with a `tag`, AIVAX tries to reuse the active session for that tag instead of creating a new conversation. This allows a user to return to the widget or send another message through the same channel without immediately losing context. When the session has no `tag`, it functions as an independent conversation controlled by the access token generated at creation.
 
-A `tag` também é o ponto de conexão entre chat client, memória, calendário, workers e integrações. Ferramentas como memória precisam de um identificador estável para saber a quem pertence uma preferência ou informação persistente. Workers recebem `externalUserId` para aplicar regras por usuário, por canal ou por conta externa. Integrações de WhatsApp e Telegram usam a identificação da conversa, telefone ou usuário para recuperar a sessão correta. Por isso, escolha uma `tag` estável, não sensível e única por usuário ou conversa.
+The `tag` also serves as the connection point between the chat client, memory, calendar, workers, and integrations. Tools like memory need a stable identifier to know who a preference or persistent information belongs to. Workers receive `externalUserId` to apply rules per user, per channel, or per external account. WhatsApp and Telegram integrations use the conversation ID, phone number, or user to retrieve the correct session. Therefore, choose a stable, non‑sensitive, unique `tag` per user or conversation.
 
-## Criar uma sessão de chat
+## Creating a chat session
 
-Uma sessão de chat é onde você cria uma conversa entre seu chat client e o usuário. Você pode chamar esse endpoint informando contexto adicional para conversa, como o nome do usuário, onde ele está, etc.
+A chat session is where you create a conversation between your chat client and the user. You can call this endpoint providing additional context for the conversation, such as the user’s name, location, etc.
 
-Uma sessão de chat expira após algum tempo por segurança do token de acesso gerado. Quando você chama esse endpoint informando uma `tag` você pode chamar o mesmo endpoint várias vezes e obter a sessão de chat que está ativa para a tag informada, ou criar um chat novo se não existir uma sessão em andamento.
+A chat session expires after the period requested at creation time. The API default is 3,600 seconds, the minimum is 10 minutes, and the maximum is 90 days. When you call this endpoint with a `tag`, you can call the same endpoint multiple times and obtain the chat session that is active for the given tag, or create a new chat if no session is in progress.
 
-Quando uma sessão é encontrada no cliente de chat através da `tag` informada, a sessão é renovada pelo período informado e o contexto é atualizado.
+When a session is found in the chat client via the provided `tag`, the session is renewed for the specified period and the context is updated.
 
-Uma sessão de chat também restaura todas as mensagens da conversa da mesma sessão após desconexão. O usuário pode limpar a conversa ao clicar no botão de limpar conversa no canto superior direito do cliente de chat. Essa sessão usa os limites definidos pelo cliente de chat, como máximo de mensagens e tokens na conversa.
+A chat session also restores all messages from the same session’s conversation after disconnection. The user can clear the conversation by clicking the clear conversation button in the upper right corner of the chat client. This session uses the limits defined by the chat client, such as maximum messages and tokens in the conversation.
 
-Se uma sessão estiver próxima de expirar, ela é renovada por mais 20 minutos na próxima mensagem do usuário.
+If a session is close to expiring, the next user message renews it for at least 30 additional minutes.
 
-Para detalhes sobre como criar uma sessão de chat, consulte o endpoint [Create Web Chat Session](https://inference.aivax.net/apidocs#CreateWebChatSession).
+Reference:
 
-Ao criar uma sessão, use o contexto adicional para informações que ajudam a assistente naquela conversa, mas que não devem virar memória permanente: nome exibido, plano do cliente, idioma preferido, página de origem, produto que o usuário está vendo, número do pedido ou estado atual de um fluxo. Não use esse campo para segredos, tokens internos ou dados que o modelo não deveria ver. O contexto adicional entra na inferência e pode influenciar respostas, ferramentas e workers.
+<script src="https://inference.aivax.net/apidocs?embed-target=Create%20Web%20Chat%20Session&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
 
-O chat web aceita mensagens de texto e anexos. Imagens são encaminhadas como conteúdo multimodal quando o modelo ou o pipeline suporta. Áudio pode ser enviado como entrada multimodal em clientes compatíveis e também pode ser sintetizado como resposta quando a configuração de síntese de áudio do chat client está ativa. Arquivos e vídeos dependem do tipo de cliente, do modelo escolhido e do processamento multimodal configurado no gateway. Quando o canal não suporta um anexo, a integração deve transformar o evento em uma mensagem textual informando que o usuário enviou um conteúdo não suportado, para que a assistente responda de maneira clara.
+When creating a session, use `extraContext` for information that helps the assistant in that conversation but should not become permanent memory: displayed name, client plan, preferred language, referrer page, product the user is viewing, order number, or current flow state. Do not use this field for secrets, internal tokens, or data the model should not see. The additional context goes into inference and can influence responses, tools, and workers.
 
-## Sessões de integrações
+You can also provide `contextLocation`, a URL that AIVAX loads during response generation and appends to the session context. Use it for server-controlled context that may change over time, and make sure the URL is reachable by AIVAX.
 
-A AIVAX fornece integrações para clientes de chat por Telegram e WhatsApp, incluindo [Z-Api](https://www.z-api.io/), Evolution API e Kapso. Cada conversa em um aplicativo é uma sessão individual, identificada pelo ID da conversa ou número de telefone do usuário.
+The web chat accepts text messages and attachments. Images, files, videos, and audio are materialized before inference; supported image, file, video, and audio types can be forwarded as multimodal content when the selected model and gateway configuration support them. Audio can also be synthesized as a response when the chat client’s audio synthesis setting is active. When a channel cannot embed an attachment, AIVAX turns unsupported content into a textual attachment notice so that the assistant can reply clearly.
 
-Essas sessões obedecem as regras do chat client original. Além disso, sessões de chat nessas integrações possuem dois comandos especiais:
+## Integration sessions
 
-- `/reset`: limpa o contexto atual da sessão.
-- `/usage`: quando `debug` está ativo no chat client, exibe o uso atual do chat em tokens.
+AIVAX provides integrations for chat clients via Telegram and WhatsApp, including [Z-Api](https://www.z-api.io/), Evolution API, and Kapso. Each conversation in an app is an individual session, identified by the conversation ID, chat ID, or the user’s phone number, depending on the provider. Integration sessions default to a three-hour duration unless the integration parameters specify another value.
 
-As integrações tratam o canal como origem de mensagens, mas a inferência continua sendo executada pelo AI Gateway associado ao chat client. No Telegram, a conversa recebe instruções adicionais sobre formatação e comportamento esperado do canal. No WhatsApp, cada provedor possui detalhes próprios de webhook, download de mídia e envio de resposta; Z-Api, Evolution API e Kapso são caminhos diferentes para chegar ao mesmo objetivo operacional. Em todos os casos, mensagens do usuário entram na sessão, são materializadas como mensagens compatíveis com a inferência e a resposta da assistente é enviada de volta pelo mensageiro da integração.
+These sessions obey the original chat client rules. Additionally, chat sessions in these integrations have two special commands:
 
-Use Telegram quando você precisa de um bot simples, com usuários identificáveis por chat e comandos fáceis de testar. Use WhatsApp quando o canal principal de atendimento do usuário já é o telefone e quando a conversa precisa acontecer em um aplicativo cotidiano. Use o widget web quando você quer incorporar a assistente em um site, produto, central de suporte ou painel. A escolha do canal não deve mudar o conteúdo essencial do gateway, mas pode exigir ajustes de tom, tamanho de resposta, formatação e tolerância a anexos.
+- `/reset`: clears the current session context.
+- `/usage`: when `debug` is active in the chat client, displays the current chat usage in tokens.
 
-Para produção, configure limites no chat client antes de liberar o canal ao público. Limites de mensagens por hora, máximo de mensagens no histórico e tempo de sessão ajudam a controlar custo, abuso e crescimento de contexto. Ative comandos de debug apenas para testes internos. Se a assistente usa memória, explique ao usuário quando informações podem ser lembradas e evite salvar dados sensíveis. Se usa workers, use o `externalUserId` para aplicar bloqueios, regras de assinatura, enriquecimento de perfil ou auditoria sem colocar essa lógica nas instruções do modelo.
+Integrations treat the channel as the source of messages, but inference continues to be performed by the AI Gateway associated with the chat client. In Telegram, the conversation receives additional instructions about formatting and expected channel behavior. In WhatsApp, each provider has its own webhook details, media download, and response sending; Z-Api, Evolution API, and Kapso are different paths to the same operational goal. In all cases, user messages enter the session, are materialized as inference‑compatible messages, and the assistant’s response is sent back via the integration’s messenger.
 
-Quando uma integração não responde como esperado, diagnostique em ordem: confirme se o chat client está associado ao gateway correto, verifique se a integração está salva com os parâmetros certos, envie uma mensagem simples sem anexo, confirme se a sessão foi criada ou reutilizada pela tag, veja se há limite de mensagens por hora, confira saldo da conta e só então investigue modelo, ferramentas e RAG. Essa ordem reduz confusão porque separa problemas de canal, sessão, cobrança e inferência.
+Use Telegram when you need a simple bot with users identifiable by chat and easy‑to‑test commands. Use WhatsApp when the user’s primary support channel is already the phone and the conversation needs to happen in a daily app. Use the web widget when you want to embed the assistant in a website, product, support center, or dashboard. The channel choice should not change the gateway’s essential content, but may require adjustments to tone, response size, formatting, and attachment tolerance.
+
+For production, configure limits on the chat client before opening the channel to the public. `messagesPerHour` controls the per-session hourly message limit, and `maxMessages` controls the maximum messages retained in a session. Session duration is controlled when creating web sessions and by each integration’s `sessionDuration`. Enable debug commands only for internal testing. If the assistant uses memory, explain to the user when information may be remembered and avoid storing sensitive data. If using workers, use the `externalUserId` to apply blocks, subscription rules, profile enrichment, or auditing without embedding that logic in the model instructions.
+
+When an integration does not respond as expected, diagnose in order: confirm that the chat client is associated with the correct gateway, verify that the integration is saved with the correct parameters, send a simple message without an attachment, confirm that the session was created or reused via the tag, check for a per‑hour message limit, check account balance, and only then investigate the model, tools, and RAG. This order reduces confusion because it separates channel, session, billing, and inference issues.

@@ -1,28 +1,14 @@
-# Workers de IA
+# AI Workers
 
-Os workers do gateway de IA são hooks que permitem controlar o comportamento de seus recursos remotamente através de eventos.
+AI Gateway workers are HTTP hooks that let an external service control gateway execution at runtime. A worker can allow an event, stop it, rewrite context, add instructions or tools, or replace a server-side tool result.
 
-Com um controlador externo configurado, eventos são enviados para ele, e a resposta do seu controlador define se aquela ação deve continuar, ser abortada ou configurada.
+Use workers when a rule must be decided outside the prompt. Common cases include subscription checks, CRM enrichment, tenant-specific policy, audit logging, dynamic tool blocking, and replacing a model-visible tool result with data from an internal system.
 
-Quando um evento é acionado no lado da AIVAX, uma requisição POST é disparada ao worker configurado com informações do evento disparado. Com base em sua resposta, a ação pode ser anulada ou configurada. Não há nenhum cache - a requisição é feita em todos os eventos que ocorrem no seu gateway de IA. 
+Workers run in the inference critical path. Every worker event adds an HTTP request before the gateway can continue, so the endpoint must respond quickly and predictably.
 
-O tempo de processamento da resposta acrescenta uma latência entre toda ação do gateway, no entanto, adiciona uma camada de controle e moderação que você pode controlar à qualquer momento.
+## Request format
 
-Use workers quando uma regra precisa ser decidida fora do prompt. Exemplos comuns são validar se um usuário tem assinatura ativa, anexar dados de CRM antes da inferência, remover informações que não devem chegar ao modelo, trocar uma mensagem por uma versão normalizada, impedir ferramentas em certos horários, substituir o resultado de uma ferramenta por dados de um sistema interno ou registrar auditoria em um sistema próprio. Se a regra é estável e textual, prefira instrução de sistema; se ela depende de banco de dados, política dinâmica, identidade externa ou decisão determinística, use worker.
-
-O worker deve ser tratado como parte do caminho crítico da inferência. Cada evento enviado a ele adiciona uma requisição HTTP antes de a conversa continuar, então o endpoint precisa responder rápido, com timeout previsível e sem operações desnecessárias. Evite fazer pipelines longos, chamadas lentas ou dependências frágeis dentro do worker. Quando precisar consultar sistemas externos, prefira respostas objetivas e cache próprio no seu lado. Uma resposta 2xx deixa o fluxo continuar; uma resposta não OK interrompe o evento; uma resposta com `Content-Type: application/json+worker-action` permite alterar o contexto ou substituir resultados.
-
-## Segurança, autenticação e operação
-
-Quando a conta possui uma chave de hook configurada, a AIVAX envia `X-Request-Nonce` nas requisições ao worker. Esse cabeçalho contém um hash BCrypt derivado da chave de hook da conta. O worker deve validar esse hash antes de confiar no corpo recebido, principalmente se ele executa ações sensíveis, como consultar dados de clientes, alterar contexto com informações privadas ou liberar ferramentas. Consulte [Autenticação](/docs/authentication) para exemplos de validação em C#, Python e JavaScript.
-
-O corpo do evento inclui `gatewayId`, `moment`, `event.name` e `event.data`. Sempre confira o `gatewayId` quando o mesmo endpoint atende mais de um gateway, porque isso evita aplicar regras de um agente em outro. Use `externalUserId` para decisões por usuário ou por canal, mas não presuma que ele sempre existe; chamadas diretas por API podem não ter uma tag de usuário. Use `metadata` para dados auxiliares do canal ou da sessão, e trate qualquer dado vindo do usuário como não confiável.
-
-Para falhas, escolha um comportamento explícito. Se o worker não conseguir consultar seu sistema, ele pode responder 2xx e deixar a inferência continuar sem enriquecimento, ou pode responder não OK e bloquear a ação. A primeira opção é melhor para recursos auxiliares; a segunda é melhor para autorização, compliance e regras que não podem falhar abertas. Em ambos os casos, registre logs no seu endpoint com `gatewayId`, `event.name`, `externalUserId`, tempo de execução e decisão tomada.
-
-## Funcionamento
-
-Quando um evento é acionado, uma requisição POST é disparada ao seu worker seguindo o formato abaixo:
+When a configured worker event fires, AIVAX sends a `POST` request to the gateway's worker URL.
 
 ```json
 {
@@ -38,88 +24,83 @@ Quando um evento é acionado, uma requisição POST é disparada ao seu worker s
                 },
                 {
                     "role": "user",
-                    "content": "bom dia"
-                },
-                {
-                    "role": "assistant",
-                    "content": "Bom dia! 😊 Como posso te ajudar hoje?"
-                },
-                {
-                    "role": "user",
-                    "content": "tudo bem?"
+                    "content": "Good morning"
                 }
             ],
-            "origin": [
-                "SessionsApi"
-            ],
-            "externalUserId": "mini-app-session@hse075q0q5gftm6jmitvi5",
+            "origin": "ChatCompletionsApi",
+            "externalUserId": "customer-123",
             "metadata": {}
         }
     }
 }
 ```
 
-O exemplo acima ilustra uma mensagem do evento `message.received` com os seus argumentos do evento.
+The exact `event.data` shape depends on the event. Always validate `gatewayId` when one endpoint serves more than one gateway.
 
-## Tipos de resposta
+## Authentication
 
-Após o envio da requisição, a AIVAX aguarda a resposta do seu worker. Existem três tipos de resposta possíveis:
+When the account has a hook key, AIVAX sends `X-Request-Nonce`. The nonce is a BCrypt hash derived from the account salt. Validate this header before trusting the body, especially when the worker releases private data, changes context, or authorizes tool usage.
 
-| Resposta | Comportamento |
-|----------|---------------|
-| **Resposta OK (2xx)** | Continua e prossegue com a execução normal do evento. |
-| **Outras respostas** | Aborta e interrompe a execução do evento. |
-| **Content-Type `application/json+worker-action`** | Executa as ações especificadas na resposta e continua com a execução. |
+Treat `externalUserId`, `metadata`, messages, and tool arguments as untrusted input.
 
-## Eventos
+## Response behavior
 
-Atualmente, os eventos que podem ser enviados para seu worker são:
+After sending the request, AIVAX handles the worker response as follows:
 
-### `message.received`
+| Response | Behavior |
+|---|---|
+| `Content-Type: application/json+worker-action` | Execute the action described in the JSON body. |
+| `2xx` without `application/json+worker-action` | Continue normally. |
+| Non-OK response without `application/json+worker-action` | Stop the event. |
 
-Enviado quando uma mensagem é recebida pelo gateway. Esse evento é acionado com todo o histórico de mensagens da conversa.
+If the worker request fails with an HTTP request exception, AIVAX logs the failure and stops the event.
+
+Choose fail-open or fail-closed behavior intentionally. Return `2xx` when enrichment is optional. Return a non-OK response when authorization, compliance, or business policy cannot fail open.
+
+## `message.received`
+
+The `message.received` event fires after the gateway prepares the incoming message context and before the model call.
 
 ```json
 {
     "name": "message.received",
     "data": {
         "messages": [],
-        "origin": ["SessionsApi"],
-        "externalUserId": "mini-app-session@lot1xc9k03g2my3j4w2y1",
+        "origin": "ChatCompletionsApi",
+        "externalUserId": "customer-123",
         "metadata": {}
     }
 }
 ```
 
-#### Ações disponíveis
-
-Para executar ações no evento `message.received`, retorne uma resposta com o header `Content-Type: application/json+worker-action` e o corpo no formato:
+To modify the context, return `Content-Type: application/json+worker-action` with `type: "message.received.response"`:
 
 ```json
 {
     "type": "message.received.response",
     "data": {
         "rewrites": [
-            // lista de ações
+            {
+                "type": "add-system",
+                "message": "Answer in formal English."
+            }
         ]
     }
 }
 ```
 
-As ações disponíveis para o campo `rewrites` são:
+Available rewrite actions:
 
-| Ação | Descrição | Parâmetros |
-|------|-----------|------------|
-| `clear` | Remove todas as entidades especificadas do contexto. | `argument`: a entidade que será removida. Pode ser `messages`, `meta`, `system`, `tools`, `skills` ou `all`. Padrão para `all` quando nulo. |
-| `add-message` | Adiciona uma mensagem ao contexto. | `message`: objeto de mensagem OpenAI-compatível (ex: `role` e `content`) |
-| `remove-message` | Remove uma mensagem do contexto pelo índice. | `index`: índice da mensagem a ser removida |
-| `add-system` | Adiciona uma instrução de sistema. | `message`: texto da instrução |
-| `add-tool` | Adiciona uma ferramenta ao contexto. | `tool`: objeto JSON da ferramenta |
-| `add-protocol-tool` | Adiciona uma definição de [protocol function](/docs/tools/protocol-functions) ao contexto. | `tool`: objeto definição da protocol function|
+| Action | Description | Parameters |
+|---|---|---|
+| `clear` | Removes context elements. | `argument`: `messages`, `meta`, `system`, `tools`, `skills`, `all`, or omitted. |
+| `add-message` | Adds a message to the conversation. | `message`: OpenAI-compatible message object. |
+| `remove-message` | Removes a message by index. | `index`: zero-based message index. |
+| `add-system` | Adds a system instruction. | `message`: instruction text. |
+| `add-tool` | Adds an OpenAI-compatible tool definition. | `tool`: tool JSON object. |
+| `add-protocol-tool` | Adds a [protocol function](/docs/tools/protocol-functions). | `tool`: protocol function definition. |
 
-##### Exemplos de ações
-
-**Limpar e adicionar mensagem:**
+### Replace the user context
 
 ```json
 {
@@ -133,7 +114,7 @@ As ações disponíveis para o campo `rewrites` são:
                 "type": "add-message",
                 "message": {
                     "role": "user",
-                    "content": "Mensagem substituída pelo worker."
+                    "content": "The original message was removed by an external policy check. Tell the user they need an active subscription to continue."
                 }
             }
         ]
@@ -141,23 +122,7 @@ As ações disponíveis para o campo `rewrites` são:
 }
 ```
 
-**Adicionar instrução de sistema:**
-
-```json
-{
-    "type": "message.received.response",
-    "data": {
-        "rewrites": [
-            {
-                "type": "add-system",
-                "message": "Responda sempre em português formal."
-            }
-        ]
-    }
-}
-```
-
-**Remover mensagem por índice:**
+### Remove a message
 
 ```json
 {
@@ -173,76 +138,74 @@ As ações disponíveis para o campo `rewrites` são:
 }
 ```
 
-### `tool.called`
+## `tool.called`
 
-Enviado quando uma ferramenta interna do servidor está prestes a ser executada.
-
-```json
-{
-  "name": "tool.called",
-  "data": {
-    "toolName": "memory_search",
-    "toolArguments": {
-      "query": "preferências do usuário"
-    },
-    "origin": "SessionsApi",
-    "externalUserId": "mini-app-session@lot1xc9k03g2my3j4w2y1",
-    "metadata": {}
-  }
-}
-```
-
-#### Ações disponíveis
-
-Para executar ações no evento `tool.called`, retorne uma resposta com o header `Content-Type: application/json+worker-action` e o corpo no formato:
+The `tool.called` event fires before AIVAX executes an internal server-side tool.
 
 ```json
 {
-  "type": "tool.called.response",
-  "data": {
-    "result": "Resultado textual da ferramenta.",
-    "messages": []
-  }
+    "name": "tool.called",
+    "data": {
+        "toolName": "check_order",
+        "toolArguments": {
+            "order_id": "A123"
+        },
+        "origin": "ChatCompletionsApi",
+        "externalUserId": "customer-123",
+        "metadata": {}
+    }
 }
 ```
 
-Campos de `data`:
+Return a non-OK response to block the tool call. Return `2xx` to let AIVAX execute the tool normally.
 
-| Campo | Descrição |
-|-------|-----------|
-| `result` | Conteúdo textual injetado como resultado da ferramenta. |
-| `messages` | Lista opcional de mensagens adicionais no formato OpenAI anexadas ao contexto da conversa. |
+To replace the tool result, return `Content-Type: application/json+worker-action` with `type: "tool.called.response"`:
 
-Quando `tool.called.response` é retornado, o resultado fornecido pelo worker é usado no lugar da execução padrão da ferramenta.
+```json
+{
+    "type": "tool.called.response",
+    "data": {
+        "result": "Order A123 is paid and scheduled for delivery tomorrow.",
+        "messages": []
+    }
+}
+```
 
-## Exemplos de uso
+Fields of `data`:
 
-Os exemplos abaixo mostram padrões comuns. Eles devem ser adaptados para seu sistema de autenticação, sua estrutura de usuários e seu canal. O ponto mais importante é separar claramente a decisão: responder não OK quando a ação deve parar, responder 2xx vazio quando ela deve continuar sem alterações, ou responder `application/json+worker-action` quando o contexto deve ser modificado.
+| Field | Description |
+|---|---|
+| `result` | Textual content injected as the tool result. |
+| `messages` | Optional additional OpenAI-format messages attached to the conversation context. |
 
-### Bloqueando usuários não autorizados
+When `tool.called.response` is returned, AIVAX uses the worker-provided result instead of executing the default tool handler.
 
-O exemplo abaixo ilustra um [Cloudflare Worker](https://workers.cloudflare.com/) que autentica uma conversa no Telegram com base no nome de usuário:
+## Example: blocking unauthorized users
+
+The example below shows a Cloudflare Worker that blocks a gateway call when the external user is not allowed.
 
 ```js
 export default {
-  async fetch(request, env, ctx) {
-    const CHECKING_GATEWAY_ID = "0197dda5-985f-7c76-96e5-0d0451c596e5";
-    const ALLOWED_USERNAMES = ["myusername"];
+  async fetch(request, env) {
+    if (request.method !== "POST") {
+      return new Response("Method not allowed", { status: 405 });
+    }
 
-    if (request.method == "POST") {
-      const requestData = await request.json();
-      const { event, gatewayId } = requestData;
+    const body = await request.json();
 
-      if (gatewayId === CHECKING_GATEWAY_ID &&
-        event.name == "message.received" &&
-        event.data.externalUserId?.startsWith("zp_telegram:")) {
-        
-        const telegramUsername = event.data.externalUserId.split(':')[0].split('@')[0];
+    if (body.gatewayId !== env.CHECKING_GATEWAY_ID) {
+      return new Response();
+    }
 
-        if (!ALLOWED_USERNAMES.includes(telegramUsername)) {
-          return new Response("User is not authed", { status: 400 });
-        }
-      }
+    if (body.event?.name !== "message.received") {
+      return new Response();
+    }
+
+    const externalUserId = body.event.data.externalUserId;
+    const allowedUsers = new Set((env.ALLOWED_USERS || "").split(","));
+
+    if (!allowedUsers.has(externalUserId)) {
+      return new Response("User is not authorized", { status: 403 });
     }
 
     return new Response();
@@ -250,57 +213,9 @@ export default {
 };
 ```
 
-### Interceptando e modificando mensagens
+## Example: replacing a tool with an internal system
 
-O exemplo abaixo demonstra como interceptar uma mensagem e substituí-la por outra quando o usuário não está autorizado:
-
-```js
-export default {
-  async fetch(request, env, ctx) {
-    const CHECKING_GATEWAY_ID = "0197dda5-985f-7c76-96e5-0d0451c596e5";
-
-    if (request.method == "POST") {
-      const requestData = await request.json();
-      const { event, gatewayId } = requestData;
-
-      if (gatewayId === CHECKING_GATEWAY_ID && event.name == "message.received") {
-        const userIsPaid = await checkUserSubscription(event.data.externalUserId);
-
-        if (!userIsPaid) {
-          return new Response(JSON.stringify({
-            type: "message.received.response",
-            data: {
-              rewrites: [
-                { type: "clear" },
-                {
-                  type: "add-message",
-                  message: {
-                    role: "user",
-                    content: "O usuário enviou uma mensagem mas ela foi excluída pelo sistema. Informe ao usuário que ele não pagou sua assinatura mensal para continuar."
-                  }
-                }
-              ]
-            }
-          }), {
-            headers: { "Content-Type": "application/json+worker-action" }
-          });
-        }
-      }
-    }
-
-    return new Response();
-  }
-};
-
-async function checkUserSubscription(externalUserId) {
-  // Implemente sua lógica de verificação de assinatura aqui
-  return true;
-}
-```
-
-### Substituindo uma ferramenta por um sistema interno
-
-O evento `tool.called` é útil quando você quer que o modelo continue acreditando que chamou uma ferramenta, mas o resultado real venha de um sistema controlado por você. Por exemplo, um gateway pode ter uma ferramenta chamada `memory_search`, `check_order` ou `lookup_customer`; antes da AIVAX executar o comportamento padrão, seu worker pode reconhecer o nome da ferramenta, consultar sua API interna e devolver um resultado textual para ser anexado à conversa.
+Use `tool.called` when the model should see a tool result, but the actual data should come from your system.
 
 ```js
 export default {
@@ -318,33 +233,39 @@ export default {
     }
 
     const orderId = toolArguments?.order_id;
-    const order = await fetch(`${env.INTERNAL_API}/orders/${orderId}`, {
-      headers: { "Authorization": `Bearer ${env.INTERNAL_API_TOKEN}` }
+    const orderResponse = await fetch(`${env.INTERNAL_API}/orders/${orderId}`, {
+      headers: {
+        "Authorization": `Bearer ${env.INTERNAL_API_TOKEN}`
+      }
     });
 
-    if (!order.ok) {
+    if (!orderResponse.ok) {
       return new Response(JSON.stringify({
         type: "tool.called.response",
         data: {
-          result: `Não foi possível consultar o pedido ${orderId} para o usuário ${externalUserId}. Oriente o usuário a conferir o número do pedido.`
+          result: `The order ${orderId} could not be retrieved for user ${externalUserId}. Ask the user to confirm the order number.`
         }
       }), {
-        headers: { "Content-Type": "application/json+worker-action" }
+        headers: {
+          "Content-Type": "application/json+worker-action"
+        }
       });
     }
 
-    const orderJson = await order.json();
+    const order = await orderResponse.json();
 
     return new Response(JSON.stringify({
       type: "tool.called.response",
       data: {
-        result: `Pedido ${orderJson.id}: status ${orderJson.status}, previsão ${orderJson.eta}.`
+        result: `Order ${order.id}: status ${order.status}, estimated delivery ${order.eta}.`
       }
     }), {
-      headers: { "Content-Type": "application/json+worker-action" }
+      headers: {
+        "Content-Type": "application/json+worker-action"
+      }
     });
   }
 };
 ```
 
-Esse padrão evita expor diretamente a API interna ao modelo. O modelo vê apenas o nome da ferramenta, os parâmetros e o resultado textual. O worker continua sendo responsável por autenticar a requisição, validar o usuário, chamar o sistema interno e decidir quanto dado pode voltar para o contexto.
+This pattern prevents exposing the internal API directly to the model. The worker remains responsible for authenticating the request, validating the user, calling the internal system, and deciding how much data can return to the model context.

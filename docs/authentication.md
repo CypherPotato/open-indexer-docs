@@ -1,144 +1,134 @@
-# Autenticação
+# Authentication
 
-Quando tiver sua conta em mãos, use sua chave de autenticação única para se autenticar na nossa API através do cabeçalho `Authorization`:
+AIVAX authenticates API requests with account API keys. The authentication middleware accepts keys from:
 
-```bash
-curl https://inference.aivax.net/api/v1/information/models.json \
-    -H 'Authorization: Bearer oky_gr5uepj...'
+- `Authorization: Bearer <API_KEY>`
+- `Authorization: Basic <BASE64_USERNAME_COLON_API_KEY>`
+- `?api-key=<API_KEY>`
+
+Prefer the `Authorization` header for server-to-server calls. Use the query parameter only when a client or integration cannot send headers, because URLs can be logged by proxies, browsers, and monitoring tools.
+
+## API key types
+
+AIVAX has two key families because browser-facing and server-side use cases have different risk profiles. If your code runs on your server, use a private key and keep it out of client bundles, logs, and public repositories. If your code runs in a browser or another environment where the key can be inspected by the end user, use a public key and keep the workflow limited to routes designed for public access.
+
+| Type | Prefix | Intended use | Access |
+| --- | --- | --- | --- |
+| Private key | `sk-aiv-acc` | Server-side integrations and administrative API calls. | Authenticated account APIs and OpenAI-compatible inference. |
+| Public key | `pk-aiv-` | Restricted client-side calls to explicitly public routes. | Public RAG query/answer routes and restricted chat-completion calls. |
+
+Public keys are currently accepted only on routes marked public in the backend, including RAG semantic search, RAG answer generation, and chat completions. When a public key calls chat completions:
+
+- The `model` must be a full AI Gateway UUID; direct integrated-model calls and gateway slug lookup are disabled.
+- Gateway slug lookup is disabled.
+- MCP sources, protocol functions, built-in tools, Bash, skills, and sentinel options are stripped from the request.
+- Only these request parameters are accepted: `model`, `messages`, `prompt`, `temperature`, `top_p`, `top_k`, `seed`, `tools`, `reasoning_effort`, `max_completion_tokens`, and `stream`.
+- Request and token rate limits are applied both globally per key and per remote address.
+
+Use private keys for backend services, account management, model listing, collection management, batch operations, and any workflow that needs the full gateway tool surface.
+
+For a first server-side request, continue with [Getting Started](getting-started.md). If you are exposing a browser or widget experience to end users, review [Chat Clients](/docs/features/chat-clients) before deciding whether a public key is the right boundary.
+
+## Create and list keys
+
+API keys belong to an account and can have a label, expiration, and type. A key with a negative duration does not expire; expired keys are rejected by authentication and are later removed by cleanup jobs.
+
+Create separate keys for separate applications. That makes rotation safer: if one integration is compromised, you can revoke only that key instead of breaking every service tied to the account. Labels and expiration dates are operational tools, not decoration; use them to identify who owns the key and when it should be reviewed.
+
+Reference:
+
+<script src="https://inference.aivax.net/apidocs?embed-target=Create%20API%20Key&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+
+<script src="https://inference.aivax.net/apidocs?embed-target=List%20API%20Keys&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+
+## Send a key with Bearer auth
+
+For OpenAI-compatible SDKs, pass the AIVAX key as the SDK API key and set the base URL to `https://inference.aivax.net/v1`.
+
+```python
+from openai import OpenAI
+
+client = OpenAI(
+    base_url="https://inference.aivax.net/v1",
+    api_key="sk-aiv-acc..."
+)
 ```
 
-Você também pode enviar o seu token de autorização pelo parâmetro da query `?api-key`, exemplo:
+## Send a key with Basic auth
 
-```bash
-curl https://inference.aivax.net/api/v1/information/models.txt?api-key=oky_gr5uepj...
+For Basic auth, AIVAX decodes the Basic credential and uses the password portion after the colon as the API key.
+
+```text
+username:sk-aiv-acc...
 ```
 
-No cabeçalho `Authorization`, envie a chave com o esquema `Bearer` ou `Basic`. Quando usar o parâmetro `?api-key`, informe apenas a chave, sem esquema de autenticação.
+The username is ignored by the authentication middleware.
 
-## Autenticando hooks
+## Hook authentication
 
-Requisições da AIVAX para seus serviços, seja workers de gateways de IA ou chamadas de função server-side, um cabeçalho `X-Request-Nonce` é encaminhado em todas as requisições conténdo um hash BCrypt sendo um salto da [chave de hook](https://console.aivax.net/dashboard/account) definida em sua conta.
+AIVAX can authenticate outbound requests to your services, such as AI Gateway workers and server-side protocol functions.
 
-A validação é simples: verifique se o hash em `X-Request-Nonce` é um produto da chave de salto definida em sua conta.
+This is the reverse direction of normal API authentication. In a normal API call, your application proves it is allowed to call AIVAX by sending an API key. In a worker or protocol-function callback, AIVAX is calling your service, so your service needs a way to verify that the request really came from the account configuration you control. That is what `X-Request-Nonce` is for.
 
-Dessa forma, você poderá autenticar se as requisições da AIVAX para seus serviços são genuínas através desse token. Se sua conta não tiver definido uma chave de hook, esse cabeçalho não será enviado.
+If your account has a hook key, AIVAX sends:
 
-Veja os exemplos abaixo para validação da chave de hook:
+```text
+X-Request-Nonce: <BCrypt hash>
+```
 
-# [C# (com Sisk)](#tab/csharp-sisk)
+The nonce is a BCrypt hash derived from the account hook key. Validate the header by verifying the stored plain-text hook key against the hash. If the account has no hook key, the header is not sent.
+
+Rolling the hook key invalidates existing worker and integration validation secrets.
+
+### C# example
 
 ```csharp
 using BCrypt.Net;
 
-[RoutePrefix("/api/aivax-protocol-functions")]
-internal class MyController : Controller
+var nonce = request.Headers["X-Request-Nonce"];
+var hookKey = Environment.GetEnvironmentVariable("AIVAX_HOOK_SECRET");
+
+if (nonce is null || hookKey is null)
 {
-    public MyController()
-    {
-        this.HasRequestHandler(RequestHandler.Create(
-            execute: (req, ctx) =>
-            {
-                // Obtém o nonce enviado da requisição
-                var hash = this.Request.Headers ["X-Request-Nonce"];
-                if (hash == null)
-                {
-                    return new HttpResponse(HttpStatusInformation.Unauthorized);
-                }
-                
-                // Valida o hook usando a biblioteca BCrypt.Net
-                var secretWord = Environment.GetEnvironmentVariable ("AIVAX_HOOK_SECRET");
-                if (!BCrypt.Net.BCrypt.Verify(secretWord, hash, enhancedEntropy: false))
-                {
-                    return new HttpResponse(HttpStatusInformation.Forbidden);
-                }
-                
-                // Continua a requisição após hook validado
-                return null;
-            }));
-    }
-    ...
+    return Results.Unauthorized();
+}
+
+if (!BCrypt.Net.BCrypt.Verify(hookKey, nonce, enhancedEntropy: false))
+{
+    return Results.Forbid();
 }
 ```
 
-# [Python (com Flask)](#tab/python-flask)
+### Python example
 
 ```python
-from flask import Flask, request, abort
 import os
 import bcrypt
+from flask import abort, request
 
-app = Flask(__name__)
+nonce = request.headers.get("X-Request-Nonce")
+hook_key = os.getenv("AIVAX_HOOK_SECRET")
 
-@app.before_request
-def autenticar_token():
-    # 1. Lê o cabeçalho que contém o hash do token
-    token_hash = request.headers.get("X-Request-Nonce")
-    if not token_hash:
-        abort(401)
+if nonce is None or hook_key is None:
+    abort(401)
 
-    # 2. Carrega o segredo em texto puro das variáveis de ambiente
-    secret = os.getenv("AIVAX_HOOK_SECRET")
-    if secret is None:
-        abort(500)
-
-    # 3. Verifica se o hash recebido corresponde ao segredo
-    if not bcrypt.checkpw(secret.encode("utf-8"),
-                          token_hash.encode("utf-8")):
-        abort(403)
-
-@app.route("/api/aivax-protocol-functions/some-action", methods=["POST"])
-def some_action():
-    return "", 204
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+if not bcrypt.checkpw(hook_key.encode("utf-8"), nonce.encode("utf-8")):
+    abort(403)
 ```
 
-# [JavaScript (com Express.js)](#tab/js-express)
+### JavaScript example
 
 ```javascript
-require('dotenv').config()
-const express = require('express')
-const bcrypt = require('bcrypt')
+import bcrypt from "bcrypt";
 
-const app = express()
+const nonce = req.header("X-Request-Nonce");
+const hookKey = process.env.AIVAX_HOOK_SECRET;
 
-app.use(async (req, res, next) => {
-  const tokenHash = req.header('X-Request-Nonce')
-  if (!tokenHash) {
-    return res.sendStatus(401)
-  }
+if (!nonce || !hookKey) {
+  return res.sendStatus(401);
+}
 
-  // 2. Carrega o segredo em texto puro das variáveis de ambiente
-  const secret = process.env.AIVAX_HOOK_SECRET
-  if (!secret) {
-    return res.sendStatus(500)
-  }
-
-  try {
-    // 3. Verifica se o hash recebido corresponde ao segredo
-    const match = await bcrypt.compare(secret, tokenHash)
-    if (!match) {
-      return res.sendStatus(403)
-    }
-    
-    next()
-  } catch (err) {
-    return res.sendStatus(500)
-  }
-})
-
-app.post(
-  '/api/aivax-protocol-functions/some-action',
-  (req, res) => {
-    res.sendStatus(204)
-  }
-)
-
-const PORT = process.env.PORT || 3000
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
-})
+if (!(await bcrypt.compare(hookKey, nonce))) {
+  return res.sendStatus(403);
+}
 ```
-
----
