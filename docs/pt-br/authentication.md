@@ -1,31 +1,31 @@
-# Authentication
+# Autenticação
 
-When you have your account ready, use your unique authentication key to authenticate with our API via the `Authorization` header:
+Quando tiver sua conta em mãos, use sua chave de autenticação única para se autenticar na nossa API através do cabeçalho `Authorization`:
 
 ```bash
 curl https://inference.aivax.net/api/v1/information/models.json \
     -H 'Authorization: Bearer oky_gr5uepj...'
 ```
 
-You can also send your authorization token via the query parameter `?api-key`, for example:
+Você também pode enviar o seu token de autorização pelo parâmetro da query `?api-key`, exemplo:
 
 ```bash
 curl https://inference.aivax.net/api/v1/information/models.txt?api-key=oky_gr5uepj...
 ```
 
-In the `Authorization` header, send the key with the `Bearer` or `Basic` scheme. When using the `?api-key` parameter, provide only the key, without an authentication scheme.
+No cabeçalho `Authorization`, envie a chave com o esquema `Bearer`. Quando usar o parâmetro `?api-key`, informe apenas a chave, sem esquema de autenticação.
 
-## Authenticating hooks
+## Autenticando hooks
 
-Requests from AIVAX to your services, whether AI gateway workers or server-side function calls, include an `X-Request-Nonce` header in every request containing a BCrypt hash that is a derivative of the [hook key](https://console.aivax.net/dashboard/account) defined in your account.
+Requisições da AIVAX para seus serviços, seja workers de gateways de IA ou chamadas de função server-side, recebem o cabeçalho `X-Request-Nonce` quando a conta possui uma [chave de hook](https://console.aivax.net/dashboard/account) configurada. Esse cabeçalho contém um hash BCrypt derivado da chave de hook definida em sua conta.
 
-Validation is simple: check that the hash in `X-Request-Nonce` is derived from the hook key defined in your account.
+A validação é simples: verifique se o hash em `X-Request-Nonce` corresponde à chave de hook definida em sua conta.
 
-This way, you can authenticate whether the requests from AIVAX to your services are genuine using this token. If your account has not defined a hook key, this header will not be sent.
+Dessa forma, você poderá autenticar se as requisições da AIVAX para seus serviços são genuínas através desse token. Se sua conta não tiver definido uma chave de hook, esse cabeçalho não será enviado.
 
-See the examples below for hook key validation:
+Veja os exemplos abaixo para validação da chave de hook:
 
-# [C# (with Sisk)](#tab/csharp-sisk)
+# [C# (com Sisk)](#tab/csharp-sisk)
 
 ```csharp
 using BCrypt.Net;
@@ -38,21 +38,21 @@ internal class MyController : Controller
         this.HasRequestHandler(RequestHandler.Create(
             execute: (req, ctx) =>
             {
-                // Get the nonce sent from the request
+                // Obtém o nonce enviado da requisição
                 var hash = this.Request.Headers ["X-Request-Nonce"];
                 if (hash == null)
                 {
                     return new HttpResponse(HttpStatusInformation.Unauthorized);
                 }
                 
-                // Validate the hook using the BCrypt.Net library
+                // Valida o hook usando a biblioteca BCrypt.Net
                 var secretWord = Environment.GetEnvironmentVariable ("AIVAX_HOOK_SECRET");
                 if (!BCrypt.Net.BCrypt.Verify(secretWord, hash, enhancedEntropy: false))
                 {
                     return new HttpResponse(HttpStatusInformation.Forbidden);
                 }
                 
-                // Continue the request after hook validated
+                // Continua a requisição após hook validado
                 return null;
             }));
     }
@@ -60,7 +60,7 @@ internal class MyController : Controller
 }
 ```
 
-# [Python (with Flask)](#tab/python-flask)
+# [Python (com Flask)](#tab/python-flask)
 
 ```python
 from flask import Flask, request, abort
@@ -71,17 +71,17 @@ app = Flask(__name__)
 
 @app.before_request
 def autenticar_token():
-    # 1. Read the header that contains the token hash
+    # 1. Lê o cabeçalho que contém o hash do token
     token_hash = request.headers.get("X-Request-Nonce")
     if not token_hash:
         abort(401)
 
-    # 2. Load the plain-text secret from environment variables
+    # 2. Carrega o segredo em texto puro das variáveis de ambiente
     secret = os.getenv("AIVAX_HOOK_SECRET")
     if secret is None:
         abort(500)
 
-    # 3. Verify that the received hash matches the secret
+    # 3. Verifica se o hash recebido corresponde ao segredo
     if not bcrypt.checkpw(secret.encode("utf-8"),
                           token_hash.encode("utf-8")):
         abort(403)
@@ -94,7 +94,7 @@ if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
 ```
 
-# [JavaScript (with Express.js)](#tab/js-express)
+# [JavaScript (com Express.js)](#tab/js-express)
 
 ```javascript
 require('dotenv').config()
@@ -109,14 +109,14 @@ app.use(async (req, res, next) => {
     return res.sendStatus(401)
   }
 
-  // 2. Load the plain-text secret from environment variables
+  // 2. Carrega o segredo em texto puro das variáveis de ambiente
   const secret = process.env.AIVAX_HOOK_SECRET
   if (!secret) {
     return res.sendStatus(500)
   }
 
   try {
-    // 3. Verify that the received hash matches the secret
+    // 3. Verifica se o hash recebido corresponde ao segredo
     const match = await bcrypt.compare(secret, tokenHash)
     if (!match) {
       return res.sendStatus(403)

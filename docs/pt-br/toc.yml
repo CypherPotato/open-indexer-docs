@@ -1,67 +1,67 @@
 items:
 
-- name: Introduction
+- name: Introdução
 
-- name: Overview
+- name: Visão geral
   href: overview.md
-- name: Getting Started
+- name: Começando
   href: getting-started.md
-- name: Authentication
+- name: Autenticação
   href: authentication.md
-- name: Pricing
+- name: Precificação
   href: pricing.md
-- name: Plans and Limits
+- name: Planos e limites
   href: limits.md 
 
-- name: RAG and Collections
+- name: RAG e coleções
 
-- name: Collections
+- name: Coleções
   href: rag/collections.md
-- name: Semantic Search
+- name: Pesquisa semântica
   href: rag/semantic-search.md
-- name: Best Practices
+- name: Boas práticas
   href: rag/best-practices.md
 
-- name: Inference
+- name: Inferência
 
-- name: AI Gateways
+- name: Gateways de IA
   href: inference/ai-gateway.md
-- name: Inference
+- name: Inferência
   href: inference/inference.md
-- name: Chat Handling
+- name: Tratamento de chat
   href: inference/chat-handling.md
-- name: Processing Pipelines
+- name: Pipeline de processamento
   href: inference/pipelines.md
-- name: Structured Responses
+- name: Respostas estruturadas
   href: inference/structured-responses.md
-- name: AI Workers
+- name: Workers de IA
   href: inference/workers.md
 
-- name: Tools
+- name: Ferramentas
 
-- name: Built-in Tools
+- name: Ferramentas de fábrica
   href: tools/builtin-tools.md
-- name: MCP Functions
+- name: Funções MCP
   href: tools/mcp.md
-- name: Protocol Functions
+- name: Funções de protocolo
   href: tools/protocol-functions.md
 - name: Shell
   href: tools/shell.md
 
-- name: Resources
+- name: Recursos
 
 - name: Skills
   href: features/skills.md
-- name: Chat Clients
+- name: Chat clients
   href: features/chat-clients.md
 - name: Batch
   href: features/batch.md
 
-- name: Legal Documents
+- name: Documentos legais
 
-- name: Privacy Policy
+- name: Política de privacidade
   href: legal/privacy-policy.md
-- name: Terms of Service
+- name: Termos de serviço
   href: legal/terms-of-service.md
-- name: Data Processors
+- name: Processadores de dados
   href: legal/third-party-processors.md
