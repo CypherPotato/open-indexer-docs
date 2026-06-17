@@ -1,67 +1,66 @@
 items:
+- name: Introduction
+  items:
+  - name: Overview
+    href: overview.md
+  - name: Getting Started
+    href: getting-started.md
+  - name: Authentication
+    href: authentication.md
+  - name: Pricing
+    href: pricing.md
+  - name: Plans and Limits
+    href: limits.md
 
-- name: Introdução
+- name: RAG and Collections
+  items:
+  - name: Collections
+    href: rag/collections.md
+  - name: Semantic Search
+    href: rag/semantic-search.md
+  - name: Best Practices
+    href: rag/best-practices.md
 
-- name: Visão geral
-  href: overview.md
-- name: Começando
-  href: getting-started.md
-- name: Autenticação
-  href: authentication.md
-- name: Precificação
-  href: pricing.md
-- name: Planos e limites
-  href: limits.md 
+- name: Inference
+  items:
+  - name: AI Gateways
+    href: inference/ai-gateway.md
+  - name: Inference
+    href: inference/inference.md
+  - name: Chat Handling
+    href: inference/chat-handling.md
+  - name: Processing Pipelines
+    href: inference/pipelines.md
+  - name: Structured Responses
+    href: inference/structured-responses.md
+  - name: AI Workers
+    href: inference/workers.md
 
-- name: RAG e coleções
+- name: Tools
+  items:
+  - name: Built-in Tools
+    href: tools/builtin-tools.md
+  - name: MCP Functions
+    href: tools/mcp.md
+  - name: Protocol Functions
+    href: tools/protocol-functions.md
+  - name: Shell
+    href: tools/shell.md
 
-- name: Coleções
-  href: rag/collections.md
-- name: Pesquisa semântica
-  href: rag/semantic-search.md
-- name: Boas práticas
-  href: rag/best-practices.md
+- name: Resources
+  items:
+  - name: Skills
+    href: features/skills.md
+  - name: Chat Clients
+    href: features/chat-clients.md
+  - name: Batch
+    href: features/batch.md
 
-- name: Inferência
-
-- name: Gateways de IA
-  href: inference/ai-gateway.md
-- name: Inferência
-  href: inference/inference.md
-- name: Tratamento de chat
-  href: inference/chat-handling.md
-- name: Pipeline de processamento
-  href: inference/pipelines.md
-- name: Respostas estruturadas
-  href: inference/structured-responses.md
-- name: Workers de IA
-  href: inference/workers.md
-
-- name: Ferramentas
-
-- name: Ferramentas de fábrica
-  href: tools/builtin-tools.md
-- name: Funções MCP
-  href: tools/mcp.md
-- name: Funções de protocolo
-  href: tools/protocol-functions.md
-- name: Shell
-  href: tools/shell.md
-
-- name: Recursos
-
-- name: Skills
-  href: features/skills.md
-- name: Chat clients
-  href: features/chat-clients.md
-- name: Batch
-  href: features/batch.md
-
-- name: Documentos legais
-
-- name: Política de privacidade
-  href: legal/privacy-policy.md
-- name: Termos de serviço
-  href: legal/terms-of-service.md
-- name: Processadores de dados
-  href: legal/third-party-processors.md
+- name: Legal Documents
+  items:
+  - name: Privacy Policy
+    href: legal/privacy-policy.md
+  - name: Terms of Service
+    href: legal/terms-of-service.md
+  - name: Data Processors
+    href: legal/third-party-processors.md

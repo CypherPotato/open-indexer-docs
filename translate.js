@@ -81,7 +81,7 @@ const mdFiles = enumerateMdFiles(targetDir);
 
 function getPrompt(toLanguage, fileName, text) {
     const baseText = `
-You're translating a piece of documentation of the Sisk Framework, an .NET web-server written in C#. Translate the translation input text to ${toLanguage}.
+You're translating a piece of AIVAX documentation. Translate the translation input text to ${toLanguage}.
 
 Rules:
 - You SHOULD translate texts, code comments, but not code symbols, variables or constants names.
@@ -125,7 +125,8 @@ ${text}
             }
             
             const translated = (await runInference(prompt))
-                .replaceAll("/docs/", `/docs/${langCode}/`);
+                .replace(/\]\(\/docs\//g, `](/docs/${langCode}/`)
+                .replace(/\]\(https:\/\/docs\.aivax\.net\/docs\//g, `](https://docs.aivax.net/docs/${langCode}/`);
 
             fs.mkdirSync(translationDir, { recursive: true });
             fs.writeFileSync(translationPath, translated);

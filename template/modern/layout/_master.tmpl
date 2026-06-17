@@ -62,7 +62,8 @@
                 
         <script>            
             function switchLanguage(lang) {
-                const docPart = window.location.pathname.match(/\/docs\/((en)\/)?(.*)/)[3];
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
                 const newPath = lang + docPart;
                 window.location.href = window.location.origin + newPath;
             }        
@@ -143,14 +144,14 @@
                         <ul class="dropdown-menu dropdown-menu-end language-dropdown">
                             <li>
                                 <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
-                                    <img src="/assets/flag/brazil.png">
-                                    Português
+                                    <img src="/assets/flag/usa.png">
+                                    English
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/en/')">
-                                    <img src="/assets/flag/usa.png">
-                                    English
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
                                 </a>
                             </li>
                         </ul>
