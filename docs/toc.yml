@@ -1,66 +1,65 @@
-items:
 - name: Introduction
-  items:
-  - name: Overview
-    href: overview.md
-  - name: Getting Started
-    href: getting-started.md
-  - name: Authentication
-    href: authentication.md
-  - name: Pricing
-    href: pricing.md
-  - name: Plans and Limits
-    href: limits.md
 
-- name: RAG and Collections
-  items:
-  - name: Collections
-    href: rag/collections.md
-  - name: Semantic Search
-    href: rag/semantic-search.md
-  - name: Best Practices
-    href: rag/best-practices.md
+- name: Overview
+  href: overview.md
+- name: Getting Started
+  href: getting-started.md
+- name: Authentication
+  href: authentication.md
+- name: Pricing
+  href: pricing.md
+- name: Plans and limits
+  href: limits.md 
+
+- name: RAG and collections
+
+- name: Collections
+  href: rag/collections.md
+- name: Semantic search
+  href: rag/semantic-search.md
+- name: Best practices
+  href: rag/best-practices.md
 
 - name: Inference
-  items:
-  - name: AI Gateways
-    href: inference/ai-gateway.md
-  - name: Inference
-    href: inference/inference.md
-  - name: Chat Handling
-    href: inference/chat-handling.md
-  - name: Processing Pipelines
-    href: inference/pipelines.md
-  - name: Structured Responses
-    href: inference/structured-responses.md
-  - name: AI Workers
-    href: inference/workers.md
+
+- name: AI gateways
+  href: inference/ai-gateway.md
+- name: Inference
+  href: inference/inference.md
+- name: Chat handling
+  href: inference/chat-handling.md
+- name: Processing pipeline
+  href: inference/pipelines.md
+- name: Structured responses
+  href: inference/structured-responses.md
+- name: AI workers
+  href: inference/workers.md
 
 - name: Tools
-  items:
-  - name: Built-in Tools
-    href: tools/builtin-tools.md
-  - name: MCP Functions
-    href: tools/mcp.md
-  - name: Protocol Functions
-    href: tools/protocol-functions.md
-  - name: Shell
-    href: tools/shell.md
+
+- name: Built-in tools
+  href: tools/builtin-tools.md
+- name: MCP functions
+  href: tools/mcp.md
+- name: Protocol functions
+  href: tools/protocol-functions.md
+- name: Shell
+  href: tools/shell.md
 
 - name: Resources
-  items:
-  - name: Skills
-    href: features/skills.md
-  - name: Chat Clients
-    href: features/chat-clients.md
-  - name: Batch
-    href: features/batch.md
 
-- name: Legal Documents
-  items:
-  - name: Privacy Policy
-    href: legal/privacy-policy.md
-  - name: Terms of Service
-    href: legal/terms-of-service.md
-  - name: Data Processors
-    href: legal/third-party-processors.md
+- name: Skills
+  href: features/skills.md
+- name: Chat clients
+  href: features/chat-clients.md
+- name: Batch
+  href: features/batch.md
+
+- name: Legal documents
+
+- name: Privacy policy
+  href: legal/privacy-policy.md
+- name: Terms of service
+  href: legal/terms-of-service.md
+- name: Data processors
+  href: legal/third-party-processors.md

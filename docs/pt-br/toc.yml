@@ -1,5 +1,3 @@
-items:
-
 - name: Introdução
 
 - name: Visão geral
@@ -8,7 +6,7 @@ items:
   href: getting-started.md
 - name: Autenticação
   href: authentication.md
-- name: Precificação
+- name: Preços
   href: pricing.md
 - name: Planos e limites
   href: limits.md 
@@ -17,29 +15,29 @@ items:
 
 - name: Coleções
   href: rag/collections.md
-- name: Pesquisa semântica
+- name: Busca semântica
   href: rag/semantic-search.md
-- name: Boas práticas
+- name: Melhores práticas
   href: rag/best-practices.md
 
 - name: Inferência
 
-- name: Gateways de IA
+- name: Portais de IA
   href: inference/ai-gateway.md
 - name: Inferência
   href: inference/inference.md
-- name: Tratamento de chat
+- name: Manipulação de chat
   href: inference/chat-handling.md
 - name: Pipeline de processamento
   href: inference/pipelines.md
 - name: Respostas estruturadas
   href: inference/structured-responses.md
-- name: Workers de IA
+- name: Trabalhadores de IA
   href: inference/workers.md
 
 - name: Ferramentas
 
-- name: Ferramentas de fábrica
+- name: Ferramentas integradas
   href: tools/builtin-tools.md
 - name: Funções MCP
   href: tools/mcp.md
@@ -50,11 +48,11 @@ items:
 
 - name: Recursos
 
-- name: Skills
+- name: Habilidades
   href: features/skills.md
-- name: Chat clients
+- name: Clientes de chat
   href: features/chat-clients.md
-- name: Batch
+- name: Lote
   href: features/batch.md
 
 - name: Documentos legais
