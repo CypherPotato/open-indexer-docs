@@ -1115,10 +1115,30 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/tools/account-management-mcp.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/tools/account-management-mcp.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "docs/pt-br/tools/builtin-tools.md",
       "output": {
         ".html": {
           "relative_path": "docs/pt-br/tools/builtin-tools.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/tools/documentation-mcp.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/tools/documentation-mcp.html"
         }
       },
       "version": ""
@@ -1198,10 +1218,30 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "docs/tools/account-management-mcp.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/tools/account-management-mcp.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "docs/tools/builtin-tools.md",
       "output": {
         ".html": {
           "relative_path": "docs/tools/builtin-tools.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/tools/documentation-mcp.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/tools/documentation-mcp.html"
         }
       },
       "version": ""

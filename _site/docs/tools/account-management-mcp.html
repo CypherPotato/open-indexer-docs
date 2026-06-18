@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>AI Workers | AIVAX </title>
+        <title>Account management MCP | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="AI Workers | AIVAX ">
+        <meta name="title" content="Account management MCP | AIVAX ">
 
 
         <link rel="icon" href="../../assets/img/favicon.ico">
@@ -23,7 +23,7 @@
         <meta name="docfx:rel" content="../../">
 
 
-        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/inference/workers.md/#L1">
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/tools/account-management-mcp.md/#L1">
         <meta name="loc:inThisArticle" content="In this article">
         <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
         <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -123,322 +123,73 @@
                 </div>
 
                 <article data-uid="">
-<h1 id="ai-workers">AI Workers</h1>
+<h1 id="account-management-mcp">Account management MCP</h1>
 
-<p>AI Gateway workers are HTTP hooks that let an external service control gateway execution at runtime. A worker can allow an event, stop it, rewrite context, add instructions or tools, or replace a server-side tool result.</p>
-<p>Use workers when a rule must be decided outside the prompt. Common cases include subscription checks, CRM enrichment, tenant-specific policy, audit logging, dynamic tool blocking, and replacing a model-visible tool result with data from an internal system.</p>
-<p>Workers run in the inference critical path. Every worker event adds an HTTP request before the gateway can continue, so the endpoint must respond quickly and predictably.</p>
-<h2 id="request-format">Request format</h2>
-<p>When a configured worker event fires, AIVAX sends a <code>POST</code> request to the gateway's worker URL.</p>
-<pre><code class="lang-json">{
-    &quot;gatewayId&quot;: &quot;019a6afb-5a03-7b83-a1a2-760bd1ecd11c&quot;,
-    &quot;moment&quot;: &quot;2025-12-29T17:04:39&quot;,
-    &quot;event&quot;: {
-        &quot;name&quot;: &quot;message.received&quot;,
-        &quot;data&quot;: {
-            &quot;messages&quot;: [
-                {
-                    &quot;role&quot;: &quot;system&quot;,
-                    &quot;content&quot;: &quot;User local date is Monday, December 29, 2025 (timezone is America/Sao_Paulo)&quot;
-                },
-                {
-                    &quot;role&quot;: &quot;user&quot;,
-                    &quot;content&quot;: &quot;Good morning&quot;
-                }
-            ],
-            &quot;origin&quot;: &quot;ChatCompletionsApi&quot;,
-            &quot;externalUserId&quot;: &quot;customer-123&quot;,
-            &quot;metadata&quot;: {}
-        }
-    }
-}
+<p>The account management MCP exposes selected AIVAX account operations to an MCP-compatible client, such as an IDE, desktop assistant, internal agent, or automation environment. It is designed for trusted operators and backend workflows that need to inspect account capabilities, discover documentation, or call authenticated AIVAX API routes without leaving the MCP client.</p>
+<p>This endpoint is different from configuring an external MCP source inside an <a href="/docs/tools/mcp">AI Gateway</a>. In that flow, AIVAX is the MCP client and your gateway calls another server during inference. With the account management MCP, AIVAX is the MCP server. Your MCP client connects to AIVAX and receives tools for operating the authenticated account.</p>
+<p>Use this MCP when an agent needs account-aware context before it acts: which models are available to the current plan, how a feature is documented, what an API route returns, or whether an account resource can be created, updated, or inspected through the existing AIVAX API. It is especially useful for internal support assistants, development environments, account administration copilots, and implementation agents that need to combine documentation lookup with real API calls.</p>
+<p>Because the MCP can invoke authenticated AIVAX functions, connect it only from trusted clients and use a private API key. Do not expose this server to end users or browser-side applications.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Do not configure the account management MCP together with the <a href="/docs/tools/documentation-mcp">documentation MCP</a> in the same client unless you have a specific reason to duplicate tools. The account management MCP already includes documentation search functions, so adding both servers usually creates redundant documentation tools and can make tool selection less predictable.</p>
+</div>
+<h2 id="endpoint">Endpoint</h2>
+<pre><code class="lang-text">https://inference.aivax.net/v1/mcp/account-management
 </code></pre>
-<p>The exact <code>event.data</code> shape depends on the event. Always validate <code>gatewayId</code> when one endpoint serves more than one gateway.</p>
-<h2 id="authentication">Authentication</h2>
-<p>When the account has a hook key, AIVAX sends <code>X-Request-Nonce</code>. The nonce is a BCrypt hash derived from the account salt. Validate this header before trusting the body, especially when the worker releases private data, changes context, or authorizes tool usage.</p>
-<p>Treat <code>externalUserId</code>, <code>metadata</code>, messages, and tool arguments as untrusted input.</p>
-<h2 id="response-behavior">Response behavior</h2>
-<p>After sending the request, AIVAX handles the worker response as follows:</p>
-<table>
-<thead>
-<tr>
-<th>Response</th>
-<th>Behavior</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>Content-Type: application/json+worker-action</code></td>
-<td>Execute the action described in the JSON body.</td>
-</tr>
-<tr>
-<td><code>2xx</code> without <code>application/json+worker-action</code></td>
-<td>Continue normally.</td>
-</tr>
-<tr>
-<td>Non-OK response without <code>application/json+worker-action</code></td>
-<td>Stop the event.</td>
-</tr>
-</tbody>
-</table>
-<p>If the worker request fails with an HTTP request exception, AIVAX logs the failure and stops the event.</p>
-<p>Choose fail-open or fail-closed behavior intentionally. Return <code>2xx</code> when enrichment is optional. Return a non-OK response when authorization, compliance, or business policy cannot fail open.</p>
-<h2 id="messagereceived"><code>message.received</code></h2>
-<p>The <code>message.received</code> event fires after the gateway prepares the incoming message context and before the model call.</p>
-<pre><code class="lang-json">{
-    &quot;name&quot;: &quot;message.received&quot;,
-    &quot;data&quot;: {
-        &quot;messages&quot;: [],
-        &quot;origin&quot;: &quot;ChatCompletionsApi&quot;,
-        &quot;externalUserId&quot;: &quot;customer-123&quot;,
-        &quot;metadata&quot;: {}
-    }
-}
+<p>The request must authenticate with an account API key. Use a private key with the <code>Authorization</code> header:</p>
+<pre><code class="lang-text">Authorization: Bearer &lt;AIVAX_PRIVATE_API_KEY&gt;
 </code></pre>
-<p>To modify the context, return <code>Content-Type: application/json+worker-action</code> with <code>type: &quot;message.received.response&quot;</code>:</p>
+<p>For key types and authentication options, see <a href="/docs/authentication">Authentication</a>.</p>
+<h2 id="configuration-example">Configuration example</h2>
+<p>The exact MCP configuration shape depends on the client. For clients that accept a Streamable HTTP server entry, configure the AIVAX endpoint and send the private key as a header.</p>
 <pre><code class="lang-json">{
-    &quot;type&quot;: &quot;message.received.response&quot;,
-    &quot;data&quot;: {
-        &quot;rewrites&quot;: [
-            {
-                &quot;type&quot;: &quot;add-system&quot;,
-                &quot;message&quot;: &quot;Answer in formal English.&quot;
-            }
-        ]
+  &quot;servers&quot;: {
+    &quot;aivax-account&quot;: {
+      &quot;type&quot;: &quot;http&quot;,
+      &quot;url&quot;: &quot;https://inference.aivax.net/v1/mcp/account-management&quot;,
+      &quot;headers&quot;: {
+        &quot;Authorization&quot;: &quot;Bearer &lt;AIVAX_PRIVATE_API_KEY&gt;&quot;
+      }
     }
-}
-</code></pre>
-<p>Available rewrite actions:</p>
-<table>
-<thead>
-<tr>
-<th>Action</th>
-<th>Description</th>
-<th>Parameters</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>clear</code></td>
-<td>Removes context elements.</td>
-<td><code>argument</code>: <code>messages</code>, <code>meta</code>, <code>system</code>, <code>tools</code>, <code>skills</code>, <code>all</code>, or omitted.</td>
-</tr>
-<tr>
-<td><code>add-message</code></td>
-<td>Adds a message to the conversation.</td>
-<td><code>message</code>: OpenAI-compatible message object.</td>
-</tr>
-<tr>
-<td><code>remove-message</code></td>
-<td>Removes a message by index.</td>
-<td><code>index</code>: zero-based message index.</td>
-</tr>
-<tr>
-<td><code>add-system</code></td>
-<td>Adds a system instruction.</td>
-<td><code>message</code>: instruction text.</td>
-</tr>
-<tr>
-<td><code>add-tool</code></td>
-<td>Adds an OpenAI-compatible tool definition.</td>
-<td><code>tool</code>: tool JSON object.</td>
-</tr>
-<tr>
-<td><code>add-protocol-tool</code></td>
-<td>Adds a <a href="/docs/tools/protocol-functions">protocol function</a>.</td>
-<td><code>tool</code>: protocol function definition.</td>
-</tr>
-<tr>
-<td><code>add-mcp-source</code></td>
-<td>Adds the tools discovered from an <a href="/docs/tools/mcp">MCP</a> source to the context.</td>
-<td><code>source</code>: MCP source object with <code>url</code>, <code>headers</code>, <code>name</code>, and/or <code>cacheDuration</code>.</td>
-</tr>
-</tbody>
-</table>
-<h3 id="replace-the-user-context">Replace the user context</h3>
-<pre><code class="lang-json">{
-    &quot;type&quot;: &quot;message.received.response&quot;,
-    &quot;data&quot;: {
-        &quot;rewrites&quot;: [
-            {
-                &quot;type&quot;: &quot;clear&quot;
-            },
-            {
-                &quot;type&quot;: &quot;add-message&quot;,
-                &quot;message&quot;: {
-                    &quot;role&quot;: &quot;user&quot;,
-                    &quot;content&quot;: &quot;The original message was removed by an external policy check. Tell the user they need an active subscription to continue.&quot;
-                }
-            }
-        ]
-    }
-}
-</code></pre>
-<h3 id="remove-a-message">Remove a message</h3>
-<pre><code class="lang-json">{
-    &quot;type&quot;: &quot;message.received.response&quot;,
-    &quot;data&quot;: {
-        &quot;rewrites&quot;: [
-            {
-                &quot;type&quot;: &quot;remove-message&quot;,
-                &quot;index&quot;: 0
-            }
-        ]
-    }
-}
-</code></pre>
-<h3 id="add-a-temporary-mcp-source">Add a temporary MCP source</h3>
-<pre><code class="lang-json">{
-    &quot;type&quot;: &quot;message.received.response&quot;,
-    &quot;data&quot;: {
-        &quot;rewrites&quot;: [
-            {
-                &quot;type&quot;: &quot;add-mcp-source&quot;,
-                &quot;source&quot;: {
-                    &quot;name&quot;: &quot;Internal CRM&quot;,
-                    &quot;url&quot;: &quot;https://crm.example.com/mcp&quot;,
-                    &quot;headers&quot;: {
-                        &quot;Authorization&quot;: &quot;Bearer server-token&quot;
-                    },
-                    &quot;cacheDuration&quot;: 600
-                }
-            }
-        ]
-    }
-}
-</code></pre>
-<p>Use <code>add-mcp-source</code> when the tool list needs to depend on the message, user, channel, or an external policy. AIVAX lists the tools from the MCP server, converts each schema into a model-callable function, and makes those tools available only for that inference. For permanent sources, configure MCP directly in the AI Gateway.</p>
-<h2 id="toolcalled"><code>tool.called</code></h2>
-<p>The <code>tool.called</code> event fires before AIVAX executes an internal server-side tool.</p>
-<pre><code class="lang-json">{
-    &quot;name&quot;: &quot;tool.called&quot;,
-    &quot;data&quot;: {
-        &quot;toolName&quot;: &quot;check_order&quot;,
-        &quot;toolArguments&quot;: {
-            &quot;order_id&quot;: &quot;A123&quot;
-        },
-        &quot;origin&quot;: &quot;ChatCompletionsApi&quot;,
-        &quot;externalUserId&quot;: &quot;customer-123&quot;,
-        &quot;metadata&quot;: {}
-    }
-}
-</code></pre>
-<p>Return a non-OK response to block the tool call. Return <code>2xx</code> to let AIVAX execute the tool normally.</p>
-<p>To replace the tool result, return <code>Content-Type: application/json+worker-action</code> with <code>type: &quot;tool.called.response&quot;</code>:</p>
-<pre><code class="lang-json">{
-    &quot;type&quot;: &quot;tool.called.response&quot;,
-    &quot;data&quot;: {
-        &quot;result&quot;: &quot;Order A123 is paid and scheduled for delivery tomorrow.&quot;,
-        &quot;messages&quot;: []
-    }
-}
-</code></pre>
-<p>Fields of <code>data</code>:</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>result</code></td>
-<td>Textual content injected as the tool result.</td>
-</tr>
-<tr>
-<td><code>messages</code></td>
-<td>Optional additional OpenAI-format messages attached to the conversation context.</td>
-</tr>
-</tbody>
-</table>
-<p>When <code>tool.called.response</code> is returned, AIVAX uses the worker-provided result instead of executing the default tool handler.</p>
-<h2 id="example-blocking-unauthorized-users">Example: blocking unauthorized users</h2>
-<p>The example below shows a Cloudflare Worker that blocks a gateway call when the external user is not allowed.</p>
-<pre><code class="lang-js">export default {
-  async fetch(request, env) {
-    if (request.method !== &quot;POST&quot;) {
-      return new Response(&quot;Method not allowed&quot;, { status: 405 });
-    }
-
-    const body = await request.json();
-
-    if (body.gatewayId !== env.CHECKING_GATEWAY_ID) {
-      return new Response();
-    }
-
-    if (body.event?.name !== &quot;message.received&quot;) {
-      return new Response();
-    }
-
-    const externalUserId = body.event.data.externalUserId;
-    const allowedUsers = new Set((env.ALLOWED_USERS || &quot;&quot;).split(&quot;,&quot;));
-
-    if (!allowedUsers.has(externalUserId)) {
-      return new Response(&quot;User is not authorized&quot;, { status: 403 });
-    }
-
-    return new Response();
   }
-};
+}
 </code></pre>
-<h2 id="example-replacing-a-tool-with-an-internal-system">Example: replacing a tool with an internal system</h2>
-<p>Use <code>tool.called</code> when the model should see a tool result, but the actual data should come from your system.</p>
-<pre><code class="lang-js">export default {
-  async fetch(request, env) {
-    const body = await request.json();
-
-    if (body.event?.name !== &quot;tool.called&quot;) {
-      return new Response();
-    }
-
-    const { toolName, toolArguments, externalUserId } = body.event.data;
-
-    if (toolName !== &quot;check_order&quot;) {
-      return new Response();
-    }
-
-    const orderId = toolArguments?.order_id;
-    const orderResponse = await fetch(`${env.INTERNAL_API}/orders/${orderId}`, {
-      headers: {
-        &quot;Authorization&quot;: `Bearer ${env.INTERNAL_API_TOKEN}`
-      }
-    });
-
-    if (!orderResponse.ok) {
-      return new Response(JSON.stringify({
-        type: &quot;tool.called.response&quot;,
-        data: {
-          result: `The order ${orderId} could not be retrieved for user ${externalUserId}. Ask the user to confirm the order number.`
-        }
-      }), {
-        headers: {
-          &quot;Content-Type&quot;: &quot;application/json+worker-action&quot;
-        }
-      });
-    }
-
-    const order = await orderResponse.json();
-
-    return new Response(JSON.stringify({
-      type: &quot;tool.called.response&quot;,
-      data: {
-        result: `Order ${order.id}: status ${order.status}, estimated delivery ${order.eta}.`
-      }
-    }), {
-      headers: {
-        &quot;Content-Type&quot;: &quot;application/json+worker-action&quot;
-      }
-    });
-  }
-};
-</code></pre>
-<p>This pattern prevents exposing the internal API directly to the model. The worker remains responsible for authenticating the request, validating the user, calling the internal system, and deciding how much data can return to the model context.</p>
+<p>After the client connects, it can list the tools exposed by the account management server. The tool names are stable and intentionally prefixed with <code>aivax_</code> so they remain clear when mixed with tools from other MCP servers.</p>
+<h2 id="what-you-can-use-it-for">What you can use it for</h2>
+<p>The account management MCP is useful when the assistant needs to reason about the account itself, not only answer an end-user prompt. It gives an MCP client a controlled way to combine AIVAX documentation, model metadata, and authenticated account API calls. This makes it a good fit for operational agents, implementation copilots, and internal assistants that need to inspect how an AIVAX workspace is configured before recommending or changing something.</p>
+<h3 id="create-and-maintain-agents">Create and maintain agents</h3>
+<p>An internal development agent can use the MCP to help create, review, and adjust <a href="/docs/inference/ai-gateway">AI Gateways</a>. Before changing a gateway, the agent can search the AIVAX manual for the relevant feature, list available models for the current account, compare model capabilities and plan availability, then invoke the appropriate account API route.</p>
+<p>This is useful when teams frequently create assistants for different departments, tenants, or products. The MCP lets the operator ask for an agent in product terms, such as &quot;create a support assistant for refund policies with the CRM MCP enabled&quot;, while the implementation assistant checks which models, tools, RAG collections, and gateway options are available in the account.</p>
+<p>For production workflows, keep a human approval step before writes. The MCP can help prepare the configuration, explain the tradeoffs, and show the API action it intends to perform before it modifies account state.</p>
+<h3 id="monitor-costs-and-model-choices">Monitor costs and model choices</h3>
+<p>The MCP can help an operations assistant investigate cost patterns and model selection. By listing models and invoking account API routes for usage, billing, gateway, or key information, the assistant can explain which models are expensive, which routes are using a subscription multiplier, and whether a cheaper model could handle part of the workload.</p>
+<p>This is especially useful when a team has many gateways or batch jobs and wants to understand why spend changed. Instead of looking only at totals, an assistant can connect usage to model metadata, plan availability, gateway configuration, and feature choices such as RAG, tools, batch, or multimodal input.</p>
+<p>Use this for recurring checks such as &quot;which gateways are likely to drive cost this week?&quot;, &quot;which model families are being used most?&quot;, or &quot;can we move this low-risk workflow to a smaller model without losing required capabilities?&quot;</p>
+<h3 id="understand-errors-and-improve-observability">Understand errors and improve observability</h3>
+<p>When an integration fails, the account management MCP can help an assistant move from a generic error to a useful diagnosis. The assistant can search documentation for the failing route or feature, inspect account resources through API calls, and compare the observed response with the expected behavior.</p>
+<p>For example, a support assistant can investigate whether a failure is caused by an expired API key, insufficient balance, plan restrictions, a missing collection, a disabled provider route, an invalid gateway configuration, or a tool schema problem. The result is a clearer explanation: what failed, where it likely failed, what evidence supports that conclusion, and what the operator should check next.</p>
+<p>This kind of observability is most valuable when the assistant is allowed to read relevant account state but not automatically change it. Give write access only to trusted maintenance workflows.</p>
+<h3 id="meta-prompting-and-conversation-review">Meta-prompting and conversation review</h3>
+<p>The MCP can support meta-prompting workflows where an assistant reviews prior conversations, gateway behavior, and documentation to suggest improvements. The goal is not to answer the original user again; it is to inspect how the agent behaved and identify what could be improved in prompts, instructions, tools, model choice, or RAG setup.</p>
+<p>A review agent can look for patterns such as overlong answers, missing questions, wrong tool selection, repeated clarification loops, unsafe assumptions, or responses that ignore retrieved context. It can then propose concrete changes: a better system instruction, a narrower tool description, a stronger structured-output schema, a different model, or an added retrieval source.</p>
+<p>This is useful for teams that treat assistants as products. Instead of tuning prompts only by intuition, they can review real interactions and turn the findings into smaller gateway or knowledge-base changes.</p>
+<h3 id="identify-why-models-fail-in-specific-situations">Identify why models fail in specific situations</h3>
+<p>Some model failures are not caused by the model alone. A wrong answer can come from missing context, a weak prompt, a bad retrieval result, an unavailable tool, a mismatched model capability, or a schema that lets the model produce ambiguous output.</p>
+<p>With account context available through MCP, an assistant can investigate these layers together. It can check which model was selected, whether that model supports the needed capability, what gateway configuration was active, whether the relevant RAG collection exists, and which documentation explains the expected behavior.</p>
+<p>This helps answer questions like &quot;why does the assistant fail when users ask about refunds?&quot;, &quot;why does this model ignore a tool?&quot;, or &quot;why do answers degrade when the request includes a file?&quot; The result should be an evidence-based explanation and a focused fix, such as changing the model, improving the tool description, adding retrieval material, or rewriting the gateway instruction.</p>
+<h3 id="improve-rag-quality">Improve RAG quality</h3>
+<p>The account management MCP is also useful for maintaining RAG systems. An assistant can inspect collection-related API behavior, search the AIVAX documentation for retrieval guidance, and help compare gateway configuration with the intended retrieval flow.</p>
+<p>Use it to investigate weak retrieval, missing citations, irrelevant chunks, overly broad searches, low-quality documents, or cases where a gateway should use a collection but does not. A RAG maintenance assistant can suggest better query phrasing, chunking changes, collection organization, reranker settings, <code>top</code> and <code>minScore</code> adjustments, or when to expose a collection through <a href="/docs/rag/semantic-search#mcp">collection MCP</a>.</p>
+<p>The best workflow is iterative: inspect a failing answer, identify which context should have been retrieved, test or review the retrieval path, update documents or gateway settings, then re-check the same conversation pattern.</p>
+<h2 id="security-guidance">Security guidance</h2>
+<p>Treat this MCP server as an administrative integration. A private key connected to it may be able to read or mutate account resources depending on the routes the agent invokes.</p>
+<p>Use a dedicated API key for each MCP client or automation. Label it clearly, set an expiration when possible, and rotate it if the client is shared, compromised, or no longer needed. Store the key in the MCP client's secret mechanism or local configuration store, not in source control.</p>
+<p>Do not connect the account management MCP to untrusted agents, public chat clients, or user-controlled browser sessions. If a workflow only needs retrieval from a RAG collection, use the <a href="/docs/rag/semantic-search#mcp">collection MCP</a> with read-only configuration. If a gateway needs to call your external tools during inference, configure <a href="/docs/tools/mcp">MCP functions</a> or <a href="/docs/tools/protocol-functions">server-side functions</a> instead.</p>
 
 </article>
 
                 <div class="contribution d-print-none">
-                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/inference/workers.md/#L1" class="edit-link">Edit this page</a>
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/tools/account-management-mcp.md/#L1" class="edit-link">Edit this page</a>
                 </div>
 
                 <div class="next-article d-print-none border-top" id="nextArticle"></div>

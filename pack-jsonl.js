@@ -5,26 +5,29 @@ const path = require('path');
 
 const args = process.argv.slice(2);
 
-const helpText = `Usage: node pack-jsonl.js [options]
+const helpText = `Usage: bun pack-jsonl.js [options]
 
-Packages the generated English documentation into JSONL records for AIVAX RAG imports.
+Packages the English Markdown documentation into JSONL records for AIVAX RAG imports.
 
 Options:
-  -i, --input <dir>       Generated English docs directory. Default: _site/docs/en
-  -o, --output <file>     Output JSONL file. Defaults to stdout
-  -u, --base-url <url>    Public base URL. Default: https://docs.aivax.net/docs/en
+  -i, --input <dir>       English Markdown docs directory. Default: docs
+  -o, --output <file>     Output JSONL file. Default: jsonl-exports/aivax-documentation.jsonl. Use - for stdout
+  -u, --base-url <url>    Public base URL. Default: https://docs.aivax.net/docs
   --single-page           Emit one record per page instead of one record per section
   -h, --help              Show this help
+
+The default input points to docs/ and skips docs/pt-br.
+By default, Markdown pages are chunked only by # and ## sections.
 `;
 
-if (args.length === 0 || args.includes('-h') || args.includes('--help')) {
+if (args.includes('-h') || args.includes('--help')) {
     console.log(helpText);
     process.exit(0);
 }
 
-let inputDir = path.join(__dirname, '_site', 'docs', 'en');
-let outputFile = null;
-let baseUrl = 'https://docs.aivax.net/docs/en';
+let inputDir = path.join(__dirname, 'docs');
+let outputFile = path.join(__dirname, 'jsonl-exports', 'aivax-documentation.jsonl');
+let baseUrl = 'https://docs.aivax.net/docs';
 let singlePage = false;
 
 for (let i = 0; i < args.length; i++) {
@@ -33,7 +36,8 @@ for (let i = 0; i < args.length; i++) {
     if (arg === '-i' || arg === '--input') {
         inputDir = path.resolve(args[++i] || '');
     } else if (arg === '-o' || arg === '--output') {
-        outputFile = path.resolve(args[++i] || '');
+        const outputArg = args[++i] || '';
+        outputFile = outputArg === '-' ? '-' : path.resolve(outputArg);
     } else if (arg === '-u' || arg === '--base-url') {
         baseUrl = (args[++i] || '').replace(/\/$/, '');
     } else if (arg === '--single-page') {
@@ -58,45 +62,6 @@ function walk(dir) {
         });
 }
 
-function decodeHtml(text) {
-    const named = {
-        amp: '&',
-        lt: '<',
-        gt: '>',
-        quot: '"',
-        apos: "'",
-        nbsp: ' '
-    };
-
-    return text.replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, (_, entity) => {
-        if (entity[0] === '#') {
-            const code = entity[1].toLowerCase() === 'x'
-                ? parseInt(entity.slice(2), 16)
-                : parseInt(entity.slice(1), 10);
-
-            return Number.isFinite(code) ? String.fromCodePoint(code) : _;
-        }
-
-        return named[entity.toLowerCase()] || _;
-    });
-}
-
-function htmlToText(html) {
-    return decodeHtml(html
-        .replace(/<script[\s\S]*?<\/script>/gi, '')
-        .replace(/<style[\s\S]*?<\/style>/gi, '')
-        .replace(/<pre[^>]*><code[^>]*>([\s\S]*?)<\/code><\/pre>/gi, '\n```\n$1\n```\n')
-        .replace(/<\/(h[1-6]|p|li|tr|table|blockquote|pre|div|section)>/gi, '\n')
-        .replace(/<br\s*\/?>/gi, '\n')
-        .replace(/<th[^>]*>/gi, ' | ')
-        .replace(/<td[^>]*>/gi, ' | ')
-        .replace(/<[^>]+>/g, '')
-        .replace(/\r/g, '')
-        .replace(/[ \t]+\n/g, '\n')
-        .replace(/\n{3,}/g, '\n\n')
-        .trim());
-}
-
 function slugify(text) {
     return text
         .toLowerCase()
@@ -106,56 +71,87 @@ function slugify(text) {
         .replace(/^-+|-+$/g, '') || 'section';
 }
 
-function getArticle(html) {
-    const match = html.match(/<article\b[^>]*>([\s\S]*?)<\/article>/i);
-    return match ? match[1] : null;
-}
-
-function getPageTitle(html, article) {
-    const h1 = article.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i);
-    const title = html.match(/<title>([\s\S]*?)<\/title>/i);
-
-    return htmlToText(h1?.[1] || title?.[1] || 'Untitled')
-        .replace(/\s*\|\s*AIVAX\s*$/i, '')
+function cleanMarkdown(markdown) {
+    return markdown
+        .replace(/\r/g, '')
+        .replace(/^---\n[\s\S]*?\n---\n/, '')
+        .replace(/<script[\s\S]*?<\/script>/gi, '')
+        .replace(/<style[\s\S]*?<\/style>/gi, '')
+        .replace(/[ \t]+\n/g, '\n')
+        .replace(/\n{3,}/g, '\n\n')
         .trim();
 }
 
-function splitSections(article, pageTitle) {
-    const headings = [...article.matchAll(/<h([1-4])\b([^>]*)>([\s\S]*?)<\/h\1>/gi)];
+function getMarkdownTitle(markdown, filePath) {
+    const title = markdown.match(/^#\s+(.+)$/m)?.[1]?.trim();
+    return title || path.basename(filePath, path.extname(filePath));
+}
 
-    if (headings.length === 0) {
-        const text = htmlToText(article);
-        return text ? [{ heading: pageTitle, anchor: slugify(pageTitle), text }] : [];
+function splitSections(markdown, pageTitle) {
+    const lines = markdown.split('\n');
+    const sections = [];
+    let current = null;
+    let inFence = false;
+
+    for (const line of lines) {
+        if (/^\s*```/.test(line)) {
+            inFence = !inFence;
+        }
+
+        const heading = !inFence ? line.match(/^(#{1,2})\s+(.+?)\s*#*\s*$/) : null;
+
+        if (heading) {
+            if (current?.lines.length) {
+                sections.push(current);
+            }
+
+            const headingText = heading[2].trim();
+            current = {
+                heading: headingText,
+                anchor: slugify(headingText),
+                lines: [line]
+            };
+            continue;
+        }
+
+        if (!current) {
+            current = {
+                heading: pageTitle,
+                anchor: slugify(pageTitle),
+                lines: []
+            };
+        }
+
+        current.lines.push(line);
     }
 
-    return headings
-        .map((heading, index) => {
-            const headingStart = heading.index;
-            const contentStart = headingStart + heading[0].length;
-            const next = headings[index + 1];
-            const headingText = htmlToText(heading[3]);
-            const id = heading[2].match(/\bid=["']([^"']+)["']/i)?.[1] || slugify(headingText);
-            const body = article.slice(contentStart, next?.index ?? article.length);
-            const text = htmlToText(`${heading[0]}\n${body}`);
+    if (current?.lines.length) {
+        sections.push(current);
+    }
 
-            return text ? { heading: headingText, anchor: id, text } : null;
-        })
-        .filter(Boolean);
+    return sections
+        .map(section => ({
+            heading: section.heading,
+            anchor: section.anchor,
+            text: cleanMarkdown(section.lines.join('\n'))
+        }))
+        .filter(section => section.text);
 }
 
 function makeRecord(filePath, section, pageTitle) {
     const relativePath = path.relative(inputDir, filePath).replace(/\\/g, '/');
-    const docsRelativePath = `${path.basename(inputDir)}/${relativePath}`;
-    const pagePath = relativePath.replace(/\.html$/i, '');
+    const docsRelativePath = relativePath;
+    const pagePath = relativePath.replace(/\.md$/i, '');
     const sectionSlug = slugify(section.anchor);
-    const url = `${baseUrl}/${relativePath.replace(/\\/g, '/')}${section.anchor ? `#${section.anchor}` : ''}`;
+    const urlPath = relativePath.replace(/\.md$/i, '.html');
+    const url = `${baseUrl}/${urlPath}${section.anchor ? `#${section.anchor}` : ''}`;
     const pathTags = pagePath.split('/').filter(part => part && part !== 'index');
 
     return {
         docid: `${docsRelativePath}${sectionSlug ? `#${sectionSlug}` : ''}`,
         text: section.text,
         __ref: docsRelativePath,
-        __tags: ['aivax', 'docs', 'en', ...pathTags],
+        __tags: ['aivax', 'docs', 'english', ...pathTags],
         __meta: {
             title: pageTitle,
             heading: section.heading,
@@ -165,25 +161,20 @@ function makeRecord(filePath, section, pageTitle) {
     };
 }
 
-const htmlFiles = walk(inputDir)
-    .filter(file => file.endsWith('.html'))
-    .filter(file => !/(^|[\\/])toc\.html$/i.test(file))
+const markdownFiles = walk(inputDir)
+    .filter(file => file.endsWith('.md'))
+    .filter(file => !/(^|[\\/])toc\.ya?ml$/i.test(file))
+    .filter(file => !path.relative(inputDir, file).replace(/\\/g, '/').startsWith('pt-br/'))
     .sort((a, b) => a.localeCompare(b));
 
 const records = [];
 
-for (const file of htmlFiles) {
-    const html = fs.readFileSync(file, 'utf8');
-    const article = getArticle(html);
-
-    if (!article) {
-        continue;
-    }
-
-    const pageTitle = getPageTitle(html, article);
+for (const file of markdownFiles) {
+    const markdown = cleanMarkdown(fs.readFileSync(file, 'utf8'));
+    const pageTitle = getMarkdownTitle(markdown, file);
     const sections = singlePage
-        ? [{ heading: pageTitle, anchor: '', text: htmlToText(article) }]
-        : splitSections(article, pageTitle);
+        ? [{ heading: pageTitle, anchor: '', text: markdown }]
+        : splitSections(markdown, pageTitle);
 
     for (const section of sections) {
         records.push(makeRecord(file, section, pageTitle));
@@ -192,10 +183,11 @@ for (const file of htmlFiles) {
 
 const jsonl = records.map(record => JSON.stringify(record)).join('\n');
 
-if (outputFile) {
-    fs.writeFileSync(outputFile, jsonl ? `${jsonl}\n` : '', 'utf8');
-    console.error(`Packed ${records.length} records into ${outputFile}`);
-} else {
+if (outputFile === '-') {
     process.stdout.write(jsonl ? `${jsonl}\n` : '');
     console.error(`Packed ${records.length} records`);
+} else {
+    fs.mkdirSync(path.dirname(outputFile), { recursive: true });
+    fs.writeFileSync(outputFile, jsonl ? `${jsonl}\n` : '', 'utf8');
+    console.error(`Packed ${records.length} records into ${outputFile}`);
 }

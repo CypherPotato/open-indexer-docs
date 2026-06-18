@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>AI Workers | AIVAX </title>
+        <title>Documentation MCP | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="AI Workers | AIVAX ">
+        <meta name="title" content="Documentation MCP | AIVAX ">
 
 
         <link rel="icon" href="../../assets/img/favicon.ico">
@@ -23,7 +23,7 @@
         <meta name="docfx:rel" content="../../">
 
 
-        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/inference/workers.md/#L1">
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/tools/documentation-mcp.md/#L1">
         <meta name="loc:inThisArticle" content="In this article">
         <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
         <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -123,322 +123,131 @@
                 </div>
 
                 <article data-uid="">
-<h1 id="ai-workers">AI Workers</h1>
+<h1 id="documentation-mcp">Documentation MCP</h1>
 
-<p>AI Gateway workers are HTTP hooks that let an external service control gateway execution at runtime. A worker can allow an event, stop it, rewrite context, add instructions or tools, or replace a server-side tool result.</p>
-<p>Use workers when a rule must be decided outside the prompt. Common cases include subscription checks, CRM enrichment, tenant-specific policy, audit logging, dynamic tool blocking, and replacing a model-visible tool result with data from an internal system.</p>
-<p>Workers run in the inference critical path. Every worker event adds an HTTP request before the gateway can continue, so the endpoint must respond quickly and predictably.</p>
-<h2 id="request-format">Request format</h2>
-<p>When a configured worker event fires, AIVAX sends a <code>POST</code> request to the gateway's worker URL.</p>
+<p>The AIVAX documentation MCP exposes AIVAX documentation, API reference content, and model metadata to MCP-compatible clients. It is designed for assistants, IDEs, internal agents, and implementation workflows that need current AIVAX context before they answer, write code, configure a gateway, or troubleshoot an integration.</p>
+<p>This MCP is read-oriented. It does not expose a generic account API invocation tool. Use it when an agent needs to understand AIVAX features, find the right API route, compare model capabilities, or ground its answer in the product manual. Use the <a href="/docs/tools/account-management-mcp">account management MCP</a> only when the client also needs to inspect or change authenticated account resources through API calls.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Do not configure the documentation MCP together with the <a href="/docs/tools/account-management-mcp">account management MCP</a> in the same client unless you have a specific reason to duplicate tools. The account management MCP already includes documentation search functions, so adding both servers usually creates redundant documentation tools and can make tool selection less predictable.</p>
+</div>
+<h2 id="endpoint">Endpoint</h2>
+<pre><code class="lang-text">https://inference.aivax.net/v1/mcp/documentation
+</code></pre>
+<p>Authenticate with an AIVAX account API key:</p>
+<pre><code class="lang-text">Authorization: Bearer &lt;AIVAX_PRIVATE_API_KEY&gt;
+</code></pre>
+<p>For key types and authentication options, see <a href="/docs/authentication">Authentication</a>.</p>
+<h2 id="configuration-example">Configuration example</h2>
+<p>The exact configuration depends on the MCP client. For clients that accept a Streamable HTTP server entry, configure the AIVAX documentation endpoint and pass the API key as a header.</p>
 <pre><code class="lang-json">{
-    &quot;gatewayId&quot;: &quot;019a6afb-5a03-7b83-a1a2-760bd1ecd11c&quot;,
-    &quot;moment&quot;: &quot;2025-12-29T17:04:39&quot;,
-    &quot;event&quot;: {
-        &quot;name&quot;: &quot;message.received&quot;,
-        &quot;data&quot;: {
-            &quot;messages&quot;: [
-                {
-                    &quot;role&quot;: &quot;system&quot;,
-                    &quot;content&quot;: &quot;User local date is Monday, December 29, 2025 (timezone is America/Sao_Paulo)&quot;
-                },
-                {
-                    &quot;role&quot;: &quot;user&quot;,
-                    &quot;content&quot;: &quot;Good morning&quot;
-                }
-            ],
-            &quot;origin&quot;: &quot;ChatCompletionsApi&quot;,
-            &quot;externalUserId&quot;: &quot;customer-123&quot;,
-            &quot;metadata&quot;: {}
-        }
+  &quot;servers&quot;: {
+    &quot;aivax-docs&quot;: {
+      &quot;type&quot;: &quot;http&quot;,
+      &quot;url&quot;: &quot;https://inference.aivax.net/v1/mcp/documentation&quot;,
+      &quot;headers&quot;: {
+        &quot;Authorization&quot;: &quot;Bearer &lt;AIVAX_PRIVATE_API_KEY&gt;&quot;
+      }
     }
+  }
 }
 </code></pre>
-<p>The exact <code>event.data</code> shape depends on the event. Always validate <code>gatewayId</code> when one endpoint serves more than one gateway.</p>
-<h2 id="authentication">Authentication</h2>
-<p>When the account has a hook key, AIVAX sends <code>X-Request-Nonce</code>. The nonce is a BCrypt hash derived from the account salt. Validate this header before trusting the body, especially when the worker releases private data, changes context, or authorizes tool usage.</p>
-<p>Treat <code>externalUserId</code>, <code>metadata</code>, messages, and tool arguments as untrusted input.</p>
-<h2 id="response-behavior">Response behavior</h2>
-<p>After sending the request, AIVAX handles the worker response as follows:</p>
+<p>After the client connects, it can discover the tools exposed by the server. Tool names are prefixed with <code>aivax_</code> so they remain clear when the client also has project, database, browser, or code tools available.</p>
+<h2 id="available-tools">Available tools</h2>
+<h3 id="aivax_search_documentation"><code>aivax_search_documentation</code></h3>
+<p>Searches AIVAX documentation and API reference content. Use this tool when the assistant needs product context before answering or acting.</p>
+<p>The tool accepts:</p>
 <table>
 <thead>
 <tr>
-<th>Response</th>
-<th>Behavior</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>Content-Type: application/json+worker-action</code></td>
-<td>Execute the action described in the JSON body.</td>
-</tr>
-<tr>
-<td><code>2xx</code> without <code>application/json+worker-action</code></td>
-<td>Continue normally.</td>
-</tr>
-<tr>
-<td>Non-OK response without <code>application/json+worker-action</code></td>
-<td>Stop the event.</td>
-</tr>
-</tbody>
-</table>
-<p>If the worker request fails with an HTTP request exception, AIVAX logs the failure and stops the event.</p>
-<p>Choose fail-open or fail-closed behavior intentionally. Return <code>2xx</code> when enrichment is optional. Return a non-OK response when authorization, compliance, or business policy cannot fail open.</p>
-<h2 id="messagereceived"><code>message.received</code></h2>
-<p>The <code>message.received</code> event fires after the gateway prepares the incoming message context and before the model call.</p>
-<pre><code class="lang-json">{
-    &quot;name&quot;: &quot;message.received&quot;,
-    &quot;data&quot;: {
-        &quot;messages&quot;: [],
-        &quot;origin&quot;: &quot;ChatCompletionsApi&quot;,
-        &quot;externalUserId&quot;: &quot;customer-123&quot;,
-        &quot;metadata&quot;: {}
-    }
-}
-</code></pre>
-<p>To modify the context, return <code>Content-Type: application/json+worker-action</code> with <code>type: &quot;message.received.response&quot;</code>:</p>
-<pre><code class="lang-json">{
-    &quot;type&quot;: &quot;message.received.response&quot;,
-    &quot;data&quot;: {
-        &quot;rewrites&quot;: [
-            {
-                &quot;type&quot;: &quot;add-system&quot;,
-                &quot;message&quot;: &quot;Answer in formal English.&quot;
-            }
-        ]
-    }
-}
-</code></pre>
-<p>Available rewrite actions:</p>
-<table>
-<thead>
-<tr>
-<th>Action</th>
-<th>Description</th>
-<th>Parameters</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>clear</code></td>
-<td>Removes context elements.</td>
-<td><code>argument</code>: <code>messages</code>, <code>meta</code>, <code>system</code>, <code>tools</code>, <code>skills</code>, <code>all</code>, or omitted.</td>
-</tr>
-<tr>
-<td><code>add-message</code></td>
-<td>Adds a message to the conversation.</td>
-<td><code>message</code>: OpenAI-compatible message object.</td>
-</tr>
-<tr>
-<td><code>remove-message</code></td>
-<td>Removes a message by index.</td>
-<td><code>index</code>: zero-based message index.</td>
-</tr>
-<tr>
-<td><code>add-system</code></td>
-<td>Adds a system instruction.</td>
-<td><code>message</code>: instruction text.</td>
-</tr>
-<tr>
-<td><code>add-tool</code></td>
-<td>Adds an OpenAI-compatible tool definition.</td>
-<td><code>tool</code>: tool JSON object.</td>
-</tr>
-<tr>
-<td><code>add-protocol-tool</code></td>
-<td>Adds a <a href="/docs/tools/protocol-functions">protocol function</a>.</td>
-<td><code>tool</code>: protocol function definition.</td>
-</tr>
-<tr>
-<td><code>add-mcp-source</code></td>
-<td>Adds the tools discovered from an <a href="/docs/tools/mcp">MCP</a> source to the context.</td>
-<td><code>source</code>: MCP source object with <code>url</code>, <code>headers</code>, <code>name</code>, and/or <code>cacheDuration</code>.</td>
-</tr>
-</tbody>
-</table>
-<h3 id="replace-the-user-context">Replace the user context</h3>
-<pre><code class="lang-json">{
-    &quot;type&quot;: &quot;message.received.response&quot;,
-    &quot;data&quot;: {
-        &quot;rewrites&quot;: [
-            {
-                &quot;type&quot;: &quot;clear&quot;
-            },
-            {
-                &quot;type&quot;: &quot;add-message&quot;,
-                &quot;message&quot;: {
-                    &quot;role&quot;: &quot;user&quot;,
-                    &quot;content&quot;: &quot;The original message was removed by an external policy check. Tell the user they need an active subscription to continue.&quot;
-                }
-            }
-        ]
-    }
-}
-</code></pre>
-<h3 id="remove-a-message">Remove a message</h3>
-<pre><code class="lang-json">{
-    &quot;type&quot;: &quot;message.received.response&quot;,
-    &quot;data&quot;: {
-        &quot;rewrites&quot;: [
-            {
-                &quot;type&quot;: &quot;remove-message&quot;,
-                &quot;index&quot;: 0
-            }
-        ]
-    }
-}
-</code></pre>
-<h3 id="add-a-temporary-mcp-source">Add a temporary MCP source</h3>
-<pre><code class="lang-json">{
-    &quot;type&quot;: &quot;message.received.response&quot;,
-    &quot;data&quot;: {
-        &quot;rewrites&quot;: [
-            {
-                &quot;type&quot;: &quot;add-mcp-source&quot;,
-                &quot;source&quot;: {
-                    &quot;name&quot;: &quot;Internal CRM&quot;,
-                    &quot;url&quot;: &quot;https://crm.example.com/mcp&quot;,
-                    &quot;headers&quot;: {
-                        &quot;Authorization&quot;: &quot;Bearer server-token&quot;
-                    },
-                    &quot;cacheDuration&quot;: 600
-                }
-            }
-        ]
-    }
-}
-</code></pre>
-<p>Use <code>add-mcp-source</code> when the tool list needs to depend on the message, user, channel, or an external policy. AIVAX lists the tools from the MCP server, converts each schema into a model-callable function, and makes those tools available only for that inference. For permanent sources, configure MCP directly in the AI Gateway.</p>
-<h2 id="toolcalled"><code>tool.called</code></h2>
-<p>The <code>tool.called</code> event fires before AIVAX executes an internal server-side tool.</p>
-<pre><code class="lang-json">{
-    &quot;name&quot;: &quot;tool.called&quot;,
-    &quot;data&quot;: {
-        &quot;toolName&quot;: &quot;check_order&quot;,
-        &quot;toolArguments&quot;: {
-            &quot;order_id&quot;: &quot;A123&quot;
-        },
-        &quot;origin&quot;: &quot;ChatCompletionsApi&quot;,
-        &quot;externalUserId&quot;: &quot;customer-123&quot;,
-        &quot;metadata&quot;: {}
-    }
-}
-</code></pre>
-<p>Return a non-OK response to block the tool call. Return <code>2xx</code> to let AIVAX execute the tool normally.</p>
-<p>To replace the tool result, return <code>Content-Type: application/json+worker-action</code> with <code>type: &quot;tool.called.response&quot;</code>:</p>
-<pre><code class="lang-json">{
-    &quot;type&quot;: &quot;tool.called.response&quot;,
-    &quot;data&quot;: {
-        &quot;result&quot;: &quot;Order A123 is paid and scheduled for delivery tomorrow.&quot;,
-        &quot;messages&quot;: []
-    }
-}
-</code></pre>
-<p>Fields of <code>data</code>:</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>result</code></td>
-<td>Textual content injected as the tool result.</td>
+<td><code>search_terms</code></td>
+<td><code>string[]</code></td>
+<td>Yes</td>
+<td>Search terms to query against AIVAX documentation and API reference.</td>
 </tr>
 <tr>
-<td><code>messages</code></td>
-<td>Optional additional OpenAI-format messages attached to the conversation context.</td>
+<td><code>search_type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Search scope. Use <code>documentation-manual</code>, <code>api-function-reference</code>, or <code>all</code>.</td>
 </tr>
 </tbody>
 </table>
-<p>When <code>tool.called.response</code> is returned, AIVAX uses the worker-provided result instead of executing the default tool handler.</p>
-<h2 id="example-blocking-unauthorized-users">Example: blocking unauthorized users</h2>
-<p>The example below shows a Cloudflare Worker that blocks a gateway call when the external user is not allowed.</p>
-<pre><code class="lang-js">export default {
-  async fetch(request, env) {
-    if (request.method !== &quot;POST&quot;) {
-      return new Response(&quot;Method not allowed&quot;, { status: 405 });
-    }
-
-    const body = await request.json();
-
-    if (body.gatewayId !== env.CHECKING_GATEWAY_ID) {
-      return new Response();
-    }
-
-    if (body.event?.name !== &quot;message.received&quot;) {
-      return new Response();
-    }
-
-    const externalUserId = body.event.data.externalUserId;
-    const allowedUsers = new Set((env.ALLOWED_USERS || &quot;&quot;).split(&quot;,&quot;));
-
-    if (!allowedUsers.has(externalUserId)) {
-      return new Response(&quot;User is not authorized&quot;, { status: 403 });
-    }
-
-    return new Response();
-  }
-};
+<p>The search can query the documentation manual, the API function reference, or both. It returns relevant documentation snippets in text form so the client can use them directly as context. Search is limited to 10 terms per call and 500 total characters across all terms.</p>
+<p>Example arguments:</p>
+<pre><code class="lang-json">{
+  &quot;search_terms&quot;: [
+    &quot;AI Gateway MCP headers&quot;,
+    &quot;tool metadata&quot;
+  ],
+  &quot;search_type&quot;: &quot;all&quot;
+}
 </code></pre>
-<h2 id="example-replacing-a-tool-with-an-internal-system">Example: replacing a tool with an internal system</h2>
-<p>Use <code>tool.called</code> when the model should see a tool result, but the actual data should come from your system.</p>
-<pre><code class="lang-js">export default {
-  async fetch(request, env) {
-    const body = await request.json();
-
-    if (body.event?.name !== &quot;tool.called&quot;) {
-      return new Response();
-    }
-
-    const { toolName, toolArguments, externalUserId } = body.event.data;
-
-    if (toolName !== &quot;check_order&quot;) {
-      return new Response();
-    }
-
-    const orderId = toolArguments?.order_id;
-    const orderResponse = await fetch(`${env.INTERNAL_API}/orders/${orderId}`, {
-      headers: {
-        &quot;Authorization&quot;: `Bearer ${env.INTERNAL_API_TOKEN}`
-      }
-    });
-
-    if (!orderResponse.ok) {
-      return new Response(JSON.stringify({
-        type: &quot;tool.called.response&quot;,
-        data: {
-          result: `The order ${orderId} could not be retrieved for user ${externalUserId}. Ask the user to confirm the order number.`
-        }
-      }), {
-        headers: {
-          &quot;Content-Type&quot;: &quot;application/json+worker-action&quot;
-        }
-      });
-    }
-
-    const order = await orderResponse.json();
-
-    return new Response(JSON.stringify({
-      type: &quot;tool.called.response&quot;,
-      data: {
-        result: `Order ${order.id}: status ${order.status}, estimated delivery ${order.eta}.`
-      }
-    }), {
-      headers: {
-        &quot;Content-Type&quot;: &quot;application/json+worker-action&quot;
-      }
-    });
-  }
-};
+<p>Use more complete phrases when the question has a clear intent, such as <code>semantic search reranker settings</code> or <code>public key chat completion restrictions</code>. Use multiple terms when you want to cover neighboring concepts, alternate names, or likely API-reference terms.</p>
+<p>Search calls are rate-limited per account: 10 requests per minute and 400 requests per four hours.</p>
+<h3 id="aivax_list_models"><code>aivax_list_models</code></h3>
+<p>Lists integrated AIVAX chat models and returns a model-readable summary for each match. Use it when the assistant needs to choose a model, explain whether a model is available to the current plan, compare capabilities, or understand pricing and provider routes.</p>
+<p>The tool accepts:</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name_filter</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Optional fuzzy filter for model names, such as <code>gpt 5</code>, <code>sonnet</code>, <code>qwen coder</code>, or <code>@openai/gpt-5-mini</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>The response includes model description, stability, type, capabilities, flags, rate-limit group, routing model, subscription multiplier, technical metadata, token pricing, and providers. Availability is evaluated against the authenticated account plan.</p>
+<p>Example arguments:</p>
+<pre><code class="lang-json">{
+  &quot;name_filter&quot;: &quot;gemini flash&quot;
+}
 </code></pre>
-<p>This pattern prevents exposing the internal API directly to the model. The worker remains responsible for authenticating the request, validating the user, calling the internal system, and deciding how much data can return to the model context.</p>
+<p>Model listing calls are rate-limited per account: 30 requests per minute and 1,000 requests per day.</p>
+<h2 id="when-to-use-it">When to use it</h2>
+<p>Use the documentation MCP when you want an assistant to answer AIVAX questions from source-backed context instead of memory. This is useful in IDEs, support tools, onboarding agents, internal implementation copilots, and evaluation workflows where the assistant should search the manual before recommending a route, parameter, feature, model, or debugging step.</p>
+<p>It is also helpful for agent-building workflows. Before creating or editing an <a href="/docs/inference/ai-gateway">AI Gateway</a>, an assistant can search for the relevant feature, check model capabilities, then explain what configuration should be used and why. For example, it can compare built-in tools, MCP functions, server-side functions, workers, RAG collections, structured responses, and multimodal pre-processing before suggesting a design.</p>
+<p>For troubleshooting, the documentation MCP helps the assistant move from an error message to the likely product boundary. It can search for authentication rules, plan limits, multimodal balance requirements, RAG search parameters, gateway behavior, or public-key restrictions, then produce a focused checklist that reflects AIVAX behavior.</p>
+<p>For model selection, combine <code>aivax_search_documentation</code> with <code>aivax_list_models</code>. Search the manual for the feature requirement, such as tool calling, video input, structured output, or long context, then list matching models and choose one that is available to the account plan.</p>
+<h2 id="choosing-search-terms">Choosing search terms</h2>
+<p>Good search terms should describe the user's goal, not only one keyword. Prefer:</p>
+<pre><code class="lang-text">public key chat completion restrictions
+semantic search include references
+AI Gateway MCP source headers
+multimodal preprocess video
+</code></pre>
+<p>Over:</p>
+<pre><code class="lang-text">key
+search
+headers
+video
+</code></pre>
+<p>When the assistant is unsure which page contains the answer, use <code>search_type: &quot;all&quot;</code>. When it needs route names, request bodies, or endpoint behavior, use <code>api-function-reference</code>. When it needs conceptual guidance, tradeoffs, or workflow explanations, use <code>documentation-manual</code>.</p>
+<h2 id="security-guidance">Security guidance</h2>
+<p>The documentation MCP is safer than a management tool because it is read-oriented, but it still authenticates as an AIVAX account and may expose account-plan-sensitive model availability. Connect it only to clients that should know the account's available models and documentation context.</p>
+<p>Use a dedicated API key for each MCP client. Store it in the client's secret mechanism or local configuration store, not in source control. If a client only needs public documentation and does not need account-specific model availability, prefer linking directly to the public documentation site instead of connecting an authenticated MCP server.</p>
 
 </article>
 
                 <div class="contribution d-print-none">
-                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/inference/workers.md/#L1" class="edit-link">Edit this page</a>
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/tools/documentation-mcp.md/#L1" class="edit-link">Edit this page</a>
                 </div>
 
                 <div class="next-article d-print-none border-top" id="nextArticle"></div>

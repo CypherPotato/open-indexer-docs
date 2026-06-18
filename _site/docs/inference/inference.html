@@ -181,6 +181,28 @@
 <li><code>input_audio</code>: Audio content. <code>input_audio.data</code> is base64 audio data, and <code>input_audio.format</code> names the format.</li>
 <li><code>file</code>: File content. <code>file.filename</code> names the file, and <code>file.file_data</code> can be an external URL or a base64 data URL.</li>
 </ul>
+<p>For video input, send a <code>video_url</code> content part. Use a publicly reachable URL when possible, especially for large videos:</p>
+<pre><code class="lang-json">{
+    &quot;model&quot;: &quot;@google/gemini-3-flash&quot;,
+    &quot;messages&quot;: [
+        {
+            &quot;role&quot;: &quot;user&quot;,
+            &quot;content&quot;: [
+                {
+                    &quot;type&quot;: &quot;text&quot;,
+                    &quot;text&quot;: &quot;Summarize the main actions in this video and identify any visible safety risks.&quot;
+                },
+                {
+                    &quot;type&quot;: &quot;video_url&quot;,
+                    &quot;video_url&quot;: {
+                        &quot;url&quot;: &quot;https://example.com/factory-inspection.mp4&quot;
+                    }
+                }
+            ]
+        }
+    ]
+}
+</code></pre>
 <p>External links must be accessible to AIVAX without authentication, firewall restrictions, or JavaScript-only rendering. Failed downloads, redirects, blocked URLs, unsupported formats, or provider-specific size limits can fail the inference.</p>
 <p>You can also send a simple text request with <code>prompt</code>:</p>
 <pre><code class="lang-json">{

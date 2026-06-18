@@ -22,7 +22,7 @@
 
 - name: Inferência
 
-- name: Portais de IA
+- name: Gateways de IA
   href: inference/ai-gateway.md
 - name: Inferência
   href: inference/inference.md
@@ -41,6 +41,10 @@
   href: tools/builtin-tools.md
 - name: Funções MCP
   href: tools/mcp.md
+- name: Gerenciamento de conta MCP
+  href: tools/account-management-mcp.md
+- name: Documentação MCP
+  href: tools/documentation-mcp.md
 - name: Funções de protocolo
   href: tools/protocol-functions.md
 - name: Shell

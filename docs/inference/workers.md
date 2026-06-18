@@ -99,6 +99,7 @@ Available rewrite actions:
 | `add-system` | Adds a system instruction. | `message`: instruction text. |
 | `add-tool` | Adds an OpenAI-compatible tool definition. | `tool`: tool JSON object. |
 | `add-protocol-tool` | Adds a [protocol function](/docs/tools/protocol-functions). | `tool`: protocol function definition. |
+| `add-mcp-source` | Adds the tools discovered from an [MCP](/docs/tools/mcp) source to the context. | `source`: MCP source object with `url`, `headers`, `name`, and/or `cacheDuration`. |
 
 ### Replace the user context
 
@@ -137,6 +138,31 @@ Available rewrite actions:
     }
 }
 ```
+
+### Add a temporary MCP source
+
+```json
+{
+    "type": "message.received.response",
+    "data": {
+        "rewrites": [
+            {
+                "type": "add-mcp-source",
+                "source": {
+                    "name": "Internal CRM",
+                    "url": "https://crm.example.com/mcp",
+                    "headers": {
+                        "Authorization": "Bearer server-token"
+                    },
+                    "cacheDuration": 600
+                }
+            }
+        ]
+    }
+}
+```
+
+Use `add-mcp-source` when the tool list needs to depend on the message, user, channel, or an external policy. AIVAX lists the tools from the MCP server, converts each schema into a model-callable function, and makes those tools available only for that inference. For permanent sources, configure MCP directly in the AI Gateway.
 
 ## `tool.called`
 

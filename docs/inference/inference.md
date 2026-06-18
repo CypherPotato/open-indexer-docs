@@ -65,6 +65,31 @@ Supported content part mappings:
 - `input_audio`: Audio content. `input_audio.data` is base64 audio data, and `input_audio.format` names the format.
 - `file`: File content. `file.filename` names the file, and `file.file_data` can be an external URL or a base64 data URL.
 
+For video input, send a `video_url` content part. Use a publicly reachable URL when possible, especially for large videos:
+
+```json
+{
+    "model": "@google/gemini-3-flash",
+    "messages": [
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "Summarize the main actions in this video and identify any visible safety risks."
+                },
+                {
+                    "type": "video_url",
+                    "video_url": {
+                        "url": "https://example.com/factory-inspection.mp4"
+                    }
+                }
+            ]
+        }
+    ]
+}
+```
+
 External links must be accessible to AIVAX without authentication, firewall restrictions, or JavaScript-only rendering. Failed downloads, redirects, blocked URLs, unsupported formats, or provider-specific size limits can fail the inference.
 
 You can also send a simple text request with `prompt`:

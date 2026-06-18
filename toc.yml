@@ -2,7 +2,5 @@
   href: /
 - name: Documentation
   href: docs/
-- name: Português
-  href: docs/pt-br/
 - name: API Reference
   href: https://inference.aivax.net/apidocs

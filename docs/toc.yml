@@ -41,6 +41,10 @@
   href: tools/builtin-tools.md
 - name: MCP functions
   href: tools/mcp.md
+- name: Account management MCP
+  href: tools/account-management-mcp.md
+- name: Documentation MCP
+  href: tools/documentation-mcp.md
 - name: Protocol functions
   href: tools/protocol-functions.md
 - name: Shell

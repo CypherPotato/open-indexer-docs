@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Gerenciamento de conta MCP | AIVAX </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="Gerenciamento de conta MCP | AIVAX ">
+
+
+        <link rel="icon" href="../../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+        
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
+
+        <meta name="docfx:rel" content="../../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/pt-br/tools/account-management-mcp.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+                
+        <script>            
+            function switchLanguage(lang) {
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../../index.html">
+                        <img id="logo" class="svg" src="../../../assets/img/aivax.png" alt="AIVAX">
+                        AIVAX
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="gerenciamento-de-conta-mcp">Gerenciamento de conta MCP</h1>
+
+<p>O MCP de gerenciamento de conta expõe operações selecionadas da conta AIVAX para um cliente compatível com MCP, como uma IDE, assistente de desktop, agente interno ou ambiente de automação. Ele foi projetado para operadores confiáveis e fluxos de trabalho de back‑end que precisam inspecionar as capacidades da conta, descobrir documentação ou chamar rotas autenticadas da API AIVAX sem sair do cliente MCP.</p>
+<p>Esse ponto de extremidade é diferente de configurar uma fonte externa de MCP dentro de um <a href="/docs/pt-br/tools/mcp">AI Gateway</a>. Nesse fluxo, a AIVAX é o cliente MCP e seu gateway chama outro servidor durante a inferência. Com o MCP de gerenciamento de conta, a AIVAX é o servidor MCP. Seu cliente MCP se conecta à AIVAX e recebe ferramentas para operar a conta autenticada.</p>
+<p>Use este MCP quando um agente precisar de contexto relacionado à conta antes de agir: quais modelos estão disponíveis no plano atual, como um recurso está documentado, o que uma rota de API retorna ou se um recurso da conta pode ser criado, atualizado ou inspecionado através da API AIVAX existente. Ele é especialmente útil para assistentes de suporte interno, ambientes de desenvolvimento, copilotos de administração de conta e agentes de implementação que precisam combinar consulta de documentação com chamadas reais de API.</p>
+<p>Como o MCP pode invocar funções autenticadas da AIVAX, conecte‑o apenas a partir de clientes confiáveis e use uma chave de API privada. Não exponha este servidor a usuários finais ou aplicações no lado do navegador.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Não configure o MCP de gerenciamento de conta junto com o <a href="/docs/pt-br/tools/documentation-mcp">documentation MCP</a> no mesmo cliente, a menos que tenha um motivo específico para duplicar ferramentas. O MCP de gerenciamento de conta já inclui funções de busca de documentação, portanto, adicionar ambos os servidores geralmente cria ferramentas de documentação redundantes e pode tornar a seleção de ferramentas menos previsível.</p>
+</div>
+<h2 id="endpoint">Endpoint</h2>
+<pre><code class="lang-text">https://inference.aivax.net/v1/mcp/account-management
+</code></pre>
+<p>A solicitação deve ser autenticada com uma chave de API da conta. Use uma chave privada no cabeçalho <code>Authorization</code>:</p>
+<pre><code class="lang-text">Authorization: Bearer &lt;AIVAX_PRIVATE_API_KEY&gt;
+</code></pre>
+<p>Para tipos de chave e opções de autenticação, veja <a href="/docs/pt-br/authentication">Authentication</a>.</p>
+<h2 id="exemplo-de-configuração">Exemplo de configuração</h2>
+<p>A forma exata da configuração do MCP depende do cliente. Para clientes que aceitam uma entrada de servidor HTTP transmitível, configure o ponto de extremidade da AIVAX e envie a chave privada como cabeçalho.</p>
+<pre><code class="lang-json">{
+  &quot;servers&quot;: {
+    &quot;aivax-account&quot;: {
+      &quot;type&quot;: &quot;http&quot;,
+      &quot;url&quot;: &quot;https://inference.aivax.net/v1/mcp/account-management&quot;,
+      &quot;headers&quot;: {
+        &quot;Authorization&quot;: &quot;Bearer &lt;AIVAX_PRIVATE_API_KEY&gt;&quot;
+      }
+    }
+  }
+}
+</code></pre>
+<p>Depois que o cliente se conectar, ele pode listar as ferramentas expostas pelo servidor de gerenciamento de conta. Os nomes das ferramentas são estáveis e intencionalmente prefixados com <code>aivax_</code> para que permaneçam claros quando misturados com ferramentas de outros servidores MCP.</p>
+<h2 id="o-que-você-pode-usar-para">O que você pode usar para</h2>
+<p>O MCP de gerenciamento de conta é útil quando o assistente precisa raciocinar sobre a própria conta, não apenas responder a um prompt do usuário final. Ele oferece ao cliente MCP um modo controlado de combinar documentação AIVAX, metadados de modelo e chamadas autenticadas da API da conta. Isso o torna adequado para agentes operacionais, copilotos de implementação e assistentes internos que precisam inspecionar como um workspace AIVAX está configurado antes de recomendar ou alterar algo.</p>
+<h3 id="criar-e-manter-agentes">Criar e manter agentes</h3>
+<p>Um agente de desenvolvimento interno pode usar o MCP para ajudar a criar, revisar e ajustar <a href="/docs/pt-br/inference/ai-gateway">AI Gateways</a>. Antes de alterar um gateway, o agente pode buscar no manual da AIVAX o recurso relevante, listar os modelos disponíveis para a conta atual, comparar capacidades de modelo e disponibilidade de plano, e então invocar a rota de API de conta adequada.</p>
+<p>Isso é útil quando equipes criam assistentes para diferentes departamentos, locatários ou produtos com frequência. O MCP permite que o operador peça um agente em termos de produto, como “criar um assistente de suporte para políticas de reembolso com o CRM MCP habilitado”, enquanto o assistente de implementação verifica quais modelos, ferramentas, coleções RAG e opções de gateway estão disponíveis na conta.</p>
+<p>Para fluxos de trabalho de produção, mantenha uma etapa de aprovação humana antes de escrever. O MCP pode ajudar a preparar a configuração, explicar os trade‑offs e mostrar a ação de API que pretende executar antes de modificar o estado da conta.</p>
+<h3 id="monitorar-custos-e-escolhas-de-modelo">Monitorar custos e escolhas de modelo</h3>
+<p>O MCP pode ajudar um assistente de operações a investigar padrões de custo e seleção de modelo. Listando modelos e invocando rotas de API de conta para uso, faturamento, gateway ou informações de chave, o assistente pode explicar quais modelos são caros, quais rotas estão usando um multiplicador de assinatura e se um modelo mais barato poderia lidar com parte da carga de trabalho.</p>
+<p>Isso é especialmente útil quando uma equipe possui muitos gateways ou jobs em lote e deseja entender por que o gasto mudou. Em vez de observar apenas os totais, um assistente pode conectar uso a metadados de modelo, disponibilidade de plano, configuração de gateway e escolhas de recursos como RAG, ferramentas, lote ou entrada multimodal.</p>
+<p>Use isso para verificações recorrentes, como “quais gateways provavelmente gerarão custo esta semana?”, “quais famílias de modelos estão sendo mais usadas?” ou “podemos mover este fluxo de trabalho de baixo risco para um modelo menor sem perder capacidades necessárias?”</p>
+<h3 id="entender-erros-e-melhorar-observabilidade">Entender erros e melhorar observabilidade</h3>
+<p>Quando uma integração falha, o MCP de gerenciamento de conta pode ajudar um assistente a passar de um erro genérico para um diagnóstico útil. O assistente pode buscar documentação para a rota ou recurso que falhou, inspecionar recursos da conta através de chamadas de API e comparar a resposta observada com o comportamento esperado.</p>
+<p>Por exemplo, um assistente de suporte pode investigar se uma falha foi causada por uma chave de API expirada, saldo insuficiente, restrições de plano, coleção ausente, rota de provedor desativada, configuração de gateway inválida ou problema de esquema de ferramenta. O resultado é uma explicação mais clara: o que falhou, onde provavelmente falhou, quais evidências sustentam essa conclusão e o que o operador deve verificar a seguir.</p>
+<p>Esse tipo de observabilidade é mais valioso quando o assistente tem permissão para ler o estado relevante da conta, mas não alterá‑lo automaticamente. Conceda acesso de escrita apenas a fluxos de trabalho de manutenção confiáveis.</p>
+<h3 id="metaprompting-e-revisão-de-conversas">Meta‑prompting e revisão de conversas</h3>
+<p>O MCP pode suportar fluxos de trabalho de meta‑prompting onde um assistente revisa conversas anteriores, comportamento de gateway e documentação para sugerir melhorias. O objetivo não é responder novamente ao usuário original; é inspecionar como o agente se comportou e identificar o que pode ser melhorado em prompts, instruções, ferramentas, escolha de modelo ou configuração RAG.</p>
+<p>Um agente de revisão pode procurar padrões como respostas muito longas, perguntas ausentes, seleção errada de ferramenta, loops de clarificação repetidos, suposições inseguras ou respostas que ignoram o contexto recuperado. Em seguida, pode propor mudanças concretas: uma instrução de sistema melhor, descrição de ferramenta mais restrita, esquema de saída estruturada mais forte, modelo diferente ou fonte de recuperação adicional.</p>
+<p>Isso é útil para equipes que tratam assistentes como produtos. Em vez de afinar prompts apenas por intuição, elas podem revisar interações reais e transformar as descobertas em mudanças menores de gateway ou de base de conhecimento.</p>
+<h3 id="identificar-por-que-modelos-falham-em-situações-específicas">Identificar por que modelos falham em situações específicas</h3>
+<p>Algumas falhas de modelo não são causadas apenas pelo modelo. Uma resposta errada pode vir de contexto ausente, prompt fraco, resultado de recuperação ruim, ferramenta indisponível, capacidade de modelo incompatível ou esquema que permite ao modelo produzir saída ambígua.</p>
+<p>Com o contexto da conta disponível através do MCP, um assistente pode investigar essas camadas em conjunto. Ele pode verificar qual modelo foi selecionado, se esse modelo suporta a capacidade necessária, qual configuração de gateway estava ativa, se a coleção RAG relevante existe e qual documentação explica o comportamento esperado.</p>
+<p>Isso ajuda a responder perguntas como “por que o assistente falha quando usuários perguntam sobre reembolsos?”, “por que este modelo ignora uma ferramenta?” ou “por que as respostas degradam quando a solicitação inclui um arquivo?”. O resultado deve ser uma explicação baseada em evidências e uma correção focada, como mudar o modelo, melhorar a descrição da ferramenta, adicionar material de recuperação ou reescrever a instrução do gateway.</p>
+<h3 id="melhorar-a-qualidade-do-rag">Melhorar a qualidade do RAG</h3>
+<p>O MCP de gerenciamento de conta também é útil para manter sistemas RAG. Um assistente pode inspecionar o comportamento da API relacionado a coleções, buscar na documentação da AIVAX orientações de recuperação e ajudar a comparar a configuração do gateway com o fluxo de recuperação pretendido.</p>
+<p>Use-o para investigar recuperação fraca, citações ausentes, trechos irrelevantes, buscas demasiado amplas, documentos de baixa qualidade ou casos em que um gateway deveria usar uma coleção mas não o faz. Um assistente de manutenção de RAG pode sugerir melhor formulação de consultas, mudanças de chunking, organização de coleções, ajustes de reranker, ajustes de <code>top</code> e <code>minScore</code>, ou quando expor uma coleção através do <a href="/docs/pt-br/rag/semantic-search#mcp">collection MCP</a>.</p>
+<p>O melhor fluxo de trabalho é iterativo: inspecionar uma resposta falha, identificar qual contexto deveria ter sido recuperado, testar ou revisar o caminho de recuperação, atualizar documentos ou configurações do gateway e, em seguida, reavaliar o mesmo padrão de conversa.</p>
+<h2 id="orientações-de-segurança">Orientações de segurança</h2>
+<p>Trate este servidor MCP como uma integração administrativa. Uma chave privada conectada a ele pode ler ou modificar recursos da conta dependendo das rotas que o agente invoca.</p>
+<p>Use uma chave de API dedicada para cada cliente ou automação MCP. Rotule-a claramente, defina uma expiração quando possível e rotacione‑a se o cliente for compartilhado, comprometido ou não for mais necessário. Armazene a chave no mecanismo de segredos do cliente MCP ou em um armazenamento de configuração local, não no controle de versão.</p>
+<p>Não conecte o MCP de gerenciamento de conta a agentes não confiáveis, clientes de chat públicos ou sessões de navegador controladas pelo usuário. Se um fluxo de trabalho precisar apenas de recuperação de uma coleção RAG, use o <a href="/docs/pt-br/rag/semantic-search#mcp">collection MCP</a> com configuração somente leitura. Se um gateway precisar chamar suas ferramentas externas durante a inferência, configure <a href="/docs/pt-br/tools/mcp">MCP functions</a> ou <a href="/docs/pt-br/tools/protocol-functions">server‑side functions</a> em vez disso.</p>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/pt-br/tools/account-management-mcp.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>
