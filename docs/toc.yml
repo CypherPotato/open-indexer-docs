@@ -26,8 +26,6 @@
   href: inference/ai-gateway.md
 - name: Inference
   href: inference/inference.md
-- name: Chat handling
-  href: inference/chat-handling.md
 - name: Processing pipeline
   href: inference/pipelines.md
 - name: Structured responses

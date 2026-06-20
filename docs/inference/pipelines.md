@@ -105,7 +105,7 @@ Server-side tools are internal functions executed by AIVAX during inference. The
 - Skills.
 - Optional bash environment.
 
-Server-side tool events can be streamed to clients as `servertool` updates. See [Chat handling](/docs/inference/chat-handling).
+Server-side tool events can be streamed to clients as `servertool` updates.
 
 ## Built-in tools
 

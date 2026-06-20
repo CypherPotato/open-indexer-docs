@@ -42,9 +42,7 @@ AIVAX provides an OpenAI-compatible chat completions endpoint:
 
 <script src="https://inference.aivax.net/apidocs?embed-target=Inference%20(chat%20completions)&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
 
-Gateway values can be overridden by the request for supported parameters such as `temperature`, `top_p`, `seed`, `reasoning_effort`, `max_completion_tokens`, `stop`, `tools`, `response_schema`, `response_format`, `builtin_tools`, `multimodal_preprocess`, and `tool_invocation_explanations`.
-
-For guidance on streaming rendering, reasoning, tools, and JSON-only responses, see [Chat handling](/docs/inference/chat-handling).
+Gateway values can be overridden by the request for supported parameters such as `temperature`, `top_p`, `seed`, `reasoning_effort`, `max_completion_tokens`, `stop`, `tools`, `response_schema`, `response_format`, `builtin_tools`, `multimodal_preprocess`, and `tool_invocation_explanations`. For direct inference behavior, including response rendering options, see [Inference](/docs/inference/inference).
 
 ## Using SDKs
 

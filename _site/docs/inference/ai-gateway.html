@@ -156,8 +156,7 @@
 <h2 id="using-an-ai-gateway">Using an AI Gateway</h2>
 <p>AIVAX provides an OpenAI-compatible chat completions endpoint:</p>
 <script src="https://inference.aivax.net/apidocs?embed-target=Inference%20(chat%20completions)&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
-<p>Gateway values can be overridden by the request for supported parameters such as <code>temperature</code>, <code>top_p</code>, <code>seed</code>, <code>reasoning_effort</code>, <code>max_completion_tokens</code>, <code>stop</code>, <code>tools</code>, <code>response_schema</code>, <code>response_format</code>, <code>builtin_tools</code>, <code>multimodal_preprocess</code>, and <code>tool_invocation_explanations</code>.</p>
-<p>For guidance on streaming rendering, reasoning, tools, and JSON-only responses, see <a href="/docs/inference/chat-handling">Chat handling</a>.</p>
+<p>Gateway values can be overridden by the request for supported parameters such as <code>temperature</code>, <code>top_p</code>, <code>seed</code>, <code>reasoning_effort</code>, <code>max_completion_tokens</code>, <code>stop</code>, <code>tools</code>, <code>response_schema</code>, <code>response_format</code>, <code>builtin_tools</code>, <code>multimodal_preprocess</code>, and <code>tool_invocation_explanations</code>. For direct inference behavior, including response rendering options, see <a href="/docs/inference/inference">Inference</a>.</p>
 <h2 id="using-sdks">Using SDKs</h2>
 <p>Because the endpoint follows the OpenAI chat completions shape, you can use existing OpenAI-compatible SDKs.</p>
 <pre><code class="lang-python">from openai import OpenAI
