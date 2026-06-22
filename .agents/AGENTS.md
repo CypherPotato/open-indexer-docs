@@ -15,7 +15,7 @@
 - `_site/` is generated output and should not be manually edited.
 
 ## Build and Test
-- Full build (includes translation pipeline): run `build.ps1`.
+- Full build (includes translation pipeline): run `build.sh`.
 - Fast rebuild (CSS + DocFX only): run `comp.ps1`.
 - Manual equivalents:
   - `cascadium build`
@@ -34,6 +34,6 @@
 
 ## Key References
 - `readme.md` for setup constraints and contribution notes.
-- `build.ps1` and `comp.ps1` for canonical build workflows.
+- `build.sh` and `comp.ps1` for canonical build workflows.
 - `translate.js` and `clean-translations.js` for translation behavior.
 - `cascadium.json5` for CSS build output mapping.

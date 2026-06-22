@@ -101,6 +101,47 @@ You can also send a simple text request with `prompt`:
 }
 ```
 
+## Request idempotency
+
+Set `idempotency_key` when your integration needs repeat calls to update the same stored conversation record instead of creating a new conversation token. AIVAX uses this value as the internal `ConversationToken` for the AI Gateway context and conversation logging.
+
+```json
+{
+    "model": "0198683a-2b6d-7066-9598-6ea119c219f2",
+    "messages": [
+        {
+            "role": "user",
+            "content": "Summarize order 123."
+        }
+    ],
+    "idempotency_key": "order-123-summary"
+}
+```
+
+The value must be a non-empty string with 128 characters or less. When omitted, AIVAX generates a conversation token automatically.
+
+## Request metadata
+
+Set `metadata` to attach string key/value information to the inference request. AIVAX stores this object with the logged conversation and exposes it to gateway events, so it is useful for operational correlation such as an order ID, tenant, workflow, or internal trace key.
+
+```json
+{
+    "model": "0198683a-2b6d-7066-9598-6ea119c219f2",
+    "messages": [
+        {
+            "role": "user",
+            "content": "Summarize this support ticket."
+        }
+    ],
+    "metadata": {
+        "ticket_id": "SUP-1042",
+        "workflow": "support-triage"
+    }
+}
+```
+
+`metadata` must be a JSON object whose property names and values are strings. Do not place secrets, credentials, payment data, or large payloads in this field.
+
 ## Multimodal pre-processing
 
 Use `multimodal_preprocess` when the main model should receive a textual description of media instead of the original media object. This is useful for text-first models or when you want AIVAX to normalize files before the main inference.

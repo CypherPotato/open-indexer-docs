@@ -125,18 +125,18 @@
                 <article data-uid="">
 <h1 id="inferência">Inferência</h1>
 
-<p>AIVAX expõe uma API <code>chat/completions</code> compatível com OpenAI com parâmetros adicionais da AIVAX. As adições são opcionais e foram projetadas para suportar gateways, RAG, ferramentas integradas, respostas estruturadas, pré-processamento multimodal, roteamento de modelo e metadados de faturamento.</p>
-<p>Use esta página para chamadas de inferência diretas. Use <a href="/docs/pt-br/inference/ai-gateway">AI Gateway</a> quando a mesma configuração precisar ser reutilizada ou gerenciada centralmente.</p>
-<h2 id="ponto-de-extremidade">Ponto de extremidade</h2>
+<p>AIVAX expõe uma API <code>chat/completions</code> compatível com OpenAI com parâmetros adicionais da AIVAX. As adições são opcionais e foram projetadas para suportar gateways, RAG, ferramentas integradas, respostas estruturadas, pré‑processamento multimodal, roteamento de modelo e metadados de faturamento.</p>
+<p>Use esta página para chamadas de inferência diretas. Use o <a href="/docs/pt-br/inference/ai-gateway">AI Gateway</a> quando a mesma configuração precisar ser reutilizada ou gerenciada centralmente.</p>
+<h2 id="endpoint">Endpoint</h2>
 <div class="request-item post">
     <span>POST</span>
     <span>
         /v1/chat/completions
     </span>
 </div>
-<p>O ponto de extremidade também tem o alias de API <code>/api/v1/chat/completions</code>.</p>
+<p>O endpoint também tem o alias de API <code>/api/v1/chat/completions</code>.</p>
 <h2 id="entrada-e-multimodalidade">Entrada e multimodalidade</h2>
-<p>AIVAX aceita partes de conteúdo de mensagem compatíveis com OpenAI para texto, imagens, áudio, vídeos e arquivos. O modelo selecionado deve suportar a modalidade, a menos que você peça à AIVAX para pré-processar a mídia em texto.</p>
+<p>AIVAX aceita partes de conteúdo de mensagem compatíveis com OpenAI para texto, imagens, áudio, vídeos e arquivos. O modelo selecionado deve suportar a modalidade a menos que você peça à AIVAX para pré‑processar a mídia em texto.</p>
 <pre><code class="lang-json">{
     &quot;model&quot;: &quot;@google/gemini-3-flash&quot;,
     &quot;messages&quot;: [
@@ -145,7 +145,7 @@
             &quot;content&quot;: [
                 {
                     &quot;type&quot;: &quot;text&quot;,
-                    &quot;text&quot;: &quot;Descreva brevemente essas entradas.&quot;
+                    &quot;text&quot;: &quot;Describe these inputs briefly.&quot;
                 },
                 {
                     &quot;type&quot;: &quot;image_url&quot;,
@@ -173,12 +173,12 @@
     ]
 }
 </code></pre>
-<p>Mapeamentos de partes de conteúdo suportadas:</p>
+<p>Mapeamentos de partes de conteúdo suportados:</p>
 <ul>
 <li><code>text</code>: Texto simples.</li>
-<li><code>image_url</code>: Conteúdo de imagem. <code>image_url.url</code> pode ser uma URL externa ou uma URL de dados base64. <code>image_url.detail</code> pode ser <code>low</code>, <code>high</code> ou <code>auto</code> quando o modelo suporta.</li>
+<li><code>image_url</code>: Conteúdo de imagem. <code>image_url.url</code> pode ser uma URL externa ou uma URL de dados base64. <code>image_url.detail</code> pode ser <code>low</code>, <code>high</code> ou <code>auto</code> quando o modelo o suporta.</li>
 <li><code>video_url</code>: Conteúdo de vídeo. <code>video_url.url</code> pode ser uma URL externa ou uma URL de dados base64. Prefira URLs para vídeos grandes.</li>
-<li><code>input_audio</code>: Conteúdo de áudio. <code>input_audio.data</code> é dados de áudio em base64, e <code>input_audio.format</code> indica o formato.</li>
+<li><code>input_audio</code>: Conteúdo de áudio. <code>input_audio.data</code> é áudio codificado em base64, e <code>input_audio.format</code> indica o formato.</li>
 <li><code>file</code>: Conteúdo de arquivo. <code>file.filename</code> nomeia o arquivo, e <code>file.file_data</code> pode ser uma URL externa ou uma URL de dados base64.</li>
 </ul>
 <p>Para entrada de vídeo, envie uma parte de conteúdo <code>video_url</code>. Use uma URL publicamente acessível quando possível, especialmente para vídeos grandes:</p>
@@ -190,7 +190,7 @@
             &quot;content&quot;: [
                 {
                     &quot;type&quot;: &quot;text&quot;,
-                    &quot;text&quot;: &quot;Resuma as principais ações neste vídeo e identifique quaisquer riscos de segurança visíveis.&quot;
+                    &quot;text&quot;: &quot;Summarize the main actions in this video and identify any visible safety risks.&quot;
                 },
                 {
                     &quot;type&quot;: &quot;video_url&quot;,
@@ -203,15 +203,46 @@
     ]
 }
 </code></pre>
-<p>Links externos devem ser acessíveis ao AIVAX sem autenticação, restrições de firewall ou renderização apenas em JavaScript. Downloads falhados, redirecionamentos, URLs bloqueadas, formatos não suportados ou limites de tamanho específicos do provedor podem fazer a inferência falhar.</p>
+<p>Links externos devem ser acessíveis ao AIVAX sem autenticação, restrições de firewall ou renderização apenas em JavaScript. Downloads falhos, redirecionamentos, URLs bloqueadas, formatos não suportados ou limites de tamanho específicos do provedor podem fazer a inferência falhar.</p>
 <p>Você também pode enviar uma solicitação de texto simples com <code>prompt</code>:</p>
 <pre><code class="lang-json">{
     &quot;model&quot;: &quot;@google/gemini-3-flash&quot;,
-    &quot;prompt&quot;: &quot;Diga olá&quot;
+    &quot;prompt&quot;: &quot;Say hello&quot;
 }
 </code></pre>
-<h2 id="pré-processamento-multimodal">Pré-processamento multimodal</h2>
-<p>Use <code>multimodal_preprocess</code> quando o modelo principal deve receber uma descrição textual da mídia em vez do objeto de mídia original. Isso é útil para modelos que priorizam texto ou quando você deseja que a AIVAX normalize arquivos antes da inferência principal.</p>
+<h2 id="idempotência-da-requisição">Idempotência da requisição</h2>
+<p>Defina <code>idempotency_key</code> quando sua integração precisar de chamadas repetidas para atualizar o mesmo registro de conversa armazenado ao invés de criar um novo token de conversa. AIVAX usa esse valor como o <code>ConversationToken</code> interno para o contexto do AI Gateway e registro de conversa.</p>
+<pre><code class="lang-json">{
+    &quot;model&quot;: &quot;0198683a-2b6d-7066-9598-6ea119c219f2&quot;,
+    &quot;messages&quot;: [
+        {
+            &quot;role&quot;: &quot;user&quot;,
+            &quot;content&quot;: &quot;Summarize order 123.&quot;
+        }
+    ],
+    &quot;idempotency_key&quot;: &quot;order-123-summary&quot;
+}
+</code></pre>
+<p>O valor deve ser uma string não vazia com 128 caracteres ou menos. Quando omitido, AIVAX gera um token de conversa automaticamente.</p>
+<h2 id="metadados-da-requisição">Metadados da requisição</h2>
+<p>Defina <code>metadata</code> para anexar informações de chave/valor de string à requisição de inferência. AIVAX armazena esse objeto com a conversa registrada e o expõe a eventos de gateway, sendo útil para correlação operacional como ID de pedido, locatário, fluxo de trabalho ou chave de rastreamento interno.</p>
+<pre><code class="lang-json">{
+    &quot;model&quot;: &quot;0198683a-2b6d-7066-9598-6ea119c219f2&quot;,
+    &quot;messages&quot;: [
+        {
+            &quot;role&quot;: &quot;user&quot;,
+            &quot;content&quot;: &quot;Summarize this support ticket.&quot;
+        }
+    ],
+    &quot;metadata&quot;: {
+        &quot;ticket_id&quot;: &quot;SUP-1042&quot;,
+        &quot;workflow&quot;: &quot;support-triage&quot;
+    }
+}
+</code></pre>
+<p><code>metadata</code> deve ser um objeto JSON cujos nomes e valores de propriedades são strings. Não coloque segredos, credenciais, dados de pagamento ou cargas úteis grandes neste campo.</p>
+<h2 id="préprocessamento-multimodal">Pré‑processamento multimodal</h2>
+<p>Use <code>multimodal_preprocess</code> quando o modelo principal deve receber uma descrição textual da mídia ao invés do objeto de mídia original. Isso é útil para modelos que priorizam texto ou quando você quer que a AIVAX normalize arquivos antes da inferência principal.</p>
 <pre><code class="lang-json">{
     &quot;model&quot;: &quot;@meta/llama-3.3-70b&quot;,
     &quot;messages&quot;: [
@@ -220,7 +251,7 @@
             &quot;content&quot;: [
                 {
                     &quot;type&quot;: &quot;text&quot;,
-                    &quot;text&quot;: &quot;Descreva brevemente este arquivo.&quot;
+                    &quot;text&quot;: &quot;Describe this file briefly.&quot;
                 },
                 {
                     &quot;type&quot;: &quot;file&quot;,
@@ -235,7 +266,7 @@
     &quot;multimodal_preprocess&quot;: &quot;File&quot;
 }
 </code></pre>
-<p>Os flags de pré-processamento disponíveis são:</p>
+<p>Bandeiras de pré‑processamento disponíveis:</p>
 <ul>
 <li><code>Image</code></li>
 <li><code>Audio</code></li>
@@ -244,12 +275,12 @@
 <li><code>OtherFiles</code></li>
 <li><code>All</code></li>
 </ul>
-<p>O resolvedor armazena em cache as descrições de mídia por hash de conteúdo para reutilização. O pré-processamento de <code>Image</code>, <code>Audio</code>, <code>Video</code> e PDF <code>File</code> usa inferência multimodal auxiliar. <code>OtherFiles</code> usa o caminho interno de extração para arquivos não-PDF que podem ser convertidos em texto.</p>
+<p>O resolvedor armazena em cache descrições de mídia por hash de conteúdo para reutilização. <code>Image</code>, <code>Audio</code>, <code>Video</code> e o pré‑processamento PDF <code>File</code> usam inferência multimodal auxiliar. <code>OtherFiles</code> usa o caminho interno de extração para arquivos não‑PDF que podem ser convertidos em texto.</p>
 <p>Arquivos e vídeos requerem um saldo mínimo de conta de $0,50. Imagens e áudio requerem um saldo mínimo de conta de $0,10.</p>
-<p>Quando uma inferência multimodal falha, estreite o problema:</p>
+<p>Quando uma inferência multimodal falha, reduza o problema:</p>
 <ol>
 <li>Teste uma mensagem de texto simples com o mesmo modelo.</li>
-<li>Teste um pequeno anexo.</li>
+<li>Teste um anexo pequeno.</li>
 <li>Teste o mesmo anexo com <code>multimodal_preprocess</code>.</li>
 <li>Revise a URL, formato, tamanho, requisito de saldo e suporte à modalidade do modelo.</li>
 </ol>
@@ -257,7 +288,7 @@
 <p>AIVAX suporta respostas estruturadas através de <code>response_schema</code>, <code>response_format</code> e <code>json_only</code>.</p>
 <pre><code class="lang-json">{
     &quot;model&quot;: &quot;@google/gemini-2.5-flash&quot;,
-    &quot;prompt&quot;: &quot;Buscar notícias recentes sobre veículos elétricos.&quot;,
+    &quot;prompt&quot;: &quot;Search for recent news about electric vehicles.&quot;,
     &quot;stream&quot;: true,
     &quot;builtin_tools&quot;: {
         &quot;tools&quot;: [
@@ -277,11 +308,11 @@
                     &quot;properties&quot;: {
                         &quot;title&quot;: {
                             &quot;type&quot;: &quot;string&quot;,
-                            &quot;description&quot;: &quot;Título da notícia&quot;
+                            &quot;description&quot;: &quot;News title&quot;
                         },
                         &quot;summary&quot;: {
                             &quot;type&quot;: &quot;string&quot;,
-                            &quot;description&quot;: &quot;Resumo da notícia&quot;
+                            &quot;description&quot;: &quot;News summary&quot;
                         }
                     },
                     &quot;required&quot;: [&quot;title&quot;, &quot;summary&quot;]
@@ -292,13 +323,13 @@
     }
 }
 </code></pre>
-<p><code>response_schema</code> habilita JSON Healing. AIVAX pede ao modelo JSON, extrai JSON do texto ou blocos de markdown gerados, valida contra o esquema e tenta novamente com feedback de validação até que a saída seja válida ou o limite de tentativas seja alcançado.</p>
-<p>Leia mais sobre <a href="/docs/pt-br/inference/structured-responses">Respostas estruturadas</a>.</p>
+<p><code>response_schema</code> habilita a Cura JSON. AIVAX solicita ao modelo JSON, extrai JSON do texto ou blocos markdown gerados, valida contra o esquema e tenta novamente com feedback de validação até que a saída seja válida ou o limite de tentativas seja atingido.</p>
+<p>Leia mais sobre <a href="/docs/pt-br/inference/structured-responses">Structured responses</a>.</p>
 <h2 id="funções-sob-demanda">Funções sob demanda</h2>
-<p>Use <code>builtin_tools</code> para habilitar ferramentas integradas da AIVAX para uma solicitação direta sem criar um gateway:</p>
+<p>Use <code>builtin_tools</code> para habilitar ferramentas integradas da AIVAX para uma requisição direta sem criar um gateway:</p>
 <pre><code class="lang-json">{
     &quot;model&quot;: &quot;@google/gemini-2.5-flash&quot;,
-    &quot;prompt&quot;: &quot;Buscar notícias recentes sobre veículos elétricos.&quot;,
+    &quot;prompt&quot;: &quot;Search for recent news about electric vehicles.&quot;,
     &quot;stream&quot;: true,
     &quot;builtin_tools&quot;: {
         &quot;tools&quot;: [
@@ -312,15 +343,15 @@
 }
 </code></pre>
 <p>Ferramentas integradas incluem <code>WebSearch</code>, <code>AdvancedWebUsage</code>, <code>OpenUrl</code>, <code>Code</code>, <code>Request</code>, <code>Calendar</code>, <code>Remember</code>, <code>GenerateWebPage</code>, <code>GenerateDocument</code>, <code>XPostsSearch</code> e <code>ImageGeneration</code>.</p>
-<p>Ferramentas sob demanda são adequadas para chamadas ocasionais, protótipos e integrações que não precisam de um gateway persistente. Se a mesma aplicação sempre usar as mesmas ferramentas, prefira configurá-las em um AI Gateway para que a política seja centralizada.</p>
-<h2 id="corpo-de-solicitação-de-provedor-personalizado">Corpo de solicitação de provedor personalizado</h2>
-<p>Quando um gateway usa uma chave de API fornecida e um endpoint de provedor compatível com OpenAI, <code>extra_body</code> pode mesclar JSON personalizado no corpo da solicitação ao provedor:</p>
+<p>Ferramentas sob demanda são adequadas para chamadas ocasionais, protótipos e integrações que não precisam de um gateway persistente. Se a mesma aplicação sempre usar as mesmas ferramentas, prefira configurá‑las em um AI Gateway para que a política seja centralizada.</p>
+<h2 id="corpo-da-requisição-do-provedor-personalizado">Corpo da requisição do provedor personalizado</h2>
+<p>Quando um gateway usa uma chave de API fornecida e um endpoint de provedor compatível com OpenAI, <code>extra_body</code> pode mesclar JSON personalizado ao corpo da requisição do provedor:</p>
 <pre><code class="lang-json">{
     &quot;model&quot;: &quot;my-custom-model:abc4&quot;,
     &quot;messages&quot;: [
         {
             &quot;role&quot;: &quot;user&quot;,
-            &quot;content&quot;: &quot;Explique o trade‑off.&quot;
+            &quot;content&quot;: &quot;Explain the tradeoff.&quot;
         }
     ],
     &quot;extra_body&quot;: {
@@ -330,15 +361,15 @@
     }
 }
 </code></pre>
-<p><code>extra_body</code> não é permitido com modelos AIVAX integrados.</p>
-<h2 id="explicações-de-ferramentas">Explicações de ferramentas</h2>
-<p>Defina <code>tool_invocation_explanations: true</code> para pedir à AIVAX que inclua campos de explicação nos argumentos de ferramentas no lado do servidor. Quando o modelo fornece <code>_tool_reason</code> e <code>_tool_goal</code>, <code>servertool.explanation</code> contém uma cópia amigável ao cliente:</p>
+<p><code>extra_body</code> não é permitido com modelos integrados da AIVAX.</p>
+<h2 id="explicações-de-ferramenta">Explicações de ferramenta</h2>
+<p>Defina <code>tool_invocation_explanations: true</code> para pedir à AIVAX que inclua campos de explicação nos argumentos de ferramenta do lado do servidor. Quando o modelo fornece <code>_tool_reason</code> e <code>_tool_goal</code>, <code>servertool.explanation</code> contém uma cópia amigável ao cliente:</p>
 <pre><code class="lang-json">{
     &quot;model&quot;: &quot;@x-ai/grok-4.3&quot;,
     &quot;messages&quot;: [
         {
             &quot;role&quot;: &quot;user&quot;,
-            &quot;content&quot;: &quot;Qual é a previsão do tempo para hoje?&quot;
+            &quot;content&quot;: &quot;What's the weather forecast for today?&quot;
         }
     ],
     &quot;stream&quot;: true,
@@ -354,24 +385,24 @@
     &quot;servertool&quot;: {
         &quot;name&quot;: &quot;web_search&quot;,
         &quot;id&quot;: &quot;call-70944e44-fbc5-4906-9f9f-99559c05db11-0&quot;,
-        &quot;contents&quot;: &quot;{\&quot;query\&quot;:\&quot;previsão do tempo hoje\&quot;,\&quot;_tool_reason\&quot;:\&quot;Procurando a previsão do tempo de hoje online\&quot;,\&quot;_tool_goal\&quot;:\&quot;Preciso de informações atuais do tempo para responder com precisão.\&quot;}&quot;,
+        &quot;contents&quot;: &quot;{\&quot;query\&quot;:\&quot;weather forecast today\&quot;,\&quot;_tool_reason\&quot;:\&quot;Searching for today's weather forecast online\&quot;,\&quot;_tool_goal\&quot;:\&quot;I need current weather information to answer accurately.\&quot;}&quot;,
         &quot;state&quot;: &quot;Created&quot;,
         &quot;explanation&quot;: {
-            &quot;reason&quot;: &quot;Procurando a previsão do tempo de hoje online&quot;,
-            &quot;goal&quot;: &quot;Preciso de informações atuais do tempo para responder com precisão.&quot;
+            &quot;reason&quot;: &quot;Searching for today's weather forecast online&quot;,
+            &quot;goal&quot;: &quot;I need current weather information to answer accurately.&quot;
         }
     },
     &quot;usage&quot;: null
 }
 </code></pre>
-<h2 id="modo-de-renderização-de-resposta">Modo de renderização de resposta</h2>
-<p>Defina <code>rendering_mode: &quot;textual_blocks&quot;</code> quando seu cliente deseja que a AIVAX coloque o raciocínio e a atividade de ferramentas no lado do servidor no mesmo fluxo de resposta textual que a interface de chat já renderiza. Isso é útil para clientes que constroem uma linha do tempo única de resposta e desejam transformar o raciocínio e a atividade de ferramentas em componentes visíveis sem manter caminhos de tratamento de eventos separados para cada tipo de marcador.</p>
+<h2 id="modo-de-renderização-da-resposta">Modo de renderização da resposta</h2>
+<p>Defina <code>rendering_mode: &quot;textual_blocks&quot;</code> quando seu cliente quiser que a AIVAX coloque raciocínio e atividade de ferramenta do lado do servidor no mesmo fluxo de resposta textual que a UI de chat já renderiza. Isso é útil para clientes que constroem uma única linha do tempo de resposta e desejam transformar raciocínio e atividade de ferramenta em componentes visíveis sem manter caminhos de tratamento de eventos separados para cada tipo de marcador.</p>
 <pre><code class="lang-json">{
     &quot;model&quot;: &quot;@openai/gpt-5-mini&quot;,
     &quot;messages&quot;: [
         {
             &quot;role&quot;: &quot;user&quot;,
-            &quot;content&quot;: &quot;Buscar atualizações recentes de produtos e resumir as mudanças importantes.&quot;
+            &quot;content&quot;: &quot;Search for recent product updates and summarize the important changes.&quot;
         }
     ],
     &quot;stream&quot;: true,
@@ -381,16 +412,16 @@
     &quot;rendering_mode&quot;: &quot;textual_blocks&quot;
 }
 </code></pre>
-<p>Neste modo, o raciocínio pode ser emitido como blocos <code>&lt;thinking-group&gt;</code> e <code>&lt;think&gt;</code>, o texto voltado ao assistente pode ser emitido como blocos <code>&lt;assistant-answer&gt;</code>, e marcadores de ferramentas no lado do servidor podem aparecer como elementos de resultado de ferramenta como <code>&lt;div class=&quot;tool-result reason&quot; data-tool-name=&quot;...&quot;&gt;</code>. Trate esses blocos como marcadores de apresentação dentro do fluxo de resposta: analise-os em componentes da linha do tempo de chat, seções de raciocínio recolhíveis, fragmentos de resposta do assistente ou linhas de status de ferramenta, mas não concatene cegamente cada marcador na resposta final do assistente.</p>
-<p>Clientes que não entendem essa marcação devem manter o modo de renderização padrão e lidar diretamente com os eventos de stream estruturados. No modo padrão, o raciocínio chega através de <code>delta.reasoning</code>, e a atividade de ferramentas no lado do servidor chega através de eventos <code>servertool</code>. Preserve a ordem em que os eventos de stream chegam para que o raciocínio, a atividade de ferramenta, o conteúdo parcial e a resposta final permaneçam na mesma linha do tempo de resposta.</p>
-<h3 id="exemplo-de-múltiplas-trocas-brutas">Exemplo de múltiplas trocas brutas</h3>
-<p>O exemplo abaixo mostra o formato de uma resposta transmitida quando o raciocínio no lado do servidor está visível ao cliente, <code>tool_invocation_explanations</code> está habilitado e <code>textual_blocks</code> é usado para manter a linha do tempo da resposta textual. Os atributos exatos do resultado da ferramenta podem variar por renderizador, mas o comportamento importante é a ordem: raciocínio, fragmentos de resposta do assistente, atividade da ferramenta, mais raciocínio e a resposta final podem todos pertencer à mesma troca do assistente.</p>
+<p>Neste modo, o raciocínio pode ser emitido como blocos <code>&lt;thinking-group&gt;</code> e <code>&lt;think&gt;</code>, o texto voltado ao assistente pode ser emitido como blocos <code>&lt;assistant-answer&gt;</code>, e marcadores de ferramenta do lado do servidor podem aparecer como elementos de resultado de ferramenta como <code>&lt;div class=&quot;tool-result reason&quot; data-tool-name=&quot;...&quot;&gt;</code>. Trate esses blocos como marcadores de apresentação dentro do stream de resposta: analise‑os em componentes da linha do tempo de chat, seções de raciocínio recolhíveis, fragmentos de resposta do assistente ou linhas de status de ferramenta, mas não concatene cegamente cada marcador na resposta final do assistente.</p>
+<p>Clientes que não entendem essa marcação devem manter o modo de renderização padrão e lidar diretamente com os eventos de stream estruturados. No modo padrão, o raciocínio chega via <code>delta.reasoning</code>, e a atividade de ferramenta do lado do servidor chega via eventos <code>servertool</code>. Preserve a ordem em que os eventos de stream chegam para que raciocínio, atividade de ferramenta, conteúdo parcial e a resposta final permaneçam na mesma linha do tempo de resposta.</p>
+<h3 id="exemplo-de-multiturn-bruto">Exemplo de multi‑turn bruto</h3>
+<p>O exemplo abaixo mostra a forma de uma resposta em stream quando o raciocínio do lado do servidor é visível ao cliente, <code>tool_invocation_explanations</code> está habilitado e <code>textual_blocks</code> é usado para manter a linha do tempo textual. Os atributos exatos do resultado da ferramenta podem variar por renderizador, mas o comportamento importante é a ordenação: raciocínio, fragmentos de resposta do assistente, atividade de ferramenta, mais raciocínio e a resposta final podem pertencer ao mesmo turno do assistente.</p>
 <pre><code class="lang-json">{
     &quot;model&quot;: &quot;my-custom-model:abc4&quot;,
     &quot;messages&quot;: [
         {
             &quot;role&quot;: &quot;user&quot;,
-            &quot;content&quot;: &quot;Quais modelos multimodais baratos e rápidos devo usar para análise de câmera de segurança?&quot;
+            &quot;content&quot;: &quot;Which cheap and fast multimodal models should I use for security camera analysis?&quot;
         }
     ],
     &quot;stream&quot;: true,
@@ -406,16 +437,16 @@
     }
 }
 </code></pre>
-<p>Linha do tempo do assistente transmitida:</p>
+<p>Linha do tempo do assistente em stream bruto:</p>
 <pre><code class="lang-text">&lt;thinking-group&gt;
 &lt;think&gt;
-O usuário está pedindo modelos multimodais baratos e rápidos para análise de câmera de segurança.
-Eu devo listar os modelos AIVAX disponíveis e pesquisar a documentação antes de recomendar opções.
+The user is asking for cheap, fast multimodal models for security camera analysis.
+I should list available AIVAX models and search the documentation before recommending options.
 &lt;/think&gt;
 &lt;/thinking-group&gt;
 
 &lt;assistant-answer&gt;
-Vou verificar os modelos multimodais disponíveis e identificar as melhores opções para análise de câmera de segurança.
+I will check the available multimodal models and identify the best options for security camera analysis.
 &lt;/assistant-answer&gt;
 
 &lt;thinking-group&gt;
@@ -424,38 +455,38 @@ Vou verificar os modelos multimodais disponíveis e identificar as melhores opç
 &lt;div class=&quot;tool-result reason&quot; data-tool-name=&quot;aivax_search_context&quot;&gt;&lt;b&gt;aivax_search_context&lt;/b&gt;&lt;span&gt;Searching documentation about multimodal models and image analysis in AIVAX&lt;/span&gt;&lt;/div&gt;
 
 &lt;think&gt;
-Os modelos relevantes devem suportar VideoInput ou ImageInput, ter custo de entrada baixo e ser rápidos o suficiente para fluxos de trabalho de câmera.
-Encontrei vários candidatos e devo classificá-los por custo, velocidade e suporte à modalidade.
+The relevant models should support VideoInput or ImageInput, have low input cost, and be fast enough for camera workflows.
+I found several candidates and should rank them by cost, speed, and modality support.
 &lt;/think&gt;
 &lt;/thinking-group&gt;
 
 &lt;assistant-answer&gt;
-Para análise de câmera de segurança, priorize modelos com VideoInput, preço de entrada baixo e alta velocidade.
+For security camera analysis, prioritize models with VideoInput, low input pricing, and high speed.
 
-Principais escolhas:
+Top picks:
 
-1. @google/gemini-2.5-flash-lite: rápido, barato e suporta vídeo.
-2. @qwen/qwen3.5-9b: o menor custo de entrada com suporte a vídeo.
-3. @amazon/nova-lite: baixo custo de entrada e uma grande janela de contexto.
+1. @google/gemini-2.5-flash-lite: fast, inexpensive, and supports video.
+2. @qwen/qwen3.5-9b: the lowest input cost with video support.
+3. @amazon/nova-lite: low input cost and a large context window.
 
-Use VideoInput para clipes quando possível. Se um modelo suportar apenas ImageInput, extraia quadros do fluxo da câmera antes de enviá‑los.
+Use VideoInput for clips when possible. If a model only supports ImageInput, extract frames from the camera stream before sending them.
 &lt;/assistant-answer&gt;
 </code></pre>
-<p>Quando o usuário responde, mantenha o histórico da conversa focado no resultado visível do assistente. Armazene o raciocínio e os detalhes da ferramenta como linha do tempo ou metadados de auditoria se seu produto precisar, mas não os transforme em uma nova mensagem de usuário. A mensagem do assistente deve usar o conteúdo do bloco <code>&lt;assistant-answer&gt;</code> final, não a transcrição completa do raciocínio.</p>
+<p>Quando o usuário responde, mantenha o histórico da conversa focado no resultado visível ao usuário. Armazene o raciocínio e detalhes da ferramenta como metadados de linha do tempo ou auditoria se seu produto precisar, mas não os transforme em uma nova mensagem de usuário. A mensagem do assistente deve usar o conteúdo do bloco <code>&lt;assistant-answer&gt;</code> final, não a transcrição completa do raciocínio.</p>
 <pre><code class="lang-json">{
     &quot;model&quot;: &quot;my-custom-model:abc4&quot;,
     &quot;messages&quot;: [
         {
             &quot;role&quot;: &quot;user&quot;,
-            &quot;content&quot;: &quot;Quais modelos multimodais baratos e rápidos devo usar para análise de câmera de segurança?&quot;
+            &quot;content&quot;: &quot;Which cheap and fast multimodal models should I use for security camera analysis?&quot;
         },
         {
             &quot;role&quot;: &quot;assistant&quot;,
-            &quot;content&quot;: &quot;Para análise de câmera de segurança, priorize modelos com VideoInput, preço de entrada baixo e alta velocidade.\n\nPrincipais escolhas:\n\n1. @google/gemini-2.5-flash-lite: rápido, barato e suporta vídeo.\n2. @qwen/qwen3.5-9b: o menor custo de entrada com suporte a vídeo.\n3. @amazon/nova-lite: baixo custo de entrada e uma grande janela de contexto.\n\nUse VideoInput para clipes quando possível. Se um modelo suportar apenas ImageInput, extraia quadros do fluxo da câmera antes de enviá‑los.&quot;
+            &quot;content&quot;: &quot;For security camera analysis, prioritize models with VideoInput, low input pricing, and high speed.\n\nTop picks:\n\n1. @google/gemini-2.5-flash-lite: fast, inexpensive, and supports video.\n2. @qwen/qwen3.5-9b: the lowest input cost with video support.\n3. @amazon/nova-lite: low input cost and a large context window.\n\nUse VideoInput for clips when possible. If a model only supports ImageInput, extract frames from the camera stream before sending them.&quot;
         },
         {
             &quot;role&quot;: &quot;user&quot;,
-            &quot;content&quot;: &quot;Agora recomende um modelo para alertas em tempo real e outro para revisão mais profunda.&quot;
+            &quot;content&quot;: &quot;Now recommend one model for real-time alerts and one for deeper review.&quot;
         }
     ],
     &quot;stream&quot;: true,
@@ -472,22 +503,22 @@ Use VideoInput para clipes quando possível. Se um modelo suportar apenas ImageI
 }
 </code></pre>
 <h3 id="orientação-de-apresentação">Orientação de apresentação</h3>
-<p>Durante a geração, o raciocínio é útil porque permite que o usuário acompanhe o que o modelo está fazendo antes que a resposta final exista. O assistente pode “falar” enquanto raciocina emitindo atualizações de processo voltadas ao usuário ou fragmentos de resposta provisórios. Essas atualizações podem ser intercaladas com blocos de raciocínio, chamadas de ferramenta e conteúdo parcial da resposta à medida que a resposta se desenvolve.</p>
-<p>Quando a resposta final do assistente é gerada, essa resposta se torna o principal produto da inferência. O raciocínio intermediário ainda é útil para auditoria, orientação e depuração, mas geralmente deixa de ser o objetivo principal do usuário. Recolha ou minimize o raciocínio por padrão após a conclusão, para que a resposta final receba a   visual, mantendo o processo disponível para usuários que desejam inspecioná‑lo.</p>
-<p>Use divulgação progressiva ao longo desse ciclo de vida. O raciocínio pode ser visível enquanto o modelo ainda está trabalhando, depois tornar‑se um elemento secundário mais discreto após a aparição da resposta final. A atividade da ferramenta deve ser lida como status, não como fala: use rótulos concisos como “Searching”, “Opening source”, “Running tool”, “Finished” ou “Failed”, e mantenha cada invocação de ferramenta agrupada como um item da linha do tempo, mesmo que seu estado mude ao longo do tempo.</p>
+<p>Durante a geração, o raciocínio é útil porque permite que o usuário acompanhe o que o modelo está fazendo antes que a resposta final exista. O assistente pode “falar” enquanto raciocina emitindo atualizações de processo voltadas ao usuário ou fragmentos de resposta provisórios. Essas atualizações podem ser intercaladas com blocos de raciocínio, chamadas de ferramenta e conteúdo parcial da resposta conforme a resposta se desenvolve.</p>
+<p>Quando a resposta final do assistente é gerada, essa resposta se torna o principal produto da inferência. O raciocínio intermediário ainda é útil para auditoria, orientação e depuração, mas geralmente deixa de ser o objetivo principal do usuário. Colapse ou minimize o raciocínio por padrão após a conclusão para que a resposta final receba a   visual, mantendo o processo disponível para usuários que desejam inspecioná‑lo.</p>
+<p>Use revelação progressiva ao longo desse ciclo de vida. O raciocínio pode ser visível enquanto o modelo ainda está trabalhando, depois se tornar um elemento secundário mais discreto após a aparição da resposta final. A atividade de ferramenta deve ser lida como status, não como discurso: use rótulos concisos como “Searching”, “Opening source”, “Running tool”, “Finished” ou “Failed”, e mantenha cada invocação de ferramenta agrupada como um item da linha do tempo, mesmo que seu estado mude ao longo do tempo.</p>
 <p>Uma boa hierarquia visual é:</p>
 <ul>
 <li>Resposta do assistente: maior destaque, tipografia de leitura normal, parte da conversa principal.</li>
 <li>Raciocínio em progresso: visível o suficiente para mostrar o que o modelo está fazendo enquanto a resposta está sendo gerada.</li>
 <li>Raciocínio concluído: menor destaque, cor ou contêiner atenuado, recolhido ou minimizado por padrão.</li>
-<li>Blocos de ferramenta: linhas de status compactas com indicações claras de carregamento, sucesso e erro.</li>
-<li>Detalhes brutos: ocultos por padrão, a menos que o cliente seja um desenvolvedor, auditoria ou superfície de depuração.</li>
+<li>Blocos de ferramenta: linhas de status compactas com carregamento, sucesso e erros claros.</li>
+<li>Detalhes brutos: ocultos por padrão, a menos que o cliente seja desenvolvedor, auditor ou superfície de depuração.</li>
 </ul>
-<p>Evite expor detalhes internos ruidosos diretamente aos usuários finais. Mostre nomes de ferramentas, estados, rótulos de origem ou resumos curtos quando ajudarem o usuário a entender o que aconteceu. Oculte argumentos brutos, cargas úteis grandes e detalhes de implementação, a menos que o usuário solicite explicitamente detalhes ou a superfície do produto seja projetada para inspeção técnica.</p>
-<p>Para acessibilidade, torne cada bloco recolhido acionável por teclado, dê a cada linha de status um rótulo legível, evite depender apenas de cor para indicar estado e mantenha o movimento sutil. Uma resposta de streaming deve parecer estável enquanto atualiza: novos raciocínios ou linhas de ferramenta podem aparecer em ordem, mas o conteúdo existente não deve pular ou forçar o usuário a perder a posição de leitura.</p>
+<p>Evite expor ruídos internos diretamente aos usuários finais. Mostre nomes de ferramenta, estados, rótulos de origem ou resumos curtos quando ajudarem o usuário a entender o que aconteceu. Oculte argumentos brutos, cargas úteis grandes e detalhes de implementação, a menos que o usuário solicite explicitamente detalhes ou a superfície do produto seja projetada para inspeção técnica.</p>
+<p>Para acessibilidade, torne cada bloco recolhível acionável por teclado, dê a cada linha de status um rótulo legível, evite depender apenas de cor para estado e mantenha o movimento sutil. Uma resposta em streaming deve parecer estável enquanto atualiza: novos raciocínios ou linhas de ferramenta podem aparecer em ordem, mas o conteúdo existente não deve pular ou forçar o usuário a perder a posição de leitura.</p>
 <h2 id="chamada-direta-ou-gateway">Chamada direta ou gateway</h2>
-<p>Use uma chamada direta para tarefas simples, testes, rotinas internas e integrações onde a aplicação controla o modelo, prompt, ferramentas e contexto para cada solicitação.</p>
-<p>Use um AI Gateway quando o comportamento precisa ser estável, auditável e reutilizável. Gateways são melhores para assistentes de suporte, bots de chat, agentes RAG, ferramentas permanentes, trabalhadores, habilidades e configurações compartilhadas por múltiplos clientes.</p>
+<p>Use uma chamada direta para tarefas simples, testes, rotinas internas e integrações onde a aplicação controla o modelo, prompt, ferramentas e contexto para cada requisição.</p>
+<p>Use um AI Gateway quando o comportamento precisar ser estável, auditável e reutilizável. Gateways são melhores para assistentes de suporte, chatbots, agentes RAG, ferramentas permanentes, trabalhadores, habilidades e configurações compartilhadas por múltiplos clientes.</p>
 
 </article>
 

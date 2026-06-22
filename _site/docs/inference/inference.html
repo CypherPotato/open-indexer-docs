@@ -210,6 +210,37 @@
     &quot;prompt&quot;: &quot;Say hello&quot;
 }
 </code></pre>
+<h2 id="request-idempotency">Request idempotency</h2>
+<p>Set <code>idempotency_key</code> when your integration needs repeat calls to update the same stored conversation record instead of creating a new conversation token. AIVAX uses this value as the internal <code>ConversationToken</code> for the AI Gateway context and conversation logging.</p>
+<pre><code class="lang-json">{
+    &quot;model&quot;: &quot;0198683a-2b6d-7066-9598-6ea119c219f2&quot;,
+    &quot;messages&quot;: [
+        {
+            &quot;role&quot;: &quot;user&quot;,
+            &quot;content&quot;: &quot;Summarize order 123.&quot;
+        }
+    ],
+    &quot;idempotency_key&quot;: &quot;order-123-summary&quot;
+}
+</code></pre>
+<p>The value must be a non-empty string with 128 characters or less. When omitted, AIVAX generates a conversation token automatically.</p>
+<h2 id="request-metadata">Request metadata</h2>
+<p>Set <code>metadata</code> to attach string key/value information to the inference request. AIVAX stores this object with the logged conversation and exposes it to gateway events, so it is useful for operational correlation such as an order ID, tenant, workflow, or internal trace key.</p>
+<pre><code class="lang-json">{
+    &quot;model&quot;: &quot;0198683a-2b6d-7066-9598-6ea119c219f2&quot;,
+    &quot;messages&quot;: [
+        {
+            &quot;role&quot;: &quot;user&quot;,
+            &quot;content&quot;: &quot;Summarize this support ticket.&quot;
+        }
+    ],
+    &quot;metadata&quot;: {
+        &quot;ticket_id&quot;: &quot;SUP-1042&quot;,
+        &quot;workflow&quot;: &quot;support-triage&quot;
+    }
+}
+</code></pre>
+<p><code>metadata</code> must be a JSON object whose property names and values are strings. Do not place secrets, credentials, payment data, or large payloads in this field.</p>
 <h2 id="multimodal-pre-processing">Multimodal pre-processing</h2>
 <p>Use <code>multimodal_preprocess</code> when the main model should receive a textual description of media instead of the original media object. This is useful for text-first models or when you want AIVAX to normalize files before the main inference.</p>
 <pre><code class="lang-json">{
