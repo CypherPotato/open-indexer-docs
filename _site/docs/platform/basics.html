@@ -2,14 +2,14 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Getting Started | AIVAX </title>
+        <title>Platform basics | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="Getting Started | AIVAX ">
+        <meta name="title" content="Platform basics | AIVAX ">
 
 
-        <link rel="icon" href="../assets/img/favicon.ico">
-        <link rel="stylesheet" href="../public/docfx.min.css">
-        <link rel="stylesheet" href="../public/main.css">
+        <link rel="icon" href="../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../public/main.css">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,13 +17,13 @@
         
         <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
 
-        <meta name="docfx:navrel" content="../toc.html">
-        <meta name="docfx:tocrel" content="toc.html">
+        <meta name="docfx:navrel" content="../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
 
-        <meta name="docfx:rel" content="../">
+        <meta name="docfx:rel" content="../../">
 
 
-        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/getting-started.md/#L1">
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/platform/basics.md/#L1">
         <meta name="loc:inThisArticle" content="In this article">
         <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
         <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -37,7 +37,7 @@
         <meta name="loc:copy" content="Copy">
         <meta name="loc:downloadPdf" content="Download PDF">
         
-        <script type="module" src="./../public/docfx.min.js"></script>
+        <script type="module" src="./../../public/docfx.min.js"></script>
         <script>
             const theme = localStorage.getItem('theme') || 'auto';
             document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
@@ -61,8 +61,8 @@
         <header class="bg-body border-bottom">
             <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
                 <div class="container-xxl flex-nowrap">
-                    <a class="navbar-brand" href="../index.html">
-                        <img id="logo" class="svg" src="../assets/img/aivax.png" alt="AIVAX">
+                    <a class="navbar-brand" href="../../index.html">
+                        <img id="logo" class="svg" src="../../assets/img/aivax.png" alt="AIVAX">
                         AIVAX
                     </a>
                     <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
@@ -123,140 +123,159 @@
                 </div>
 
                 <article data-uid="">
-<h1 id="getting-started">Getting Started</h1>
+<h1 id="platform-basics">Platform basics</h1>
 
-<p>This guide shows the shortest path from an AIVAX account to a first OpenAI-compatible chat completion.</p>
+<p>Use the AIVAX console when you need to configure and monitor the resources that power your AI applications: models, AI Gateways, RAG collections, chat clients, batch jobs, skills, logs, conversations, memories, account usage, and billing.</p>
+<p>This page is for account operators and builders who are signing in to the console for the first time or need a reliable mental model for moving around the platform. If you are integrating through code instead of using the console, start with <a href="/docs/getting-started">Getting Started</a> and <a href="/docs/authentication">Authentication</a>.</p>
 <h2 id="before-you-begin">Before you begin</h2>
-<p>You need:</p>
+<p>You need an AIVAX account and a 14-character alphanumeric login key. A login key signs you in to the console. It is different from an API key: API keys authenticate applications and integrations, while the login key authenticates a person or operator in the browser.</p>
+<p>Keep login keys private. Do not paste them into support tickets, public chat clients, source code, screenshots, or shared documents. If an API key may have been exposed, revoke it from account management. If a hook key may have been exposed, reset it. If a login key may have been exposed, sign out of shared browsers and use the supported account recovery or support process; signing out does not rotate the login key.</p>
+<h2 id="sign-in">Sign in</h2>
+<p>Open the <a href="https://console.aivax.net/">AIVAX console</a> and enter your login key on the Login page. The login form accepts the key as a 14-character value and signs you in automatically when the key is complete.</p>
+<p>If you do not have an account yet, use <strong>Register</strong> on the Login page. Registration asks for a full name and email address, then sends a verification email containing the login key. Use an email address that can receive operational account messages, because it may later be used for account-related notices.</p>
+<p>After signing in, AIVAX opens the dashboard. If you were sent to the login page while trying to open a protected console URL, the console returns you to the intended page after authentication.</p>
+<h2 id="understand-the-dashboard">Understand the dashboard</h2>
+<p>The dashboard is the console home page. It helps you answer two first questions:</p>
 <ul>
-<li>An AIVAX account.</li>
-<li>A private API key from the account dashboard or API key endpoint.</li>
-<li>Enough account balance for the operation. Some routes only require the balance not to be negative, while chat clients, integrations, batch processing, and multimodal inputs can require a strictly positive or minimum balance.</li>
-<li>Either a hosted model name or an AI Gateway ID.</li>
+<li>Is this the right account?</li>
+<li>Is the account ready to make requests?</li>
 </ul>
-<p>Production API base URL:</p>
-<pre><code class="lang-text">https://inference.aivax.net
-</code></pre>
-<p>OpenAI-compatible SDK base URL:</p>
-<pre><code class="lang-text">https://inference.aivax.net/v1
-</code></pre>
-<h2 id="1-create-an-api-key">1. Create an API key</h2>
-<p>Use a <strong>private</strong> API key for server-side calls. Private keys are generated with the <code>sk-aiv-acc</code> prefix and can call authenticated account APIs and OpenAI-compatible inference endpoints.</p>
-<p>Public keys use the <code>pk-aiv-</code> prefix. They are intended for restricted client-side use on public routes, such as public RAG query/answer routes and restricted chat completions. They cannot call account-management endpoints.</p>
-<p>For most first integrations, start with a private key from a backend service. It gives you the complete account surface: model listing, chat completions, AI Gateways, RAG collections, batch workflows, and administrative APIs. Public keys are useful later, when you intentionally expose a restricted capability to a browser or another client-side environment.</p>
-<p>See <a href="authentication.html">Authentication</a> for key types, accepted auth schemes, and hook validation. If the next thing you want to build is an end-user widget instead of a backend integration, also read <a href="features/chat-clients.html">Chat Clients</a>, because chat sessions solve identity, conversation history, attachments, and per-user limits more directly than a raw public key.</p>
-<h2 id="2-find-a-model-or-gateway-id">2. Find a model or gateway ID</h2>
-<p>You can call either:</p>
-<ul>
-<li>A hosted model name returned by the model listing endpoint.</li>
-<li>A gateway identifier from your account.</li>
-</ul>
-<p>Gateway slugs are supported for private keys. Public-key chat completions must use the full gateway UUID and cannot call integrated models directly.</p>
-<p>Use a hosted model name when you only need a direct model call. Use an AI Gateway when you want reusable behavior: instructions, RAG collections, built-in tools, workers, MCP servers, protocol functions, skills, moderation, or provider settings. A gateway becomes the stable &quot;assistant configuration&quot; your application can call repeatedly without rebuilding the same options in every request.</p>
-<p>If you are still exploring, list models first and make one direct call. When the prompt, tools, or retrieval rules start becoming part of the product, move that configuration into an <a href="inference/ai-gateway.html">AI Gateway</a>.</p>
-<p>Reference:</p>
-<script src="https://inference.aivax.net/apidocs?embed-target=Model%20listing&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
-<h2 id="3-make-a-chat-completion-request">3. Make a chat-completion request</h2>
-<p>Install the OpenAI SDK for your language, then point it to AIVAX:</p>
-<pre><code class="lang-python">from openai import OpenAI
-
-client = OpenAI(
-    base_url=&quot;https://inference.aivax.net/v1&quot;,
-    api_key=&quot;sk-aiv-acc...&quot;
-)
-
-response = client.chat.completions.create(
-    model=&quot;&lt;MODEL_OR_GATEWAY_ID&gt;&quot;,
-    messages=[
-        {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Write a one-sentence welcome message.&quot;}
-    ]
-)
-
-print(response.choices[0].message.content)
-</code></pre>
-<p>Replace <code>&lt;MODEL_OR_GATEWAY_ID&gt;</code> with an integrated model name or a gateway ID available to your account.</p>
-<p>This request is intentionally small: one user message, one model or gateway, and one response. After it works, you can add the product pieces one at a time. For structured JSON output, see <a href="inference/structured-responses.html">Structured Responses</a>. To retrieve knowledge from documents before answering, create a <a href="rag/collections.html">RAG collection</a> and attach it to a gateway. To let the model call external systems, compare <a href="tools/builtin-tools.html">Built-in Tools</a>, <a href="tools/mcp.html">MCP</a>, and <a href="tools/protocol-functions.html">Protocol Functions</a>.</p>
-<h3 id="long-running-inference">Long-running inference</h3>
-<p>For normal requests, keep using <code>https://inference.aivax.net/v1</code>.</p>
-<p>If an inference call can run for longer than the Cloudflare proxy timeout, or if your client receives HTTP <code>524</code> errors while waiting for long completions, use the direct inference host instead:</p>
-<pre><code class="lang-text">https://direct.inference.aivax.net/v1
-</code></pre>
-<p>This host exposes only the OpenAI-compatible inference paths needed for model listing and chat completions. Use the same API key, model value, request body, and SDK configuration, changing only the base URL:</p>
-<pre><code class="lang-python">client = OpenAI(
-    base_url=&quot;https://direct.inference.aivax.net/v1&quot;,
-    api_key=&quot;sk-aiv-acc...&quot;
-)
-</code></pre>
-<p>Reference:</p>
-<script src="https://inference.aivax.net/apidocs?embed-target=Inference%20(chat%20completions)&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
-<h2 id="4-confirm-billing-and-limits">4. Confirm billing and limits</h2>
-<p>After a successful request, usage is recorded against the authenticated account and the API key resource. Integrated model usage is charged from account balance unless it is covered by a subscription-model reserve window.</p>
-<p>Checking balance after the first call is a good sanity step because it confirms that authentication, model access, usage tracking, and billing all resolved under the expected account. The balance endpoint also returns plan and limit information, which is useful before enabling higher-volume features such as RAG imports, chat clients, or batch processing.</p>
-<p>Reference:</p>
-<script src="https://inference.aivax.net/apidocs?embed-target=Get%20Account%20Balance&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
-<h2 id="error-formats">Error formats</h2>
-<p>AIVAX uses two response shapes:</p>
-<ul>
-<li>OpenAI-compatible endpoints return an OpenAI-style <code>error</code> object with <code>message</code>, <code>type</code>, <code>param</code>, and <code>code</code>.</li>
-<li>Administrative endpoints return <code>{&quot;error&quot;: &quot;...&quot;, &quot;details&quot;: null}</code> for errors and <code>{&quot;message&quot;: &quot;...&quot;, &quot;data&quot;: ...}</code> for successful <code>JsonResponse</code> results.</li>
-</ul>
-<p>Common failures:</p>
+<p>The top area links to the getting-started guide and shows example requests for common workflows, such as RAG query, chat completions, and structured JSON output. Treat these snippets as starting points: replace generated account-specific values before sharing them, and avoid copying screenshots that reveal masked key identifiers, model or gateway names, collection IDs, or other account-specific values.</p>
+<p>The summary cards show account-level signals such as balance, recent spend, token usage, and request volume. Use them as a quick health check before debugging a product issue. For example, if a chat client stops responding, confirm the account has usable balance before investigating the gateway, model, RAG, or integration configuration.</p>
+<p>The usage visualization shows recent activity over time. Use it to notice unusual spikes, quiet periods, or changes after a deployment. For deeper analysis, open Analytics or account usage from the account menu.</p>
+<h2 id="navigate-the-console">Navigate the console</h2>
+<p>The left navigation is divided into product areas:</p>
 <table>
 <thead>
 <tr>
-<th>Status</th>
-<th>Likely cause</th>
+<th>Area</th>
+<th>Use it for</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>401 Unauthorized</code></td>
-<td>Missing, malformed, expired, or unknown API key.</td>
+<td><strong>Home</strong></td>
+<td>Review account readiness, examples, usage summary, and quick links.</td>
 </tr>
 <tr>
-<td><code>403 Forbidden</code></td>
-<td>A public key tried to call a non-public route, or the resource is not allowed.</td>
+<td><strong>Models</strong></td>
+<td>Compare available hosted and routed models before choosing one directly or through a gateway.</td>
 </tr>
 <tr>
-<td><code>402 Payment Required</code></td>
-<td>Balance is insufficient or the account exceeded storage quota.</td>
+<td><strong>AI Gateways</strong></td>
+<td>Configure reusable assistant runtimes with model settings, instructions, tools, RAG, workers, skills, and output behavior.</td>
 </tr>
 <tr>
-<td><code>429 Too Many Requests</code></td>
-<td>A rate limit was reached.</td>
+<td><strong>RAG Collections</strong></td>
+<td>Store and index documents that can be searched directly or attached to gateways.</td>
 </tr>
 <tr>
-<td><code>400 Bad Request</code></td>
-<td>Invalid request body, unsupported parameter, missing model, invalid schema, or invalid tool configuration.</td>
+<td><strong>Chat clients</strong></td>
+<td>Connect a gateway to end-user chat sessions and channel integrations.</td>
+</tr>
+<tr>
+<td><strong>Batch</strong></td>
+<td>Run an AI workflow over many independent records asynchronously.</td>
+</tr>
+<tr>
+<td><strong>Analytics</strong></td>
+<td>Inspect usage by resource, model, route, or account dimension.</td>
+</tr>
+<tr>
+<td><strong>Conversations</strong></td>
+<td>Review stored conversation history and related message activity.</td>
+</tr>
+<tr>
+<td><strong>Skills</strong></td>
+<td>Manage reusable instruction bundles that gateways can load during inference.</td>
+</tr>
+<tr>
+<td><strong>Instruction Store</strong></td>
+<td>Browse instruction assets available to the account, when enabled.</td>
+</tr>
+<tr>
+<td><strong>Logs</strong></td>
+<td>Inspect operational events and failures.</td>
+</tr>
+<tr>
+<td><strong>Memories</strong></td>
+<td>Review persistent memory records created by memory-enabled tools or sessions.</td>
 </tr>
 </tbody>
 </table>
-<p>For streaming chat completions, handle normal SSE chunks, optional <code>servertool</code> chunks, final usage metadata, <code>[DONE]</code>, and streaming error chunks.</p>
-<h2 id="troubleshooting-checklist">Troubleshooting checklist</h2>
-<p>When a request fails, verify in this order:</p>
+<p>Accounts with administrative access may also see <strong>Admin</strong>. If a page is not visible, your account may not have the required role, plan, or feature access.</p>
+<p>The bottom navigation also includes <strong>Avi Assistant</strong>, which opens the in-console assistant, and <strong>Documentation</strong>, which opens the public AIVAX documentation site.</p>
+<h2 id="use-the-account-menu">Use the account menu</h2>
+<p>The account menu appears at the bottom of the left navigation. It shows the current account name and plan badge, then opens account actions:</p>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>When to use it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Add account</strong></td>
+<td>Sign in to another AIVAX account by entering that account's 14-character login key.</td>
+</tr>
+<tr>
+<td><strong>Usage</strong></td>
+<td>Open detailed account usage and billing activity.</td>
+</tr>
+<tr>
+<td><strong>Top up account</strong></td>
+<td>Add prepaid credit when the account needs more balance.</td>
+</tr>
+<tr>
+<td><strong>Manage account</strong></td>
+<td>Update account profile and settings, manage API keys, and reset hook-key configuration where available.</td>
+</tr>
+<tr>
+<td><strong>Logout</strong></td>
+<td>Sign out of the current account. If another saved account exists in the browser, AIVAX can switch to it; otherwise it returns to the public entry page.</td>
+</tr>
+</tbody>
+</table>
+<p>Use multiple saved accounts when you operate separate customer, staging, production, or personal accounts from the same browser. Before changing a gateway, collection, key, or billing setting, confirm the account name and plan badge in the menu. This is especially important when production and testing accounts have similar resource names.</p>
+<p>Saved accounts are stored in the browser's local storage together with session data. Use this feature only on trusted private browsers. Logging out removes the current saved account locally, but it does not rotate login keys, revoke API keys, or invalidate credentials that were already exposed elsewhere.</p>
+<h2 id="open-help-and-status-pages">Open help and status pages</h2>
+<p>The lower navigation includes <strong>Documentation</strong>, which opens the public AIVAX documentation site. The footer also links to the landing page, documentation, privacy policy, Terms of use, and service status page.</p>
+<p>Use documentation links when you need product guidance, API reference embeds, or implementation details. Use the status page when a feature that normally works starts failing across multiple unrelated resources.</p>
+<h2 id="keep-account-information-safe">Keep account information safe</h2>
+<p>The console can display sensitive operational data, including account names, API keys, snippets with credentials, collection IDs, resource IDs, usage values, and conversation content. Before sharing a screenshot or copied snippet:</p>
 <ol>
-<li>Base URL is <code>https://inference.aivax.net/v1</code> for OpenAI SDK calls.</li>
-<li>The key is sent as <code>Authorization: Bearer &lt;KEY&gt;</code>, Basic auth, or the <code>api-key</code> query parameter.</li>
-<li>The account has enough balance and storage quota.</li>
-<li>The model or gateway ID exists and is allowed by the current plan.</li>
-<li>The request is under the plan's request, token, RAG, tool, or batch limits.</li>
-<li>Public-key calls use only allowed chat-completion parameters and full gateway UUIDs.</li>
-<li>Tool, RAG, worker, or schema configuration is isolated by testing the same prompt without that feature.</li>
+<li>Remove API keys and login keys.</li>
+<li>Redact resource IDs, customer names, conversation content, and private account values.</li>
+<li>Confirm the screenshot does not show another saved account in the account menu.</li>
+<li>Prefer linking to the relevant documentation page instead of sharing a console screenshot when the reader only needs instructions.</li>
 </ol>
-<h2 id="next-steps">Next steps</h2>
+<p>For API key management, see <a href="/docs/authentication#create-and-list-keys">Create and list keys</a>. For hook validation, see <a href="/docs/authentication#hook-authentication">Hook authentication</a>. For balance checks, plan limits, and usage constraints, see <a href="/docs/limits">Plans and limits</a> and <a href="/docs/pricing">Pricing</a>.</p>
+<h2 id="faq">FAQ</h2>
+<h3 id="is-a-login-key-the-same-as-an-api-key">Is a login key the same as an API key?</h3>
+<p>No. A login key is used to sign in to the console. API keys are used by applications, SDKs, MCP clients, and backend integrations. Keep both private, but do not substitute one for the other.</p>
+<h3 id="why-do-i-see-different-pages-from-another-teammate">Why do I see different pages from another teammate?</h3>
+<p>Visible pages can vary by role, plan, feature availability, and account state. Confirm you are in the same account and plan before comparing screens.</p>
+<h3 id="what-should-i-check-first-when-something-fails">What should I check first when something fails?</h3>
+<p>Start with the account and resource basics: current account, balance, plan limits, selected model or gateway, recent logs, and whether the affected resource exists in the expected account. This usually separates account-state issues from model, tool, RAG, or integration issues.</p>
+<h3 id="what-should-i-do-if-login-does-not-work">What should I do if login does not work?</h3>
+<p>Check that the login key has 14 alphanumeric characters and no leading or trailing spaces. If you are registering, check the email inbox and spam folder for the verification message. If repeated attempts fail, wait before retrying and ask the account owner or support team to confirm the correct recovery path.</p>
+<h3 id="can-i-share-the-example-snippets-from-the-dashboard">Can I share the example snippets from the dashboard?</h3>
+<p>Only after redacting account-specific values. Dashboard snippets may include masked key identifiers, model or gateway names, and collection identifiers from the active account.</p>
+<h2 id="related-documentation">Related documentation</h2>
 <ul>
-<li><a href="authentication.html">Authentication</a>: understand private keys, public keys, and reverse hook validation.</li>
-<li><a href="limits.html">Plans and limits</a>: check request limits, context limits, RAG limits, tool limits, and batch limits before opening a workflow to users.</li>
-<li><a href="pricing.html">Pricing</a>: understand how credits, usage, storage, and minimum-balance checks work.</li>
-<li><a href="inference/ai-gateway.html">AI Gateways</a>: move from a direct model call to a reusable assistant configuration.</li>
-<li><a href="rag/collections.html">RAG collections</a>: store documents and retrieve them during inference.</li>
-<li><a href="features/batch.html">Batch</a>: run the same AI workflow over many independent records.</li>
+<li><a href="/docs/getting-started">Getting Started</a>: make a first OpenAI-compatible request.</li>
+<li><a href="/docs/authentication">Authentication</a>: understand login-independent API authentication, key types, and hook validation.</li>
+<li><a href="/docs/pricing">Pricing</a>: understand prepaid balance and usage charges.</li>
+<li><a href="/docs/limits">Plans and limits</a>: review plan, rate, storage, RAG, chat-client, and batch limits.</li>
+<li><a href="/docs/inference/ai-gateway">AI Gateways</a>: configure reusable assistant behavior.</li>
+<li><a href="/docs/rag/collections">RAG Collections</a>: store and index documents for retrieval.</li>
 </ul>
 
 </article>
 
                 <div class="contribution d-print-none">
-                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/getting-started.md/#L1" class="edit-link">Edit this page</a>
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/platform/basics.md/#L1" class="edit-link">Edit this page</a>
                 </div>
 
                 <div class="next-article d-print-none border-top" id="nextArticle"></div>

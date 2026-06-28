@@ -11,6 +11,33 @@
 - name: Plans and limits
   href: limits.md 
 
+- name: Platform
+
+- name: Platform basics
+  href: platform/basics.md
+- name: Account, balance, and multiple accounts
+  href: platform/account-balance.md
+- name: Models
+  href: platform/models.md
+- name: AI Gateways
+  href: platform/ai-gateways.md
+- name: RAG Collections
+  href: platform/rag-collections.md
+- name: Chat Clients
+  href: platform/chat-clients.md
+- name: Batch
+  href: platform/batch.md
+- name: Analytics
+  href: platform/analytics.md
+- name: Conversations
+  href: platform/conversations.md
+- name: Skills
+  href: platform/skills.md
+- name: Logs
+  href: platform/logs.md
+- name: Memories
+  href: platform/memories.md
+
 - name: RAG and collections
 
 - name: Collections

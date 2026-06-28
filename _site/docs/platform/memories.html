@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Memories | AIVAX </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="Memories | AIVAX ">
+
+
+        <link rel="icon" href="../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+        
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
+
+        <meta name="docfx:rel" content="../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/platform/memories.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+                
+        <script>            
+            function switchLanguage(lang) {
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../index.html">
+                        <img id="logo" class="svg" src="../../assets/img/aivax.png" alt="AIVAX">
+                        AIVAX
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="memories">Memories</h1>
+
+<p>Memories are persisted user-specific facts that AIVAX can carry across conversations when a gateway or chat client uses memory-aware tools. Use the <strong>Memories</strong> page to inspect what the platform has stored for an external user, check whether a memory is shared or gateway-scoped, and delete memories that are no longer appropriate.</p>
+<p>Memories are not a knowledge base. Use <a href="/docs/platform/rag-collections">RAG Collections</a> for product manuals, policies, documents, and other source material that should be searched as knowledge. Use Memories for small pieces of user context, such as preferences, continuity notes, or reminders tied to an identified user.</p>
+<h2 id="when-to-use-memories">When to use Memories</h2>
+<p>Open <strong>Memories</strong> when you need to:</p>
+<ul>
+<li>Review what an assistant has remembered for a user.</li>
+<li>Check whether a memory belongs to all gateways or one specific gateway.</li>
+<li>Find memories by ID, content, external user ID, format, or gateway.</li>
+<li>Remove one incorrect memory.</li>
+<li>Remove all memories of one format for a user.</li>
+<li>Prepare a migration prompt for a user before moving their stored context.</li>
+</ul>
+<p>Use <a href="/docs/platform/conversations">Conversations</a> when you need to understand how a memory was created during a specific conversation. Use <a href="/docs/platform/chat-clients">Chat Clients</a> when you need to check whether sessions are using a stable <code>tag</code>, because memory depends on an identifiable user reference.</p>
+<h2 id="before-you-begin">Before you begin</h2>
+<p>Memories are account-scoped and visible to authenticated console users who can access the active account. Because memory details and migration prompts can expose user-specific context, limit operational access to people who are authorized to review, migrate, or delete user data for that account.</p>
+<p>Memory depends on three conditions:</p>
+<ul>
+<li>The assistant must run in a context with an identifiable user, such as a chat client session <code>tag</code> or a <code>user</code> value in a chat completions request.</li>
+<li>The relevant AI Gateway or runtime must have the Memory tool enabled when it should save, search, update, or remove text memories.</li>
+<li>Date-based reminders are stored through the Calendar tool and appear in Memories with the <code>DateReminder</code> format.</li>
+</ul>
+<p>Without a user reference, memory tools cannot store or search user-specific information. AIVAX instructs the model not to save sensitive or personal data, but model behavior is not a compliance boundary. Design your gateway instructions and review process so the assistant does not store secrets, payment data, credentials, medical details, or unnecessary personal information.</p>
+<p>Before viewing details, generating a migration prompt, or deleting records, confirm the active account, external user ID, format, and gateway source. If the action is part of a privacy, compliance, or support process, confirm that your destination system is approved for this data.</p>
+<h2 id="understand-the-memories-page">Understand the Memories page</h2>
+<p>Open <strong>Memories</strong> from the console sidebar.</p>
+<p>The top filters control the list:</p>
+<table>
+<thead>
+<tr>
+<th>Filter</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Search</strong></td>
+<td>Searches memory ID, content, and external user ID. The console waits briefly while you type before refreshing.</td>
+</tr>
+<tr>
+<td><strong>Format</strong></td>
+<td>Filters by <code>Text</code>, <code>DateReminder</code>, or all formats.</td>
+</tr>
+<tr>
+<td><strong>Gateway</strong></td>
+<td>Shows all gateways, only memories with no gateway link, or memories linked to one selected gateway.</td>
+</tr>
+<tr>
+<td><strong>Refresh</strong></td>
+<td>Reloads the current list using the selected filters.</td>
+</tr>
+</tbody>
+</table>
+<p>The <strong>Persisted memories</strong> table shows:</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID</strong></td>
+<td>The memory identifier. The table shows a short copyable ID label, while the copied value is the full ID.</td>
+</tr>
+<tr>
+<td><strong>External user ID</strong></td>
+<td>The user reference that owns the memory. This usually comes from the chat client session <code>tag</code> or inference <code>user</code>.</td>
+</tr>
+<tr>
+<td><strong>Content preview</strong></td>
+<td>A shortened preview of the stored memory content. The API listing truncates content to 120 characters, and the console table shortens that preview again to 72 characters. Open details to retrieve the full content.</td>
+</tr>
+<tr>
+<td><strong>Format</strong></td>
+<td><code>Text</code> for general memory or <code>DateReminder</code> for calendar/reminder data.</td>
+</tr>
+<tr>
+<td><strong>Source</strong></td>
+<td>The linked gateway, or <strong>No gateway</strong> when the memory is shared account memory.</td>
+</tr>
+<tr>
+<td><strong>Actions</strong></td>
+<td>Details, Migration prompt, Delete memory, and Delete all memories from user.</td>
+</tr>
+</tbody>
+</table>
+<p>The table paginates in pages of 25 rows. The listing returns only active, unexpired memories for the authenticated account, newest first.</p>
+<h2 id="find-memories-for-a-user">Find memories for a user</h2>
+<ol>
+<li>Confirm the active account in the account menu.</li>
+<li>Enter the external user ID, memory ID, or a content phrase in <strong>Search</strong>.</li>
+<li>Select <strong>Format</strong> when you need only <code>Text</code> memories or only <code>DateReminder</code> records.</li>
+<li>Select <strong>Gateway</strong> when you need memories from one gateway or only <strong>No gateway</strong> shared memories.</li>
+<li>Select <strong>Refresh</strong> after changing context or after a cleanup action.</li>
+</ol>
+<p>If a user has no visible memories, clear the filters and search again by external user ID. The list shows active, unexpired records only, so an expired memory may not appear even if older stored data exists outside the normal listing.</p>
+<h2 id="read-a-memory-safely">Read a memory safely</h2>
+<p>Use <strong>Actions &gt; Details</strong> when the table preview is not enough. Details show:</p>
+<ul>
+<li>Full memory ID.</li>
+<li>External user ID.</li>
+<li>Format.</li>
+<li>Gateway link, when present.</li>
+<li>Created at and Expires at timestamps.</li>
+<li>Full content.</li>
+</ul>
+<p>Treat the Details dialog as sensitive. Memory content can include user preferences, reminders, internal workflow context, or personal data that the assistant should not have stored. Redact before sharing screenshots or copied values.</p>
+<h2 id="understand-memory-scope">Understand memory scope</h2>
+<p>Memory scope determines which gateway can read or create a memory.</p>
+<table>
+<thead>
+<tr>
+<th>Source in table</th>
+<th>Meaning</th>
+<th>Runtime effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>No gateway</strong></td>
+<td>The memory is shared account memory.</td>
+<td>Gateways that allow shared memory can see it for the same external user.</td>
+</tr>
+<tr>
+<td>Gateway name</td>
+<td>The memory is linked to that gateway.</td>
+<td>The gateway can see its own memories. Other gateways can see it only when their memory visibility allows shared memory.</td>
+</tr>
+</tbody>
+</table>
+<p>In an AI Gateway, the Memory Configuration area controls related behavior:</p>
+<ul>
+<li><strong>Include all memory context:</strong> When enabled, AIVAX injects all active <code>Text</code> memories visible to the gateway into the system context and does not expose <code>memory_search</code>. When disabled, AIVAX injects up to 10 visible <code>Text</code> memories and, when the Memory tool is enabled, exposes <code>memory_search</code> so the model can search additional memories.</li>
+<li><strong>Memory visibility:</strong> Controls whether a gateway can consume memories from other gateways or only its own gateway-scoped memories.</li>
+</ul>
+<p>New memories created while a gateway is running are linked to that gateway. Calls outside a gateway or contexts without a gateway link create shared memories.</p>
+<h2 id="work-with-text-and-datereminder-formats">Work with Text and DateReminder formats</h2>
+<p><code>Text</code> memories are plain user-persistent information, such as preferences or continuity notes. The Memory tool can save, search, update, remove, and clear these records.</p>
+<p><code>DateReminder</code> memories are calendar/reminder records stored by the Calendar tool. They appear in the same Memories page so account operators can inspect and delete them, but their content is structured reminder data rather than ordinary prose.</p>
+<p>When filtering by format, remember that bulk deletion by user also requires a format. Deleting all <code>Text</code> memories for a user does not delete that user's <code>DateReminder</code> memories, and deleting <code>DateReminder</code> memories does not delete <code>Text</code> memories.</p>
+<p><code>memory_save</code> and <code>memory_update</code> reject <code>memoryData</code> larger than 10 KB. Both tools accept <code>retentionDays</code> from 1 to 365 days; when omitted, retention defaults to 30 days.</p>
+<h2 id="delete-memories">Delete memories</h2>
+<p>Deletion is permanent from the console.</p>
+<p>Use <strong>Actions &gt; Delete memory</strong> when one specific record is wrong, outdated, or unsafe to keep. Confirm the flyout to remove that memory by ID. After deletion, refresh or repeat the same search; the deleted row should no longer appear, and opening details by that ID should no longer succeed.</p>
+<p>Use <strong>Actions &gt; Delete all memories from user</strong> only when you intend to clear one user's memories for the selected row's format. This is not a row-only action. It can remove multiple records.</p>
+<p>This action deletes by format and by a normalized external user prefix: the API removes everything after the first <code>@</code> in the supplied <code>externalUserId</code>, then deletes records whose stored <code>ExternalUserId</code> starts with that normalized value. Confirm the identifier carefully before proceeding.</p>
+<p>Before deleting:</p>
+<ol>
+<li>Confirm the active account.</li>
+<li>Confirm the external user ID.</li>
+<li>Check the format: <code>Text</code> or <code>DateReminder</code>.</li>
+<li>Open <strong>Details</strong> for at least one affected row if the preview is ambiguous.</li>
+<li>Preserve approved evidence outside AIVAX if the deletion is part of a support, privacy, or compliance process.</li>
+</ol>
+<p>Deleting a memory does not rewrite past conversations, remove exported conversation files, revoke chat sessions, or change gateway instructions. It only removes persisted memory records from future memory retrieval.</p>
+<p>To confirm cleanup worked, refresh the page, search for the same external user ID, and verify that the deleted memory or deleted format no longer appears. Future memory retrieval should exclude the removed records, but past conversation logs remain unchanged.</p>
+<h2 id="use-the-migration-prompt">Use the migration prompt</h2>
+<p>Use <strong>Actions &gt; Migration prompt</strong> when you need a compact, model-readable export of stored context for one exact external user ID. The prompt includes all memory records whose <code>ExternalUserId</code> exactly matches that value, plus related scheduled and recurring message data for the same exact value. Unlike the Memories list, this prompt is not limited to unexpired records and does not use normalized-prefix matching.</p>
+<p>Before using a migration prompt:</p>
+<ol>
+<li>Confirm the active account.</li>
+<li>Confirm the exact external user ID.</li>
+<li>Confirm the intended destination and data-handling approval.</li>
+<li>Decide whether the included scheduled or recurring message data is appropriate for the migration.</li>
+<li>Review and redact the generated prompt before sending it anywhere.</li>
+</ol>
+<p>The migration prompt is not anonymized. It may contain sensitive user context or operational details, and it is meant as a working migration aid rather than a public export. Do not paste it into unrelated tools, tickets, or prompts unless the destination is approved for that data.</p>
+<h2 id="privacy-and-data-minimization">Privacy and data minimization</h2>
+<p>Memories affect future assistant behavior, so store only what the assistant genuinely needs to personalize or continue work for a user.</p>
+<p>Avoid storing:</p>
+<ul>
+<li>API keys, passwords, tokens, login keys, webhook secrets, or payment data.</li>
+<li>Government IDs, financial account data, health information, or other high-risk personal data.</li>
+<li>Customer-private details that are not needed for future assistance.</li>
+<li>Temporary issue details that belong in a support ticket or conversation log instead.</li>
+<li>Large documents, policies, manuals, or knowledge-base text that belongs in RAG.</li>
+</ul>
+<p>Use expiration deliberately. Memory tool calls can request retention from 1 to 365 days, and the default is 30 days when no retention is supplied. Expired memories are hidden from normal listing and use; old expired records are later removed by background cleanup.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Likely cause</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No memories appear for a user</td>
+<td>The session did not have a stable user reference, the memory expired, the wrong account is active, or the filters are too narrow.</td>
+<td>Confirm the active account, clear filters, search by external user ID, and verify the chat client session <code>tag</code> or inference <code>user</code>.</td>
+</tr>
+<tr>
+<td>The assistant does not remember prior context</td>
+<td>Memory tool may not be enabled, the gateway may not see shared memory, or the session user changed.</td>
+<td>Check the AI Gateway built-in tools, Memory Configuration, and the user reference used by the client.</td>
+</tr>
+<tr>
+<td>The wrong gateway sees a memory</td>
+<td>Shared memory visibility may be enabled, or the memory has no gateway source.</td>
+<td>Filter by Gateway on the Memories page and review the gateway's Memory visibility setting.</td>
+</tr>
+<tr>
+<td>A memory contains sensitive or incorrect data</td>
+<td>The assistant saved content that should not persist.</td>
+<td>Delete the specific memory, review gateway instructions, and inspect Conversations to understand how it was created.</td>
+</tr>
+<tr>
+<td>Bulk delete removed more than expected</td>
+<td>Delete all memories from user deletes by normalized external user prefix and format, not by the selected row only.</td>
+<td>Verify the affected external user ID and format before confirming; use single-memory delete for precise cleanup.</td>
+</tr>
+<tr>
+<td>Calendar reminders appear in Memories</td>
+<td>Calendar uses the same persistent store with the <code>DateReminder</code> format.</td>
+<td>Filter by <code>DateReminder</code> when reviewing reminders, and delete only that format when clearing calendar data.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="api-reference">API reference</h2>
+<p>Use the console for manual review and cleanup. Use the Memories API when you need to build an audited, repeatable, or bulk internal workflow around persisted memories. The API is account-authenticated and exposes listing, detail, and deletion operations.</p>
+<h3 id="list-memories">List memories</h3>
+<p>List memories when you need to find active persisted records for the authenticated account. Use <code>filter</code>, <code>format</code>, and <code>gatewayId</code> to narrow the result before deleting or inspecting details.</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=List%20Memories&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<h3 id="get-memory-details">Get memory details</h3>
+<p>Get one memory when you already have the memory ID from the console, listing endpoint, or a review workflow.</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=Get%20Memory&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<h3 id="delete-memories-1">Delete memories</h3>
+<p>Delete by ID when you need precise cleanup. Delete by external user ID and format when fulfilling a user-level cleanup request for one memory type.</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=Delete%20Memories&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/platform/memories.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Conversations | AIVAX </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="Conversations | AIVAX ">
+
+
+        <link rel="icon" href="../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+        
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
+
+        <meta name="docfx:rel" content="../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/platform/conversations.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+                
+        <script>            
+            function switchLanguage(lang) {
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../index.html">
+                        <img id="logo" class="svg" src="../../assets/img/aivax.png" alt="AIVAX">
+                        AIVAX
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="conversations">Conversations</h1>
+
+<p>Conversations is the observability area for model interactions stored in your account. Use it to find recent requests, inspect prompt and response behavior, review usage, connect a conversation to a gateway or session, export evidence, and remove stored conversation records when they are no longer needed.</p>
+<p>Conversation records can contain prompts, assistant responses, tool calls, metadata, external user IDs, resource IDs, usage objects, response schemas, errors, and timing information. Treat this page as sensitive operational data.</p>
+<h2 id="when-to-use-conversations">When to use Conversations</h2>
+<p>Use Conversations when you need to:</p>
+<ul>
+<li>Investigate a recent answer from the Chat Completions API, Sessions API, or Functions API.</li>
+<li>Find conversations by model, external user, API key, gateway, chat client, or chat session.</li>
+<li>Review token usage and resources connected to a specific interaction.</li>
+<li>Check whether a request failed and see the stored error message.</li>
+<li>Export conversations for audit, offline review, support, or quality analysis.</li>
+<li>Delete stored conversation records from the account.</li>
+</ul>
+<p>Use <a href="/docs/platform/analytics">Analytics</a> when you need billing rollups and spend trends. Use Logs when you need lower-level runtime or operational events.</p>
+<h2 id="before-you-begin">Before you begin</h2>
+<p>Conversation visibility is limited by your account plan's conversation retention period. The list and exports cannot return records outside the retained period, even if you choose a longer range.</p>
+<p>Confirm that you are in the correct active account before investigating or deleting conversation data. If your observability or audit process requires stored conversations, also confirm that account-level conversation logging is enabled. When logging is disabled, future conversations may not be stored on this page.</p>
+<p>Before sharing a conversation, export, screenshot, or copied JSON, redact secrets, customer data, API keys, session keys, private prompts, personal data, and unrelated metadata. Export URLs opened by the console include an <code>api-key</code> query parameter, so do not share browser URLs, history entries, proxy logs, or screenshots that include export request URLs.</p>
+<h2 id="browse-conversations">Browse conversations</h2>
+<p>Open <strong>Conversations</strong> from the console sidebar. The list shows recent conversations with:</p>
+<ul>
+<li><strong>Origin:</strong> The API surface that created the conversation, such as Chat Completions API, Sessions API, or Functions API.</li>
+<li><strong>Updated:</strong> The last update time.</li>
+<li><strong>Model:</strong> The model used by the conversation.</li>
+<li><strong>Token count:</strong> Total input and output tokens, including server-side tool re-calls when stored.</li>
+<li><strong>First user message:</strong> A preview of the first user message.</li>
+<li><strong>Last assistant message:</strong> A preview of the latest assistant response or an error indicator.</li>
+<li><strong>Actions:</strong> Open the detail view or delete the conversation.</li>
+</ul>
+<p>Search and time-range changes refresh the list automatically. Use <strong>Refresh</strong> when waiting for a recent request to appear.</p>
+<h2 id="filter-the-list">Filter the list</h2>
+<p>Use <strong>Time range</strong> to choose the lookback window:</p>
+<ul>
+<li>Last week</li>
+<li>Last 24 hours</li>
+<li>Last 2 hours</li>
+<li>Last 5 minutes</li>
+</ul>
+<p>The requested window is also limited by the account retention period.</p>
+<p>Use <strong>Search</strong> for free-text filtering or command-style filters. The built-in help lists supported filters:</p>
+<table>
+<thead>
+<tr>
+<th>Filter</th>
+<th>Use it to find</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--model</code> or <code>-m</code></td>
+<td>Conversations that used a specific model.</td>
+</tr>
+<tr>
+<td><code>--user</code> or <code>-u</code></td>
+<td>Conversations for a specific external user ID.</td>
+</tr>
+<tr>
+<td><code>--api-key</code></td>
+<td>Conversations associated with a specific API key ID.</td>
+</tr>
+<tr>
+<td><code>--gateway</code></td>
+<td>Conversations associated with a specific AI Gateway ID.</td>
+</tr>
+<tr>
+<td><code>--chat-client</code></td>
+<td>Conversations associated with a specific Chat Client.</td>
+</tr>
+<tr>
+<td><code>--chat-session</code></td>
+<td>Conversations associated with a specific chat session.</td>
+</tr>
+</tbody>
+</table>
+<p>Resource filters such as <code>--api-key</code>, <code>--gateway</code>, <code>--chat-client</code>, and <code>--chat-session</code> expect the full resource UUID, not a display name, short ID, or URL. <code>--model</code> and <code>--user</code> match exact string values case-insensitively.</p>
+<p>You can click a model badge in the list to apply a model filter. When investigating a user report, start with the narrowest useful range and the most specific identifier you have, such as external user ID, gateway ID, or chat session ID.</p>
+<p>The list is optimized for recent investigation, not complete audit proof. High-volume accounts can hit list caps before every matching conversation in a broad range is visible. Narrow the time range and use the export/API workflow for broader review.</p>
+<h2 id="inspect-a-conversation">Inspect a conversation</h2>
+<p>Select <strong>View</strong> to open the conversation inspector. The inspector keeps the message transcript visible while the side panel shows observability details.</p>
+<p>The side panel can include:</p>
+<table>
+<thead>
+<tr>
+<th>Tab</th>
+<th>What it shows</th>
+<th>When to use it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Conversation data</strong></td>
+<td>Conversation ID, request ID, model name, external user ID, origin, created and updated timestamps, token count, and metadata</td>
+<td>Use for support handoff, correlation, and high-level identity checks.</td>
+</tr>
+<tr>
+<td><strong>Usage</strong></td>
+<td>Raw usage object and related resources</td>
+<td>Use to connect the conversation to billing, gateways, collections, sessions, or other resources.</td>
+</tr>
+<tr>
+<td><strong>Response schema</strong></td>
+<td>Stored response schema, when the request used structured output</td>
+<td>Use when investigating malformed or unexpected structured responses.</td>
+</tr>
+<tr>
+<td><strong>Tools</strong></td>
+<td>Tools available or recorded for the conversation</td>
+<td>Use when checking whether a tool-enabled answer used the expected capabilities.</td>
+</tr>
+<tr>
+<td><strong>Performance</strong></td>
+<td>Request performance waterfall, when available</td>
+<td>Use when diagnosing slow responses or provider/tool latency.</td>
+</tr>
+</tbody>
+</table>
+<p>The main message area shows user, assistant, tool, and informational messages. Very long conversations may show an omitted-message marker in the middle of the inspector. The detail view keeps the first 30 and last 40 messages and inserts an omitted count when the message list is longer. Use export when the middle of the transcript matters.</p>
+<p>If the request failed, the inspector can show a <strong>Request error</strong> information block with the stored error message.</p>
+<h2 id="export-conversations">Export conversations</h2>
+<p>Use <strong>Export all</strong> from the list to export conversations as JSONL. The dialog includes:</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Values</th>
+<th>Guidance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Period</strong></td>
+<td>2 hours, 1 day, 7 days, 30 days</td>
+<td>The selected export period is still limited by account retention.</td>
+</tr>
+<tr>
+<td><strong>Media</strong></td>
+<td>Include, Truncate to text</td>
+<td>Use text truncation when exports should not include full multipart media payloads.</td>
+</tr>
+<tr>
+<td><strong>Thinking</strong></td>
+<td>All, Only visible, None</td>
+<td>Use <strong>None</strong> for most support handoffs, <strong>Only visible</strong> when reviewing user-facing reasoning, and <strong>All</strong> only for trusted internal debugging with approved storage.</td>
+</tr>
+<tr>
+<td><strong>Truncate</strong></td>
+<td>Token limit, where <code>0</code> disables truncation</td>
+<td>Use a non-zero limit when exports may be large or when you only need a sample of each conversation.</td>
+</tr>
+</tbody>
+</table>
+<p>Use the detail page <strong>Export</strong> menu to export one conversation as JSON, or <strong>Copy to clipboard</strong> to copy the currently loaded detail object.</p>
+<p>Single-conversation <strong>Export as JSON</strong> is a direct download, not the same configurable dialog as <strong>Export all</strong>. In the current console behavior, it exports the stored conversation with media included, all reasoning included, and no truncation. <strong>Copy to clipboard</strong> copies the loaded inspector object, which can omit middle messages in long conversations.</p>
+<p>Both <strong>Export all</strong> and single <strong>Export as JSON</strong> open URLs with an <code>api-key</code> query parameter. Do not share those URLs, browser history, screenshots, network logs, or copied request URLs.</p>
+<p>Exports may contain prompts, responses, hidden metadata, tool traces, media references, reasoning content depending on the selected option, and account identifiers. Store exports securely and delete local copies when they are no longer needed.</p>
+<h2 id="investigate-a-conversation">Investigate a conversation</h2>
+<p>Use this flow for bad answers, errors, unexpected cost, or suspected unauthorized traffic:</p>
+<ol>
+<li>Confirm the active account and choose the narrowest useful time range.</li>
+<li>Search by the most specific identifier available: chat session, external user, gateway, API key, chat client, or model.</li>
+<li>Open the conversation and copy the conversation ID and request ID.</li>
+<li>Inspect <strong>Conversation data</strong>, <strong>Usage</strong>, <strong>Tools</strong>, <strong>Response schema</strong>, <strong>Performance</strong>, and any <strong>Request error</strong> block.</li>
+<li>Cross-check related billing in <a href="/docs/platform/analytics">Analytics</a> and runtime evidence in Logs.</li>
+<li>Preserve only the minimum evidence needed for support, audit, or remediation.</li>
+<li>Remediate the source: update the gateway, stop the caller, rotate or revoke an exposed key, delete an exposed session, or correct the source data.</li>
+</ol>
+<h2 id="share-conversation-evidence-safely">Share conversation evidence safely</h2>
+<p>Prefer sharing the conversation ID, request ID, approximate time range, origin, and a redacted description of the problem. Avoid full exports unless the recipient is trusted and the storage location is approved.</p>
+<p>Before sending evidence, redact customer data, prompts, tool outputs, media, hidden reasoning, API keys, session keys, external user IDs when not required, unrelated metadata, and browser URLs with query strings.</p>
+<h2 id="delete-conversations">Delete conversations</h2>
+<p>Use the row action menu and select <strong>Delete conversation</strong> to remove a stored conversation. The console asks for confirmation and warns that the action cannot be undone.</p>
+<p>Before deleting, verify the active account, confirm the conversation ID and request ID, and export or copy only the evidence you are allowed to retain. Deletion is irreversible from the console.</p>
+<p>Deletion removes the stored conversation record from the account. It does not revoke API keys, delete chat sessions, remove source data, change invoices, or undo usage that was already recorded. If a conversation shows unauthorized activity, delete only after preserving the evidence needed for investigation, then rotate or revoke the relevant key or session separately.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Likely cause</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A recent conversation is missing</td>
+<td>The time range is too narrow, retention expired, account logging is disabled, list caps hide the record, or the request has not been stored yet</td>
+<td>Choose a wider range within retention, clear filters, confirm logging settings, narrow the search, and refresh.</td>
+</tr>
+<tr>
+<td>Search returns no results</td>
+<td>The filter uses the wrong identifier type or a value not present in stored metadata</td>
+<td>Use one filter at a time. Try model, external user ID, gateway ID, chat client, or chat session separately.</td>
+</tr>
+<tr>
+<td>The detail view shows omitted messages</td>
+<td>The conversation is long and the inspector keeps the beginning and end while omitting the middle</td>
+<td>Export the conversation if you need the middle of the transcript, and choose export truncation carefully.</td>
+</tr>
+<tr>
+<td>A conversation shows an error</td>
+<td>The request failed during inference, tool use, validation, or another runtime step</td>
+<td>Open the detail view, copy the request ID, inspect related Logs, and review the gateway, model, tool, or session involved.</td>
+</tr>
+<tr>
+<td>Export is too large or too sensitive</td>
+<td>The period is broad, media is included, reasoning is included, or truncation is disabled</td>
+<td>Narrow the period, select <strong>Truncate to text</strong>, choose <strong>Only visible</strong> or <strong>None</strong> for Thinking, and set a truncate limit.</td>
+</tr>
+<tr>
+<td>You found unauthorized traffic</td>
+<td>An API key, public session, gateway, chat client, or integration may be exposed</td>
+<td>Preserve minimum evidence, stop the caller, rotate or revoke keys, delete exposed sessions, and review Analytics for impact.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="api-reference">API reference</h2>
+<p>Use the Conversations API when you need to build your own observability, audit, export, or cleanup workflow.</p>
+<h3 id="list-and-export">List and export</h3>
+<p>List recent conversations with optional filters, or export multiple conversations as JSONL.</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=List%20Conversations&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Export%20Conversations%20%28JSONL%29&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<h3 id="inspect-export-or-delete-one-conversation">Inspect, export, or delete one conversation</h3>
+<p>Use a single-conversation endpoint when you already have the conversation ID from the list, a support case, logs, or an internal correlation workflow.</p>
+<p>The public reference for single-conversation export may show query options also used by JSONL exports. Verify current behavior before relying on truncation, media, or thinking controls for single JSON exports; use bulk JSONL export when configurable redaction is required.</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=View%20Conversation&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Export%20Conversation%20%28JSON%29&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Delete%20Conversation&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/platform/conversations.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>

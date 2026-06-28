@@ -11,6 +11,33 @@
 - name: Planos e limites
   href: limits.md 
 
+- name: Plataforma
+
+- name: Fundamentos da plataforma
+  href: platform/basics.md
+- name: Conta, saldo e várias contas
+  href: platform/account-balance.md
+- name: Modelos
+  href: platform/models.md
+- name: Gateways de IA
+  href: platform/ai-gateways.md
+- name: Coleções RAG
+  href: platform/rag-collections.md
+- name: Clientes de chat
+  href: platform/chat-clients.md
+- name: Lote
+  href: platform/batch.md
+- name: Análise
+  href: platform/analytics.md
+- name: Conversas
+  href: platform/conversations.md
+- name: Habilidades
+  href: platform/skills.md
+- name: Registros
+  href: platform/logs.md
+- name: Memórias
+  href: platform/memories.md
+
 - name: RAG e coleções
 
 - name: Coleções
@@ -39,9 +66,9 @@
   href: tools/builtin-tools.md
 - name: Funções MCP
   href: tools/mcp.md
-- name: Gerenciamento de conta MCP
+- name: MCP de gerenciamento de conta
   href: tools/account-management-mcp.md
-- name: Documentação MCP
+- name: MCP de documentação
   href: tools/documentation-mcp.md
 - name: Funções de protocolo
   href: tools/protocol-functions.md

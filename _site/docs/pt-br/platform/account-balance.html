@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Conta, saldo e v&#225;rias contas | AIVAX </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="Conta, saldo e v&#225;rias contas | AIVAX ">
+
+
+        <link rel="icon" href="../../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+        
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
+
+        <meta name="docfx:rel" content="../../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/pt-br/platform/account-balance.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+                
+        <script>            
+            function switchLanguage(lang) {
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../../index.html">
+                        <img id="logo" class="svg" src="../../../assets/img/aivax.png" alt="AIVAX">
+                        AIVAX
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="conta-saldo-e-várias-contas">Conta, saldo e várias contas</h1>
+
+<p>Use <strong>Minha conta</strong> e <strong>Uso</strong> para gerenciar as configurações de nível de conta que afetam todos os recursos AIVAX: plano, saldo, notificações, chaves de API, autenticação de hook, uso de armazenamento, uso de reserva de modelo e contas de navegador salvas.</p>
+<p>Esta página é para proprietários de conta, operadores e desenvolvedores que precisam manter uma conta AIVAX utilizável e segura. Se você só precisa fazer sua primeira chamada de API, comece com <a href="/docs/pt-br/getting-started">Começando</a>. Se precisar das regras de autenticação da API, veja <a href="/docs/pt-br/authentication">Autenticação</a>.</p>
+<h2 id="antes-de-começar">Antes de começar</h2>
+<p>Você precisa estar conectado ao <a href="https://console.aivax.net/">console AIVAX</a>. Algumas ações podem afetar sistemas de produção, faturamento ou integrações, portanto confirme o nome da conta e o selo do plano no menu de conta inferior esquerdo antes de fazer qualquer alteração.</p>
+<p>Não execute ações de conta, chave, chave de hook ou faturamento a partir de um navegador compartilhado ou não confiável. Contas salvas e sessões de login são armazenadas localmente pelo navegador.</p>
+<h2 id="escolha-a-página-de-conta-correta">Escolha a página de conta correta</h2>
+<p>AIVAX separa a administração de contas em algumas superfícies relacionadas:</p>
+<table>
+<thead>
+<tr>
+<th>Superfície</th>
+<th>Quando usar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Minha conta</strong></td>
+<td>Atualize as configurações do perfil da conta, preferências de notificação, chaves de API, chave de hook, registro de conversas, correção automática de JSON e comportamento de logout.</td>
+</tr>
+<tr>
+<td><strong>Uso</strong></td>
+<td>Verifique o plano atual, saldo, uso de armazenamento, uso de reserva de modelo por assinatura e detalhamento de reservas quando disponível.</td>
+</tr>
+<tr>
+<td><strong>Nível da conta</strong></td>
+<td>Compare as capacidades dos planos Free, Pro e Max e os limites de produção.</td>
+</tr>
+<tr>
+<td><strong>Menu da conta</strong></td>
+<td>Altere ou adicione contas salvas, abra o uso, recarregue o saldo, gerencie as configurações da conta ou faça logout.</td>
+</tr>
+</tbody>
+</table>
+<p>Use <strong>Minha conta</strong> para configuração. Use <strong>Uso</strong> para estado operacional. Use <strong>Nível da conta</strong> ao decidir se um plano suporta o fluxo de trabalho que você deseja executar.</p>
+<h2 id="gerenciar-informações-da-conta">Gerenciar informações da conta</h2>
+<p>Abra <strong>Minha conta &gt; Informações da conta</strong> para revisar e atualizar as configurações globais da conta.</p>
+<p>Você pode:</p>
+<ul>
+<li>Abra a comparação de plano a partir de <strong>Plano da conta</strong>.</li>
+<li>Edite o nome da conta exibido no console.</li>
+<li>Revise o endereço de e‑mail da conta.</li>
+<li>Ative ou desative o registro de conteúdo de conversas.</li>
+<li>Ative ou desative a correção automática de JSON.</li>
+<li>Abra o Gravatar para alterar a foto do perfil da conta.</li>
+<li>Faça logout da conta atual.</li>
+</ul>
+<p>O nome da conta é visível na plataforma, portanto escolha um nome que permita aos operadores distinguir contas de produção, teste, cliente e pessoais. O endereço de e‑mail da conta está atualmente somente leitura no console. Se precisar ser alterado, use a recuperação de conta suportada ou o caminho de suporte.</p>
+<p>Ative o <strong>registro de conversas</strong> quando sua equipe precisar de conteúdo de conversas armazenado para depuração, análise, revisão ou fluxos de auditoria. Desative quando a conta deve evitar reter conteúdo de conversas além do necessário para o fluxo de trabalho ativo. Antes de mudar essa configuração, coordene com quem depende de Conversas, Análises ou fluxos de solução de problemas.</p>
+<p>Ative a <strong>correção automática de JSON</strong> quando as aplicações esperam JSON estruturado e você deseja que a AIVAX tente reparar a saída de modelo malformada. Para detalhes de implementação e comportamento de esquema, veja <a href="/docs/pt-br/inference/structured-responses">Respostas Estruturadas</a>.</p>
+<h2 id="configurar-notificações">Configurar notificações</h2>
+<p>Abra <strong>Minha conta &gt; Notificações</strong> para controlar os e‑mails da conta.</p>
+<p>As notificações são atualmente enviadas para o endereço de e‑mail da conta. As configurações de notificação incluem:</p>
+<table>
+<thead>
+<tr>
+<th>Notificação</th>
+<th>O que faz</th>
+<th>Controle de tempo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Baixo saldo</strong></td>
+<td>Envia um e‑mail quando o saldo da conta cai abaixo do limite configurado.</td>
+<td>No máximo uma vez a cada 3 dias.</td>
+</tr>
+<tr>
+<td><strong>Modelos descontinuados</strong></td>
+<td>Envia um e‑mail quando um modelo usado recentemente se torna descontinuado.</td>
+<td>Apenas modelos usados nos últimos 30 dias são considerados; e‑mails são enviados no máximo uma vez a cada 7 dias.</td>
+</tr>
+</tbody>
+</table>
+<p>Use notificações de baixo saldo para contas de produção e fluxos de trabalho com lotes intensivos. Defina o limite alto o suficiente para que a equipe possa recarregar antes que clientes de chat, integrações, chamadas multimodais ou jobs em lote parem por saldo insuficiente.</p>
+<p>Use notificações de modelos descontinuados quando gateways ou integrações diretas dependem de nomes de modelos específicos. Após receber uma notificação, revise o gateway ou aplicação afetada antes que o modelo seja removido ou se torne inadequado para produção.</p>
+<h2 id="verificar-saldo-e-uso">Verificar saldo e uso</h2>
+<p>Abra <strong>Uso</strong> a partir do menu de conta.</p>
+<p>Uso mostra:</p>
+<ul>
+<li>Plano atual.</li>
+<li>Saldo da conta.</li>
+<li>Uma ação de <strong>Recarregar conta</strong>.</li>
+<li>Uso de armazenamento em relação à cota de armazenamento incluída.</li>
+<li>Janelas de uso de modelo por assinatura, quando o plano inclui reservas de modelo por assinatura.</li>
+<li>Detalhamento semanal da reserva de modelo por assinatura, quando o plano inclui reservas e há uso no período atual.</li>
+</ul>
+<p>O saldo é consumido por inferência, RAG, assinaturas e outros serviços AIVAX. Alguns fluxos de trabalho exigem saldo positivo ou um mínimo específico de rota antes de iniciar, e rotas faturáveis podem retornar <code>402 Payment Required</code> quando o saldo ou a cota de armazenamento são insuficientes. Veja <a href="/docs/pt-br/pricing#balance-requirements">Preços</a>, <a href="/docs/pt-br/pricing#credits-and-invoices">Créditos e faturas</a> e <a href="/docs/pt-br/limits#how-limits-are-enforced">Planos e limites</a> para as regras técnicas.</p>
+<p>Se um fluxo de trabalho falhar inesperadamente, verifique o Uso antes de depurar o modelo ou a configuração de recursos. Baixo saldo, janelas de reserva esgotadas ou armazenamento acima da cota podem fazer com que gateways, coleções, clientes de chat e jobs em lote saudáveis pareçam quebrados.</p>
+<h2 id="recargarregar-conta-da-conta">Recargarregar conta da conta</h2>
+<p>Use <strong>Recarregar conta</strong> a partir do menu de conta ou da página de Uso quando o saldo pré‑pago estiver muito baixo.</p>
+<p>A caixa de diálogo de crédito solicita o valor do crédito e mostra o método de pagamento, taxa do processador, taxa de serviço e total antes de criar o link de pagamento. Confirme somente depois que o total corresponder ao que você pretende adicionar. A AIVAX então abre o link do provedor de pagamento em uma nova aba do navegador. Para saber como créditos e faturas afetam o saldo, veja <a href="/docs/pt-br/pricing#credits-and-invoices">Créditos e faturas</a>.</p>
+<p>Não use o botão de voltar do navegador ou abas duplicadas para criar múltiplos links de pagamento a menos que queira múltiplos pagamentos intencionalmente. Após o pagamento, retorne ao Uso ou ao painel para confirmar que o saldo mudou.</p>
+<h2 id="gerenciar-chaves-de-api">Gerenciar chaves de API</h2>
+<p>Abra <strong>Minha conta &gt; Chaves de API</strong> para criar, inspecionar e revogar chaves de API.</p>
+<p>Chaves de API autenticam aplicações, SDKs, clientes MCP e serviços de backend. Elas são diferentes das chaves de login. Crie chaves de API separadas para aplicações distintas para que você possa revogar uma integração sem quebrar todos os sistemas na conta.</p>
+<p>Ao criar uma chave, escolha:</p>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Orientação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Nome da chave</strong></td>
+<td>Use um proprietário e propósito, como <code>production support bot</code> ou <code>staging batch importer</code>.</td>
+</tr>
+<tr>
+<td><strong>Tipo da chave</strong></td>
+<td>Use <strong>Private</strong> para integrações do lado do servidor e APIs de gerenciamento de conta. Use <strong>Public (beta)</strong> somente para rotas restritas de navegador/cliente projetadas para chaves públicas.</td>
+</tr>
+<tr>
+<td><strong>Expiração da chave</strong></td>
+<td>Escolha 7, 30 ou 90 dias para trabalho temporário; escolha <strong>Never</strong> somente quando você tem um processo externo de rotação.</td>
+</tr>
+</tbody>
+</table>
+<p>A AIVAX exibe uma nova chave de API gerada apenas uma vez. Copie-a diretamente para o gerenciador de segredos ou ambiente de implantação de destino. Não a armazene em código‑fonte, rastreadores de issues, capturas de tela, notas compartilhadas ou transcrições de chat.</p>
+<p>A tabela de chaves de API mostra a chave mascarada, tipo, rótulo, expiração, horário da última utilização e ações. Use <strong>View conversation logs</strong> para abrir conversas filtradas por essa chave ao investigar uma integração específica. Use <strong>Delete</strong> para revogar uma chave. Excluir uma chave pode quebrar imediatamente todos os serviços que a utilizam, portanto rotacione os chamadores para uma chave de substituição antes da exclusão quando a disponibilidade for importante.</p>
+<p>Para tipos de chave e esquemas de autenticação de API aceitos, veja <a href="/docs/pt-br/authentication#api-key-types">Autenticação</a> e <a href="/docs/pt-br/authentication#create-and-list-keys">Criar e listar chaves</a>.</p>
+<h2 id="gerenciar-a-chave-de-hook">Gerenciar a chave de hook</h2>
+<p>Abra <strong>Minha conta &gt; Chave de hook</strong> para gerenciar o segredo usado para chamadas reversas da AIVAX aos seus serviços, como workers e callbacks de funções de protocolo do lado do servidor.</p>
+<p>Use <strong>Reset hook key</strong> quando a chave de hook pode ter sido exposta ou quando você rotaciona intencionalmente o material de verificação de webhook. Resetá‑la significa que todo serviço que valida chamadas reversas da AIVAX deve ser atualizado com o novo segredo. Planeje isso como uma rotação de credenciais, especialmente para workers ou integrações de produção.</p>
+<p>Use <strong>Copy</strong> somente quando estiver pronto para colar a chave de hook em um armazenamento de segredos confiável. Não a cole em logs ou código do lado do cliente.</p>
+<p>Para detalhes de validação, veja <a href="/docs/pt-br/authentication#hook-authentication">Autenticação de hook</a>.</p>
+<h2 id="usar-várias-contas-salvas">Usar várias contas salvas</h2>
+<p>O menu de conta permite adicionar outra conta inserindo a chave de login de 14 caracteres dessa conta. Depois que uma conta é salva, ela aparece no menu de conta e pode ser selecionada sem retornar à página de login.</p>
+<p>Para adicionar e alternar contas:</p>
+<ol>
+<li>Abra o menu de conta inferior esquerdo.</li>
+<li>Selecione <strong>Add account</strong>.</li>
+<li>Insira a chave de login de 14 caracteres da outra conta.</li>
+<li>Confirme o formulário. A AIVAX autentica com essa chave e troca o console para essa conta.</li>
+<li>Confirme o nome da conta e o selo do plano antes de fazer alterações.</li>
+</ol>
+<p>Para voltar depois, abra o menu de conta e selecione a conta salva. Para remover acesso local temporário, faça logout dessa conta. Se outra conta salva existir, a AIVAX pode mudar para ela automaticamente.</p>
+<p>Várias contas salvas são úteis quando você opera contas de produção, teste, cliente ou pessoais separadas a partir do mesmo navegador. Elas também são uma fonte comum de erros. Antes de editar uma chave, gateway, coleção, notificação ou configuração de saldo, verifique o nome da conta ativa e o selo do plano.</p>
+<p>Chaves de login de contas salvas e dados de sessão são armazenados no armazenamento local do navegador. Use esse recurso apenas em um dispositivo privado confiável e perfil de navegador. Não adicione contas enquanto compartilha a tela, pois o campo de chave de login fica visível enquanto você digita ou cola. Fazer logout remove a conta salva atual localmente e pode mudar para outra conta salva, mas não rotaciona chaves de login expostas, revoga chaves de API ou invalida credenciais armazenadas em outro lugar.</p>
+<h2 id="solução-de-problemas">Solução de problemas</h2>
+<h3 id="uma-solicitação-falha-com-402-payment-required">Uma solicitação falha com <code>402 Payment Required</code></h3>
+<p>Abra o Uso e verifique o saldo e o uso de armazenamento. A conta pode ter saldo insuficiente, um requisito de saldo mínimo para o tipo de entrada ou uso de armazenamento acima da cota do plano. Veja <a href="/docs/pt-br/pricing#balance-requirements">Preços</a>.</p>
+<h3 id="o-saldo-não-foi-atualizado-após-recarregar">O saldo não foi atualizado após recarregar</h3>
+<p>Confirme que o link de pagamento abriu em uma nova aba e que o pagamento foi concluído. Se o navegador bloqueou a nova aba, crie um novo link de pagamento a partir da caixa de diálogo de crédito. Evite criar links duplicados a menos que pretenda fazer múltiplos pagamentos. A confirmação do pagamento pode não ser instantânea; verifique o painel ou o Uso novamente após o provedor confirmar o pagamento. Se precisar de confirmação a nível de fatura, abra o Analytics e revise faturas ou atividade de faturamento quando disponível.</p>
+<h3 id="um-serviço-parou-após-mudança-de-chave-de-api">Um serviço parou após mudança de chave de API</h3>
+<p>Verifique se a chave foi excluída, expirou ou foi substituída sem atualizar o serviço. Crie uma chave privada de substituição, atualize o segredo do serviço, teste-a e então exclua a chave antiga.</p>
+<h3 id="um-worker-ou-callback-de-função-do-lado-do-servidor-é-rejeitado">Um worker ou callback de função do lado do servidor é rejeitado</h3>
+<p>Verifique se a chave de hook foi redefinida. Atualize o serviço receptor para validar contra a chave de hook atual e o esquema de validação <code>X-Request-Nonce</code> atual, então tente novamente uma solicitação controlada. Se o receptor ou worker foi provisionado com configurações de callback mais antigas, reimplante ou reprovisione o serviço afetado antes de testar novamente. Veja <a href="/docs/pt-br/authentication#hook-authentication">Autenticação de hook</a>.</p>
+<h3 id="mudei-de-conta-e-não-consigo-encontrar-um-recurso">Mudei de conta e não consigo encontrar um recurso</h3>
+<p>Confirme o nome da conta no menu de conta inferior esquerdo. Recursos como gateways, coleções, chaves, logs, conversas e memórias pertencem à conta ativa.</p>
+<h3 id="emails-de-notificação-estão-ausentes-ou-atrasados">E‑mails de notificação estão ausentes ou atrasados</h3>
+<p>Verifique se a notificação está habilitada e se o limiar ou condição de evento foi realmente atendido. As notificações são enviadas para o endereço de e‑mail da conta, então verifique a caixa de entrada e a pasta de spam. Notificações de baixo saldo são enviadas no máximo uma vez a cada 3 dias. Notificações de modelos descontinuados são enviadas no máximo uma vez a cada 7 dias e consideram apenas modelos usados nos últimos 30 dias.</p>
+<h2 id="documentação-relacionada">Documentação relacionada</h2>
+<ul>
+<li><a href="basics.html">Platform basics</a>: faça login e navegue no console.</li>
+<li><a href="/docs/pt-br/authentication">Authentication</a>: famílias de chaves de API, esquemas de autenticação aceitos e validação de hook.</li>
+<li><a href="/docs/pt-br/pricing">Pricing</a>: saldo pré‑pago, cobranças de uso, faturamento de armazenamento e requisitos de saldo.</li>
+<li><a href="/docs/pt-br/limits">Plans and limits</a>: cotas de plano, limites de taxa, limites de armazenamento e disponibilidade de recursos.</li>
+<li><a href="/docs/pt-br/inference/structured-responses">Structured Responses</a>: saída de esquema JSON e comportamento de correção de JSON.</li>
+</ul>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/pt-br/platform/account-balance.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>

@@ -2,14 +2,14 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Getting Started | AIVAX </title>
+        <title>Logs | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="Getting Started | AIVAX ">
+        <meta name="title" content="Logs | AIVAX ">
 
 
-        <link rel="icon" href="../assets/img/favicon.ico">
-        <link rel="stylesheet" href="../public/docfx.min.css">
-        <link rel="stylesheet" href="../public/main.css">
+        <link rel="icon" href="../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../public/main.css">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,13 +17,13 @@
         
         <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
 
-        <meta name="docfx:navrel" content="../toc.html">
-        <meta name="docfx:tocrel" content="toc.html">
+        <meta name="docfx:navrel" content="../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
 
-        <meta name="docfx:rel" content="../">
+        <meta name="docfx:rel" content="../../">
 
 
-        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/getting-started.md/#L1">
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/platform/logs.md/#L1">
         <meta name="loc:inThisArticle" content="In this article">
         <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
         <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -37,7 +37,7 @@
         <meta name="loc:copy" content="Copy">
         <meta name="loc:downloadPdf" content="Download PDF">
         
-        <script type="module" src="./../public/docfx.min.js"></script>
+        <script type="module" src="./../../public/docfx.min.js"></script>
         <script>
             const theme = localStorage.getItem('theme') || 'auto';
             document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
@@ -61,8 +61,8 @@
         <header class="bg-body border-bottom">
             <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
                 <div class="container-xxl flex-nowrap">
-                    <a class="navbar-brand" href="../index.html">
-                        <img id="logo" class="svg" src="../assets/img/aivax.png" alt="AIVAX">
+                    <a class="navbar-brand" href="../../index.html">
+                        <img id="logo" class="svg" src="../../assets/img/aivax.png" alt="AIVAX">
                         AIVAX
                     </a>
                     <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
@@ -123,140 +123,167 @@
                 </div>
 
                 <article data-uid="">
-<h1 id="getting-started">Getting Started</h1>
+<h1 id="logs">Logs</h1>
 
-<p>This guide shows the shortest path from an AIVAX account to a first OpenAI-compatible chat completion.</p>
-<h2 id="before-you-begin">Before you begin</h2>
-<p>You need:</p>
+<p>Logs give authenticated account users a short, account-scoped view of operational warnings and errors that AIVAX records while platform resources run. Use this page when something looks wrong and you need a fast signal before opening a deeper page such as Conversations, RAG Collections, Batch, or Analytics.</p>
+<p>Logs are not a full transcript system and they are not an analytics ledger. They are most useful for recent operational messages: failed generation attempts, provider or tool errors, indexing warnings, document-size warnings, and other notifications that should be visible to the account owner.</p>
+<h2 id="when-to-use-logs">When to use Logs</h2>
+<p>Open <strong>Logs</strong> when you need to answer questions like:</p>
 <ul>
-<li>An AIVAX account.</li>
-<li>A private API key from the account dashboard or API key endpoint.</li>
-<li>Enough account balance for the operation. Some routes only require the balance not to be negative, while chat clients, integrations, batch processing, and multimodal inputs can require a strictly positive or minimum balance.</li>
-<li>Either a hosted model name or an AI Gateway ID.</li>
+<li>Did AIVAX record a recent warning or error for this account?</li>
+<li>Did an indexing job flag a document as too small or too large?</li>
+<li>Did a provider, gateway, or tool path fail while processing a request?</li>
+<li>Is a support case related to account state, resource configuration, or a deeper conversation-specific issue?</li>
 </ul>
-<p>Production API base URL:</p>
-<pre><code class="lang-text">https://inference.aivax.net
-</code></pre>
-<p>OpenAI-compatible SDK base URL:</p>
-<pre><code class="lang-text">https://inference.aivax.net/v1
-</code></pre>
-<h2 id="1-create-an-api-key">1. Create an API key</h2>
-<p>Use a <strong>private</strong> API key for server-side calls. Private keys are generated with the <code>sk-aiv-acc</code> prefix and can call authenticated account APIs and OpenAI-compatible inference endpoints.</p>
-<p>Public keys use the <code>pk-aiv-</code> prefix. They are intended for restricted client-side use on public routes, such as public RAG query/answer routes and restricted chat completions. They cannot call account-management endpoints.</p>
-<p>For most first integrations, start with a private key from a backend service. It gives you the complete account surface: model listing, chat completions, AI Gateways, RAG collections, batch workflows, and administrative APIs. Public keys are useful later, when you intentionally expose a restricted capability to a browser or another client-side environment.</p>
-<p>See <a href="authentication.html">Authentication</a> for key types, accepted auth schemes, and hook validation. If the next thing you want to build is an end-user widget instead of a backend integration, also read <a href="features/chat-clients.html">Chat Clients</a>, because chat sessions solve identity, conversation history, attachments, and per-user limits more directly than a raw public key.</p>
-<h2 id="2-find-a-model-or-gateway-id">2. Find a model or gateway ID</h2>
-<p>You can call either:</p>
-<ul>
-<li>A hosted model name returned by the model listing endpoint.</li>
-<li>A gateway identifier from your account.</li>
-</ul>
-<p>Gateway slugs are supported for private keys. Public-key chat completions must use the full gateway UUID and cannot call integrated models directly.</p>
-<p>Use a hosted model name when you only need a direct model call. Use an AI Gateway when you want reusable behavior: instructions, RAG collections, built-in tools, workers, MCP servers, protocol functions, skills, moderation, or provider settings. A gateway becomes the stable &quot;assistant configuration&quot; your application can call repeatedly without rebuilding the same options in every request.</p>
-<p>If you are still exploring, list models first and make one direct call. When the prompt, tools, or retrieval rules start becoming part of the product, move that configuration into an <a href="inference/ai-gateway.html">AI Gateway</a>.</p>
-<p>Reference:</p>
-<script src="https://inference.aivax.net/apidocs?embed-target=Model%20listing&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
-<h2 id="3-make-a-chat-completion-request">3. Make a chat-completion request</h2>
-<p>Install the OpenAI SDK for your language, then point it to AIVAX:</p>
-<pre><code class="lang-python">from openai import OpenAI
-
-client = OpenAI(
-    base_url=&quot;https://inference.aivax.net/v1&quot;,
-    api_key=&quot;sk-aiv-acc...&quot;
-)
-
-response = client.chat.completions.create(
-    model=&quot;&lt;MODEL_OR_GATEWAY_ID&gt;&quot;,
-    messages=[
-        {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Write a one-sentence welcome message.&quot;}
-    ]
-)
-
-print(response.choices[0].message.content)
-</code></pre>
-<p>Replace <code>&lt;MODEL_OR_GATEWAY_ID&gt;</code> with an integrated model name or a gateway ID available to your account.</p>
-<p>This request is intentionally small: one user message, one model or gateway, and one response. After it works, you can add the product pieces one at a time. For structured JSON output, see <a href="inference/structured-responses.html">Structured Responses</a>. To retrieve knowledge from documents before answering, create a <a href="rag/collections.html">RAG collection</a> and attach it to a gateway. To let the model call external systems, compare <a href="tools/builtin-tools.html">Built-in Tools</a>, <a href="tools/mcp.html">MCP</a>, and <a href="tools/protocol-functions.html">Protocol Functions</a>.</p>
-<h3 id="long-running-inference">Long-running inference</h3>
-<p>For normal requests, keep using <code>https://inference.aivax.net/v1</code>.</p>
-<p>If an inference call can run for longer than the Cloudflare proxy timeout, or if your client receives HTTP <code>524</code> errors while waiting for long completions, use the direct inference host instead:</p>
-<pre><code class="lang-text">https://direct.inference.aivax.net/v1
-</code></pre>
-<p>This host exposes only the OpenAI-compatible inference paths needed for model listing and chat completions. Use the same API key, model value, request body, and SDK configuration, changing only the base URL:</p>
-<pre><code class="lang-python">client = OpenAI(
-    base_url=&quot;https://direct.inference.aivax.net/v1&quot;,
-    api_key=&quot;sk-aiv-acc...&quot;
-)
-</code></pre>
-<p>Reference:</p>
-<script src="https://inference.aivax.net/apidocs?embed-target=Inference%20(chat%20completions)&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
-<h2 id="4-confirm-billing-and-limits">4. Confirm billing and limits</h2>
-<p>After a successful request, usage is recorded against the authenticated account and the API key resource. Integrated model usage is charged from account balance unless it is covered by a subscription-model reserve window.</p>
-<p>Checking balance after the first call is a good sanity step because it confirms that authentication, model access, usage tracking, and billing all resolved under the expected account. The balance endpoint also returns plan and limit information, which is useful before enabling higher-volume features such as RAG imports, chat clients, or batch processing.</p>
-<p>Reference:</p>
-<script src="https://inference.aivax.net/apidocs?embed-target=Get%20Account%20Balance&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
-<h2 id="error-formats">Error formats</h2>
-<p>AIVAX uses two response shapes:</p>
-<ul>
-<li>OpenAI-compatible endpoints return an OpenAI-style <code>error</code> object with <code>message</code>, <code>type</code>, <code>param</code>, and <code>code</code>.</li>
-<li>Administrative endpoints return <code>{&quot;error&quot;: &quot;...&quot;, &quot;details&quot;: null}</code> for errors and <code>{&quot;message&quot;: &quot;...&quot;, &quot;data&quot;: ...}</code> for successful <code>JsonResponse</code> results.</li>
-</ul>
-<p>Common failures:</p>
+<p>Use <a href="/docs/platform/conversations">Conversations</a> when you need the actual prompt, response, metadata, usage, tools, or request details for an inference. Use <a href="/docs/platform/analytics">Analytics</a> when you need usage totals, cost trends, or invoices. Use <a href="/docs/platform/rag-collections">RAG Collections</a> when the problem is retrieval quality, indexing state, or collection transactions.</p>
+<h2 id="understand-the-logs-page">Understand the Logs page</h2>
+<p>Open <strong>Logs</strong> from the console sidebar. The page title is <strong>Account Logs</strong>.</p>
+<p>The table shows the most recent logs for the active account:</p>
 <table>
 <thead>
 <tr>
-<th>Status</th>
-<th>Likely cause</th>
+<th>Column</th>
+<th>Meaning</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>401 Unauthorized</code></td>
-<td>Missing, malformed, expired, or unknown API key.</td>
+<td><strong>Date and time</strong></td>
+<td>When AIVAX wrote the log entry.</td>
 </tr>
 <tr>
-<td><code>403 Forbidden</code></td>
-<td>A public key tried to call a non-public route, or the resource is not allowed.</td>
+<td><strong>Level</strong></td>
+<td>The severity. The console may show the level as a compact badge such as <code>I</code>, <code>W</code>, or <code>E</code> for Information, Warning, or Error.</td>
 </tr>
 <tr>
-<td><code>402 Payment Required</code></td>
-<td>Balance is insufficient or the account exceeded storage quota.</td>
+<td><strong>Message</strong></td>
+<td>The human-readable log message. Long stored messages may be truncated by the platform before they reach the table.</td>
 </tr>
 <tr>
-<td><code>429 Too Many Requests</code></td>
-<td>A rate limit was reached.</td>
-</tr>
-<tr>
-<td><code>400 Bad Request</code></td>
-<td>Invalid request body, unsupported parameter, missing model, invalid schema, or invalid tool configuration.</td>
+<td><strong>Actions</strong></td>
+<td>Per-row actions. The current console action is <strong>Copy to clipboard</strong>.</td>
 </tr>
 </tbody>
 </table>
-<p>For streaming chat completions, handle normal SSE chunks, optional <code>servertool</code> chunks, final usage metadata, <code>[DONE]</code>, and streaming error chunks.</p>
-<h2 id="troubleshooting-checklist">Troubleshooting checklist</h2>
-<p>When a request fails, verify in this order:</p>
+<p>Use <strong>Refresh</strong> to reload the list. The console requests <code>/api/v1/information/logs.json</code>, which returns the newest authenticated-account log entries first, capped at 300 entries. The console table paginates those results in pages of 30 rows. This console endpoint is used by the authenticated AIVAX console and is not currently listed in the published API reference.</p>
+<h2 id="read-log-levels">Read log levels</h2>
+<p>Log levels help you decide the next action.</p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>What it usually means</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Information</strong></td>
+<td>A normal account-level event or background notification.</td>
+<td>Use it as context; no action is usually required unless it relates to an investigation.</td>
+</tr>
+<tr>
+<td><strong>Warning</strong></td>
+<td>A resource worked, but AIVAX detected something that may reduce quality or reliability.</td>
+<td>Read the message and check the named resource. For example, a large-document warning usually means you should split that RAG document into smaller chunks.</td>
+</tr>
+<tr>
+<td><strong>Error</strong></td>
+<td>A request, provider call, tool call, indexing step, or integration path failed.</td>
+<td>Use the timestamp and message to find the related resource, then inspect the deeper page for the affected feature.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="investigate-a-warning-or-error">Investigate a warning or error</h2>
+<p>Start from the log message and work outward. A log row usually gives you a timestamp and a short description; some messages also include a resource identifier.</p>
 <ol>
-<li>Base URL is <code>https://inference.aivax.net/v1</code> for OpenAI SDK calls.</li>
-<li>The key is sent as <code>Authorization: Bearer &lt;KEY&gt;</code>, Basic auth, or the <code>api-key</code> query parameter.</li>
-<li>The account has enough balance and storage quota.</li>
-<li>The model or gateway ID exists and is allowed by the current plan.</li>
-<li>The request is under the plan's request, token, RAG, tool, or batch limits.</li>
-<li>Public-key calls use only allowed chat-completion parameters and full gateway UUIDs.</li>
-<li>Tool, RAG, worker, or schema configuration is isolated by testing the same prompt without that feature.</li>
-</ol>
-<h2 id="next-steps">Next steps</h2>
+<li>Confirm the active account in the account menu.</li>
+<li>Select <strong>Refresh</strong> so you are looking at the newest rows.</li>
+<li>Find the most recent Warning or Error near the time of the reported issue.</li>
+<li>Open the row <strong>Actions</strong> menu and select <strong>Copy to clipboard</strong> when you need to paste the message into an internal ticket or compare it with another resource.</li>
+<li>Open the product page related to the message:
 <ul>
-<li><a href="authentication.html">Authentication</a>: understand private keys, public keys, and reverse hook validation.</li>
-<li><a href="limits.html">Plans and limits</a>: check request limits, context limits, RAG limits, tool limits, and batch limits before opening a workflow to users.</li>
-<li><a href="pricing.html">Pricing</a>: understand how credits, usage, storage, and minimum-balance checks work.</li>
-<li><a href="inference/ai-gateway.html">AI Gateways</a>: move from a direct model call to a reusable assistant configuration.</li>
-<li><a href="rag/collections.html">RAG collections</a>: store documents and retrieve them during inference.</li>
-<li><a href="features/batch.html">Batch</a>: run the same AI workflow over many independent records.</li>
+<li>RAG document or indexing messages: open <a href="/docs/platform/rag-collections">RAG Collections</a>.</li>
+<li>Batch job or item messages: open <a href="/docs/platform/batch">Batch</a>.</li>
+<li>Unexpected model behavior, failed tools, or request-level problems: open <a href="/docs/platform/conversations">Conversations</a>.</li>
+<li>Cost or balance problems: open <a href="/docs/platform/analytics">Analytics</a> or <a href="/docs/platform/account-balance">Account, balance, and multiple accounts</a>.</li>
 </ul>
+</li>
+<li>Use the timestamp, model, gateway, resource ID, collection ID, batch job ID, or related conversation to narrow the investigation. Never paste raw API keys into tickets or shared notes.</li>
+</ol>
+<p>When a log points to a document-size issue, treat it as a quality signal. Oversized chunks can make retrieval less precise, while very small chunks can lack enough context. Adjust the document chunking strategy, reimport or reindex the affected documents, and test retrieval before relying on the collection in production.</p>
+<h2 id="share-log-information-safely">Share log information safely</h2>
+<p>Log messages are account operational data. They may contain resource IDs, provider names, tool names, document names, or fragments of operational context. They should not normally contain secrets, but do not assume every copied message is safe to share.</p>
+<p>Before sharing a log message, redact:</p>
+<ul>
+<li>API keys, session keys, login keys, webhook secrets, or bearer tokens.</li>
+<li>Personal data or customer identifiers.</li>
+<li>Internal URLs, request IDs, account IDs, and infrastructure details unless the recipient needs them.</li>
+<li>Private prompts, tool arguments, or business process details.</li>
+</ul>
+<p>Do not share browser network logs from the console. Network captures may include authorization headers or authenticated response headers that are not part of the visible log table.</p>
+<h2 id="limits-and-retention">Limits and retention</h2>
+<p>Logs are intentionally short-lived and recent-focused:</p>
+<ul>
+<li>Logs are account-scoped to the authenticated account.</li>
+<li>The listing returns the newest account logs first.</li>
+<li>The API response is capped at 300 entries, and the console paginates those results 30 rows at a time.</li>
+<li>Messages longer than 5,000 characters are truncated before storage.</li>
+<li>Background cleanup removes log entries older than 7 days, so Logs should not be treated as permanent audit storage.</li>
+</ul>
+<p>If you need durable investigation evidence, copy the relevant message into your own approved support or incident system while the entry is still available. For full conversation evidence, use Conversations export instead of relying on Logs.</p>
+<h2 id="what-logs-do-not-show">What Logs do not show</h2>
+<p>Logs are a high-level operational signal. They do not replace:</p>
+<ul>
+<li>Conversation transcripts, tool calls, request metadata, or message hashes.</li>
+<li>Complete API request and response payloads.</li>
+<li>Full provider traces or infrastructure logs.</li>
+<li>Billing ledgers or detailed usage breakdowns.</li>
+<li>RAG transaction scoring and matched-document details.</li>
+</ul>
+<p>Use Logs to decide where to look next, then move to the product-specific page that owns the full detail.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Likely cause</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A known issue does not appear in Logs</td>
+<td>The issue did not create an account log entry, the entry is older than the retention window, or you are viewing the wrong account.</td>
+<td>Confirm the active account, refresh, then check Conversations, Batch, RAG Collections, or Analytics for feature-specific evidence.</td>
+</tr>
+<tr>
+<td>The table shows only old rows</td>
+<td>No newer account-level log entries have been written, or the page has not refreshed.</td>
+<td>Select <strong>Refresh</strong> and reproduce the issue in a controlled test if you need a new signal.</td>
+</tr>
+<tr>
+<td>A warning mentions a large document</td>
+<td>The RAG document may be too large for precise retrieval.</td>
+<td>Split the document into smaller chunks, reimport or reindex it, and test the collection before production use.</td>
+</tr>
+<tr>
+<td>An error message is too general</td>
+<td>Logs intentionally summarize account-level failures.</td>
+<td>Use the timestamp, resource ID, gateway, API key, or related conversation to open the deeper diagnostic page.</td>
+</tr>
+<tr>
+<td>You need to share evidence with another team</td>
+<td>The raw message may include operational context.</td>
+<td>Copy only the relevant row, redact sensitive data, and avoid sharing console network captures or screenshots that include secrets.</td>
+</tr>
+</tbody>
+</table>
 
 </article>
 
                 <div class="contribution d-print-none">
-                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/getting-started.md/#L1" class="edit-link">Edit this page</a>
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/platform/logs.md/#L1" class="edit-link">Edit this page</a>
                 </div>
 
                 <div class="next-article d-print-none border-top" id="nextArticle"></div>

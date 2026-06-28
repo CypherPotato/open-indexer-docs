@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Modelos | AIVAX </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="Modelos | AIVAX ">
+
+
+        <link rel="icon" href="../../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+        
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
+
+        <meta name="docfx:rel" content="../../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/pt-br/platform/models.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+                
+        <script>            
+            function switchLanguage(lang) {
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../../index.html">
+                        <img id="logo" class="svg" src="../../../assets/img/aivax.png" alt="AIVAX">
+                        AIVAX
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="modelos">Modelos</h1>
+
+<p>Use <strong>Modelos</strong> para descobrir os modelos integrados disponíveis na sua conta AIVAX e decidir se chama um modelo diretamente ou o usa como modelo base para um AI Gateway.</p>
+<p>Esta página é para desenvolvedores que escolhem um modelo para um fluxo de trabalho de produto. Ela explica como ler o catálogo de modelos, comparar opções, abrir exemplos de integração e criar um gateway a partir de um modelo. Para a listagem de modelos ao nível de API e o comportamento de inferência direta, veja <a href="/docs/pt-br/getting-started">Getting Started</a> e <a href="/docs/pt-br/inference/inference">Inference</a>.</p>
+<h2 id="antes-de-começar">Antes de começar</h2>
+<p>Faça login no <a href="https://console.aivax.net/">console AIVAX</a> e abra <strong>Dashboard &gt; Modelos</strong>. Confirme que está usando a conta e o plano desejados antes de testar os modelos, pois acesso ao modelo, saldo, reservas de assinatura, limites de requisição, status do modelo e configuração do gateway podem afetar se um modelo visível pode ser usado com sucesso.</p>
+<p>Para exemplos de API, crie ou escolha uma chave de API privada para uma integração de backend. Não use navegadores compartilhados para testar modelos e não faça commit de chaves ou URLs de playground gerados no controle de versão.</p>
+<h2 id="quando-usar-modelos">Quando usar Modelos</h2>
+<p>Abra <strong>Modelos</strong> quando precisar:</p>
+<ul>
+<li>Encontrar o nome exato do modelo para usar em uma requisição compatível com OpenAI.</li>
+<li>Comparar velocidade, inteligência, tamanho de contexto, preço, estabilidade e capacidades do modelo.</li>
+<li>Verificar se um modelo está incluído no uso de reserva de assinatura.</li>
+<li>Escolher um modelo que suporte uma capacidade necessária, como entrada de imagem, áudio, vídeo, raciocínio, chamada de ferramenta, execução de código, busca na web ou roteamento de modelo.</li>
+<li>Criar um novo AI Gateway a partir de um modelo.</li>
+<li>Copiar código de integração inicial para Python, JavaScript ou curl.</li>
+</ul>
+<p>Use uma chamada direta ao modelo para testes simples, protótipos, rotinas internas ou caminhos de código onde sua aplicação controla todas as opções de requisição. Use um <a href="/docs/pt-br/inference/ai-gateway">AI Gateway</a> quando o comportamento precisar ser reutilizável, gerenciado centralmente, auditável ou compartilhado por clientes de chat, fluxos RAG, habilidades, ferramentas, workers ou múltiplas aplicações.</p>
+<h2 id="pesquisar-e-filtrar-o-catálogo">Pesquisar e filtrar o catálogo</h2>
+<p>A página Modelos exibe o catálogo de modelos integrados e a contagem atual de modelos. Um modelo que aparece no catálogo não garante que todas as contas possam usá‑lo em todo fluxo de trabalho. Acesso ao plano, saldo da conta, reservas de assinatura, limites de requisição, status do modelo e configuração do gateway ainda podem afetar o comportamento em tempo de execução.</p>
+<p>Use a caixa de pesquisa para buscar pelo nome do modelo. A pesquisa tolera espaços e pontuação, portanto buscar por um provedor ou família de modelo pode reduzir a lista mesmo quando o nome completo do modelo contém símbolos como <code>@</code>, <code>/</code>, <code>-</code> ou <code>:</code>.</p>
+<p>Use filtros quando já souber o trade‑off desejado:</p>
+<table>
+<thead>
+<tr>
+<th>Filtro</th>
+<th>Use quando</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Velocidade</strong></td>
+<td>Você precisa de menor latência para chat, suporte, roteamento, extração ou fluxos voltados ao usuário.</td>
+</tr>
+<tr>
+<td><strong>Inteligência</strong></td>
+<td>Você precisa de raciocínio mais forte, codificação, seguimento de instruções ou trabalho de longo horizonte.</td>
+</tr>
+<tr>
+<td><strong>Preço</strong></td>
+<td>Você precisa controlar o custo de saída ou comparar modelos mais baratos e mais caros.</td>
+</tr>
+<tr>
+<td><strong>Assinatura</strong></td>
+<td>Você quer identificar modelos com uso incluído nos planos de assinatura.</td>
+</tr>
+</tbody>
+</table>
+<p>Os filtros podem gerar uma lista vazia. Se isso acontecer, limpe o termo de pesquisa primeiro, depois relaxe um filtro de cada vez. Por exemplo, se nenhum modelo corresponder a um nome de provedor mais <strong>Ultra rápido</strong> mais <strong>Incluído</strong>, remova o filtro de assinatura ou escolha <strong>Rápido</strong>.</p>
+<h2 id="ler-um-cartão-de-modelo">Ler um cartão de modelo</h2>
+<p>Cada cartão de modelo combina sinais de produto e faturamento:</p>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>O que significa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Nome do modelo</strong></td>
+<td>O valor exato usado em <code>model</code>, como <code>@provider/model-name</code>. Copie esse valor ao chamar o modelo diretamente.</td>
+</tr>
+<tr>
+<td><strong>Descrição</strong></td>
+<td>Um resumo curto dos pontos fortes pretendidos do modelo e do posicionamento do provedor.</td>
+</tr>
+<tr>
+<td><strong>Provedor e data de lançamento</strong></td>
+<td>Ajuda a distinguir famílias de modelos e entender a atualidade.</td>
+</tr>
+<tr>
+<td><strong>Janela de contexto</strong></td>
+<td>O tamanho máximo de contexto exposto para o modelo. Contexto longo ajuda com documentos grandes e prompts em escala de projeto, mas pode aumentar custo e latência.</td>
+</tr>
+<tr>
+<td><strong>Estabilidade</strong></td>
+<td>Indica se o modelo está estável, instável ou offline.</td>
+</tr>
+<tr>
+<td><strong>Precificação</strong></td>
+<td>Mostra preços de entrada, entrada em cache, entrada de áudio quando disponível e preços de saída por milhão de tokens. Alguns modelos exibem preços diferentes por nível de contexto.</td>
+</tr>
+<tr>
+<td><strong>Velocidade</strong></td>
+<td>Uma classificação relativa de velocidade, de mais lenta a ultra rápida.</td>
+</tr>
+<tr>
+<td><strong>Inteligência</strong></td>
+<td>Uma classificação relativa de capacidade, da mais baixa à mais alta.</td>
+</tr>
+<tr>
+<td><strong>Capacidades</strong></td>
+<td>Ícones para recursos suportados pelo modelo, como imagem, áudio, vídeo, busca na web, raciocínio, chamada de ferramenta, execução de código, links externos, memória, funções JSON, comportamento sem censura, roteamento de modelo ou difusão.</td>
+</tr>
+<tr>
+<td><strong>Emblemas</strong></td>
+<td>Rótulos de status importantes, como incluído na assinatura, novo, pré‑visualização, depreciado, com desconto, gratuito ou outras flags de conta/modelo quando exibidos.</td>
+</tr>
+</tbody>
+</table>
+<p>Não escolha com base em um único sinal. Um modelo barato pode se tornar caro se precisar de muitas tentativas, gerar respostas longas ou faltar uma capacidade necessária. Um modelo de alta inteligência pode ser a escolha errada para extração de alto volume se um modelo mais rápido e barato puder atender ao padrão de qualidade.</p>
+<h2 id="escolher-um-modelo-para-um-fluxo-de-trabalho">Escolher um modelo para um fluxo de trabalho</h2>
+<p>Comece com os requisitos rígidos do fluxo de trabalho:</p>
+<ol>
+<li><strong>Tipo de entrada:</strong> texto apenas, imagem, áudio, vídeo, arquivo ou conteúdo misto.</li>
+<li><strong>Formato de saída:</strong> texto simples, JSON estruturado, chamadas de ferramenta, execução de código ou mídia gerada.</li>
+<li><strong>Latência:</strong> chat interativo, tarefa em segundo plano, processamento em lote ou análise de longa duração.</li>
+<li><strong>Tamanho do contexto:</strong> prompt curto, histórico de conversa, documentos grandes ou contexto em escala de projeto.</li>
+<li><strong>Perfil de custo:</strong> tokens de entrada esperados, tokens de saída, entrada em cache e taxa de tentativas.</li>
+<li><strong>Risco operacional:</strong> uso estável em produção, teste de pré‑visualização, migração de modelo depreciado ou comportamento de roteador de modelo.</li>
+</ol>
+<p>Em seguida, use os filtros do catálogo para encontrar candidatos e teste‑os com um prompt representativo pequeno. Para produção, prefira modelos estáveis que suportem diretamente as capacidades necessárias. Use modelos de pré‑visualização, depreciados, gratuitos, sem censura ou roteadores apenas quando seus trade‑offs forem intencionais e documentados para sua equipe.</p>
+<p>Se o modelo for usado com RAG, ferramentas, habilidades, workers, clientes de chat públicos ou integrações de canal, crie um AI Gateway em vez de codificar o nome do modelo integrado em cada cliente. O gateway mantém a seleção de modelo, instruções, recuperação, ferramentas e configurações de segurança em um único lugar.</p>
+<h2 id="usar-ações-de-modelo">Usar ações de modelo</h2>
+<p>Abra o menu de ações em um cartão de modelo para usar o modelo selecionado.</p>
+<table>
+<thead>
+<tr>
+<th>Ação</th>
+<th>O que faz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Copiar nome do modelo</strong></td>
+<td>Copia o identificador exato do modelo para chamadas de API diretas ou documentação.</td>
+</tr>
+<tr>
+<td><strong>Criar gateway</strong></td>
+<td>Abre um formulário para nome do gateway e cria um AI Gateway usando o modelo integrado selecionado.</td>
+</tr>
+<tr>
+<td><strong>Abrir playground</strong></td>
+<td>Abre o playground AIVAX com o modelo selecionado e o contexto da sessão atual. Use para testes rápidos no navegador antes de confirmar uma configuração.</td>
+</tr>
+<tr>
+<td><strong>Ver código de integração</strong></td>
+<td>Abre exemplos iniciais em Python, JavaScript e curl usando a variável de ambiente <code>AIVAX_API_KEY</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>Criar um gateway a partir de um modelo define o gateway para usar o modelo integrado através do AIVAX. Após a criação do gateway, revise suas instruções, coleções RAG, ferramentas, habilidades, workers e configurações de saída antes de usá‑lo em produção. Veja <a href="/docs/pt-br/inference/ai-gateway">AI Gateways</a> para o fluxo completo de gateway.</p>
+<p>Testes no playground e chamadas de API podem consumir saldo da conta ou reservas de assinatura. Use prompts de teste curtos primeiro e verifique <a href="account-balance.html#check-balance-and-usage">Uso</a> se estiver comparando vários modelos.</p>
+<p>Não compartilhe URLs de playground gerados. O console pode incluir informações da sessão no link do playground para que o teste seja executado. Para integrações duráveis, use uma chave de API privada armazenada em <code>AIVAX_API_KEY</code> ou em um gerenciador de segredos, em vez de depender de uma sessão de navegador.</p>
+<h2 id="usar-exemplos-de-integração-com-segurança">Usar exemplos de integração com segurança</h2>
+<p>A caixa de diálogo <strong>Ver código de integração</strong> mostra exemplos para Python, JavaScript e curl. Os exemplos usam uma variável de ambiente para a chave de API em vez de imprimir uma chave real no bloco de código. O console pode exibir o alias do endpoint <code>/api/v1</code>; para configuração de SDK, a URL base canônica compatível com OpenAI é <code>https://inference.aivax.net/v1</code>.</p>
+<p>Antes de executar um exemplo:</p>
+<ol>
+<li>Crie ou escolha uma chave de API privada para a integração.</li>
+<li>Armazene-a em uma variável de ambiente ou gerenciador de segredos como <code>AIVAX_API_KEY</code>.</li>
+<li>Confirme que o nome do modelo corresponde ao modelo selecionado.</li>
+<li>Comece com um prompt pequeno.</li>
+<li>Mova o comportamento reutilizável para um AI Gateway quando o prompt, modelo, ferramentas, RAG ou regras de saída se tornarem configuração de produto.</li>
+</ol>
+<p>Não cole chaves de API nos exemplos de código nem as faça commit no controle de versão. Para orientações sobre chaves de API, veja <a href="account-balance.html#manage-api-keys">Gerenciar chaves de API</a> e <a href="/docs/pt-br/authentication">Autenticação</a>.</p>
+<h2 id="decisões-comuns">Decisões comuns</h2>
+<h3 id="modelo-direto-ou-ai-gateway">Modelo direto ou AI Gateway?</h3>
+<p>Use um modelo direto quando a requisição for simples e totalmente controlada pela sua aplicação. Use um AI Gateway quando quiser reutilizar instruções, anexar coleções RAG, habilitar ferramentas, impor comportamento de saída, conectar clientes de chat, expor uma ferramenta MCP ou mudar configurações de modelo sem redeployar sua aplicação.</p>
+<h3 id="modelo-rápido-ou-modelo-de-alta-inteligência">Modelo rápido ou modelo de alta inteligência?</h3>
+<p>Use um modelo mais rápido para suporte interativo, classificação, roteamento, extração e tarefas de alto volume com critérios de sucesso claros. Use um modelo de alta inteligência para análises ambíguas, codificação, contexto longo, raciocínio em múltiplas etapas e tarefas onde a qualidade da resposta importa mais que a latência.</p>
+<h3 id="modelo-mais-barato-ou-modelo-incluído-na-assinatura">Modelo mais barato ou modelo incluído na assinatura?</h3>
+<p>Use o filtro de preço quando o fluxo de trabalho for cobrado por token e o custo for principalmente impulsionado pelo volume de saída. Use o filtro de assinatura quando seu plano incluir uso de reserva e o multiplicador de uso do modelo selecionado se adequar à carga de trabalho. Sempre valide com prompts reais, pois tentativas e saídas longas podem alterar o custo efetivo.</p>
+<h3 id="modelo-estável-de-prévisualização-depreciado-ou-roteador">Modelo estável, de pré‑visualização, depreciado ou roteador?</h3>
+<p>Use modelos estáveis para produção. Use modelos de pré‑visualização para avaliação e experimentos controlados. Trate modelos depreciados como alvos de migração: encontre um substituto e atualize gateways ou aplicações antes da remoção. Modelos roteadores podem ser úteis quando quiser que o AIVAX roteie dentro de uma família de modelos, mas valide o comportamento com seus próprios prompts antes de depender deles.</p>
+<h2 id="solução-de-problemas">Solução de problemas</h2>
+<h3 id="a-lista-de-modelos-está-vazia">A lista de modelos está vazia</h3>
+<p>Limpe o campo de pesquisa e redefina os filtros para <strong>Todas as velocidades</strong>, <strong>Todas as inteligências</strong>, <strong>Todos os preços</strong> e <strong>Todos os modelos</strong>. Se a lista ainda estiver vazia, atualize a página e confirme que a conta está autenticada.</p>
+<h3 id="um-modelo-não-funciona-com-meu-prompt">Um modelo não funciona com meu prompt</h3>
+<p>Verifique primeiro as capacidades do modelo. Se a requisição incluir imagens, áudio, vídeo, arquivos, ferramentas, funções JSON ou contexto longo, o modelo selecionado deve suportar esse requisito ou o gateway deve usar pré‑processamento AIVAX ou outro caminho de modelo que o faça.</p>
+<h3 id="um-modelo-está-disponível-no-catálogo-mas-falha-em-produção">Um modelo está disponível no catálogo mas falha em produção</h3>
+<p>Verifique, na ordem: saldo da conta, acesso ao plano, limites de requisição, tamanho de contexto, capacidades necessárias, estabilidade ou status de deção do modelo, validade da chave de API e configurações do gateway. Em seguida, teste um prompt direto simples com o mesmo modelo. Se o mesmo prompt direto funcionar mas o gateway falhar, revise o nome do modelo do gateway, endereço base, coleções RAG, ferramentas, workers e configurações de saída.</p>
+<h3 id="um-modelo-foi-depreciado">Um modelo foi depreciado</h3>
+<p>Abra Modelos, procure pelo provedor ou família de modelo e escolha um substituto com capacidades comparáveis, tamanho de contexto, velocidade e preço. Atualize primeiro os AI Gateways e depois as integrações diretas. Se as notificações de modelo depreciado estiverem habilitadas, a conta pode enviar e‑mail quando modelos usados recentemente forem depreciados.</p>
+<h2 id="referência">Referência</h2>
+<p>Referência da API de listagem de modelos compatível com OpenAI:</p>
+<p>A referência abaixo documenta a superfície de listagem de modelos da API usada por integrações. Não é o mesmo payload rico de catálogo renderizado pela página Modelos do dashboard, que inclui metadados orientados à UI, como níveis de preço, flags, velocidade relativa, inteligência relativa e menus de ação.</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=Model%20listing&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<p>Documentação relacionada:</p>
+<ul>
+<li><a href="/docs/pt-br/inference/inference">Inference</a>: chame modelos através da API de complementos de chat compatível com OpenAI.</li>
+<li><a href="/docs/pt-br/inference/ai-gateway">AI Gateways</a>: transforme a seleção de modelo em configuração reutilizável de assistente.</li>
+<li><a href="/docs/pt-br/limits">Plans and limits</a>: entenda acesso ao plano, limites de taxa, limites de contexto e reservas de assinatura.</li>
+<li><a href="/docs/pt-br/pricing">Pricing</a>: entenda uso de modelo, saldo e faturamento de armazenamento.</li>
+</ul>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/pt-br/platform/models.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>

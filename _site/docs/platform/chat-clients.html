@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Chat Clients | AIVAX </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="Chat Clients | AIVAX ">
+
+
+        <link rel="icon" href="../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+        
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
+
+        <meta name="docfx:rel" content="../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/platform/chat-clients.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+                
+        <script>            
+            function switchLanguage(lang) {
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../index.html">
+                        <img id="logo" class="svg" src="../../assets/img/aivax.png" alt="AIVAX">
+                        AIVAX
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="chat-clients">Chat Clients</h1>
+
+<p>Use <strong>Chat Clients</strong> to connect an AI Gateway to people through a web chat session, Telegram bot, or WhatsApp integration. The gateway controls the assistant's behavior; the chat client controls the channel, session identity, user interface, limits, integrations, scheduled continuations, and conversation entry points.</p>
+<p>This page is for builders and operators who manage chat clients from the AIVAX console. For API session mechanics and channel behavior, see the <a href="/docs/features/chat-clients">developer Chat Clients guide</a>.</p>
+<h2 id="before-you-begin">Before you begin</h2>
+<p>Sign in to the <a href="https://console.aivax.net/">AIVAX console</a> and open <strong>Dashboard &gt; Chat clients</strong>. Confirm the active account before editing a client, copying session links, changing integrations, or deleting sessions.</p>
+<p>Before creating or changing a production chat client, identify:</p>
+<ul>
+<li>Which <a href="ai-gateways.html">AI Gateway</a> should answer messages.</li>
+<li>Which channel you are serving: web chat, Telegram, WhatsApp, or a mix.</li>
+<li>What user identity should be used as the session tag or external user ID.</li>
+<li>Which attachments, tools, audio, memory, scheduled continuations, or workers the gateway may use.</li>
+<li>What limits should protect the assistant from abuse or runaway sessions.</li>
+<li>Where conversation logs and support review should happen.</li>
+</ul>
+<h2 id="when-to-use-a-chat-client">When to use a chat client</h2>
+<p>Use a chat client when a human user needs a managed conversation surface rather than a raw API call. Chat clients are useful for:</p>
+<ul>
+<li>Website or product assistants.</li>
+<li>Support portals and internal help desks.</li>
+<li>Telegram bots.</li>
+<li>WhatsApp support through Evolution API, Kapso, or legacy Z-Api.</li>
+<li>Demo links or controlled test conversations.</li>
+<li>Session-based conversations that need context, expiration, usage limits, and observability.</li>
+</ul>
+<p>Use direct inference instead when your application owns the full UI, identity model, and conversation state.</p>
+<h2 id="understand-the-chat-client-list">Understand the chat-client list</h2>
+<p>The Chat clients page shows each client owned by the active account.</p>
+<table>
+<thead>
+<tr>
+<th>Column or control</th>
+<th>Use it for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>New chat client</strong></td>
+<td>Create a client and link it to an AI Gateway.</td>
+</tr>
+<tr>
+<td><strong>Filter columns</strong></td>
+<td>Search visible list values.</td>
+</tr>
+<tr>
+<td><strong>Id.</strong></td>
+<td>Short display form of the chat client ID. Copy the full ID when integrating through API or configuring webhooks.</td>
+</tr>
+<tr>
+<td><strong>Name</strong></td>
+<td>Friendly client name shown in the console.</td>
+</tr>
+<tr>
+<td><strong>Associated gateway</strong></td>
+<td>Gateway that receives messages from this client.</td>
+</tr>
+<tr>
+<td><strong>Active sessions</strong></td>
+<td>Number of sessions currently listed for the client.</td>
+</tr>
+<tr>
+<td><strong>Manage</strong></td>
+<td>Open the client editor.</td>
+</tr>
+<tr>
+<td><strong>Sessions</strong></td>
+<td>Open session management for the client.</td>
+</tr>
+<tr>
+<td><strong>Scheduled messages</strong></td>
+<td>Open scheduled messages and recurring tasks for the client.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="create-a-chat-client">Create a chat client</h2>
+<p>To create a client:</p>
+<ol>
+<li>Select <strong>New chat client</strong>.</li>
+<li>Set <strong>Chat client name</strong> to a clear channel and environment name.</li>
+<li>Select the <strong>Associated gateway</strong> that should answer messages.</li>
+<li>Choose the <strong>UI language</strong> or leave it on auto-detect.</li>
+<li>Review customization, limits, and channel settings.</li>
+<li>Select <strong>Create chat client</strong>.</li>
+</ol>
+<p>Confirm that the client appears in the list with the expected gateway. For public or customer-facing channels, test with a non-production gateway or private session before publishing links or webhooks.</p>
+<h2 id="configure-the-client-editor">Configure the client editor</h2>
+<p>Open <strong>Manage</strong> on a chat client to edit it. Save changes only after reviewing all tabs that affect production behavior.</p>
+<table>
+<thead>
+<tr>
+<th>Tab</th>
+<th>Use it for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Chat client</strong></td>
+<td>Client name, associated gateway, and interface language.</td>
+</tr>
+<tr>
+<td><strong>Customization</strong></td>
+<td>Primary color, page title, presentation title/subtitle, logo, suggestion buttons, and input placeholder.</td>
+</tr>
+<tr>
+<td><strong>Parameters</strong></td>
+<td>Maximum messages per hour, maximum retained messages, and allowed input modes such as image, document, and audio.</td>
+</tr>
+<tr>
+<td><strong>Text-to-speech</strong></td>
+<td>Voice synthesis provider, voice name, speech instructions, and optional summarization before synthesis.</td>
+</tr>
+<tr>
+<td><strong>Integrations</strong></td>
+<td>Telegram, Evolution API, Kapso, legacy Z-Api, messaging behavior, scheduled continuations, and shared integration settings.</td>
+</tr>
+<tr>
+<td><strong>Advanced</strong></td>
+<td>Custom CSS, custom JavaScript, debug mode, and tool-call visibility.</td>
+</tr>
+</tbody>
+</table>
+<p>Review the associated gateway first. If the gateway does not support the input modes or tools enabled in the client, users may be able to submit content the assistant cannot handle well.</p>
+<h2 id="customize-the-web-chat">Customize the web chat</h2>
+<p>Use <strong>Customization</strong> to make the chat client understandable to users before the first message is sent.</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Use it for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Primary color</strong></td>
+<td>Highlight color for links, buttons, and client UI elements.</td>
+</tr>
+<tr>
+<td><strong>Page title</strong></td>
+<td>Browser page title.</td>
+</tr>
+<tr>
+<td><strong>Presentation title</strong></td>
+<td>Empty-state headline shown before a conversation starts.</td>
+</tr>
+<tr>
+<td><strong>Presentation subtitle</strong></td>
+<td>Empty-state supporting text.</td>
+</tr>
+<tr>
+<td><strong>Logo image</strong></td>
+<td>Logo shown at the opening of the chat.</td>
+</tr>
+<tr>
+<td><strong>Suggestion buttons</strong></td>
+<td>Conversation starters displayed near the input.</td>
+</tr>
+<tr>
+<td><strong>Input area placeholder</strong></td>
+<td>Placeholder text in the message field.</td>
+</tr>
+</tbody>
+</table>
+<p>Write suggestion buttons as safe, high-value starting prompts. Avoid putting private customer data, credentials, account IDs, or internal-only procedures into visible UI text.</p>
+<h2 id="set-limits-and-input-modes">Set limits and input modes</h2>
+<p>Use <strong>Parameters</strong> to protect user experience, cost, and account resources.</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Maximum messages per hour</strong></td>
+<td>Per-session hourly message limit.</td>
+</tr>
+<tr>
+<td><strong>Maximum messages</strong></td>
+<td>Maximum messages allowed in a session, counting both user and assistant messages. When a session exceeds this cap, the chat is blocked instead of silently trimming old messages.</td>
+</tr>
+<tr>
+<td><strong>Input modes</strong></td>
+<td>Which input types the client allows, such as image, document, and audio.</td>
+</tr>
+</tbody>
+</table>
+<p>Set limits before exposing a chat client publicly. If you allow files or audio, verify that the associated gateway and selected model can process those inputs, and explain expected attachment behavior to users where appropriate.</p>
+<h2 id="configure-text-to-speech">Configure text-to-speech</h2>
+<p>Use <strong>Text-to-speech</strong> when the chat experience should produce audio responses.</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Voice Synthesis Origin</strong></td>
+<td>Provider used for text-to-speech, or none.</td>
+</tr>
+<tr>
+<td><strong>Synthesis Voice</strong></td>
+<td>Voice identifier used by the selected provider.</td>
+</tr>
+<tr>
+<td><strong>Special Instructions</strong></td>
+<td>Tone, speaking style, or pronunciation guidance.</td>
+</tr>
+<tr>
+<td><strong>Summarize before synthesis</strong></td>
+<td>Shortens text before synthesis to improve audio quality and control cost.</td>
+</tr>
+</tbody>
+</table>
+<p>Text-to-speech can add cost and can change how responses are perceived. Test with realistic answers, long answers, and error messages before enabling it for users.</p>
+<h2 id="configure-messaging-integrations">Configure messaging integrations</h2>
+<p>Open <strong>Integrations</strong> to connect the chat client to messaging channels.</p>
+<table>
+<thead>
+<tr>
+<th>Integration</th>
+<th>Use it for</th>
+<th>Main setup fields</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Telegram</strong></td>
+<td>Telegram bot conversations.</td>
+<td>Bot token and session duration. Use <strong>Update hooks</strong> after saving token changes.</td>
+</tr>
+<tr>
+<td><strong>Evolution API</strong></td>
+<td>WhatsApp through a self-hosted Evolution API instance.</td>
+<td>Instance endpoint, instance name, instance token, session duration, and the generated webhook URL.</td>
+</tr>
+<tr>
+<td><strong>Kapso</strong></td>
+<td>WhatsApp through Kapso.</td>
+<td>API key, phone number ID, optional webhook secret key, session duration, and optional continued-message template ID.</td>
+</tr>
+<tr>
+<td><strong>Z-Api</strong></td>
+<td>Legacy WhatsApp integration.</td>
+<td>Instance ID, instance token, optional client token, session duration, and the generated webhook URL.</td>
+</tr>
+</tbody>
+</table>
+<p>Provider tokens and webhook secrets are credentials. Store them only in the integration settings, do not paste them into documentation, screenshots, browser recordings, or support messages, and rotate them if exposed.</p>
+<p>For WhatsApp integrations, configure the provider webhook exactly as the integration page instructs. For Z-Api, do not enable provider options that notify messages sent by the bot itself; that can create an infinite response loop. For Evolution API, the console specifies the message-upsert event and webhook settings required for normal operation.</p>
+<p>Removing an integration disconnects that provider configuration from the chat client. It does not replace the underlying provider account setup, and it can immediately stop users on that channel from reaching the assistant until the integration is configured again.</p>
+<h2 id="rotate-or-change-provider-credentials">Rotate or change provider credentials</h2>
+<p>Treat provider credentials as production infrastructure. For live Telegram or WhatsApp channels:</p>
+<ol>
+<li>Create or use a staging chat client when possible.</li>
+<li>Save the new token, API key, or webhook secret in the staging client first.</li>
+<li>Configure the provider webhook with the staging webhook URL.</li>
+<li>Send a simple test message and confirm the reply plus conversation logs.</li>
+<li>Apply the new credential to the production client.</li>
+<li>Update hooks or provider webhook settings as required by the integration page.</li>
+<li>Confirm production logs and then revoke the old credential or webhook.</li>
+</ol>
+<p>Avoid deleting the old integration until the replacement path is tested. If delivery stops after rotation, restore the previous provider configuration or disable the provider webhook while you investigate.</p>
+<h2 id="configure-shared-messaging-behavior">Configure shared messaging behavior</h2>
+<p>The <strong>Integrations</strong> tab also includes shared messaging settings:</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Split answer into message chunks</strong></td>
+<td>Sends long answers as multiple channel messages.</td>
+</tr>
+<tr>
+<td><strong>Message debounce interval</strong></td>
+<td>Wait time after user input stops before processing.</td>
+</tr>
+<tr>
+<td><strong>Upload unsupported files</strong></td>
+<td>Allows files that are not natively supported by the model to be uploaded and represented for the assistant.</td>
+</tr>
+<tr>
+<td><strong>Allow continued conversations</strong></td>
+<td>Allows the assistant to schedule continued messages and actions.</td>
+</tr>
+<tr>
+<td><strong>Maximum ignored time for continued messages</strong></td>
+<td>How long a scheduled continuation can be ignored before being discarded.</td>
+</tr>
+</tbody>
+</table>
+<p>Use scheduled continuations only when users have agreed to later follow-ups. Verify the target identifier before relying on it, provide an opt-out path in the channel, and review stale recurring tasks before changing integrations, deleting clients, or reassigning a phone number or bot.</p>
+<h2 id="use-advanced-settings-safely">Use Advanced settings safely</h2>
+<p>Use <strong>Advanced</strong> only when you need controlled client-level customization or debugging.</p>
+<p>Custom CSS and JavaScript run in the chat client experience. Use code only from trusted sources, and do not load third-party scripts that can read session URLs, message content, user input, or provider context.</p>
+<p>Keep <strong>Debug</strong> and <strong>Tool call visibility</strong> disabled for production clients unless you are reproducing an issue in a private test session. These settings can expose tool parameters, internal errors, request details, or session data to browser users or logs. Disable them immediately after testing.</p>
+<h2 id="use-sessions-safely">Use sessions safely</h2>
+<p>Open <strong>Sessions</strong> from the chat-client list or Manage menu to inspect conversations created for that client.</p>
+<p>The session list shows:</p>
+<table>
+<thead>
+<tr>
+<th>Column or action</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Session key</strong></td>
+<td>Access key for the session. Treat it as sensitive.</td>
+</tr>
+<tr>
+<td><strong>Tag/User</strong></td>
+<td>External user ID or tag associated with the session.</td>
+</tr>
+<tr>
+<td><strong>Usage</strong></td>
+<td>Token count and message count.</td>
+</tr>
+<tr>
+<td><strong>Created at</strong></td>
+<td>Session creation time.</td>
+</tr>
+<tr>
+<td><strong>Last activity</strong></td>
+<td>Last user or assistant activity.</td>
+</tr>
+<tr>
+<td><strong>Context</strong></td>
+<td>Preview of extra context attached to the session.</td>
+</tr>
+<tr>
+<td><strong>Open chat</strong></td>
+<td>Opens the web chat for that session.</td>
+</tr>
+<tr>
+<td><strong>Copy link</strong></td>
+<td>Copies a session URL. Anyone with the link can access that session while it is valid.</td>
+</tr>
+<tr>
+<td><strong>Export conversation</strong></td>
+<td>Downloads that session transcript.</td>
+</tr>
+<tr>
+<td><strong>View conversation logs</strong></td>
+<td>Opens Conversations filtered to the session.</td>
+</tr>
+<tr>
+<td><strong>Clear conversation</strong></td>
+<td>Clears conversation messages while keeping the session. This does not revoke the session key or invalidate copied links.</td>
+</tr>
+<tr>
+<td><strong>Delete</strong></td>
+<td>Deletes the session and ends access through its key.</td>
+</tr>
+</tbody>
+</table>
+<p>Do not share session keys or chat links publicly. A session link is an access token for that conversation. If a link is exposed, delete the session or create a new session and share the replacement only with the intended user. Clear conversation is useful for resetting content, but use <strong>Delete</strong> when a session link or key may have been exposed.</p>
+<p>Treat exported conversations and logs as sensitive data. Store them only in approved locations, avoid sending raw exports to support, and redact credentials, session keys, phone numbers, personal data, and internal context when sharing examples.</p>
+<h2 id="create-a-session">Create a session</h2>
+<p>Use <strong>New session</strong> when you need a controlled web-chat link or a test conversation.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Use it for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tag</strong></td>
+<td>Stable external ID for the user, account, or application conversation. Use one unique tag per real user or conversation. If an active session already exists with the same tag, creating a session refreshes and returns that session, which can expose prior context if two users share a tag by accident.</td>
+</tr>
+<tr>
+<td><strong>Expiration</strong></td>
+<td>How long the session remains valid. The console enforces the supported 10-minute to 90-day range.</td>
+</tr>
+<tr>
+<td><strong>Context</strong></td>
+<td>Additional model-visible context for this session.</td>
+</tr>
+</tbody>
+</table>
+<p>Keep tags stable but non-sensitive. The tag is searchable identity for restoring sessions, not a place for private metadata. Do not use raw personal identifiers, credentials, or secrets as tags. Put only information in <strong>Context</strong> that the assistant is allowed to see. Session metadata is forwarded through inference context; do not store secrets or credentials.</p>
+<h2 id="review-scheduled-tasks">Review scheduled tasks</h2>
+<p>Open <strong>Scheduled messages</strong> to monitor follow-ups created for a chat client.</p>
+<p>The page includes:</p>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th>Use it for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Filter by user</strong></td>
+<td>Filter schedules and recurring tasks by external user ID.</td>
+</tr>
+<tr>
+<td><strong>Scheduled messages</strong></td>
+<td>One-time messages scheduled for future delivery.</td>
+</tr>
+<tr>
+<td><strong>Recurring tasks</strong></td>
+<td>Cron-based tasks that activate repeatedly.</td>
+</tr>
+<tr>
+<td><strong>Details</strong></td>
+<td>Inspect target, target identifier, timing, reason, context, execution result, cron expression, and activation history.</td>
+</tr>
+<tr>
+<td><strong>Cancel</strong></td>
+<td>Cancel a one-time schedule or recurring task. This cannot be undone from the console.</td>
+</tr>
+</tbody>
+</table>
+<p>Use this page when users report unexpected follow-ups, missing reminders, or repeated messages. Check the external user ID, target, scheduled time, status, next activation, execution count, and related conversation logs.</p>
+<p>Before deleting or recreating a session, check whether scheduled messages or recurring tasks use the same external user ID. Deleting the session does not automatically prove that a future provider-side or schedule-side follow-up is no longer relevant.</p>
+<h2 id="delete-or-disconnect-safely">Delete or disconnect safely</h2>
+<p>Before deleting a chat client or integration:</p>
+<ol>
+<li>Review active sessions.</li>
+<li>Check scheduled messages and recurring tasks.</li>
+<li>Open conversation logs for recent activity.</li>
+<li>Identify websites, bots, provider webhooks, or applications that use the client ID or session URLs.</li>
+<li>Export conversations if retention or audit requirements require it.</li>
+<li>Disable external provider webhooks if the provider should stop sending messages to AIVAX.</li>
+</ol>
+<p>Deleting a chat client also deletes its sessions. Removing an integration only removes that provider configuration from the client.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<p>When escalating an issue, share the chat client ID, provider name, timestamp, masked user or tag, and relevant error text. Do not share bot tokens, API keys, webhook secrets, full session URLs, session keys, or unredacted transcripts.</p>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Check</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>User cannot open a web chat link</td>
+<td>Session key, expiration time, deleted session, copied URL, and active account/client.</td>
+<td>Create a new session and share the new link only with the intended user.</td>
+</tr>
+<tr>
+<td>Bot receives messages but does not answer</td>
+<td>Associated gateway, account balance, message limits, integration credentials, provider webhook URL, and conversation logs.</td>
+<td>Test the gateway directly, verify provider settings, then send a simple text-only message.</td>
+</tr>
+<tr>
+<td>WhatsApp bot loops or replies to itself</td>
+<td>Provider webhook options and whether sent-by-bot messages are forwarded back to AIVAX.</td>
+<td>Disable provider options that notify messages sent by the bot and retest with one message.</td>
+</tr>
+<tr>
+<td>Attachments fail or produce poor answers</td>
+<td>Input modes, model modality support, gateway multimodal settings, unsupported-file setting, and provider media support.</td>
+<td>Enable only supported input modes or switch to a gateway/model that supports the channel content.</td>
+</tr>
+<tr>
+<td>Users hit limits too quickly</td>
+<td>Maximum messages per hour, maximum messages, integration session duration, and repeated retry behavior.</td>
+<td>Increase limits deliberately, split users across sessions where appropriate, or reduce automated retries.</td>
+</tr>
+<tr>
+<td>Scheduled follow-up did not send</td>
+<td>Allow continued conversations, scheduled task status, target identifier, external user ID, next activation, provider credentials, and account balance.</td>
+<td>Inspect scheduled task details, fix provider/gateway issues, and recreate the schedule if needed.</td>
+</tr>
+<tr>
+<td>Tool errors are hidden</td>
+<td>Debug and tool-call visibility settings.</td>
+<td>Enable debug temporarily in a controlled test client, reproduce, inspect logs, then disable debug for production users.</td>
+</tr>
+<tr>
+<td>Conversation quality differs by channel</td>
+<td>Gateway instructions, channel formatting, message chunking, attachments, and session context.</td>
+<td>Test the same user task in the web chat and the messaging integration, then adjust channel-specific settings.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="api-reference">API reference</h2>
+<p>Manage chat clients through the Web Chat API:</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=List%20Web%20Chat%20Clients&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Create%20Web%20Chat%20Client&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=View%20Web%20Chat%20Client&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Edit%20Web%20Chat%20Client&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Edit%20Web%20Chat%20Client%20Integrations&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Delete%20Web%20Chat%20Client%20Integration&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Delete%20Web%20Chat%20Client&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<p>Create and manage sessions through the Web Chat Sessions API:</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=Create%20Web%20Chat%20Session&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=List%20Web%20Chat%20Sessions&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Delete%20Web%20Chat%20Session&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<p>Use these public session actions from a valid chat session:</p>
+<p><strong>Clear conversation</strong> is available from the console session menu. Its backing reset action is not currently exposed as an embedded public API reference, so use the console when you need to clear a session without deleting it.</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=Get%20Session%20Info&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Send%20Prompt&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Retry%20Last%20Message&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Download%20Session%20Transcript&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<p>Monitor scheduled and recurring follow-ups through Hook Schedules:</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=List%20Hook%20Schedules&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Get%20Schedule&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Get%20Recurring%20Task&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Cancel%20Schedule&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Cancel%20Recurring%20Task&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<p>Related documentation:</p>
+<ul>
+<li><a href="/docs/features/chat-clients">Developer Chat Clients guide</a>: technical session and integration behavior.</li>
+<li><a href="ai-gateways.html">AI Gateways</a>: configure the assistant behind the client.</li>
+<li>Conversations: inspect conversation logs and exports from the console.</li>
+<li><a href="account-balance.html">Account, balance, and multiple accounts</a>: manage balance, limits, and API keys.</li>
+</ul>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/platform/chat-clients.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>

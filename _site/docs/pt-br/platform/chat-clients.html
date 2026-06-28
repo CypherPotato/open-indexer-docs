@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Clientes de Chat | AIVAX </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="Clientes de Chat | AIVAX ">
+
+
+        <link rel="icon" href="../../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+        
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
+
+        <meta name="docfx:rel" content="../../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/pt-br/platform/chat-clients.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+                
+        <script>            
+            function switchLanguage(lang) {
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../../index.html">
+                        <img id="logo" class="svg" src="../../../assets/img/aivax.png" alt="AIVAX">
+                        AIVAX
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="clientes-de-chat">Clientes de Chat</h1>
+
+<p>Use <strong>Clientes de Chat</strong> para conectar um AI Gateway às pessoas através de uma sessão de chat web, bot do Telegram ou integração com WhatsApp. O gateway controla o comportamento do assistente; o cliente de chat controla o canal, identidade da sessão, interface do usuário, limites, integrações, continuações agendadas e pontos de entrada da conversa.</p>
+<p>Esta página é para construtores e operadores que gerenciam clientes de chat pelo console AIVAX. Para mecânicas de sessão API e comportamento do canal, veja o <a href="/docs/pt-br/features/chat-clients">guia de Clientes de Chat para desenvolvedores</a>.</p>
+<h2 id="antes-de-começar">Antes de começar</h2>
+<p>Faça login no <a href="https://console.aivax.net/">console AIVAX</a> e abra <strong>Painel &gt; Clientes de chat</strong>. Confirme a conta ativa antes de editar um cliente, copiar links de sessão, alterar integrações ou excluir sessões.</p>
+<p>Antes de criar ou alterar um cliente de chat de produção, identifique:</p>
+<ul>
+<li>Qual <a href="ai-gateways.html">AI Gateway</a> deve responder às mensagens.</li>
+<li>Qual canal você está atendendo: chat web, Telegram, WhatsApp ou uma combinação.</li>
+<li>Qual identidade de usuário deve ser usada como tag da sessão ou ID externo de usuário.</li>
+<li>Quais anexos, ferramentas, áudio, memória, continuações agendadas ou workers o gateway pode usar.</li>
+<li>Quais limites devem proteger o assistente de abuso ou sessões fora de controle.</li>
+<li>Onde os logs de conversa e revisão de suporte devem acontecer.</li>
+</ul>
+<h2 id="quando-usar-um-cliente-de-chat">Quando usar um cliente de chat</h2>
+<p>Use um cliente de chat quando um usuário humano precisar de uma interface de conversa gerenciada ao invés de uma chamada de API bruta. Clientes de chat são úteis para:</p>
+<ul>
+<li>Assistentes de sites ou produtos.</li>
+<li>Portais de suporte e help desks internos.</li>
+<li>Bots do Telegram.</li>
+<li>Suporte via WhatsApp através da Evolution API, Kapso ou Z-Api legada.</li>
+<li>Links de demonstração ou conversas de teste controladas.</li>
+<li>Conversas baseadas em sessão que precisam de contexto, expiração, limites de uso e observabilidade.</li>
+</ul>
+<p>Use inferência direta quando sua aplicação possui a UI completa, modelo de identidade e estado da conversa.</p>
+<h2 id="entenda-a-lista-de-clientes-de-chat">Entenda a lista de clientes de chat</h2>
+<p>A página Clientes de chat mostra cada cliente pertencente à conta ativa.</p>
+<table>
+<thead>
+<tr>
+<th>Coluna ou controle</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Novo cliente de chat</strong></td>
+<td>Crie um cliente e vincule‑o a um AI Gateway.</td>
+</tr>
+<tr>
+<td><strong>Filtrar colunas</strong></td>
+<td>Pesquise valores visíveis na lista.</td>
+</tr>
+<tr>
+<td><strong>Id.</strong></td>
+<td>Forma curta de exibição do ID do cliente de chat. Copie o ID completo ao integrar via API ou configurar webhooks.</td>
+</tr>
+<tr>
+<td><strong>Nome</strong></td>
+<td>Nome amigável do cliente exibido no console.</td>
+</tr>
+<tr>
+<td><strong>Gateway associado</strong></td>
+<td>Gateway que recebe mensagens deste cliente.</td>
+</tr>
+<tr>
+<td><strong>Sessões ativas</strong></td>
+<td>Número de sessões atualmente listadas para o cliente.</td>
+</tr>
+<tr>
+<td><strong>Gerenciar</strong></td>
+<td>Abra o editor do cliente.</td>
+</tr>
+<tr>
+<td><strong>Sessões</strong></td>
+<td>Abra o gerenciamento de sessões para o cliente.</td>
+</tr>
+<tr>
+<td><strong>Mensagens agendadas</strong></td>
+<td>Abra mensagens agendadas e tarefas recorrentes para o cliente.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="crie-um-cliente-de-chat">Crie um cliente de chat</h2>
+<p>Para criar um cliente:</p>
+<ol>
+<li>Selecione <strong>Novo cliente de chat</strong>.</li>
+<li>Defina <strong>Nome do cliente de chat</strong> para um nome de canal e ambiente claros.</li>
+<li>Selecione o <strong>Gateway associado</strong> que deve responder às mensagens.</li>
+<li>Escolha o <strong>Idioma da UI</strong> ou deixe em detecção automática.</li>
+<li>Revise personalização, limites e configurações do canal.</li>
+<li>Selecione <strong>Criar cliente de chat</strong>.</li>
+</ol>
+<p>Confirme que o cliente aparece na lista com o gateway esperado. Para canais públicos ou voltados ao cliente, teste com um gateway não‑produção ou sessão privada antes de publicar links ou webhooks.</p>
+<h2 id="configure-o-editor-do-cliente">Configure o editor do cliente</h2>
+<p>Abra <strong>Gerenciar</strong> em um cliente de chat para editá‑lo. Salve alterações somente após revisar todas as abas que afetam o comportamento de produção.</p>
+<table>
+<thead>
+<tr>
+<th>Aba</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cliente de chat</strong></td>
+<td>Nome do cliente, gateway associado e idioma da interface.</td>
+</tr>
+<tr>
+<td><strong>Personalização</strong></td>
+<td>Cor primária, título da página, título/subtítulo da apresentação, logo, botões de sugestão e placeholder de entrada.</td>
+</tr>
+<tr>
+<td><strong>Parâmetros</strong></td>
+<td>Máximo de mensagens por hora, mensagens retidas máximas e modos de entrada permitidos como imagem, documento e áudio.</td>
+</tr>
+<tr>
+<td><strong>Texto‑para‑fala</strong></td>
+<td>Provedor de síntese de voz, nome da voz, instruções de fala e resumo opcional antes da síntese.</td>
+</tr>
+<tr>
+<td><strong>Integrações</strong></td>
+<td>Telegram, Evolution API, Kapso, Z‑Api legada, comportamento de mensagens, continuações agendadas e configurações de integração compartilhadas.</td>
+</tr>
+<tr>
+<td><strong>Avançado</strong></td>
+<td>CSS personalizado, JavaScript personalizado, modo de depuração e visibilidade de chamadas de ferramenta.</td>
+</tr>
+</tbody>
+</table>
+<p>Revise primeiro o gateway associado. Se o gateway não suportar os modos de entrada ou ferramentas habilitadas no cliente, os usuários podem conseguir enviar conteúdo que o assistente não trata bem.</p>
+<h2 id="personalize-o-chat-web">Personalize o chat web</h2>
+<p>Use <strong>Personalização</strong> para tornar o cliente de chat compreensível aos usuários antes que a primeira mensagem seja enviada.</p>
+<table>
+<thead>
+<tr>
+<th>Configuração</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cor primária</strong></td>
+<td>Cor de destaque para links, botões e elementos da UI do cliente.</td>
+</tr>
+<tr>
+<td><strong>Título da página</strong></td>
+<td>Título da página do navegador.</td>
+</tr>
+<tr>
+<td><strong>Título da apresentação</strong></td>
+<td>Cabeçalho de estado vazio exibido antes de iniciar a conversa.</td>
+</tr>
+<tr>
+<td><strong>Subtítulo da apresentação</strong></td>
+<td>Texto de apoio de estado vazio.</td>
+</tr>
+<tr>
+<td><strong>Imagem do logo</strong></td>
+<td>Logo exibido na abertura do chat.</td>
+</tr>
+<tr>
+<td><strong>Botões de sugestão</strong></td>
+<td>Iniciadores de conversa exibidos próximo à entrada.</td>
+</tr>
+<tr>
+<td><strong>Placeholder da área de entrada</strong></td>
+<td>Texto placeholder no campo de mensagem.</td>
+</tr>
+</tbody>
+</table>
+<p>Escreva botões de sugestão como prompts iniciais seguros e de alto valor. Evite colocar dados privados do cliente, credenciais, IDs de conta ou procedimentos internos apenas texto UI visível.</p>
+<h2 id="defina-limites-e-modos-de-entrada">Defina limites e modos de entrada</h2>
+<p>Use <strong>Parâmetros</strong> para proteger a experiência do usuário, custo e recursos da conta.</p>
+<table>
+<thead>
+<tr>
+<th>Configuração</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Máximo de mensagens por hora</strong></td>
+<td>Limite horário de mensagens por sessão.</td>
+</tr>
+<tr>
+<td><strong>Máximo de mensagens</strong></td>
+<td>Número máximo de mensagens permitidas em uma sessão, contando mensagens do usuário e do assistente. Quando uma sessão ultrapassa esse limite, o chat é bloqueado ao invés de cortar silenciosamente mensagens antigas.</td>
+</tr>
+<tr>
+<td><strong>Modos de entrada</strong></td>
+<td>Quais tipos de entrada o cliente permite, como imagem, documento e áudio.</td>
+</tr>
+</tbody>
+</table>
+<p>Defina limites antes de expor publicamente um cliente de chat. Se permitir arquivos ou áudio, verifique se o gateway associado e o modelo selecionado podem processar esses insumos e explique o comportamento esperado de anexos aos usuários quando adequado.</p>
+<h2 id="configure-textoparafala">Configure texto‑para‑fala</h2>
+<p>Use <strong>Texto‑para‑fala</strong> quando a experiência de chat deve produzir respostas em áudio.</p>
+<table>
+<thead>
+<tr>
+<th>Configuração</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Origem da síntese de voz</strong></td>
+<td>Provedor usado para texto‑para‑fala, ou nenhum.</td>
+</tr>
+<tr>
+<td><strong>Voz de síntese</strong></td>
+<td>Identificador da voz usado pelo provedor selecionado.</td>
+</tr>
+<tr>
+<td><strong>Instruções especiais</strong></td>
+<td>Tom, estilo de fala ou orientação de pronúncia.</td>
+</tr>
+<tr>
+<td><strong>Resumir antes da síntese</strong></td>
+<td>Encurta o texto antes da síntese para melhorar a qualidade do áudio e controlar custos.</td>
+</tr>
+</tbody>
+</table>
+<p>Texto‑para‑fala pode acrescentar custo e pode mudar como as respostas são percebidas. Teste com respostas realistas, respostas longas e mensagens de erro antes de habilitar para usuários.</p>
+<h2 id="configure-integrações-de-mensagens">Configure integrações de mensagens</h2>
+<p>Abra <strong>Integrações</strong> para conectar o cliente de chat a canais de mensagem.</p>
+<table>
+<thead>
+<tr>
+<th>Integração</th>
+<th>Uso</th>
+<th>Campos principais de configuração</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Telegram</strong></td>
+<td>Conversas de bot do Telegram.</td>
+<td>Token do bot e duração da sessão. Use <strong>Hooks de atualização</strong> após salvar alterações no token.</td>
+</tr>
+<tr>
+<td><strong>Evolution API</strong></td>
+<td>WhatsApp via instância auto‑hospedada da Evolution API.</td>
+<td>Endpoint da instância, nome da instância, token da instância, duração da sessão e URL do webhook gerado.</td>
+</tr>
+<tr>
+<td><strong>Kapso</strong></td>
+<td>WhatsApp via Kapso.</td>
+<td>Chave de API, ID do número de telefone, chave secreta opcional do webhook, duração da sessão e ID de modelo de mensagem contínua opcional.</td>
+</tr>
+<tr>
+<td><strong>Z‑Api</strong></td>
+<td>Integração WhatsApp legada.</td>
+<td>ID da instância, token da instância, token de cliente opcional, duração da sessão e URL do webhook gerado.</td>
+</tr>
+</tbody>
+</table>
+<p>Tokens de provedor e segredos de webhook são credenciais. Armazene‑os apenas nas configurações de integração, não cole‑os em documentação, capturas de tela, gravações de navegador ou mensagens de suporte, e rotacione‑os se expostos.</p>
+<p>Para integrações WhatsApp, configure o webhook do provedor exatamente como a página de integração instrui. Para Z‑Api, não habilite opções do provedor que notifiquem mensagens enviadas pelo próprio bot; isso pode criar um loop infinito de respostas. Para Evolution API, o console especifica o evento de inserção de mensagem e as configurações de webhook necessárias para operação normal.</p>
+<p>Remover uma integração desconecta a configuração do provedor do cliente de chat. Não substitui a configuração da conta do provedor subjacente e pode parar imediatamente usuários desse canal de alcançar o assistente até que a integração seja configurada novamente.</p>
+<h2 id="rotacione-ou-altere-credenciais-do-provedor">Rotacione ou altere credenciais do provedor</h2>
+<p>Trate credenciais do provedor como infraestrutura de produção. Para canais Telegram ou WhatsApp ao vivo:</p>
+<ol>
+<li>Crie ou use um cliente de chat de teste quando possível.</li>
+<li>Salve o novo token, chave de API ou segredo de webhook primeiro no cliente de teste.</li>
+<li>Configure o webhook do provedor com a URL do webhook de teste.</li>
+<li>Envie uma mensagem de teste simples e confirme a resposta mais logs de conversa.</li>
+<li>Aplique a nova credencial ao cliente de produção.</li>
+<li>Atualize hooks ou configurações de webhook do provedor conforme exigido pela página de integração.</li>
+<li>Confirme logs de produção e então revogue a credencial ou webhook antigo.</li>
+</ol>
+<p>Evite excluir a integração antiga até que o caminho de substituição seja testado. Se a entrega parar após a rotação, restaure a configuração anterior do provedor ou desative o webhook do provedor enquanto investiga.</p>
+<h2 id="configure-comportamento-de-mensagens-compartilhado">Configure comportamento de mensagens compartilhado</h2>
+<p>A aba <strong>Integrações</strong> também inclui configurações de mensagens compartilhadas:</p>
+<table>
+<thead>
+<tr>
+<th>Configuração</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Dividir resposta em blocos de mensagem</strong></td>
+<td>Envia respostas longas como múltiplas mensagens do canal.</td>
+</tr>
+<tr>
+<td><strong>Intervalo de debounce da mensagem</strong></td>
+<td>Tempo de espera após o usuário parar de digitar antes de processar.</td>
+</tr>
+<tr>
+<td><strong>Carregar arquivos não suportados</strong></td>
+<td>Permite arquivos que não são suportados nativamente pelo modelo sejam carregados e representados para o assistente.</td>
+</tr>
+<tr>
+<td><strong>Permitir conversas contínuas</strong></td>
+<td>Permite ao assistente agendar mensagens e ações contínuas.</td>
+</tr>
+<tr>
+<td><strong>Tempo máximo ignorado para mensagens contínuas</strong></td>
+<td>Quanto tempo uma continuação agendada pode ser ignorada antes de ser descartada.</td>
+</tr>
+</tbody>
+</table>
+<p>Use continuações agendadas somente quando os usuários concordaram com acompanhamentos posteriores. Verifique o identificador de destino antes de confiar nele, forneça um caminho de exclusão no canal e revise tarefas recorrentes obsoletas antes de alterar integrações, excluir clientes ou reatribuir um número de telefone ou bot.</p>
+<h2 id="use-configurações-avançadas-com-segurança">Use configurações avançadas com segurança</h2>
+<p>Use <strong>Avançado</strong> somente quando precisar de personalização ou depuração controlada ao nível do cliente.</p>
+<p>CSS e JavaScript personalizados são executados na experiência do cliente de chat. Use código apenas de fontes confiáveis e não carregue scripts de terceiros que possam ler URLs de sessão, conteúdo de mensagens, entrada do usuário ou contexto do provedor.</p>
+<p>Mantenha <strong>Depuração</strong> e <strong>Visibilidade de chamadas de ferramenta</strong> desativados para clientes de produção, a menos que esteja reproduzindo um problema em uma sessão de teste privada. Essas configurações podem expor parâmetros de ferramentas, erros internos, detalhes de requisição ou dados de sessão a usuários do navegador ou logs. Desative‑as imediatamente após o teste.</p>
+<h2 id="use-sessões-com-segurança">Use sessões com segurança</h2>
+<p>Abra <strong>Sessões</strong> a partir da lista de clientes de chat ou menu Gerenciar para inspecionar conversas criadas para aquele cliente.</p>
+<p>A lista de sessões mostra:</p>
+<table>
+<thead>
+<tr>
+<th>Coluna ou ação</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Chave da sessão</strong></td>
+<td>Chave de acesso à sessão. Trate como sensível.</td>
+</tr>
+<tr>
+<td><strong>Tag/Usuário</strong></td>
+<td>ID externo de usuário ou tag associada à sessão.</td>
+</tr>
+<tr>
+<td><strong>Uso</strong></td>
+<td>Contagem de tokens e de mensagens.</td>
+</tr>
+<tr>
+<td><strong>Criado em</strong></td>
+<td>Horário de criação da sessão.</td>
+</tr>
+<tr>
+<td><strong>Última atividade</strong></td>
+<td>Última atividade do usuário ou assistente.</td>
+</tr>
+<tr>
+<td><strong>Contexto</strong></td>
+<td>Pré‑visualização de contexto extra anexado à sessão.</td>
+</tr>
+<tr>
+<td><strong>Abrir chat</strong></td>
+<td>Abre o chat web para essa sessão.</td>
+</tr>
+<tr>
+<td><strong>Copiar link</strong></td>
+<td>Copia uma URL de sessão. Qualquer pessoa com o link pode acessar a sessão enquanto ela for válida.</td>
+</tr>
+<tr>
+<td><strong>Exportar conversa</strong></td>
+<td>Baixa a transcrição da sessão.</td>
+</tr>
+<tr>
+<td><strong>Ver logs de conversa</strong></td>
+<td>Abre Conversas filtradas para a sessão.</td>
+</tr>
+<tr>
+<td><strong>Limpar conversa</strong></td>
+<td>Limpa as mensagens da conversa mantendo a sessão. Isso não revoga a chave da sessão nem invalida links copiados.</td>
+</tr>
+<tr>
+<td><strong>Excluir</strong></td>
+<td>Exclui a sessão e encerra o acesso via sua chave.</td>
+</tr>
+</tbody>
+</table>
+<p>Não compartilhe chaves de sessão ou links de chat publicamente. Um link de sessão é um token de acesso para aquela conversa. Se um link for exposto, exclua a sessão ou crie uma nova sessão e compartilhe a substituição apenas com o usuário pretendido. Limpar conversa é útil para redefinir conteúdo, mas use <strong>Excluir</strong> quando um link ou chave de sessão puder ter sido exposto.</p>
+<p>Trate conversas exportadas e logs como dados sensíveis. Armazene‑os apenas em locais aprovados, evite enviar exportações brutas ao suporte e redacte credenciais, chaves de sessão, números de telefone, dados pessoais e contexto interno ao compartilhar exemplos.</p>
+<h2 id="crie-uma-sessão">Crie uma sessão</h2>
+<p>Use <strong>Nova sessão</strong> quando precisar de um link de chat web controlado ou de uma conversa de teste.</p>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tag</strong></td>
+<td>ID externo estável para o usuário, conta ou conversa da aplicação. Use uma tag única por usuário real ou conversa. Se já existir uma sessão ativa com a mesma tag, criar uma sessão atualiza e retorna essa sessão, o que pode expor contexto prévio se dois usuários compartilharem a tag por acidente.</td>
+</tr>
+<tr>
+<td><strong>Expiração</strong></td>
+<td>Tempo que a sessão permanece válida. O console impõe o intervalo suportado de 10 minutos a 90 dias.</td>
+</tr>
+<tr>
+<td><strong>Contexto</strong></td>
+<td>Contexto adicional visível ao modelo para esta sessão.</td>
+</tr>
+</tbody>
+</table>
+<p>Mantenha tags estáveis mas não sensíveis. A tag é identidade pesquisável para restauração de sessões, não um local para metadados privados. Não use identificadores pessoais crus, credenciais ou segredos como tags. Coloque apenas informações em <strong>Contexto</strong> que o assistente tem permissão para ver. Metadados da sessão são repassados através do contexto de inferência; não armazene segredos ou credenciais.</p>
+<h2 id="revise-tarefas-agendadas">Revise tarefas agendadas</h2>
+<p>Abra <strong>Mensagens agendadas</strong> para monitorar acompanhamentos criados para um cliente de chat.</p>
+<p>A página inclui:</p>
+<table>
+<thead>
+<tr>
+<th>Seção</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Filtrar por usuário</strong></td>
+<td>Filtra agendas e tarefas recorrentes por ID externo de usuário.</td>
+</tr>
+<tr>
+<td><strong>Mensagens agendadas</strong></td>
+<td>Mensagens únicas agendadas para entrega futura.</td>
+</tr>
+<tr>
+<td><strong>Tarefas recorrentes</strong></td>
+<td>Tarefas baseadas em cron que ativam repetidamente.</td>
+</tr>
+<tr>
+<td><strong>Detalhes</strong></td>
+<td>Inspeciona alvo, identificador de alvo, horário, motivo, contexto, resultado da execução, expressão cron e histórico de ativações.</td>
+</tr>
+<tr>
+<td><strong>Cancelar</strong></td>
+<td>Cancela uma agenda única ou tarefa recorrente. Isso não pode ser desfeito pelo console.</td>
+</tr>
+</tbody>
+</table>
+<p>Use esta página quando usuários relatarem acompanhamentos inesperados, lembretes faltantes ou mensagens repetidas. Verifique o ID externo de usuário, alvo, horário agendado, status, próxima ativação, contagem de execuções e logs de conversa relacionados.</p>
+<p>Antes de excluir ou recriar uma sessão, verifique se mensagens agendadas ou tarefas recorrentes usam o mesmo ID externo de usuário. Excluir a sessão não prova automaticamente que um acompanhamento futuro do provedor ou da agenda não é mais relevante.</p>
+<h2 id="exclua-ou-desconecte-com-segurança">Exclua ou desconecte com segurança</h2>
+<p>Antes de excluir um cliente de chat ou integração:</p>
+<ol>
+<li>Revise sessões ativas.</li>
+<li>Verifique mensagens agendadas e tarefas recorrentes.</li>
+<li>Abra logs de conversa para atividade recente.</li>
+<li>Identifique sites, bots, webhooks de provedor ou aplicações que usam o ID do cliente ou URLs de sessão.</li>
+<li>Exporte conversas se requisitos de retenção ou auditoria exigirem.</li>
+<li>Desative webhooks externos de provedor se o provedor deve parar de enviar mensagens ao AIVAX.</li>
+</ol>
+<p>Excluir um cliente de chat também exclui suas sessões. Remover uma integração apenas remove aquela configuração de provedor do cliente.</p>
+<h2 id="solução-de-problemas">Solução de problemas</h2>
+<p>Ao escalar um problema, compartilhe o ID do cliente de chat, nome do provedor, timestamp, usuário ou tag mascarados e texto de erro relevante. Não compartilhe tokens de bot, chaves de API, segredos de webhook, URLs completas de sessão, chaves de sessão ou transcrições não redactadas.</p>
+<table>
+<thead>
+<tr>
+<th>Sintoma</th>
+<th>Verificação</th>
+<th>Correção</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Usuário não consegue abrir link de chat web</td>
+<td>Chave da sessão, horário de expiração, sessão excluída, URL copiada e conta/cliente ativo.</td>
+<td>Crie uma nova sessão e compartilhe o novo link apenas com o usuário pretendido.</td>
+</tr>
+<tr>
+<td>Bot recebe mensagens mas não responde</td>
+<td>Gateway associado, saldo da conta, limites de mensagem, credenciais de integração, URL do webhook do provedor e logs de conversa.</td>
+<td>Teste o gateway diretamente, verifique configurações do provedor, então envie uma mensagem simples somente texto.</td>
+</tr>
+<tr>
+<td>Bot WhatsApp entra em loop ou responde a si mesmo</td>
+<td>Opções de webhook do provedor e se mensagens enviadas pelo bot são encaminhadas de volta ao AIVAX.</td>
+<td>Desative opções do provedor que notifiquem mensagens enviadas pelo bot e teste novamente com uma mensagem.</td>
+</tr>
+<tr>
+<td>Anexos falham ou produzem respostas ruins</td>
+<td>Modos de entrada, suporte de modalidade do modelo, configurações multimodais do gateway, configuração de arquivo não suportado e suporte de mídia do provedor.</td>
+<td>Habilite apenas modos de entrada suportados ou troque para um gateway/modelo que suporte o conteúdo do canal.</td>
+</tr>
+<tr>
+<td>Usuários atingem limites muito rápido</td>
+<td>Máximo de mensagens por hora, máximo de mensagens, duração da sessão de integração e comportamento de tentativas repetidas.</td>
+<td>Aumente limites deliberadamente, distribua usuários entre sessões quando apropriado ou reduza tentativas automáticas.</td>
+</tr>
+<tr>
+<td>Acompanhamento agendado não enviou</td>
+<td>Permitir conversas contínuas, status da tarefa agendada, identificador de alvo, ID externo de usuário, próxima ativação, credenciais do provedor e saldo da conta.</td>
+<td>Inspecione detalhes da tarefa agendada, corrija problemas do provedor/gateway e recrie a agenda se necessário.</td>
+</tr>
+<tr>
+<td>Erros de ferramenta estão ocultos</td>
+<td>Configurações de depuração e visibilidade de chamadas de ferramenta.</td>
+<td>Habilite depuração temporariamente em um cliente de teste controlado, reproduza, inspecione logs e depois desative depuração para usuários de produção.</td>
+</tr>
+<tr>
+<td>Qualidade da conversa difere por canal</td>
+<td>Instruções do gateway, formatação do canal, divisão de mensagens, anexos e contexto da sessão.</td>
+<td>Teste a mesma tarefa de usuário no chat web e na integração de mensagem, então ajuste configurações específicas do canal.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="referência-de-api">Referência de API</h2>
+<p>Gerencie clientes de chat através da API Web Chat:</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=List%20Web%20Chat%20Clients&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Create%20Web%20Chat%20Client&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=View%20Web%20Chat%20Client&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Edit%20Web%20Chat%20Client&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Edit%20Web%20Chat%20Client%20Integrations&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Delete%20Web%20Chat%20Client%20Integration&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Delete%20Web%20Chat%20Client&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<p>Crie e gerencie sessões através da API Web Chat Sessions:</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=Create%20Web%20Chat%20Session&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=List%20Web%20Chat%20Sessions&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Delete%20Web%20Chat%20Session&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<p>Use essas ações públicas de sessão a partir de uma sessão de chat válida:</p>
+<p><strong>Limpar conversa</strong> está disponível no menu de sessão do console. Sua ação de redefinição subjacente não está atualmente exposta como referência de API pública incorporada, então use o console quando precisar limpar uma sessão sem excluí‑la.</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=Get%20Session%20Info&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Send%20Prompt&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Retry%20Last%20Message&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Download%20Session%20Transcript&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<p>Monitore acompanhamentos agendados e recorrentes através de Schedules de Hook:</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=List%20Hook%20Schedules&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Get%20Schedule&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Get%20Recurring%20Task&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Cancel%20Schedule&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Cancel%20Recurring%20Task&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<p>Documentação relacionada:</p>
+<ul>
+<li><a href="/docs/pt-br/features/chat-clients">Guia de Clientes de Chat para desenvolvedores</a>: comportamento de sessão e integração técnica.</li>
+<li><a href="ai-gateways.html">AI Gateways</a>: configure o assistente por trás do cliente.</li>
+<li>Conversas: inspecione logs de conversa e exportações pelo console.</li>
+<li><a href="account-balance.html">Conta, saldo e múltiplas contas</a>: gerencie saldo, limites e chaves de API.</li>
+</ul>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/pt-br/platform/chat-clients.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>

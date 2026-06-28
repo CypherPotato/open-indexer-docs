@@ -2,14 +2,14 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Getting Started | AIVAX </title>
+        <title>Registros | AIVAX </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="title" content="Getting Started | AIVAX ">
+        <meta name="title" content="Registros | AIVAX ">
 
 
-        <link rel="icon" href="../assets/img/favicon.ico">
-        <link rel="stylesheet" href="../public/docfx.min.css">
-        <link rel="stylesheet" href="../public/main.css">
+        <link rel="icon" href="../../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../../public/main.css">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,13 +17,13 @@
         
         <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
 
-        <meta name="docfx:navrel" content="../toc.html">
-        <meta name="docfx:tocrel" content="toc.html">
+        <meta name="docfx:navrel" content="../../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
 
-        <meta name="docfx:rel" content="../">
+        <meta name="docfx:rel" content="../../../">
 
 
-        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/getting-started.md/#L1">
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/pt-br/platform/logs.md/#L1">
         <meta name="loc:inThisArticle" content="In this article">
         <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
         <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -37,7 +37,7 @@
         <meta name="loc:copy" content="Copy">
         <meta name="loc:downloadPdf" content="Download PDF">
         
-        <script type="module" src="./../public/docfx.min.js"></script>
+        <script type="module" src="./../../../public/docfx.min.js"></script>
         <script>
             const theme = localStorage.getItem('theme') || 'auto';
             document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
@@ -61,8 +61,8 @@
         <header class="bg-body border-bottom">
             <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
                 <div class="container-xxl flex-nowrap">
-                    <a class="navbar-brand" href="../index.html">
-                        <img id="logo" class="svg" src="../assets/img/aivax.png" alt="AIVAX">
+                    <a class="navbar-brand" href="../../../index.html">
+                        <img id="logo" class="svg" src="../../../assets/img/aivax.png" alt="AIVAX">
                         AIVAX
                     </a>
                     <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
@@ -123,140 +123,167 @@
                 </div>
 
                 <article data-uid="">
-<h1 id="getting-started">Getting Started</h1>
+<h1 id="registros">Registros</h1>
 
-<p>This guide shows the shortest path from an AIVAX account to a first OpenAI-compatible chat completion.</p>
-<h2 id="before-you-begin">Before you begin</h2>
-<p>You need:</p>
+<p>Os registros dão aos usuários autenticados uma visão curta e limitada à conta de avisos e erros operacionais que a AIVAX registra enquanto os recursos da plataforma são executados. Use esta página quando algo parece errado e você precisa de um sinal rápido antes de abrir uma página mais profunda, como Conversas, Coleções RAG, Lote ou Análises.</p>
+<p>Os registros não são um sistema de transcrição completo e não são um livro‑razão de análises. Eles são mais úteis para mensagens operacionais recentes: tentativas de geração falhas, erros de provedor ou ferramenta, avisos de indexação, avisos de tamanho de documento e outras notificações que devem ser visíveis ao proprietário da conta.</p>
+<h2 id="quando-usar-registros">Quando usar Registros</h2>
+<p>Abra <strong>Registros</strong> quando precisar responder a perguntas como:</p>
 <ul>
-<li>An AIVAX account.</li>
-<li>A private API key from the account dashboard or API key endpoint.</li>
-<li>Enough account balance for the operation. Some routes only require the balance not to be negative, while chat clients, integrations, batch processing, and multimodal inputs can require a strictly positive or minimum balance.</li>
-<li>Either a hosted model name or an AI Gateway ID.</li>
+<li>A AIVAX registrou um aviso ou erro recente para esta conta?</li>
+<li>Um trabalho de indexação sinalizou um documento como pequeno demais ou grande demais?</li>
+<li>Um provedor, gateway ou caminho de ferramenta falhou ao processar uma solicitação?</li>
+<li>Um caso de suporte está relacionado ao estado da conta, configuração de recurso ou a um problema mais específico de conversa?</li>
 </ul>
-<p>Production API base URL:</p>
-<pre><code class="lang-text">https://inference.aivax.net
-</code></pre>
-<p>OpenAI-compatible SDK base URL:</p>
-<pre><code class="lang-text">https://inference.aivax.net/v1
-</code></pre>
-<h2 id="1-create-an-api-key">1. Create an API key</h2>
-<p>Use a <strong>private</strong> API key for server-side calls. Private keys are generated with the <code>sk-aiv-acc</code> prefix and can call authenticated account APIs and OpenAI-compatible inference endpoints.</p>
-<p>Public keys use the <code>pk-aiv-</code> prefix. They are intended for restricted client-side use on public routes, such as public RAG query/answer routes and restricted chat completions. They cannot call account-management endpoints.</p>
-<p>For most first integrations, start with a private key from a backend service. It gives you the complete account surface: model listing, chat completions, AI Gateways, RAG collections, batch workflows, and administrative APIs. Public keys are useful later, when you intentionally expose a restricted capability to a browser or another client-side environment.</p>
-<p>See <a href="authentication.html">Authentication</a> for key types, accepted auth schemes, and hook validation. If the next thing you want to build is an end-user widget instead of a backend integration, also read <a href="features/chat-clients.html">Chat Clients</a>, because chat sessions solve identity, conversation history, attachments, and per-user limits more directly than a raw public key.</p>
-<h2 id="2-find-a-model-or-gateway-id">2. Find a model or gateway ID</h2>
-<p>You can call either:</p>
-<ul>
-<li>A hosted model name returned by the model listing endpoint.</li>
-<li>A gateway identifier from your account.</li>
-</ul>
-<p>Gateway slugs are supported for private keys. Public-key chat completions must use the full gateway UUID and cannot call integrated models directly.</p>
-<p>Use a hosted model name when you only need a direct model call. Use an AI Gateway when you want reusable behavior: instructions, RAG collections, built-in tools, workers, MCP servers, protocol functions, skills, moderation, or provider settings. A gateway becomes the stable &quot;assistant configuration&quot; your application can call repeatedly without rebuilding the same options in every request.</p>
-<p>If you are still exploring, list models first and make one direct call. When the prompt, tools, or retrieval rules start becoming part of the product, move that configuration into an <a href="inference/ai-gateway.html">AI Gateway</a>.</p>
-<p>Reference:</p>
-<script src="https://inference.aivax.net/apidocs?embed-target=Model%20listing&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
-<h2 id="3-make-a-chat-completion-request">3. Make a chat-completion request</h2>
-<p>Install the OpenAI SDK for your language, then point it to AIVAX:</p>
-<pre><code class="lang-python">from openai import OpenAI
-
-client = OpenAI(
-    base_url=&quot;https://inference.aivax.net/v1&quot;,
-    api_key=&quot;sk-aiv-acc...&quot;
-)
-
-response = client.chat.completions.create(
-    model=&quot;&lt;MODEL_OR_GATEWAY_ID&gt;&quot;,
-    messages=[
-        {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Write a one-sentence welcome message.&quot;}
-    ]
-)
-
-print(response.choices[0].message.content)
-</code></pre>
-<p>Replace <code>&lt;MODEL_OR_GATEWAY_ID&gt;</code> with an integrated model name or a gateway ID available to your account.</p>
-<p>This request is intentionally small: one user message, one model or gateway, and one response. After it works, you can add the product pieces one at a time. For structured JSON output, see <a href="inference/structured-responses.html">Structured Responses</a>. To retrieve knowledge from documents before answering, create a <a href="rag/collections.html">RAG collection</a> and attach it to a gateway. To let the model call external systems, compare <a href="tools/builtin-tools.html">Built-in Tools</a>, <a href="tools/mcp.html">MCP</a>, and <a href="tools/protocol-functions.html">Protocol Functions</a>.</p>
-<h3 id="long-running-inference">Long-running inference</h3>
-<p>For normal requests, keep using <code>https://inference.aivax.net/v1</code>.</p>
-<p>If an inference call can run for longer than the Cloudflare proxy timeout, or if your client receives HTTP <code>524</code> errors while waiting for long completions, use the direct inference host instead:</p>
-<pre><code class="lang-text">https://direct.inference.aivax.net/v1
-</code></pre>
-<p>This host exposes only the OpenAI-compatible inference paths needed for model listing and chat completions. Use the same API key, model value, request body, and SDK configuration, changing only the base URL:</p>
-<pre><code class="lang-python">client = OpenAI(
-    base_url=&quot;https://direct.inference.aivax.net/v1&quot;,
-    api_key=&quot;sk-aiv-acc...&quot;
-)
-</code></pre>
-<p>Reference:</p>
-<script src="https://inference.aivax.net/apidocs?embed-target=Inference%20(chat%20completions)&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
-<h2 id="4-confirm-billing-and-limits">4. Confirm billing and limits</h2>
-<p>After a successful request, usage is recorded against the authenticated account and the API key resource. Integrated model usage is charged from account balance unless it is covered by a subscription-model reserve window.</p>
-<p>Checking balance after the first call is a good sanity step because it confirms that authentication, model access, usage tracking, and billing all resolved under the expected account. The balance endpoint also returns plan and limit information, which is useful before enabling higher-volume features such as RAG imports, chat clients, or batch processing.</p>
-<p>Reference:</p>
-<script src="https://inference.aivax.net/apidocs?embed-target=Get%20Account%20Balance&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
-<h2 id="error-formats">Error formats</h2>
-<p>AIVAX uses two response shapes:</p>
-<ul>
-<li>OpenAI-compatible endpoints return an OpenAI-style <code>error</code> object with <code>message</code>, <code>type</code>, <code>param</code>, and <code>code</code>.</li>
-<li>Administrative endpoints return <code>{&quot;error&quot;: &quot;...&quot;, &quot;details&quot;: null}</code> for errors and <code>{&quot;message&quot;: &quot;...&quot;, &quot;data&quot;: ...}</code> for successful <code>JsonResponse</code> results.</li>
-</ul>
-<p>Common failures:</p>
+<p>Use <a href="/docs/pt-br/platform/conversations">Conversas</a> quando precisar do prompt real, resposta, metadados, uso, ferramentas ou detalhes da solicitação para uma inferência. Use <a href="/docs/pt-br/platform/analytics">Análises</a> quando precisar de totais de uso, tendências de custo ou faturas. Use <a href="/docs/pt-br/platform/rag-collections">Coleções RAG</a> quando o problema for qualidade de recuperação, estado de indexação ou transações da coleção.</p>
+<h2 id="entendendo-a-página-de-registros">Entendendo a página de Registros</h2>
+<p>Abra <strong>Registros</strong> na barra lateral do console. O título da página é <strong>Registros da Conta</strong>.</p>
+<p>A tabela mostra os registros mais recentes para a conta ativa:</p>
 <table>
 <thead>
 <tr>
-<th>Status</th>
-<th>Likely cause</th>
+<th>Coluna</th>
+<th>Significado</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>401 Unauthorized</code></td>
-<td>Missing, malformed, expired, or unknown API key.</td>
+<td><strong>Data e hora</strong></td>
+<td>Quando a AIVAX escreveu a entrada de registro.</td>
 </tr>
 <tr>
-<td><code>403 Forbidden</code></td>
-<td>A public key tried to call a non-public route, or the resource is not allowed.</td>
+<td><strong>Nível</strong></td>
+<td>A gravidade. O console pode mostrar o nível como um selo compacto, como <code>I</code>, <code>W</code> ou <code>E</code> para Informação, Aviso ou Erro.</td>
 </tr>
 <tr>
-<td><code>402 Payment Required</code></td>
-<td>Balance is insufficient or the account exceeded storage quota.</td>
+<td><strong>Mensagem</strong></td>
+<td>A mensagem de registro legível por humanos. Mensagens longas podem ser truncadas pela plataforma antes de chegarem à tabela.</td>
 </tr>
 <tr>
-<td><code>429 Too Many Requests</code></td>
-<td>A rate limit was reached.</td>
-</tr>
-<tr>
-<td><code>400 Bad Request</code></td>
-<td>Invalid request body, unsupported parameter, missing model, invalid schema, or invalid tool configuration.</td>
+<td><strong>Ações</strong></td>
+<td>Ações por linha. A ação atual do console é <strong>Copiar para a área de transferência</strong>.</td>
 </tr>
 </tbody>
 </table>
-<p>For streaming chat completions, handle normal SSE chunks, optional <code>servertool</code> chunks, final usage metadata, <code>[DONE]</code>, and streaming error chunks.</p>
-<h2 id="troubleshooting-checklist">Troubleshooting checklist</h2>
-<p>When a request fails, verify in this order:</p>
+<p>Use <strong>Atualizar</strong> para recarregar a lista. O console solicita <code>/api/v1/information/logs.json</code>, que devolve as entradas de registro de conta autenticada mais recentes primeiro, limitadas a 300 entradas. A tabela do console pagina esses resultados em páginas de 30 linhas. Esse ponto de extremidade do console é usado pelo console autenticado da AIVAX e não está listado na referência de API publicada.</p>
+<h2 id="ler-níveis-de-registro">Ler níveis de registro</h2>
+<p>Os níveis de registro ajudam a decidir a próxima ação.</p>
+<table>
+<thead>
+<tr>
+<th>Nível</th>
+<th>O que geralmente significa</th>
+<th>O que fazer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Informação</strong></td>
+<td>Um evento normal ao nível da conta ou notificação de fundo.</td>
+<td>Use como contexto; normalmente nenhuma ação é necessária, a menos que esteja relacionado a uma investigação.</td>
+</tr>
+<tr>
+<td><strong>Aviso</strong></td>
+<td>Um recurso funcionou, mas a AIVAX detectou algo que pode reduzir a qualidade ou confiabilidade.</td>
+<td>Leia a mensagem e verifique o recurso nomeado. Por exemplo, um aviso de documento grande geralmente significa que você deve dividir esse documento RAG em blocos menores.</td>
+</tr>
+<tr>
+<td><strong>Erro</strong></td>
+<td>Uma solicitação, chamada ao provedor, chamada de ferramenta, etapa de indexação ou caminho de integração falhou.</td>
+<td>Use a marca de tempo e a mensagem para encontrar o recurso relacionado, então inspecione a página mais profunda para a funcionalidade afetada.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="investigar-um-aviso-ou-erro">Investigar um aviso ou erro</h2>
+<p>Comece pela mensagem de registro e expanda. Uma linha de registro geralmente fornece uma marca de tempo e uma descrição curta; algumas mensagens também incluem um identificador de recurso.</p>
 <ol>
-<li>Base URL is <code>https://inference.aivax.net/v1</code> for OpenAI SDK calls.</li>
-<li>The key is sent as <code>Authorization: Bearer &lt;KEY&gt;</code>, Basic auth, or the <code>api-key</code> query parameter.</li>
-<li>The account has enough balance and storage quota.</li>
-<li>The model or gateway ID exists and is allowed by the current plan.</li>
-<li>The request is under the plan's request, token, RAG, tool, or batch limits.</li>
-<li>Public-key calls use only allowed chat-completion parameters and full gateway UUIDs.</li>
-<li>Tool, RAG, worker, or schema configuration is isolated by testing the same prompt without that feature.</li>
-</ol>
-<h2 id="next-steps">Next steps</h2>
+<li>Confirme a conta ativa no menu da conta.</li>
+<li>Selecione <strong>Atualizar</strong> para garantir que está visualizando as linhas mais recentes.</li>
+<li>Encontre o Aviso ou Erro mais recente próximo ao horário do problema relatado.</li>
+<li>Abra o menu <strong>Ações</strong> da linha e selecione <strong>Copiar para a área de transferência</strong> quando precisar colar a mensagem em um ticket interno ou compará‑la com outro recurso.</li>
+<li>Abra a página de produto relacionada à mensagem:
 <ul>
-<li><a href="authentication.html">Authentication</a>: understand private keys, public keys, and reverse hook validation.</li>
-<li><a href="limits.html">Plans and limits</a>: check request limits, context limits, RAG limits, tool limits, and batch limits before opening a workflow to users.</li>
-<li><a href="pricing.html">Pricing</a>: understand how credits, usage, storage, and minimum-balance checks work.</li>
-<li><a href="inference/ai-gateway.html">AI Gateways</a>: move from a direct model call to a reusable assistant configuration.</li>
-<li><a href="rag/collections.html">RAG collections</a>: store documents and retrieve them during inference.</li>
-<li><a href="features/batch.html">Batch</a>: run the same AI workflow over many independent records.</li>
+<li>Documento ou mensagens de indexação RAG: abra <a href="/docs/pt-br/platform/rag-collections">Coleções RAG</a>.</li>
+<li>Mensagens de trabalho ou item em lote: abra <a href="/docs/pt-br/platform/batch">Lote</a>.</li>
+<li>Comportamento inesperado do modelo, ferramentas falhas ou problemas a nível de solicitação: abra <a href="/docs/pt-br/platform/conversations">Conversas</a>.</li>
+<li>Problemas de custo ou saldo: abra <a href="/docs/pt-br/platform/analytics">Análises</a> ou <a href="/docs/pt-br/platform/account-balance">Conta, saldo e múltiplas contas</a>.</li>
 </ul>
+</li>
+<li>Use a marca de tempo, modelo, gateway, ID do recurso, ID da coleção, ID do trabalho em lote ou conversa relacionada para restringir a investigação. Nunca cole chaves de API brutas em tickets ou notas compartilhadas.</li>
+</ol>
+<p>Quando um registro aponta para um problema de tamanho de documento, trate-o como um sinal de qualidade. Blocos superdimensionados podem tornar a recuperação menos precisa, enquanto blocos muito pequenos podem carecer de contexto suficiente. Ajuste a estratégia de fragmentação de documentos, reimporte ou reindexe os documentos afetados e teste a recuperação antes de usar a coleção em produção.</p>
+<h2 id="compartilhar-informações-de-registro-com-segurança">Compartilhar informações de registro com segurança</h2>
+<p>Mensagens de registro são dados operacionais da conta. Elas podem conter IDs de recurso, nomes de provedor, nomes de ferramenta, nomes de documento ou fragmentos de contexto operacional. Normalmente não devem conter segredos, mas não presuma que toda mensagem copiada seja segura para compartilhar.</p>
+<p>Antes de compartilhar uma mensagem de registro, remova:</p>
+<ul>
+<li>Chaves de API, chaves de sessão, chaves de login, segredos de webhook ou tokens de portador.</li>
+<li>Dados pessoais ou identificadores de cliente.</li>
+<li>URLs internos, IDs de solicitação, IDs de conta e detalhes de infraestrutura, a menos que o destinatário precise deles.</li>
+<li>Prompts privados, argumentos de ferramenta ou detalhes de processos de negócio.</li>
+</ul>
+<p>Não compartilhe registros de rede do navegador do console. Capturas de rede podem incluir cabeçalhos de autorização ou cabeçalhos de resposta autenticados que não fazem parte da tabela de registro visível.</p>
+<h2 id="limites-e-retenção">Limites e retenção</h2>
+<p>Os registros são intencionalmente de curta duração e focados no recente:</p>
+<ul>
+<li>Os registros são limitados à conta autenticada.</li>
+<li>A listagem devolve primeiro os registros de conta mais recentes.</li>
+<li>A resposta da API é limitada a 300 entradas, e o console pagina esses resultados 30 linhas por vez.</li>
+<li>Mensagens com mais de 5 000 caracteres são truncadas antes do armazenamento.</li>
+<li>Limpeza em segundo plano remove entradas de registro com mais de 7 dias, portanto os Registros não devem ser tratados como armazenamento de auditoria permanente.</li>
+</ul>
+<p>Se precisar de evidência de investigação durável, copie a mensagem relevante para seu próprio sistema de suporte ou incidente aprovado enquanto a entrada ainda estiver disponível. Para evidência completa de conversa, use a exportação de Conversas em vez de depender dos Registros.</p>
+<h2 id="o-que-os-registros-não-mostram">O que os Registros não mostram</h2>
+<p>Os Registros são um sinal operacional de alto nível. Eles não substituem:</p>
+<ul>
+<li>Transcrições de conversa, chamadas de ferramenta, metadados de solicitação ou hashes de mensagem.</li>
+<li>Payloads completos de requisição e resposta da API.</li>
+<li>Rastreios completos de provedor ou logs de infraestrutura.</li>
+<li>Livros‑razão de faturamento ou detalhamentos de uso.</li>
+<li>Pontuação de transações RAG e detalhes de documentos correspondentes.</li>
+</ul>
+<p>Use os Registros para decidir onde procurar a seguir, depois vá para a página específica do produto que contém o detalhe completo.</p>
+<h2 id="solução-de-problemas">Solução de problemas</h2>
+<table>
+<thead>
+<tr>
+<th>Problema</th>
+<th>Causa provável</th>
+<th>O que fazer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Um problema conhecido não aparece nos Registros</td>
+<td>O problema não gerou uma entrada de registro de conta, a entrada é mais antiga que a janela de retenção ou você está visualizando a conta errada.</td>
+<td>Confirme a conta ativa, atualize e então verifique Conversas, Lote, Coleções RAG ou Análises para evidências específicas da funcionalidade.</td>
+</tr>
+<tr>
+<td>A tabela mostra apenas linhas antigas</td>
+<td>Nenhuma nova entrada de registro a nível de conta foi escrita ou a página não foi atualizada.</td>
+<td>Selecione <strong>Atualizar</strong> e reproduza o problema em um teste controlado se precisar de um novo sinal.</td>
+</tr>
+<tr>
+<td>Um aviso menciona um documento grande</td>
+<td>O documento RAG pode ser grande demais para recuperação precisa.</td>
+<td>Divida o documento em blocos menores, reimporte ou reindexe e teste a coleção antes do uso em produção.</td>
+</tr>
+<tr>
+<td>Uma mensagem de erro é muito genérica</td>
+<td>Os Registros resumem intencionalmente falhas a nível de conta.</td>
+<td>Use a marca de tempo, ID do recurso, gateway, chave de API ou conversa relacionada para abrir a página de diagnóstico mais profunda.</td>
+</tr>
+<tr>
+<td>Você precisa compartilhar evidência com outra equipe</td>
+<td>A mensagem bruta pode conter contexto operacional.</td>
+<td>Copie apenas a linha relevante, remova dados sensíveis e evite compartilhar capturas de rede do console ou screenshots que incluam segredos.</td>
+</tr>
+</tbody>
+</table>
 
 </article>
 
                 <div class="contribution d-print-none">
-                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/getting-started.md/#L1" class="edit-link">Edit this page</a>
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/pt-br/platform/logs.md/#L1" class="edit-link">Edit this page</a>
                 </div>
 
                 <div class="next-article d-print-none border-top" id="nextArticle"></div>

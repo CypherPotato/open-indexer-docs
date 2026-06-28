@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Lote | AIVAX </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="Lote | AIVAX ">
+
+
+        <link rel="icon" href="../../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+        
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
+
+        <meta name="docfx:rel" content="../../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/pt-br/platform/batch.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+                
+        <script>            
+            function switchLanguage(lang) {
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../../index.html">
+                        <img id="logo" class="svg" src="../../../assets/img/aivax.png" alt="AIVAX">
+                        AIVAX
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="lote">Lote</h1>
+
+<p>Lote executa o mesmo fluxo de trabalho de IA sobre muitas entradas independentes. Use-o quando quiser que AIVAX classifique, extraia, enriqueça, resuma, valide ou gere saída estruturada para uma lista de registros sem manter um chat ou solicitação de inferência aberta.</p>
+<p>A área de Lote está organizada em torno de dois objetos:</p>
+<ul>
+<li><strong>Workflows</strong> são receitas de processamento reutilizáveis. Eles definem a instrução, modelo, esquema de resultado, ferramentas opcionais, validação, tentativas e tratamento de erros.</li>
+<li><strong>Jobs</strong> são execuções concretas criadas a partir de um workflow. Eles contêm os itens importados, estado de processamento, progresso, eventos, custo, confiança, detalhes do item, tentativas, limpeza e exportações.</li>
+</ul>
+<p>Para detalhes de implementação, campos de solicitação e comportamento da API, veja o <a href="/docs/pt-br/features/batch">Batch developer guide</a>.</p>
+<h2 id="quando-usar-lote">Quando usar Lote</h2>
+<p>Use Lote quando cada item puder ser processado independentemente com a mesma instrução. Bons exemplos incluem classificação de leads, marcação de tickets de suporte, extração de metadados, enriquecimento de URL ou empresa, resumo de documentos curtos, revisão de moderação, avaliação de respostas e geração de JSON para importação posterior em outro sistema.</p>
+<p>Não use Lote para chat em tempo real, fluxos de trabalho onde cada resposta depende da resposta anterior, ou bases de conhecimento pesquisáveis. Use <a href="/docs/pt-br/platform/chat-clients">Chat Clients</a> para conversas voltadas ao usuário, <a href="/docs/pt-br/platform/ai-gateways">AI Gateways</a> para comportamento de inferência reutilizável, e <a href="/docs/pt-br/platform/rag-collections">RAG Collections</a> quando o objetivo é indexar conhecimento para recuperação.</p>
+<h2 id="antes-de-começar">Antes de começar</h2>
+<p>Prepare uma pequena amostra representativa antes de importar um arquivo grande. Lote pode consumir saldo rapidamente quando um workflow usa um modelo caro, validação, ferramentas web, geração de imagens ou muitas tentativas.</p>
+<p>Você precisa:</p>
+<ul>
+<li>Uma conta com saldo disponível e acesso ao modelo ou AI Gateway que pretende usar.</li>
+<li>Uma instrução clara que se aplique a cada item.</li>
+<li>Um esquema de resultado caso a saída alimente uma planilha, banco de dados, automação ou fila de revisão.</li>
+<li>Uma decisão sobre se a validação vale uma segunda passagem de modelo.</li>
+<li>Dados de entrada que sejam seguros para processar com o modelo e ferramentas selecionados.</li>
+</ul>
+<p>Evite importar segredos, credenciais, dados pessoais regulados ou dados de cliente que sua conta não tem permissão para processar. As exportações incluem entrada original, saída gerada, metadados, confiança, resultado de validação e campos de temporização, portanto trate o JSONL exportado como dados operacionais sensíveis.</p>
+<h2 id="teste-com-uma-pequena-amostra-primeiro">Teste com uma pequena amostra primeiro</h2>
+<p>Antes de executar uma carga real, crie um job piloto com 5 a 20 itens representativos. Inicie o job, então inspecione os <strong>Insights</strong>, <strong>Processing list</strong>, detalhes do <strong>View</strong>, confiança, resultado de validação, custo e formato do JSONL exportado.</p>
+<p>Use o piloto para responder às seguintes questões:</p>
+<ul>
+<li>A instrução produz a decisão ou extração correta para entradas normais, de borda e de baixa qualidade?</li>
+<li>O esquema de resultado contém os campos que seu processo downstream espera?</li>
+<li>Falhas de validação são úteis ou estão rejeitando resultados aceitáveis?</li>
+<li>A distribuição de confiança é boa o suficiente para seu processo de revisão?</li>
+<li>O custo por item é aceitável antes de multiplicá‑lo pelo conjunto de dados completo?</li>
+</ul>
+<p>Ajuste o workflow antes de criar o job de produção. Para cargas importantes, mantenha os jobs piloto e de produção separados para que a exportação de produção contenha apenas os registros desejados.</p>
+<h2 id="entenda-a-página-de-lote">Entenda a página de Lote</h2>
+<p>Abra <strong>Lote</strong> na barra lateral do console.</p>
+<p>A aba <strong>Workflows</strong> lista workflows reutilizáveis com seu ID, hora de criação, título, modelo, contagem de jobs e ações. A partir dessa tabela você pode criar um workflow, criar um job a partir de um workflow existente, editar o workflow ou excluí‑lo.</p>
+<p>A aba <strong>Jobs</strong> lista jobs recentes entre workflows. Use‑a quando quiser monitorar ou retornar a uma execução de processamento sem abrir primeiro o workflow pai. A lista mostra o ID do job, nome, estado, progresso, tempo de execução, contagem de eventos e uma ação <strong>Manage</strong>.</p>
+<h2 id="crie-um-workflow">Crie um workflow</h2>
+<p>Crie um workflow quando quiser salvar uma regra de processamento repetível. O workflow deve ler como uma política para cada item, não como um prompt de uso único.</p>
+<p>Em <strong>Workflows</strong>, selecione <strong>Create workflow</strong>. Configure as abas:</p>
+<table>
+<thead>
+<tr>
+<th>Aba</th>
+<th>O que configurar</th>
+<th>Orientação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Basic</strong></td>
+<td>Título do workflow, instruções do workflow, esquema de resultado</td>
+<td>Use o título para operadores. Coloque as regras da tarefa na instrução. Use um JSON Schema quando sistemas downstream esperam campos estáveis.</td>
+</tr>
+<tr>
+<td><strong>Model</strong></td>
+<td>Modelo, esforço de raciocínio, ferramentas habilitadas, opções de ferramentas</td>
+<td>Escolha um modelo que se ajuste ao trade‑off de qualidade, velocidade e custo. Habilite ferramentas somente quando cada item realmente precisar delas.</td>
+</tr>
+<tr>
+<td><strong>Validation</strong></td>
+<td>Habilitar validação e instruções de validação</td>
+<td>Habilite quando os resultados precisarem de uma verificação adicional de modelo contra regras de negócio, regras de segurança ou qualidade de saída.</td>
+</tr>
+<tr>
+<td><strong>Handling</strong></td>
+<td>Limiar de parada de erro e máximo de tentativas por item</td>
+<td>Use um limiar baixo durante testes para que um prompt ou esquema ruim pause cedo. Aumente apenas depois que o workflow for comprovado.</td>
+</tr>
+</tbody>
+</table>
+<p>O novo rascunho de workflow começa com uma instrução vazia, um esquema de objeto permissivo, sem ferramentas, validação desativada, limiar de parada de erro de <code>5</code> e máximo de tentativas de <code>2</code>. Workflows salvos exigem uma instrução não vazia, um objeto de esquema de resultado e um modelo ou AI Gateway disponível. A API aceita <code>errorStopThreshold</code> de <code>1</code> a <code>100</code> e <code>maxRetries</code> de <code>0</code> a <code>10</code>.</p>
+<p>Use <strong>Edit with AI</strong> para ajudar a refinar a instrução, esquema e instrução de validação. Revise o diff antes de aceitá‑lo, especialmente se o workflow lidar com decisões reguladas ou de alto impacto.</p>
+<h2 id="habilite-ferramentas-com-segurança">Habilite ferramentas com segurança</h2>
+<p>Ferramentas habilitadas ficam disponíveis ao modelo para cada item processado. Elas podem melhorar resultados, mas também podem aumentar custos, expor conteúdo do item a caminhos de recuperação externos, criar efeitos colaterais persistentes ou dificultar a reprodução das execuções.</p>
+<table>
+<thead>
+<tr>
+<th>Ferramenta</th>
+<th>Quando usar</th>
+<th>Orientação de segurança</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Open URLs</strong></td>
+<td>Cada item inclui uma URL que deve ser lida diretamente</td>
+<td>Importe apenas URLs que a conta tem permissão para processar. Espere falhas para páginas bloqueadas, privadas ou instáveis.</td>
+</tr>
+<tr>
+<td><strong>Web search</strong></td>
+<td>O modelo precisa de informações públicas atuais</td>
+<td>A busca pode adicionar latência e custo. Não dependa dela para fatos privados ou registros que devem permanecer internos.</td>
+</tr>
+<tr>
+<td><strong>X posts search</strong></td>
+<td>Posts públicos do X fazem parte da evidência</td>
+<td>Trate resultados sociais como barulhentos e sensíveis ao tempo. Valide saídas antes de agir sobre elas.</td>
+</tr>
+<tr>
+<td><strong>Advanced web usage</strong></td>
+<td>Uma tarefa requer comportamento de navegação mais profunda</td>
+<td>Use somente para workflows onde a interação com página externa é necessária. Teste com um job pequeno porque falhas podem ser específicas do site.</td>
+</tr>
+<tr>
+<td><strong>Code execution</strong></td>
+<td>Cada item precisa de computação ou parsing que o modelo pode expressar como código</td>
+<td>Não alimente segredos ou instruções de código não confiáveis. Revise as saídas cuidadosamente antes de usá‑las em automações.</td>
+</tr>
+<tr>
+<td><strong>Image generation</strong></td>
+<td>O resultado esperado inclui imagens geradas</td>
+<td>Isso pode aumentar materialmente o custo e gerar conteúdo que precisa de revisão humana antes da publicação.</td>
+</tr>
+<tr>
+<td><strong>Memory</strong></td>
+<td>O workflow intencionalmente precisa de contexto lembrado</td>
+<td>Evite usá‑lo para jobs isolados e auditáveis onde cada item deve ser processado apenas a partir de sua entrada e instrução do workflow.</td>
+</tr>
+</tbody>
+</table>
+<p>Se um resultado incluir contexto externo ou lembrado inesperado, pause o job, desative a ferramenta relacionada, revise a instrução e teste com um novo job piloto.</p>
+<h2 id="use-a-validação-com-cuidado">Use a validação com cuidado</h2>
+<p>A validação executa uma segunda passagem de modelo para checar a saída. É útil quando o resultado deve seguir regras de negócio, requisitos de segurança ou um esquema rígido antes de ser confiável downstream.</p>
+<p>Escreva instruções de validação como checagens concretas. Por exemplo, peça ao validador para confirmar que campos obrigatórios estão presentes, que a justificativa cita evidência da entrada, ou que o rótulo escolhido pertence a uma lista permitida. Evite instruções vagas como “garanta que a resposta seja boa”; elas podem gerar resultados inconsistentes de <code>ValidationError</code>.</p>
+<p>A validação pode adicionar custo e transformar saídas geradas em itens falhados. Quando erros de validação aparecerem, abra detalhes do item e revise o motivo antes de tentar novamente. Se o motivo indicar um problema de prompt ou esquema, corrija o workflow e execute um job piloto em vez de tentar novamente toda a carga.</p>
+<h2 id="crie-um-job">Crie um job</h2>
+<p>Crie um job quando tiver uma carga concreta para processar através de um workflow. A partir de uma linha de workflow, abra o menu de ações e selecione <strong>Create job</strong>. Dê ao job um nome que descreva o conjunto de dados, período, cliente ou rodada de revisão.</p>
+<p>Novos jobs são criados pausados. Isso é intencional: importe e inspecione a lista de itens antes de iniciar o processamento.</p>
+<h2 id="importe-itens">Importe itens</h2>
+<p>Abra o job e vá para <strong>Processing list</strong>. Use <strong>Insert data</strong> para adicionar itens.</p>
+<table>
+<thead>
+<tr>
+<th>Modo</th>
+<th>Quando usar</th>
+<th>O que se torna um item</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>From text file</strong></td>
+<td>Você já tem um arquivo com muitos registros</td>
+<td>Cada linha não vazia</td>
+</tr>
+<tr>
+<td><strong>From files</strong></td>
+<td>Cada arquivo fonte é um registro</td>
+<td>Cada arquivo de texto simples enviado</td>
+</tr>
+<tr>
+<td><strong>From zip</strong></td>
+<td>Você quer enviar muitos arquivos de texto juntos</td>
+<td>Cada entrada de ZIP de texto simples</td>
+</tr>
+<tr>
+<td><strong>Type text</strong></td>
+<td>Você quer adicionar um item de teste manual</td>
+<td>O campo de texto enviado</td>
+</tr>
+</tbody>
+</table>
+<p>Para entradas estruturadas baseadas em linhas, JSONL costuma ser o formato mais seguro: um objeto JSON compacto por linha. A instrução do workflow deve explicar como interpretar cada objeto.</p>
+<p>Exemplo JSONL:</p>
+<pre><code class="lang-jsonl">{&quot;company&quot;:&quot;Northwind Parts&quot;,&quot;description&quot;:&quot;Regional distributor of industrial replacement parts&quot;}
+{&quot;company&quot;:&quot;Contoso Legal&quot;,&quot;description&quot;:&quot;Law firm focused on employment contracts&quot;}
+</code></pre>
+<p>Inclua apenas os campos que o workflow necessita. Identificadores extras, dados pessoais ou notas internas podem aparecer depois nas exportações.</p>
+<p>Para importações <code>files</code> e <code>zip</code>, os limites atuais são 1.000 arquivos ou entradas ZIP por solicitação, 10 MB por arquivo ou entrada ZIP, e 100 MB de conteúdo importado total por solicitação. Importações ZIP também verificam comportamento de compressão inválido. No modo <code>lines</code>, AIVAX importa cada linha não vazia do arquivo enviado; linhas vazias são ignoradas.</p>
+<h2 id="inicie-pause-e-finalize">Inicie, pause e finalize</h2>
+<p>Use <strong>Start job</strong> somente depois que os itens importados parecerem corretos. Iniciar um job o move para <code>Active</code> e permite que os trabalhadores processem itens pendentes. O processamento pode gerar custos de modelo, validação e ferramentas.</p>
+<p>Use <strong>Pause job</strong> quando precisar parar o novo processamento enquanto investiga erros, revisa custos, altera temporização operacional ou aguarda mais saldo. Um item em execução pode terminar mesmo após um pedido de pausa; pausar interrompe novos processamentos mas não interrompe uma inferência já em execução.</p>
+<p>Jobs finalizam automaticamente quando todos os itens são processados. O console expõe principalmente controles de iniciar e pausar. Use a API para definir um job como <code>Finished</code> somente quando uma automação deve encerrar a execução ao invés de deixá‑lo retomável.</p>
+<h2 id="monitore-um-job">Monitore um job</h2>
+<p>A página do job tem três abas principais:</p>
+<ul>
+<li><strong>Insights</strong> mostra progresso, conclusão, taxa de sucesso, taxa de recusa, confiança média, custo cobrado, custo previsto, tempo decorrido, ETA e últimos itens processados.</li>
+<li><strong>Processing list</strong> mostra cada item listado com estado, prioridade, pré‑visualização da entrada, confiança, custo, filtros, tentativas, ações de remoção e detalhes do item.</li>
+<li><strong>Events</strong> mostra histórico operacional como criação de job, início, pausa, finalização e mudanças automáticas de estado.</li>
+</ul>
+<p>Abra <strong>View</strong> em um item para inspecionar metadados, conteúdo da entrada, saída, custo, confiança, status de validação e motivo da validação. Use isso antes de mudar prompts, tentar novamente itens ou confiar em saída de baixa confiança.</p>
+<h2 id="trabalhe-com-estados-de-item-e-confiança">Trabalhe com estados de item e confiança</h2>
+<p>Itens podem ser:</p>
+<ul>
+<li><code>Pending</code>: aguardando processamento.</li>
+<li><code>Finished</code>: processado com sucesso.</li>
+<li><code>Refused</code>: o modelo recusou o item.</li>
+<li><code>ExecutionError</code>: inferência ou execução falhou.</li>
+<li><code>ValidationError</code>: a resposta não passou no esquema ou validação.</li>
+<li><code>Cancelled</code>: um possível estado terminal retornado pelo sistema.</li>
+</ul>
+<p>A lista de Processamento pode filtrar por estado, alta confiança e baixa confiança. Alta confiança significa ao menos 80 %. Baixa confiança significa abaixo de 30 %. Baixa confiança não é automaticamente falha, mas é um forte sinal para revisão manual ou nova tentativa.</p>
+<p>A prioridade do item afeta a ordem de processamento junto com a prioridade do plano da conta e a ordem de inserção. Itens pendentes, não em execução, podem ser movidos para cima, para baixo ou removidos da lista de processamento com <strong>Cancel</strong>. A ação atual de cancelamento é destrutiva para aquele item e não interrompe uma inferência já em execução, portanto exporte tudo que precisar primeiro.</p>
+<h2 id="tente-novamente-com-segurança">Tente novamente com segurança</h2>
+<p>Use <strong>Retry</strong> depois de entender o padrão de falha.</p>
+<p>Opções de tentativa:</p>
+<ul>
+<li><strong>All failed</strong></li>
+<li><strong>Low confidence</strong></li>
+<li><strong>Execution error</strong></li>
+<li><strong>Validation error</strong></li>
+</ul>
+<p>Retry move os itens não em execução correspondentes de volta para <code>Pending</code>. Se ao menos um item for tentado novamente e o job ainda não estiver ativo, AIVAX inicia o job automaticamente. Isso pode gerar novo custo, então verifique a instrução, esquema, regra de validação e modelo antes de tentar novamente muitos itens.</p>
+<h2 id="remova-ou-exclua-dados">Remova ou exclua dados</h2>
+<p>Use <strong>Remove</strong> na lista de Processamento para remover grupos de itens não em execução:</p>
+<ul>
+<li>Itens pendentes</li>
+<li>Itens bem‑sucedidos</li>
+<li>Itens falhados</li>
+<li>Todos os itens não em execução</li>
+</ul>
+<p>A remoção é destrutiva para os itens selecionados. Exporte tudo que precisar antes de removê‑los.</p>
+<p>Excluir um job exclui o job e todos os seus itens. Excluir um workflow exclui o workflow, todos os seus jobs e todo item enfileirado ou processado sob esses jobs. Use exclusão apenas após atender a requisitos de exportação e auditoria.</p>
+<h2 id="exporte-resultados">Exporte resultados</h2>
+<p>Use <strong>Export</strong> na página do job para baixar itens processados como JSONL.</p>
+<p>Exportações disponíveis:</p>
+<ul>
+<li>Successful</li>
+<li>High confidence</li>
+<li>Low confidence</li>
+<li>Failed</li>
+<li>All processed</li>
+</ul>
+<p>O console também inclui <strong>Copy line schema</strong> como auxiliar de área de transferência. Ele copia o JSON Schema para linhas JSONL exportadas, incluindo metadados, entrada, saída, confiança e campos de validação; não é um modo de exportação JSONL separado.</p>
+<p>Itens pendentes não são exportados. Cada linha exportada contém metadados, entrada original, saída, confiança e resultado de validação. Mantenha as exportações em local seguro e evite compartilhá‑las em tickets de suporte a menos que campos sensíveis sejam removidos.</p>
+<p>O download de exportação do console abre uma URL que inclui a chave de sessão atual como parâmetro de consulta <code>api-key</code>. Não compartilhe URLs de exportação, histórico do navegador, logs de proxy, capturas de tela ou URLs de requisição copiados que incluam essa string de consulta. Masacente os parâmetros de consulta antes de solucionar problemas com outra pessoa.</p>
+<p>Use exportações separadas quando seu processo de revisão diferir por resultado. Por exemplo, exporte itens de alta confiança bem‑sucedidos para importação downstream, depois exporte itens de baixa confiança ou falhados para revisão humana.</p>
+<h2 id="solução-de-problemas">Solução de problemas</h2>
+<table>
+<thead>
+<tr>
+<th>Problema</th>
+<th>Causa provável</th>
+<th>O que fazer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>O job não processa itens</td>
+<td>O job está pausado, finalizado, sem saldo, bloqueado por limites ou não tem itens pendentes</td>
+<td>Verifique o estado do job, saldo, contagem pendente e eventos. Inicie ou retome apenas após a lista de itens estar correta.</td>
+</tr>
+<tr>
+<td>Muitas falhas de validação</td>
+<td>O esquema é muito rígido, a instrução é ambígua ou regras de validação conflitam com o esquema de resultado</td>
+<td>Abra detalhes do item, compare a saída com o esquema, ajuste o workflow e tente novamente um pequeno subconjunto.</td>
+</tr>
+<tr>
+<td>Muitas falhas de execução</td>
+<td>Falhas no provedor, modelo, ferramenta ou requisição</td>
+<td>Verifique eventos e detalhes do item. Re‑tente falhas de execução após confirmar que modelo e ferramentas estão disponíveis.</td>
+</tr>
+<tr>
+<td>Confiança baixa</td>
+<td>O item carece de evidência suficiente, a instrução é pouco especificada ou o modelo está incerto</td>
+<td>Revise amostras de saída, melhore a instrução ou formato de entrada e re‑tente itens de baixa confiança separadamente.</td>
+</tr>
+<tr>
+<td>Itens importados parecem errados</td>
+<td>O arquivo fonte não tinha um registro por linha, entradas ZIP não eram texto simples ou campos desnecessários foram incluídos</td>
+<td>Pause o job antes de processar. Remova itens não em execução, corrija o formato de importação e execute novamente um job piloto.</td>
+</tr>
+<tr>
+<td>Workflow baseado em ferramenta falha</td>
+<td>A ferramenta selecionada não consegue acessar a URL, fonte de busca, página, caminho de código ou requisito de mídia gerada</td>
+<td>Abra detalhes do item e eventos, teste com menos itens e desative ferramentas que não são necessárias para a tarefa.</td>
+</tr>
+<tr>
+<td>Resultados incluem contexto externo ou lembrado inesperado</td>
+<td>Uma ferramenta web ou de memória adicionou contexto não intencionado para esta execução isolada</td>
+<td>Pause o job, desative a ferramenta relacionada, revise a instrução e crie um novo job piloto.</td>
+</tr>
+<tr>
+<td>Exportação está faltando registros</td>
+<td>Itens pendentes não são exportados ou o filtro de exportação os exclui</td>
+<td>Verifique os filtros da lista de Processamento e use <strong>All processed</strong> quando precisar de todos os resultados processados.</td>
+</tr>
+<tr>
+<td>Custo maior que o esperado</td>
+<td>Modelo, passagem de validação, ferramentas, tentativas ou contagem de itens aumentaram o uso</td>
+<td>Pause o job, inspecione custo e custo previsto, reduza ferramentas ou validação se adequado e teste com uma amostra menor.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="referência-da-api">Referência da API</h2>
+<p>Use a API quando Lote fizer parte de um pipeline interno de dados ou automação. A API segue o mesmo fluxo do console: crie um workflow, crie um job pausado, importe itens, inicie o job, monitore itens, re‑tente ou remova registros selecionados e exporte resultados processados.</p>
+<p>Ao usar exportações via API, proteja credenciais da mesma forma que protege chaves de API. Não cole URLs de exportação com parâmetros de consulta <code>api-key</code> em tickets, mensagens de chat, logs ou capturas de tela.</p>
+<h3 id="workflows">Workflows</h3>
+<p>Crie e mantenha receitas de processamento reutilizáveis.</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=List%20Batch%20Workflows&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Create%20Batch%20Workflow&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=View%20Batch%20Workflow&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Edit%20Batch%20Workflow&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Delete%20Batch%20Workflow&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<h3 id="jobs">Jobs</h3>
+<p>Crie, inicie, pause, monitore e exclua execuções de processamento concretas.</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=List%20Account%20Batch%20Jobs&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=List%20Batch%20Jobs&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Create%20Batch%20Job&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=View%20Batch%20Job&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Edit%20Batch%20Job&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Delete%20Batch%20Job&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<h3 id="items-and-export">Items and export</h3>
+<p>Importe itens de carga, inspecione saídas individuais, re‑tente ou limpe grupos e exporte JSONL processado.</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=Import%20Batch%20Job%20Items&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=List%20Batch%20Job%20Items&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=View%20Batch%20Job%20Item&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Edit%20Batch%20Job%20Item&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Retry%20Batch%20Job%20Items&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Remove%20Batch%20Job%20Items&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Delete%20Batch%20Job%20Item&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Export%20Batch%20Job&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/pt-br/platform/batch.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>

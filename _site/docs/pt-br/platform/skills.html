@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Habilidades | AIVAX </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="Habilidades | AIVAX ">
+
+
+        <link rel="icon" href="../../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+        
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
+
+        <meta name="docfx:rel" content="../../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/pt-br/platform/skills.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+                
+        <script>            
+            function switchLanguage(lang) {
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../../index.html">
+                        <img id="logo" class="svg" src="../../../assets/img/aivax.png" alt="AIVAX">
+                        AIVAX
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="habilidades">Habilidades</h1>
+
+<p>Habilidades são pacotes de instruções reutilizáveis que ajudam um AI Gateway a aplicar comportamento especializado apenas quando for relevante. Use‑as para expertise de domínio, estilo de resposta, procedimentos de revisão, regras de conformidade ou fluxos de trabalho específicos que seriam grandes demais ou muito situacionais para permanecer nas instruções base do gateway.</p>
+<p>Uma habilidade tem:</p>
+<ul>
+<li><strong>Slug:</strong> O identificador está usado por gateways, importações, exportações e chamadas de API.</li>
+<li><strong>Description:</strong> Uma breve explicação de roteamento que indica ao modelo quando a habilidade deve ser usada.</li>
+<li><strong>Instructions:</strong> A orientação completa inserida quando a habilidade está ativa.</li>
+<li><strong>Options:</strong> Configuração de fonte de instrução remota armazenada e associações de nomes de ferramentas.</li>
+</ul>
+<p>Para detalhes mais profundos de comportamento e ativação, veja o <a href="/docs/pt-br/features/skills">Skills developer guide</a>.</p>
+<h2 id="quando-usar-habilidades">Quando usar Habilidades</h2>
+<p>Use Habilidades quando o assistente precisar de comportamento especializado apenas para algumas tarefas:</p>
+<ul>
+<li>Métodos legais, financeiros, de saúde, suporte, engenharia ou outros específicos de domínio.</li>
+<li>Um tom ou formato de resposta que deve ser aplicado apenas a um fluxo de trabalho específico.</li>
+<li>Uma lista de verificação de revisão, procedimento operacional ou política de escalonamento.</li>
+<li>Um conjunto de instruções longas que desperdiçariam contexto se permanecessem sempre ativas.</li>
+<li>Vários conjuntos de regras distintas que não devem ser aplicados simultaneamente.</li>
+</ul>
+<p>Não use Habilidades para instruções que devem ser aplicadas sempre. Coloque comportamento permanente nas instruções do AI Gateway. Não use Habilidades como base de conhecimento pesquisável; use <a href="/docs/pt-br/platform/rag-collections">RAG Collections</a> quando o assistente precisar recuperar documentos factuais. Não use uma habilidade para expor uma ferramenta a menos que a tarefa realmente necessite dela.</p>
+<h2 id="entender-a-página-de-habilidades">Entender a página de Habilidades</h2>
+<p>Abra <strong>Habilidades</strong> na barra lateral do console.</p>
+<p>A tabela <strong>My skills</strong> mostra:</p>
+<ul>
+<li><strong>Id:</strong> O ID único da habilidade.</li>
+<li><strong>Slug:</strong> O nome estável da habilidade.</li>
+<li><strong>Description:</strong> Uma pré‑visualização de quando a habilidade deve ser usada.</li>
+<li><strong>Allowed tools:</strong> O número de nomes de ferramentas armazenados nas opções da habilidade. Zero é normal para habilidades apenas de instrução.</li>
+<li><strong>Actions:</strong> Editar ou excluir a habilidade.</li>
+</ul>
+<p>Use <strong>New skill</strong> para criar uma habilidade. Use <strong>Manage</strong> para importar habilidades de JSONL, exportar todas as habilidades ou excluir todas as habilidades.</p>
+<h2 id="criar-uma-habilidade">Criar uma habilidade</h2>
+<p>Selecione <strong>New skill</strong>, depois preencha a aba <strong>Skill editor</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>O que inserir</th>
+<th>Orientação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Slug</strong></td>
+<td>Um nome técnico curto</td>
+<td>Use de 1 a 64 letras, números, sublinhados, pontos ou hífens. Palavras em minúsculas separadas por hífens, como <code>contract-review</code> ou <code>support-escalation</code>, são mais fáceis de ler. Mantenha estável; alterá‑lo pode afetar gateways, importações e referências.</td>
+</tr>
+<tr>
+<td><strong>Description</strong></td>
+<td>Quando a habilidade deve ser usada</td>
+<td>Escreva como uma regra de roteamento. Uma boa descrição indica a tarefa, o domínio e as condições de disparo.</td>
+</tr>
+<tr>
+<td><strong>Instructions</strong></td>
+<td>O comportamento completo a aplicar</td>
+<td>Escreva orientações operacionais: o que fazer, o que evitar, o que perguntar quando informações faltarem, formato de saída esperado e quaisquer limites.</td>
+</tr>
+</tbody>
+</table>
+<p>Use <strong>Edit with AI</strong> quando quiser ajuda para melhorar a descrição ou instruções. Revise o diff antes de aceitar; essa ação pode reescrever regras operacionais importantes.</p>
+<p>Após salvar, teste a habilidade através de um AI Gateway que tenha acesso a ela. Uma habilidade que parece bem escrita isoladamente ainda pode conflitar com instruções do gateway, ferramentas ou outras habilidades.</p>
+<h2 id="escrever-uma-descrição-forte">Escrever uma descrição forte</h2>
+<p>A descrição é como o modelo decide se carrega a habilidade. Deve ser específica o suficiente para separar esta habilidade de habilidades próximas.</p>
+<p>Fraca:</p>
+<pre><code class="lang-text">Legal skill.
+</code></pre>
+<p>Melhor:</p>
+<pre><code class="lang-text">Use quando o usuário solicitar revisão, explicação ou comparação de cláusulas contratuais em linguagem simples, especialmente obrigações, rescisão, responsabilidade, confidencialidade ou termos de resolução de disputas.
+</code></pre>
+<p>Evite descrições sobrepostas entre muitas habilidades. Se duas habilidades afirmam a mesma tarefa, o modelo pode carregar a errada ou carregar muitas.</p>
+<h2 id="escrever-instruções-úteis">Escrever instruções úteis</h2>
+<p>Instruções devem dizer ao modelo como executar a tarefa após a habilidade estar ativa.</p>
+<p>Instruções boas geralmente incluem:</p>
+<ul>
+<li>O objetivo da habilidade.</li>
+<li>A estrutura de resposta esperada.</li>
+<li>Regras ou listas de verificação de domínio.</li>
+<li>Perguntas a fazer quando informações necessárias estiverem ausentes.</li>
+<li>Limites, avisos ou regras de escalonamento.</li>
+<li>Orientação de uso de ferramentas, se ferramentas forem permitidas.</li>
+<li>Exemplos apenas quando reduzirem ambiguidades.</li>
+</ul>
+<p>Mantenha segredos sensíveis, chaves de API, credenciais, dados privados de clientes, detalhes de casos únicos, contatos de escalonamento, limiares de políticas, controles defensivos, posições legais e procedimentos de incidentes fora de habilidades reutilizáveis, a menos que a habilidade realmente os exija. Habilidades podem ser exportadas, reutilizadas e habilitadas em gateways, portanto trate‑as como configuração operacional de nível de conta.</p>
+<h2 id="configurar-opções">Configurar Opções</h2>
+<p>Abra a aba <strong>Options</strong> para configurar comportamento adicional.</p>
+<h3 id="fontes-de-instrução-remotas">Fontes de instrução remotas</h3>
+<p>Fontes de instrução remotas armazenam configuração externa de fonte de instrução com a habilidade. São úteis como metadados de configuração, mas a ativação atual da habilidade injeta de forma confiável o campo <strong>Instructions</strong> embutido. Não dependa de fontes de instrução remotas para comportamento de tempo de execução obrigatório, a menos que sua integração tenha verificado esse caminho.</p>
+<p>Antes de adicionar uma fonte remota, confirme:</p>
+<ul>
+<li>A fonte é estável, versionada ou fixada e controlada pela sua organização.</li>
+<li>O conteúdo é revisado antes do uso em produção e revisado novamente quando mudar.</li>
+<li>A fonte não expõe segredos ou dados privados de clientes.</li>
+<li>A fonte não é controlada por terceiros, editável publicamente ou editável por usuários sem revisão.</li>
+<li>Você testou o comportamento do gateway/tempo de execução que se espera usar a configuração de fonte armazenada.</li>
+</ul>
+<p>Se o assistente precisar confiar em um corpo mutável de conteúdo factual, prefira RAG Collections a incorporar esse conhecimento diretamente em uma habilidade.</p>
+<h3 id="ferramentas-visíveis-da-habilidade">Ferramentas visíveis da habilidade</h3>
+<p><strong>Skill visible tools</strong> armazena nomes de ferramentas destinados a serem associados à habilidade. Use essa configuração com cuidado e verifique o comportamento no gateway exato onde a habilidade será executada. A forma confiável de manter ferramentas compartilhadas visíveis quando um AI Gateway oculta ferramentas sem uma habilidade é a configuração geral de ferramentas sempre visíveis do gateway.</p>
+<p>Exposeja apenas as ferramentas que a tarefa realmente necessita. O acesso a ferramentas pode mudar custo, privacidade, exposição de dados externos e confiabilidade da saída.</p>
+<table>
+<thead>
+<tr>
+<th>Categoria de ferramenta</th>
+<th>Risco principal</th>
+<th>Prática mais segura</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ferramentas externas de web, navegador ou busca</td>
+<td>O assistente pode enviar contexto da tarefa fora do AIVAX</td>
+<td>Permitir apenas quando o fluxo de trabalho exigir informação externa atual e indicar o que pode ser buscado.</td>
+</tr>
+<tr>
+<td>Ferramentas de conta, banco de dados ou operação interna</td>
+<td>O assistente pode agir sobre dados empresariais sensíveis</td>
+<td>Restringir a habilidades revisadas e testar primeiro com prompts não‑produção.</td>
+</tr>
+<tr>
+<td>Ferramentas de escrita, envio, exclusão ou publicação</td>
+<td>O assistente pode criar efeitos colaterais</td>
+<td>Exigir confirmação explícita do usuário nas instruções da habilidade.</td>
+</tr>
+<tr>
+<td>Ferramentas de geração cara</td>
+<td>O assistente pode aumentar o custo de uso</td>
+<td>Descrever quando a ferramenta é permitida e como parar após a produção de saída suficiente.</td>
+</tr>
+</tbody>
+</table>
+<p>Após mudar as associações de ferramentas, teste a habilidade no gateway onde será usada e revise as Conversas para confirmar que o comportamento é o esperado.</p>
+<h2 id="habilitar-habilidades-em-um-ai-gateway">Habilitar habilidades em um AI Gateway</h2>
+<p>Criar uma habilidade a armazena na conta, mas o assistente só se beneficia dela quando o runtime ou AI Gateway pode usá‑la. Em uma configuração típica de gateway, habilite as habilidades relevantes no AI Gateway e teste um prompt que deveria ativar cada uma.</p>
+<p>Quando um gateway tem habilidades disponíveis, o runtime pode expor uma função <code>read_skill</code>. O modelo chama <code>read_skill</code> com slugs de habilidade correspondentes, e as instruções da habilidade selecionada são inseridas no próximo turno de contexto dentro de blocos ativados por habilidade. Para que isso funcione de forma confiável, o modelo selecionado e o caminho do gateway devem suportar chamadas de função e instruções de sistema, a menos que seu pipeline de gateway forneça um caminho de compensação equivalente.</p>
+<p>Para conectar uma habilidade a um gateway:</p>
+<ol>
+<li>Abra o <a href="/docs/pt-br/platform/ai-gateways">AI Gateway</a> relevante.</li>
+<li>Encontre a área do gateway onde habilidades, ferramentas ou comportamento são configurados.</li>
+<li>Anexe ou habilite a habilidade pelo seu slug ou nome.</li>
+<li>Salve o gateway.</li>
+<li>Execute um prompt que corresponda claramente à descrição da habilidade.</li>
+</ol>
+<p>Para validar uma habilidade:</p>
+<ol>
+<li>Salve a habilidade.</li>
+<li>Anexe ou habilite‑a no AI Gateway relevante.</li>
+<li>Faça um prompt que corresponda claramente à descrição da habilidade.</li>
+<li>Faça um prompt próximo que não deveria usar a habilidade.</li>
+<li>Revise a resposta quanto ao formato, escopo e uso de ferramentas.</li>
+<li>Verifique <a href="/docs/pt-br/platform/conversations">Conversations</a> quando precisar de evidência do comportamento do modelo, chamadas de ferramentas, uso ou erros.</li>
+</ol>
+<p>Se a habilidade afeta um fluxo de trabalho de produção, valide uma habilidade por vez antes de habilitar um conjunto maior.</p>
+<h2 id="importar-e-exportar-habilidades">Importar e exportar Habilidades</h2>
+<p>Use <strong>Manage &gt; Export skills</strong> para baixar todas as habilidades da conta como JSONL. Cada linha contém uma habilidade com <code>slug</code>, <code>description</code>, <code>instructions</code> e <code>options</code>.</p>
+<p>Use <strong>Manage &gt; Import skills</strong> para enviar um arquivo <code>.jsonl</code>. Cada linha deve ser um objeto JSON com pelo menos <code>slug</code> e <code>instructions</code>.</p>
+<p>Exemplo de linha JSONL:</p>
+<pre><code class="lang-json">{&quot;slug&quot;:&quot;support-escalation&quot;,&quot;description&quot;:&quot;Use when a support answer needs escalation criteria or handoff wording.&quot;,&quot;instructions&quot;:&quot;Classify the issue, state the escalation reason, and ask for missing account or incident context before recommending a handoff.&quot;}
+</code></pre>
+<p>Comportamento da importação:</p>
+<ul>
+<li>Habilidades existentes são correspondidas por slug sem diferenciação de maiúsculas/minúsculas e atualizadas em vez de duplicadas.</li>
+<li><code>instructions</code> são obrigatórias e substituem as instruções existentes.</li>
+<li><code>description</code> é substituída pelo valor importado e pode ficar vazia se o arquivo a omitir.</li>
+<li><code>options</code> são preservadas quando omitidas e substituídas quando fornecidas.</li>
+<li>Importações grandes podem ser limitadas; compare as contagens de importados e pulados retornadas com o número de linhas JSONL que você esperava processar.</li>
+</ul>
+<p>Antes de importar sobre uma conta de produção:</p>
+<ol>
+<li>Confirme a conta ativa.</li>
+<li>Exporte as habilidades atuais e verifique o download.</li>
+<li>Revise o arquivo JSONL no controle de versão ou em um processo de revisão confiável.</li>
+<li>Importe primeiro um pequeno arquivo piloto, se possível.</li>
+<li>Teste os AI Gateways afetados após a importação.</li>
+</ol>
+<p>Uma importação JSONL pode atualizar muitas habilidades de uma vez, e instruções alteradas podem afetar qualquer gateway que use essas habilidades.</p>
+<p>A exportação do console abre uma URL que inclui a chave de sessão atual como parâmetro de consulta <code>api-key</code>. Não compartilhe URLs de exportação, histórico do navegador, capturas de tela, logs de proxy ou URLs de requisição copiados que incluam essa string de consulta. O JSONL exportado também pode conter regras operacionais sensíveis, associações de ferramentas e configuração de fonte, portanto armazene‑o como configuração de conta e não como documentação pública.</p>
+<h2 id="excluir-habilidades">Excluir Habilidades</h2>
+<p>Use o menu de ação da linha para excluir uma habilidade. Use <strong>Manage &gt; Delete all skills</strong> somente quando quiser remover todas as habilidades na conta ativa.</p>
+<p>A exclusão é irreversível pelo console. Antes de excluir:</p>
+<ul>
+<li>Confirme a conta ativa.</li>
+<li>Exporte as habilidades atuais se precisar restaurá‑las.</li>
+<li>Procure AI Gateways pelo slug ou nome da habilidade, documente gateways afetados e remova ou substitua a habilidade antes de excluí‑la.</li>
+<li>Preserve notas de mudança fora do AIVAX se a exclusão fizer parte de um rollout controlado.</li>
+</ul>
+<p>Excluir uma habilidade remove o pacote de instruções armazenado. Não reescreve automaticamente instruções do gateway, exclui conversas, desfaz usos anteriores ou remove cópias exportadas.</p>
+<p>Excluir todas as habilidades é uma ação de conta inteira para a conta ativa. Evite usá‑la durante tráfego de produção a menos que tenha exportado um backup, verificado o seletor de conta e planejado o comportamento do gateway que deve permanecer após a remoção das habilidades.</p>
+<h2 id="solução-de-problemas">Solução de Problemas</h2>
+<table>
+<thead>
+<tr>
+<th>Problema</th>
+<th>Causa provável</th>
+<th>O que fazer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>O assistente não usa a habilidade</td>
+<td>A habilidade não está habilitada no gateway relevante, o modelo não a selecionou ou a descrição é vaga demais</td>
+<td>Confirme que a habilidade está anexada ao gateway, confirme que o caminho do modelo suporta chamadas de função e instruções de sistema, teste com apenas essa habilidade habilitada e então torne a descrição mais específica.</td>
+</tr>
+<tr>
+<td>A habilidade errada é ativada</td>
+<td>Descrições de habilidades se sobrepõem ou usam linguagem ampla</td>
+<td>Reescreva as descrições como regras de roteamento distintas e reduza a sobreposição entre habilidades semelhantes.</td>
+</tr>
+<tr>
+<td>Respostas ignoram as instruções da habilidade</td>
+<td>Instruções do gateway, limitações do modelo ou outras habilidades conflitam com a habilidade</td>
+<td>Verifique se a ativação ocorreu, teste uma habilidade por vez, simplifique as instruções e revise Conversas ou Logs para evidência.</td>
+</tr>
+<tr>
+<td>Comportamento da ferramenta inesperado</td>
+<td>Associações de ferramentas não correspondem à configuração do gateway, muitas ferramentas estão visíveis ou a habilidade não explica quando usar ferramentas</td>
+<td>Revise tanto as opções da habilidade quanto as configurações de visibilidade de ferramentas do AI Gateway, adicione regras de uso de ferramentas às instruções e teste novamente no gateway.</td>
+</tr>
+<tr>
+<td>Importação altera mais do que o esperado</td>
+<td>Habilidades existentes foram correspondidas por slug e sobrescritas</td>
+<td>Restaure de um export anterior se necessário, então importe um arquivo JSONL menor e revisado.</td>
+</tr>
+<tr>
+<td>Exportação contém dados sensíveis</td>
+<td>Instruções da habilidade incluem regras operacionais privadas, detalhes de clientes ou segredos</td>
+<td>Remova conteúdo sensível das habilidades e rotacione quaisquer segredos expostos fora do AIVAX.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="referência-de-api">Referência de API</h2>
+<p>Use a API de Habilidades quando gerenciar habilidades a partir de uma ferramenta interna, pipeline de implantação ou fluxo de backup.</p>
+<p>O endpoint de atualização aceita alterações parciais de habilidade e mescla superficialmente <code>options</code>. A importação JSONL tem semânticas diferentes: faz upsert por slug, substitui campos importados, preserva <code>options</code> apenas quando omitidos e substitui <code>options</code> quando fornecidos.</p>
+<h3 id="criar-e-gerenciar-uma-habilidade">Criar e gerenciar uma habilidade</h3>
+<p>Crie, inspecione, atualize ou exclua habilidades individuais.</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=List%20Skills&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Create%20Skill&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Get%20Skill&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Update%20Skill&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Delete%20Skill&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<h3 id="importar-exportar-e-limpar">Importar, exportar e limpar</h3>
+<p>Use importação/exportação JSONL para migração, backups, revisão e pacotes de habilidades versionados. Use limpar somente após exportar e confirmar a conta ativa.</p>
+<p>Exportações podem ser solicitadas com uma chave de API. Trate a URL da requisição e o JSONL baixado como configuração sensível de conta, especialmente quando incluírem instruções, associações de ferramentas ou configuração de fonte.</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=Import%20Skills%20%28JSONL%29&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Export%20Skills%20%28JSONL%29&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Clear%20Skills&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/pt-br/platform/skills.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>

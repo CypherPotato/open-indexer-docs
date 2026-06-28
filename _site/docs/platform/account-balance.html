@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Account, balance, and multiple accounts | AIVAX </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="Account, balance, and multiple accounts | AIVAX ">
+
+
+        <link rel="icon" href="../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+        
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
+
+        <meta name="docfx:rel" content="../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/platform/account-balance.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+                
+        <script>            
+            function switchLanguage(lang) {
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../index.html">
+                        <img id="logo" class="svg" src="../../assets/img/aivax.png" alt="AIVAX">
+                        AIVAX
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="account-balance-and-multiple-accounts">Account, balance, and multiple accounts</h1>
+
+<p>Use <strong>My account</strong> and <strong>Usage</strong> to manage the account-level settings that affect every AIVAX resource: plan, balance, notifications, API keys, hook authentication, storage usage, model reserve usage, and saved browser accounts.</p>
+<p>This page is for account owners, operators, and developers who need to keep an AIVAX account usable and safe. If you only need to make your first API call, start with <a href="/docs/getting-started">Getting Started</a>. If you need the API authentication rules, see <a href="/docs/authentication">Authentication</a>.</p>
+<h2 id="before-you-begin">Before you begin</h2>
+<p>You need to be signed in to the <a href="https://console.aivax.net/">AIVAX console</a>. Some actions can affect production systems, billing, or integrations, so confirm the account name and plan badge in the lower-left account menu before changing anything.</p>
+<p>Do not perform account, key, hook-key, or billing actions from a shared or untrusted browser. Saved accounts and login sessions are stored locally by the browser.</p>
+<h2 id="choose-the-right-account-page">Choose the right account page</h2>
+<p>AIVAX separates account administration into a few related surfaces:</p>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>Use it when you need to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>My account</strong></td>
+<td>Update account profile settings, notification preferences, API keys, hook key, conversation logging, automatic JSON healing, and logout behavior.</td>
+</tr>
+<tr>
+<td><strong>Usage</strong></td>
+<td>Check current plan, balance, storage usage, subscription-model reserve usage, and reserve breakdowns when available.</td>
+</tr>
+<tr>
+<td><strong>Account level</strong></td>
+<td>Compare Free, Pro, and Max plan capabilities and production limits.</td>
+</tr>
+<tr>
+<td><strong>Account menu</strong></td>
+<td>Switch or add saved accounts, open usage, top up balance, manage account settings, or log out.</td>
+</tr>
+</tbody>
+</table>
+<p>Use <strong>My account</strong> for configuration. Use <strong>Usage</strong> for operational state. Use <strong>Account level</strong> when deciding whether a plan supports the workflow you want to run.</p>
+<h2 id="manage-account-information">Manage account information</h2>
+<p>Open <strong>My account &gt; Account information</strong> to review and update account-wide settings.</p>
+<p>You can:</p>
+<ul>
+<li>Open the plan comparison from <strong>Account plan</strong>.</li>
+<li>Edit the account name shown in the console.</li>
+<li>Review the account email address.</li>
+<li>Enable or disable conversation-content logging.</li>
+<li>Enable or disable automatic JSON healing.</li>
+<li>Open Gravatar to change the account profile picture.</li>
+<li>Log out of the current account.</li>
+</ul>
+<p>The account name is visible in the platform, so choose a name that lets operators distinguish production, staging, customer, and personal accounts. The account email address is currently read-only in the console. If it needs to change, use the supported account recovery or support path.</p>
+<p>Turn <strong>Conversations logging</strong> on when your team needs stored conversation content for debugging, analytics, review, or audit workflows. Turn it off when your account should avoid retaining conversation content beyond what is necessary for the active workflow. Before changing this setting, coordinate with anyone who relies on Conversations, Analytics, or troubleshooting workflows.</p>
+<p>Turn <strong>Automatic JSON healing</strong> on when applications expect structured JSON and you want AIVAX to attempt repair of malformed model output. For implementation details and schema behavior, see <a href="/docs/inference/structured-responses">Structured Responses</a>.</p>
+<h2 id="configure-notifications">Configure notifications</h2>
+<p>Open <strong>My account &gt; Notifications</strong> to control account emails.</p>
+<p>Notifications are currently sent to the account email address. The notification settings include:</p>
+<table>
+<thead>
+<tr>
+<th>Notification</th>
+<th>What it does</th>
+<th>Timing guard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Low balance</strong></td>
+<td>Sends an email when account balance falls below the configured threshold.</td>
+<td>At most once every 3 days.</td>
+</tr>
+<tr>
+<td><strong>Deprecated models</strong></td>
+<td>Sends an email when a model used recently becomes deprecated.</td>
+<td>Only models used in the last 30 days are considered; emails are sent at most once every 7 days.</td>
+</tr>
+</tbody>
+</table>
+<p>Use low-balance notifications for production accounts and batch-heavy workflows. Set the threshold high enough that the team can top up before chat clients, integrations, multimodal calls, or batch jobs stop for insufficient balance.</p>
+<p>Use deprecated-model notifications when gateways or direct integrations depend on specific model names. After receiving a notification, review the affected gateway or application before the model is removed or becomes unsuitable for production.</p>
+<h2 id="check-balance-and-usage">Check balance and usage</h2>
+<p>Open <strong>Usage</strong> from the account menu.</p>
+<p>Usage shows:</p>
+<ul>
+<li>Current plan.</li>
+<li>Account balance.</li>
+<li>A <strong>Top up account</strong> action.</li>
+<li>Storage usage against the included storage quota.</li>
+<li>Subscription-model usage windows, when the plan includes subscription-model reserves.</li>
+<li>Weekly subscription-model reserve breakdown, when the plan includes reserves and usage exists for the current period.</li>
+</ul>
+<p>Balance is consumed by inference, RAG, subscriptions, and other AIVAX services. Some workflows require a positive balance or a route-specific minimum before they start, and billable routes can return <code>402 Payment Required</code> when balance or storage quota is insufficient. See <a href="/docs/pricing#balance-requirements">Pricing</a>, <a href="/docs/pricing#credits-and-invoices">Credits and invoices</a>, and <a href="/docs/limits#how-limits-are-enforced">Plans and limits</a> for the technical rules.</p>
+<p>If a workflow fails unexpectedly, check Usage before debugging the model or resource configuration. Low balance, exhausted reserve windows, or storage over quota can make healthy gateways, collections, chat clients, and batch jobs appear broken.</p>
+<h2 id="top-up-account-balance">Top up account balance</h2>
+<p>Use <strong>Top up account</strong> from the account menu or the Usage page when the prepaid balance is too low.</p>
+<p>The credit dialog asks for the credit amount and shows the payment method, processor fee, service fee, and total before creating the payment link. Confirm only after the total matches what you intend to add. AIVAX then opens the payment provider link in a new browser tab. For how credits and invoices affect balance, see <a href="/docs/pricing#credits-and-invoices">Credits and invoices</a>.</p>
+<p>Do not use the browser back button or duplicate tabs to create multiple payment links unless you intentionally want multiple payments. After payment, return to Usage or the dashboard to confirm the balance changed.</p>
+<h2 id="manage-api-keys">Manage API keys</h2>
+<p>Open <strong>My account &gt; API Keys</strong> to create, inspect, and revoke API keys.</p>
+<p>API keys authenticate applications, SDKs, MCP clients, and backend services. They are different from login keys. Create separate API keys for separate applications so you can revoke one integration without breaking every system in the account.</p>
+<p>When creating a key, choose:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Guidance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Key name</strong></td>
+<td>Use an owner and purpose, such as <code>production support bot</code> or <code>staging batch importer</code>.</td>
+</tr>
+<tr>
+<td><strong>Key type</strong></td>
+<td>Use <strong>Private</strong> for server-side integrations and account-management APIs. Use <strong>Public (beta)</strong> only for restricted browser/client-side routes designed for public keys.</td>
+</tr>
+<tr>
+<td><strong>Key expiration</strong></td>
+<td>Choose 7, 30, or 90 days for temporary work; choose <strong>Never</strong> only when you have an external rotation process.</td>
+</tr>
+</tbody>
+</table>
+<p>AIVAX shows a newly generated API key only once. Copy it directly into the destination secret manager or deployment environment. Do not store it in source code, issue trackers, screenshots, shared notes, or chat transcripts.</p>
+<p>The API key table shows the masked key, type, label, expiration, last-used time, and actions. Use <strong>View conversation logs</strong> to open conversations filtered to that key when investigating a specific integration. Use <strong>Delete</strong> to revoke a key. Deleting a key can immediately break every service that uses it, so rotate callers to a replacement key before deletion when uptime matters.</p>
+<p>For key types and accepted API authentication schemes, see <a href="/docs/authentication#api-key-types">Authentication</a> and <a href="/docs/authentication#create-and-list-keys">Create and list keys</a>.</p>
+<h2 id="manage-the-hook-key">Manage the hook key</h2>
+<p>Open <strong>My account &gt; Hook key</strong> to manage the secret used for AIVAX reverse calls to your services, such as workers and server-side protocol-function callbacks.</p>
+<p>Use <strong>Reset hook key</strong> when the hook key may have been exposed or when you intentionally rotate webhook verification material. Resetting it means every service that validates AIVAX reverse calls must be updated with the new secret. Plan this like a credential rotation, especially for production workers or integrations.</p>
+<p>Use <strong>Copy</strong> only when you are ready to paste the hook key into a trusted secret store. Do not paste it into logs or client-side code.</p>
+<p>For validation details, see <a href="/docs/authentication#hook-authentication">Hook authentication</a>.</p>
+<h2 id="use-multiple-saved-accounts">Use multiple saved accounts</h2>
+<p>The account menu lets you add another account by entering that account's 14-character login key. After an account is saved, it appears in the account menu and can be selected without returning to the Login page.</p>
+<p>To add and switch accounts:</p>
+<ol>
+<li>Open the lower-left account menu.</li>
+<li>Select <strong>Add account</strong>.</li>
+<li>Enter the other account's 14-character login key.</li>
+<li>Confirm the form. AIVAX authenticates with that key and switches the console to that account.</li>
+<li>Confirm the account name and plan badge before making changes.</li>
+</ol>
+<p>To switch back later, open the account menu and select the saved account. To remove temporary local access, log out of that account. If another saved account exists, AIVAX may switch to it automatically.</p>
+<p>Multiple saved accounts are useful when you operate separate production, staging, customer, or personal accounts from the same browser. They are also a common source of mistakes. Before editing a key, gateway, collection, notification, or balance setting, check the active account name and plan badge.</p>
+<p>Saved account login keys and session data are stored in the browser's local storage. Use this feature only on a trusted private device and browser profile. Do not add accounts while screen sharing, because the login-key field is visible while you type or paste. Logging out removes the current saved account locally and may switch to another saved account, but it does not rotate exposed login keys, revoke API keys, or invalidate credentials stored elsewhere.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="a-request-fails-with-402-payment-required">A request fails with <code>402 Payment Required</code></h3>
+<p>Open Usage and check balance and storage usage. The account may have insufficient balance, a minimum-balance requirement for the input type, or storage usage above the plan quota. See <a href="/docs/pricing#balance-requirements">Pricing</a>.</p>
+<h3 id="balance-did-not-update-after-topping-up">Balance did not update after topping up</h3>
+<p>Confirm that the payment link opened in a new tab and that the payment was completed. If the browser blocked the new tab, create a new payment link from the credit dialog. Avoid creating duplicate links unless you intend to make multiple payments. Payment confirmation may not be instant; check the dashboard or Usage again after the provider confirms payment. If you need invoice-level confirmation, open Analytics and review invoices or billing activity when available.</p>
+<h3 id="a-service-stopped-after-an-api-key-change">A service stopped after an API key change</h3>
+<p>Check whether the key was deleted, expired, or replaced without updating the service. Create a replacement private key, update the service secret, test it, and then delete the old key.</p>
+<h3 id="a-worker-or-server-side-function-callback-is-rejected">A worker or server-side function callback is rejected</h3>
+<p>Check whether the hook key was reset. Update the receiving service to validate against the current hook key and the current <code>X-Request-Nonce</code> validation scheme, then retry a controlled request. If the receiver or worker was provisioned with older callback settings, redeploy or reprovision the affected service before testing again. See <a href="/docs/authentication#hook-authentication">Hook authentication</a>.</p>
+<h3 id="i-changed-accounts-and-cannot-find-a-resource">I changed accounts and cannot find a resource</h3>
+<p>Confirm the account name in the lower-left account menu. Resources such as gateways, collections, keys, logs, conversations, and memories belong to the active account.</p>
+<h3 id="notification-emails-are-missing-or-delayed">Notification emails are missing or delayed</h3>
+<p>Check that the notification is enabled and that the threshold or event condition has actually been met. Notifications are sent to the account email address, so check that inbox and spam folder. Low-balance notifications are sent at most once every 3 days. Deprecated-model notifications are sent at most once every 7 days and only consider models used in the last 30 days.</p>
+<h2 id="related-documentation">Related documentation</h2>
+<ul>
+<li><a href="basics.html">Platform basics</a>: sign in and navigate the console.</li>
+<li><a href="/docs/authentication">Authentication</a>: API key families, accepted auth schemes, and hook validation.</li>
+<li><a href="/docs/pricing">Pricing</a>: prepaid balance, usage charges, storage billing, and balance requirements.</li>
+<li><a href="/docs/limits">Plans and limits</a>: plan quotas, rate limits, storage limits, and feature availability.</li>
+<li><a href="/docs/inference/structured-responses">Structured Responses</a>: JSON schema output and JSON healing behavior.</li>
+</ul>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/platform/account-balance.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>

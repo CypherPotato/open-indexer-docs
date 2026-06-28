@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Batch | AIVAX </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="Batch | AIVAX ">
+
+
+        <link rel="icon" href="../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+        
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
+
+        <meta name="docfx:rel" content="../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/platform/batch.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+                
+        <script>            
+            function switchLanguage(lang) {
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../index.html">
+                        <img id="logo" class="svg" src="../../assets/img/aivax.png" alt="AIVAX">
+                        AIVAX
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="batch">Batch</h1>
+
+<p>Batch runs the same AI workflow over many independent inputs. Use it when you want AIVAX to classify, extract, enrich, summarize, validate, or generate structured output for a list of records without keeping a chat or inference request open.</p>
+<p>The Batch area is organized around two objects:</p>
+<ul>
+<li><strong>Workflows</strong> are reusable processing recipes. They define the instruction, model, result schema, optional tools, validation, retries, and error handling.</li>
+<li><strong>Jobs</strong> are concrete runs created from a workflow. They hold the imported items, processing state, progress, events, cost, confidence, item details, retries, cleanup, and exports.</li>
+</ul>
+<p>For implementation details, request fields, and API behavior, see the <a href="/docs/features/batch">Batch developer guide</a>.</p>
+<h2 id="when-to-use-batch">When to use Batch</h2>
+<p>Use Batch when every item can be processed independently with the same instruction. Good examples include lead classification, support-ticket tagging, metadata extraction, URL or company enrichment, short document summarization, moderation review, response evaluation, and JSON generation for later import into another system.</p>
+<p>Do not use Batch for real-time chat, workflows where each answer depends on the previous answer, or searchable knowledge bases. Use <a href="/docs/platform/chat-clients">Chat Clients</a> for user-facing conversations, <a href="/docs/platform/ai-gateways">AI Gateways</a> for reusable inference behavior, and <a href="/docs/platform/rag-collections">RAG Collections</a> when the goal is to index knowledge for retrieval.</p>
+<h2 id="before-you-begin">Before you begin</h2>
+<p>Prepare a small representative sample before importing a large file. Batch can spend balance quickly when a workflow uses an expensive model, validation, web tools, image generation, or many retries.</p>
+<p>You need:</p>
+<ul>
+<li>An account with available balance and access to the model or AI Gateway you plan to use.</li>
+<li>A clear instruction that applies to every item.</li>
+<li>A result schema if the output will feed a spreadsheet, database, automation, or review queue.</li>
+<li>A decision about whether validation is worth a second model pass.</li>
+<li>Input data that is safe to process with the selected model and tools.</li>
+</ul>
+<p>Avoid importing secrets, credentials, regulated personal data, or customer data that your account is not allowed to process. Exports include original input, generated output, metadata, confidence, validation result, and timing fields, so treat exported JSONL as sensitive operational data.</p>
+<h2 id="test-with-a-small-sample-first">Test with a small sample first</h2>
+<p>Before running a real workload, create a pilot job with 5 to 20 representative items. Start the job, then inspect the <strong>Insights</strong>, <strong>Processing list</strong>, item <strong>View</strong> details, confidence, validation result, cost, and exported JSONL shape.</p>
+<p>Use the pilot to answer these questions:</p>
+<ul>
+<li>Does the instruction produce the right decision or extraction for normal, edge, and poor-quality inputs?</li>
+<li>Does the result schema contain the fields your downstream process expects?</li>
+<li>Are validation failures useful, or are they rejecting acceptable results?</li>
+<li>Is the confidence distribution good enough for your review process?</li>
+<li>Is the cost per item acceptable before multiplying it by the full dataset?</li>
+</ul>
+<p>Adjust the workflow before creating the production job. For important workloads, keep pilot and production jobs separate so the production export contains only the intended records.</p>
+<h2 id="understand-the-batch-page">Understand the Batch page</h2>
+<p>Open <strong>Batch</strong> from the console sidebar.</p>
+<p>The <strong>Workflows</strong> tab lists reusable workflows with their ID, creation time, title, model, job count, and actions. From this table you can create a workflow, create a job from an existing workflow, edit the workflow, or delete it.</p>
+<p>The <strong>Jobs</strong> tab lists recent jobs across workflows. Use it when you want to monitor or return to a processing run without first opening the parent workflow. The list shows the job ID, name, state, progress, runtime, event count, and a <strong>Manage</strong> action.</p>
+<h2 id="create-a-workflow">Create a workflow</h2>
+<p>Create a workflow when you want to save a repeatable processing rule. The workflow should read like a policy for every item, not like a one-time prompt.</p>
+<p>In <strong>Workflows</strong>, select <strong>Create workflow</strong>. Configure the tabs:</p>
+<table>
+<thead>
+<tr>
+<th>Tab</th>
+<th>What to configure</th>
+<th>Guidance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Basic</strong></td>
+<td>Workflow title, workflow instructions, result schema</td>
+<td>Use the title for operators. Put the task rules in the instruction. Use a JSON Schema when downstream systems expect stable fields.</td>
+</tr>
+<tr>
+<td><strong>Model</strong></td>
+<td>Model, reasoning effort, enabled tools, tool options</td>
+<td>Choose a model that fits the quality, speed, and cost tradeoff. Enable tools only when each item truly needs them.</td>
+</tr>
+<tr>
+<td><strong>Validation</strong></td>
+<td>Enable validation and validation instructions</td>
+<td>Enable when results need an additional model check against business rules, safety rules, or output quality.</td>
+</tr>
+<tr>
+<td><strong>Handling</strong></td>
+<td>Error stop threshold and max retries per item</td>
+<td>Use a low threshold while testing so a bad prompt or schema pauses early. Increase it only after the workflow is proven.</td>
+</tr>
+</tbody>
+</table>
+<p>The new workflow draft starts with an empty instruction, a permissive object schema, no tools, validation disabled, an error stop threshold of <code>5</code>, and max retries of <code>2</code>. Saved workflows require a non-empty instruction, a result schema object, and an available model or AI Gateway. The API accepts <code>errorStopThreshold</code> from <code>1</code> to <code>100</code> and <code>maxRetries</code> from <code>0</code> to <code>10</code>.</p>
+<p>Use <strong>Edit with AI</strong> to help refine the instruction, schema, and validation instruction. Review the diff before accepting it, especially if the workflow handles regulated or high-impact decisions.</p>
+<h2 id="enable-tools-safely">Enable tools safely</h2>
+<p>Enabled tools are available to the model for every processed item. They can improve results, but they can also add cost, expose item content to external retrieval paths, create persistent side effects, or make runs harder to reproduce.</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Use when</th>
+<th>Safety guidance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Open URLs</strong></td>
+<td>Each item includes a URL that should be read directly</td>
+<td>Import only URLs the account is allowed to process. Expect failures for blocked, private, or unstable pages.</td>
+</tr>
+<tr>
+<td><strong>Web search</strong></td>
+<td>The model needs current public information</td>
+<td>Search can add latency and cost. Do not rely on it for private facts or records that should stay internal.</td>
+</tr>
+<tr>
+<td><strong>X posts search</strong></td>
+<td>Public X posts are part of the evidence</td>
+<td>Treat social results as noisy and time-sensitive. Validate outputs before acting on them.</td>
+</tr>
+<tr>
+<td><strong>Advanced web usage</strong></td>
+<td>A task needs deeper browsing behavior</td>
+<td>Use only for workflows where external page interaction is required. Test with a small job because failures can be site-specific.</td>
+</tr>
+<tr>
+<td><strong>Code execution</strong></td>
+<td>Each item needs computation or parsing that the model can express as code</td>
+<td>Do not feed secrets or untrusted code instructions. Review outputs carefully before using them in automations.</td>
+</tr>
+<tr>
+<td><strong>Image generation</strong></td>
+<td>The expected result includes generated images</td>
+<td>This can materially increase cost and may produce content that needs human review before publication.</td>
+</tr>
+<tr>
+<td><strong>Memory</strong></td>
+<td>The workflow intentionally needs remembered context</td>
+<td>Avoid using it for isolated, auditable jobs where each item should be processed only from its input and workflow instruction.</td>
+</tr>
+</tbody>
+</table>
+<p>If a result includes unexpected external or remembered context, pause the job, disable the related tool, revise the instruction, and test with a new pilot job.</p>
+<h2 id="use-validation-carefully">Use validation carefully</h2>
+<p>Validation runs a second model pass to check the output. It is useful when the result must follow business rules, safety requirements, or a strict schema before it can be trusted downstream.</p>
+<p>Write validation instructions as concrete checks. For example, ask the validator to confirm that required fields are present, the justification cites evidence from the input, or the chosen label belongs to an allowed list. Avoid vague instructions such as &quot;make sure the answer is good&quot;; they can create inconsistent <code>ValidationError</code> results.</p>
+<p>Validation can add cost and can turn generated outputs into failed items. When validation errors appear, open item details and review the validation reason before retrying. If the reason shows a prompt or schema problem, fix the workflow and run a pilot job instead of retrying the whole workload.</p>
+<h2 id="create-a-job">Create a job</h2>
+<p>Create a job when you have a concrete workload to process through a workflow. From a workflow row, open the actions menu and select <strong>Create job</strong>. Give the job a name that describes the dataset, period, customer, or review round.</p>
+<p>New jobs are created paused. This is intentional: import and inspect the item list before starting processing.</p>
+<h2 id="import-items">Import items</h2>
+<p>Open the job and go to <strong>Processing list</strong>. Use <strong>Insert data</strong> to add items.</p>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>When to use it</th>
+<th>What becomes one item</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>From text file</strong></td>
+<td>You already have one file with many records</td>
+<td>Each non-empty line</td>
+</tr>
+<tr>
+<td><strong>From files</strong></td>
+<td>Each source file is one record</td>
+<td>Each uploaded plain-text file</td>
+</tr>
+<tr>
+<td><strong>From zip</strong></td>
+<td>You want to upload many text files together</td>
+<td>Each plain-text ZIP entry</td>
+</tr>
+<tr>
+<td><strong>Type text</strong></td>
+<td>You want to add one manual test item</td>
+<td>The submitted text field</td>
+</tr>
+</tbody>
+</table>
+<p>For structured line-based inputs, JSONL is usually the safest format: one compact JSON object per line. The workflow instruction should explain how to interpret each object.</p>
+<p>Example JSONL:</p>
+<pre><code class="lang-jsonl">{&quot;company&quot;:&quot;Northwind Parts&quot;,&quot;description&quot;:&quot;Regional distributor of industrial replacement parts&quot;}
+{&quot;company&quot;:&quot;Contoso Legal&quot;,&quot;description&quot;:&quot;Law firm focused on employment contracts&quot;}
+</code></pre>
+<p>Include only fields the workflow needs. Extra identifiers, personal data, or internal notes can appear later in exports.</p>
+<p>For <code>files</code> and <code>zip</code> imports, current limits are 1,000 files or ZIP entries per request, 10 MB per file or ZIP entry, and 100 MB total imported content per request. ZIP imports also check for invalid compression behavior. In <code>lines</code> mode, AIVAX imports each non-empty line from the uploaded file; empty lines are skipped.</p>
+<h2 id="start-pause-and-finish">Start, pause, and finish</h2>
+<p>Use <strong>Start job</strong> only after the imported items look correct. Starting a job moves it to <code>Active</code> and allows workers to process pending items. Processing can generate model, validation, and tool costs.</p>
+<p>Use <strong>Pause job</strong> when you need to stop new processing while investigating errors, reviewing cost, changing operational timing, or waiting for more balance. A running item may finish even after a pause request; pausing stops further processing but does not interrupt an inference already running.</p>
+<p>Jobs finish automatically when all items are processed. The console primarily exposes start and pause controls. Use the API to set a job to <code>Finished</code> only when an automation should close the run instead of leaving it resumable.</p>
+<h2 id="monitor-a-job">Monitor a job</h2>
+<p>The job page has three main tabs:</p>
+<ul>
+<li><strong>Insights</strong> shows progression, completion, success rate, refusal rate, average confidence, charged cost, predicted cost, elapsed time, ETA, and latest processed items.</li>
+<li><strong>Processing list</strong> shows every listed item with state, priority, input preview, confidence, cost, filters, retries, removal actions, and item details.</li>
+<li><strong>Events</strong> shows operational history such as job creation, start, pause, finish, and automatic state changes.</li>
+</ul>
+<p>Open <strong>View</strong> on an item to inspect metadata, input content, output, cost, confidence, validation status, and validation reason. Use this before changing prompts, retrying items, or trusting low-confidence output.</p>
+<h2 id="work-with-item-states-and-confidence">Work with item states and confidence</h2>
+<p>Items can be:</p>
+<ul>
+<li><code>Pending</code>: waiting for processing.</li>
+<li><code>Finished</code>: processed successfully.</li>
+<li><code>Refused</code>: the model refused the item.</li>
+<li><code>ExecutionError</code>: inference or execution failed.</li>
+<li><code>ValidationError</code>: the response did not pass schema or validation.</li>
+<li><code>Cancelled</code>: a possible terminal item state returned by the system.</li>
+</ul>
+<p>The Processing list can filter by state, high confidence, and low confidence. High confidence means at least 80%. Low confidence means below 30%. Low confidence is not automatically a failure, but it is a strong signal for manual review or retry.</p>
+<p>Item priority affects processing order together with account plan priority and insertion order. Pending, non-running items can be moved up, moved down, or removed from the processing list with <strong>Cancel</strong>. The current cancel action is destructive for that item and does not interrupt an inference already running, so export anything you need first.</p>
+<h2 id="retry-safely">Retry safely</h2>
+<p>Use <strong>Retry</strong> after you understand the failure pattern.</p>
+<p>Retry options are:</p>
+<ul>
+<li><strong>All failed</strong></li>
+<li><strong>Low confidence</strong></li>
+<li><strong>Execution error</strong></li>
+<li><strong>Validation error</strong></li>
+</ul>
+<p>Retry moves matching non-running items back to <code>Pending</code>. If at least one item is retried and the job is not already active, AIVAX starts the job automatically. This can generate new cost, so check the instruction, schema, validation rule, and model before retrying many items.</p>
+<h2 id="remove-or-delete-data">Remove or delete data</h2>
+<p>Use <strong>Remove</strong> on the Processing list to remove groups of non-running items:</p>
+<ul>
+<li>Pending items</li>
+<li>Successful items</li>
+<li>Failed items</li>
+<li>All non-running items</li>
+</ul>
+<p>Removal is destructive for the selected items. Export anything you need before removing it.</p>
+<p>Deleting a job deletes the job and all its items. Deleting a workflow deletes the workflow, all of its jobs, and every queued or processed item under those jobs. Use deletion only after exports and audit requirements are satisfied.</p>
+<h2 id="export-results">Export results</h2>
+<p>Use <strong>Export</strong> on the job page to download processed items as JSONL.</p>
+<p>Available exports include:</p>
+<ul>
+<li>Successful</li>
+<li>High confidence</li>
+<li>Low confidence</li>
+<li>Failed</li>
+<li>All processed</li>
+</ul>
+<p>The console also includes <strong>Copy line schema</strong> as a clipboard helper. It copies the JSON Schema for exported JSONL lines, including metadata, input, output, confidence, and validation fields; it is not a separate JSONL export mode.</p>
+<p>Pending items are not exported. Each exported line contains metadata, original input, output, confidence, and validation result. Keep exports in a secure location and avoid sharing them in support tickets unless sensitive fields are removed.</p>
+<p>The console export download opens a URL that includes the current session key as an <code>api-key</code> query parameter. Do not share export URLs, browser history, proxy logs, screenshots, or copied request URLs that include this query string. Redact query parameters before troubleshooting with another person.</p>
+<p>Use separate exports when your review process differs by outcome. For example, export successful high-confidence items for downstream import, then export low-confidence or failed items for human review.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Likely cause</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The job does not process items</td>
+<td>The job is paused, finished, out of balance, blocked by limits, or has no pending items</td>
+<td>Check job state, balance, pending count, and events. Start or resume only after the item list is correct.</td>
+</tr>
+<tr>
+<td>Many validation errors appear</td>
+<td>The schema is too strict, the instruction is ambiguous, or validation rules conflict with the result schema</td>
+<td>Open item details, compare output with the schema, adjust the workflow, and retry a small subset first.</td>
+</tr>
+<tr>
+<td>Many execution errors appear</td>
+<td>Provider, model, tool, or request failures are occurring</td>
+<td>Check events and item details. Retry execution errors after confirming the model and tools are available.</td>
+</tr>
+<tr>
+<td>Confidence is low</td>
+<td>The item lacks enough evidence, the instruction is underspecified, or the model is uncertain</td>
+<td>Review sample outputs, improve the instruction or input format, and retry low-confidence items separately.</td>
+</tr>
+<tr>
+<td>Imported items look wrong</td>
+<td>The source file was not one-record-per-line, ZIP entries were not plain text, or unnecessary fields were included</td>
+<td>Pause the job before processing. Remove non-running items, fix the import format, and rerun a pilot job.</td>
+</tr>
+<tr>
+<td>Tool-based workflow fails</td>
+<td>The selected tool cannot access the URL, search source, page, code path, or generated media requirement</td>
+<td>Open item details and events, test with fewer items, and disable tools that are not required for the task.</td>
+</tr>
+<tr>
+<td>Results include unexpected external or remembered context</td>
+<td>A web or memory tool added context that was not intended for this isolated run</td>
+<td>Pause the job, disable the related tool, revise the instruction, and create a new pilot job.</td>
+</tr>
+<tr>
+<td>Export is missing records</td>
+<td>Pending items are not exported, or the export filter excludes them</td>
+<td>Check the Processing list filters and use <strong>All processed</strong> when you need every processed outcome.</td>
+</tr>
+<tr>
+<td>Cost is higher than expected</td>
+<td>The model, validation pass, tools, retries, or item count increased usage</td>
+<td>Pause the job, inspect cost and predicted cost, reduce tools or validation if appropriate, and test with a smaller sample.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="api-reference">API reference</h2>
+<p>Use the API when Batch is part of an internal data pipeline or automation. The API follows the same flow as the console: create a workflow, create a paused job, import items, start the job, monitor items, retry or remove selected records, and export processed results.</p>
+<p>When using API exports, protect credentials the same way you protect API keys. Do not paste export URLs with <code>api-key</code> query parameters into tickets, chat messages, logs, or screenshots.</p>
+<h3 id="workflows">Workflows</h3>
+<p>Create and maintain reusable processing recipes.</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=List%20Batch%20Workflows&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Create%20Batch%20Workflow&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=View%20Batch%20Workflow&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Edit%20Batch%20Workflow&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Delete%20Batch%20Workflow&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<h3 id="jobs">Jobs</h3>
+<p>Create, start, pause, monitor, and delete concrete processing runs.</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=List%20Account%20Batch%20Jobs&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=List%20Batch%20Jobs&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Create%20Batch%20Job&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=View%20Batch%20Job&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Edit%20Batch%20Job&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Delete%20Batch%20Job&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<h3 id="items-and-export">Items and export</h3>
+<p>Import workload items, inspect individual outputs, retry or clean groups, and export processed JSONL.</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=Import%20Batch%20Job%20Items&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=List%20Batch%20Job%20Items&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=View%20Batch%20Job%20Item&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Edit%20Batch%20Job%20Item&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Retry%20Batch%20Job%20Items&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Remove%20Batch%20Job%20Items&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Delete%20Batch%20Job%20Item&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Export%20Batch%20Job&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/platform/batch.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>

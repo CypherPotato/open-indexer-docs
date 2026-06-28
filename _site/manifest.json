@@ -882,6 +882,126 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "docs/platform/account-balance.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/platform/account-balance.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/platform/ai-gateways.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/platform/ai-gateways.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/platform/analytics.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/platform/analytics.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/platform/basics.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/platform/basics.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/platform/batch.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/platform/batch.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/platform/chat-clients.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/platform/chat-clients.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/platform/conversations.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/platform/conversations.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/platform/logs.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/platform/logs.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/platform/memories.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/platform/memories.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/platform/models.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/platform/models.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/platform/rag-collections.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/platform/rag-collections.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/platform/skills.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/platform/skills.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "docs/pricing.md",
       "output": {
         ".html": {
@@ -1036,6 +1156,126 @@
       "output": {
         ".html": {
           "relative_path": "docs/pt-br/overview.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/platform/account-balance.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/platform/account-balance.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/platform/ai-gateways.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/platform/ai-gateways.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/platform/analytics.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/platform/analytics.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/platform/basics.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/platform/basics.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/platform/batch.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/platform/batch.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/platform/chat-clients.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/platform/chat-clients.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/platform/conversations.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/platform/conversations.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/platform/logs.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/platform/logs.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/platform/memories.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/platform/memories.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/platform/models.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/platform/models.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/platform/rag-collections.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/platform/rag-collections.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/pt-br/platform/skills.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/pt-br/platform/skills.html"
         }
       },
       "version": ""

@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Portais de IA | AIVAX </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="Portais de IA | AIVAX ">
+
+
+        <link rel="icon" href="../../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+        
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
+
+        <meta name="docfx:rel" content="../../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/pt-br/platform/ai-gateways.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+                
+        <script>            
+            function switchLanguage(lang) {
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../../index.html">
+                        <img id="logo" class="svg" src="../../../assets/img/aivax.png" alt="AIVAX">
+                        AIVAX
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="portais-de-ia">Portais de IA</h1>
+
+<p>Use <strong>Portais de IA</strong> para transformar um modelo em uma configuração de assistente reutilizável. Um portal armazena o modelo, a conexão do provedor, instruções, coleções RAG, habilidades, ferramentas, fontes MCP, moderação, trabalhadores, controles de contexto e parâmetros de ajuste que o AIVAX aplica sempre que o portal é chamado.</p>
+<p>Esta página é para construtores e operadores que gerenciam o comportamento do assistente a partir do console. Para o modelo técnico do portal e comportamento da API, veja <a href="/docs/pt-br/inference/ai-gateway">Portal de IA</a>.</p>
+<h2 id="antes-de-começar">Antes de começar</h2>
+<p>Faça login no <a href="https://console.aivax.net/">console AIVAX</a> e abra <strong>Dashboard &gt; Portais de IA</strong>. Confirme a conta ativa antes de editar um portal. Alterações no portal podem afetar imediatamente aplicações, clientes de chat, clientes MCP, fluxos de trabalho em lote e integrações que chamam o portal por slug ou ID.</p>
+<p>Antes de alterar um portal de produção, identifique:</p>
+<ul>
+<li>Qual aplicativo, cliente de chat, fluxo de trabalho ou cliente MCP o chama.</li>
+<li>Se os chamadores usam o slug do portal ou o ID completo do portal.</li>
+<li>Quais capacidades do modelo são necessárias, como ferramentas, entrada de imagem, RAG, saída estruturada ou contexto longo.</li>
+<li>Se o portal atualmente tem conversas ativas ou tráfego de produção.</li>
+</ul>
+<h2 id="quando-usar-um-portal">Quando usar um portal</h2>
+<p>Use um portal quando o comportamento deve ser estável e gerenciado centralmente. Um portal é o lugar certo para decisões que não devem ser repetidas em cada requisição de API:</p>
+<ul>
+<li>Nome do modelo e conexão do provedor.</li>
+<li>Instruções do sistema e modelo de prompt.</li>
+<li>Coleções RAG e estratégia de recuperação.</li>
+<li>Habilidades e visibilidade de ferramentas.</li>
+<li>Ferramentas integradas, fontes MCP, funções de protocolo, definições de ferramentas brutas e configurações Bash.</li>
+<li>Amostragem, raciocínio, verbosidade e controles de contexto.</li>
+<li>Limiares de moderação e webhooks de trabalhadores.</li>
+</ul>
+<p>Use uma chamada direta ao modelo quando precisar apenas de um prompt simples ou de um teste interno onde a aplicação controla todas as opções.</p>
+<h2 id="encontrar-e-abrir-um-portal">Encontrar e abrir um portal</h2>
+<p>A lista de Portais de IA mostra cada portal com:</p>
+<table>
+<thead>
+<tr>
+<th>Coluna</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Id.</strong></td>
+<td>Forma curta de exibição do ID do portal. Copie o ID completo quando precisar de um identificador estável.</td>
+</tr>
+<tr>
+<td><strong>Nome</strong></td>
+<td>Nome amigável exibido no console.</td>
+</tr>
+<tr>
+<td><strong>Modelo base</strong></td>
+<td>O modelo configurado para o portal.</td>
+</tr>
+<tr>
+<td><strong>Endereço base</strong></td>
+<td>Inferência integrada ou o endpoint externo compatível com OpenAI.</td>
+</tr>
+<tr>
+<td><strong>Slug</strong></td>
+<td>Valor de modelo legível por humanos que chamadores com chave privada podem usar em completaões de chat.</td>
+</tr>
+<tr>
+<td><strong>Ações</strong></td>
+<td>Abre o editor do portal.</td>
+</tr>
+</tbody>
+</table>
+<p>Use a caixa de filtro para pesquisar nas colunas do portal. Abra <strong>Visualizar</strong> para inspecionar ou editar o portal.</p>
+<h2 id="criar-um-portal">Criar um portal</h2>
+<p>Você pode criar um portal a partir da página Portais de IA com <strong>Novo portal IA</strong>, ou a partir de um cartão de modelo em <strong>Modelos &gt; Criar portal</strong>.</p>
+<p>No mínimo, configure:</p>
+<ol>
+<li><strong>Nome do portal:</strong> Um nome claro que identifique o propósito e o ambiente.</li>
+<li><strong>Nome do modelo do portal:</strong> O modelo integrado ou o valor do modelo roteado.</li>
+<li><strong>Endereço base:</strong> Use inferência integrada para modelos hospedados pelo AIVAX, ou uma URL base compatível com OpenAI para provedores externos.</li>
+<li><strong>Chave de API:</strong> Necessária apenas quando o portal chama um provedor externo que requer uma.</li>
+<li><strong>Instruções:</strong> O papel do assistente, limites, fonte da verdade e estilo de resposta.</li>
+</ol>
+<p>Selecione <strong>Criar portal IA</strong> ou <strong>Salvar alterações</strong> somente após revisar a pré-visualização do pipeline. Para produção, comece com a configuração funcional mais simples, teste-a e depois adicione RAG, ferramentas, habilidades, moderação e trabalhadores deliberadamente.</p>
+<h2 id="escolher-inferência-integrada-ou-externa">Escolher inferência integrada ou externa</h2>
+<p>A aba <strong>Inferência</strong> controla como o portal alcança o modelo.</p>
+<table>
+<thead>
+<tr>
+<th>Opção</th>
+<th>Use quando</th>
+<th>Endereço base</th>
+<th>Chave de API</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Inferência integrada</strong></td>
+<td>Você quer que o AIVAX chame um modelo integrado do catálogo.</td>
+<td>Inferência integrada, representada internamente como <code>@integrated</code>.</td>
+<td>Não necessária para o provedor do modelo.</td>
+</tr>
+<tr>
+<td><strong>Provedor externo compatível com OpenAI</strong></td>
+<td>Você fornece seu próprio endpoint ou modelo de provedor.</td>
+<td>URL base do provedor compatível com a interface de chat-completions do OpenAI.</td>
+<td>Necessária quando o provedor requer autenticação.</td>
+</tr>
+<tr>
+<td><strong>Roteador de modelo</strong></td>
+<td>Você deseja que o portal roteie por complexidade da requisição.</td>
+<td>Modelo de roteamento integrado.</td>
+<td>Configure modelos de baixa, média e alta complexidade e esforço de raciocínio onde suportado.</td>
+</tr>
+</tbody>
+</table>
+<p>Antes de salvar, verifique se o modelo selecionado suporta o comportamento exigido pelo portal. Portais com muitas ferramentas precisam de chamadas de ferramentas confiáveis. Portais multimodais precisam da modalidade de entrada requerida ou de um plano de pré-processamento. Portais de saída estruturada precisam de comportamento de esquema compatível. Portais RAG precisam de contexto suficiente para documentos recuperados mais a conversa do usuário.</p>
+<h2 id="entender-as-abas-do-editor">Entender as abas do editor</h2>
+<p>O editor do portal está organizado por área de configuração:</p>
+<table>
+<thead>
+<tr>
+<th>Aba</th>
+<th>Use para</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Portal</strong></td>
+<td>Nome e estrutura de pipeline de alto nível.</td>
+</tr>
+<tr>
+<td><strong>Inferência</strong></td>
+<td>Nome do modelo, conexão integrada ou externa do provedor, chave de API e parâmetros do roteador de modelo.</td>
+</tr>
+<tr>
+<td><strong>RAG</strong></td>
+<td>Coleções, estratégia de consulta, reordenador, contagem de resultados, pontuação mínima, janelas de reescrita e apresentação de metadados.</td>
+</tr>
+<tr>
+<td><strong>Habilidades</strong></td>
+<td>Habilidades vinculadas ao portal, se ferramentas estão ocultas a menos que selecionadas por uma habilidade, e ferramentas que devem permanecer visíveis.</td>
+</tr>
+<tr>
+<td><strong>Instruções</strong></td>
+<td>Instruções do sistema, fontes de instrução remotas, modelo de prompt do usuário, pré-preenchimento do assistente, texto de parada e comportamento de pré-preenchimento.</td>
+</tr>
+<tr>
+<td><strong>Parâmetros + Ajuste</strong></td>
+<td>Temperatura, top-p, penalidades, esforço de raciocínio, verbosidade, máximo de tokens, tamanho do contexto, pré-processamento multimodal e limites de mensagens de ferramenta.</td>
+</tr>
+<tr>
+<td><strong>Ferramentas + MCP</strong></td>
+<td>Fontes MCP, funções de protocolo, ferramentas brutas, ferramentas integradas, ambiente Bash, busca na web, memória, geração de imagens e configurações avançadas de JSON.</td>
+</tr>
+<tr>
+<td><strong>Moderação</strong></td>
+<td>Limiares para violência/ódio, conteúdo sexual, política, conteúdo perigoso e tentativas de jailbreak.</td>
+</tr>
+<tr>
+<td><strong>Trabalhadores</strong></td>
+<td>URL de trabalhador externo que pode controlar eventos do portal antes que a ação final ocorra.</td>
+</tr>
+</tbody>
+</table>
+<p>Use <strong>Ocultar etapas desativadas</strong> quando quiser focar nas partes habilitadas do pipeline. Deixe desativado quando estiver auditando um portal e precisar ver quais capacidades estão intencionalmente desativadas.</p>
+<h2 id="revisar-configurações-de-alto-impacto">Revisar configurações de alto impacto</h2>
+<p>Antes de salvar um portal de produção, revise:</p>
+<ul>
+<li>Nome do modelo, endereço base e chave de API do provedor.</li>
+<li>Coleções RAG, estratégia de consulta, contagem de resultados, pontuação mínima e reordenador.</li>
+<li>Instruções do sistema, modelo de prompt, pré-preenchimento do assistente e texto de parada.</li>
+<li>Ferramentas, MCP, funções de protocolo, ferramentas brutas e exposição Bash, especialmente ferramentas que podem gravar.</li>
+<li>Habilidades, ferramentas ocultas e ferramentas sempre visíveis.</li>
+<li>Tamanho do contexto, máximo de tokens, esforço de raciocínio, verbosidade e limites de mensagens de ferramenta.</li>
+<li>Pré-processamento multimodal e tipos de mídia selecionados.</li>
+<li>Limiares de moderação e URL de trabalhador.</li>
+<li>Trechos de integração, MCP e playground gerados antes de compartilhá-los.</li>
+<li>Logs de conversas após os testes.</li>
+</ul>
+<h2 id="configurar-rag-cuidadosamente">Configurar RAG cuidadosamente</h2>
+<p>Anexe coleções RAG quando o assistente precisar responder a partir de documentos de propriedade da conta. Escolha a estratégia de consulta com base na conversa:</p>
+<ul>
+<li><strong>Plain:</strong> Usa a mensagem mais recente do usuário como consulta de busca.</li>
+<li><strong>Concatenate:</strong> Junta as mensagens recentes na consulta.</li>
+<li><strong>User rewrite:</strong> Reescreve as mensagens recentes do usuário antes da busca.</li>
+<li><strong>Full rewrite:</strong> Reescreve o contexto recente do usuário e do assistente antes da busca.</li>
+<li><strong>Query function:</strong> Fornece ao modelo uma ferramenta de busca ao invés de injetar resultados automaticamente.</li>
+</ul>
+<p>Ajuste <strong>Resultados máximos</strong> e <strong>Pontuação mínima</strong> juntos. Mais resultados podem melhorar a cobertura, mas aumentam o uso de tokens e o ruído. Pontuações mínimas mais altas reduzem contexto irrelevante, mas podem ocultar documentos úteis se a qualidade da coleção for desigual. Teste a recuperação antes de usar o portal em produção.</p>
+<h2 id="configurar-ferramentas-e-mcp-deliberadamente">Configurar ferramentas e MCP deliberadamente</h2>
+<p>Ferramentas de portal podem permitir que o modelo busque na web, abra URLs, execute código, chame endpoints HTTP, gere imagens ou documentos, memorize informações, use memória estilo calendário, chame servidores MCP ou funções de protocolo.</p>
+<p>Habilite apenas ferramentas que tenham um papel claro no assistente. Cada ferramenta extra aumenta o tamanho do prompt, o custo e a chance de uma chamada de ferramenta errada. Se a seleção de ferramentas se tornar pouco confiável, use habilidades, ferramentas sempre visíveis ou oculte ferramentas sem habilidades para restringir o que o modelo pode ver.</p>
+<p>Trate ferramentas externas e fontes MCP como integrações. Valide autenticação, autorização e argumentos esperados no lado receptor. Não exponha ferramentas que podem gravar a usuários não confiáveis sem regras de aprovação ao nível da aplicação. Para comportamento de ferramentas integradas, veja <a href="/docs/pt-br/tools/builtin-tools">Ferramentas integradas</a>.</p>
+<h2 id="usar-opções-com-segurança">Usar opções com segurança</h2>
+<p>Código gerado e links de playground podem conter credenciais. <strong>Ver código de integração</strong> espera que você forneça <code>AIVAX_API_KEY</code> a partir de uma variável de ambiente. <strong>Ver código MCP</strong> pode incluir a chave de sessão atual no cabeçalho <code>Authorization</code> gerado. <strong>Executar no playground</strong> pode colocar material de chave na URL do playground gerada. Substitua valores reais por <code>YOUR_AIVAX_API_KEY</code> ou uma variável de ambiente antes de compartilhar, confirmar ou colar trechos em ferramentas de suporte. Se uma chave real ou URL contendo sessão foi exposta, rotacione ou revogue a credencial afetada.</p>
+<p>O menu <strong>Opções</strong> inclui:</p>
+<table>
+<thead>
+<tr>
+<th>Ação</th>
+<th>Use para</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Ver código de integração</strong></td>
+<td>Copiar exemplos em Python, JavaScript ou curl para <code>/v1/chat/completions</code> usando o slug ou ID do portal.</td>
+</tr>
+<tr>
+<td><strong>Ver código MCP</strong></td>
+<td>Configurar o portal como uma ferramenta MCP através de <code>/v1/mcp/inference</code>.</td>
+</tr>
+<tr>
+<td><strong>Executar no playground</strong></td>
+<td>Testar o portal interativamente no playground AIVAX.</td>
+</tr>
+<tr>
+<td><strong>Copiar slug do modelo</strong></td>
+<td>Copiar o slug do portal para chamadores com chave privada.</td>
+</tr>
+<tr>
+<td><strong>Copiar ID</strong></td>
+<td>Copiar o ID completo do portal.</td>
+</tr>
+<tr>
+<td><strong>Importar de JSON</strong></td>
+<td>Substituir os campos atuais do portal no editor por uma configuração JSON. Revise e salve para persistir.</td>
+</tr>
+<tr>
+<td><strong>Exportar para JSON</strong></td>
+<td>Copiar a configuração atual do portal para backup, revisão ou migração.</td>
+</tr>
+<tr>
+<td><strong>Ver logs de conversas</strong></td>
+<td>Abrir logs de conversas filtrados para este portal.</td>
+</tr>
+<tr>
+<td><strong>Excluir portal</strong></td>
+<td>Remover o portal. Isso pode quebrar chamadores que usam seu slug ou ID.</td>
+</tr>
+</tbody>
+</table>
+<p>Antes de importar ou excluir um portal de produção:</p>
+<ol>
+<li>Exporte o JSON atual do portal.</li>
+<li>Copie o ID e o slug do portal.</li>
+<li>Revise os logs de conversas para atividade recente.</li>
+<li>Identifique chamadores que usam o slug ou ID completo.</li>
+<li>Teste a substituição ou configuração importada em um portal separado quando possível.</li>
+<li>Salve ou exclua somente após entender os chamadores e o rollback.</li>
+</ol>
+<p>Importar JSON altera o estado do editor primeiro. Não é persistido até que você salve. Após a importação, revise campos sensíveis, URLs externas, definições de ferramentas, trabalhadores e chaves de provedor antes de salvar.</p>
+<h2 id="testar-antes-da-produção">Testar antes da produção</h2>
+<p>Antes de usar um portal em produção:</p>
+<ol>
+<li>Envie uma mensagem direta simples através do portal.</li>
+<li>Teste a tarefa principal do usuário com entrada realista.</li>
+<li>Se o RAG estiver habilitado, teste a qualidade da recuperação e referências com <a href="/docs/pt-br/rag/semantic-search">Busca semântica</a>.</li>
+<li>Se as ferramentas estiverem habilitadas, verifique se o modelo escolhe a ferramenta correta e se o receptor valida as requisições.</li>
+<li>Se a moderação ou trabalhadores estiverem habilitados, teste exemplos permitidos e bloqueados. Para comportamento de trabalhador, veja <a href="/docs/pt-br/inference/workers">Trabalhadores IA</a>.</li>
+<li>Verifique <a href="account-balance.html#check-balance-and-usage">Uso</a>, Analytics, Logs e Conversas para erros, custos e comportamentos inesperados.</li>
+</ol>
+<h2 id="solução-de-problemas">Solução de problemas</h2>
+<table>
+<thead>
+<tr>
+<th>Sintoma</th>
+<th>Verificar</th>
+<th>Correção</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A chamada ao portal retorna <code>401</code> ou <code>403</code></td>
+<td>Chave de API, tipo de chave pública/privada, permissões do chamador e se o chamador usa um slug de portal que chaves públicas não podem resolver.</td>
+<td>Use uma chave privada válida para chamadas administrativas ou baseadas em slug, ou use o ID completo do portal quando necessário.</td>
+</tr>
+<tr>
+<td>A chamada ao portal retorna <code>402</code></td>
+<td>Saldo da conta, cota de armazenamento e mínimos específicos de rota em Uso.</td>
+<td>Reabasteça o saldo, reduza o armazenamento ou diminua o uso de modelo/ferramenta de baixo custo.</td>
+</tr>
+<tr>
+<td>A chamada ao portal retorna <code>429</code></td>
+<td>Plano da conta, limites de taxa do modelo, limites de ferramentas e volume de cliente de lote/chat.</td>
+<td>Reduza a taxa de requisições, escolha um caminho de modelo diferente ou faça upgrade do plano.</td>
+</tr>
+<tr>
+<td>Falha na chamada ao provedor externo</td>
+<td>Endereço base, chave de API do provedor, nome do modelo, limites de taxa do provedor e erros de resposta do provedor.</td>
+<td>Teste as credenciais do provedor separadamente, depois atualize as configurações de inferência do portal.</td>
+</tr>
+<tr>
+<td>Respostas RAG ausentes ou irrelevantes</td>
+<td>Coleções anexadas, estado de indexação, estratégia de consulta, reordenador, resultados máximos, pontuação mínima, referências e instruções do sistema.</td>
+<td>Teste a coleção diretamente, compare <code>Plain</code> com estratégias de reescrita, ajuste limites de pontuação/resultado deliberadamente e depois reteste através do portal.</td>
+</tr>
+<tr>
+<td>Chamadas de ferramenta erradas ou ruidosas</td>
+<td>Ferramentas habilitadas, fontes MCP, ferramentas brutas, habilidades, ferramentas sempre visíveis e instruções de ferramenta.</td>
+<td>Reduza o conjunto de ferramentas, use habilidades para limitar ferramentas visíveis e documente quando cada ferramenta deve ser usada.</td>
+</tr>
+<tr>
+<td>Trabalhador ou callback rejeita AIVAX</td>
+<td>Chave de hook da conta, validação <code>X-Request-Nonce</code>, URL de callback, implantação do trabalhador e comportamento de timeout.</td>
+<td>Atualize o receptor para validar a chave de hook atual, reimplante ou reprovisione os trabalhadores afetados e reenvie uma requisição controlada. Veja <a href="/docs/pt-br/authentication#hook-authentication">Autenticação de hook</a>.</td>
+</tr>
+<tr>
+<td>Usuários ainda utilizam uma configuração antiga</td>
+<td>Valor do modelo do chamador, slug do portal, ID completo, URL de playground copiada, configuração de cliente em cache e chamadas diretas ao modelo que contornam o portal.</td>
+<td>Atualize todos os chamadores que contornam ou fixam o valor antigo do portal.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="chamar-um-portal">Chamar um Portal</h2>
+<p>Chamadas de conclusão de chat do portal usam o endpoint padrão de inferência:</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=Inference%20(chat%20completions)&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<p>Documentação relacionada:</p>
+<ul>
+<li><a href="/docs/pt-br/inference/ai-gateway">Portal de IA</a>: comportamento técnico do portal e configuração MCP.</li>
+<li><a href="models.html">Modelos</a>: escolha o modelo base para um portal.</li>
+<li><a href="/docs/pt-br/rag/collections">Coleções RAG</a>: prepare coleções antes de anexá-las.</li>
+<li><a href="/docs/pt-br/features/skills">Habilidades</a>: crie pacotes de instruções reutilizáveis.</li>
+<li><a href="/docs/pt-br/tools/mcp">Funções MCP</a>: conecte ferramentas MCP externas.</li>
+<li><a href="/docs/pt-br/tools/protocol-functions">Funções de protocolo</a>: exponha funções HTTP do lado do servidor.</li>
+</ul>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/pt-br/platform/ai-gateways.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>AI Gateways | AIVAX </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="AI Gateways | AIVAX ">
+
+
+        <link rel="icon" href="../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+        
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
+
+        <meta name="docfx:rel" content="../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/platform/ai-gateways.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+                
+        <script>            
+            function switchLanguage(lang) {
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../index.html">
+                        <img id="logo" class="svg" src="../../assets/img/aivax.png" alt="AIVAX">
+                        AIVAX
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="ai-gateways">AI Gateways</h1>
+
+<p>Use <strong>AI Gateways</strong> to turn a model into a reusable assistant configuration. A gateway stores the model, provider connection, instructions, RAG collections, skills, tools, MCP sources, moderation, workers, context controls, and tuning parameters that AIVAX applies whenever the gateway is called.</p>
+<p>This page is for builders and operators who manage assistant behavior from the console. For the technical gateway model and API behavior, see <a href="/docs/inference/ai-gateway">AI Gateway</a>.</p>
+<h2 id="before-you-begin">Before you begin</h2>
+<p>Sign in to the <a href="https://console.aivax.net/">AIVAX console</a> and open <strong>Dashboard &gt; AI Gateways</strong>. Confirm the active account before editing a gateway. Gateway changes can immediately affect applications, chat clients, MCP clients, batch workflows, and integrations that call the gateway by slug or ID.</p>
+<p>Before changing a production gateway, identify:</p>
+<ul>
+<li>Which app, chat client, workflow, or MCP client calls it.</li>
+<li>Whether callers use the gateway slug or full gateway ID.</li>
+<li>Which model capabilities are required, such as tools, image input, RAG, structured output, or long context.</li>
+<li>Whether the gateway currently has active conversations or production traffic.</li>
+</ul>
+<h2 id="when-to-use-a-gateway">When to use a gateway</h2>
+<p>Use a gateway when behavior should be stable and centrally managed. A gateway is the right place for decisions that should not be repeated in every API request:</p>
+<ul>
+<li>Model name and provider connection.</li>
+<li>System instructions and prompt template.</li>
+<li>RAG collections and retrieval strategy.</li>
+<li>Skills and tool visibility.</li>
+<li>Built-in tools, MCP sources, protocol functions, raw tool definitions, and Bash settings.</li>
+<li>Sampling, reasoning, verbosity, and context controls.</li>
+<li>Moderation thresholds and worker webhooks.</li>
+</ul>
+<p>Use a direct model call instead when you only need a simple one-off prompt or an internal test where the application owns every option.</p>
+<h2 id="find-and-open-a-gateway">Find and open a gateway</h2>
+<p>The AI Gateways list shows each gateway with:</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Id.</strong></td>
+<td>Short display form of the gateway ID. Copy the full ID when you need a stable identifier.</td>
+</tr>
+<tr>
+<td><strong>Name</strong></td>
+<td>Friendly name shown in the console.</td>
+</tr>
+<tr>
+<td><strong>Base model</strong></td>
+<td>The model configured for the gateway.</td>
+</tr>
+<tr>
+<td><strong>Base address</strong></td>
+<td>Integrated inference or the external OpenAI-compatible provider endpoint.</td>
+</tr>
+<tr>
+<td><strong>Slug</strong></td>
+<td>Human-readable model value that private-key callers can use in chat completions.</td>
+</tr>
+<tr>
+<td><strong>Actions</strong></td>
+<td>Opens the gateway editor.</td>
+</tr>
+</tbody>
+</table>
+<p>Use the filter box to search across gateway columns. Open <strong>View</strong> to inspect or edit the gateway.</p>
+<h2 id="create-a-gateway">Create a gateway</h2>
+<p>You can create a gateway from the AI Gateways page with <strong>New AI gateway</strong>, or from a model card in <strong>Models &gt; Create gateway</strong>.</p>
+<p>At minimum, configure:</p>
+<ol>
+<li><strong>Gateway name:</strong> A clear name that identifies purpose and environment.</li>
+<li><strong>Gateway model name:</strong> The integrated model or routed model value.</li>
+<li><strong>Base address:</strong> Use integrated inference for AIVAX-hosted models, or an OpenAI-compatible base URL for external providers.</li>
+<li><strong>API key:</strong> Required only when the gateway calls an external provider that needs one.</li>
+<li><strong>Instructions:</strong> The assistant's role, boundaries, source of truth, and response style.</li>
+</ol>
+<p>Select <strong>Create AI gateway</strong> or <strong>Save changes</strong> only after reviewing the pipeline preview. For production, start with the smallest working configuration, test it, then add RAG, tools, skills, moderation, and workers deliberately.</p>
+<h2 id="choose-integrated-or-external-inference">Choose integrated or external inference</h2>
+<p>The <strong>Inference</strong> tab controls how the gateway reaches the model.</p>
+<table>
+<thead>
+<tr>
+<th>Choice</th>
+<th>Use it when</th>
+<th>Base address</th>
+<th>API key</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Integrated inference</strong></td>
+<td>You want AIVAX to call an integrated model from the catalog.</td>
+<td>Integrated inference, represented internally as <code>@integrated</code>.</td>
+<td>Not required for the model provider.</td>
+</tr>
+<tr>
+<td><strong>External OpenAI-compatible provider</strong></td>
+<td>You bring your own provider endpoint or model.</td>
+<td>Provider base URL compatible with the OpenAI chat-completions interface.</td>
+<td>Required when the provider requires authentication.</td>
+</tr>
+<tr>
+<td><strong>Model router</strong></td>
+<td>You want the gateway to route by request complexity.</td>
+<td>Integrated routing model.</td>
+<td>Configure low, medium, and high complexity models and reasoning effort where supported.</td>
+</tr>
+</tbody>
+</table>
+<p>Before saving, verify that the selected model supports the gateway's required behavior. Tool-heavy gateways need reliable tool calling. Multimodal gateways need the required input modality or a preprocessing plan. Structured-output gateways need compatible schema behavior. RAG gateways need enough context for retrieved documents plus the user conversation.</p>
+<h2 id="understand-the-editor-tabs">Understand the editor tabs</h2>
+<p>The gateway editor is organized by configuration area:</p>
+<table>
+<thead>
+<tr>
+<th>Tab</th>
+<th>Use it for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Gateway</strong></td>
+<td>Name and high-level pipeline structure.</td>
+</tr>
+<tr>
+<td><strong>Inference</strong></td>
+<td>Model name, integrated or external provider connection, API key, and model-router parameters.</td>
+</tr>
+<tr>
+<td><strong>RAG</strong></td>
+<td>Collections, query strategy, reranker, result count, minimum score, rewrite windows, and metadata presentation.</td>
+</tr>
+<tr>
+<td><strong>Skills</strong></td>
+<td>Skills attached to the gateway, whether tools are hidden unless selected by a skill, and tools that should stay visible.</td>
+</tr>
+<tr>
+<td><strong>Instructions</strong></td>
+<td>System instructions, remote instruction sources, user prompt template, assistant prefill, stop text, and prefilling behavior.</td>
+</tr>
+<tr>
+<td><strong>Parameters + Tuning</strong></td>
+<td>Temperature, top-p, penalties, reasoning effort, verbosity, max tokens, context length, multimodal preprocessing, and tool-message limits.</td>
+</tr>
+<tr>
+<td><strong>Tools + MCP</strong></td>
+<td>MCP sources, protocol functions, raw tools, built-in tools, Bash environment, web search, memory, image generation, and advanced JSON settings.</td>
+</tr>
+<tr>
+<td><strong>Moderation</strong></td>
+<td>Thresholds for violence/hate, sexual content, politics, dangerous content, and jailbreak attempts.</td>
+</tr>
+<tr>
+<td><strong>Workers</strong></td>
+<td>External worker URL that can control gateway events before the final action happens.</td>
+</tr>
+</tbody>
+</table>
+<p>Use <strong>Hide disabled steps</strong> when you want to focus on enabled pipeline parts. Leave it off when you are auditing a gateway and need to see which capabilities are intentionally disabled.</p>
+<h2 id="review-high-impact-settings">Review high-impact settings</h2>
+<p>Before saving a production gateway, review:</p>
+<ul>
+<li>Model name, base address, and provider API key.</li>
+<li>RAG collections, query strategy, result count, minimum score, and reranker.</li>
+<li>System instructions, prompt template, assistant prefill, and stop text.</li>
+<li>Tool, MCP, protocol-function, raw-tool, and Bash exposure, especially write-capable tools.</li>
+<li>Skills, hidden tools, and always-visible tools.</li>
+<li>Context length, max tokens, reasoning effort, verbosity, and tool-message limits.</li>
+<li>Multimodal preprocessing and selected media types.</li>
+<li>Moderation thresholds and worker URL.</li>
+<li>Generated integration, MCP, and playground snippets before sharing them.</li>
+<li>Conversation logs after testing.</li>
+</ul>
+<h2 id="configure-rag-carefully">Configure RAG carefully</h2>
+<p>Attach RAG collections when the assistant must answer from account-owned documents. Choose the query strategy based on the conversation:</p>
+<ul>
+<li><strong>Plain:</strong> Uses the latest user message as the search query.</li>
+<li><strong>Concatenate:</strong> Joins recent messages into the query.</li>
+<li><strong>User rewrite:</strong> Rewrites recent user messages before searching.</li>
+<li><strong>Full rewrite:</strong> Rewrites recent user and assistant context before searching.</li>
+<li><strong>Query function:</strong> Gives the model a search tool instead of injecting results automatically.</li>
+</ul>
+<p>Tune <strong>Maximum results</strong> and <strong>Minimum score</strong> together. More results can improve recall but increase token use and noise. Higher minimum scores reduce irrelevant context but can hide useful documents if the collection quality is uneven. Test retrieval before using the gateway in production.</p>
+<h2 id="configure-tools-and-mcp-deliberately">Configure tools and MCP deliberately</h2>
+<p>Gateway tools can let the model search the web, open URLs, execute code, call HTTP endpoints, generate images or documents, remember information, use calendar-like memory, call MCP servers, or call protocol functions.</p>
+<p>Enable only tools that have a clear job in the assistant. Each extra tool increases prompt size, cost, and the chance of a wrong tool call. If tool selection becomes unreliable, use skills, always-visible tools, or hide tools without skills to narrow what the model can see.</p>
+<p>Treat external tools and MCP sources as integrations. Validate authentication, authorization, and expected arguments on the receiving side. Do not expose write-capable tools to untrusted users without application-level approval rules. For built-in tool behavior, see <a href="/docs/tools/builtin-tools">Built-in tools</a>.</p>
+<h2 id="use-options-safely">Use options safely</h2>
+<p>Generated code and playground links can contain credentials. <strong>View integration code</strong> expects you to provide <code>AIVAX_API_KEY</code> from an environment variable. <strong>View MCP code</strong> can include the current session key in the generated <code>Authorization</code> header. <strong>Run in playground</strong> can place key material in the generated playground URL. Replace real values with <code>YOUR_AIVAX_API_KEY</code> or an environment variable before sharing, committing, or pasting snippets into support tools. If a real key or session-bearing URL was exposed, rotate or revoke the affected credential.</p>
+<p>The <strong>Options</strong> menu includes:</p>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Use it for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>View integration code</strong></td>
+<td>Copy Python, JavaScript, or curl examples for <code>/v1/chat/completions</code> using the gateway slug or ID.</td>
+</tr>
+<tr>
+<td><strong>View MCP code</strong></td>
+<td>Configure the gateway as an MCP tool through <code>/v1/mcp/inference</code>.</td>
+</tr>
+<tr>
+<td><strong>Run in playground</strong></td>
+<td>Test the gateway interactively in the AIVAX playground.</td>
+</tr>
+<tr>
+<td><strong>Copy model slug</strong></td>
+<td>Copy the gateway slug for private-key callers.</td>
+</tr>
+<tr>
+<td><strong>Copy ID</strong></td>
+<td>Copy the full gateway ID.</td>
+</tr>
+<tr>
+<td><strong>Import from JSON</strong></td>
+<td>Replace the editor's current gateway fields from a JSON configuration. Review and save to persist.</td>
+</tr>
+<tr>
+<td><strong>Export to JSON</strong></td>
+<td>Copy the current gateway configuration for backup, review, or migration.</td>
+</tr>
+<tr>
+<td><strong>View conversation logs</strong></td>
+<td>Open conversation logs filtered to this gateway.</td>
+</tr>
+<tr>
+<td><strong>Delete gateway</strong></td>
+<td>Remove the gateway. This can break callers that use its slug or ID.</td>
+</tr>
+</tbody>
+</table>
+<p>Before importing or deleting a production gateway:</p>
+<ol>
+<li>Export the current gateway JSON.</li>
+<li>Copy the gateway ID and slug.</li>
+<li>Review conversation logs for recent activity.</li>
+<li>Identify callers that use the slug or full ID.</li>
+<li>Test the replacement or imported configuration in a separate gateway when possible.</li>
+<li>Save or delete only after callers and rollback are understood.</li>
+</ol>
+<p>Importing JSON changes the editor state first. It is not persisted until you save. After import, review sensitive fields, external URLs, tool definitions, workers, and provider keys before saving.</p>
+<h2 id="test-before-production">Test before production</h2>
+<p>Before using a gateway in production:</p>
+<ol>
+<li>Send a simple direct message through the gateway.</li>
+<li>Test the main user task with realistic input.</li>
+<li>If RAG is enabled, test retrieval quality and references with <a href="/docs/rag/semantic-search">Semantic search</a>.</li>
+<li>If tools are enabled, verify the model chooses the right tool and the receiver validates requests.</li>
+<li>If moderation or workers are enabled, test allowed and blocked examples. For worker behavior, see <a href="/docs/inference/workers">AI workers</a>.</li>
+<li>Check <a href="account-balance.html#check-balance-and-usage">Usage</a>, Analytics, Logs, and Conversations for errors, cost, and unexpected behavior.</li>
+</ol>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Check</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gateway call returns <code>401</code> or <code>403</code></td>
+<td>API key, public/private key type, caller permissions, and whether the caller uses a gateway slug that public keys cannot resolve.</td>
+<td>Use a valid private key for administrative or slug-based calls, or use the full gateway ID where required.</td>
+</tr>
+<tr>
+<td>Gateway call returns <code>402</code></td>
+<td>Account balance, storage quota, and route-specific minimums in Usage.</td>
+<td>Top up balance, reduce storage, or lower-cost model/tool usage.</td>
+</tr>
+<tr>
+<td>Gateway call returns <code>429</code></td>
+<td>Account plan, model rate limits, tool limits, and batch/chat-client volume.</td>
+<td>Reduce request rate, choose a different model path, or upgrade plan.</td>
+</tr>
+<tr>
+<td>External provider call fails</td>
+<td>Base address, provider API key, model name, provider rate limits, and provider response errors.</td>
+<td>Test the provider credentials separately, then update the gateway inference settings.</td>
+</tr>
+<tr>
+<td>RAG answers are missing or irrelevant</td>
+<td>Attached collections, indexing state, query strategy, reranker, maximum results, minimum score, references, and system instructions.</td>
+<td>Test the collection directly, compare <code>Plain</code> with rewrite strategies, adjust score/result limits deliberately, then retest through the gateway.</td>
+</tr>
+<tr>
+<td>Tool calls are wrong or noisy</td>
+<td>Enabled tools, MCP sources, raw tools, skills, always-visible tools, and tool instructions.</td>
+<td>Reduce the tool set, use skills to narrow visible tools, and document when each tool should be used.</td>
+</tr>
+<tr>
+<td>Worker or callback rejects AIVAX</td>
+<td>Account hook key, <code>X-Request-Nonce</code> validation, callback URL, worker deployment, and timeout behavior.</td>
+<td>Update the receiver to validate the current hook key, redeploy or reprovision affected workers, and retry a controlled request. See <a href="/docs/authentication#hook-authentication">Hook authentication</a>.</td>
+</tr>
+<tr>
+<td>Users still hit an old configuration</td>
+<td>Caller model value, gateway slug, full ID, copied playground URL, cached client configuration, and direct model calls that bypass the gateway.</td>
+<td>Update every caller that bypasses or pins the old gateway value.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="call-a-gateway">Call A Gateway</h2>
+<p>Gateway chat-completion calls use the standard inference endpoint:</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=Inference%20(chat%20completions)&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<p>Related documentation:</p>
+<ul>
+<li><a href="/docs/inference/ai-gateway">AI Gateway</a>: technical gateway behavior and MCP configuration.</li>
+<li><a href="models.html">Models</a>: choose the base model for a gateway.</li>
+<li><a href="/docs/rag/collections">RAG Collections</a>: prepare collections before attaching them.</li>
+<li><a href="/docs/features/skills">Skills</a>: create reusable instruction bundles.</li>
+<li><a href="/docs/tools/mcp">MCP functions</a>: connect external MCP tools.</li>
+<li><a href="/docs/tools/protocol-functions">Protocol functions</a>: expose server-side HTTP functions.</li>
+</ul>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/platform/ai-gateways.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>

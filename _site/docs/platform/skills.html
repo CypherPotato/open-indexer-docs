@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Skills | AIVAX </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="Skills | AIVAX ">
+
+
+        <link rel="icon" href="../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+        
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
+
+        <meta name="docfx:rel" content="../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/platform/skills.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+                
+        <script>            
+            function switchLanguage(lang) {
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../index.html">
+                        <img id="logo" class="svg" src="../../assets/img/aivax.png" alt="AIVAX">
+                        AIVAX
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="skills">Skills</h1>
+
+<p>Skills are reusable instruction packages that help an AI Gateway apply specialized behavior only when it is relevant. Use them for domain expertise, response style, review procedures, compliance rules, or task-specific workflows that would be too large or too situational to keep in the gateway's base instructions.</p>
+<p>A skill has:</p>
+<ul>
+<li><strong>Slug:</strong> The stable identifier used by gateways, imports, exports, and API calls.</li>
+<li><strong>Description:</strong> A short routing explanation that tells the model when the skill should be used.</li>
+<li><strong>Instructions:</strong> The full guidance inserted when the skill is active.</li>
+<li><strong>Options:</strong> Stored remote instruction-source configuration and tool-name associations.</li>
+</ul>
+<p>For deeper behavior and activation details, see the <a href="/docs/features/skills">Skills developer guide</a>.</p>
+<h2 id="when-to-use-skills">When to use Skills</h2>
+<p>Use Skills when the assistant needs specialized behavior only for some tasks:</p>
+<ul>
+<li>Legal, finance, healthcare, support, engineering, or other domain-specific methods.</li>
+<li>A tone or response format that should apply only to a certain workflow.</li>
+<li>A review checklist, operating procedure, or escalation policy.</li>
+<li>A set of long instructions that would waste context if always active.</li>
+<li>Several distinct rule sets that should not all apply at once.</li>
+</ul>
+<p>Do not use Skills for instructions that must always apply. Put permanent behavior in the AI Gateway instructions. Do not use Skills as a searchable knowledge base; use <a href="/docs/platform/rag-collections">RAG Collections</a> when the assistant needs to retrieve factual documents. Do not use a skill to expose a tool unless the task truly needs that tool.</p>
+<h2 id="understand-the-skills-page">Understand the Skills page</h2>
+<p>Open <strong>Skills</strong> from the console sidebar.</p>
+<p>The <strong>My skills</strong> table shows:</p>
+<ul>
+<li><strong>Id:</strong> The unique skill ID.</li>
+<li><strong>Slug:</strong> The stable skill name.</li>
+<li><strong>Description:</strong> A preview of when the skill should be used.</li>
+<li><strong>Allowed tools:</strong> The number of tool names stored in the skill options. Zero is normal for instruction-only skills.</li>
+<li><strong>Actions:</strong> Edit or delete the skill.</li>
+</ul>
+<p>Use <strong>New skill</strong> to create one skill. Use <strong>Manage</strong> to import skills from JSONL, export all skills, or delete all skills.</p>
+<h2 id="create-a-skill">Create a skill</h2>
+<p>Select <strong>New skill</strong>, then fill in the <strong>Skill editor</strong> tab.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>What to enter</th>
+<th>Guidance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Slug</strong></td>
+<td>A short technical name</td>
+<td>Use 1-64 letters, numbers, underscores, periods, or hyphens. Lowercase words separated by hyphens, such as <code>contract-review</code> or <code>support-escalation</code>, are easiest to read. Keep it stable; changing it can affect gateways, imports, and references.</td>
+</tr>
+<tr>
+<td><strong>Description</strong></td>
+<td>When the skill should be used</td>
+<td>Write this as a routing rule. A good description says the task, domain, and trigger conditions.</td>
+</tr>
+<tr>
+<td><strong>Instructions</strong></td>
+<td>The full behavior to apply</td>
+<td>Write operational guidance: what to do, what to avoid, what to ask when information is missing, expected output format, and any limits.</td>
+</tr>
+</tbody>
+</table>
+<p>Use <strong>Edit with AI</strong> when you want help improving the description or instructions. Review the diff before accepting it; this action can rewrite important operating rules.</p>
+<p>After saving, test the skill through an AI Gateway that has access to it. A skill that looks well-written in isolation can still conflict with gateway instructions, tools, or other skills.</p>
+<h2 id="write-a-strong-description">Write a strong description</h2>
+<p>The description is how the model decides whether to load the skill. It should be specific enough to separate this skill from nearby skills.</p>
+<p>Weak:</p>
+<pre><code class="lang-text">Legal skill.
+</code></pre>
+<p>Better:</p>
+<pre><code class="lang-text">Use when the user asks to review, explain, or compare contract clauses in plain language, especially obligations, termination, liability, confidentiality, or dispute-resolution terms.
+</code></pre>
+<p>Avoid overlapping descriptions across many skills. If two skills both claim the same task, the model may load the wrong one or load too many.</p>
+<h2 id="write-useful-instructions">Write useful instructions</h2>
+<p>Instructions should tell the model how to perform the task after the skill is active.</p>
+<p>Good skill instructions usually include:</p>
+<ul>
+<li>The objective of the skill.</li>
+<li>The expected response structure.</li>
+<li>Domain rules or checklists.</li>
+<li>Questions to ask when required information is missing.</li>
+<li>Boundaries, disclaimers, or escalation rules.</li>
+<li>Tool-use guidance, if tools are allowed.</li>
+<li>Examples only when they reduce ambiguity.</li>
+</ul>
+<p>Keep sensitive secrets, API keys, credentials, customer-private data, one-off case details, escalation contacts, policy thresholds, defensive controls, legal positions, and incident procedures out of reusable skills unless the skill truly requires them. Skills can be exported, reused, and enabled in gateways, so treat them as account-level operational configuration.</p>
+<h2 id="configure-options">Configure Options</h2>
+<p>Open the <strong>Options</strong> tab to configure additional behavior.</p>
+<h3 id="remote-instruction-sources">Remote instruction sources</h3>
+<p>Remote instruction sources store external instruction-source configuration with the skill. They are useful as configuration metadata, but current skill activation reliably injects the inline <strong>Instructions</strong> field. Do not depend on remote instruction sources for required runtime behavior unless your integration has verified that path.</p>
+<p>Before adding a remote source, confirm:</p>
+<ul>
+<li>The source is stable, versioned or pinned, and controlled by your organization.</li>
+<li>The content is reviewed before production use and reviewed again when it changes.</li>
+<li>The source does not expose secrets or private customer data.</li>
+<li>The source is not third-party controlled, publicly editable, or user-editable without review.</li>
+<li>You have tested the gateway/runtime behavior that is expected to use the stored source configuration.</li>
+</ul>
+<p>If the assistant must rely on a changing body of factual content, prefer RAG Collections over embedding that knowledge directly in a skill.</p>
+<h3 id="skill-visible-tools">Skill visible tools</h3>
+<p><strong>Skill visible tools</strong> stores tool names intended to be associated with the skill. Use this configuration carefully, and verify behavior in the exact gateway where the skill will run. The reliable way to keep shared tools visible when an AI Gateway hides tools without a skill is the gateway's general always-visible tool configuration.</p>
+<p>Only expose tools the task actually needs. Tool access can change cost, privacy, external data exposure, and output reliability.</p>
+<table>
+<thead>
+<tr>
+<th>Tool category</th>
+<th>Main risk</th>
+<th>Safer practice</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>External web, browser, or search tools</td>
+<td>The assistant may send task context outside AIVAX</td>
+<td>Allow only when the workflow requires current external information, and state what may be searched.</td>
+</tr>
+<tr>
+<td>Account, database, or internal-operation tools</td>
+<td>The assistant may act on sensitive business data</td>
+<td>Restrict to reviewed skills and test with non-production prompts first.</td>
+</tr>
+<tr>
+<td>Write, send, delete, or publish tools</td>
+<td>The assistant may create side effects</td>
+<td>Require explicit user confirmation in the skill instructions.</td>
+</tr>
+<tr>
+<td>Expensive generation tools</td>
+<td>The assistant may increase usage cost</td>
+<td>Describe when the tool is allowed and how to stop after enough output is produced.</td>
+</tr>
+</tbody>
+</table>
+<p>After changing tool associations, test the skill in the gateway where it will be used and review Conversations to confirm the behavior is expected.</p>
+<h2 id="enable-skills-in-an-ai-gateway">Enable skills in an AI Gateway</h2>
+<p>Creating a skill stores it in the account, but the assistant only benefits from it when the runtime or AI Gateway can use it. In a typical gateway setup, enable the relevant skills on the AI Gateway and test a prompt that should activate each one.</p>
+<p>When a gateway has skills available, the runtime can expose a <code>read_skill</code> function. The model calls <code>read_skill</code> with matching skill slugs, and the selected skill instructions are inserted into the next context turn inside activated-skill blocks. For this to work reliably, the selected model and gateway path must support function calling and system instructions, unless your gateway pipeline provides an equivalent compensation path.</p>
+<p>To connect a skill to a gateway:</p>
+<ol>
+<li>Open the relevant <a href="/docs/platform/ai-gateways">AI Gateway</a>.</li>
+<li>Find the gateway area where skills, tools, or behavior are configured.</li>
+<li>Attach or enable the skill by its slug or name.</li>
+<li>Save the gateway.</li>
+<li>Run a prompt that clearly matches the skill description.</li>
+</ol>
+<p>To validate a skill:</p>
+<ol>
+<li>Save the skill.</li>
+<li>Attach or enable it in the relevant AI Gateway.</li>
+<li>Ask a prompt that clearly matches the skill description.</li>
+<li>Ask a nearby prompt that should not use the skill.</li>
+<li>Review the response for format, scope, and tool use.</li>
+<li>Check <a href="/docs/platform/conversations">Conversations</a> when you need evidence of model behavior, tool calls, usage, or errors.</li>
+</ol>
+<p>If the skill affects a production workflow, validate one skill at a time before enabling a larger bundle.</p>
+<h2 id="import-and-export-skills">Import and export Skills</h2>
+<p>Use <strong>Manage &gt; Export skills</strong> to download all account skills as JSONL. Each line contains one skill with <code>slug</code>, <code>description</code>, <code>instructions</code>, and <code>options</code>.</p>
+<p>Use <strong>Manage &gt; Import skills</strong> to upload a <code>.jsonl</code> file. Each line must be a JSON object with at least <code>slug</code> and <code>instructions</code>.</p>
+<p>Example JSONL line:</p>
+<pre><code class="lang-json">{&quot;slug&quot;:&quot;support-escalation&quot;,&quot;description&quot;:&quot;Use when a support answer needs escalation criteria or handoff wording.&quot;,&quot;instructions&quot;:&quot;Classify the issue, state the escalation reason, and ask for missing account or incident context before recommending a handoff.&quot;}
+</code></pre>
+<p>Import behavior:</p>
+<ul>
+<li>Existing skills are matched by slug case-insensitively and updated rather than duplicated.</li>
+<li><code>instructions</code> are required and replace the existing instructions.</li>
+<li><code>description</code> is replaced by the imported value and may become empty if the file omits it.</li>
+<li><code>options</code> are preserved when omitted and replaced when supplied.</li>
+<li>Large imports may be capped; compare the returned imported and skipped counts with the number of JSONL lines you expected to process.</li>
+</ul>
+<p>Before importing over a production account:</p>
+<ol>
+<li>Confirm the active account.</li>
+<li>Export the current skills and verify the download.</li>
+<li>Review the JSONL file in source control or a trusted review process.</li>
+<li>Import a small pilot file first when possible.</li>
+<li>Test affected AI Gateways after import.</li>
+</ol>
+<p>A JSONL import can update many skills at once, and changed instructions can affect any gateway that uses those skills.</p>
+<p>The console export opens a URL that includes the current session key as an <code>api-key</code> query parameter. Do not share export URLs, browser history, screenshots, proxy logs, or copied request URLs that include this query string. The exported JSONL itself can also contain sensitive operating rules, tool associations, and source configuration, so store it as account configuration rather than public documentation.</p>
+<h2 id="delete-skills">Delete Skills</h2>
+<p>Use the row action menu to delete one skill. Use <strong>Manage &gt; Delete all skills</strong> only when you intentionally want to remove every skill in the active account.</p>
+<p>Deletion is irreversible from the console. Before deleting:</p>
+<ul>
+<li>Confirm the active account.</li>
+<li>Export the current skills if you may need to restore them.</li>
+<li>Search AI Gateways for the skill slug or name, document affected gateways, and remove or replace the skill before deleting it.</li>
+<li>Preserve change notes outside AIVAX if the deletion is part of a controlled rollout.</li>
+</ul>
+<p>Deleting a skill removes the stored instruction package. It does not automatically rewrite gateway instructions, delete conversations, undo prior usage, or remove exported copies.</p>
+<p>Delete all skills is an account-wide action for the active account. Avoid using it during production traffic unless you have exported a backup, verified the account selector, and planned the gateway behavior that should remain after the skills are gone.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Likely cause</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The assistant does not use the skill</td>
+<td>The skill is not enabled on the relevant gateway, the model did not select it, or the description is too vague</td>
+<td>Confirm the skill is attached to the gateway, confirm the model path supports function calls and system instructions, test with only this skill enabled, then make the description more specific.</td>
+</tr>
+<tr>
+<td>The wrong skill activates</td>
+<td>Skill descriptions overlap or use broad language</td>
+<td>Rewrite descriptions as distinct routing rules and reduce overlap between similar skills.</td>
+</tr>
+<tr>
+<td>Responses ignore the skill instructions</td>
+<td>Gateway instructions, model limitations, or other skills conflict with the skill</td>
+<td>Check that activation happened, test one skill at a time, simplify instructions, and review Conversations or Logs for evidence.</td>
+</tr>
+<tr>
+<td>Tool behavior is unexpected</td>
+<td>Tool associations do not match the gateway configuration, too many tools are visible, or the skill does not explain when to use tools</td>
+<td>Review both the skill options and the AI Gateway tool visibility settings, add tool-use rules to the instructions, and retest in the gateway.</td>
+</tr>
+<tr>
+<td>Import changes more than expected</td>
+<td>Existing skills were matched by slug and overwritten</td>
+<td>Restore from a prior export if needed, then import a smaller reviewed JSONL file.</td>
+</tr>
+<tr>
+<td>Export contains sensitive data</td>
+<td>Skill instructions include private operating rules, customer details, or secrets</td>
+<td>Remove sensitive content from skills and rotate any exposed secrets outside AIVAX.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="api-reference">API reference</h2>
+<p>Use the Skills API when you manage skills from an internal tool, deployment pipeline, or backup workflow.</p>
+<p>The update endpoint accepts partial skill changes and shallow-merges <code>options</code>. JSONL import has different semantics: it upserts by slug, replaces imported fields, preserves <code>options</code> only when omitted, and replaces <code>options</code> when supplied.</p>
+<h3 id="create-and-manage-one-skill">Create and manage one skill</h3>
+<p>Create, inspect, update, or delete individual skills.</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=List%20Skills&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Create%20Skill&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Get%20Skill&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Update%20Skill&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Delete%20Skill&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<h3 id="import-export-and-clear">Import, export, and clear</h3>
+<p>Use JSONL import/export for migration, backups, review, and versioned skill bundles. Use clear only after exporting and confirming the active account.</p>
+<p>Exports can be requested with an API key. Treat the request URL and downloaded JSONL as sensitive account configuration, especially when they include instructions, tool associations, or source configuration.</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=Import%20Skills%20%28JSONL%29&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Export%20Skills%20%28JSONL%29&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Clear%20Skills&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/platform/skills.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>

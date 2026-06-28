@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Analytics | AIVAX </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="Analytics | AIVAX ">
+
+
+        <link rel="icon" href="../../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+        
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
+
+        <meta name="docfx:rel" content="../../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/pt-br/platform/analytics.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+                
+        <script>            
+            function switchLanguage(lang) {
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../../index.html">
+                        <img id="logo" class="svg" src="../../../assets/img/aivax.png" alt="AIVAX">
+                        AIVAX
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="analytics">Analytics</h1>
+
+<p>Analytics shows account usage, spend, invoices, and detailed billing listings for a selected time range. Use it when you need to understand where usage came from, compare model or SKU consumption, investigate unexpected spend, or reconcile invoices with activity.</p>
+<p>Analytics is different from the lighter <strong>Usage</strong> page. Use <strong>Usage</strong> to check current balance, storage, plan limits, and subscription‑model quotas when your plan includes them. Use <strong>Analytics</strong> when you need historical charts, grouped usage, request‑level listings, or invoices.</p>
+<p>Analytics is scoped to the active account shown in the console. Before reviewing spend, adding credits, or sharing screenshots, confirm that you are in the correct account, especially if you work with multiple accounts.</p>
+<h2 id="when-to-use-analytics">When to use Analytics</h2>
+<p>Open <strong>Analytics</strong> when you need to:</p>
+<ul>
+<li>Review account spend for a specific period.</li>
+<li>Compare usage by model, SKU, or resource.</li>
+<li>Investigate which requests produced a cost.</li>
+<li>Check invoice history and payment status.</li>
+<li>Add credits from the invoices area.</li>
+<li>Prepare a usage summary for operations, finance, or support.</li>
+</ul>
+<p>Analytics is not a conversation debugger. If you need the full prompt, response, tool calls, metadata, or error details for an inference run, use <a href="/docs/pt-br/platform/conversations">Conversations</a> and <a href="/docs/pt-br/platform/logs">Logs</a> when those pages are available in your workspace.</p>
+<h2 id="choose-a-time-range">Choose a time range</h2>
+<p>Use the <strong>List to date</strong> date‑range selector at the top of the page to control the reporting period. The picker supports manual <strong>From</strong> and <strong>To</strong> date‑time values and quick ranges:</p>
+<ul>
+<li>Past 30 minutes</li>
+<li>Past hour</li>
+<li>Past 3 hours</li>
+<li>Past week</li>
+<li>Past month</li>
+<li>Past year</li>
+</ul>
+<p>Changing the range refreshes the Analytics data. Use short ranges when diagnosing a recent spike; use longer ranges when reviewing trends, model mix, invoices, or monthly usage.</p>
+<p>The selected period cannot exceed one year. For older investigations, compare smaller ranges separately and keep notes outside AIVAX if you need a long‑running finance reconciliation trail.</p>
+<p>Usage listings may take up to 10 minutes to update. If a new request does not appear immediately, wait and refresh the selected period before assuming it was not billed or recorded.</p>
+<p>Analytics is optimized for investigation and summaries, not complete ledger export. High‑volume periods can be capped in the console: usage listings show the latest rows, model and SKU groups show top groups, and resource groups show a bounded set per resource type. If a view looks incomplete, narrow the date range around the time you are investigating.</p>
+<h2 id="read-discriminations">Read Discriminations</h2>
+<p>The <strong>Discriminations</strong> tab is the main dashboard for grouped usage.</p>
+<p>In Analytics, discriminations are grouped breakdowns of usage by model, SKU, or resource.</p>
+<p>The <strong>Account</strong> section shows:</p>
+<ul>
+<li><strong>Storage usage:</strong> Current account storage used by stored resources.</li>
+<li><strong>Period spend:</strong> Total usage amount for the selected period.</li>
+</ul>
+<p>The <strong>Inference</strong> section shows:</p>
+<ul>
+<li><strong>Volume:</strong> Total measured usage volume for the period.</li>
+<li><strong>Input tokens:</strong> Tokens sent to models.</li>
+<li><strong>Output tokens:</strong> Tokens generated by models.</li>
+<li><strong>Cached tokens:</strong> Input tokens served through cache‑related billing categories.</li>
+<li><strong>Cache hit rate:</strong> A derived cache metric for the selected period.</li>
+</ul>
+<p>Use these cards as directional indicators, then inspect the charts and tables to understand the drivers. For example, a period can show low spend but high token volume when the active models or SKUs are priced very low, discounted, included, or otherwise billed at a small amount.</p>
+<h3 id="usage-per-model">Usage per model</h3>
+<p>Use <strong>Usage per model</strong> to see model spend over time and model‑related token counts in the table. The chart is spend‑oriented, while the table groups model name, SKU, token count, and total usage for selected inference categories. Non‑token or service‑specific charges may be easier to understand in <strong>Usage per SKU</strong> or <strong>Usage per resource</strong>.</p>
+<h3 id="usage-per-sku">Usage per SKU</h3>
+<p>Use <strong>Usage per SKU</strong> to understand the billing category behind usage. SKUs separate input, output, cached input, embeddings, RAG answer generation, and other billable resource types. This view is useful when the model name alone does not explain the cost pattern.</p>
+<h3 id="usage-per-resource">Usage per resource</h3>
+<p>Use <strong>Usage per resource</strong> to see usage grouped by account resource. This helps connect spend to a feature area or object, such as a gateway, collection, batch job, or other resource that generated usage.</p>
+<p>If a resource name or ID is unfamiliar, copy only the minimum identifier you need, search the related feature page by ID or name, and keep the selected time range with your notes. When asking for support, provide redacted IDs and the time range instead of full screenshots with account, invoice, prompt, or customer data.</p>
+<h2 id="read-listings">Read Listings</h2>
+<p>The <strong>Listings</strong> tab shows the latest balance releases in the account. Each listing can include:</p>
+<ul>
+<li>Usage listing ID</li>
+<li>Request ID</li>
+<li>Moment</li>
+<li>Description</li>
+<li>SKU</li>
+<li>Quantity</li>
+<li>Amount</li>
+</ul>
+<p>Rows are grouped by date and request. When multiple SKU rows belong to the same request, the table shows a request total after the group. Use this tab when a chart shows a spike and you need to inspect the request‑level billing entries that contributed to it.</p>
+<p>Treat request IDs and usage listings as operational identifiers. They are useful for support and internal investigation, but they should not be posted publicly with account, customer, or prompt details.</p>
+<h2 id="read-invoices">Read Invoices</h2>
+<p>The <strong>Invoices</strong> tab shows invoice history and credit‑related actions.</p>
+<p>The <strong>My invoices</strong> table includes:</p>
+<ul>
+<li>Invoice ID</li>
+<li>Date</li>
+<li>Expiration</li>
+<li>Description</li>
+<li>Amount</li>
+<li>Status</li>
+</ul>
+<p>Use <strong>Add credits</strong> when you need to add balance to the account. If an invoice is expired or unpaid, create or complete a current top‑up flow instead of relying on an old invoice.</p>
+<h2 id="add-credits-safely">Add credits safely</h2>
+<p><strong>Add credits</strong> starts a credit addition and payment flow. It can create or update invoice records, but credits should be treated as available only after payment or processing succeeds. Confirm the result in two places: the invoice status in Analytics and the current balance on the <strong>Usage</strong> page.</p>
+<p>Do not reuse expired invoice links as proof of available balance. If the payment flow is interrupted, return to <strong>Invoices</strong> and <strong>Usage</strong> before retrying a workload that depends on the new balance.</p>
+<h2 id="investigate-unexpected-spend">Investigate unexpected spend</h2>
+<p>When spend looks higher than expected:</p>
+<ol>
+<li>Set <strong>List to date</strong> to the smallest period that contains the spike.</li>
+<li>Open <strong>Discriminations</strong> and check whether the increase is concentrated in one model, SKU, or resource.</li>
+<li>Open <strong>Listings</strong> and find request groups around the time of the spike.</li>
+<li>Use the request time, resource, model, and SKU to continue the investigation in related pages, such as AI Gateways, RAG Collections, Batch, Conversations, or Logs.</li>
+<li>Contain the source before retrying or rerunning work.</li>
+</ol>
+<p>Do not assume every high token count is a high bill. Compare token volume with <strong>Total usage</strong> and <strong>Period spend</strong>.</p>
+<p>Use the source‑specific containment path:</p>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Immediate containment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Batch job</td>
+<td>Pause the job before retrying or importing more items.</td>
+</tr>
+<tr>
+<td>AI Gateway or direct model traffic</td>
+<td>Stop the caller, review routing, and rotate or revoke the calling API key if the traffic is unauthorized.</td>
+</tr>
+<tr>
+<td>RAG Collection</td>
+<td>Stop the caller that is querying the collection, then review the gateway or API integration using it.</td>
+</tr>
+<tr>
+<td>Chat Client or messaging integration</td>
+<td>Disable the integration, delete exposed sessions, or stop the channel that is sending traffic.</td>
+</tr>
+<tr>
+<td>Unknown source</td>
+<td>Narrow the time range, inspect Listings request IDs, then continue in Logs or the related feature page.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="reconcile-invoices-and-account-balance">Reconcile invoices and account balance</h2>
+<p>Use Analytics and Usage together:</p>
+<ul>
+<li>Analytics <strong>Invoices</strong> shows invoice history and payment status.</li>
+<li>Analytics <strong>Discriminations</strong> shows spend for the selected period.</li>
+<li>The <strong>Usage</strong> page shows current balance, plan, included resources, and quota‑style limits.</li>
+</ul>
+<p>These views answer different questions. A paid invoice can add credits, but period spend depends on usage during the selected range. Current balance depends on both credits and subsequent usage.</p>
+<h2 id="share-analytics-data-safely">Share Analytics data safely</h2>
+<p>Analytics can expose account names, invoice IDs, payment status, balance, spend patterns, request IDs, resource IDs, model usage, and operating times. Before sharing screenshots, copied table rows, browser URLs, or support notes, redact unrelated invoices, account identifiers, API keys, customer data, prompts, and any request details that are not needed for the investigation.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Likely cause</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Recent usage is missing</td>
+<td>Usage listings can take up to 10 minutes to update</td>
+<td>Wait, refresh, and choose a range that includes the request time.</td>
+</tr>
+<tr>
+<td>Spend looks too high</td>
+<td>A model, SKU, tool, RAG query, batch job, or retry loop increased usage</td>
+<td>Narrow the time range, check Discriminations, then inspect Listings and the related feature page.</td>
+</tr>
+<tr>
+<td>Token volume is high but spend is low</td>
+<td>The selected model or SKU may be low‑cost, cached, included in plan limits, discounted, or otherwise priced differently</td>
+<td>Verify current plan and pricing, then compare token count with Total usage and Period spend instead of judging by tokens alone.</td>
+</tr>
+<tr>
+<td>Cache hit rate looks unusual</td>
+<td>The selected period may include small samples, cached categories, or mixed request types</td>
+<td>Compare a longer period and inspect Usage per SKU before making billing decisions.</td>
+</tr>
+<tr>
+<td>An invoice is expired</td>
+<td>The payment window for that invoice has passed</td>
+<td>Use <strong>Add credits</strong> to start a current top‑up flow.</td>
+</tr>
+<tr>
+<td>A support case needs evidence</td>
+<td>Screenshots or listings may expose account activity, IDs, invoices, and usage patterns</td>
+<td>Share only the minimum IDs and time ranges needed. Redact customer data, prompts, API keys, and unrelated account details.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="api-reference">API reference</h2>
+<p>For programmatic account balance, plan, storage, and quota status, use the published account balance endpoint. This endpoint is for balance and quota status, not for reproducing the full Analytics tabs.</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=Get%20Account%20Balance&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<p>Detailed Analytics charts, invoices, and request listings are presented in the console. The console uses an authenticated internal usage endpoint for these Analytics views; it is not currently published as a public API reference endpoint. Use the console when you need the same grouped views described in this page.</p>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/pt-br/platform/analytics.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>

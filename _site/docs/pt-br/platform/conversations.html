@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Conversas | AIVAX </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="Conversas | AIVAX ">
+
+
+        <link rel="icon" href="../../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+        
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
+
+        <meta name="docfx:rel" content="../../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/pt-br/platform/conversations.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+                
+        <script>            
+            function switchLanguage(lang) {
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../../index.html">
+                        <img id="logo" class="svg" src="../../../assets/img/aivax.png" alt="AIVAX">
+                        AIVAX
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="conversas">Conversas</h1>
+
+<p>Conversas é a área de observabilidade para interações de modelo armazenadas em sua conta. Use-a para encontrar solicitações recentes, inspecionar o comportamento de prompts e respostas, revisar o uso, conectar uma conversa a um gateway ou sessão, exportar evidências e remover registros de conversa armazenados quando não forem mais necessários.</p>
+<p>Os registros de conversa podem conter prompts, respostas de assistente, chamadas de ferramenta, metadados, IDs de usuário externo, IDs de recurso, objetos de uso, esquemas de resposta, erros e informações de tempo. Trate esta página como dados operacionais sensíveis.</p>
+<h2 id="quando-usar-conversas">Quando usar Conversas</h2>
+<p>Use Conversas quando precisar:</p>
+<ul>
+<li>Investigar uma resposta recente da API de Chat Completions, API de Sessions ou API de Functions.</li>
+<li>Encontrar conversas por modelo, usuário externo, chave de API, gateway, cliente de chat ou sessão de chat.</li>
+<li>Revisar o uso de tokens e recursos conectados a uma interação específica.</li>
+<li>Verificar se uma solicitação falhou e ver a mensagem de erro armazenada.</li>
+<li>Exportar conversas para auditoria, revisão offline, suporte ou análise de qualidade.</li>
+<li>Excluir registros de conversa armazenados da conta.</li>
+</ul>
+<p>Use <a href="/docs/pt-br/platform/analytics">Análises</a> quando precisar de consolidações de faturamento e tendências de gastos. Use Logs quando precisar de eventos de runtime ou operacionais de nível inferior.</p>
+<h2 id="antes-de-começar">Antes de começar</h2>
+<p>A visibilidade da conversa é limitada pelo período de retenção de conversas do plano da sua conta. A lista e as exportações não podem retornar registros fora do período retido, mesmo que você escolha um intervalo maior.</p>
+<p>Confirme que está na conta ativa correta antes de investigar ou excluir dados de conversa. Se seu processo de observabilidade ou auditoria exigir conversas armazenadas, também confirme que o registro de conversas ao nível da conta está habilitado. Quando o registro está desativado, conversas futuras podem não ser armazenadas nesta página.</p>
+<p>Antes de compartilhar uma conversa, exportar, fazer captura de tela ou copiar JSON, redija segredos, dados de cliente, chaves de API, chaves de sessão, prompts privados, dados pessoais e metadados não relacionados. URLs de exportação abertas pelo console incluem um parâmetro de consulta <code>api-key</code>, portanto não compartilhe URLs do navegador, entradas de histórico, logs de proxy ou capturas de tela que incluam URLs de solicitação de exportação.</p>
+<h2 id="navegar-por-conversas">Navegar por conversas</h2>
+<p>Abra <strong>Conversas</strong> na barra lateral do console. A lista mostra conversas recentes com:</p>
+<ul>
+<li><strong>Origem:</strong> A interface de API que criou a conversa, como API de Chat Completions, API de Sessions ou API de Functions.</li>
+<li><strong>Atualizado:</strong> O horário da última atualização.</li>
+<li><strong>Modelo:</strong> O modelo usado pela conversa.</li>
+<li><strong>Contagem de tokens:</strong> Total de tokens de entrada e saída, incluindo re-chamadas de ferramenta do lado do servidor quando armazenadas.</li>
+<li><strong>Primeira mensagem do usuário:</strong> Uma pré-visualização da primeira mensagem do usuário.</li>
+<li><strong>Última mensagem do assistente:</strong> Uma pré-visualização da resposta mais recente do assistente ou um indicador de erro.</li>
+<li><strong>Ações:</strong> Abrir a visualização de detalhes ou excluir a conversa.</li>
+</ul>
+<p>Alterações de pesquisa e intervalo de tempo atualizam a lista automaticamente. Use <strong>Atualizar</strong> ao aguardar que uma solicitação recente apareça.</p>
+<h2 id="filtrar-a-lista">Filtrar a lista</h2>
+<p>Use <strong>Intervalo de tempo</strong> para escolher a janela de retrocesso:</p>
+<ul>
+<li>Última semana</li>
+<li>Últimas 24 horas</li>
+<li>Últimas 2 horas</li>
+<li>Últimos 5 minutos</li>
+</ul>
+<p>A janela solicitada também é limitada pelo período de retenção da conta.</p>
+<p>Use <strong>Pesquisa</strong> para filtragem de texto livre ou filtros no estilo de comando. A ajuda interna lista filtros suportados:</p>
+<table>
+<thead>
+<tr>
+<th>Filtro</th>
+<th>Use para encontrar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--model</code> ou <code>-m</code></td>
+<td>Conversas que usaram um modelo específico.</td>
+</tr>
+<tr>
+<td><code>--user</code> ou <code>-u</code></td>
+<td>Conversas para um ID de usuário externo específico.</td>
+</tr>
+<tr>
+<td><code>--api-key</code></td>
+<td>Conversas associadas a um ID de chave de API específico.</td>
+</tr>
+<tr>
+<td><code>--gateway</code></td>
+<td>Conversas associadas a um ID de AI Gateway específico.</td>
+</tr>
+<tr>
+<td><code>--chat-client</code></td>
+<td>Conversas associadas a um Cliente de Chat específico.</td>
+</tr>
+<tr>
+<td><code>--chat-session</code></td>
+<td>Conversas associadas a uma sessão de chat específica.</td>
+</tr>
+</tbody>
+</table>
+<p>Filtros de recurso como <code>--api-key</code>, <code>--gateway</code>, <code>--chat-client</code> e <code>--chat-session</code> esperam o UUID completo do recurso, não um nome de exibição, ID curto ou URL. <code>--model</code> e <code>--user</code> correspondem a valores de string exatos, sem diferenciar maiúsculas de minúsculas.</p>
+<p>Você pode clicar em um distintivo de modelo na lista para aplicar um filtro de modelo. Ao investigar um relatório de usuário, comece com o intervalo mais estreito útil e o identificador mais específico que possui, como ID de usuário externo, ID de gateway ou ID de sessão de chat.</p>
+<p>A lista é otimizada para investigação recente, não para prova completa de auditoria. Contas de alto volume podem atingir limites de lista antes que toda conversa correspondentes em um intervalo amplo esteja visível. Reduza o intervalo de tempo e use o fluxo de exportação/API para revisão mais ampla.</p>
+<h2 id="inspecionar-uma-conversa">Inspecionar uma conversa</h2>
+<p>Selecione <strong>Visualizar</strong> para abrir o inspetor de conversa. O inspetor mantém a transcrição de mensagens visível enquanto o painel lateral mostra detalhes de observabilidade.</p>
+<p>O painel lateral pode incluir:</p>
+<table>
+<thead>
+<tr>
+<th>Aba</th>
+<th>O que mostra</th>
+<th>Quando usar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Dados da conversa</strong></td>
+<td>ID da conversa, ID da solicitação, nome do modelo, ID de usuário externo, origem, timestamps de criação e atualização, contagem de tokens e metadados</td>
+<td>Use para passagem de suporte, correlação e verificações de identidade de alto nível.</td>
+</tr>
+<tr>
+<td><strong>Uso</strong></td>
+<td>Objeto de uso bruto e recursos relacionados</td>
+<td>Use para conectar a conversa ao faturamento, gateways, coleções, sessões ou outros recursos.</td>
+</tr>
+<tr>
+<td><strong>Esquema de resposta</strong></td>
+<td>Esquema de resposta armazenado, quando a solicitação usou saída estruturada</td>
+<td>Use ao investigar respostas estruturadas malformadas ou inesperadas.</td>
+</tr>
+<tr>
+<td><strong>Ferramentas</strong></td>
+<td>Ferramentas disponíveis ou registradas para a conversa</td>
+<td>Use ao verificar se uma resposta habilitada por ferramenta usou as capacidades esperadas.</td>
+</tr>
+<tr>
+<td><strong>Desempenho</strong></td>
+<td>Cascata de desempenho da solicitação, quando disponível</td>
+<td>Use ao diagnosticar respostas lentas ou latência de provedor/ferramenta.</td>
+</tr>
+</tbody>
+</table>
+<p>A área principal de mensagens mostra mensagens de usuário, assistente, ferramenta e informativas. Conversas muito longas podem exibir um marcador de mensagem omitida no meio do inspetor. A visualização de detalhes mantém as primeiras 30 e as últimas 40 mensagens e insere uma contagem omitida quando a lista de mensagens é maior. Use exportação quando o meio da transcrição for importante.</p>
+<p>Se a solicitação falhou, o inspetor pode mostrar um bloco de informações <strong>Erro da solicitação</strong> com a mensagem de erro armazenada.</p>
+<h2 id="exportar-conversas">Exportar conversas</h2>
+<p>Use <strong>Exportar tudo</strong> na lista para exportar conversas como JSONL. O diálogo inclui:</p>
+<table>
+<thead>
+<tr>
+<th>Opção</th>
+<th>Valores</th>
+<th>Orientação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Período</strong></td>
+<td>2 horas, 1 dia, 7 dias, 30 dias</td>
+<td>O período de exportação selecionado ainda é limitado pela retenção da conta.</td>
+</tr>
+<tr>
+<td><strong>Mídia</strong></td>
+<td>Incluir, Truncar para texto</td>
+<td>Use truncamento de texto quando as exportações não devem incluir payloads de mídia multipartes completos.</td>
+</tr>
+<tr>
+<td><strong>Pensamento</strong></td>
+<td>Tudo, Apenas visível, Nenhum</td>
+<td>Use <strong>Nenhum</strong> para a maioria das passagens de suporte, <strong>Apenas visível</strong> ao revisar raciocínio voltado ao usuário e <strong>Tudo</strong> apenas para depuração interna confiável com armazenamento aprovado.</td>
+</tr>
+<tr>
+<td><strong>Truncar</strong></td>
+<td>Limite de tokens, onde <code>0</code> desativa o truncamento</td>
+<td>Use um limite diferente de zero quando as exportações podem ser grandes ou quando você só precisa de uma amostra de cada conversa.</td>
+</tr>
+</tbody>
+</table>
+<p>Use o menu <strong>Exportar</strong> da página de detalhes para exportar uma conversa como JSON, ou <strong>Copiar para a área de transferência</strong> para copiar o objeto de detalhe carregado atualmente.</p>
+<p><strong>Exportar como JSON</strong> de uma única conversa é um download direto, não o mesmo diálogo configurável de <strong>Exportar tudo</strong>. No comportamento atual do console, ele exporta a conversa armazenada com mídia incluída, todo o raciocínio incluído e sem truncamento. <strong>Copiar para a área de transferência</strong> copia o objeto do inspetor carregado, que pode omitir mensagens do meio em conversas longas.</p>
+<p>Tanto <strong>Exportar tudo</strong> quanto <strong>Exportar como JSON</strong> de uma única conversa abrem URLs com um parâmetro de consulta <code>api-key</code>. Não compartilhe esses URLs, histórico do navegador, capturas de tela, logs de rede ou URLs de solicitação copiados.</p>
+<p>As exportações podem conter prompts, respostas, metadados ocultos, rastros de ferramenta, referências de mídia, conteúdo de raciocínio dependendo da opção selecionada e identificadores de conta. Armazene as exportações com segurança e exclua cópias locais quando não forem mais necessárias.</p>
+<h2 id="investigar-uma-conversa">Investigar uma conversa</h2>
+<p>Use este fluxo para respostas ruins, erros, custo inesperado ou tráfego não autorizado suspeito:</p>
+<ol>
+<li>Confirme a conta ativa e escolha o intervalo de tempo mais estreito útil.</li>
+<li>Pesquise pelo identificador mais específico disponível: sessão de chat, usuário externo, gateway, chave de API, cliente de chat ou modelo.</li>
+<li>Abra a conversa e copie o ID da conversa e o ID da solicitação.</li>
+<li>Inspecione <strong>Dados da conversa</strong>, <strong>Uso</strong>, <strong>Ferramentas</strong>, <strong>Esquema de resposta</strong>, <strong>Desempenho</strong> e qualquer bloco <strong>Erro da solicitação</strong>.</li>
+<li>Verifique o faturamento relacionado em <a href="/docs/pt-br/platform/analytics">Análises</a> e evidências de runtime em Logs.</li>
+<li>Preserve apenas a evidência mínima necessária para suporte, auditoria ou remediação.</li>
+<li>Remedeie a origem: atualize o gateway, interrompa o chamador, gire ou revogue uma chave exposta, exclua uma sessão exposta ou corrija os dados de origem.</li>
+</ol>
+<h2 id="compartilhar-evidências-de-conversa-com-segurança">Compartilhar evidências de conversa com segurança</h2>
+<p>Prefira compartilhar o ID da conversa, ID da solicitação, intervalo de tempo aproximado, origem e uma descrição redigida do problema. Evite exportações completas a menos que o destinatário seja confiável e o local de armazenamento seja aprovado.</p>
+<p>Antes de enviar evidências, redacte dados de cliente, prompts, saídas de ferramenta, mídia, raciocínio oculto, chaves de API, chaves de sessão, IDs de usuário externo quando não necessários, metadados não relacionados e URLs do navegador com strings de consulta.</p>
+<h2 id="excluir-conversas">Excluir conversas</h2>
+<p>Use o menu de ação da linha e selecione <strong>Excluir conversa</strong> para remover uma conversa armazenada. O console pede confirmação e avisa que a ação não pode ser desfeita.</p>
+<p>Antes de excluir, verifique a conta ativa, confirme o ID da conversa e o ID da solicitação, e exporte ou copie apenas as evidências que você tem permissão para manter. A exclusão é irreversível a partir do console.</p>
+<p>A exclusão remove o registro da conversa armazenada da conta. Não revoga chaves de API, exclui sessões de chat, remove dados de origem, altera faturas ou desfaz uso já registrado. Se uma conversa mostrar atividade não autorizada, exclua somente após preservar as evidências necessárias para a investigação, então gire ou revogue a chave ou sessão relevante separadamente.</p>
+<h2 id="solução-de-problemas">Solução de problemas</h2>
+<table>
+<thead>
+<tr>
+<th>Problema</th>
+<th>Causa provável</th>
+<th>O que fazer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Uma conversa recente está ausente</td>
+<td>O intervalo de tempo está muito estreito, retenção expirou, registro de conta está desativado, limites de lista ocultam o registro ou a solicitação ainda não foi armazenada</td>
+<td>Escolha um intervalo mais amplo dentro da retenção, limpe filtros, confirme as configurações de registro, estreite a pesquisa e atualize.</td>
+</tr>
+<tr>
+<td>Pesquisa não retorna resultados</td>
+<td>O filtro usa o tipo de identificador errado ou um valor não presente nos metadados armazenados</td>
+<td>Use um filtro por vez. Tente modelo, ID de usuário externo, ID de gateway, cliente de chat ou sessão de chat separadamente.</td>
+</tr>
+<tr>
+<td>A visualização de detalhes mostra mensagens omitidas</td>
+<td>A conversa é longa e o inspetor mantém o início e o fim enquanto omite o meio</td>
+<td>Exporte a conversa se precisar do meio da transcrição e escolha o truncamento de exportação com cuidado.</td>
+</tr>
+<tr>
+<td>Uma conversa mostra um erro</td>
+<td>A solicitação falhou durante inferência, uso de ferramenta, validação ou outra etapa de runtime</td>
+<td>Abra a visualização de detalhes, copie o ID da solicitação, inspecione Logs relacionados e revise o gateway, modelo, ferramenta ou sessão envolvida.</td>
+</tr>
+<tr>
+<td>Exportação é muito grande ou sensível</td>
+<td>O período é amplo, mídia está incluída, raciocínio está incluído ou truncamento está desativado</td>
+<td>Reduza o período, selecione <strong>Truncar para texto</strong>, escolha <strong>Apenas visível</strong> ou <strong>Nenhum</strong> para Pensamento e defina um limite de truncamento.</td>
+</tr>
+<tr>
+<td>Você encontrou tráfego não autorizado</td>
+<td>Uma chave de API, sessão pública, gateway, cliente de chat ou integração pode estar exposta</td>
+<td>Preserve a evidência mínima, interrompa o chamador, gire ou revogue chaves, exclua sessões expostas e revise as Análises para impacto.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="referência-da-api">Referência da API</h2>
+<p>Use a API de Conversas quando precisar construir sua própria observabilidade, auditoria, exportação ou fluxo de limpeza.</p>
+<h3 id="listar-e-exportar">Listar e exportar</h3>
+<p>Liste conversas recentes com filtros opcionais ou exporte várias conversas como JSONL.</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=List%20Conversations&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Export%20Conversations%20%28JSONL%29&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<h3 id="inspecionar-exportar-ou-excluir-uma-conversa">Inspecionar, exportar ou excluir uma conversa</h3>
+<p>Use um endpoint de única conversa quando já possuir o ID da conversa da lista, de um caso de suporte, logs ou de um fluxo de correlação interno.</p>
+<p>A referência pública para exportação de única conversa pode mostrar opções de consulta também usadas por exportações JSONL. Verifique o comportamento atual antes de confiar em truncamento, mídia ou controles de pensamento para exportações JSON únicas; use exportação JSONL em lote quando for necessária redigir configurável.</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=View%20Conversation&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Export%20Conversation%20%28JSON%29&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Delete%20Conversation&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/pt-br/platform/conversations.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>

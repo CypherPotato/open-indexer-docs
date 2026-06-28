@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>RAG Collections | AIVAX </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="RAG Collections | AIVAX ">
+
+
+        <link rel="icon" href="../../assets/img/favicon.ico">
+        <link rel="stylesheet" href="../../public/docfx.min.css">
+        <link rel="stylesheet" href="../../public/main.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+        
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+        <meta name="docfx:navrel" content="../../toc.html">
+        <meta name="docfx:tocrel" content="../toc.html">
+
+        <meta name="docfx:rel" content="../../">
+
+
+        <meta name="docfx:docurl" content="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/platform/rag-collections.md/#L1">
+        <meta name="loc:inThisArticle" content="In this article">
+        <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+        <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+        <meta name="loc:tocFilter" content="Filter by title">
+        <meta name="loc:nextArticle" content="Next">
+        <meta name="loc:prevArticle" content="Previous">
+        <meta name="loc:themeLight" content="Light">
+        <meta name="loc:themeDark" content="Dark">
+        <meta name="loc:themeAuto" content="Auto">
+        <meta name="loc:changeTheme" content="Change theme">
+        <meta name="loc:copy" content="Copy">
+        <meta name="loc:downloadPdf" content="Download PDF">
+        
+        <script type="module" src="./../../public/docfx.min.js"></script>
+        <script>
+            const theme = localStorage.getItem('theme') || 'auto';
+            document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+        </script>
+        
+        <script src="https://unpkg.com/@cypherpotato/el/dist/el.min.js"></script>
+                
+        <script>            
+            function switchLanguage(lang) {
+                const match = window.location.pathname.match(/\/docs\/(?:(pt-br)\/)?(.*)/i);
+                const docPart = match ? match[2] : '';
+                const newPath = lang + docPart;
+                window.location.href = window.location.origin + newPath;
+            }        
+        </script>
+        
+    </head>
+    
+    
+    <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+        <header class="bg-body border-bottom">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+                <div class="container-xxl flex-nowrap">
+                    <a class="navbar-brand" href="../../index.html">
+                        <img id="logo" class="svg" src="../../assets/img/aivax.png" alt="AIVAX">
+                        AIVAX
+                    </a>
+                    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navpanel">
+                        <div id="navbar">
+                            <form class="search" role="search" id="search">
+                                <i class="bi bi-search"></i>
+                                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-xxl">
+            <div class="toc-offcanvas">
+                <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav class="toc" id="toc"></nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="actionbar">
+                    <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <nav id="breadcrumb"></nav>
+
+                    <div id="language-wrapper">
+                        <a class="btn border-0 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" title="Change theme">
+                            <i class="bi bi-globe"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end language-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/')">
+                                    <img src="/assets/flag/usa.png">
+                                    English
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:switchLanguage('/docs/pt-br/')">
+                                    <img src="/assets/flag/brazil.png">
+                                    Português
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <article data-uid="">
+<h1 id="rag-collections">RAG Collections</h1>
+
+<p>Use <strong>RAG Collections</strong> to store searchable knowledge that AI Gateways, MCP clients, and direct RAG API calls can retrieve later. A collection is the boundary for a knowledge base: it groups documents, indexing state, context, tags, search tests, and retrieval history in one place.</p>
+<p>This page is for builders and operators who manage knowledge bases from the AIVAX console. For API schemas, JSONL import format, and deeper retrieval behavior, see <a href="/docs/rag/collections">Collections and Documents</a> and <a href="/docs/rag/semantic-search">Semantic search</a>.</p>
+<h2 id="before-you-begin">Before you begin</h2>
+<p>Sign in to the <a href="https://console.aivax.net/">AIVAX console</a> and open <strong>Dashboard &gt; RAG Collections</strong>. Confirm the active account before importing, resetting, deleting, or reindexing a collection.</p>
+<p>Before changing a production collection, identify:</p>
+<ul>
+<li>Which AI Gateways, chat clients, batch workflows, MCP clients, or applications use it.</li>
+<li>Whether the change affects source documents, metadata only, or generated vectors.</li>
+<li>Whether users are currently querying the collection.</li>
+<li>Whether you need a JSONL export before making the change.</li>
+<li>Whether the import or reindexing operation can generate indexing cost.</li>
+</ul>
+<h2 id="when-to-use-a-collection">When to use a collection</h2>
+<p>Use a collection when an assistant or application needs answers grounded in account-owned knowledge, such as product manuals, policies, support articles, contract clauses, catalog items, operational procedures, or tenant-specific information.</p>
+<p>A collection is useful when the knowledge should be:</p>
+<ul>
+<li>Searchable by semantic meaning, not only exact keywords.</li>
+<li>Reused by more than one gateway or integration.</li>
+<li>Maintained separately from gateway instructions.</li>
+<li>Exported, audited, reimported, or tested directly.</li>
+<li>Observed through retrieval scores and transaction history.</li>
+</ul>
+<p>Do not put every source into one large collection by default. Prefer separate collections when knowledge has different owners, lifecycle, languages, access rules, environments, or quality expectations.</p>
+<h2 id="understand-the-collection-list">Understand the collection list</h2>
+<p>The RAG Collections page shows the collections owned by the active account.</p>
+<table>
+<thead>
+<tr>
+<th>Column or control</th>
+<th>Use it for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>New collection</strong></td>
+<td>Create an empty collection before adding documents.</td>
+</tr>
+<tr>
+<td><strong>Filter columns...</strong></td>
+<td>Search collections by visible table text.</td>
+</tr>
+<tr>
+<td><strong>Id.</strong></td>
+<td>Short display form of the collection ID. Copy the full ID when integrating through API or MCP.</td>
+</tr>
+<tr>
+<td><strong>Name</strong></td>
+<td>Friendly collection name shown in the console.</td>
+</tr>
+<tr>
+<td><strong>Created at</strong></td>
+<td>Creation date and time.</td>
+</tr>
+<tr>
+<td><strong>Current state</strong></td>
+<td>Indexed, queued, and outdated document counts as a segmented status bar.</td>
+</tr>
+<tr>
+<td><strong>View</strong></td>
+<td>Open the collection details, documents, transactions, and settings.</td>
+</tr>
+</tbody>
+</table>
+<p>Create a collection with a name that identifies its purpose and environment, such as <code>Help Center - Production</code> or <code>Legal Policies - Internal</code>. The console requires a name of at least three characters.</p>
+<h2 id="create-a-collection">Create a collection</h2>
+<p>To create a collection:</p>
+<ol>
+<li>Select <strong>New collection</strong>.</li>
+<li>Enter a purpose-oriented collection name.</li>
+<li>Confirm the dialog.</li>
+<li>Open the new collection with <strong>View</strong>.</li>
+</ol>
+<p>Confirm that the new collection appears under the expected active account and starts with the expected document state. For production knowledge bases, consider creating separate staging and production collections so you can test imports, chunking, and retrieval quality before changing the collection that live gateways use.</p>
+<h2 id="browse-documents">Browse documents</h2>
+<p>Open <strong>View</strong> on a collection to reach the collection workspace. The <strong>Browse documents</strong> tab is the main maintenance surface.</p>
+<p>The summary cards show:</p>
+<table>
+<thead>
+<tr>
+<th>Card</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Total documents</strong></td>
+<td>Number of documents currently stored in the collection.</td>
+</tr>
+<tr>
+<td><strong>Query coverage</strong></td>
+<td>Portion of recorded RAG transactions that returned documents. Use it as a quality signal, not as a complete relevance guarantee.</td>
+</tr>
+<tr>
+<td><strong>Avg. Performance</strong></td>
+<td>Average retrieval processing time from recorded RAG transactions.</td>
+</tr>
+<tr>
+<td><strong>Avg. Score</strong></td>
+<td>Average score from recorded RAG transactions.</td>
+</tr>
+</tbody>
+</table>
+<p>The document table shows each document's short ID, updated time, name, reference ID, tags, content preview, indexing state, and actions. Use the search box for name, ID, or content text. Use <strong>Filter state</strong> to focus on all, indexed, or queued documents. Use <strong>Order by</strong> to sort by created, updated, or indexed time in either direction.</p>
+<p>Use this tab after imports to confirm that documents arrived, moved from queued to indexed, and look like focused chunks rather than entire source files pasted into one document.</p>
+<h2 id="add-or-edit-documents">Add or edit documents</h2>
+<p>Select <strong>New document</strong> to create one document manually, or <strong>Edit</strong> on an existing row to update a document.</p>
+<p>The document editor has:</p>
+<table>
+<thead>
+<tr>
+<th>Field or control</th>
+<th>Use it for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Document name</strong></td>
+<td>Stable name used to identify this document on later updates.</td>
+</tr>
+<tr>
+<td><strong>Tags</strong></td>
+<td>Maintenance labels for filtering and organization.</td>
+</tr>
+<tr>
+<td><strong>Reference ID</strong></td>
+<td>Shared identifier for related chunks from the same source.</td>
+</tr>
+<tr>
+<td><strong>Split multiple sections</strong></td>
+<td>On document creation, split text separated by <code>---</code> into multiple documents.</td>
+</tr>
+<tr>
+<td><strong>Document contents</strong></td>
+<td>The text that will be indexed and retrieved.</td>
+</tr>
+<tr>
+<td><strong>Document information</strong></td>
+<td>Approximate token count, estimated indexing cost, word count, character count, and section count.</td>
+</tr>
+<tr>
+<td><strong>Edit with AI</strong></td>
+<td>Ask AIVAX to propose an edit to the document text before saving.</td>
+</tr>
+</tbody>
+</table>
+<p>Write documents as focused, self-contained chunks. A retrieved document should contain enough context for the model to use it without guessing what came before or after it. If you paste a long manual page, split it into topic-sized sections first. If you edit an existing document that contains section separators, the console warns that saving will not split it into multiple documents.</p>
+<p>Changed document text is queued for indexing. Metadata-only maintenance can avoid unnecessary reindexing when performed through the API. For the exact upsert behavior and JSONL field names, see <a href="/docs/rag/collections#document-fields">Document fields</a>.</p>
+<h2 id="import-documents">Import documents</h2>
+<p>Use <strong>Options</strong> in the collection workspace when you need to import or export data.</p>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Use it for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Import from files</strong></td>
+<td>Upload images, audio, video, or PDF files so AIVAX can extract documents with an LLM-based OCR/extraction algorithm.</td>
+</tr>
+<tr>
+<td><strong>Import from JSONL</strong></td>
+<td>Upload prepared text documents where each line is one JSON object.</td>
+</tr>
+<tr>
+<td><strong>Export to JSONL</strong></td>
+<td>Download collection documents for backup, migration, review, or offline processing. Treat exports as sensitive operational data.</td>
+</tr>
+<tr>
+<td><strong>View MCP code</strong></td>
+<td>Configure the collection as an MCP source through the collections MCP endpoint.</td>
+</tr>
+</tbody>
+</table>
+<p>Choose <strong>Import from JSONL</strong> when your application or preprocessing pipeline already prepared clean chunks. The console import dialog accepts a <code>.jsonl</code> file, explains that unchanged existing documents are ignored, and states a console file limit of 10,000 documents and 50 MB per file. Plan and API limits may still apply; see <a href="/docs/rag/collections#batch-import-limits">Batch import limits</a>.</p>
+<p>A JSONL import is an upsert. If <code>docid</code> matches an existing document and <code>text</code> changes, AIVAX updates that document and queues it for reindexing. Export first, test in a non-production collection when possible, and verify <code>docid</code> collisions before importing into production.</p>
+<p>Choose <strong>Import from files</strong> when you need AIVAX to extract text from source media. The dialog accepts image, audio, video, and PDF files, asks for an extraction algorithm, and includes a <strong>Context</strong> field to guide extraction. Use the context field to describe what the source contains and what should be preserved, not to add unrelated instructions.</p>
+<p>Only upload files you are allowed to process with AIVAX. Extracted text becomes collection content and can later be retrieved by gateways, MCP clients, or API calls that use the collection.</p>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>Imports and vector updates can consume credits. Export the collection first when you need a rollback copy, and test imports in a non-production collection when the source format or chunking strategy is new.</p>
+</div>
+<p>Treat exported collection JSONL as sensitive data. It may contain source text, customer data, internal procedures, tags, references, and document IDs. Store it securely and redact it before sharing outside the team that owns the knowledge base.</p>
+<h2 id="use-the-playground">Use the playground</h2>
+<p>Select <strong>Playground</strong> from the collection workspace to test retrieval before attaching the collection to a production gateway.</p>
+<p>The playground lets you configure:</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Use it for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Search text</strong></td>
+<td>The query you want to test. Use realistic user wording.</td>
+</tr>
+<tr>
+<td><strong>Minimum score</strong></td>
+<td>Lowest score accepted for returned documents. Higher values reduce noise but can hide useful results.</td>
+</tr>
+<tr>
+<td><strong>Maximum results</strong></td>
+<td>Number of documents to return. More results can improve recall but increase context size.</td>
+</tr>
+<tr>
+<td><strong>Reranker</strong></td>
+<td><code>none</code>, <code>lexical</code>, or <code>smart</code>. Lexical is a no-cost word-aware reranker; smart uses a specialized reranking model and is priced separately.</td>
+</tr>
+<tr>
+<td><strong>Endpoint</strong></td>
+<td><code>/query</code> returns matching documents; <code>/answer</code> asks a model to answer using retrieved documents.</td>
+</tr>
+<tr>
+<td><strong>Include chunked references</strong></td>
+<td>Include related chunks that share references when enabled.</td>
+</tr>
+</tbody>
+</table>
+<p>Use the playground as a quality gate:</p>
+<ol>
+<li>Test common user questions.</li>
+<li>Confirm that the returned documents are relevant and specific.</li>
+<li>Compare <code>/query</code> and <code>/answer</code> when you need both source inspection and answer behavior.</li>
+<li>Adjust score, result count, reranker, document chunking, or collection context.</li>
+<li>Attach the collection to an <a href="ai-gateways.html">AI Gateway</a> only after retrieval is consistent.</li>
+</ol>
+<p>The <strong>View code</strong> action generates a quick example for the selected playground endpoint. Use the API reference below as the canonical integration source, replace placeholders, and keep API keys in environment variables before sharing or committing examples.</p>
+<h2 id="configure-collection-settings">Configure collection settings</h2>
+<p>Open <strong>Settings</strong> to manage collection-level metadata.</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Use it for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Collection Name</strong></td>
+<td>Friendly name used in the console and model-facing collection awareness.</td>
+</tr>
+<tr>
+<td><strong>Collection Context</strong></td>
+<td>A hint that describes what the collection contains so models and operators understand its purpose.</td>
+</tr>
+<tr>
+<td><strong>Generate context from documents</strong></td>
+<td>Ask AIVAX to propose collection context and tags from existing documents. This may consume credits and analyzes stored document content. Review the proposed diff for secrets, private data, and unintended model-facing instructions before saving.</td>
+</tr>
+<tr>
+<td><strong>Collection Tags</strong></td>
+<td>Tags that categorize the collection as a whole.</td>
+</tr>
+<tr>
+<td><strong>Save changes</strong></td>
+<td>Persist edited name, context, and tags.</td>
+</tr>
+</tbody>
+</table>
+<p>Good collection context tells the model what the collection is about and what kinds of answers it can support. Keep it factual and concise. Do not put secrets, private customer data, credentials, or hidden operational instructions in collection context.</p>
+<h2 id="use-advanced-settings-safely">Use advanced settings safely</h2>
+<p>The <strong>Advanced settings</strong> menu contains high-impact maintenance actions.</p>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Effect</th>
+<th>Use it when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Update outdated documents</strong></td>
+<td>Marks outdated vectors so the indexing job rebuilds embeddings. The console warns that this may generate cost.</td>
+<td>Embedding behavior changed, documents show outdated state, or retrieval quality depends on refreshed vectors.</td>
+</tr>
+<tr>
+<td><strong>Reset collection</strong></td>
+<td>Deletes all pending and indexed documents, but keeps the collection record and configuration.</td>
+<td>You want to keep the collection shell but rebuild its contents from scratch.</td>
+</tr>
+<tr>
+<td><strong>Delete collection</strong></td>
+<td>Deletes the collection and all documents. This cannot be undone from the console.</td>
+<td>The collection is no longer used by any gateway, client, workflow, or application.</td>
+</tr>
+</tbody>
+</table>
+<p>Before resetting or deleting:</p>
+<ol>
+<li>Export the collection to JSONL if you may need the documents later.</li>
+<li>Check AI Gateways and integrations that reference the collection.</li>
+<li>Confirm that no production traffic depends on it.</li>
+<li>Prefer testing replacement collections before changing production collections.</li>
+<li>After the change, verify gateway behavior and collection transactions.</li>
+</ol>
+<h2 id="review-rag-transactions">Review RAG transactions</h2>
+<p>Use the <strong>Transactions</strong> tab to understand how the collection is actually being searched.</p>
+<p>The tab includes:</p>
+<table>
+<thead>
+<tr>
+<th>Control or column</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>View</strong></td>
+<td>Switch between <code>Recent</code>, <code>Low quality</code>, and <code>High quality</code> transaction views.</td>
+</tr>
+<tr>
+<td><strong>Refresh</strong></td>
+<td>Reload the selected transaction view.</td>
+</tr>
+<tr>
+<td><strong>Export JSONL</strong></td>
+<td>Download the selected transaction view for offline review.</td>
+</tr>
+<tr>
+<td><strong>ID</strong></td>
+<td>Transaction identifier.</td>
+</tr>
+<tr>
+<td><strong>Moment</strong></td>
+<td>When the retrieval happened.</td>
+</tr>
+<tr>
+<td><strong>Original score</strong></td>
+<td>Initial retrieval score before reranking.</td>
+</tr>
+<tr>
+<td><strong>Reranker score</strong></td>
+<td>Score assigned by the reranker when one was used.</td>
+</tr>
+<tr>
+<td><strong>Query</strong></td>
+<td>Search query recorded for the transaction.</td>
+</tr>
+<tr>
+<td><strong>Results</strong></td>
+<td>Number of returned documents.</td>
+</tr>
+<tr>
+<td><strong>Details</strong></td>
+<td>Opens timing, cost, score, reranker, and matched-document details.</td>
+</tr>
+</tbody>
+</table>
+<p>Use <strong>Low quality</strong> to find queries that need better documents, lower score thresholds, different chunking, clearer collection context, or a different reranker. Use <strong>High quality</strong> to identify examples worth reusing as regression tests. Transaction visibility is subject to account-plan retention; review <a href="/docs/limits">Plans and limits</a> when planning monitoring or export cadence.</p>
+<p>The details dialog can show request ID, query text, processing time, cost, original score, reranker score, final score, reranker name, matched document IDs, document names, scores, and content previews. Treat exported transactions as operational data: remove user text, customer data, and internal identifiers before sharing outside your team.</p>
+<h2 id="use-collections-through-mcp">Use collections through MCP</h2>
+<p>The <strong>View MCP code</strong> action generates an MCP configuration for querying the collection through <code>/v1/mcp/collections</code>. The generated configuration includes collection headers such as collection ID, collection name, top-k, minimum score, and reference behavior.</p>
+<p>Generated MCP snippets can include the current console session key in the <code>Authorization</code> header. Replace it with <code>YOUR_AIVAX_API_KEY</code> or an environment variable before sharing, saving, or committing the configuration. Do not share generated console URLs or snippets that include <code>api-key</code> or <code>Authorization</code> values. If a real key, session-bearing URL, or session-bearing snippet was exposed, rotate or revoke the affected credential.</p>
+<p>Keep MCP access read-only by default. Do not enable collection write access for general assistants or untrusted clients. Write-enabled MCP tools can create, update, or delete collection documents. Use a dedicated credential with the minimum access needed and rotate it if exposed.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Check</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Collection does not appear in the list</td>
+<td>Active account, account switcher, and collection limit for the current plan.</td>
+<td>Switch to the expected account or create the collection in the correct account.</td>
+</tr>
+<tr>
+<td>Documents stay queued</td>
+<td>Indexing volume, account balance, daily RAG insertion limits, document size, and background processing time.</td>
+<td>Wait for indexing, reduce import size, top up balance, or split imports into smaller batches.</td>
+</tr>
+<tr>
+<td>Search returns no documents</td>
+<td>Query wording, indexing state, minimum score, collection ID, and whether the right collection is selected.</td>
+<td>Lower minimum score temporarily, test broader wording, confirm documents are indexed, and inspect document contents.</td>
+</tr>
+<tr>
+<td>Search returns irrelevant documents</td>
+<td>Chunk size, document context, tags, references, reranker, score threshold, and query strategy in the gateway.</td>
+<td>Split broad documents, improve source text, test lexical or smart reranking, and raise minimum score deliberately.</td>
+</tr>
+<tr>
+<td>Gateway answer ignores the collection</td>
+<td>Gateway RAG tab, attached collection IDs, query strategy, maximum results, minimum score, and prompt instructions.</td>
+<td>Test the collection directly in the playground, then retest the same prompt through the gateway.</td>
+</tr>
+<tr>
+<td>Import skips records</td>
+<td>Existing document names with unchanged content, JSONL format, missing required fields, or file-size/line limits.</td>
+<td>Validate the JSONL file, change document text when reindexing is intended, and split large files.</td>
+</tr>
+<tr>
+<td>Reset was done by mistake</td>
+<td>Whether a JSONL export exists and whether gateways still reference the same collection.</td>
+<td>Reimport the latest export into the same collection, wait for indexing, then retest affected gateways.</td>
+</tr>
+<tr>
+<td>Collection was deleted by mistake</td>
+<td>Whether a JSONL export exists and which gateways, MCP clients, or API callers referenced the deleted collection ID.</td>
+<td>Recreate a collection, reimport the latest export, wait for indexing, and update every integration that used the old collection ID.</td>
+</tr>
+<tr>
+<td>MCP client cannot query the collection</td>
+<td>API key, generated headers, collection ID, minimum score, top-k, and reference behavior.</td>
+<td>Replace session credentials with a private API key, verify headers, and test the same query in the console playground.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="api-reference">API reference</h2>
+<p>Create, inspect, edit, export, reset, delete, and reindex collections through the Collections API:</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=List%20Collections&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Create%20Collection&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Get%20Collection%20Details&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Edit%20Collection&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Export%20Collection&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Reset%20Collection&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Update%20Collection%20Vectors&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Delete%20Collection&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<p>Review RAG transaction activity through the collection transaction endpoints:</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=List%20Collection%20RAG%20Transactions&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=View%20Collection%20RAG%20Transaction&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Export%20Collection%20RAG%20Transactions&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<p>Manage collection documents through the Documents API:</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=Index%20Documents%20(JSONL)&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Browse%20Documents&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Get%20Document&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Create%20or%20Update%20Document&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Delete%20Document&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<p>Test retrieval through the RAG API:</p>
+<script src="https://inference.aivax.net/apidocs?embed-target=Semantic%20search&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<script src="https://inference.aivax.net/apidocs?embed-target=Answer%20generation&r=https%3A%2F%2Finference.aivax.net%2Fapidocs"></script>
+<p>Related documentation:</p>
+<ul>
+<li><a href="/docs/rag/collections">Collections and Documents</a>: technical collection and document behavior.</li>
+<li><a href="/docs/rag/semantic-search">Semantic search</a>: query parameters, reranking, references, and answer generation.</li>
+<li><a href="ai-gateways.html">AI Gateways</a>: attach collections to assistant configurations.</li>
+<li><a href="account-balance.html">Account, balance, and multiple accounts</a>: manage balance, limits, and API keys.</li>
+</ul>
+
+</article>
+
+                <div class="contribution d-print-none">
+                    <a href="https://github.com/CypherPotato/open-indexer-docs/blob/master/docs/platform/rag-collections.md/#L1" class="edit-link">Edit this page</a>
+                </div>
+
+                <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+            </div>
+
+            <div class="affix">
+                <nav id="affix"></nav>
+            </div>
+        </main>
+
+        <div class="container-xxl search-results" id="search-results"></div>
+
+        <footer class="border-top text-secondary">
+            <div class="container-xxl">
+                <div class="flex-fill">
+                    <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+                </div>
+            </div>
+            <script>
+                if (window.location.pathname.startsWith('/docs/')) {
+                    document.getElementById('language-wrapper').style.display = 'block';
+                }
+                
+                function splitText(text, words) {
+                    if (!Array.isArray(words)) return [];
+                    const escapedWords = words.map(word =>
+                        word.replace(/([.*+?^${}()|[\]\\])/g, '\\$1').replace(/\s/g, '\\$&'));
+                        
+                    escapedWords.sort((a, b) => b.length - a.length || b.localeCompare(a, 'en-US', { sensitivity: 'base' }));
+                    const pattern = new RegExp(`\\b(${escapedWords.join('|')})\\b`, 'gi');
+                    const splitResult = text.split(pattern);
+                    const cleanedResult = splitResult.filter(segment => segment !== '');
+                    return cleanedResult;
+                }
+                
+                function runPostHljsFunctions() {
+                    if (!document.querySelector("pre>code")) {
+                        return;
+                    }
+                    if (!document.querySelector(".hljs")) {
+                        setTimeout(runPostHljsFunctions, 100);
+                        return;
+                    }
+                    
+                    function highlightMissingCodeTokens(pre) {
+                        const tokenClasses = [
+                            "HttpResponse", "HttpRequest", "File", "Task",
+                            "Router", "Route", "StringContent", "StreamContent",
+                            "JsonContent", "RegexRoute", "HtmlContent", "CancellationTokenSource",
+                            "HttpContext", "Stream", "MultipartObject", "Thread", "Task", "Encoding",
+                            "HttpKnownHeaderNames", "HttpMethod", "List", "JsonSerializer",
+                            "LogStream", "HttpServer", "RotatingLogPolicy", "StringBuilder",
+                            "Console", "HttpRequestEventSource", "HttpWebSocket", "X509Certificate2",
+                            "AppDomain", "Path", "Directory", "HttpServerConfiguration", "ListeningHost",
+                            "ByteArrayContent", "ForwardingResolver", "IPAddress", "IPEndPoint",
+                            "HttpServerExecutionResult", "ArgumentNullException", "JsonSerializerOptions",
+                            "DbContext"
+                        ];
+                        const tokenValues = [
+                            "RouteMethod", "Guid", "RequestHandlerExecutionMode", "HttpStatusCode",
+                            "HttpStatusInformation", "DateTime", "TimeSpan", "RouterMethod",
+                            "ListeningPort"
+                        ];
+                        const tokenInterfaces = [
+                            "IRequestHandler", "IEnumerable", "ICollection", "IList"
+                        ];
+                        
+                        function runStyles(node) {
+                            if (node.nodeType === 3) {
+                                applyStyles(node);
+                                
+                            } else if (node.nodeType === 1) {
+                                
+                                const prohibitedClasses = ["hljs-comment", "hljs-string"];
+                                
+                                if (! prohibitedClasses.some(cls => node.classList.contains(cls))) {
+                                    for(const child of node.childNodes) {
+                                        runStyles(child);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        function applyStyles(textNode) {
+                            const text = textNode.textContent;
+                            const fragment = [];
+                            
+                            for (const token of splitText(text, [...tokenClasses, ...tokenValues, ...tokenInterfaces])) {
+                                if (tokenClasses.includes(token)) {
+                                    fragment.push(el("span.hljs-meta", token));
+                                    
+                                } else if (tokenValues.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-value", token));
+                                    
+                                } else if (tokenInterfaces.includes(token)) {
+                                    fragment.push(el("span.hljs-meta-interface", token));
+                                    
+                                } else {
+                                    fragment.push(token);
+                                }
+                            }
+                            
+                            textNode.replaceWith(el.fragment(...fragment));
+                        }
+                        
+                        const code = pre.querySelector("code");
+                        if (code && (code.classList.contains("lang-csharp") || code.classList.contains("lang-cs"))) {
+                            runStyles(code);
+                        }
+                    }
+                    
+                    function addLineNumbers(pre) {
+                        const code = pre.querySelector("code");
+                        if (!code) return;
+                        
+                        var lines = (code.textContent.match(/\n/g) || []).length;
+                        
+                        if (lines <= 1) {
+                            return;
+                        }
+                        
+                        const lineElements = [];
+                        for (let i = 1; i <= lines; i++) {
+                            lineElements.push(el("span.hljs-line-number", i + "\n"));
+                        }
+                        
+                        code.prepend(el("div.line-numbers", ...lineElements));
+                        code.classList.add("has-line-numbers");
+                    }
+                                        
+                    document.querySelectorAll("pre").forEach(pre => {
+                        highlightMissingCodeTokens(pre);
+                        addLineNumbers(pre);
+                    });
+                }
+                
+                runPostHljsFunctions();
+            </script>
+        </footer>
+    </body>
+</html>
